@@ -24,7 +24,7 @@ from bs4 import BeautifulSoup
 # ── COURSE MAP ────────────────────────────────────────────────
 # Maps source folder → (Category, Subject, Course) metadata
 COURSE_MAP = {
-    "Core_Python": {
+    "_02_python": {
         "subpath": "",
         "category": {"name": "Programming Languages", "slug": "programming-languages",
                      "type": "technical", "icon": "fas fa-code", "color": "#3b82f6"},
@@ -35,7 +35,7 @@ COURSE_MAP = {
                      "difficulty": "beginner", "estimated_hours": 40},
         "module":   {"title": "Core Concepts", "slug": "core-concepts"},
     },
-    "Core_Java": {
+    "_03_java": {
         "subpath": "",
         "category": {"name": "Programming Languages", "slug": "programming-languages",
                      "type": "technical", "icon": "fas fa-code", "color": "#3b82f6"},
@@ -46,7 +46,7 @@ COURSE_MAP = {
                      "difficulty": "intermediate", "estimated_hours": 50},
         "module":   {"title": "Core Concepts", "slug": "core-concepts"},
     },
-    "Java_Selenium": {
+    "_04_selenium": {
         "subpath": "content",
         "category": {"name": "Automation & Testing", "slug": "automation-testing",
                      "type": "technical", "icon": "fas fa-robot", "color": "#22c55e"},
@@ -57,7 +57,7 @@ COURSE_MAP = {
                      "difficulty": "intermediate", "estimated_hours": 35},
         "module":   {"title": "Selenium Fundamentals", "slug": "selenium-fundamentals"},
     },
-    "My_Sql": {
+    "_05_mysql": {
         "subpath": "topics",
         "category": {"name": "Databases", "slug": "databases",
                      "type": "technical", "icon": "fas fa-database", "color": "#f59e0b"},
@@ -165,7 +165,7 @@ def run_migration(dry_run: bool = False):
         skipped = 0
 
         for folder_name, meta in COURSE_MAP.items():
-            folder_path = project_root / "old notes" / folder_name
+            folder_path = project_root / "docs" / "notes preparing implementation" / folder_name
             if meta.get("subpath"):
                 folder_path = folder_path / meta["subpath"]
                 
