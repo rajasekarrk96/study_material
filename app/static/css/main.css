@@ -110,6 +110,13 @@ code, pre {
     font-weight: 700;
     color: var(--text-primary);
 }
+.navbar-logo {
+    height: 36px;
+    width: 36px;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
 .navbar-brand i {
     color: var(--accent-light);
     font-size: 1.4rem;
