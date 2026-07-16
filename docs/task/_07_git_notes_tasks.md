@@ -15,10 +15,10 @@
 ---
 
 ## 7.2 Course 2: Git Collaboration [NEW]
-- [ ] **Lesson 7**: Remote Repositories & Origin Configuration (adding remotes, naming, clone vs fork).
-- [ ] **Lesson 8**: Syncing Data: Fetch, Pull, and Push (data flow tracking, automatic merges vs rebase pulls).
-- [ ] **Lesson 9**: Handling Merge Conflicts in Teams (visual markers, resolution, conflict abort).
-- [ ] **Lesson 10**: Upstream and Forking Workflows (syncing forks, remote upstream config).
+- [x] **Lesson 7**: Remote Repositories & Origin Configuration (`_01_11_git_collaboration_lesson1_remotes.md`).
+- [x] **Lesson 8**: Syncing Data: Fetch, Pull, and Push (`_01_12_git_collaboration_lesson2_sync.md`).
+- [x] **Lesson 9**: Handling Merge Conflicts in Teams (`_01_13_git_collaboration_lesson3_conflicts.md`).
+- [x] **Lesson 10**: Upstream and Forking Workflows (`_01_14_git_collaboration_lesson4_forks.md`).
 
 ---
 
