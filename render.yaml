@@ -1,0 +1,69 @@
+services:
+  # ─── Web Application ───────────────────────────────────────────────────────
+  - type: web
+    name: learning-os
+    runtime: python
+    region: oregon                        # cheapest Render region (US West)
+    plan: free                            # change to 'starter' for always-on
+
+    # Build phase — install all Python dependencies
+    buildCommand: pip install -r requirements.txt
+
+    # Start command — gunicorn WSGI server (production-grade)
+    # run:app means: from run.py import app
+    # 2 workers x 2 threads = handles ~4 concurrent requests on free tier
+    startCommand: gunicorn run:app --workers 2 --threads 2 --timeout 120 --bind 0.0.0.0:$PORT
+
+    # Health check — Render pings this path to confirm the app is alive
+    healthCheckPath: /
+
+    # Environment variables — set these in the Render dashboard as secrets
+    # DO NOT commit real values here; this file just declares the variable names
+    envVars:
+      - key: FLASK_ENV
+        value: production
+
+      - key: SECRET_KEY
+        sync: false                       # set manually in Render dashboard
+
+      - key: ENCRYPTION_KEY
+        sync: false
+
+      - key: DATABASE_TYPE
+        value: tidb
+
+      - key: DATABASE_URL
+        sync: false                       # full TiDB connection string
+
+      - key: TIDB_HOST
+        sync: false
+      - key: TIDB_PORT
+        value: "4000"
+      - key: TIDB_USER
+        sync: false
+      - key: TIDB_PASSWORD
+        sync: false
+      - key: TIDB_DATABASE
+        value: test
+      - key: TIDB_CA_PATH
+        value: isrgrootx1.pem
+
+      - key: AI_PROVIDER
+        value: ollama                     # or 'openai' if using cloud AI
+      - key: OLLAMA_API_BASE_URL
+        value: http://localhost:11434     # update if running external Ollama server
+      - key: OLLAMA_MODEL_NAME
+        value: qwen2.5-coder:7b
+
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+
+      - key: JUDGE0_API_URL
+        value: https://api.judge0.com
+      - key: JUDGE0_API_KEY
+        sync: false
+
+      - key: PORT
+        value: "5000"
