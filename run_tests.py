@@ -511,6 +511,30 @@ class QuizEngineTestCase(unittest.TestCase):
         self.assertIn("<urlset", xml_content)
         self.assertIn("https://bytesandboards.com", xml_content)
 
+    def test_caching_decorator(self):
+        from app.core.cache import cache_memoize, clear_cache
+
+        call_count = 0
+
+        @cache_memoize(timeout_seconds=5)
+        def dummy_calc(x):
+            nonlocal call_count
+            call_count += 1
+            return x * 2
+
+        clear_cache()
+        # First call calculates
+        self.assertEqual(dummy_calc(10), 20)
+        self.assertEqual(call_count, 1)
+
+        # Second call returns cached value
+        self.assertEqual(dummy_calc(10), 20)
+        self.assertEqual(call_count, 1)
+
+        # Different parameter calculates again
+        self.assertEqual(dummy_calc(5), 10)
+        self.assertEqual(call_count, 2)
+
 
 if __name__ == "__main__":
     unittest.main()

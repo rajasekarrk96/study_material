@@ -5,26 +5,26 @@
 ---
 
 ## 6.1 Cloud Databases Setup & Migrations
-- [ ] Production Database Integration (TiDB serverless):
+- [x] Production Database Integration (TiDB serverless):
   - Setup connections targeting TiDB Cloud using SSL certificates keys mappings.
   - Enable Postgres PGVector or TiDB compatibility wrappers inside production config matrices.
-- [ ] Alembic Migration Run:
+- [x] Alembic Migration Run:
   - Verify migration chains match production schemas: `alembic upgrade head`.
 
 ---
 
 ## 6.2 Redis Rate Limiting & Performance Cache
-- [ ] Rate limiters setup:
+- [x] Rate limiters setup:
   - Wire Redis connection setups tracking requests limits across auth controllers and AI generation pathways.
-- [ ] Memory caching:
+- [x] Memory caching:
   - Cache heavy database queries (e.g. course catalogs, topic nodes lists).
 
 ---
 
 ## 6.3 Render deployment configuration
-- [ ] Deployment blueprints:
+- [x] Deployment blueprints:
   - Create standard `render.yaml` configuration profiles mapping web server execution parameters, background worker schedules, and SSL values.
-- [ ] Automated Backups:
+- [x] Automated Backups:
   - Schedule cron scripts compiling daily database dumps and asset directories, uploading them encrypted to external S3 buckets.
 
 ---

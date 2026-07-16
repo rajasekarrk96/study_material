@@ -21,6 +21,7 @@ def create_app() -> Flask:
     app.config["SQLALCHEMY_DATABASE_URI"] = config.db.database_uri
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SQLALCHEMY_ENGINE_OPTIONS"] = _get_engine_options()
+    app.config["RATELIMIT_STORAGE_URI"] = os.environ.get("REDIS_URL", "memory://")
 
     # ── Extensions ─────────────────────────────────────────────────────────
     db.init_app(app)
