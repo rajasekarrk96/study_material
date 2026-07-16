@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  03 intro   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()"> Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>03. Introduction to Selenium</h1>
+
+<h2>📖 Introduction</h2>
+<p>In the modern software development lifecycle, <strong>Automation Testing</strong> is not just a luxury—it's a
+    necessity. It involves using specialized tools to control the execution of tests and compare the actual results
+    against the expected results. Think of it as teaching a robot to perform the repetitive, boring tasks so you can
+    focus on the creative and complex ones.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The fundamental differences between Manual and Automation Testing</li>
+    <li>Why Selenium is the undisputed king of web automation</li>
+    <li>The core components of the Selenium Suite</li>
+    <li>When to choose automation over manual testing</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>Manual vs. Automation Testing</h3>
+<p>Understanding the difference is crucial for any QA engineer:</p>
+<ul>
+    <li><strong>Manual Testing:</strong> A human carefully executes test steps, interacts with the software, and
+        visually verifies the results. It's intuitive but slow and prone to fatigue-induced errors.</li>
+    <li><strong>Automation Testing:</strong> Scripts and tools execute pre-defined actions. It's blazing fast, 100%
+        accurate, and can run 24/7 without coffee breaks.</li>
+</ul>
+
+<h3>Why Selenium?</h3>
+<p>Selenium dominates the market for several compelling reasons:</p>
+<ol>
+    <li><strong>Open Source:</strong> Completely free to use with a massive community.</li>
+    <li><strong>Language Freedom:</strong> Write tests in Java, Python, C#, JavaScript, or Ruby.</li>
+    <li><strong>Browser Compatibility:</strong> Works seamlessly on Chrome, Firefox, Edge, Safari, and Opera.</li>
+    <li><strong>OS Independence:</strong> Run your tests on Windows, macOS, or Linux.</li>
+</ol>
+
+<h3>Selenium Suite Components</h3>
+<p>Selenium isn't just one tool; it's a suite of tools:</p>
+<ul>
+    <li><strong>Selenium WebDriver:</strong> The core library that drives a browser natively, as a user would.</li>
+    <li><strong>Selenium IDE:</strong> A record-and-playback tool for quick prototypes (Chrome/Firefox plugin).</li>
+    <li><strong>Selenium Grid:</strong> Allows running tests on multiple machines and browsers simultaneously.</li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+<p>Here is your first look at a simple "Hello World" in Selenium Automation:</p>
+
+<h3>The "Hello World" of Selenium</h3>
+<pre><code>// 1. Setup the ChromeDriver
+WebDriverManager.chromedriver().setup();
+
+// 2. Initialize the Browser
+WebDriver driver = new ChromeDriver();
+
+// 3. Navigate to a URL
+driver.get("https://google.com");
+
+// 4. Print the Title
+System.out.println("Page Title is: " + driver.getTitle());
+
+// 5. Close the Browser
+driver.quit();
+</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Don't Automate Everything:</strong> One of the biggest mistakes beginners make is trying to automate 100%
+        of testing. Usability testing, exploratory testing, and ad-hoc testing are best done manually.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Set up your environment for the first time.</p>
+    <ol>
+        <li>Install Java (JDK 11 or higher) and verify with <code>java -version</code>.</li>
+        <li>Install an IDE (Eclipse or IntelliJ IDEA).</li>
+        <li>Create a simple Maven project.</li>
+        <li>Add Selenium dependencies to your <code>pom.xml</code>.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: What are the limitations of Selenium?</strong></p>
+    <p><strong>Answer:</strong> Selenium supports <em>only</em> web-based applications. It cannot automate desktop
+        applications (like Calculator or Notepad) or mobile native apps (unless using Appium). It also has no built-in
+        reporting mechanism (requires TestNG/JUnit).</p>
+
+    <p><strong>Q2: What is the difference between Selenium and QTP/UFT?</strong></p>
+    <p><strong>Answer:</strong> Selenium is open-source and free, while UFT is a paid commercial tool. Selenium supports
+        multiple languages, while UFT uses VBScript.</p>
+</blockquote>
+
+<a href="worksheets/ws_intro.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

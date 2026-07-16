@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Case</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Case</h2>
+                <p class="topic-desc">The CASE statement is used to add conditional logic to SQL queries, similar to IF-ELSE in programming.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Basic Syntax</h3>
+                        <p class="subtopic-desc"><strong>🔹 Structure</strong><br>CASE goes through conditions and returns a value when the first condition is met.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">CASE</span>\n    <span class="sql-keyword">WHEN</span> condition1 <span class="sql-keyword">THEN</span> result1\n    <span class="sql-keyword">WHEN</span> condition2 <span class="sql-keyword">THEN</span> result2\n    <span class="sql-keyword">ELSE</span> resultN\nEND</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Table: students</h3>
+                        <p class="subtopic-desc">Sample data used for the CASE examples.</p>
+            <div class="output-box">
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>student_id</th><th>name</th><th>marks</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Arun</td><td>85</td></tr>
+                        <tr><td>2</td><td>Ravi</td><td>45</td></tr>
+                        <tr><td>3</td><td>Meena</td><td>72</td></tr>
+                        <tr><td>4</td><td>Sita</td><td>30</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Example 1: Grade students based on marks</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Assign a text label based on the marks range.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name, marks,\nCASE\n    <span class="sql-keyword">WHEN</span> marks &gt;= 75 <span class="sql-keyword">THEN</span> <span class="sql-string">'Distinction'</span>\n    <span class="sql-keyword">WHEN</span> marks &gt;= 50 <span class="sql-keyword">THEN</span> <span class="sql-string">'Pass'</span>\n    <span class="sql-keyword">ELSE</span> <span class="sql-string">'Fail'</span>\nEND <span class="sql-keyword">AS</span> result\nFROM students;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>name</th><th>marks</th><th>result</th></tr></thead>
+                    <tbody>
+                        <tr><td>Arun</td><td>85</td><td>Distinction</td></tr>
+                        <tr><td>Ravi</td><td>45</td><td>Fail</td></tr>
+                        <tr><td>Meena</td><td>72</td><td>Pass</td></tr>
+                        <tr><td>Sita</td><td>30</td><td>Fail</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Example 2: CASE with ORDER BY</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Sort the result set based on custom logic rather than raw data values.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name, marks\nFROM students\nORDER BY\nCASE\n    <span class="sql-keyword">WHEN</span> marks &gt;= 75 <span class="sql-keyword">THEN</span> 1\n    <span class="sql-keyword">WHEN</span> marks &gt;= 50 <span class="sql-keyword">THEN</span> 2\n    <span class="sql-keyword">ELSE</span> 3\nEND;</code></pre><div class="output-box">✔ Groups results by category (Distinction first, then Pass, then Fail).</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Example 3: CASE with UPDATE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Update a column with values based on conditions.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> students\nSET result =\nCASE\n    <span class="sql-keyword">WHEN</span> marks &gt;= 50 <span class="sql-keyword">THEN</span> <span class="sql-string">'Pass'</span>\n    <span class="sql-keyword">ELSE</span> <span class="sql-string">'Fail'</span>\nEND;</code></pre><div class="output-box">✔ Column 'result' is populated for all students based on their marks.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">Example 4: CASE with GROUP BY</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Group aggregate results based on a calculated condition.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span>\nCASE\n    <span class="sql-keyword">WHEN</span> marks &gt;= 50 <span class="sql-keyword">THEN</span> <span class="sql-string">'Pass'</span>\n    <span class="sql-keyword">ELSE</span> <span class="sql-string">'Fail'</span>\nEND <span class="sql-keyword">AS</span> status,\nCOUNT(*) <span class="sql-keyword">AS</span> total_students\nFROM students\nGROUP BY status;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 50%; font-size: 13px;'>
+                    <thead><tr><th>status</th><th>total_students</th></tr></thead>
+                    <tbody>
+                        <tr><td>Pass</td><td>2</td></tr>
+                        <tr><td>Fail</td><td>2</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Display student names with age group (Minor / Adult).</strong><br>
+    <button class="toggle-btn" data-target="ans-t28-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t28-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name,
+       CASE 
+           WHEN age < 18 THEN 'Minor'
+           ELSE 'Adult'
+       END AS age_group
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+-----------+
+| name   | age_group |
++--------+-----------+
+| Arun   | Adult     |
+| Priya  | Adult     |
+| Kiran  | Adult     |
+| Meena  | Adult     |
++--------+-----------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Assign grade based on age.</strong><br>
+    <button class="toggle-btn" data-target="ans-t28-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t28-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name,
+       CASE 
+           WHEN age >= 24 THEN 'A'
+           WHEN age >= 22 THEN 'B'
+           ELSE 'C'
+       END AS grade
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+-------+
+| name   | grade |
++--------+-------+
+| Arun   | B     |
+| Priya  | B     |
+| Kiran  | B     |
+| Meena  | A     |
++--------+-------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Use CASE in ORDER BY to prioritize students aged 23 first.</strong><br>
+    <button class="toggle-btn" data-target="ans-t28-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t28-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, age
+FROM students
+ORDER BY 
+    CASE WHEN age = 23 THEN 1 ELSE 2 END;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+------+
+| name   | age  |
++--------+------+
+| Priya  | 23   |
+| Kiran  | 23   |
+| Arun   | 22   |
+| Meena  | 24   |
++--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Display age category (Young / Middle / Senior).</strong><br>
+    <button class="toggle-btn" data-target="ans-t28-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t28-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name,
+       CASE 
+           WHEN age < 23 THEN 'Young'
+           WHEN age = 23 THEN 'Middle'
+           ELSE 'Senior'
+       END AS category
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+---------+
+| name   | category|
++--------+---------+
+| Arun   | Young   |
+| Priya  | Middle  |
+| Kiran  | Middle  |
+| Meena  | Senior  |
++--------+---------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Use CASE to mark students eligible for scholarship (age < 23).</strong><br>
+    <button class="toggle-btn" data-target="ans-t28-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t28-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name,
+       CASE 
+           WHEN age < 23 THEN 'Eligible'
+           ELSE 'Not Eligible'
+       END AS scholarship
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+-------------+
+| name   | scholarship |
++--------+-------------+
+| Arun   | Eligible    |
+| Priya  | Not Eligible|
+| Kiran  | Not Eligible|
+| Meena  | Not Eligible|
++--------+-------------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='28_exists.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Exists</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='30_ifnull.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">IFNULL →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

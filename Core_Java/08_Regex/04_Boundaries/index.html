@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boundaries - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Boundaries</h5>
+        <a href="../../index.html#regex">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#types">Types</a>
+        <a href="#examples">Examples</a>
+    </div>
+    <div class="top-nav">
+        <h2>Regex Boundaries</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Regex Boundaries</h1>
+            <p class="lead text-muted">Match positions in strings using boundary matchers.</p>
+        </div>
+        <div class="section" id="types">
+            <h4>Boundary Types</h4>
+            <table class="table">
+                <tr>
+                    <th>Boundary</th>
+                    <th>Meaning</th>
+                </tr>
+                <tr>
+                    <td>^</td>
+                    <td>Start of line</td>
+                </tr>
+                <tr>
+                    <td>$</td>
+                    <td>End of line</td>
+                </tr>
+                <tr>
+                    <td>\b</td>
+                    <td>Word boundary</td>
+                </tr>
+                <tr>
+                    <td>\B</td>
+                    <td>Non-word boundary</td>
+                </tr>
+            </table>
+        </div>
+        <div class="section" id="examples">
+            <h4>Example: Start and End Matching</h4>
+            <pre><code>import java.util.regex.*;
+
+public class BoundaryDemo {
+    public static void main(String[] args) {
+        String text = "Java Programming";
+        
+        // ^ matches start
+        System.out.println(text.matches("^Java.*"));  // true
+        
+        // $ matches end
+        System.out.println(text.matches(".*Programming$"));  // true
+        
+        // \b matches word boundary
+        Pattern p = Pattern.compile("\\bJava\\b");
+        Matcher m = p.matcher("Java is great, JavaScript too");
+        while (m.find()) {
+            System.out.println("Found at: " + m.start());
+        }
+    }
+}</code></pre>
+            <div class="output">
+                true<br>
+                true<br>
+                Found at: 0
+            </div>
+        </div>
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn-worksheet">Go to Practice Worksheets →</a>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Boundaries Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

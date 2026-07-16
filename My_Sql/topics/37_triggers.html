@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triggers - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Triggers</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Triggers</h2>
+                <p class="topic-desc">A Trigger is a special type of stored procedure that automatically executes in response to certain events (INSERT, UPDATE, DELETE) on a table.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Basic Concept</h3>
+                        <p class="subtopic-desc"><strong>🔹 Logic</strong><br>Triggers are automatic and cannot be called manually. They are used for data validation, auditing, and maintaining database integrity.</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Types of Triggers</h3>
+                        <p class="subtopic-desc">MySQL supports triggers for various events and execution timings:</p>
+            <div class="output-box">
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>Type</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td>BEFORE INSERT</td><td>Executes before a row is inserted.</td></tr>
+                        <tr><td>AFTER INSERT</td><td>Executes after a row is inserted.</td></tr>
+                        <tr><td>BEFORE UPDATE</td><td>Executes before a row is updated.</td></tr>
+                        <tr><td>AFTER UPDATE</td><td>Executes after a row is updated.</td></tr>
+                        <tr><td>BEFORE DELETE</td><td>Executes before a row is deleted.</td></tr>
+                        <tr><td>AFTER DELETE</td><td>Executes after a row is deleted.</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Syntax (MySQL)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Keywords</strong><ul><li><strong>FOR EACH ROW:</strong> The trigger runs for every affected row.</li><li><strong>NEW:</strong> Refers to the incoming value (INSERT/UPDATE).</li><li><strong>OLD:</strong> Refers to the existing value (UPDATE/DELETE).</li></ul></p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TRIGGER</span> trigger_name\nBEFORE|AFTER <span class="sql-keyword">INSERT</span>|<span class="sql-keyword">UPDATE</span>|<span class="sql-keyword">DELETE</span>\nON table_name\nFOR EACH ROW\nBEGIN\n    <span class="sql-comment">-- SQL statements\nEND;</span></code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example: Student Insertion Audit</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Log every new student added to the main table into an audit table.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- 1. <span class="sql-keyword">Create</span> audit <span class="sql-keyword">table</span>\nCREATE <span class="sql-keyword">TABLE</span> students_log (\n    student_id <span class="sql-keyword">INT</span>,\n    student_name <span class="sql-keyword">VARCHAR</span>(50),\n    action_time TIMESTAMP <span class="sql-keyword">DEFAULT</span> CURRENT_TIMESTAMP\n);\n\n-- 2. <span class="sql-keyword">Create</span> <span class="sql-keyword">Trigger</span>\nDELIMITER //\nCREATE <span class="sql-keyword">TRIGGER</span> after_student_insert\nAFTER <span class="sql-keyword">INSERT</span> <span class="sql-keyword">ON</span> students\nFOR EACH ROW\nBEGIN\n    <span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> students_log(student_id, student_name)\n    <span class="sql-keyword">VALUES</span> (NEW.student_id, NEW.student_name);\nEND //\nDELIMITER ;</span></code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Result Visualization</h3>
+                        <p class="subtopic-desc"><strong>🔹 Testing</strong><br>Inserting a student automatically populates the log table.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> students(student_id, student_name, marks)\nVALUES (3, <span class="sql-string">'Bob'</span>, 78);</code></pre><div class="output-box">
+                <strong style='color: var(--accent-primary);'>students_log table:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px;'>
+                    <thead><tr><th>student_id</th><th>student_name</th><th>action_time</th></tr></thead>
+                    <tbody>
+                        <tr><td>3</td><td>Bob</td><td>2025-12-26 21:00:00</td></tr>
+                    </tbody>
+                </table>
+                <p style='margin-top: 10px; color: var(--text-secondary);'>✅ The trigger handled the logging without manual intervention.</p></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Create a BEFORE INSERT trigger to set default age to 18 if not provided.</strong><br>
+    <button class="toggle-btn" data-target="ans-t36-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t36-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE TRIGGER before_student_insert
+BEFORE INSERT ON students
+FOR EACH ROW
+BEGIN
+    IF NEW.age IS NULL THEN
+        SET NEW.age = 18;
+    END IF;
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>INSERT INTO students(name) VALUES('Sita');
+SELECT * FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+------+-----+
+| id | name | age |
++----+------+-----+
+| ...| Sita | 18  |
++----+------+-----+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Create an AFTER INSERT trigger to log new student names.</strong><br>
+    <button class="toggle-btn" data-target="ans-t36-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t36-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE TABLE student_log(
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_name VARCHAR(50),
+    log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) $$
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER after_student_insert
+AFTER INSERT ON students
+FOR EACH ROW
+BEGIN
+    INSERT INTO student_log(student_name) VALUES (NEW.name);
+END $$
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>INSERT INTO students(name, age) VALUES('Ravi', 22);
+SELECT * FROM student_log;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+--------------+---------------------+
+| log_id | student_name | log_time            |
++--------+--------------+---------------------+
+| 1      | Ravi         | 2025-12-29 11:00:00 |
++--------+--------------+---------------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. BEFORE UPDATE trigger to prevent decreasing age.</strong><br>
+    <button class="toggle-btn" data-target="ans-t36-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t36-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE TRIGGER before_age_update
+BEFORE UPDATE ON students
+FOR EACH ROW
+BEGIN
+    IF NEW.age < OLD.age THEN
+        SET NEW.age = OLD.age;
+    END IF;
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>UPDATE students SET age = 20 WHERE name='Ravi';
+SELECT * FROM students WHERE name='Ravi';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+------+-----+
+| id | name | age |
++----+------+-----+
+| ...| Ravi | 22  |
++----+------+-----+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. AFTER DELETE trigger to log deleted student.</strong><br>
+    <button class="toggle-btn" data-target="ans-t36-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t36-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE TRIGGER after_student_delete
+AFTER DELETE ON students
+FOR EACH ROW
+BEGIN
+    INSERT INTO student_log(student_name) VALUES (OLD.name);
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>DELETE FROM students WHERE name='Sita';
+SELECT * FROM student_log;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+--------------+---------------------+
+| log_id | student_name | log_time            |
++--------+--------------+---------------------+
+| 2      | Sita         | 2025-12-29 11:05:00 |
++--------+--------------+---------------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. BEFORE INSERT trigger to capitalize student names.</strong><br>
+    <button class="toggle-btn" data-target="ans-t36-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t36-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE TRIGGER before_name_insert
+BEFORE INSERT ON students
+FOR EACH ROW
+BEGIN
+    SET NEW.name = UPPER(NEW.name);
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>INSERT INTO students(name, age) VALUES('meena', 24);
+SELECT * FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+------+-----+
+| id | name | age |
++----+------+-----+
+| ...| MEENA| 24  |
++----+------+-----+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='36_stored-procedures.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Stored Procedures</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='38_normalization.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Normalization →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

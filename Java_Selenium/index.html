@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Selenium Learning Portal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .sidebar-section {
+            padding: 15px 0;
+            margin: 0;
+        }
+
+        .sidebar-section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            opacity: 0.6;
+            padding: 10px 20px 5px;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+        }
+
+        .sidebar-section ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar-section li {
+            border-bottom: none;
+            margin: 0;
+        }
+
+        .sidebar-section .topic-link {
+            padding-left: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-section .topic-link i {
+            font-size: 14px;
+            width: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <nav id="sidebar" class="hidden">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn">🏠 Home</button>
+        </div>
+        <ul id="topic-list">
+            <!-- Core Intro -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-label">📌 Getting Started</div>
+                <ul>
+                    <li><a href="#_01_demo_page_" class="topic-link"><i class="fas fa-play-circle"></i> 01. Demo
+                            Page</a></li>
+                    <li><a href="#_02_java" class="topic-link"><i class="fas fa-coffee"></i> 02. Java Prerequisites</a>
+                    </li>
+                    <li><a href="#_03_intro___" class="topic-link"><i class="fas fa-info-circle"></i> 03.
+                            Introduction</a></li>
+                </ul>
+            </div>
+
+            <!-- Basic Setup -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-label">⚙️ Setup & Basin Commands</div>
+                <ul>
+                    <li><a href="#_04_web_driver_commands___" class="topic-link"><i class="fas fa-terminal"></i> 04.
+                            WebDriver Commands</a></li>
+                    <li><a href="#_05_auto_webdriver_manager___" class="topic-link"><i class="fas fa-magic"></i> 05.
+                            WebDriver Setup</a></li>
+                    <li><a href="#_06_chrome_options___" class="topic-link"><i class="fas fa-sliders-h"></i> 06. Chrome
+                            Options</a></li>
+                    <li><a href="#_07_page_load_strategy___" class="topic-link"><i class="fas fa-hourglass-start"></i>
+                            07. Page Load</a></li>
+                </ul>
+            </div>
+
+            <!-- Element Interaction -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-label">🔍 Locators & Selection</div>
+                <ul>
+                    <li><a href="#_08_locators___" class="topic-link"><i class="fas fa-crosshairs"></i> 08. Locators</a>
+                    </li>
+                    <li><a href="worksheets/ws_01_xpath_basics.html" class="topic-link"><i class="fas fa-code"></i> 09.
+                            XPath Practice</a></li>
+                    <li><a href="#_10_navigation___" class="topic-link"><i class="fas fa-compass"></i> 10.
+                            Navigation</a></li>
+                </ul>
+            </div>
+
+            <!-- HTML Controls -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-label">📝 HTML Controls</div>
+                <ul>
+                    <li><a href="#_11_basic_html_controls___" class="topic-link"><i class="fas fa-edit"></i> 11. Basic
+                            Controls</a></li>
+                    <li><a href="#_12_advanced_html_controls___" class="topic-link"><i class="fas fa-layer-group"></i>
+                            12. Advanced Controls</a></li>
+                    <li><a href="#_13_dropdown___" class="topic-link"><i class="fas fa-list"></i> 13. Dropdowns</a></li>
+                </ul>
+            </div>
+
+            <!-- Advanced Automation -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-label">⚡ Advanced Interactions</div>
+                <ul>
+                    <li><a href="#_14_waits_and_synchronization___" class="topic-link"><i class="fas fa-clock"></i> 14.
+                            Waits & Sync</a></li>
+                    <li><a href="#_15_iframe_handling___" class="topic-link"><i class="fas fa-cube"></i> 15. Iframes</a>
+                    </li>
+                    <li><a href="#_16_alerts_and_popups___" class="topic-link"><i
+                                class="fas fa-exclamation-triangle"></i> 16. Alerts</a></li>
+                    <li><a href="#_17_drag_drop___" class="topic-link"><i class="fas fa-mouse-pointer"></i> 17. Drag &
+                            Drop</a></li>
+                    <li><a href="#_18_keyboard_actions___" class="topic-link"><i class="fas fa-keyboard"></i> 18.
+                            Keyboard</a></li>
+                    <li><a href="#_19_mouse_actions___" class="topic-link"><i class="fas fa-mouse"></i> 19. Mouse</a>
+                    </li>
+                    <li><a href="#_20_scrolling_page___" class="topic-link"><i class="fas fa-scroll"></i> 20.
+                            Scrolling</a></li>
+                    <li><a href="#_21_multi_select___" class="topic-link"><i class="fas fa-check-double"></i> 21.
+                            Multi-Select</a></li>
+                </ul>
+            </div>
+
+            <!-- Utilities -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-label">🛠️ Utilities & Tools</div>
+                <ul>
+                    <li><a href="#_22_find_all_links___" class="topic-link"><i class="fas fa-link"></i> 22. Find All
+                            Links</a></li>
+                    <li><a href="#_23_window_handling___" class="topic-link"><i class="fas fa-window-restore"></i> 23.
+                            Windows</a></li>
+                    <li><a href="#_24_file_upload_download___" class="topic-link"><i class="fas fa-upload"></i> 24. File
+                            Up/Down</a></li>
+                    <li><a href="#_25_screenshots___" class="topic-link"><i class="fas fa-camera"></i> 25.
+                            Screenshots</a></li>
+                    <li><a href="#_26_common_selenium_exceptions___" class="topic-link"><i class="fas fa-bug"></i> 26.
+                            Exceptions</a></li>
+                </ul>
+            </div>
+
+            <!-- Frameworks -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-label">🧪 Framework & Design</div>
+                <ul>
+                    <li><a href="#_27_page_object_model___" class="topic-link"><i class="fas fa-sitemap"></i> 27. POM
+                            Pattern</a></li>
+                    <li><a href="#_28_testng___" class="topic-link"><i class="fas fa-vial"></i> 28. TestNG</a></li>
+                    <li><a href="#_29_maven_and_project_structure___" class="topic-link"><i class="fas fa-box"></i> 29.
+                            Maven</a></li>
+                    <li><a href="#_30_reports___" class="topic-link"><i class="fas fa-chart-line"></i> 30. Reports</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Final Links -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-label">🏁 Resources</div>
+                <ul>
+                    <li><a href="#_31_extra___" class="topic-link"><i class="fas fa-star"></i> 31. Resources</a></li>
+                    <li><a href="#_32_connect_with_local_host" class="topic-link"><i class="fas fa-server"></i> 32.
+                            Local Testing</a></li>
+                </ul>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <!-- Landing Page Grid -->
+        <div id="landing-page">
+            <header class="hero-section">
+                <div class="hero-badge">🚀 Professional Training</div>
+                <h1>Java Selenium Automation</h1>
+                <p class="hero-subtitle">Master the art of Web Automation Testing from scratch</p>
+                <p class="hero-description">Comprehensive curriculum covering everything from basics to advanced
+                    frameworks • Real-world examples • Interactive practice worksheets</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">30+</span>
+                        <span class="stat-label">Topics</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Code Examples</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">25+</span>
+                        <span class="stat-label">Worksheets</span>
+                    </div>
+                </div>
+            </header>
+            <div class="landing-grid">
+                <!-- Topic cards will be generated here -->
+            </div>
+        </div>
+
+        <!-- Topic Content Display (Initially Hidden) -->
+        <div id="content-display" class="hidden">
+            <!-- Dynamic Content Load Area -->
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

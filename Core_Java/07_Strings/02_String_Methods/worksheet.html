@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Methods - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Strings Worksheet</h5>
+        <a href="index.html" class="nav-link">← Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+            <a href="#question6" class="nav-link">Question 6</a>
+            <a href="#question7" class="nav-link">Question 7</a>
+            <a href="#question8" class="nav-link">Question 8</a>
+            <a href="#question9" class="nav-link">Question 9</a>
+            <a href="#question10" class="nav-link">Question 10</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>String Methods - Practice</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master Java String methods and common string manipulation algorithms.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Lexicographical Comparison</h3>
+            <div class="explanation">Write a Java program to compare two strings lexicographically. Two strings are
+                lexicographically equal if they are the same length and contain the same characters in the same
+                positions.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter string 1: ");
+        String s1 = sn.next();
+        System.out.print("Enter string 2: ");
+        String s2 = sn.next();
+
+        int result = s1.compareTo(s2);
+
+        if (result == 0)
+            System.out.println("Strings are equal");
+        else if (result > 0)
+            System.out.println("First string is greater");
+        else
+            System.out.println("Second string is greater");
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter string 1: Apple
+Enter string 2: Banana
+Second string is greater</code></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Case-Insensitive Comparison</h3>
+            <div class="explanation">Write a Java program to compare two strings lexicographically, ignoring case
+                differences.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter string 1: ");
+        String s1 = sn.next();
+        System.out.print("Enter string 2: ");
+        String s2 = sn.next();
+
+        int result = s1.compareToIgnoreCase(s2);
+        System.out.println("Case-insensitive result: " + result);
+
+        sn.close();
+    }
+}</code></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Check Character Sequence</h3>
+            <div class="explanation">Write a Java program to test if a given string contains the specified sequence of
+                char values.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter main string: ");
+        String str = sn.nextLine();
+        System.out.print("Enter sequence to search: ");
+        String seq = sn.next();
+
+        System.out.println("Contains sequence: " + str.contains(seq));
+
+        sn.close();
+    }
+}</code></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Check Suffix</h3>
+            <div class="explanation">Write a Java program to check whether a given string ends with the contents of
+                another string.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _04_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter string: ");
+        String str = sn.next();
+        System.out.print("Enter suffix: ");
+        String end = sn.next();
+
+        System.out.println("Ends with: " + str.endsWith(end));
+
+        sn.close();
+    }
+}</code></div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Count Vowels</h3>
+            <div class="explanation">Write a Java method that takes a string as input and returns the number of vowels
+                (a, e, i, o, u) in the string.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _05_ {
+
+    static int countVowels(String s) {
+        int count = 0;
+        for (char c : s.toLowerCase().toCharArray())
+            if ("aeiou".indexOf(c) != -1)
+                count++;
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter string: ");
+        String s = sn.nextLine();
+        System.out.println("Vowel count: " + countVowels(s));
+
+        sn.close();
+    }
+}</code></div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="section-card" id="question6">
+            <h3>Question 6: Count "the" Occurrences</h3>
+            <div class="explanation">Write a Java method that takes a string as input and returns the number of times
+                the word "the" appears in the string.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _06_ {
+
+    static int countThe(String s) {
+        int count = 0;
+        String[] words = s.toLowerCase().split("\\s+");
+        for (String w : words)
+            if (w.equals("the"))
+                count++;
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter sentence: ");
+        String s = sn.nextLine();
+        System.out.println("Count of 'the': " + countThe(s));
+
+        sn.close();
+    }
+}</code></div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="section-card" id="question7">
+            <h3>Question 7: Unique Characters</h3>
+            <div class="explanation">Write a Java method that returns true if the string contains only unique
+                characters; otherwise, it returns false.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+import java.util.HashSet;
+
+class _07_ {
+
+    static boolean isUnique(String s) {
+        HashSet<Character> set = new HashSet<>();
+        for (char c : s.toCharArray()) {
+            if (!set.add(c))
+                return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter word: ");
+        String s = sn.next();
+        System.out.println("Is unique: " + isUnique(s));
+
+        sn.close();
+    }
+}</code></div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="section-card" id="question8">
+            <h3>Question 8: Count Words</h3>
+            <div class="explanation">Write a Java method that takes a string as input and returns the number of words in
+                the string.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _08_ {
+
+    static int wordCount(String s) {
+        if (s == null || s.isEmpty()) return 0;
+        String[] words = s.trim().split("\\s+");
+        return words.length;
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter sentence: ");
+        String s = sn.nextLine();
+        System.out.println("Word count: " + wordCount(s));
+
+        sn.close();
+    }
+}</code></div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="section-card" id="question9">
+            <h3>Question 9: Reverse String Characters</h3>
+            <div class="explanation">Write a program in Java to print individual characters of a string in reverse
+                order.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _09_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter string: ");
+        String s = sn.next();
+
+        System.out.print("Reversed: ");
+        for (int i = s.length() - 1; i >= 0; i--)
+            System.out.print(s.charAt(i));
+        System.out.println();
+
+        sn.close();
+    }
+}</code></div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="section-card" id="question10">
+            <h3>Question 10: Second Most Frequent Character</h3>
+            <div class="explanation">Write a Java program to find the second most frequent character in a given string.
+            </div>
+            <div class="code-block"><code>import java.util.Scanner;
+import java.util.HashMap;
+
+class _10_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter string: ");
+        String s = sn.next();
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (char c : s.toCharArray())
+            map.put(c, map.getOrDefault(c, 0) + 1);
+
+        char first = 0, second = 0;
+        int fmax = 0, smax = 0;
+
+        for (char c : map.keySet()) {
+            int freq = map.get(c);
+            if (freq > fmax) {
+                smax = fmax;
+                second = first;
+                fmax = freq;
+                first = c;
+            } else if (freq > smax && freq != fmax) {
+                smax = freq;
+                second = c;
+            }
+        }
+
+        System.out.println("Second most frequent character: " + second);
+
+        sn.close();
+    }
+}</code></div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>String Methods Module - Practice Worksheet</strong></p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

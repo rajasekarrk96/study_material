@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Normalization - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Normalization</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Normalization</h2>
+                <p class="topic-desc">Normalization is the process of organizing a database to reduce redundancy and improve data integrity by splitting large tables into smaller, related ones.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Purpose & Core Concepts</h3>
+                        <p class="subtopic-desc"><strong>🔹 Why Normalize?</strong><ul><li>Remove duplicate data.</li><li>Avoid insertion, update, and deletion anomalies.</li><li>Ensure data consistency and optimize storage.</li></ul></p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Normal Forms (NF) Summary</h3>
+                        <p class="subtopic-desc">A quick reference for the transformation stages.</p>
+            <div class="output-box">
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>Normal Form</th><th>Requirement</th></tr></thead>
+                    <tbody>
+                        <tr><td>1NF</td><td>Each column contains atomic values, no repeating groups.</td></tr>
+                        <tr><td>2NF</td><td>In 1NF, and all non-key columns fully depend on the primary key.</td></tr>
+                        <tr><td>3NF</td><td>In 2NF, and no transitive dependency exists.</td></tr>
+                        <tr><td>BCNF</td><td>Stronger 3NF; every determinant is a candidate key.</td></tr>
+                        <tr><td>4NF</td><td>Handles multi-valued dependencies.</td></tr>
+                        <tr><td>5NF</td><td>Handles join dependencies.</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">First Normal Form (1NF)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Rule:</strong> Make columns atomic (no multiple values in a single cell).</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> Students_1NF (\n    StudentID <span class="sql-keyword">INT</span>,\n    StudentName <span class="sql-keyword">VARCHAR</span>(50),\n    Course <span class="sql-keyword">VARCHAR</span>(50),\n    Instructor <span class="sql-keyword">VARCHAR</span>(50)\n);</code></pre><div class="output-box">
+                <strong>1NF Table:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>StudentID</th><th>StudentName</th><th>Course</th><th>Instructor</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>John</td><td>Math</td><td>Mr.A</td></tr>
+                        <tr><td>1</td><td>John</td><td>Physics</td><td>Mr.B</td></tr>
+                        <tr><td>2</td><td>Alice</td><td>Math</td><td>Mr.A</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Second Normal Form (2NF)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Rule:</strong> Remove partial dependencies. Split data into logical entities.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- Students <span class="sql-keyword">Table</span>\nCREATE <span class="sql-keyword">TABLE</span> Students (\n    StudentID <span class="sql-keyword">INT</span> <span class="sql-keyword">PRIMARY KEY</span>,\n    StudentName <span class="sql-keyword">VARCHAR</span>(50)\n);\n\n-- Courses <span class="sql-keyword">Table</span>\nCREATE <span class="sql-keyword">TABLE</span> Courses (\n    Course <span class="sql-keyword">VARCHAR</span>(50) <span class="sql-keyword">PRIMARY KEY</span>,\n    Instructor <span class="sql-keyword">VARCHAR</span>(50)\n);\n\n-- Enrollment <span class="sql-keyword">Join</span> <span class="sql-keyword">Table</span>\nCREATE <span class="sql-keyword">TABLE</span> Enrollment (\n    StudentID <span class="sql-keyword">INT</span>,\n    Course <span class="sql-keyword">VARCHAR</span>(50),\n    <span class="sql-keyword">PRIMARY KEY</span> (StudentID, Course),\n    <span class="sql-keyword">FOREIGN KEY</span> (StudentID) <span class="sql-keyword">REFERENCES</span> Students(StudentID),\n    <span class="sql-keyword">FOREIGN KEY</span> (Course) <span class="sql-keyword">REFERENCES</span> Courses(Course)\n);</span></code></pre><div class="output-box">
+                <div style='display: flex; gap: 15px; flex-wrap: wrap;'>
+                    <div><strong>Students:</strong><br><table border='1'><tr><th>ID</th><th>Name</th></tr><tr><td>1</td><td>John</td></tr><tr><td>2</td><td>Alice</td></tr></table></div>
+                    <div><strong>Courses:</strong><br><table border='1'><tr><th>Course</th><th>Instr</th></tr><tr><td>Math</td><td>Mr.A</td></tr><tr><td>Physics</td><td>Mr.B</td></tr></table></div>
+                </div></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Third Normal Form (3NF)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Rule:</strong> Remove transitive dependencies (non-key columns shouldn't depend on other non-key columns).</p>
+            <div class="output-box">✅ Satisfied if StudentName depends only on StudentID, and Instructor depends only on Course.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Boyce-Codd Normal Form (BCNF)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Rule:</strong> For every functional dependency (X → Y), X must be a superkey.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- Decomposing to satisfy BCNF\nCREATE <span class="sql-keyword">TABLE</span> Course_Room (CourseID <span class="sql-keyword">VARCHAR</span>(10) <span class="sql-keyword">PRIMARY KEY</span>, Room <span class="sql-keyword">VARCHAR</span>(10));\nCREATE <span class="sql-keyword">TABLE</span> Room_Instructor (Room <span class="sql-keyword">VARCHAR</span>(10) <span class="sql-keyword">PRIMARY KEY</span>, Instructor <span class="sql-keyword">VARCHAR</span>(50));</span></code></pre><div class="output-box">✔ Resolves anomalies where a non-prime attribute determines another non-prime attribute.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">Fourth Normal Form (4NF)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Rule:</strong> No multi-valued dependencies. Independent facts go to separate tables.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- Student hobbies <span class="sql-keyword">and</span> phones split <span class="sql-keyword">into</span> different tables\nCREATE <span class="sql-keyword">TABLE</span> Student_Hobby (StudentID <span class="sql-keyword">INT</span>, Hobby <span class="sql-keyword">VARCHAR</span>(50));\nCREATE <span class="sql-keyword">TABLE</span> Student_Phone (StudentID <span class="sql-keyword">INT</span>, Phone <span class="sql-keyword">VARCHAR</span>(15));</span></code></pre><div class="output-box">✔ Prevents redundancy when one key has multiple independent attributes.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Fifth Normal Form (5NF)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Rule:</strong> Handles join dependencies; ensures data can be reconstructed exactly.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- Splitting Employee, Project, <span class="sql-keyword">and</span> Skill <span class="sql-keyword">into</span> 3 binary relationships\nCREATE <span class="sql-keyword">TABLE</span> Employee_Project (...);\nCREATE <span class="sql-keyword">TABLE</span> Employee_Skill (...);\nCREATE <span class="sql-keyword">TABLE</span> Project_Skill (...);</span></code></pre><div class="output-box">✔ Minimal redundancy for complex N-way relationships.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. What is normalization?</strong><br>
+    <button class="toggle-btn" data-target="ans-t37-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t37-q1" style="display:none; margin-top:10px;">
+        Answer:<br>
+        Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity. It divides large tables into smaller, related tables and defines relationships between them.<br><br>
+        Example: A table storing student and department data:<br>
+        <pre class='code-block-minimal'><code>StudentID  Name   DeptID  DeptName
+1          Arun   101     IT
+2          Priya  102     HR
+3          Kiran  101     IT</code></pre><br>
+        Redundant DeptName column exists.
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. First Normal Form (1NF)</strong><br>
+    <button class="toggle-btn" data-target="ans-t37-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t37-q2" style="display:none; margin-top:10px;">
+        Rule:<br>
+        - Remove repeating groups<br>
+        - Each column must hold atomic values (no multiple values in a column)<br><br>
+        Example Table:<br>
+        <pre class='code-block-minimal'><code>StudentID   Name    Subjects
+1           Arun    Math, Science</code></pre><br>
+        Normalized 1NF Table:<br>
+        <pre class='code-block-minimal'><code>StudentID   Name    Subject
+1           Arun    Math
+1           Arun    Science</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Second Normal Form (2NF)</strong><br>
+    <button class="toggle-btn" data-target="ans-t37-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t37-q3" style="display:none; margin-top:10px;">
+        Rule:<br>
+        - Must be in 1NF<br>
+        - Remove partial dependency (columns should depend on the whole primary key)<br><br>
+        Normalized 2NF Tables:<br>
+        Students Table:<br>
+        <pre class='code-block-minimal'><code>StudentID  Name
+1          Arun</code></pre><br>
+        Courses Table:<br>
+        <pre class='code-block-minimal'><code>CourseID   CourseName   Instructor</code></pre><br>
+        Enrollment Table:<br>
+        <pre class='code-block-minimal'><code>StudentID  CourseID
+1          101</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Third Normal Form (3NF)</strong><br>
+    <button class="toggle-btn" data-target="ans-t37-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t37-q4" style="display:none; margin-top:10px;">
+        Rule:<br>
+        - Must be in 2NF<br>
+        - Remove transitive dependency (non-key columns should not depend on other non-key columns)<br><br>
+        Normalized 3NF Tables:<br>
+        Students Table:<br>
+        <pre class='code-block-minimal'><code>StudentID  Name  DeptID</code></pre><br>
+        Departments Table:<br>
+        <pre class='code-block-minimal'><code>DeptID   DeptName</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Benefits of Normalization</strong><br>
+    <button class="toggle-btn" data-target="ans-t37-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t37-q5" style="display:none; margin-top:10px;">
+        - Reduces data redundancy<br>
+        - Improves data integrity<br>
+        - Easier to maintain and update<br>
+        - Makes queries more efficient<br><br>
+        Example: Instead of repeating department names in multiple student rows, you store department once in a separate table and link with DeptID.
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='37_triggers.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Triggers</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='39_cte.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">CTE (Common Table Expression) →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Sets - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#access">Access Items</a></li>
+                        <li><a href="#add">Add Items</a></li>
+                        <li><a href="#remove">Remove Items</a></li>
+                        <li><a href="#loop">Loop Sets</a></li>
+                        <li><a href="#join">Join Sets</a></li>
+                        <li><a href="#methods">Set Methods</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python Sets</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>Sets are used to store multiple items in a single variable.</p>
+                    <p>A set is a collection which is <strong>unordered</strong>, <strong>unchangeable*</strong>, and
+                        <strong>unindexed</strong>.
+                    </p>
+                    <p>* Note: Set items are unchangeable, but you can remove items and add new items.</p>
+                    <p>Sets are written with curly brackets.</p>
+                    <pre class="code-block">
+thisset = {"apple", "banana", "cherry"}
+print(thisset)
+</pre>
+                    <h3>Set Items</h3>
+                    <ul>
+                        <li><strong>Unordered:</strong> Unordered means that the items in a set do not have a defined
+                            order. Set items can appear in a different order every time you use them, and cannot be
+                            referred to by index or key.</li>
+                        <li><strong>Unchangeable:</strong> Set items are unchangeable, meaning that we cannot change the
+                            items after the set has been created.</li>
+                        <li><strong>Duplicates Not Allowed:</strong> Sets cannot have two items with the same value.
+                        </li>
+                    </ul>
+
+                    <h2 id="access">Access Items</h2>
+                    <p>You cannot access items in a set by referring to an index or a key.</p>
+                    <p>But you can loop through the set items using a <code>for</code> loop, or ask if a specified value
+                        is present in a set, by using the <code>in</code> keyword.</p>
+                    <pre class="code-block">
+thisset = {"apple", "banana", "cherry"}
+
+for x in thisset:
+  print(x)
+
+print("banana" in thisset) # True
+</pre>
+
+                    <h2 id="add">Add Items</h2>
+                    <h3>Add Items</h3>
+                    <p>To add one item to a set use the <code>add()</code> method.</p>
+                    <pre class="code-block">
+thisset = {"apple", "banana", "cherry"}
+thisset.add("orange")
+</pre>
+
+                    <h3>Add Sets</h3>
+                    <p>To add items from another set into the current set, use the <code>update()</code> method.</p>
+                    <pre class="code-block">
+thisset = {"apple", "banana", "cherry"}
+tropical = {"pineapple", "mango", "papaya"}
+
+thisset.update(tropical)
+</pre>
+
+                    <h2 id="create-set">Create Set</h2>
+                    <p>A set is created by placing all the items (elements) inside curly braces <code>{}</code>,
+                        separated
+                        by commas.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+set_name = {item1, item2, item3, ...}
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+thisset = {"apple", "banana", "cherry"}
+thisset.remove("banana")
+</pre>
+
+                    <h2 id="remove">Remove Items</h2>
+                    <p>To remove an item in a set, use the <code>remove()</code>, or the <code>discard()</code> method.
+                    </p>
+                    <pre class="code-block">
+thisset = {"apple", "banana", "cherry"}
+thisset.remove("banana")
+</pre>
+                    <p><strong>Note:</strong> If the item to remove does not exist, <code>remove()</code> will raise an
+                        error, while <code>discard()</code> will NOT raise an error.</p>
+
+                    <h2 id="loop">Loop Sets</h2>
+                    <p>You can loop through the set items by using a <code>for</code> loop:</p>
+                    <pre class="code-block">
+thisset = {"apple", "banana", "cherry"}
+
+for x in thisset:
+  print(x)
+</pre>
+
+                    <h2 id="join">Join Sets</h2>
+                    <p>There are several ways to join two or more sets in Python.</p>
+                    <ul>
+                        <li>The <code>union()</code> method returns a new set with all items from both sets.</li>
+                        <li>The <code>update()</code> method inserts all the items from one set into another.</li>
+                    </ul>
+                    <pre class="code-block">
+set1 = {"a", "b" , "c"}
+set2 = {1, 2, 3}
+
+set3 = set1.union(set2)
+print(set3)
+</pre>
+
+                    <h2 id="methods">Set Methods</h2>
+                    <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
+                        <tr style="background-color: #f1f1f1; text-align: left;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Method</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Description</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">add()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Adds an element to the set</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">clear()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Removes all the elements from the set
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">copy()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns a copy of the set</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">difference()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns a set containing the difference
+                                between two or more sets</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">discard()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Remove the specified item</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">intersection()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns a set, that is the intersection
+                                of two other sets</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">issubset()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns whether another set contains this
+                                set or not</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">pop()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Removes an element from the set</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">remove()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Removes the specified element</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">union()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Return a set containing the union of sets
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">update()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Update the set with the union of this set
+                                and others</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a Python program to create a set.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>x = set()
+print(x)
+n = {0, 1, 2, 3, 4}
+print(n)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a Python program to add member(s) in a set.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>color_set = set()
+color_set.add("Red")
+print(color_set)
+# Add multiple items
+color_set.update(["Blue", "Green"])
+print(color_set)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a Python program to remove an item from a set if it is present in the set.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>num_set = {0, 1, 2, 3, 4, 5}
+num_set.discard(4)
+print(num_set)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a Python program to create an intersection of sets.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>setx = set(["green", "blue"])
+sety = set(["blue", "yellow"])
+setz = setx & sety
+print(setz)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a Python program to create a union of sets.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>setx = set(["green", "blue"])
+sety = set(["blue", "yellow"])
+seta = setx | sety
+print(seta)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a Python program to create set difference.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>setx = set(["green", "blue"])
+sety = set(["blue", "yellow"])
+setz = setx - sety
+print(setz)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a Python program to create a symmetric difference.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>setx = set(["green", "blue"])
+sety = set(["blue", "yellow"])
+setz = setx ^ sety
+print(setz)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a Python program to check if a set is a subset of another set.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>x = {"a", "b", "c", "d", "e"}
+y = {"c", "d"}
+print("Is y a subset of x?")
+print(y.issubset(x))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a Python program to find maximum and the minimum value in a set.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>setn = {5, 10, 3, 15, 2, 20}
+print(max(setn))
+print(min(setn))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a Python program to clear a set.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>setc = {"Red", "Green", "Black"}
+setc.clear()
+print(setc)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

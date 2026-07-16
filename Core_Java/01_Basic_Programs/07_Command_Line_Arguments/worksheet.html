@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Line Arguments - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none;
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333;
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0;
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px;
+        }
+
+        .explanation ol {
+            line-height: 1.8;
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>CLI Arguments Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Command Line Arguments - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of command line arguments with these practice problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Display All Arguments</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that displays all command line arguments passed to it, along with the total count.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>java DisplayArgs Hello World Java</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Total arguments: 3<br>Argument 0: Hello<br>Argument 1: World<br>Argument 2: Java</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>java DisplayArgs Programming</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Total arguments: 1<br>Argument 0: Programming</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class DisplayArgs {
+    public static void main(String[] args) {
+        System.out.println("Total arguments: " + args.length);
+        
+        for (int i = 0; i < args.length; i++) {
+            System.out.println("Argument " + i + ": " + args[i]);
+        }
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>args[] is an array of strings from the command line:</strong> When you run "java
+                                DisplayArgs Hello World", Java automatically creates an array where args[0]="Hello",
+                                args[1]="World". This allows programs to accept input without user interaction.</li>
+                            <li><strong>Array indexing starts at 0, not 1:</strong> The first argument is args[0], not
+                                args[1]. This is a fundamental concept in Java - all arrays use zero-based indexing. The
+                                program name itself is not included in args.</li>
+                            <li><strong>args.length tells us how many arguments were provided:</strong> This is crucial
+                                for validation - we can check if the user provided the expected number of arguments
+                                before processing them, preventing array index errors.</li>
+                            <li><strong>Command line args enable automation:</strong> Unlike Scanner input which
+                                requires user interaction, command line arguments allow scripts and other programs to
+                                run your Java program automatically with different inputs.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Sum of Numbers from Arguments</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that takes numbers as command line arguments and calculates their sum.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>java SumArgs 10 20 30</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Sum: 60</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>java SumArgs 5 15 25 35</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Sum: 80</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class SumArgs {
+    public static void main(String[] args) {
+        int sum = 0;
+        
+        for (String arg : args) {
+            sum += Integer.parseInt(arg);
+        }
+        
+        System.out.println("Sum: " + sum);
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Command line arguments are always strings:</strong> Even though we type "10 20
+                                30", Java receives them as the strings "10", "20", "30". We must explicitly convert them
+                                to numbers to perform arithmetic.</li>
+                            <li><strong>Integer.parseInt() converts string to int:</strong> This method parses the
+                                string representation of a number and returns the actual integer value. Without this
+                                conversion, "10" + "20" would give "1020" (string concatenation), not 30.</li>
+                            <li><strong>Enhanced for loop simplifies iteration:</strong> The syntax
+                                <code>for (String arg : args)</code> automatically loops through each element without
+                                needing an index variable. This is cleaner and less error-prone than traditional for
+                                loops.</li>
+                            <li><strong>Error handling is important in real applications:</strong> This code assumes all
+                                arguments are valid numbers. In production code, we'd wrap parseInt() in try-catch to
+                                handle invalid input gracefully.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Argument Validation</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that validates the number of command line arguments and displays an error message
+                if incorrect.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>java ValidateArgs John 25</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Name: John<br>Age: 25</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>java ValidateArgs John</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Error: Please provide exactly 2 arguments (name and age)</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class ValidateArgs {
+    public static void main(String[] args) {
+        if (args.length != 2) {
+            System.out.println("Error: Please provide exactly 2 arguments (name and age)");
+            return;
+        }
+        
+        String name = args[0];
+        int age = Integer.parseInt(args[1]);
+        
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Validation prevents crashes and confusion:</strong> Checking args.length before
+                                accessing elements prevents ArrayIndexOutOfBoundsException. If we tried args[1] when
+                                only one argument was provided, the program would crash.</li>
+                            <li><strong>Early return stops execution gracefully:</strong> The <code>return</code>
+                                statement exits the main method immediately after showing the error. This prevents the
+                                rest of the code from running with invalid data.</li>
+                            <li><strong>Clear error messages guide users:</strong> Instead of a cryptic exception, we
+                                tell users exactly what went wrong and how to fix it. Good error messages are crucial
+                                for usability.</li>
+                            <li><strong>This pattern is standard in CLI tools:</strong> Professional command-line
+                                programs always validate input first. They often show usage instructions when arguments
+                                are missing or incorrect, helping users understand how to use the program correctly.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Simple Calculator with Arguments</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that performs arithmetic operations based on command line arguments: number1
+                operator number2.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>java Calculator 15 + 5</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Result: 20</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>java Calculator 20 * 3</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Result: 60</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class Calculator {
+    public static void main(String[] args) {
+        if (args.length != 3) {
+            System.out.println("Usage: java Calculator <num1> <operator> <num2>");
+            return;
+        }
+        
+        double num1 = Double.parseDouble(args[0]);
+        String operator = args[1];
+        double num2 = Double.parseDouble(args[2]);
+        
+        double result = 0;
+        
+        switch (operator) {
+            case "+":
+                result = num1 + num2;
+                break;
+            case "-":
+                result = num1 - num2;
+                break;
+            case "*":
+                result = num1 * num2;
+                break;
+            case "/":
+                result = num1 / num2;
+                break;
+            default:
+                System.out.println("Invalid operator. Use +, -, *, or /");
+                return;
+        }
+        
+        System.out.println("Result: " + result);
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Command line calculators demonstrate practical CLI usage:</strong> This pattern
+                                is common in Unix/Linux tools - accept input as arguments, process it, output results.
+                                It's perfect for scripting and automation where interactive input isn't feasible.</li>
+                            <li><strong>Switch statement handles multiple operation choices:</strong> Rather than nested
+                                if-else statements, switch provides a clean way to handle different operators. Each case
+                                represents one operation, making the code organized and readable.</li>
+                            <li><strong>Using doubles instead of ints prevents precision loss:</strong> Division like
+                                15/4 would give 3 with integers, but 3.75 with doubles. By using Double.parseDouble(),
+                                we maintain decimal precision for all operations.</li>
+                            <li><strong>Default case catches invalid operators:</strong> If someone types "java
+                                Calculator 5 % 2", the default case catches this invalid operator and provides feedback.
+                                This defensive programming prevents unexpected behavior.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Processing Variable Number of Arguments</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that finds the maximum value among any number of command line arguments.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>java FindMax 45 23 67 12 89 34</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Maximum value: 89</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>java FindMax 100 50 75</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Maximum value: 100</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class FindMax {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Error: Please provide at least one number");
+            return;
+        }
+        
+        int max = Integer.parseInt(args[0]);
+        
+        for (int i = 1; i < args.length; i++) {
+            int current = Integer.parseInt(args[i]);
+            if (current > max) {
+                max = current;
+            }
+        }
+        
+        System.out.println("Maximum value: " + max);
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Initialize max with the first element, not zero:</strong> Starting with max=0
+                                would fail if all numbers are negative. By using args[0] as the initial value, we
+                                guarantee max starts with an actual value from the input.</li>
+                            <li><strong>Loop starts at index 1, not 0:</strong> Since we already used args[0] to
+                                initialize max, we begin comparing from args[1]. This avoids redundantly comparing the
+                                first element with itself.</li>
+                            <li><strong>The algorithm is a linear search for maximum:</strong> We examine each number
+                                once, updating max whenever we find a larger value. This is efficient (O(n) time
+                                complexity) and simple to understand.</li>
+                            <li><strong>Flexibility is the key advantage:</strong> Unlike a fixed-parameter function,
+                                this program works with any number of arguments - 3, 10, or 100 numbers. This
+                                demonstrates the power of arrays and loops for handling variable-length input.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+        <footer>
+            <p><strong>Command Line Arguments - Practice Worksheet</strong></p>
+            <p>Master command line argument processing in Java</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

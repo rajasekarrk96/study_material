@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Exceptions - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Custom Exceptions Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Custom Exceptions - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master advanced exception handling with custom exceptions, try-with-resources, assertions, and exception
+                chaining.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Custom Exception Classes</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of custom exception classes to
+                handle application-specific exceptions. Create a custom exception by extending the Exception class.
+            </div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class MyException extends Exception {
+    MyException(String msg) {
+        super(msg);
+    }
+}
+
+class _04_ {
+    public static void main(String[] args) {
+        try {
+            throw new MyException("Custom Exception Occurred");
+        } catch (MyException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Custom Exception Occurred</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Custom Exception:</strong> Extend Exception class for checked exceptions</li>
+                    <li><strong>super(msg):</strong> Pass message to parent Exception class</li>
+                    <li><strong>Application-Specific:</strong> Create meaningful exception names</li>
+                    <li><strong>getMessage():</strong> Retrieve exception message</li>
+                </ul>
+                <strong>Best Practices:</strong> Use descriptive names like InvalidAgeException,
+                InsufficientFundsException
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: try-with-resources Statement</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of the try-with-resources statement
+                to automatically close resources. Show how resources implementing AutoCloseable are automatically
+                closed.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.*;
+
+class _05_ {
+    public static void main(String[] args) {
+
+        try (FileReader fr = new FileReader("test.txt")) {
+            System.out.println("File opened");
+        } catch (Exception e) {
+            System.out.println("Exception handled");
+        }
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Exception handled
+(if file doesn't exist)
+
+or
+
+File opened
+(if file exists, then automatically closed)</code></div>
+            <h4>How try-with-resources Works</h4>
+            <div class="code-block"><code>// Traditional approach (manual closing)
+FileReader fr = null;
+try {
+    fr = new FileReader("test.txt");
+    // Use file
+} catch (Exception e) {
+    e.printStackTrace();
+} finally {
+    if (fr != null) {
+        try {
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// try-with-resources (automatic closing)
+try (FileReader fr = new FileReader("test.txt")) {
+    // Use file
+} catch (Exception e) {
+    e.printStackTrace();
+}
+// fr.close() called automatically!</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>AutoCloseable:</strong> Resources must implement AutoCloseable or Closeable</li>
+                    <li><strong>Automatic Closing:</strong> close() called automatically after try block</li>
+                    <li><strong>Multiple Resources:</strong> Can declare multiple resources separated by semicolons</li>
+                    <li><strong>Cleaner Code:</strong> No need for explicit finally block</li>
+                </ul>
+                <strong>Example with Multiple Resources:</strong>
+                <code>try (FileReader fr = new FileReader("in.txt"); FileWriter fw = new FileWriter("out.txt")) { ... }</code>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: assert Statement</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of the assert statement to handle
+                exceptions. Show how assertions can be used to validate assumptions during development.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _06_ {
+    public static void main(String[] args) {
+
+        int age = 15;
+
+        assert age >= 18 : "Age must be 18 or above";
+
+        System.out.println("Valid age");
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Valid age
+(if assertions are disabled - default)
+
+or
+
+Exception in thread "main" java.lang.AssertionError: Age must be 18 or above
+(if assertions are enabled with -ea flag)</code></div>
+            <h4>Enabling Assertions</h4>
+            <div class="code-block"><code>// Compile
+javac _06_.java
+
+// Run without assertions (default)
+java _06_
+// Output: Valid age
+
+// Run with assertions enabled
+java -ea _06_
+// Output: AssertionError: Age must be 18 or above
+
+// Enable for specific class
+java -ea:_06_ _06_
+
+// Enable for package
+java -ea:com.mypackage... _06_</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>assert:</strong> Tests a boolean condition</li>
+                    <li><strong>AssertionError:</strong> Thrown when assertion fails</li>
+                    <li><strong>Disabled by Default:</strong> Must enable with -ea flag</li>
+                    <li><strong>Development Tool:</strong> Use for debugging, not production error handling</li>
+                </ul>
+                <strong>When to Use Assertions:</strong>
+                <ul>
+                    <li>Internal invariants (conditions that should always be true)</li>
+                    <li>Pre-conditions and post-conditions</li>
+                    <li>Control flow invariants</li>
+                </ul>
+                <strong>When NOT to Use:</strong>
+                <ul>
+                    <li>Validating user input (use exceptions instead)</li>
+                    <li>Production error handling</li>
+                    <li>Side effects (code that must execute)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Exception Chaining</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of the exception chaining mechanism
+                to propagate exceptions across multiple layers of an application. Show how to preserve the original
+                exception while throwing a new one.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _10_ {
+
+    static void method1() {
+        try {
+            method2();
+        } catch (Exception e) {
+            throw new RuntimeException("Exception in method1", e);
+        }
+    }
+
+    static void method2() throws Exception {
+        throw new Exception("Original Exception");
+    }
+
+    public static void main(String[] args) {
+        try {
+            method1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>java.lang.RuntimeException: Exception in method1
+    at _10_.method1(_10_.java:7)
+    at _10_.main(_10_.java:16)
+Caused by: java.lang.Exception: Original Exception
+    at _10_.method2(_10_.java:12)
+    at _10_.method1(_10_.java:5)
+    ... 1 more</code></div>
+            <h4>Understanding Exception Chaining</h4>
+            <div class="code-block"><code>// Without chaining (loses original exception)
+try {
+    method2();
+} catch (Exception e) {
+    throw new RuntimeException("Exception in method1");
+    // Original exception lost!
+}
+
+// With chaining (preserves original exception)
+try {
+    method2();
+} catch (Exception e) {
+    throw new RuntimeException("Exception in method1", e);
+    // Original exception preserved as "cause"
+}
+
+// Accessing the cause
+try {
+    method1();
+} catch (Exception e) {
+    System.out.println("Current: " + e.getMessage());
+    System.out.println("Cause: " + e.getCause().getMessage());
+}</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Exception Chaining:</strong> Link exceptions in a cause-and-effect chain</li>
+                    <li><strong>Caused by:</strong> Shows the root cause in stack trace</li>
+                    <li><strong>getCause():</strong> Retrieve the underlying exception</li>
+                    <li><strong>Layered Architecture:</strong> Each layer can add context</li>
+                </ul>
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>Preserves original exception information</li>
+                    <li>Adds context at each layer</li>
+                    <li>Complete stack trace for debugging</li>
+                    <li>Better error diagnosis</li>
+                </ul>
+                <strong>Real-World Example:</strong>
+                <ul>
+                    <li>Database layer: SQLException</li>
+                    <li>Service layer: DataAccessException(cause: SQLException)</li>
+                    <li>Controller layer: ServiceException(cause: DataAccessException)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>Custom Exceptions Module - Practice Worksheet</strong></p>
+            <p>Master advanced exception handling techniques</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

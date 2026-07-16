@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boundaries - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Boundaries Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>Boundaries - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master regex boundaries like ^, $, and \b to match exact positions in text strings.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Extract All Words Ending With "ing"</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to extract all words from a sentence that end with the suffix "ing". Use word
+                boundaries <code>\b</code> to ensure you match only the end of the word.
+                <br><br>
+                <strong>Example Sentence:</strong> "Singing and dancing are inspiring activities for coding."
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.regex.*;
+
+public class ExtractWords {
+    public static void main(String[] args) {
+        String text = "Singing and dancing are inspiring activities for coding.";
+        
+        // Pattern: any word characters ending with 'ing' at a word boundary
+        Pattern p = Pattern.compile("\\b\\w+ing\\b");
+        Matcher m = p.matcher(text);
+        
+        System.out.println("Words ending with -ing:");
+        while (m.find()) {
+            System.out.println(m.group());
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Words ending with -ing:
+Singing
+dancing
+inspiring
+coding</code></div>
+
+            <h4>Regex Pattern Explanation</h4>
+            <div class="code-block"><code>\\b\\w+ing\\b
+
+Breakdown:
+- \\b  : Start of a word boundary
+- \\w+ : One or more word characters
+- ing  : Literal suffix "ing"
+- \\b  : End of a word boundary</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Word Boundary \b:</strong> Matches the position between a word character and a non-word
+                        character (or start/end of string).</li>
+                    <li><strong>Matcher.find():</strong> Scans the input sequence for the next subsequence that matches
+                        the pattern.</li>
+                    <li><strong>Matcher.group():</strong> Returns the input subsequence matched by the previous match.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Check if a String Starts and Ends with Only Vowels</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to check if a single word starts and ends with a vowel (a, e, i, o, u). Use
+                <code>^</code> and <code>$</code> anchors.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>public class VowelAnchor {
+    public static void main(String[] args) {
+        String[] words = {"apple", "orange", "java", "idea", "eye"};
+        
+        // ^[aeiouAEIOU] matches starting vowel
+        // .* matches any characters in between
+        // [aeiouAEIOU]$ matches ending vowel
+        String regex = "^[aeiouAEIOU].*[aeiouAEIOU]$";
+        
+        for (String word : words) {
+            if (word.matches(regex)) {
+                System.out.println(word + " matches");
+            } else {
+                System.out.println(word + " does not match");
+            }
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>apple matches
+orange matches
+java does not match
+idea matches
+eye matches</code></div>
+
+            <h4>Regex Pattern Explanation</h4>
+            <div class="code-block"><code>^[aeiouAEIOU].*[aeiouAEIOU]$
+
+Breakdown:
+- ^             : Start of string anchor
+- [aeiouAEIOU]  : Vowel character class (matches first char)
+- .*            : Any characters (matches middle)
+- [aeiouAEIOU]  : Vowel character class (matches last char)
+- $             : End of string anchor</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Caret (^):</strong> Anchors the match to the beginning of the string.</li>
+                    <li><strong>Dollar ($):</strong> Anchors the match to the end of the string.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Boundaries Module - Practice Worksheet</strong></p>
+            <p>Master Java Regex Position Matching</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

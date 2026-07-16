@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Basics - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item has-subtopics active">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#variable">Variable</a></li>
+                        <li><a href="#data-types">Data Types</a></li>
+                        <li><a href="#type-casting">Type Casting</a></li>
+                        <li><a href="#arithmetic-operators">Arithmetic Operators</a></li>
+                        <li><a href="#comparison-operators">Comparison Operators</a></li>
+                        <li><a href="#logical-operators">Logical Operators</a></li>
+                        <li><a href="#bitwise-operators">Bitwise Operators</a></li>
+                        <li><a href="#assignment-operators">Assignment Operators</a></li>
+                        <li><a href="#identity-operators">Identity Operators</a></li>
+                        <li><a href="#membership-operators">Membership Operators</a></li>
+                        <li><a href="#ascii">ASCII</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python Basics</h1>
+
+                <div class="content-description">
+                    <h2 id="variable">Variable</h2>
+                    <p>A variable in Python is a named storage location in memory that is used to store data or a value
+                        that can be referenced and manipulated in a program.</p>
+                    <p>It acts like a container that holds data, and the value stored can be changed anytime.</p>
+                    <p>In Python, you don’t need to declare the data type — the type is decided automatically based on
+                        the value assigned.</p>
+
+                    <h3>Syntax</h3>
+                    <pre class="code-block">
+variable_name = value
+</pre>
+
+                    <h3>Basic Example</h3>
+                    <pre class="code-block">
+x = 10        # x stores an integer
+name = "Ram"  # name stores a string
+pi = 3.14     # pi stores a float
+
+print(x, name, pi)
+</pre>
+
+                    <h3>Variable Reassignment (you can change the value anytime)</h3>
+                    <pre class="code-block">
+a = 5
+a = "Hello"
+print(a)   # Output: Hello
+</pre>
+
+                    <h3>Rules for Naming Variables</h3>
+                    <ul>
+                        <li>Must start with a letter or underscore</li>
+                        <li>Cannot start with a number</li>
+                        <li>Can contain letters, numbers, and underscore</li>
+                        <li>Case-sensitive (age and Age are different)</li>
+                    </ul>
+                    <pre class="code-block">
+valid_name = 10
+_valid = 20
+name1 = "Ragul"   # valid
+
+1name = 5         # ❌ invalid
+my-name = 10      # ❌ invalid
+</pre>
+
+                    <h3>Multiple Variable Assignment</h3>
+                    <pre class="code-block">
+a, b, c = 1, 2, 3
+print(a, b, c)
+</pre>
+
+                    <h3>Assigning Same Value to Many Variables</h3>
+                    <pre class="code-block">
+x = y = z = 100
+print(x, y, z)
+</pre>
+
+                    <h3>Dynamic Typing Example</h3>
+                    <p>Python allows changing the type of a variable anytime:</p>
+                    <pre class="code-block">
+data = 10      # int
+data = "text"  # now string
+print(data)
+</pre>
+
+                    <h2 id="data-types">Data types</h2>
+                    <p>Data types in Python represent the kind of value stored in a variable.</p>
+                    <p>They determine what operations can be done on that value (like addition, indexing, etc.).</p>
+                    <p>Python has the following basic data types:</p>
+
+                    <h3>1. Integer (int)</h3>
+                    <p>Numbers without decimals.</p>
+                    <pre class="code-block">
+x = 10
+print(type(x))  # &lt;class 'int'&gt;
+</pre>
+
+                    <h3>2. Float (float)</h3>
+                    <p>Numbers with decimals.</p>
+                    <pre class="code-block">
+y = 3.14
+print(type(y))  # &lt;class 'float'&gt;
+</pre>
+
+                    <h3>3. String (str)</h3>
+                    <p>Text or characters inside quotes.</p>
+                    <pre class="code-block">
+name = "Ragul"
+print(type(name))  # &lt;class 'str'&gt;
+</pre>
+
+                    <h3>4. Boolean (bool)</h3>
+                    <p>Represents True or False.</p>
+                    <pre class="code-block">
+a = True
+b = False
+print(type(a))  # &lt;class 'bool'&gt;
+</pre>
+
+                    <h3>5. List</h3>
+                    <p>Ordered, changeable collection of values.</p>
+                    <pre class="code-block">
+numbers = [1, 2, 3, 4]
+print(type(numbers))  # &lt;class 'list'&gt;
+</pre>
+
+                    <h3>6. Tuple</h3>
+                    <p>Ordered but unchangeable collection.</p>
+                    <pre class="code-block">
+point = (5, 10)
+print(type(point))  # &lt;class 'tuple'&gt;
+</pre>
+
+                    <h3>7. Set</h3>
+                    <p>Unordered collection of unique values.</p>
+                    <pre class="code-block">
+unique_values = {1, 2, 3, 3}
+print(unique_values)          # {1, 2, 3}
+print(type(unique_values))    # &lt;class 'set'&gt;
+</pre>
+
+                    <h3>8. Dictionary (dict)</h3>
+                    <p>Stores data in key–value pairs.</p>
+                    <pre class="code-block">
+student = {"name": "Ragul", "age": 21}
+print(type(student))  # &lt;class 'dict'&gt;
+</pre>
+
+                    <h2 id="type-casting">Type Casting</h2>
+                    <p>Type casting is the process of converting one data type into another in Python.</p>
+                    <p>It helps when you need to change values from string → integer, float → integer, etc.</p>
+                    <p>Python provides built-in functions for casting.</p>
+
+                    <h3>Types of Type Casting</h3>
+                    <h4>1. Implicit Type Casting</h4>
+                    <p>Python automatically converts one type to another when it is safe to do so.</p>
+                    <p><strong>Example</strong></p>
+                    <pre class="code-block">
+a = 5       # int
+b = 2.5     # float
+
+c = a + b   # Python converts a to float
+print(c)           # 7.5
+print(type(c))     # &lt;class 'float'&gt;
+</pre>
+                    <p>Python changes a from int → float automatically.</p>
+
+                    <h4>2. Explicit Type Casting</h4>
+                    <p>You manually convert one data type to another using functions like:</p>
+                    <ul>
+                        <li>int()</li>
+                        <li>float()</li>
+                        <li>str()</li>
+                        <li>bool()</li>
+                        <li>list(), tuple(), etc.</li>
+                    </ul>
+
+                    <p><strong>Examples</strong></p>
+                    <p>Convert string → int</p>
+                    <pre class="code-block">
+x = "25"
+y = int(x)
+print(y, type(y))
+</pre>
+
+                    <h2 id="arithmetic-operators">Arithmetic Operators</h2>
+                    <p>Arithmetic operators are symbols used to perform mathematical operations on numbers in Python.
+                    </p>
+
+                    <h3>List of Arithmetic Operators</h3>
+                    <h4>1. Addition (+)</h4>
+                    <p>Adds two values.</p>
+                    <pre class="code-block">
+a = 10 + 5
+print(a)   # 15
+</pre>
+
+                    <h4>2. Subtraction (-)</h4>
+                    <p>Subtracts one value from another.</p>
+                    <pre class="code-block">
+a = 10 - 3
+print(a)   # 7
+</pre>
+
+                    <h4>3. Multiplication (*)</h4>
+                    <p>Multiplies two values.</p>
+                    <pre class="code-block">
+a = 6 * 4
+print(a)   # 24
+</pre>
+
+                    <h4>4. Division (/)</h4>
+                    <p>Always returns a float.</p>
+                    <pre class="code-block">
+a = 10 / 4
+print(a)   # 2.5
+</pre>
+
+                    <h4>5. Floor Division (//)</h4>
+                    <p>Returns the integer part of division (rounds down).</p>
+                    <pre class="code-block">
+a = 10 // 4
+print(a)   # 2
+</pre>
+
+                    <h4>6. Modulus (%)</h4>
+                    <p>Gives the remainder of division.</p>
+                    <pre class="code-block">
+a = 10 % 4
+print(a)   # 2
+</pre>
+
+                    <h4>7. Exponentiation (**)</h4>
+                    <p>Raises a number to the power of another number.</p>
+                    <pre class="code-block">
+a = 2 ** 3
+print(a)   # 8
+</pre>
+
+                    <h3>Example Using All Operators</h3>
+                    <pre class="code-block">
+x = 10
+y = 3
+
+print(x + y)   # 13
+print(x - y)   # 7
+print(x * y)   # 30
+print(x / y)   # 3.333...
+print(x // y)  # 3
+print(x % y)   # 1
+print(x ** y)  # 1000
+</pre>
+
+                    <h2 id="comparison-operators">Comparison Operators</h2>
+                    <p>Comparison operators are used to compare two values.</p>
+                    <p>They return a Boolean result → True or False.</p>
+
+                    <h3>List of Comparison Operators</h3>
+                    <h4>1. Equal to (==)</h4>
+                    <p>Checks if two values are equal.</p>
+                    <pre class="code-block">
+print(5 == 5)   # True
+print(5 == 3)   # False
+</pre>
+
+                    <h4>2. Not equal to (!=)</h4>
+                    <p>Checks if two values are not equal.</p>
+                    <pre class="code-block">
+print(5 != 3)   # True
+print(5 != 5)   # False
+</pre>
+
+                    <h4>3. Greater than (&gt;)</h4>
+                    <p>Checks if left value is greater than right.</p>
+                    <pre class="code-block">
+print(10 > 5)   # True
+print(3 > 8)    # False
+</pre>
+
+                    <h4>4. Less than (&lt;)</h4>
+                    <p>Checks if left value is less than right.</p>
+                    <pre class="code-block">
+print(2 < 7)   # True
+print(9 < 1)   # False
+</pre>
+
+                    <h4>5. Greater than or equal to (&gt;=)</h4>
+                    <p>Checks if left value is greater or equal.</p>
+                    <pre class="code-block">
+print(5 >= 5)   # True
+print(6 >= 10)  # False
+</pre>
+
+                    <h4>6. Less than or equal to (&lt;=)</h4>
+                    <p>Checks if left value is less or equal.</p>
+                    <pre class="code-block">
+print(3 <= 5)   # True
+print(7 <= 2)   # False
+</pre>
+
+                    <h3>Example Combining Comparison Operators</h3>
+                    <pre class="code-block">
+a = 10
+b = 20
+
+print(a == b)   # False
+print(a != b)   # True
+print(a < b)    # True
+print(a > b)    # False
+print(a <= b)   # True
+print(a >= b)   # False
+</pre>
+
+                    <h2 id="logical-operators">Logical Operators</h2>
+                    <p>Logical operators are used to combine multiple conditions.</p>
+                    <p>They always return a Boolean value → True or False.</p>
+                    <p>Python has three logical operators:</p>
+
+                    <h3>1. and</h3>
+                    <p>Returns True only if both conditions are True.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+a = 10
+b = 5
+
+print(a > 5 and b < 10)   # True and True → True
+print(a > 5 and b > 10)   # True and False → False
+</pre>
+
+                    <h3>2. or</h3>
+                    <p>Returns True if at least one condition is True.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+a = 10
+b = 20
+
+print(a > 5 or b < 10)    # True or False → True
+print(a < 5 or b < 10)    # False or False → False
+</pre>
+
+                    <h3>3. not</h3>
+                    <p>Reverses the Boolean value.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+x = True
+y = False
+
+print(not x)   # False
+print(not y)   # True
+</pre>
+
+                    <h3>Combined Example</h3>
+                    <pre class="code-block">
+age = 18
+marks = 75
+
+print(age >= 18 and marks > 60)   # True
+print(age < 18 or marks > 60)     # True
+print(not(age > 18))              # True (because age > 18 is False)
+</pre>
+
+                    <h2 id="bitwise-operators">Bitwise Operators</h2>
+                    <p>Bitwise operators perform operations on numbers at the binary (bit) level.</p>
+                    <p>They compare or manipulate each bit of the number.</p>
+                    <p>Example:<br>10 in binary → 1010<br>4 in binary → 0100</p>
+
+                    <h3>List of Bitwise Operators</h3>
+
+                    <h4>1. AND (&amp;)</h4>
+                    <p>Sets each bit to 1 if both bits are 1.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+a = 10   # 1010
+b = 4    # 0100
+
+print(a & b)   # 8  (1000)
+</pre>
+
+                    <h4>2. OR (|)</h4>
+                    <p>Sets each bit to 1 if at least one bit is 1.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+a = 10   # 1010
+b = 4    # 0100
+
+print(a | b)   # 14 (1110)
+</pre>
+
+                    <h4>3. XOR (^)</h4>
+                    <p>Sets each bit to 1 if bits are different.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+a = 10   # 1010
+b = 4    # 0100
+
+print(a ^ b)   # 14 (1110)
+</pre>
+
+                    <h4>4. NOT (~)</h4>
+                    <p>Inverts all bits (changes 0 to 1 and 1 to 0).</p>
+                    <p>For positive numbers, result becomes negative using 2’s complement.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+a = 10
+print(~a)      # -11
+</pre>
+
+                    <h4>5. Left Shift (&lt;&lt;)</h4>
+                    <p>Shifts bits to the left (adds zeros on the right).</p>
+                    <p>Same as multiplying by 2.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+a = 5    # 0101
+print(a << 1)   # 10 (1010)
+print(a << 2)   # 20 (10100)
+</pre>
+
+                    <h4>6. Right Shift (&gt;&gt;)</h4>
+                    <p>Shifts bits to the right (removes bits on the right).</p>
+                    <p>Same as dividing by 2.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+a = 20   # 10100
+print(a >> 1)   # 10 (1010)
+print(a >> 2)   # 5  (101)
+</pre>
+
+                    <h2 id="assignment-operators">Assignment Operators</h2>
+                    <p>Assignment operators are used to assign values to variables.</p>
+                    <p>They can also update the existing value using arithmetic or bitwise operations.</p>
+
+                    <h3>Basic Assignment Operator</h3>
+                    <h4>1. = (Simple assignment)</h4>
+                    <p>Assigns a value to a variable.</p>
+                    <pre class="code-block">
+x = 10
+y = "Hello"
+</pre>
+
+                    <h3>Compound Assignment Operators</h3>
+                    <p>These operators update the variable by performing an operation and assignment in one step.</p>
+
+                    <h4>2. += (Add and assign)</h4>
+                    <pre class="code-block">
+x = 10
+x += 5       # x = x + 5
+print(x)     # 15
+</pre>
+
+                    <h4>3. -= (Subtract and assign)</h4>
+                    <pre class="code-block">
+x = 20
+x -= 8       # x = x - 8
+print(x)     # 12
+</pre>
+
+                    <h4>4. *= (Multiply and assign)</h4>
+                    <pre class="code-block">
+x = 6
+x *= 3       # x = x * 3
+print(x)     # 18
+</pre>
+
+                    <h4>5. /= (Divide and assign)</h4>
+                    <pre class="code-block">
+x = 10
+x /= 4       # x = x / 4
+print(x)     # 2.5
+</pre>
+
+                    <h4>6. %= (Modulus and assign)</h4>
+                    <pre class="code-block">
+x = 10
+x %= 3       # x = x % 3
+print(x)     # 1
+</pre>
+
+                    <h4>7. //= (Floor divide and assign)</h4>
+                    <pre class="code-block">
+x = 10
+x //= 3      # x = x // 3
+print(x)     # 3
+</pre>
+
+                    <h4>8. **= (Power and assign)</h4>
+                    <pre class="code-block">
+x = 2
+x **= 4      # x = x ** 4
+print(x)     # 16
+</pre>
+
+                    <h2 id="identity-operators">Identity Operators</h2>
+                    <p>Identity operators are used to compare memory locations of two objects.</p>
+                    <p>They check whether two variables refer to the same object in memory, not just equal values.</p>
+                    <p>Python has two identity operators:</p>
+
+                    <h3>1. is</h3>
+                    <p>Returns True if both variables point to the same memory location.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+a = [1, 2, 3]
+b = a
+
+print(a is b)      # True (same object)
+</pre>
+
+                    <h3>2. is not</h3>
+                    <p>Returns True if both variables do NOT refer to the same object.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+a = [1, 2, 3]
+b = [1, 2, 3]
+
+print(a is b)       # False (different objects)
+print(a is not b)   # True
+</pre>
+
+                    <h2 id="membership-operators">Membership Operators</h2>
+                    <p>Membership operators are used to check whether a value exists inside a sequence such as:</p>
+                    <ul>
+                        <li>string</li>
+                        <li>list</li>
+                        <li>tuple</li>
+                        <li>set</li>
+                        <li>dictionary (checks keys)</li>
+                    </ul>
+                    <p>They return a Boolean value → True or False.</p>
+                    <p>Python has two membership operators:</p>
+
+                    <h3>1. in</h3>
+                    <p>Returns True if the value is present in the sequence.</p>
+                    <h3>2. not in</h3>
+                    <p>Returns True if the value is not present in the sequence.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+fruits = ["apple", "banana", "mango"]
+
+print("apple" in fruits)       # True
+print("orange" not in fruits)  # True
+</pre>
+
+                    <h2 id="ascii">ASCII</h2>
+                    <p>ASCII (American Standard Code for Information Interchange) is a character encoding system that
+                        assigns a numeric value to letters, digits, symbols, and control characters.</p>
+                    <p>It uses 7 bits to represent each character and supports 128 characters (0–127).</p>
+                    <p>Examples:</p>
+                    <ul>
+                        <li>A → 65</li>
+                        <li>a → 97</li>
+                        <li>0 → 48</li>
+                        <li>Space → 32</li>
+                    </ul>
+
+                    <h3>Why ASCII is used?</h3>
+                    <p>It allows computers to store, process, and transmit text using numbers.</p>
+
+                    <h3>ASCII in Python</h3>
+                    <p>1. Get ASCII value of a character → ord()</p>
+                    <pre class="code-block">
+print(ord('A'))   # 65
+</pre>
+
+                    <p>2. Convert ASCII number to character → chr()</p>
+                    <pre class="code-block">
+print(chr(65))    # A
+</pre>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a program to print your name.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>a=(str(input("Enter Your Name:")))
+print("My Name Is",a)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a program to find the area of a parallelogram (b*h).</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>b=int(input("Enter the base value="))
+h=int(input("Enter the height value="))
+p=b*h
+print("the area of parallelogram=",p)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a program to find the area of an ellipse (3.14*a*b).</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>a = int(input("length of semi-major axis:"))
+b = int(input("length of semi-minor axis:"))
+e=3.14*a*b
+print("area of an ellipse:",e)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a code to generate ASCII value.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>ch = input("Enter a character: ")
+
+print("ASCII value of", ch, "is", ord(ch))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a program to convert ASCII value to Character.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>ch = int(input("Enter an ASCII value: "))
+print("Character for ASCII", ch, "is", chr(ch))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a program to find the volume of an ellipsoid (4/3) × π × a × b × c.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>a = float(input("Enter value of a: "))
+b = float(input("Enter value of b: "))
+c = float(input("Enter value of c: "))
+
+v = (4/3) * 3.14 * a * b * c
+
+print("The volume of the ellipsoid is:", v)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a program to find simple interest SI = P × R × T.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>p = float(input("Enter value of p: "))
+r = float(input("Enter value of r: "))
+t = float(input("Enter value of t: "))
+si=(p*r*t)/100
+print("Simple Interest SI is",si)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a program to find compound interest CI = P(1 + r/100)^n – P.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>p = float(input("Enter value of p: "))
+r = float(input("Enter value of r: "))
+n = float(input("Enter value of n: "))
+ci=p*(1+r/100)**n-p
+print("Compound Interest CI is",ci)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a program to get five inputs from the user and print the mean of the inputs.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>a = float(input("Enter value of a: "))
+b = float(input("Enter value of b: "))
+c = float(input("Enter value of c: "))
+d = float(input("Enter value of d: "))
+e = float(input("Enter value of e: "))
+sum=a+b+c+d+e
+mean=sum/5
+print("The mean of the five numbers is:",mean)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a program to swap numbers using Bitwise XOR operator.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>a = int(input("Enter value of a: "))
+b = int(input("Enter value of b: "))
+
+# Bitwise XOR Swap
+a = a ^ b
+b = a ^ b
+a = a ^ b
+
+print("After swapping:", a, b)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

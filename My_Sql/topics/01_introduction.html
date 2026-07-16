@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Introduction</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Introduction</h2>
+                <p class="topic-desc">SQL (Structured Query Language) is a standard language used to store, retrieve, manage, and manipulate data in relational databases.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">DBMS & RDBMS</h3>
+                        <p class="subtopic-desc"><strong>🔹 DBMS (Database Management System)</strong><br>A system software used to store, manage, and retrieve data efficiently.<br><br><strong>🔹 RDBMS (Relational Database Management System)</strong><br>A DBMS where data is stored in tables (rows & columns) and relationships are created using keys.</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">DDL - Data Definition Language</h3>
+                        <p class="subtopic-desc"><strong>Used to define and manage database structure</strong><br><br>🔹 <strong>CREATE</strong> – Creates database objects like tables, views, indexes.<br>🔹 <strong>ALTER</strong> – Modifies the structure of an existing table.<br>🔹 <strong>DROP</strong> – Deletes database objects permanently.<br>🔹 <strong>TRUNCATE</strong> – Removes all records from a table but keeps its structure.<br>🔹 <strong>RENAME</strong> – Changes the name of a database object.</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">DML - Data Manipulation Language</h3>
+                        <p class="subtopic-desc"><strong>Used to manipulate data inside tables</strong><br><br>🔹 <strong>INSERT</strong> – Adds new records into a table.<br>🔹 <strong>UPDATE</strong> – Modifies existing records in a table.<br>🔹 <strong>DELETE</strong> – Removes records from a table.</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">DRL / DQL - Data Retrieval / Query Language</h3>
+                        <p class="subtopic-desc"><strong>Used to retrieve data from database</strong><br><br>🔹 <strong>SELECT</strong> – Fetches required data from one or more tables.</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">TCL - Transaction Control Language</h3>
+                        <p class="subtopic-desc"><strong>Used to control transactions</strong><br><br>🔹 <strong>COMMIT</strong> – Permanently saves the changes.<br>🔹 <strong>ROLLBACK</strong> – Reverts changes made during a transaction.<br>🔹 <strong>SAVEPOINT</strong> – Creates a point within a transaction to rollback partially.</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">DCL - Data Control Language</h3>
+                        <p class="subtopic-desc"><strong>Used to control access and permissions</strong><br><br>🔹 <strong>GRANT</strong> – Provides user permissions on database objects.<br>🔹 <strong>REVOKE</strong> – Removes previously granted permissions.</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Advanced Database Objects</h3>
+                        <p class="subtopic-desc"><strong>🔹 Stored Procedure</strong><br>A group of SQL statements stored in the database that performs a specific task.<br><br><strong>🔹 Stored Function</strong><br>A stored program that returns a single value.<br><br><strong>🔹 Trigger</strong><br>A database object that automatically executes when a specific event occurs on a table.</p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    <div></div>
+                        <div class="nav-btn next" onclick="window.location.href='02_create-drop-database.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Create / Drop Database →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

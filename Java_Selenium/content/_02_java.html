@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  02 java</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <div class="sidebar-buttons">
+                <button id="back-btn" class="nav-btn back-btn" onclick="goBack()" title="Go to previous page">
+                    ← Back
+                </button>
+                <button id="home-btn" class="home-btn" onclick="goHome()">🏠 Home</button>
+            </div>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>02. Java Prerequisites for Selenium</h1>
+
+<h2>📖 Introduction</h2>
+<p>Selenium supports multiple languages, but <strong>Java</strong> is the undisputed king of test automation. You do not
+    need to be a full-stack Java developer to excel at Selenium. You only need to master "Core Java" concepts.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>Why Java is preferred for Selenium</li>
+    <li>Essential Java concepts: OOP, Collections, and Exceptions</li>
+    <li>How Java connects to WebDriver</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>1. Object Oriented Programming (OOP)</h3>
+<p>Selenium itself is built on OOP.</p>
+<ul>
+    <li><strong>Interface:</strong> <code>WebDriver</code> is an Interface.</li>
+    <li><strong>Class:</strong> <code>ChromeDriver</code> is a Class implementing that interface.</li>
+    <li><strong>Polymorphism:</strong> <code>WebDriver driver = new ChromeDriver();</code></li>
+</ul>
+
+<h3>2. Collections Framework</h3>
+<p>We rarely use Arrays in Selenium because their size is fixed. We use Collections.</p>
+<ul>
+    <li><strong>List (ArrayList):</strong> Storing a list of elements found by <code>findElements()</code>.</li>
+    <li><strong>Set (HashSet):</strong> Handling unique Window Handles.</li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+
+<h3>A Simple Java Class for Automation</h3>
+<pre><code>public class BrowserFactory {
+    
+    // Encapsulation: Private Driver
+    private WebDriver driver;
+
+    // Method to return instance (Abstraction)
+    public WebDriver initBrowser(String browserName) {
+        if(browserName.equals("chrome")) {
+            driver = new ChromeDriver();
+        }
+        return driver;
+    }
+}</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>NullPointerException:</strong> The most common Java error in Selenium. It happens when you try to use an
+        object (like `driver`) that hasn't been initialized yet (is null).</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Setup your Java Environment.</p>
+    <ol>
+        <li>Install JDK (Java Development Kit) 11+.</li>
+        <li>Set the JAVA_HOME environment variable.</li>
+        <li>Verify by typing `java -version` in cmd.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: Why do we use 'WebDriver driver = new ChromeDriver()' instead of 'ChromeDriver driver =
+            ...'?</strong></p>
+    <p><strong>Answer:</strong> This is "Upcasting". If we use the interface <code>WebDriver</code> as the reference
+        type, we can easily switch to <code>new FirefoxDriver()</code> later without changing the rest of our code. It
+        allows for Cross-Browser Testing.</p>
+</blockquote>
+
+<a href="worksheets/ws_java_prerequisites.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script>
+        /**
+         * Safe Back Navigation Function
+         * Attempts to navigate to the previous page using the browser's history stack.
+         * If history is empty, falls back to the referrer or home page.
+         * 
+         * Why this is needed:
+         * - window.history.back() attempts to navigate to the previous page in browser history
+         * - If no history exists (first page visit), it does nothing
+         * - document.referrer provides a fallback to the page that linked to this one
+         * - If neither exists, we navigate to the home page as a last resort
+         */
+        function goBack() {
+            // Check if there's a valid page in browser history
+            if (window.history.length > 1) {
+                // Go back to the previous page in the history stack
+                window.history.back();
+            } else if (document.referrer) {
+                // Fallback 1: Navigate to the referrer (page that linked here)
+                window.location.href = document.referrer;
+            } else {
+                // Fallback 2: Navigate to home page as last resort
+                window.location.href = '../index.html';
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If-Else Ladder - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px
+        }
+
+        .explanation ol {
+            line-height: 1.8
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>If-Else Ladder Worksheet</h5><a href="index.html"
+            style="color:#dc3545;text-decoration:none;display:block;margin-bottom:10px">← Back to Module</a>
+        <hr style="border-color:#34495e;margin:15px 0">
+        <nav><a href="#question1" class="nav-link active">Question 1</a><a href="#question2" class="nav-link">Question
+                2</a></nav>
+    </div>
+    <div class="top-nav">
+        <h2>If-Else Ladder - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of If-Else Ladder with these practice problems.</p>
+        </div>
+        <div class="section-card" id="question1">
+            <h3>Question 1: Movie Ticket Price</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Calculate movie ticket price based on age: Child (0-12) = $5, Teen (13-17) = $8,
+                Adult (18-64) = $12, Senior (65+) = $7.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>10</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Ticket Price: $5</code><br><br><strong>Sample Input
+                    2:</strong><br><code>70</code><br><br><strong>Sample Output
+                    2:</strong><br><code>Ticket Price: $7</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class MovieTicket {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter age: ");
+        int age = sn.nextInt();
+        
+        if (age <= 12) {
+            System.out.println("Ticket Price: $5");
+        } else if (age <= 17) {
+            System.out.println("Ticket Price: $8");
+        } else if (age <= 64) {
+            System.out.println("Ticket Price: $12");
+        } else {
+            System.out.println("Ticket Price: $7");
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Sequential range checking is efficient:</strong> By ordering conditions from low
+                                to high (or high to low), you can use simple comparisons. Here, <=12, <=17, <=64 works
+                                    because earlier conditions have already been eliminated.</li>
+                            <li><strong>Inclusive vs exclusive boundaries matter:</strong> Using <= means the upper
+                                    value is included in that range. Age 12 gets child price, age 13 gets teen price.
+                                    Perfect for categorizing continuous values into discrete groups.</li>
+                            <li><strong>Final else handles unbounded range:</strong> Ages 65+ don't need an explicit
+                                condition. The else automatically catches everything not handled by previous conditions,
+                                simplifying code and preventing gaps.</li>
+                            <li><strong>Real pricing systems use this pattern:</strong> Age-based pricing, tax brackets,
+                                shipping costs - all use ladder structures. Understanding this pattern prepares you for
+                                real-world business logic implementation.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div class="section-card" id="question2">
+            <h3>Question 2: Water State</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Determine water state based on temperature: <=0="Solid (Ice)" ,
+                    1-99="Liquid (Water)" ,>=100 = "Gas (Steam)".</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>-5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Solid (Ice)</code><br><br><strong>Sample Input
+                    2:</strong><br><code>105</code><br><br><strong>Sample Output 2:</strong><br><code>Gas (Steam)</code>
+            </div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class WaterState {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter temperature (°C): ");
+        int temp = sn.nextInt();
+        
+        if (temp <= 0) {
+            System.out.println("Solid (Ice)");
+        } else if (temp < 100) {
+            System.out.println("Liquid (Water)");
+        } else {
+            System.out.println("Gas (Steam)");
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Scientific ranges map to code logic:</strong> Physical properties of water at
+                                different temperatures translate directly to if-else conditions. Programming often
+                                models real-world phenomena this way.</li>
+                            <li><strong>
+                                    < vs <=creates precise boundaries:</strong> Using temp < 100 for liquid means 100 is
+                                            NOT liquid (it's steam). This precision prevents edge case bugs where a
+                                            value might fall into wrong category.</li>
+                            <li><strong>Three state transitions require two checks:</strong> With three categories, you
+                                need only two explicit conditions. First divides solid/not-solid, second divides
+                                liquid/gas. The ladder structure handles the rest automatically.</li>
+                            <li><strong>Consider temperature scale assumptions:</strong> This code assumes Celsius. For
+                                production, you'd specify units clearly or accept Fahrenheit too. Good programming
+                                anticipates these ambiguities.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div style="margin-top:40px"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>If-Else Ladder - Practice Worksheet</strong></p>
+            <p>Master sequential conditional testing in Java</p>
+            <p>&copy; 2026 Java Learning Platform</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('.sidebar nav a').forEach(link => { link.addEventListener('click', function () { document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active')); this.classList.add('active') }) });</script>
+</body>
+
+</html>

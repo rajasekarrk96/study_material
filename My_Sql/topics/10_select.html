@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Select</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Select</h2>
+                <p class="topic-desc">The SELECT statement is used to retrieve data from one or more tables in a database.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Basic Concepts</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to view data without changing it. It is the primary command of Data Query Language (DQL).</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> column1, column2 <span class="sql-keyword">FROM</span> table_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- <span class="sql-keyword">Select</span> specific columns\nSELECT emp_name, salary <span class="sql-keyword">FROM</span> employees;</span></code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Select All Columns</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Uses the asterisk (*) wildcard to fetch all columns from a table.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> table_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> employees;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>emp_id</th><th>emp_name</th><th>dept</th><th>salary</th></tr></thead><tbody><tr><td>101</td><td>Arun</td><td>IT</td><td>60000</td></tr><tr><td>102</td><td>Priya</td><td>HR</td><td>45000</td></tr><tr><td>103</td><td>Ravi</td><td>IT</td><td>70000</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Select Specific Columns</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Retrieves only the columns you specify, separating them with commas.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> column1, column2 <span class="sql-keyword">FROM</span> table_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> emp_name, salary <span class="sql-keyword">FROM</span> employees;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>emp_name</th><th>salary</th></tr></thead><tbody><tr><td>Arun</td><td>60000</td></tr><tr><td>Priya</td><td>45000</td></tr><tr><td>Ravi</td><td>70000</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Display all columns from the students table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t9-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t9-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 20   |
+| 2  | Priya  | 21   |
+| 3  | Kiran  | 22   |
+| 4  | Meena  | NULL |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display only name and age columns from students.</strong><br>
+    <button class="toggle-btn" data-target="ans-t9-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t9-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, age FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+------+
+| name   | age  |
++--------+------+
+| Arun   | 20   |
+| Priya  | 21   |
+| Kiran  | 22   |
+| Meena  | NULL |
++--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Display students whose age is greater than 20.</strong><br>
+    <button class="toggle-btn" data-target="ans-t9-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t9-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE age > 20;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 2  | Priya  | 21   |
+| 3  | Kiran  | 22   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Display students ordered by age in descending order.</strong><br>
+    <button class="toggle-btn" data-target="ans-t9-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t9-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+ORDER BY age DESC;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 3  | Kiran  | 22   |
+| 2  | Priya  | 21   |
+| 1  | Arun   | 20   |
+| 4  | Meena  | NULL |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display only first 2 records from students.</strong><br>
+    <button class="toggle-btn" data-target="ans-t9-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t9-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+LIMIT 2;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 20   |
+| 2  | Priya  | 21   |
++----+--------+------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='09_views.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Views</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='11_aliases.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Aliases (AS) →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

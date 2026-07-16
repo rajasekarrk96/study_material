@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Lambda - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#syntax">Syntax</a></li>
+                        <li><a href="#why">Why Use Lambda?</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python Lambda</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>A lambda function is a small anonymous function.</p>
+                    <p>A lambda function can take any number of arguments, but can only have one expression.</p>
+
+                    <h2 id="syntax">Syntax</h2>
+                    <p>The syntax of a lambda function is:</p>
+                    <pre class="code-block">
+lambda arguments : expression
+</pre>
+                    <p>The expression is executed and the result is returned:</p>
+                    <pre class="code-block">
+x = lambda a : a + 10
+print(x(5))
+</pre>
+
+                    <p>Lambda functions can take any number of arguments:</p>
+                    <pre class="code-block">
+x = lambda a, b : a * b
+print(x(5, 6))
+
+x = lambda a, b, c : a + b + c
+print(x(5, 6, 2))
+</pre>
+
+                    <h2 id="why">Why Use Lambda Functions?</h2>
+                    <p>The power of lambda is better shown when you use them as an anonymous function inside another
+                        function.</p>
+                    <p>Say you have a function definition that takes one argument, and that argument will be multiplied
+                        with an unknown number:</p>
+                    <pre class="code-block">
+def myfunc(n):
+    return lambda a : a * n
+
+mydoubler = myfunc(2)
+
+print(mydoubler(11))
+</pre>
+
+                    <h3>Usage with Map and Filter</h3>
+                    <p>Lambda functions are frequently used with <code>filter()</code> and <code>map()</code> functions.
+                    </p>
+                    <pre class="code-block">
+# Using with filter()
+numbers = [1, 2, 3, 4, 5, 6]
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(evens)
+
+# Using with map()
+squares = list(map(lambda x: x**2, numbers))
+print(squares)
+</pre>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a lambda function to add 15 to a given number.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>add_15 = lambda x: x + 15
+print(add_15(10))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a lambda function that multiplies argument x with argument y.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>multiply = lambda x, y: x * y
+print(multiply(5, 6))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a lambda function to square a number.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>square = lambda x: x ** 2
+print(square(8))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a lambda function to check if a number is even.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>is_even = lambda x: x % 2 == 0
+print(is_even(10))
+print(is_even(7))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a lambda function to reverse a string.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>reverse_str = lambda s: s[::-1]
+print(reverse_str("Python"))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a lambda function that returns the maximum of two numbers.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>max_num = lambda x, y: x if x > y else y
+print(max_num(10, 20))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a program to sort a list of tuples based on the second element using lambda.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>data = [(1, 5), (3, 2), (2, 8)]
+data.sort(key=lambda x: x[1])
+print(data)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a program to filter words that start with 'a' using lambda.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>words = ["apple", "banana", "avocado", "cherry"]
+starts_with_a = list(filter(lambda x: x.startswith('a'), words))
+print(starts_with_a)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a program to square every number in a list using map and lambda.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>nums = [1, 2, 3, 4]
+squared = list(map(lambda x: x**2, nums))
+print(squared)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a lambda function to check if a string contains the letter 'a'.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>has_a = lambda s: 'a' in s
+print(has_a("Hello"))
+print(has_a("Apple"))</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

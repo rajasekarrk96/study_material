@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  14 waits and synchronization   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>14. Waits & Synchronization</h1>
+
+<h2>📖 Introduction</h2>
+<p>Modern web applications are dynamic. Elements load at different speeds via AJAX, React, or Angular. If your script
+    tries to find an element before it's ready, it fails with <code>NoSuchElementException</code>.
+    <strong>Synchronization</strong> is the art of matching the speed of your WebDriver with the speed of the browser.
+</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>Why simple <code>Thread.sleep()</code> is a bad practice</li>
+    <li>How to use Implicit Waits for global timeout</li>
+    <li>How to use Explicit Waits (WebDriverWait) for specific conditions</li>
+    <li>When to use Fluent Wait</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>1. Implicit Wait</h3>
+<p>Tells WebDriver to wait for a certain amount of time when trying to find <em>any</em> element if it is not
+    immediately available. It's set once globally.</p>
+<pre><code>driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));</code></pre>
+<p><em>Downside:</em> It only waits for existence, not visibility or clickability.</p>
+
+<h3>2. Explicit Wait (Recommended)</h3>
+<p>Waits for a <strong>specific condition</strong> to apply to a <strong>specific element</strong>. It is more
+    intelligent.</p>
+<pre><code>WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("loginBtn")));</code></pre>
+
+<h3>3. Fluent Wait</h3>
+<p>Advanced version of explicit wait where you can define the polling interval (how often to check) and exceptions to
+    ignore.</p>
+
+<h2>💻 Code Examples</h2>
+
+<h3>Handling Slow Elements</h3>
+<pre><code>// 1. Setup Explicit Wait
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+// 2. Clear conditions
+// Wait until visible
+WebElement banner = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("promo")));
+
+// Wait until clickable
+WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(By.id("submit")));
+btn.click();
+
+// Wait until invisible (loading spinner)
+wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("spinner")));
+</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Don't Mix Waits:</strong> Avoid using Implicit and Explicit waits together. It can cause unpredictable
+        wait times (e.g., 10s implicit + 10s explicit might result in 20s or more depending on browser implementation).
+    </p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Handle a slow-loading banking app.</p>
+    <ol>
+        <li>Click "Login" button.</li>
+        <li>Wait for the loading spinner to disappear.</li>
+        <li>Wait for the "Welcome User" message to be visible.</li>
+        <li>Extract the text.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: What is the default polling time of Selenium Explicit Wait?</strong></p>
+    <p><strong>Answer:</strong> 500 milliseconds (0.5 seconds).</p>
+
+    <p><strong>Q2: Why is Thread.sleep() discouraged?</strong></p>
+    <p><strong>Answer:</strong> It's a static wait. It pauses execution for the full time even if the element loads in
+        1ms. Waits are dynamic; they proceed as soon as the condition is met.</p>
+</blockquote>
+
+<a href="worksheets/ws_waits.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Map - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#syntax">Syntax</a></li>
+                        <li><a href="#function">With Function</a></li>
+                        <li><a href="#lambda">With Lambda</a></li>
+                        <li><a href="#multiple">Multiple Iterators</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python Map</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>The <code>map()</code> function executes a specified function for each item in an iterable. The
+                        item is sent to the function as a parameter.</p>
+
+                    <h2 id="syntax">Syntax</h2>
+                    <pre class="code-block">
+map(function, iterable)
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+map(function, iterables)
+</pre>
+                    <ul>
+                        <li><strong>function</strong>: The function to execute for each item.</li>
+                        <li><strong>iterables</strong>: A sequence, collection or an iterator object. You can send as
+                            many iterables as you like, just make sure the function has one parameter for each iterable.
+                        </li>
+                    </ul>
+
+                    <h2 id="function">Usage with Function</h2>
+                    <p>Calculate the length of each word in the tuple:</p>
+                    <pre class="code-block">
+def myfunc(n):
+    return len(n)
+
+x = map(myfunc, ('apple', 'banana', 'cherry'))
+
+print(list(x))
+# Output: [5, 6, 6]
+</pre>
+
+                    <h2 id="lambda">Usage with Lambda</h2>
+                    <p>You can use <code>lambda</code> functions to keep the code concise:</p>
+                    <pre class="code-block">
+numbers = [1, 2, 3, 4]
+result = map(lambda x: x + x, numbers)
+print(list(result))
+# Output: [2, 4, 6, 8]
+</pre>
+
+                    <h2 id="multiple">Mapping Multiple Iterators</h2>
+                    <p>If you pass multiple iterables, the function must accept that many arguments, and is applied to
+                        the items from all iterables in parallel.</p>
+                    <pre class="code-block">
+numbers1 = [1, 2, 3]
+numbers2 = [4, 5, 6]
+
+result = map(lambda x, y: x + y, numbers1, numbers2)
+print(list(result))
+# Output: [5, 7, 9]
+</pre>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a program to triple all numbers in a given list.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>nums = [1, 2, 3, 4, 5]
+tripled = list(map(lambda x: x * 3, nums))
+print(tripled)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a program to add three lists using map and lambda.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>nums1 = [1, 2, 3]
+nums2 = [4, 5, 6]
+nums3 = [7, 8, 9]
+
+result = list(map(lambda x, y, z: x + y + z, nums1, nums2, nums3))
+print(result)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a program to listify the list of given strings individually.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>color = ['Red', 'Blue', 'Black', 'White', 'Pink']
+result = list(map(list, color))
+print(result)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a program to calculate the square of the elements of a list.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>nums = [1, 2, 3, 4]
+squared = list(map(lambda x: x**2, nums))
+print(squared)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a program to convert all the characters in uppercase and lowercase and eliminate
+                            duplicate letters from a given sequence.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def change_cases(s):
+    return str(s).upper(), str(s).lower()
+
+chars = {'a', 'b', 'E', 'f', 'a', 'i', 'o', 'U', 'a'}
+result = map(change_cases, chars)
+print(set(result))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a program to add two given lists and find the difference between them.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>nums1 = [6, 5, 3, 9]
+nums2 = [0, 1, 7, 7]
+
+result = list(map(lambda x, y: (x + y, x - y), nums1, nums2))
+print(result)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a program to convert a given list of integers and a tuple of integers in a list of
+                            strings.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>nums_list = [1, 2, 3, 4]
+nums_tuple = (0, 1, 2, 3)
+
+result_list = list(map(str, nums_list))
+result_tuple = tuple(map(str, nums_tuple))
+
+print(result_list)
+print(result_tuple)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a program to create a new list taking specific elements from a tuple and convert a
+                            string value to integer.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>student_data = [('Alberto Franco', '15/05/2002', '35kg'), ('Gino Mcneill', '17/05/2002', '37kg'), ('Ryan Parkes', '16/02/1999', '39kg'), ('Eesha Hinton', '25/09/1998', '35kg')]
+
+students_weight = list(map(lambda x: int(x[2][:-2]), student_data))
+print(students_weight)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a program to compute the square of first N Fibonacci numbers.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import itertools
+
+n = 10
+def fibonacci_nums(x=0, y=1):
+    yield x
+    while True:
+        yield y
+        x, y = y, x + y
+
+print("First 10 Fibonacci numbers:")
+result = list(itertools.islice(fibonacci_nums(), n))
+print(result)
+
+print("\nSquare of the said numbers:")
+print(list(map(lambda x: x**2, result)))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a program to compute the sum of elements of a given array of integers.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from array import array
+
+def array_sum(nums_arr):
+    sum_val = 0
+    for n in nums_arr:
+        sum_val += n
+    return sum_val
+
+nums = array('i', [1, 2, 3, 4, 5, -15])
+# Or simply using sum, but assuming map concept was intended, 
+# map is for transformation, sum is reduction. 
+# But let's show sum function for completeness in this context (even if not strictly map only)
+print("Sum:", sum(nums))</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

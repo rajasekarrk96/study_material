@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Introduction - Java Learning Module</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>String Introduction</h5>
+        <a href="../../index.html#strings">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#section1">What are Strings</a>
+        <a href="#section2">String Creation</a>
+        <a href="#section3">Immutability</a>
+        <a href="#section4">String Pool</a>
+        <a href="#section5">String vs Char vs StringBuffer</a>
+    </div>
+
+    <div class="top-nav">
+        <h1>String Introduction</h1>
+    </div>
+
+    <div class="main-content">
+        <!-- Section 1: What are Strings -->
+        <div class="section" id="section1">
+            <h2>Section 1: What are Strings?</h2>
+            <p>
+                A <strong>String</strong> is a sequence of characters (text). It's one of the most commonly used data
+                types in Java.
+                Strings are immutable, meaning once created, they cannot be changed. Every string in Java is an object
+                of the String class.
+            </p>
+
+            <h3>Key Characteristics</h3>
+            <ul>
+                <li><strong>Sequence of characters:</strong> A String contains letters, numbers, symbols</li>
+                <li><strong>Immutable:</strong> Once created, the value cannot be changed</li>
+                <li><strong>Reference type:</strong> Strings are objects, not primitive types</li>
+                <li><strong>Widely used:</strong> Almost every program uses strings</li>
+            </ul>
+
+            <div class="note-box">
+                <h4>💡 String vs Char</h4>
+                <p><code>String</code> represents multiple characters and uses double quotes: <code>"Hello"</code><br>
+                    <code>char</code> represents a single character and uses single quotes: <code>'A'</code>
+                </p>
+            </div>
+
+            <div class="example-box">
+                <h4>🎯 Real-World Example</h4>
+                <p>Strings are used for names, addresses, messages, usernames, passwords - basically any text data in
+                    programs.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: String Creation and Declaration -->
+        <div class="section" id="section2">
+            <h2>Section 2: String Creation and Declaration</h2>
+            <p>Strings can be created in multiple ways in Java:</p>
+
+            <h3>Method 1: String Literal</h3>
+            <div class="code-block"><code>String name = "Alice";
+String greeting = "Hello World";
+String empty = "";</code></div>
+
+            <h3>Method 2: Using new Keyword</h3>
+            <div class="code-block"><code>String str1 = new String("Java");
+String str2 = new String("Programming");
+String str3 = new String();  // Empty string</code></div>
+
+            <h3>Method 3: String Concatenation</h3>
+            <div class="code-block"><code>String firstName = "John";
+String lastName = "Doe";
+String fullName = firstName + " " + lastName;  // Concatenation
+System.out.println(fullName);  // Output: John Doe</code></div>
+
+            <h3>Complete Example</h3>
+            <div class="code-block"><code>public class StringCreation {
+    public static void main(String[] args) {
+        // Using literals
+        String str1 = "Java";
+        String str2 = "Programming";
+        
+        // Using new keyword
+        String str3 = new String("Hello");
+        
+        // Concatenation
+        String combined = str1 + " " + str2;
+        System.out.println(combined);  // Output: Java Programming
+        
+        // String from variables
+        int age = 25;
+        String message = "I am " + age + " years old";
+        System.out.println(message);  // Output: I am 25 years old
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Java Programming<br>I am 25 years old</p>
+            </div>
+
+            <div class="note-box">
+                <h4>📝 String Literal vs new Keyword</h4>
+                <p><code>"Hello"</code> creates string in String pool (memory efficient)<br>
+                    <code>new String("Hello")</code> creates string in heap (creates new object each time)
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 3: String Immutability -->
+        <div class="section" id="section3">
+            <h2>Section 3: String Immutability Concept</h2>
+            <p>
+                Immutability means once a String is created, it cannot be modified. Any operation that appears to modify
+                a string
+                actually creates a new string object. This is crucial for understanding string behavior in Java.
+            </p>
+
+            <h3>Immutability Explained</h3>
+            <div class="code-block"><code>String original = "Hello";
+String modified = original.toUpperCase();
+
+System.out.println(original);  // Output: Hello (unchanged)
+System.out.println(modified);  // Output: HELLO (new string)</code></div>
+
+            <h3>Example: Demonstrating Immutability</h3>
+            <div class="code-block"><code>public class Immutability {
+    public static void main(String[] args) {
+        String str = "Java";
+        System.out.println("Original: " + str);
+        
+        // These methods return new strings, don't modify original
+        String upper = str.toUpperCase();
+        String lower = str.toLowerCase();
+        String replaced = str.replace('a', 'o');
+        
+        System.out.println("Uppercase: " + upper);   // JAVA
+        System.out.println("Lowercase: " + lower);   // java
+        System.out.println("Replaced: " + replaced); // Jovo
+        System.out.println("Original still: " + str); // Java (unchanged)
+    }
+}</code></div>
+
+            <h3>Impact of Immutability</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Advantage</th>
+                        <th>Disadvantage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Thread-safe by nature</td>
+                        <td>Creates new objects frequently</td>
+                    </tr>
+                    <tr>
+                        <td>Can be cached safely</td>
+                        <td>Memory overhead</td>
+                    </tr>
+                    <tr>
+                        <td>Simple to use</td>
+                        <td>Performance impact with many operations</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="example-box">
+                <h4>🔍 Why Immutable?</h4>
+                <p>Immutability makes strings safe for concurrent use, enables caching, and simplifies code reasoning.
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 4: String Pool and Memory -->
+        <div class="section" id="section4">
+            <h2>Section 4: String Pool and Memory</h2>
+            <p>Java uses a special memory region called the String Pool to optimize string storage:</p>
+
+            <h3>What is String Pool?</h3>
+            <div class="code-block"><code>String str1 = "Hello";      // Created in String Pool
+String str2 = "Hello";      // References same object in Pool
+String str3 = new String("Hello");  // Created in Heap (not in Pool)
+
+System.out.println(str1 == str2);  // true (same reference)
+System.out.println(str1 == str3);  // false (different objects)</code></div>
+
+            <h3>String Pool Behavior</h3>
+            <div class="code-block"><code>public class StringPoolDemo {
+    public static void main(String[] args) {
+        // Both reference same object in String Pool
+        String a = "Java";
+        String b = "Java";
+        System.out.println(a == b);  // true
+        System.out.println(a.equals(b));  // true
+        
+        // Different objects in heap
+        String c = new String("Java");
+        System.out.println(a == c);  // false (different objects)
+        System.out.println(a.equals(c));  // true (same content)
+        
+        // Using intern() to add to pool
+        String d = c.intern();
+        System.out.println(a == d);  // true (now in pool)
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>true<br>true<br>false<br>true<br>true</p>
+            </div>
+
+            <div class="note-box">
+                <h4>💡 Memory Efficiency</h4>
+                <p>String Pool saves memory by storing only one copy of each unique string literal. This is why using
+                    string literals is preferred over new String().</p>
+            </div>
+        </div>
+
+        <!-- Section 5: String vs Char vs StringBuffer -->
+        <div class="section" id="section5">
+            <h2>Section 5: String vs Char vs StringBuffer</h2>
+            <p>Understanding the differences between these string-related types helps choose the right one for your
+                needs:</p>
+
+            <h3>String vs Char</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>String</th>
+                        <th>char</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Definition</td>
+                        <td>Sequence of characters</td>
+                        <td>Single character</td>
+                    </tr>
+                    <tr>
+                        <td>Quotes</td>
+                        <td>Double quotes: "Hello"</td>
+                        <td>Single quotes: 'A'</td>
+                    </tr>
+                    <tr>
+                        <td>Type</td>
+                        <td>Reference (Object)</td>
+                        <td>Primitive</td>
+                    </tr>
+                    <tr>
+                        <td>Size</td>
+                        <td>Variable</td>
+                        <td>Always 1 character</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>String vs StringBuffer</h3>
+            <div class="code-block"><code>// String - Immutable (creates new object)
+String str = "Hello";
+str = str + " World";  // Creates new String object
+
+// StringBuffer - Mutable (modifies same object)
+StringBuffer sb = new StringBuffer("Hello");
+sb.append(" World");   // Modifies same object</code></div>
+
+            <h3>Comparison Table</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>String</th>
+                        <th>StringBuffer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mutability</td>
+                        <td>Immutable</td>
+                        <td>Mutable</td>
+                    </tr>
+                    <tr>
+                        <td>Thread Safety</td>
+                        <td>Always safe</td>
+                        <td>Synchronized (thread-safe)</td>
+                    </tr>
+                    <tr>
+                        <td>Performance</td>
+                        <td>Slow for modifications</td>
+                        <td>Fast for modifications</td>
+                    </tr>
+                    <tr>
+                        <td>Use Case</td>
+                        <td>Fixed strings</td>
+                        <td>Frequent modifications</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Example: When to Use Each</h3>
+            <div class="code-block"><code>public class StringComparison {
+    public static void main(String[] args) {
+        // Use String for fixed values
+        String name = "John";
+        System.out.println("Name: " + name);
+        
+        // Use StringBuffer for frequent modifications
+        StringBuffer sb = new StringBuffer();
+        for (int i = 1; i <= 5; i++) {
+            sb.append(i).append(", ");
+        }
+        System.out.println("Numbers: " + sb);
+        
+        // String concatenation (less efficient)
+        String result = "";
+        for (int i = 1; i <= 5; i++) {
+            result += i + ", ";  // Creates new object each iteration
+        }
+        System.out.println("Result: " + result);
+    }
+}</code></div>
+
+            <div class="note-box">
+                <h4>⚠️ Performance Tip</h4>
+                <p>When doing many string concatenations in a loop, use StringBuffer or StringBuilder instead of String.
+                    It's much more efficient.</p>
+            </div>
+        </div>
+
+        <!-- Worksheet Button -->
+        <div style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
+            <a href="worksheet.html" class="btn-worksheet">Open Worksheet & Exercises</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

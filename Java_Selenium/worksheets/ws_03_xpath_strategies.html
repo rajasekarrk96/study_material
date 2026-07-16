@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksheet: XPath Strategies</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ffc107;
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-light: #e0e0e0;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            height: calc(100vh - 50px);
+        }
+
+        .pane-questions {
+            width: 40%;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pane-header {
+            padding: 15px;
+            background: #252525;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .questions-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .question-card {
+            background: #2d2d2d;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .q-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .q-text {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .q-hint {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            font-style: italic;
+            padding: 8px;
+            background: #1a1a1a;
+            border-radius: 3px;
+            border-left: 2px solid #666;
+        }
+
+        .pane-practice {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f0f0;
+        }
+
+        .browser-bar {
+            background: #e0e0e0;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .url-box {
+            background: #fff;
+            padding: 5px 12px;
+            border-radius: 12px;
+            flex: 1;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #555;
+            border: 1px solid #ccc;
+        }
+
+        .app-view {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            color: #333;
+        }
+
+        .mock-app {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+        }
+
+        .solutions-panel {
+            background: #1a1a1a;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sol-header {
+            padding: 10px 20px;
+            background: #252525;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .sol-header:hover {
+            color: #fff;
+            background: #333;
+        }
+
+        .sol-content {
+            padding: 15px;
+            display: none;
+            font-family: 'Consolas', monospace;
+            font-size: 0.75rem;
+            color: #dcdcaa;
+            background: #111;
+            max-height: 500px;
+            overflow-y: auto;
+            line-height: 1.3;
+        }
+
+        .sol-content.visible {
+            display: block;
+        }
+
+        /* Syntax Highlighting */
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-variable {
+            color: #9cdcfe;
+        }
+
+        .code-method {
+            color: #dcdcaa;
+        }
+
+        .code-class {
+            color: #4ec9b0;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .page-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .page-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .good {
+            background: #c8e6c9;
+            padding: 8px;
+            border-left: 4px solid #4caf50;
+            margin: 8px 0;
+            border-radius: 3px;
+        }
+
+        .bad {
+            background: #ffcdd2;
+            padding: 8px;
+            border-left: 4px solid #f44336;
+            margin: 8px 0;
+            border-radius: 3px;
+        }
+
+        .code-sample {
+            background: #f5f5f5;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            border-radius: 3px;
+            margin: 8px 0;
+            border-left: 3px solid #ffc107;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 3px;
+            border-left: 4px solid #ffc107;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><i class="fas fa-lightbulb"></i> Practice: XPath Strategies & Best Practices</h1><a href="../index.html" style="color:#888; text-decoration:none;"><i class="fas fa-home"></i> Home</a>
+    </header>
+    <div class="workspace">
+        <div class="pane-questions">
+            <div class="pane-header"><i class="fas fa-tasks"></i> Strategy Tasks (6)</div>
+            <div class="questions-list">
+                <div class="question-card">
+                    <div class="q-title">Task 01: Avoid Absolute XPath</div>
+                    <div class="q-text">Convert an absolute XPath to a more maintainable relative XPath.
+                        <br><strong>(Instruction: Use the ID locator 'username' for this task)</strong>
+                    </div>
+                    <div class="q-hint">❌ Bad: <code>/html/body/form/input</code> → ✅ Good:
+                        <code>//input[@name='login']</code>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 02: Use Unique Identifiers</div>
+                    <div class="q-text">Choose the best locator: by ID, Name, or dynamic XPath? Prioritize!</div>
+                    <div class="q-hint">💡 Prefer stable attributes over generated ones</div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 03: Combine XPath with CSS</div>
+                    <div class="q-text">Decide when to use XPath vs CSS Selector for the given scenarios.
+                        <br><strong>(Instruction: Use the ID locator 'email' for this task)</strong>
+                    </div>
+                    <div class="q-hint">💡 CSS is faster, XPath is powerful</div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 04: Performance Optimization</div>
+                    <div class="q-text">Identify slow XPaths and optimize them for better performance.</div>
+                    <div class="q-hint">💡 Use specific paths, avoid wild-card searches</div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 05: Robust Locators</div>
+                    <div class="q-text">Create locators that won't break when HTML changes slightly.</div>
+                    <div class="q-hint">💡 Use contains(), starts-with() for flexibility</div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 06: Debugging XPath</div>
+                    <div class="q-text">Use Chrome DevTools Console to test and validate XPath expressions.</div>
+                    <div class="q-hint">💡 Command: <code>$x("//button")</code></div>
+                </div>
+            </div>
+            <div class="solutions-panel">
+                <div class="sol-header" onclick="toggleSolutions()">
+                    <span><i class="fas fa-code"></i> Solutions</span>
+                    <i class="fas fa-chevron-up" id="sol-icon"></i>
+                </div>
+                <div class="sol-content" id="sol-body">
+                    <pre style="margin:0;"><code><span class="code-keyword">package</span> <span class="code-class">Selenium</span>;
+ 
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.By</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebDriver</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.chrome.ChromeDriver</span>;
+ 
+<span class="code-keyword">public class</span> <span class="code-class">_24_XPathStrategies</span> <span class="code-punctuation">{</span>
+    <span class="code-keyword">public static void</span> <span class="code-method">main</span><span class="code-punctuation">(</span><span class="code-class">String</span><span class="code-punctuation">[]</span> args<span class="code-punctuation">)</span> <span class="code-punctuation">{</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Started ---"</span><span class="code-punctuation">);</span>
+        <span class="code-class">WebDriver</span> <span class="code-variable">driver</span> <span class="code-punctuation">=</span> <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Navigating to XPath Strategies worksheet..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">get</span><span class="code-punctuation">(</span><span class="code-string">"http://127.0.0.1:5501/Java_Selinium/worksheets/ws_03_xpath_strategies.html"</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-comment">// Task 01: Avoid Absolute XPath</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 01: Locating element via stable ID instead of absolute path..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">id</span><span class="code-punctuation">(</span><span class="code-string">"username"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 03: Decision - XPath vs CSS</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 03: Navigating to parent and matching by text..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//input[@id='email']/parent::div"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//button[text()='Submit']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 04: Performance Optimization</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 04: Optimizing XPath by providing specific parent scope..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//div[@class='page-section']//span[contains(text(), 'Active')]"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 05: Robust Locators</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 05: Building robust locators with contains() and normalize-space()..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//button[contains(@class, 'submit')]"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//button[normalize-space()='Submit']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Ended ---"</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">quit</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+    <span class="code-punctuation">}</span>
+<span class="code-punctuation">}</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="pane-practice">
+            <div class="browser-bar"><i class="fas fa-globe" style="color:#666"></i>
+                <div class="url-box">https://xpath-strategies-guide.com</div>
+            </div>
+            <div class="app-view">
+                <div class="mock-app">
+                    <h2>XPath Best Practices Guide</h2>
+
+                    <!-- Section 1: Absolute vs Relative -->
+                    <div class="page-section">
+                        <h3>1️⃣ Absolute vs Relative XPath</h3>
+                        <div class="bad">
+                            ❌ <strong>Avoid Absolute XPath:</strong><br>
+                            <code class="code-sample">/html/body/div/form/input</code><br>
+                            <small>Breaks easily when DOM structure changes!</small>
+                        </div>
+                        <div class="good">
+                            ✅ <strong>Use Relative XPath:</strong><br>
+                            <code class="code-sample">//input[@id='username']</code><br>
+                            <small>Starts with // to search from any level</small>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Identifier Hierarchy -->
+                    <div class="page-section">
+                        <h3>2️⃣ Locator Priority (Best to Worst)</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Priority</th>
+                                    <th>Type</th>
+                                    <th>Stability</th>
+                                    <th>Performance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1</strong></td>
+                                    <td>ID</td>
+                                    <td>Highest</td>
+                                    <td>⚡ Fastest</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2</strong></td>
+                                    <td>Name</td>
+                                    <td>High</td>
+                                    <td>⚡ Fast</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3</strong></td>
+                                    <td>CSS Class</td>
+                                    <td>Medium</td>
+                                    <td>⚡ Fast</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4</strong></td>
+                                    <td>XPath with attributes</td>
+                                    <td>Medium</td>
+                                    <td>Medium</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5</strong></td>
+                                    <td>Dynamic XPath</td>
+                                    <td>Low</td>
+                                    <td>Slow</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Section 3: XPath vs CSS -->
+                    <div class="page-section">
+                        <h3>3️⃣ When to Use XPath vs CSS</h3>
+                        <div class="good">
+                            ✅ <strong>Use XPath when:</strong>
+                            <ul>
+                                <li>Need to traverse UP the DOM (parent, ancestor)</li>
+                                <li>Locating by text content</li>
+                                <li>Complex logic and functions needed</li>
+                                <li>Multiple conditions required</li>
+                            </ul>
+                        </div>
+                        <div class="good">
+                            ✅ <strong>Use CSS Selector when:</strong>
+                            <ul>
+                                <li>Simple attribute-based selection</li>
+                                <li>Performance is critical</li>
+                                <li>Only traversing DOWN the DOM</li>
+                                <li>Modern browser compatibility needed</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Performance Tips -->
+                    <div class="page-section">
+                        <h3>4️⃣ Performance Optimization</h3>
+                        <div class="bad">
+                            ❌ <strong>Slow XPath (searches entire DOM):</strong><br>
+                            <code class="code-sample">//button[contains(text(), 'Submit')]</code>
+                        </div>
+                        <div class="good">
+                            ✅ <strong>Faster XPath (specific scope):</strong><br>
+                            <code
+                                class="code-sample">//form[@name='login-form']//button[contains(text(), 'Submit')]</code>
+                        </div>
+                        <div class="warning-box">
+                            ⚠️ Start XPath from most specific parent, then navigate to target
+                        </div>
+                    </div>
+
+                    <!-- Section 5: Robust Locators -->
+                    <div class="page-section">
+                        <h3>5️⃣ Building Robust Locators</h3>
+                        <div class="bad">
+                            ❌ <strong>Fragile (breaks on any change):</strong><br>
+                            <code class="code-sample">//button[2]</code><br>
+                            <code class="code-sample">//span[@class='btn-submit']</code>
+                        </div>
+                        <div class="good">
+                            ✅ <strong>Robust (tolerates changes):</strong><br>
+                            <code class="code-sample">//button[contains(@class, 'submit')]</code><br>
+                            <code class="code-sample">//button[starts-with(@name, 'btn')]</code><br>
+                            <code class="code-sample">//button[contains(normalize-space(), 'Submit')]</code>
+                        </div>
+                    </div>
+
+                    <!-- Section 6: Testing XPath -->
+                    <div class="page-section">
+                        <h3>6️⃣ Debug XPath in Chrome DevTools</h3>
+                        <div class="code-sample">
+                            // In Chrome Console, test XPath instantly:<br>
+                            $x("//button[@name='submit-btn']")<br>
+                            <br>
+                            // Returns array of matched elements<br>
+                            // If empty, your XPath has no matches
+                        </div>
+                        <div class="warning-box">
+                            💡 Press F12 → Console → Copy-paste XPath → Press Enter
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <script>
+        function toggleSolutions() {
+            const solBody = document.getElementById('sol-body');
+            const solIcon = document.getElementById('sol-icon');
+            solBody.classList.toggle('visible');
+            solIcon.className = solBody.classList.contains('visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+        }
+    </script>
+</body>
+
+</html>

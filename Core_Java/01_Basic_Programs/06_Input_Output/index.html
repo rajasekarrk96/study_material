@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Input/Output Module</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h5>Java Input/Output</h5>
+        <a href="../../index.html#basics"
+            style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#section1" class="nav-link active">System.out Methods</a>
+            <a href="#section2" class="nav-link">Scanner Class</a>
+            <a href="#section3" class="nav-link">Reading Data Types</a>
+            <a href="#section4" class="nav-link">Formatted Output</a>
+            <a href="#section5" class="nav-link">Practical Examples</a>
+        </nav>
+    </div>
+
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <h2>Java Input/Output Module</h2>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="module-header">
+            <h1>Java Input/Output</h1>
+            <p>Master input and output operations in Java using System.out and Scanner class for interactive programs.
+            </p>
+        </div>
+
+        <!-- Section 1: System.out Methods -->
+        <div class="section-card" id="section1">
+            <h3>Section 1: System.out Methods</h3>
+
+            <h4>Overview</h4>
+            <div class="explanation">
+                System.out is an object used to display output to the console. It provides three main methods for
+                printing: print(), println(), and printf(). Each serves a different purpose in displaying information to
+                the user.
+            </div>
+
+            <h4>Methods Table</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                            <th>Output</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>print()</td>
+                            <td>Prints without newline</td>
+                            <td>System.out.print("Hello");</td>
+                            <td>Hello</td>
+                        </tr>
+                        <tr>
+                            <td>println()</td>
+                            <td>Prints with newline</td>
+                            <td>System.out.println("Hello");</td>
+                            <td>Hello<br>(moves to next line)</td>
+                        </tr>
+                        <tr>
+                            <td>printf()</td>
+                            <td>Formatted printing</td>
+                            <td>System.out.printf("%d", 42);</td>
+                            <td>42</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Code Example</h4>
+            <div class="code-block"><code>public class SystemOutMethods {
+    public static void main(String[] args) {
+        // print() - no newline
+        System.out.print("Hello ");
+        System.out.print("World");
+        System.out.println(); // Move to next line
+        
+        // println() - with newline
+        System.out.println("Java Programming");
+        System.out.println("Easy to Learn");
+        
+        // Printing different data types
+        System.out.println(42);              // Integer
+        System.out.println(3.14);            // Double
+        System.out.println(true);            // Boolean
+        System.out.println('A');             // Character
+        
+        // String concatenation
+        String name = "John";
+        int age = 25;
+        System.out.println("Name: " + name + ", Age: " + age);
+        
+        // printf() examples
+        System.out.printf("Number: %d\n", 42);
+        System.out.printf("Float: %.2f\n", 3.14159);
+        System.out.printf("String: %s\n", "Hello");
+    }
+}</code></div>
+
+            <h4>Output</h4>
+            <div class="output-block"><code>Hello World
+Java Programming
+Easy to Learn
+42
+3.14
+true
+A
+Name: John, Age: 25
+Number: 42
+Float: 3.14
+String: Hello</code></div>
+
+            <div class="notes-block">
+                <strong>Note:</strong> Use println() for most cases as it adds a newline automatically. Use print() when
+                you need output without a newline. Use printf() for formatted output with specific formatting
+                requirements.
+            </div>
+        </div>
+
+        <!-- Section 2: Scanner Class -->
+        <div class="section-card" id="section2">
+            <h3>Section 2: Scanner Class for Input</h3>
+
+            <h4>Overview</h4>
+            <div class="explanation">
+                The Scanner class is used to read input from the user. It's part of the java.util package and provides
+                various methods to read different data types from the console (System.in). To use Scanner, you must
+                import java.util.Scanner first.
+            </div>
+
+            <h4>Basic Setup</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+Scanner input = new Scanner(System.in);</code></div>
+
+            <h4>Scanner Methods Table</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Data Type</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>nextInt()</td>
+                            <td>Integer</td>
+                            <td>int num = input.nextInt();</td>
+                        </tr>
+                        <tr>
+                            <td>nextDouble()</td>
+                            <td>Double</td>
+                            <td>double price = input.nextDouble();</td>
+                        </tr>
+                        <tr>
+                            <td>nextFloat()</td>
+                            <td>Float</td>
+                            <td>float height = input.nextFloat();</td>
+                        </tr>
+                        <tr>
+                            <td>nextLine()</td>
+                            <td>String (entire line)</td>
+                            <td>String text = input.nextLine();</td>
+                        </tr>
+                        <tr>
+                            <td>next()</td>
+                            <td>String (single word)</td>
+                            <td>String word = input.next();</td>
+                        </tr>
+                        <tr>
+                            <td>nextBoolean()</td>
+                            <td>Boolean</td>
+                            <td>boolean flag = input.nextBoolean();</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Code Example</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+public class ScannerClassExample {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        // Read a string
+        System.out.print("Enter your name: ");
+        String name = input.nextLine();
+        
+        // Read an integer
+        System.out.print("Enter your age: ");
+        int age = input.nextInt();
+        
+        // Read a double
+        System.out.print("Enter your height (in meters): ");
+        double height = input.nextDouble();
+        
+        // Display results
+        System.out.println("\n--- Your Information ---");
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Height: " + height + " meters");
+        
+        // Close the scanner
+        input.close();
+    }
+}</code></div>
+
+            <h4>Sample Interaction</h4>
+            <div class="output-block"><code>Enter your name: Alice Johnson
+Enter your age: 22
+Enter your height (in meters): 1.65
+
+--- Your Information ---
+Name: Alice Johnson
+Age: 22
+Height: 1.65 meters</code></div>
+
+            <div class="notes-block">
+                <strong>Note:</strong> Always close the Scanner when done to free up resources using input.close().
+                After using nextInt(), nextDouble(), etc., use nextLine() carefully as it may read leftover newline
+                characters.
+            </div>
+        </div>
+
+        <!-- Section 3: Reading Different Data Types -->
+        <div class="section-card" id="section3">
+            <h3>Section 3: Reading Different Data Types</h3>
+
+            <h4>Overview</h4>
+            <div class="explanation">
+                The Scanner class provides specific methods for reading different data types. Understanding how to use
+                each method correctly is crucial for building interactive programs that accept various types of user
+                input.
+            </div>
+
+            <h4>Code Example</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+public class ReadingDataTypes {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        // Reading Integer
+        System.out.print("Enter an integer: ");
+        int intValue = input.nextInt();
+        
+        // Reading Double
+        System.out.print("Enter a decimal number: ");
+        double doubleValue = input.nextDouble();
+        
+        // Reading Float
+        System.out.print("Enter a float value: ");
+        float floatValue = input.nextFloat();
+        
+        // Important: Clear the newline from input buffer
+        input.nextLine();
+        
+        // Reading String (single word)
+        System.out.print("Enter a word: ");
+        String word = input.next();
+        
+        // Clear the newline again
+        input.nextLine();
+        
+        // Reading entire line as String
+        System.out.print("Enter a full sentence: ");
+        String sentence = input.nextLine();
+        
+        // Reading Boolean
+        System.out.print("Enter true or false: ");
+        boolean boolValue = input.nextBoolean();
+        
+        // Display all inputs
+        System.out.println("\n--- Collected Data ---");
+        System.out.println("Integer: " + intValue);
+        System.out.println("Double: " + doubleValue);
+        System.out.println("Float: " + floatValue);
+        System.out.println("Word: " + word);
+        System.out.println("Sentence: " + sentence);
+        System.out.println("Boolean: " + boolValue);
+        
+        input.close();
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter an integer: 42
+Enter a decimal number: 3.14
+Enter a float value: 2.5
+Enter a word: Java
+Enter a full sentence: Java is amazing
+Enter true or false: true
+
+--- Collected Data ---
+Integer: 42
+Double: 3.14
+Float: 2.5
+Word: Java
+Sentence: Java is amazing
+Boolean: true</code></div>
+
+            <div class="example-block">
+                <strong>Example:</strong> When mixing nextInt(), nextDouble() with nextLine(), always use nextLine()
+                after numeric input to clear the input buffer and avoid skipping lines.
+            </div>
+        </div>
+
+        <!-- Section 4: Formatted Output -->
+        <div class="section-card" id="section4">
+            <h3>Section 4: Formatted Output</h3>
+
+            <h4>Overview</h4>
+            <div class="explanation">
+                The printf() method allows you to format output using format specifiers. This is useful for aligning
+                output, controlling decimal places, and creating organized displays like tables and reports.
+            </div>
+
+            <h4>Common Format Specifiers</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Specifier</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                            <th>Output</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>%d</td>
+                            <td>Integer</td>
+                            <td>printf("%d", 42)</td>
+                            <td>42</td>
+                        </tr>
+                        <tr>
+                            <td>%f</td>
+                            <td>Floating-point (6 decimal places)</td>
+                            <td>printf("%f", 3.14)</td>
+                            <td>3.140000</td>
+                        </tr>
+                        <tr>
+                            <td>%.2f</td>
+                            <td>Floating-point (2 decimal places)</td>
+                            <td>printf("%.2f", 3.14159)</td>
+                            <td>3.14</td>
+                        </tr>
+                        <tr>
+                            <td>%s</td>
+                            <td>String</td>
+                            <td>printf("%s", "Hello")</td>
+                            <td>Hello</td>
+                        </tr>
+                        <tr>
+                            <td>%c</td>
+                            <td>Character</td>
+                            <td>printf("%c", 'A')</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>%n</td>
+                            <td>Newline</td>
+                            <td>printf("Line1%nLine2")</td>
+                            <td>Line1<br>Line2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Code Example</h4>
+            <div class="code-block"><code>public class FormattedOutput {
+    public static void main(String[] args) {
+        // Basic formatting
+        System.out.printf("Integer: %d\n", 42);
+        System.out.printf("String: %s\n", "Java");
+        System.out.printf("Character: %c\n", 'J');
+        
+        // Decimal formatting
+        double price = 19.567;
+        System.out.printf("Price: $%.2f\n", price);
+        
+        // Width and alignment
+        System.out.printf("%10d\n", 42);        // Right-aligned in 10 spaces
+        System.out.printf("%-10s|\n", "Left");  // Left-aligned in 10 spaces
+        
+        // Multiple values
+        String product = "Laptop";
+        int quantity = 5;
+        double unitPrice = 999.99;
+        System.out.printf("%s: Qty=%d, Price=$%.2f\n", product, quantity, unitPrice);
+        
+        // Table formatting
+        System.out.println("\n--- Student Grades ---");
+        System.out.printf("%-15s %10s %10s\n", "Name", "Score", "Grade");
+        System.out.println("---------------------------------------------");
+        System.out.printf("%-15s %10d %10s\n", "Alice", 95, "A");
+        System.out.printf("%-15s %10d %10s\n", "Bob", 87, "B");
+        System.out.printf("%-15s %10d %10s\n", "Charlie", 92, "A");
+    }
+}</code></div>
+
+            <h4>Output</h4>
+            <div class="output-block"><code>Integer: 42
+String: Java
+Character: J
+Price: $19.57
+        42
+Left      |
+Laptop: Qty=5, Price=$999.99
+
+--- Student Grades ---
+Name                   Score      Grade
+---------------------------------------------
+Alice                      95          A
+Bob                        87          B
+Charlie                    92          A</code></div>
+
+            <div class="notes-block">
+                <strong>Note:</strong> Use %n instead of \n in printf() for better portability. The format specifier can
+                include width and precision information, such as %10d for 10-space width or %.2f for 2 decimal places.
+            </div>
+        </div>
+
+        <!-- Section 5: Practical Examples -->
+        <div class="section-card" id="section5">
+            <h3>Section 5: Practical Examples</h3>
+
+            <h4>Example 1: Simple Calculator</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+public class SimpleCalculator {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("=== Simple Calculator ===");
+        System.out.print("Enter first number: ");
+        double num1 = input.nextDouble();
+        
+        System.out.print("Enter second number: ");
+        double num2 = input.nextDouble();
+        
+        double sum = num1 + num2;
+        double difference = num1 - num2;
+        double product = num1 * num2;
+        double quotient = num1 / num2;
+        
+        System.out.println("\n--- Results ---");
+        System.out.printf("%.2f + %.2f = %.2f\n", num1, num2, sum);
+        System.out.printf("%.2f - %.2f = %.2f\n", num1, num2, difference);
+        System.out.printf("%.2f * %.2f = %.2f\n", num1, num2, product);
+        System.out.printf("%.2f / %.2f = %.2f\n", num1, num2, quotient);
+        
+        input.close();
+    }
+}</code></div>
+
+            <h4>Example 1 Output</h4>
+            <div class="output-block"><code>=== Simple Calculator ===
+Enter first number: 50
+Enter second number: 15
+
+--- Results ---
+50.00 + 15.00 = 65.00
+50.00 - 15.00 = 35.00
+50.00 * 15.00 = 750.00
+50.00 / 15.00 = 3.33</code></div>
+
+            <h4>Example 2: Student Information Form</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+public class StudentForm {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("=== Student Information Form ===");
+        
+        System.out.print("Enter student name: ");
+        String name = input.nextLine();
+        
+        System.out.print("Enter roll number: ");
+        int rollNumber = input.nextInt();
+        
+        System.out.print("Enter marks in Math: ");
+        double math = input.nextDouble();
+        
+        System.out.print("Enter marks in English: ");
+        double english = input.nextDouble();
+        
+        System.out.print("Enter marks in Science: ");
+        double science = input.nextDouble();
+        
+        double average = (math + english + science) / 3;
+        
+        System.out.println("\n=== Student Report ===");
+        System.out.printf("Name: %s\n", name);
+        System.out.printf("Roll No: %d\n", rollNumber);
+        System.out.printf("Math: %.2f\n", math);
+        System.out.printf("English: %.2f\n", english);
+        System.out.printf("Science: %.2f\n", science);
+        System.out.printf("Average: %.2f\n", average);
+        
+        input.close();
+    }
+}</code></div>
+
+            <h4>Example 2 Output</h4>
+            <div class="output-block"><code>=== Student Information Form ===
+Enter student name: Priya Sharma
+Enter roll number: 101
+Enter marks in Math: 95
+Enter marks in English: 87
+Enter marks in Science: 91
+
+=== Student Report ===
+Name: Priya Sharma
+Roll No: 101
+Math: 95.00
+English: 87.00
+Science: 91.00
+Average: 91.00</code></div>
+
+            <div class="example-block">
+                <strong>Best Practices:</strong> Always provide clear prompts to users about what input is expected. Use
+                appropriate Scanner methods for each data type. Close the Scanner object after use to prevent resource
+                leaks. Validate user input when possible.
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p><strong>Java Input/Output Module</strong></p>
+            <p>Master System.out and Scanner for interactive Java programs</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

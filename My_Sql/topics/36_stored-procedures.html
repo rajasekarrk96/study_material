@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stored Procedures - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Stored Procedures</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Stored Procedures</h2>
+                <p class="topic-desc">A Stored Procedure is a predefined set of SQL statements stored in the database that can be executed whenever needed, supporting parameters and reusable logic.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Basic Concept & Syntax</h3>
+                        <p class="subtopic-desc"><strong>🔹 Logic</strong><br>Procedures can take input parameters, return output through OUT variables, and are used for bulk logic, security, and performance.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-comment">-- Change delimiter to allow semicolons inside <span class="sql-keyword">procedure</span>\nDELIMITER //\n\nCREATE <span class="sql-keyword">PROCEDURE</span> procedure_name (IN input_param <span class="sql-keyword">INT</span>, OUT output_param <span class="sql-keyword">VARCHAR</span>(50))\nBEGIN\n    -- SQL statements\n    <span class="sql-keyword">SELECT</span> column_name <span class="sql-keyword">INTO</span> output_param\n    <span class="sql-keyword">FROM</span> table_name\n    <span class="sql-keyword">WHERE</span> id = input_param;\nEND //\n\nDELIMITER ;</span></code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Parameter Types</h3>
+                        <p class="subtopic-desc"><ul>\n<li><strong>IN:</strong> Input parameter (passed from caller).</li>\n<li><strong>OUT:</strong> Output parameter (returned to caller).</li>\n<li><strong>INOUT:</strong> Acts as both input and output.</li>\n<li><strong>SELECT ... INTO:</strong> Stores a single result into an OUT variable.</li>\n</ul></p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Table: students</h3>
+                        <p class="subtopic-desc">Sample data used for the procedure example.</p>
+            <div class="output-box">
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>student_id</th><th>student_name</th><th>marks</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>John</td><td>85</td></tr>
+                        <tr><td>2</td><td>Alice</td><td>90</td></tr>
+                        <tr><td>3</td><td>Bob</td><td>78</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Example: Create Stored Procedure</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Create a procedure that retrieves a student name by their ID.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code>DELIMITER //\n\nCREATE <span class="sql-keyword">PROCEDURE</span> GetStudentName(IN sid <span class="sql-keyword">INT</span>, OUT sname <span class="sql-keyword">VARCHAR</span>(50))\nBEGIN\n    <span class="sql-keyword">SELECT</span> student_name <span class="sql-keyword">INTO</span> sname\n    <span class="sql-keyword">FROM</span> students\n    <span class="sql-keyword">WHERE</span> student_id = sid;\nEND //\n\nDELIMITER ;</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Example: Calling the Procedure</h3>
+                        <p class="subtopic-desc"><strong>🔹 Logic</strong><br>Use a user-defined variable (starting with @) to capture the OUT value.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code>CALL GetStudentName(2, @name);\nSELECT @name;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 30%; font-size: 13px;'>
+                    <thead><tr><th>@name</th></tr></thead>
+                    <tbody>
+                        <tr><td>Alice</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Simple procedure to select all students.</strong><br>
+    <button class="toggle-btn" data-target="ans-t35-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t35-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE PROCEDURE get_all_students()
+BEGIN
+    SELECT * FROM students;
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>CALL get_all_students();</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+-----+
+| id | name   | age |
++----+--------+-----+
+| 1  | Arun   | 22  |
+| 2  | Priya  | 23  |
+| 3  | Kiran  | 23  |
+| 4  | Meena  | 24  |
++----+--------+-----+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Procedure with input parameter – Get student by ID.</strong><br>
+    <button class="toggle-btn" data-target="ans-t35-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t35-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE PROCEDURE get_student_by_id(IN stu_id INT)
+BEGIN
+    SELECT * FROM students WHERE id = stu_id;
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>CALL get_student_by_id(2);</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+-------+-----+
+| id | name  | age |
++----+-------+-----+
+| 2  | Priya | 23  |
++----+-------+-----+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Procedure with output parameter – Get student age.</strong><br>
+    <button class="toggle-btn" data-target="ans-t35-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t35-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE PROCEDURE get_student_age(IN stu_id INT, OUT stu_age INT)
+BEGIN
+    SELECT age INTO stu_age FROM students WHERE id = stu_id;
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>CALL get_student_age(3, @age);
+SELECT @age;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+
+| @age |
++------+
+| 23   |
++------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Procedure to insert a new student.</strong><br>
+    <button class="toggle-btn" data-target="ans-t35-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t35-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE PROCEDURE add_student(IN stu_name VARCHAR(50), IN stu_age INT)
+BEGIN
+    INSERT INTO students(name, age) VALUES(stu_name, stu_age);
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>CALL add_student('Ravi', 22);
+SELECT * FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+-----+
+| id | name   | age |
++----+--------+-----+
+| 1  | Arun   | 22  |
+| 2  | Priya  | 23  |
+| 3  | Kiran  | 23  |
+| 4  | Meena  | 24  |
+| 5  | Ravi   | 22  |
++----+--------+-----+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Procedure to update student age.</strong><br>
+    <button class="toggle-btn" data-target="ans-t35-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t35-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE PROCEDURE update_student_age(IN stu_id INT, IN new_age INT)
+BEGIN
+    UPDATE students SET age = new_age WHERE id = stu_id;
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>CALL update_student_age(5, 23);
+SELECT * FROM students WHERE id = 5;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+-------+-----+
+| id | name  | age |
++----+-------+-----+
+| 5  | Ravi  | 23  |
++----+-------+-----+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='35_loops.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Loops (Procedures)</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='37_triggers.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Triggers →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

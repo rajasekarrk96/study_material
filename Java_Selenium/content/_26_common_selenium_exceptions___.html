@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  26 common selenium exceptions   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>26. Common Exceptions</h1>
+
+<h2>📖 Introduction</h2>
+<p>Exceptions are not your enemy; they are clues. They tell you exactly what went wrong. In Selenium, 90% of issues stem
+    from a handful of common exceptions. Understanding them differentiates a beginner from an expert.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The hierarchy of Selenium Exceptions</li>
+    <li>Root causes of NoSuchElementException, StaleElementReferenceException, etc.</li>
+    <li>How to debug and fix them</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>1. NoSuchElementException</h3>
+<p><strong>Cause:</strong> The locator (ID, XPath, etc.) you provided does not exist in the DOM at the exact moment the
+    driver looked for it.</p>
+<p><strong>Fix:</strong> Check your locator logic. Check if the element is inside an iframe. Check if the page has fully
+    loaded (Synchronization).</p>
+
+<h3>2. StaleElementReferenceException</h3>
+<p><strong>Cause:</strong> The element you found <em>was</em> there, but the page refreshed (or DOM updated), and the
+    reference is now dead ("stale").</p>
+<p><strong>Fix:</strong> You must <code>findElement</code> again to get a fresh reference.</p>
+
+<h3>3. ElementNotInteractableException</h3>
+<p><strong>Cause:</strong> The element exists, but it might be hidden, overlapping with another element, or disabled.
+</p>
+<p><strong>Fix:</strong> Scroll the element into view. Wait for overlays to disappear.</p>
+
+<h2>💻 Code Examples</h2>
+<p>Handling exceptions gracefully:</p>
+
+<h3>Try-Catch Block</h3>
+<pre><code>try {
+    driver.findElement(By.id("logout")).click();
+} catch (NoSuchElementException e) {
+    System.out.println("Logout button not found. Must be already logged out.");
+}</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Catching Exception (Generic):</strong> Don't just catch <code>Exception</code>. Catch specific Selenium
+        exceptions to handle them properly. Catching generic exceptions masks the real issue.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Force a StaleElementReferenceException.</p>
+    <ol>
+        <li>Find the "Home" link.</li>
+        <li>Refresh the page (<code>driver.navigate().refresh()</code>).</li>
+        <li>Try to click the "Home" link variable you found in step 1.</li>
+        <li>Observe the crash.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: What is the superclass of all WebDriver exceptions?</strong></p>
+    <p><strong>Answer:</strong> <code>WebDriverException</code>.</p>
+</blockquote>
+
+<a href="worksheets/ws_exceptions.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

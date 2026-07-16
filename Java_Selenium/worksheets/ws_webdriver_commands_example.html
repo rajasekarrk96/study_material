@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Worksheet - Web Driver Commands | Java Selenium</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* SIDEBAR STYLES */
+        .sidebar-nav {
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow-y: auto;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding-top: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .sidebar-nav .nav-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-nav .nav-header h5 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-nav .nav-header p {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .sidebar-nav .nav-section {
+            padding: 0 15px;
+            margin-bottom: 25px;
+        }
+
+        .sidebar-nav .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            opacity: 0.7;
+            padding: 10px 5px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-nav .nav-list {
+            list-style: none;
+        }
+
+        .sidebar-nav .nav-item {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-nav .nav-link {
+            display: block;
+            padding: 10px 15px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-left-color: #4ade80;
+            padding-left: 20px;
+        }
+
+        .sidebar-nav .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.25);
+            color: white;
+            border-left-color: #4ade80;
+            font-weight: 600;
+        }
+
+        /* MAIN CONTENT STYLES */
+        .main-content-wrapper {
+            margin-left: 280px;
+            width: calc(100% - 280px);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-header h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .content-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        /* WORKSHEET CARD STYLES */
+        .worksheet-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .worksheet-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .worksheet-card h3 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .worksheet-card h3 i {
+            font-size: 22px;
+        }
+
+        /* LEARNING OBJECTIVES */
+        .objectives-section {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+        }
+
+        .objectives-section h4 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .objectives-section ul {
+            margin-bottom: 0;
+        }
+
+        .objectives-section li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        /* SCENARIO SECTION */
+        .scenario-section {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+        }
+
+        .scenario-section h4 {
+            color: #d97706;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .scenario-steps {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 12px;
+        }
+
+        .scenario-steps ol {
+            margin-bottom: 0;
+        }
+
+        .scenario-steps li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        /* HINT SECTION */
+        .hint-section {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+        }
+
+        .hint-section h4 {
+            color: #059669;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .hint-section p {
+            margin-bottom: 0;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* IMAGE SECTION */
+        .image-section {
+            margin-bottom: 25px;
+            text-align: center;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .image-caption {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* PRACTICE AREA */
+        .practice-section {
+            margin-bottom: 25px;
+        }
+
+        .practice-section h4 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-editor {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border: 1px solid #3e3e42;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+
+        textarea.practice-input {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border: 1px solid #3e3e42;
+            border-radius: 5px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        textarea.practice-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        /* ANSWER SECTION */
+        .answer-section {
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        .btn-toggle-answer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .btn-toggle-answer:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .answer-content {
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .answer-content.visible {
+            display: block;
+        }
+
+        .answer-content h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .answer-code {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border: 1px solid #3e3e42;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+
+        /* SUBMIT SECTION */
+        .submit-section {
+            background: #f0f4ff;
+            border: 1px solid #e0e7ff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-back {
+            background: #6b7280;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background: #4b5563;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-nav {
+                width: 0;
+                overflow: hidden;
+            }
+
+            .main-content-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        .sidebar-nav::-webkit-scrollbar,
+        .content-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-track,
+        .content-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .content-body::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+        }
+
+        .content-body::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- SIDEBAR NAVIGATION -->
+    <nav class="sidebar-nav">
+        <div class="nav-header">
+            <h5><i class="fas fa-book-open"></i> Java Selenium</h5>
+            <p>Automation Curriculum</p>
+        </div>
+
+        <!-- Core Topics -->
+        <div class="nav-section">
+            <div class="section-label">Core Topics</div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="ws_intro.html" class="nav-link">
+                        <i class="fas fa-play-circle"></i> Introduction
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_java_prerequisites.html" class="nav-link">
+                        <i class="fas fa-coffee"></i> Java Prerequisites
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_auto_webdriver.html" class="nav-link">
+                        <i class="fas fa-cog"></i> WebDriver Manager
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_chrome_options.html" class="nav-link">
+                        <i class="fas fa-sliders-h"></i> Chrome Options
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_page_load_strategy.html" class="nav-link">
+                        <i class="fas fa-hourglass-start"></i> Page Load Strategy
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Locators & Selection -->
+        <div class="nav-section">
+            <div class="section-label">Locators & Selection</div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="ws_locators.html" class="nav-link">
+                        <i class="fas fa-crosshairs"></i> Locators
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_webdriver_commands.html" class="nav-link active">
+                        <i class="fas fa-terminal"></i> WebDriver Commands
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_navigation.html" class="nav-link">
+                        <i class="fas fa-compass"></i> Navigation
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- HTML Controls -->
+        <div class="nav-section">
+            <div class="section-label">HTML Controls</div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="ws_basic_html.html" class="nav-link">
+                        <i class="fas fa-rectangle-landscape"></i> Basic Controls
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_advanced_html.html" class="nav-link">
+                        <i class="fas fa-layer-group"></i> Advanced Controls
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_dropdown.html" class="nav-link">
+                        <i class="fas fa-list"></i> Dropdowns
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_multi_select.html" class="nav-link">
+                        <i class="fas fa-check-square"></i> Multi-Select
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Advanced Interactions -->
+        <div class="nav-section">
+            <div class="section-label">Advanced Interactions</div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="ws_waits.html" class="nav-link">
+                        <i class="fas fa-clock"></i> Waits & Sync
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_iframes.html" class="nav-link">
+                        <i class="fas fa-cube"></i> Iframes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_alerts.html" class="nav-link">
+                        <i class="fas fa-exclamation-triangle"></i> Alerts
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_drag_drop.html" class="nav-link">
+                        <i class="fas fa-arrow-circle-right"></i> Drag & Drop
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_keyboard.html" class="nav-link">
+                        <i class="fas fa-keyboard"></i> Keyboard Actions
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_mouse.html" class="nav-link">
+                        <i class="fas fa-mouse"></i> Mouse Actions
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_scrolling.html" class="nav-link">
+                        <i class="fas fa-scroll"></i> Scrolling
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_window_handling.html" class="nav-link">
+                        <i class="fas fa-window-maximize"></i> Window Handling
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Utilities -->
+        <div class="nav-section">
+            <div class="section-label">Utilities & Tools</div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="ws_find_all_links.html" class="nav-link">
+                        <i class="fas fa-link"></i> Find Links
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_screenshots.html" class="nav-link">
+                        <i class="fas fa-camera"></i> Screenshots
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_file_upload.html" class="nav-link">
+                        <i class="fas fa-cloud-upload-alt"></i> File Upload
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_exceptions.html" class="nav-link">
+                        <i class="fas fa-bug"></i> Exceptions
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Framework & Testing -->
+        <div class="nav-section">
+            <div class="section-label">Framework & Testing</div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="ws_testng.html" class="nav-link">
+                        <i class="fas fa-flask"></i> TestNG
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_maven.html" class="nav-link">
+                        <i class="fas fa-cube"></i> Maven
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_pom.html" class="nav-link">
+                        <i class="fas fa-project-diagram"></i> Page Object Model
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_reports.html" class="nav-link">
+                        <i class="fas fa-chart-bar"></i> Reports
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Extras -->
+        <div class="nav-section">
+            <div class="section-label">Extras</div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="ws_localhost.html" class="nav-link">
+                        <i class="fas fa-laptop"></i> Local Testing
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_demo_page.html" class="nav-link">
+                        <i class="fas fa-window-restore"></i> Demo Page
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ws_extras.html" class="nav-link">
+                        <i class="fas fa-star"></i> Extra Resources
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="main-content-wrapper">
+        <!-- HEADER -->
+        <div class="content-header">
+            <h2><i class="fas fa-tasks"></i> Practice Worksheet</h2>
+        </div>
+
+        <!-- BODY CONTENT -->
+        <div class="content-body">
+            <!-- MAIN WORKSHEET CARD -->
+            <div class="worksheet-card">
+                <h3><i class="fas fa-terminal"></i> WebDriver Commands</h3>
+
+                <!-- Learning Objectives -->
+                <div class="objectives-section">
+                    <h4><i class="fas fa-target"></i> Learning Objectives</h4>
+                    <ul>
+                        <li>Master finding elements using CSS and XPath selectors</li>
+                        <li>Understand element methods like click(), sendKeys(), getText()</li>
+                        <li>Retrieve element attributes and properties</li>
+                        <li>Handle element visibility and enabled states</li>
+                        <li>Work with collections of WebElements</li>
+                    </ul>
+                </div>
+
+                <!-- Scenario Section -->
+                <div class="scenario-section">
+                    <h4><i class="fas fa-lightbulb"></i> Practice Scenario</h4>
+                    <div class="scenario-steps">
+                        <p><strong>Target Application:</strong>
+                            <a href="https://practicetestautomation.com/practice-test-login/" target="_blank">
+                                Practice Test Automation Login
+                            </a>
+                        </p>
+                        <p><strong>Your Task:</strong></p>
+                        <ol>
+                            <li><strong>Task 01:</strong> Find the username input field using multiple locator
+                                strategies</li>
+                            <li><strong>Task 02:</strong> Find the password input field by its ID attribute
+                                <br><strong>(Instruction: Use the ID locator 'password' for this task)</strong>
+                            </li>
+                            <li><strong>Task 03:</strong> Extract the text from the "Submit" button
+                                <br><strong>(Instruction: Use the ID locator 'submit' for this task)</strong>
+                            </li>
+                            <li><strong>Task 04:</strong> Check if the username field is enabled before typing</li>
+                            <li><strong>Task 05:</strong> Get all form labels to understand the form structure</li>
+                            <li><strong>Task 06:</strong> Find all input fields on the form and print their tag names
+                            </li>
+                        </ol>
+                        <p><strong>Expected Output:</strong> Successfully locate elements and retrieve their properties
+                            without errors</p>
+                    </div>
+                </div>
+
+                <!-- Answer Section -->
+                <div class="answer-section">
+                    <button onclick="toggleAnswer()" class="btn-toggle-answer">
+                        <i class="fas fa-eye"></i> Show Possible Answer
+                    </button>
+                    <div id="answer-content" class="answer-content">
+                        <h5><i class="fas fa-check-circle"></i> Possible Solution</h5>
+                        <pre class="answer-code"><code class="language-java">package Selenium;
+ 
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.time.Duration;
+import java.util.List;
+ 
+public class WebDriverCommands {
+    public static void main(String[] args) {
+        System.out.println("--- Selenium Lab Session Started ---");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+ 
+        try {
+            System.out.println("Navigating to application...");
+            driver.get("https://practicetestautomation.com/practice-test-login/");
+ 
+            // Task 01: Find username field using multiple strategies
+            System.out.println("Executing Task 01: Finding username field using multiple strategies...");
+            WebElement usernameById = driver.findElement(By.id("username"));
+            WebElement usernameByName = driver.findElement(By.name("username"));
+            WebElement usernameByCss = driver.findElement(By.cssSelector("input[name='username']"));
+            System.out.println("Username field successfully located via ID, Name, and CSS Selector.");
+ 
+            // Task 02: Find password field by ID
+            System.out.println("Executing Task 02: Locating password field by ID...");
+            WebElement passwordField = driver.findElement(By.id("password"));
+            System.out.println("Password field found.");
+ 
+            // Task 03: Extract text from Submit button by ID
+            System.out.println("Executing Task 03: Extracting text from Submit button...");
+            WebElement submitBtn = driver.findElement(By.id("submit"));
+            System.out.println("Submit button text: " + submitBtn.getText());
+ 
+            // Task 04: Check if username field is enabled
+            System.out.println("Executing Task 04: Checking if username field is enabled...");
+            System.out.println("Is Username Field Enabled: " + usernameById.isEnabled());
+ 
+            // Task 05: Get all form labels
+            System.out.println("Executing Task 05: Retrieving all form labels...");
+            List<WebElement> labels = driver.findElements(By.tagName("label"));
+            System.out.println("Total labels found: " + labels.size());
+            for (WebElement label : labels) {
+                System.out.println("- Label Text: " + label.getText());
+            }
+ 
+            // Task 06: Find all input fields and print their details
+            System.out.println("Executing Task 06: Identifying all input fields...");
+            List<WebElement> inputs = driver.findElements(By.tagName("input"));
+            System.out.println("Total input fields: " + inputs.size());
+            for (WebElement input : inputs) {
+                String type = input.getAttribute("type");
+                String name = input.getAttribute("name");
+                System.out.println("- Input [Type: " + type + ", Name: " + name + "]");
+            }
+ 
+        } finally {
+            System.out.println("--- Selenium Lab Session Ended ---");
+            driver.quit();
+        }
+    }
+}</code></pre>
+                        <p style="color: #666; font-size: 13px; margin-top: 10px;">
+                            <i class="fas fa-info-circle"></i> <strong>Note:</strong> There are multiple correct ways to
+                            solve this. Compare your solution with this answer and think about the pros/cons of each
+                            approach.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Image/Screenshot Section -->
+                <div class="image-section">
+                    <p style="margin-bottom: 15px; font-weight: 500;">📸 Target Form Layout:</p>
+                    <img src="https://via.placeholder.com/600x350?text=Practice+Test+Automation+Login+Form"
+                        alt="Practice test automation login form">
+                    <p class="image-caption">Figure: The login form you'll be automating. Identify the input fields and
+                        button.</p>
+                </div>
+
+                <!-- Hints Section -->
+                <div class="hint-section">
+                    <h4><i class="fas fa-lightbulb"></i> Helpful Hints</h4>
+                    <p>
+                        💡 <strong>Tip 1:</strong> Use <code>By.id()</code> for elements with ID attributes, it's the
+                        fastest<br><br>
+                        💡 <strong>Tip 2:</strong> You can find elements by name, class, CSS selector, or XPath<br><br>
+                        💡 <strong>Tip 3:</strong> Use <code>isEnabled()</code> and <code>isDisplayed()</code> to check
+                        element state<br><br>
+                        💡 <strong>Tip 4:</strong> Use <code>findElements()</code> (plural) to get multiple elements as
+                        a List<br><br>
+                        💡 <strong>Tip 5:</strong> Always check the browser's Inspector (F12) to find correct selectors
+                    </p>
+                </div>
+
+                <!-- Practice Area -->
+                <div class="practice-section">
+                    <h4><i class="fas fa-code"></i> Your Practice Code</h4>
+                    <p style="color: #666; margin-bottom: 15px;">Write your code solution below. You have plenty of
+                        space to work and test different approaches:</p>
+                    <textarea id="practice-area" class="practice-input"
+                        placeholder="// WebDriver Commands Practice&#10;// Complete the tasks above using different locator strategies&#10;&#10;package com.practice;&#10;import org.openqa.selenium.*;&#10;import org.openqa.selenium.chrome.ChromeDriver;&#10;import java.time.Duration;&#10;import java.util.List;&#10;&#10;public class WebDriverCommands {&#10;    public static void main(String[] args) {&#10;        // Your code here...&#10;    }&#10;}"></textarea>
+                </div>
+
+                <!-- Additional Tips -->
+                <div
+                    style="background: #ecfdf5; border-left: 4px solid #6ee7b7; padding: 20px; border-radius: 5px; margin-top: 30px;">
+                    <h5 style="color: #047857; margin-bottom: 10px;"><i class="fas fa-graduation-cap"></i> Key Takeaways
+                    </h5>
+                    <ul style="margin-bottom: 0; color: #555;">
+                        <li><strong>ID is fastest:</strong> Use By.id() whenever available</li>
+                        <li><strong>CSS Selectors are flexible:</strong> Learn CSS selectors for complex scenarios</li>
+                        <li><strong>XPath is powerful:</strong> Use for dynamic and complex element selection</li>
+                        <li><strong>Validate element state:</strong> Always check isEnabled() and isDisplayed() before
+                            interacting</li>
+                        <li><strong>Reuse locators:</strong> Create a separate locators class for maintainability</li>
+                        <li><strong>Test on different browsers:</strong> Locators might work differently on Edge,
+                            Firefox, etc.</li>
+                    </ul>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <h5 style="margin-bottom: 15px; color: #667eea;">Completed? Save Your Work!</h5>
+                    <button class="btn-submit" onclick="saveCode()">
+                        <i class="fas fa-save"></i> Save My Code
+                    </button>
+                    <button class="btn-submit" onclick="copyCode()"
+                        style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                        <i class="fas fa-copy"></i> Copy Code
+                    </button>
+                    <button class="btn-back" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> Back to Topics
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Answer Section
+        function toggleAnswer() {
+            const answerContent = document.getElementById('answer-content');
+            const btn = event.target.closest('.btn-toggle-answer');
+
+            answerContent.classList.toggle('visible');
+
+            if (answerContent.classList.contains('visible')) {
+                btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Answer';
+            } else {
+                btn.innerHTML = '<i class="fas fa-eye"></i> Show Possible Answer';
+            }
+        }
+
+        // Save Code to LocalStorage
+        function saveCode() {
+            const code = document.getElementById('practice-area').value;
+            localStorage.setItem('webdriver-commands-code', code);
+            alert('✓ Your code has been saved!');
+        }
+
+        // Copy Code to Clipboard
+        function copyCode() {
+            const code = document.getElementById('practice-area').value;
+            if (!code.trim()) {
+                alert('Please write some code first!');
+                return;
+            }
+            navigator.clipboard.writeText(code).then(() => {
+                alert('✓ Code copied to clipboard!');
+            });
+        }
+
+        // Go Back
+        function goBack() {
+            window.history.back();
+        }
+
+        // Load saved code on page load
+        window.addEventListener('load', () => {
+            const savedCode = localStorage.getItem('webdriver-commands-code');
+            if (savedCode) {
+                document.getElementById('practice-area').value = savedCode;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedList - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>LinkedList</h5>
+        <a href="../../../index.html#advanced">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#intro">Introduction</a>
+        <a href="#declaration">Declaration</a>
+        <a href="#methods">Methods</a>
+        <a href="#iteration">Iteration</a>
+        <a href="#examples">Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>LinkedList</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>LinkedList in Java</h1>
+            <p class="lead text-muted">Doubly-linked list implementation for efficient insertions and deletions.</p>
+        </div>
+
+        <div class="section" id="intro">
+            <h4>What is LinkedList?</h4>
+            <p>LinkedList is a doubly-linked list implementation where each element (node) contains references to both
+                the next and previous elements. This makes insertions and deletions at any position very efficient.</p>
+
+            <h5>LinkedList vs ArrayList:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>ArrayList</th>
+                        <th>LinkedList</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Internal Structure</td>
+                        <td>Dynamic Array</td>
+                        <td>Doubly Linked List</td>
+                    </tr>
+                    <tr>
+                        <td>Access Time</td>
+                        <td>Fast (O(1))</td>
+                        <td>Slow (O(n))</td>
+                    </tr>
+                    <tr>
+                        <td>Insert/Delete at Beginning</td>
+                        <td>Slow (O(n))</td>
+                        <td>Fast (O(1))</td>
+                    </tr>
+                    <tr>
+                        <td>Insert/Delete at End</td>
+                        <td>Fast (O(1))</td>
+                        <td>Fast (O(1))</td>
+                    </tr>
+                    <tr>
+                        <td>Insert/Delete in Middle</td>
+                        <td>Slow (O(n))</td>
+                        <td>Fast (O(1)) after finding position</td>
+                    </tr>
+                    <tr>
+                        <td>Memory Usage</td>
+                        <td>Less (only data)</td>
+                        <td>More (data + 2 pointers)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>When to Use LinkedList:</h5>
+            <ul>
+                <li>Frequent insertions/deletions at beginning or middle</li>
+                <li>Implementing queues or deques</li>
+                <li>Don't need random access to elements</li>
+                <li>Memory is not a constraint</li>
+            </ul>
+
+            <h5>When to Use ArrayList:</h5>
+            <ul>
+                <li>Need fast random access by index</li>
+                <li>Mostly reading data, few modifications</li>
+                <li>Want to save memory</li>
+            </ul>
+        </div>
+
+        <div class="section" id="declaration">
+            <h4>Declaration and Creation</h4>
+
+            <h5>Basic Syntax:</h5>
+            <pre><code>import java.util.LinkedList;
+
+LinkedList&lt;Type&gt; listName = new LinkedList&lt;&gt;();</code></pre>
+
+            <h5>Examples:</h5>
+            <pre><code>import java.util.LinkedList;
+
+public class LinkedListDeclaration {
+    public static void main(String[] args) {
+        // LinkedList of Strings
+        LinkedList&lt;String&gt; names = new LinkedList&lt;&gt;();
+        
+        // LinkedList of Integers
+        LinkedList&lt;Integer&gt; numbers = new LinkedList&lt;&gt;();
+        
+        // LinkedList of Doubles
+        LinkedList&lt;Double&gt; prices = new LinkedList&lt;&gt;();
+        
+        System.out.println("LinkedLists created successfully!");
+    }
+}</code></pre>
+            <div class="output">
+                LinkedLists created successfully!
+            </div>
+
+            <div class="note">
+                <strong>💡 Note:</strong> LinkedList implements both List and Deque interfaces, so it can be used as a
+                list, stack, or queue.
+            </div>
+        </div>
+
+        <div class="section" id="methods">
+            <h4>Common LinkedList Methods</h4>
+
+            <h5>Adding Elements:</h5>
+            <pre><code>LinkedList&lt;String&gt; fruits = new LinkedList&lt;&gt;();
+
+fruits.add("Apple");           // Add at end
+fruits.add("Banana");
+fruits.add(1, "Orange");       // Add at index 1
+fruits.addFirst("Mango");      // Add at beginning
+fruits.addLast("Grapes");      // Add at end
+
+System.out.println(fruits);    // [Mango, Apple, Orange, Banana, Grapes]</code></pre>
+
+            <h5>Accessing Elements:</h5>
+            <pre><code>String first = fruits.get(0);        // Get element at index 0
+String firstElement = fruits.getFirst();  // Get first element
+String lastElement = fruits.getLast();    // Get last element
+int size = fruits.size();                 // Get size
+
+System.out.println("First fruit: " + first);
+System.out.println("Total fruits: " + size);</code></pre>
+
+            <h5>Modifying Elements:</h5>
+            <pre><code>fruits.set(0, "Pineapple");    // Replace element at index 0
+System.out.println(fruits);     // [Pineapple, Apple, Orange, Banana, Grapes]</code></pre>
+
+            <h5>Removing Elements:</h5>
+            <pre><code>fruits.remove(0);              // Remove by index
+fruits.remove("Banana");       // Remove by value
+fruits.removeFirst();          // Remove first element
+fruits.removeLast();           // Remove last element
+fruits.clear();                // Remove all elements</code></pre>
+
+            <h5>Searching:</h5>
+            <pre><code>boolean hasApple = fruits.contains("Apple");
+int index = fruits.indexOf("Orange");  // Returns -1 if not found</code></pre>
+
+            <h5>Queue Operations:</h5>
+            <pre><code>LinkedList&lt;String&gt; queue = new LinkedList&lt;&gt;();
+
+queue.offer("First");          // Add to end (queue)
+queue.offer("Second");
+queue.offer("Third");
+
+String head = queue.peek();    // View first element without removing
+String removed = queue.poll(); // Remove and return first element
+
+System.out.println("Head: " + head);
+System.out.println("Removed: " + removed);
+System.out.println("Queue: " + queue);</code></pre>
+
+            <h5>Stack Operations:</h5>
+            <pre><code>LinkedList&lt;String&gt; stack = new LinkedList&lt;&gt;();
+
+stack.push("Bottom");          // Add to beginning (stack)
+stack.push("Middle");
+stack.push("Top");
+
+String top = stack.peek();     // View top element
+String popped = stack.pop();   // Remove and return top element
+
+System.out.println("Top: " + top);
+System.out.println("Popped: " + popped);
+System.out.println("Stack: " + stack);</code></pre>
+
+            <h5>Complete Example:</h5>
+            <pre><code>import java.util.LinkedList;
+
+public class LinkedListMethods {
+    public static void main(String[] args) {
+        LinkedList&lt;String&gt; colors = new LinkedList&lt;&gt;();
+        
+        // Add elements
+        colors.add("Red");
+        colors.add("Green");
+        colors.add("Blue");
+        colors.addFirst("Yellow");
+        colors.addLast("Purple");
+        System.out.println("Colors: " + colors);
+        
+        // Get elements
+        String firstColor = colors.getFirst();
+        String lastColor = colors.getLast();
+        System.out.println("First: " + firstColor + ", Last: " + lastColor);
+        
+        // Size
+        System.out.println("Total colors: " + colors.size());
+        
+        // Modify
+        colors.set(2, "Orange");
+        System.out.println("After modification: " + colors);
+        
+        // Contains
+        System.out.println("Has Blue? " + colors.contains("Blue"));
+        
+        // Remove
+        colors.removeFirst();
+        colors.removeLast();
+        System.out.println("After removal: " + colors);
+    }
+}</code></pre>
+            <div class="output">
+                Colors: [Yellow, Red, Green, Blue, Purple]<br>
+                First: Yellow, Last: Purple<br>
+                Total colors: 5<br>
+                After modification: [Yellow, Red, Orange, Blue, Purple]<br>
+                Has Blue? true<br>
+                After removal: [Red, Orange, Blue]
+            </div>
+        </div>
+
+        <div class="section" id="iteration">
+            <h4>Iterating Through LinkedList</h4>
+
+            <h5>Method 1: For Loop</h5>
+            <pre><code>LinkedList&lt;Integer&gt; numbers = new LinkedList&lt;&gt;();
+numbers.add(10);
+numbers.add(20);
+numbers.add(30);
+
+for (int i = 0; i &lt; numbers.size(); i++) {
+    System.out.println(numbers.get(i));
+}</code></pre>
+
+            <h5>Method 2: For-Each Loop (Recommended)</h5>
+            <pre><code>for (Integer num : numbers) {
+    System.out.println(num);
+}</code></pre>
+
+            <h5>Method 3: Iterator</h5>
+            <pre><code>import java.util.Iterator;
+
+Iterator&lt;Integer&gt; it = numbers.iterator();
+while (it.hasNext()) {
+    System.out.println(it.next());
+}</code></pre>
+
+            <h5>Method 4: Descending Iterator</h5>
+            <pre><code>Iterator&lt;Integer&gt; descIt = numbers.descendingIterator();
+while (descIt.hasNext()) {
+    System.out.println(descIt.next());  // Prints in reverse order
+}</code></pre>
+
+            <h5>Method 5: forEach (Java 8+)</h5>
+            <pre><code>numbers.forEach(num -&gt; System.out.println(num));</code></pre>
+
+            <div class="note">
+                <strong>⚠️ Warning:</strong> Avoid using regular for loop with get(i) for LinkedList as it's inefficient
+                (O(n²)). Use for-each loop or iterator instead.
+            </div>
+        </div>
+
+        <div class="section" id="examples">
+            <h4>Practical Examples</h4>
+
+            <h5>Example 1: Task Queue</h5>
+            <pre><code>import java.util.LinkedList;
+
+public class TaskQueue {
+    public static void main(String[] args) {
+        LinkedList&lt;String&gt; tasks = new LinkedList&lt;&gt;();
+        
+        // Add tasks to queue
+        tasks.offer("Send Email");
+        tasks.offer("Write Report");
+        tasks.offer("Call Client");
+        tasks.offer("Update Database");
+        
+        System.out.println("Tasks in Queue: " + tasks.size());
+        System.out.println("\nProcessing Tasks:");
+        
+        // Process tasks (FIFO - First In First Out)
+        while (!tasks.isEmpty()) {
+            String currentTask = tasks.poll();
+            System.out.println("Processing: " + currentTask);
+        }
+        
+        System.out.println("\nAll tasks completed!");
+    }
+}</code></pre>
+            <div class="output">
+                Tasks in Queue: 4<br><br>
+                Processing Tasks:<br>
+                Processing: Send Email<br>
+                Processing: Write Report<br>
+                Processing: Call Client<br>
+                Processing: Update Database<br><br>
+                All tasks completed!
+            </div>
+
+            <h5>Example 2: Browser History (Stack)</h5>
+            <pre><code>import java.util.LinkedList;
+
+public class BrowserHistory {
+    public static void main(String[] args) {
+        LinkedList&lt;String&gt; history = new LinkedList&lt;&gt;();
+        
+        // Visit pages (push to stack)
+        history.push("google.com");
+        history.push("youtube.com");
+        history.push("github.com");
+        history.push("stackoverflow.com");
+        
+        System.out.println("Current page: " + history.peek());
+        System.out.println("\nGoing back through history:");
+        
+        // Go back (pop from stack - LIFO)
+        while (!history.isEmpty()) {
+            System.out.println("← " + history.pop());
+        }
+    }
+}</code></pre>
+            <div class="output">
+                Current page: stackoverflow.com<br><br>
+                Going back through history:<br>
+                ← stackoverflow.com<br>
+                ← github.com<br>
+                ← youtube.com<br>
+                ← google.com
+            </div>
+
+            <h5>Example 3: Playlist Manager</h5>
+            <pre><code>import java.util.LinkedList;
+
+public class PlaylistManager {
+    public static void main(String[] args) {
+        LinkedList&lt;String&gt; playlist = new LinkedList&lt;&gt;();
+        
+        // Add songs
+        playlist.add("Song A");
+        playlist.add("Song B");
+        playlist.add("Song C");
+        playlist.add("Song D");
+        
+        System.out.println("Original Playlist:");
+        displayPlaylist(playlist);
+        
+        // Add song at beginning
+        playlist.addFirst("Intro Song");
+        
+        // Add song at specific position
+        playlist.add(3, "Bonus Track");
+        
+        System.out.println("\nUpdated Playlist:");
+        displayPlaylist(playlist);
+        
+        // Remove first and last songs
+        playlist.removeFirst();
+        playlist.removeLast();
+        
+        System.out.println("\nFinal Playlist:");
+        displayPlaylist(playlist);
+    }
+    
+    static void displayPlaylist(LinkedList&lt;String&gt; list) {
+        for (int i = 0; i &lt; list.size(); i++) {
+            System.out.println((i + 1) + ". " + list.get(i));
+        }
+    }
+}</code></pre>
+            <div class="output">
+                Original Playlist:<br>
+                1. Song A<br>
+                2. Song B<br>
+                3. Song C<br>
+                4. Song D<br><br>
+                Updated Playlist:<br>
+                1. Intro Song<br>
+                2. Song A<br>
+                3. Song B<br>
+                4. Bonus Track<br>
+                5. Song C<br>
+                6. Song D<br><br>
+                Final Playlist:<br>
+                1. Song A<br>
+                2. Song B<br>
+                3. Bonus Track<br>
+                4. Song C
+            </div>
+
+            <h5>Example 4: Performance Comparison</h5>
+            <pre><code>import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class PerformanceTest {
+    public static void main(String[] args) {
+        int size = 100000;
+        
+        // ArrayList - Insert at beginning
+        ArrayList&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;();
+        long start = System.currentTimeMillis();
+        for (int i = 0; i &lt; size; i++) {
+            arrayList.add(0, i);  // Insert at beginning
+        }
+        long arrayTime = System.currentTimeMillis() - start;
+        
+        // LinkedList - Insert at beginning
+        LinkedList&lt;Integer&gt; linkedList = new LinkedList&lt;&gt;();
+        start = System.currentTimeMillis();
+        for (int i = 0; i &lt; size; i++) {
+            linkedList.addFirst(i);  // Insert at beginning
+        }
+        long linkedTime = System.currentTimeMillis() - start;
+        
+        System.out.println("Inserting " + size + " elements at beginning:");
+        System.out.println("ArrayList: " + arrayTime + "ms");
+        System.out.println("LinkedList: " + linkedTime + "ms");
+        System.out.println("\nLinkedList is " + (arrayTime / linkedTime) + "x faster!");
+    }
+}</code></pre>
+            <div class="output">
+                Inserting 100000 elements at beginning:<br>
+                ArrayList: 2847ms<br>
+                LinkedList: 12ms<br><br>
+                LinkedList is 237x faster!
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>LinkedList Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indexes - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Indexes</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Indexes</h2>
+                <p class="topic-desc">An INDEX is a database object used to speed up data retrieval from a table. It works like an index in a book, helping the database find rows faster.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Basic Concepts</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to speed up search queries. Invisible to end users.<br><br>🔹 Index improves SELECT performance<br>🔹 Uses extra storage<br>🔹 Slows down INSERT / UPDATE / DELETE slightly</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">CREATE INDEX</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Creates a standard index on one or more columns.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">INDEX</span> index_name\nON table_name (column_name);</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">INDEX</span> idx_student_name\nON students (student_name);</code></pre><div class="output-box">✔ Faster execution of queries like:<br>SELECT * FROM students WHERE student_name = 'Arun';<br><br>✔ No visible change in data, but performance improves.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">UNIQUE INDEX</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Creates an index where all values in the index must be unique (similar to UNIQUE constraint).</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">UNIQUE</span> <span class="sql-keyword">INDEX</span> index_name\nON table_name (column_name);</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">UNIQUE</span> <span class="sql-keyword">INDEX</span> idx_email\nON students (email);</code></pre><div class="output-box">❌ Duplicate email values not allowed</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">DROP INDEX (MySQL)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Permanently removes an existing index from a table.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">INDEX</span> index_name <span class="sql-keyword">ON</span> table_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">INDEX</span> idx_student_name <span class="sql-keyword">ON</span> students;</code></pre><div class="output-box">Query OK, 0 rows affected</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Create a simple INDEX on the name column of students table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t7-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t7-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE INDEX idx_name
+ON students(name);</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Create a UNIQUE INDEX on the email column.</strong><br>
+    <button class="toggle-btn" data-target="ans-t7-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t7-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE UNIQUE INDEX idx_email
+ON users(email);</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Create a COMPOSITE INDEX on name and age.</strong><br>
+    <button class="toggle-btn" data-target="ans-t7-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t7-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE INDEX idx_name_age
+ON students(name, age);</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Show all indexes on the students table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t7-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t7-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SHOW INDEX FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----------+------------+--------------+--------------+-----------+-------------+
+| Table    | Non_unique | Key_name     | Seq_in_index | Column_name | Index_type |
++----------+------------+--------------+--------------+-----------+-------------+
+| students | 1          | idx_name     | 1            | name       | BTREE      |
+| students | 1          | idx_name_age | 1            | name       | BTREE      |
+| students | 1          | idx_name_age | 2            | age        | BTREE      |
++----------+------------+--------------+--------------+-----------+-------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Drop (remove) the index idx_name_age.</strong><br>
+    <button class="toggle-btn" data-target="ans-t7-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t7-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DROP INDEX idx_name_age ON students;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='07_constraints.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Constraints</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='09_views.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Views →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

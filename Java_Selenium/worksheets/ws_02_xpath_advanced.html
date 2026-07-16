@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksheet: XPath Advanced</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff6b9d;
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-light: #e0e0e0;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            height: calc(100vh - 50px);
+        }
+
+        .pane-questions {
+            width: 40%;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pane-header {
+            padding: 15px;
+            background: #252525;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .questions-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .question-card {
+            background: #2d2d2d;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .q-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .q-text {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .q-hint {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            font-style: italic;
+            padding: 8px;
+            background: #1a1a1a;
+            border-radius: 3px;
+            border-left: 2px solid #666;
+        }
+
+        .pane-practice {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f0f0;
+        }
+
+        .browser-bar {
+            background: #e0e0e0;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .url-box {
+            background: #fff;
+            padding: 5px 12px;
+            border-radius: 12px;
+            flex: 1;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #555;
+            border: 1px solid #ccc;
+        }
+
+        .app-view {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            color: #333;
+        }
+
+        .mock-app {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+        }
+
+        .solutions-panel {
+            background: #1a1a1a;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sol-header {
+            padding: 10px 20px;
+            background: #252525;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .sol-header:hover {
+            color: #fff;
+            background: #333;
+        }
+
+        .sol-content {
+            padding: 15px;
+            display: none;
+            font-family: 'Consolas', monospace;
+            font-size: 0.80rem;
+            color: #dcdcaa;
+            background: #111;
+            max-height: 500px;
+            overflow-y: auto;
+            line-height: 1.4;
+        }
+
+        .sol-content.visible {
+            display: block;
+        }
+
+        /* Syntax Highlighting */
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-variable {
+            color: #9cdcfe;
+        }
+
+        .code-method {
+            color: #dcdcaa;
+        }
+
+        .code-class {
+            color: #4ec9b0;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .card-section {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .card-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .element-label {
+            display: inline-block;
+            background: #e8f4f8;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            margin: 2px 0;
+            border-left: 3px solid #ff6b9d;
+        }
+
+        .product-item {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .product-item h4 {
+            margin: 0 0 8px 0;
+            color: #333;
+        }
+
+        .product-item p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .price-tag {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .rating {
+            color: #ff9800;
+            font-size: 0.9rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            margin-right: 5px;
+        }
+
+        .modal {
+            background: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .modal-overlay {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><i class="fas fa-flask"></i> Practice: XPath Advanced</h1><a href="../index.html" style="color:#888; text-decoration:none;"><i class="fas fa-home"></i> Home</a>
+    </header>
+    <div class="workspace">
+        <div class="pane-questions">
+            <div class="pane-header"><i class="fas fa-tasks"></i> Assignments (6 Advanced Tasks)</div>
+            <div class="questions-list">
+                <div class="question-card">
+                    <div class="q-title">Task 01: Parent Navigation</div>
+                    <div class="q-text">From the element with <code>class="price-tag"</code>, find its parent div using
+                        <code>parent::</code> or <code>parent::*</code>.
+                    </div>
+                    <div class="q-hint">💡 Navigate UP the DOM tree</div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 02: Sibling Traversal</div>
+                    <div class="q-text">Find all links that are <strong>siblings</strong> to the element with text
+                        "Home".</div>
+                    <div class="q-hint">💡 Use <code>following-sibling::</code> or <code>preceding-sibling::</code>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 03: Complex Conditions</div>
+                    <div class="q-text">Locate a product with price greater than <strong>$50</strong> that is <strong>In
+                            Stock</strong>.</div>
+                    <div class="q-hint">💡 Use <code>and</code> operator with multiple conditions</div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 04: Descendant Selection</div>
+                    <div class="q-text">From a product card, find the "Add to Cart" button that is a
+                        <strong>descendant</strong> of that card. <br><strong>(Instruction: Use the ID locator
+                            'product_1' in your XPath)</strong>
+                    </div>
+                    <div class="q-hint">💡 Use <code>//div[@class='product-item']//button</code></div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 05: Logical OR Operator</div>
+                    <div class="q-text">Find elements that are EITHER buttons OR links (using <code>|</code> operator).
+                    </div>
+                    <div class="q-hint">💡 Use <code>//button | //a</code> for multiple XPath expressions</div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 06: Case-Insensitive Match</div>
+                    <div class="q-text">Find element by text <strong>ignoring case</strong> (e.g., "Submit", "SUBMIT",
+                        "submit").</div>
+                    <div class="q-hint">💡 Use <code>translate()</code> function for case conversion</div>
+                </div>
+            </div>
+            <div class="solutions-panel">
+                <div class="sol-header" onclick="toggleSolutions()">
+                    <span><i class="fas fa-code"></i> Solutions</span>
+                    <i class="fas fa-chevron-up" id="sol-icon"></i>
+                </div>
+                <div class="sol-content" id="sol-body">
+                    <pre style="margin:0;"><code><span class="code-keyword">package</span> <span class="code-class">Selenium</span>;
+ 
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.By</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebDriver</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebElement</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.chrome.ChromeDriver</span>;
+<span class="code-keyword">import</span> <span class="code-class">java.util.List</span>;
+ 
+<span class="code-keyword">public class</span> <span class="code-class">_09_XPathAdvanced</span> <span class="code-punctuation">{</span>
+    <span class="code-keyword">public static void</span> <span class="code-method">main</span><span class="code-punctuation">(</span><span class="code-class">String</span><span class="code-punctuation">[]</span> args<span class="code-punctuation">)</span> <span class="code-punctuation">{</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Started ---"</span><span class="code-punctuation">);</span>
+        <span class="code-class">WebDriver</span> <span class="code-variable">driver</span> <span class="code-punctuation">=</span> <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Navigating to XPath Advanced worksheet..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">get</span><span class="code-punctuation">(</span><span class="code-string">"http://127.0.0.1:5501/Java_Selinium/worksheets/ws_02_xpath_advanced.html"</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-comment">// Task 01: Parent Navigation</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 01: Finding parent of 'price-tag' element..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//p[@class='price-tag']/parent::div"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 02: Sibling Traversal</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 02: Finding sibling a-tags after 'Home' link..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElements</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//a[text()='Home']/following-sibling::a"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 03: Complex Conditions</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 03: Finding 'In Stock' products with price > $50..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElements</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//div[contains(., 'In Stock')]//p[number(substring-after(text(), '$')) > 50]"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 04: Descendant Selection</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 04: Finding button as descendant of product_1..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//div[@id='product_1']//descendant::button"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 05: OR Operator</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 05: Collecting both buttons and links via OR..."</span><span class="code-punctuation">);</span>
+        <span class="code-class">List</span>&lt;<span class="code-class">WebElement</span>&gt; <span class="code-variable">elements</span> <span class="code-punctuation">=</span> <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElements</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//button | //a"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 06: Case-Insensitive Match</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 06: Finding 'Submit' button ignoring case..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//button[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'submit']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Ended ---"</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">quit</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+    <span class="code-punctuation">}</span>
+<span class="code-punctuation">}</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="pane-practice">
+            <div class="browser-bar"><i class="fas fa-globe" style="color:#666"></i>
+                <div class="url-box">https://ecommerce-demo.com/products</div>
+            </div>
+            <div class="app-view">
+                <div class="mock-app">
+                    <h2>Product Catalog</h2>
+
+                    <!-- Navigation -->
+                    <div class="card-section">
+                        <nav>
+                            <a href="#">Home</a> |
+                            <a href="#">Products</a> |
+                            <a href="#">Cart</a> |
+                            <a href="#">Checkout</a>
+                        </nav>
+                        <div class="element-label">siblings example</div>
+                    </div>
+
+                    <!-- Product 1 -->
+                    <div class="product-item" id="product_1">
+                        <h4>Wireless Headphones</h4>
+                        <p>High-quality sound with noise cancellation</p>
+                        <p class="price-tag">$89.99</p>
+                        <p class="rating">⭐⭐⭐⭐⭐ (342 reviews)</p>
+                        <span class="badge">In Stock</span>
+                        <button onclick="alert('Added to cart!')">Add to Cart</button>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-item" id="product_2">
+                        <h4>USB-C Cable</h4>
+                        <p>Fast charging, 2-meter length</p>
+                        <p class="price-tag">$12.99</p>
+                        <p class="rating">⭐⭐⭐⭐ (156 reviews)</p>
+                        <span class="badge">In Stock</span>
+                        <button onclick="alert('Added to cart!')">Add to Cart</button>
+                    </div>
+
+                    <!-- Product 3 (Out of stock) -->
+                    <div class="product-item" id="product_3">
+                        <h4>Gaming Mouse</h4>
+                        <p>RGB lighting, 16,000 DPI sensor</p>
+                        <p class="price-tag">$69.99</p>
+                        <p class="rating">⭐⭐⭐⭐⭐ (523 reviews)</p>
+                        <span class="badge" style="background:#f44336;">Out of Stock</span>
+                        <button disabled style="opacity:0.5;">Add to Cart</button>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="product-item" id="product_4">
+                        <h4>Mechanical Keyboard</h4>
+                        <p>Cherry MX switches, RGB backlighting</p>
+                        <p class="price-tag">$129.99</p>
+                        <p class="rating">⭐⭐⭐⭐⭐ (401 reviews)</p>
+                        <span class="badge">In Stock</span>
+                        <button onclick="alert('Added to cart!')">Add to Cart</button>
+                    </div>
+
+                    <!-- Modal/Dialog -->
+                    <div class="modal">
+                        <h3>Special Offer</h3>
+                        <p>Get 20% off on all products this weekend!</p>
+                        <button onclick="alert('Offer applied!')">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleSolutions() {
+            const solBody = document.getElementById('sol-body');
+            const solIcon = document.getElementById('sol-icon');
+            solBody.classList.toggle('visible');
+            solIcon.className = solBody.classList.contains('visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+        }
+    </script>
+</body>
+
+</html>

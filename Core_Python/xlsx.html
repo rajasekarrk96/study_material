@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python XLSX - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#write">Write Excel</a></li>
+                        <li><a href="#read">Read Excel</a></li>
+                        <li><a href="#append">Append Data</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python XLSX (Excel)</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>Python does not have built-in support for Excel files, but we can use the <code>openpyxl</code>
+                        library to read and write Excel 2010 xlsx/xlsm/xltx/xltm files.</p>
+
+                    <h3>Installation</h3>
+                    <p>To use it, you must install it using pip:</p>
+                    <pre class="code-block">
+pip install openpyxl
+</pre>
+
+                    <h2 id="write">Create & Write to Excel</h2>
+                    <p>You can create a workbook, access the active sheet, and assign values to cells.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+wb = Workbook()
+sheet = wb.active
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+from openpyxl import Workbook
+
+# Create a workbook and select active sheet
+wb = Workbook()
+sheet = wb.active
+
+# Assign values
+sheet['A1'] = "Name"
+sheet['B1'] = "Age"
+
+sheet['A2'] = "Alice"
+sheet['B2'] = 25
+
+# Save the file
+wb.save("sample.xlsx")
+print("File saved successfully.")
+</pre>
+
+                    <h2 id="read">Read from Excel</h2>
+                    <p>You can load an existing workbook and read values from cells.</p>
+                    <pre class="code-block">
+from openpyxl import load_workbook
+
+# Load the workbook
+wb = load_workbook("sample.xlsx")
+sheet = wb.active
+
+# Read specific cell
+print(sheet['A2'].value) # Output: Alice
+
+# Iterate through rows
+print("\nAll Data:")
+for row in sheet.iter_rows(values_only=True):
+    print(row)
+</pre>
+
+                    <h2 id="append">Append Data</h2>
+                    <p>You can easily append rows to the end of the sheet.</p>
+                    <pre class="code-block">
+from openpyxl import load_workbook
+
+wb = load_workbook("sample.xlsx")
+sheet = wb.active
+
+# Data to append
+new_data = [
+    ("Bob", 30),
+    ("Charlie", 35)
+]
+
+for row in new_data:
+    sheet.append(row)
+
+wb.save("sample.xlsx")
+print("Data appended.")
+</pre>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a program to create a new Excel file named 'students.xlsx'.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from openpyxl import Workbook
+wb = Workbook()
+wb.save('students.xlsx')
+print("Created")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a program to write 'Hello' to cell A1 of 'students.xlsx'.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from openpyxl import load_workbook
+wb = load_workbook('students.xlsx')
+ws = wb.active
+ws['A1'] = 'Hello'
+wb.save('students.xlsx')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a program to read the value from cell A1.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from openpyxl import load_workbook
+wb = load_workbook('students.xlsx')
+ws = wb.active
+print(ws['A1'].value)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a program to append a list of values [1, 2, 3] as a row.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from openpyxl import load_workbook
+wb = load_workbook('students.xlsx')
+ws = wb.active
+ws.append([1, 2, 3])
+wb.save('students.xlsx')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a program to create a header row: Name, City, Age.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from openpyxl import Workbook
+wb = Workbook()
+ws = wb.active
+ws.append(["Name", "City", "Age"])
+wb.save('data.xlsx')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a program to read all values in the first column.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from openpyxl import load_workbook
+wb = load_workbook('data.xlsx')
+ws = wb.active
+for row in ws.iter_rows(min_col=1, max_col=1, values_only=True):
+    print(row[0])</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a program to change the sheet title to 'MyData'.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from openpyxl import load_workbook
+wb = load_workbook('data.xlsx')
+ws = wb.active
+ws.title = "MyData"
+wb.save('data.xlsx')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a program to create a new sheet named 'Sheet2'.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from openpyxl import load_workbook
+wb = load_workbook('data.xlsx')
+wb.create_sheet("Sheet2")
+wb.save('data.xlsx')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a program to access specific cell using text coordinates (e.g. cell(row=1,
+                            column=2)).</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from openpyxl import load_workbook
+wb = load_workbook('data.xlsx')
+ws = wb.active
+# Row 1, Col 2 is B1
+print(ws.cell(row=1, column=2).value)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a program to iterate over all rows using values_only=True.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from openpyxl import load_workbook
+wb = load_workbook('data.xlsx')
+ws = wb.active
+for row in ws.values:
+    print(row)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

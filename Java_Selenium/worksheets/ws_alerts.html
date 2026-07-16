@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksheet: Alerts</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00e676;
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-light: #e0e0e0;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            height: 50px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .workspace {
+            display: flex;
+            flex: 1;
+        }
+
+        /* LEFT PANEL */
+        .pane-questions {
+            width: 40%;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pane-header {
+            padding: 15px;
+            background: #252525;
+            font-weight: 600;
+        }
+
+        .questions-list {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .question-card {
+            background: #2d2d2d;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .q-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .q-text {
+            color: #ddd;
+            font-size: 0.95rem;
+        }
+
+        /* SOLUTION PANEL */
+        .solution-panel {
+            border-top: 1px solid var(--border-color);
+            background: #1a1a1a;
+        }
+
+        .solution-header {
+            padding: 12px 15px;
+            cursor: pointer;
+            background: #252525;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #aaa;
+        }
+
+        .solution-header:hover {
+            background: #333;
+            color: #fff;
+        }
+
+        .solution-body {
+            display: none;
+            background: #111;
+            padding: 10px;
+            max-height: 350px;
+            overflow-y: auto;
+            font-family: Consolas, monospace;
+            font-size: 0.85rem;
+        }
+
+        .solution-body.visible {
+            display: block;
+        }
+
+        /* RIGHT PANEL */
+        .pane-practice {
+            width: 60%;
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 30px;
+            position: relative;
+        }
+
+        .btn-simple {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background: white;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .mock-alert-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 60px;
+            z-index: 100;
+        }
+
+        .mock-alert-box {
+            background: white;
+            width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .mock-alert-msg {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .mock-alert-actions {
+            border-top: 1px solid #ddd;
+            display: flex;
+        }
+
+        .mock-alert-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1><i class="fas fa-exclamation-triangle"></i> Practice: JavaScript Alerts</h1>
+    </header>
+
+    <div class="workspace">
+
+        <!-- LEFT -->
+        <div class="pane-questions">
+
+            <div class="pane-header">Assignments</div>
+
+            <div class="questions-list">
+                <div class="question-card">
+                    <div class="q-title">Task 01</div>
+                    <div class="q-text">Accept Alert</div>
+                </div>
+                <div class="question-card">
+                    <div class="q-title">Task 02</div>
+                    <div class="q-text">Dismiss Confirm</div>
+                </div>
+                <div class="question-card">
+                    <div class="q-title">Task 03</div>
+                    <div class="q-text">Send Keys in Prompt</div>
+                </div>
+            </div>
+
+            <!-- ✅ SOLUTION AT BOTTOM LEFT -->
+            <div class="solution-panel">
+                <div class="solution-header" onclick="toggleSolution()">
+                    <span><i class="fas fa-code"></i> Solution</span>
+                    <i class="fas fa-chevron-up" id="solIcon"></i>
+                </div>
+
+                <div class="solution-body" id="solutionBody">
+                    <!-- 🔥 YOUR CODE (UNCHANGED) 🔥 -->
+                    <!-- PASTE YOUR <pre><code> BLOCK HERE -->
+                    <pre style="margin:0;">
+<code>
+<span class="code-keyword">package</span> Selenium<span class="code-punctuation">;</span>
+
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.By</span><span class="code-punctuation">;</span>
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebDriver</span><span class="code-punctuation">;</span>
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.chrome.ChromeDriver</span><span class="code-punctuation">;</span>
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.support.ui.ExpectedConditions</span><span class="code-punctuation">;</span>
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.support.ui.WebDriverWait</span><span class="code-punctuation">;</span>
+<span class="code-keyword">import</span> <span class="code-class">java.time.Duration</span><span class="code-punctuation">;</span>
+
+<span class="code-keyword">public class</span> <span class="code-class">_16_AlertsandPopups</span> <span class="code-punctuation">{</span>
+    <span class="code-keyword">public static void</span> <span class="code-method">main</span><span class="code-punctuation">(</span><span class="code-class">String</span><span class="code-punctuation">[]</span> args<span class="code-punctuation">)</span> <span class="code-punctuation">{</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Started ---"</span><span class="code-punctuation">);</span>
+        <span class="code-class">WebDriver</span> <span class="code-variable">driver</span> <span class="code-punctuation">=</span> <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+        <span class="code-class">WebDriverWait</span> <span class="code-variable">wait</span> <span class="code-punctuation">=</span> <span class="code-keyword">new</span> <span class="code-class">WebDriverWait</span><span class="code-punctuation">(</span><span class="code-variable">driver</span><span class="code-punctuation">,</span> <span class="code-class">Duration</span><span class="code-punctuation">.</span><span class="code-method">ofSeconds</span><span class="code-punctuation">(</span><span class="code-number">10</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Navigating to Alerts worksheet..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">get</span><span class="code-punctuation">(</span><span class="code-string">"http://127.0.0.1:5501/Java_Selinium/worksheets/ws_alerts.html"</span><span class="code-punctuation">);</span>
+
+        <span class="code-comment">// TASK 01: Alert</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 01: Handling Alert..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//button[text()='Alert Me']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">click</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+        <span class="code-variable">wait</span><span class="code-punctuation">.</span><span class="code-method">until</span><span class="code-punctuation">(</span><span class="code-class">ExpectedConditions</span><span class="code-punctuation">.</span><span class="code-method">visibilityOfElementLocated</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">id</span><span class="code-punctuation">(</span><span class="code-string">"mockAlert"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//div[@id='mockAlert']//button[text()='OK']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">click</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Alert accepted."</span><span class="code-punctuation">);</span>
+
+        <span class="code-comment">// TASK 02: Confirm</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 02: Handling Confirm..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//button[text()='Confirm Me']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">click</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+        <span class="code-variable">wait</span><span class="code-punctuation">.</span><span class="code-method">until</span><span class="code-punctuation">(</span><span class="code-class">ExpectedConditions</span><span class="code-punctuation">.</span><span class="code-method">visibilityOfElementLocated</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">id</span><span class="code-punctuation">(</span><span class="code-string">"mockConfirm"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//div[@id='mockConfirm']//button[text()='Cancel']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">click</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Confirm dismissed."</span><span class="code-punctuation">);</span>
+
+        <span class="code-comment">// TASK 03: Prompt</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 03: Handling Prompt..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//button[text()='Prompt Me']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">click</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+        <span class="code-variable">wait</span><span class="code-punctuation">.</span><span class="code-method">until</span><span class="code-punctuation">(</span><span class="code-class">ExpectedConditions</span><span class="code-punctuation">.</span><span class="code-method">visibilityOfElementLocated</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">id</span><span class="code-punctuation">(</span><span class="code-string">"mockPrompt"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">id</span><span class="code-punctuation">(</span><span class="code-string">"promptInput"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">sendKeys</span><span class="code-punctuation">(</span><span class="code-string">"Admin"</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//div[@id='mockPrompt']//button[text()='OK']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">click</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Prompt handled with input: Admin"</span><span class="code-punctuation">);</span>
+
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Ended ---"</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">quit</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+    <span class="code-punctuation">}</span>
+<span class="code-punctuation">}</span>
+</code>
+</pre>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT -->
+        <div class="pane-practice">
+
+            <button class="btn-simple" onclick="show('mockAlert')">Alert Me</button>
+            <button class="btn-simple" onclick="show('mockConfirm')">Confirm Me</button>
+            <button class="btn-simple" onclick="showPrompt()">Prompt Me</button>
+
+            <div class="mock-alert-overlay" id="mockAlert">
+                <div class="mock-alert-box">
+                    <div class="mock-alert-msg">This is an alert</div>
+                    <div class="mock-alert-actions">
+                        <button class="mock-alert-btn" onclick="hide('mockAlert')">OK</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mock-alert-overlay" id="mockConfirm">
+                <div class="mock-alert-box">
+                    <div class="mock-alert-msg">Are you sure?</div>
+                    <div class="mock-alert-actions">
+                        <button class="mock-alert-btn" onclick="hide('mockConfirm')">OK</button>
+                        <button class="mock-alert-btn" onclick="hide('mockConfirm')">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mock-alert-overlay" id="mockPrompt">
+                <div class="mock-alert-box">
+                    <div class="mock-alert-msg">
+                        <input id="promptInput" placeholder="Enter name" style="width:90%">
+                    </div>
+                    <div class="mock-alert-actions">
+                        <button class="mock-alert-btn" onclick="hide('mockPrompt')">OK</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function show(id) { document.getElementById(id).style.display = 'flex'; }
+        function hide(id) { document.getElementById(id).style.display = 'none'; }
+        function showPrompt() {
+            show('mockPrompt');
+            document.getElementById('promptInput').focus();
+        }
+
+        function toggleSolution() {
+            const body = document.getElementById('solutionBody');
+            const icon = document.getElementById('solIcon');
+            body.classList.toggle('visible');
+            icon.className = body.classList.contains('visible')
+                ? 'fas fa-chevron-down'
+                : 'fas fa-chevron-up';
+        }
+    </script>
+
+</body>
+
+</html>

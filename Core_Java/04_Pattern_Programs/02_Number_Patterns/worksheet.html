@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Patterns - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px
+        }
+
+        .explanation ol {
+            line-height: 1.8
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Number Patterns Worksheet</h5><a href="index.html"
+            style="color:#dc3545;text-decoration:none;display:block;margin-bottom:10px">← Back to Module</a>
+        <hr style="border-color:#34495e;margin:15px 0">
+        <nav><a href="#question1" class="nav-link active">Question 1</a><a href="#question2" class="nav-link">Question
+                2</a><a href="#question3" class="nav-link">Question 3</a><a href="#question4" class="nav-link">Question
+                4</a><a href="#question5" class="nav-link">Question 5</a></nav>
+    </div>
+    <div class="top-nav">
+        <h2>Number Patterns - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Number Patterns with these practice problems.</p>
+        </div>
+
+        <div class="section-card" id="question1">
+            <h3>Question 1: Sequential Number Triangle</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print a triangle pattern with sequential numbers on each row (each row shows
+                numbers from 1 to row number).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>1<br>1 2<br>1 2 3<br>1 2 3 4<br>1 2 3 4 5</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class SequentialTriangle {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Print j instead of star:</strong> Same structure as star triangle, but print j
+                                (the column number) instead of a * symbol. This makes each row show 1, 2, 3... up to
+                                that row's number.</li>
+                            <li><strong>Inner loop variable controls output:</strong> The inner loop variable j
+                                naturally counts 1, 2, 3... so printing j automatically gives sequential numbers. No
+                                extra counter needed!</li>
+                            <li><strong>Pattern logic transfers between symbols:</strong> Star patterns and number
+                                patterns share identical loop structure. Only difference is what you print. Master one,
+                                you know the other.</li>
+                            <li><strong>Understanding variable roles:</strong> Outer loop variable i controls
+                                progression (row number), inner loop variable j controls content (what prints). Clear
+                                variable roles make code logic obvious.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question2">
+            <h3>Question 2: Repeated Number Pattern</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print a triangle where each row repeats its row number.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>1<br>2 2<br>3 3 3<br>4 4 4 4<br>5 5 5 5 5</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class RepeatedNumber {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Print i not j:</strong> Subtle but powerful change. Printing i (outer loop
+                                variable) instead of j means every position in a row shows the same number - the row
+                                number itself.</li>
+                            <li><strong>Outer vs inner variable usage:</strong> This demonstrates when to use which
+                                variable. i for row-specific values (repeated), j for position-specific values
+                                (sequential). Choose wisely based on pattern needs.</li>
+                            <li><strong>One-character change, different pattern:</strong> Just changing print(j) to
+                                print(i) completely transforms the output. Small code changes can have major visual
+                                effects in patterns.</li>
+                            <li><strong>Building pattern intuition:</strong> Understanding how variable choice affects
+                                output builds your pattern design skills. You'll start seeing patterns and knowing
+                                immediately which variable to print.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question3">
+            <h3>Question 3: Floyd's Triangle</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print Floyd's Triangle - continuous numbering across all rows (1, 2, 3, 4, 5, 6,
+                ...).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>1<br>2 3<br>4 5 6<br>7 8 9 10<br>11 12 13 14 15</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class FloydTriangle {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        int num = 1;
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print(num + " ");
+                num++;
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>External counter for continuous numbering:</strong> Variable num starts at 1 and
+                                increments continuously, never resetting. This creates unbroken sequence across rows,
+                                unlike previous patterns that restart each row.</li>
+                            <li><strong>Print then increment pattern:</strong> Print num, then increment it. This
+                                ensures next print uses next number. Order matters - increment first would skip 1.</li>
+                            <li><strong>Counter persists across iterations:</strong> num is declared outside loops, so
+                                it maintains value across all rows. Understanding variable scope is crucial for patterns
+                                with state.</li>
+                            <li><strong>Famous pattern in CS education:</strong> Floyd's Triangle appears in many
+                                programming courses and interviews. It tests understanding of nested loops plus state
+                                management across iterations.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question4">
+            <h3>Question 4: Reverse Number Triangle</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print numbers in reverse order on each row (row 3 shows 3, 2, 1).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>4</code><br><br><strong>Sample Output
+                    1:</strong><br><code>1<br>2 1<br>3 2 1<br>4 3 2 1</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class ReverseNumberTriangle {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = i; j >= 1; j--) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Countdown in inner loop:</strong> Inner loop starts at i and counts down to 1
+                                (j--). This reverses the number sequence on each row. Counting direction determines
+                                number order.</li>
+                            <li><strong>Alternative methods exist:</strong> Could count j from 1 to i but print (i - j +
+                                1). Multiple approaches work - countdown is simpler logic here but calculation can work
+                                too.</li>
+                            <li><strong>Visualize before coding:</strong> For row 3, you need 3, 2, 1. Starting j at 3
+                                (which is i) and decrementing makes this natural. Thinking through one example clarifies
+                                the whole pattern.</li>
+                            <li><strong>Pattern reversal skill:</strong> Being able to reverse sequences (ascending ↔
+                                descending) is a core pattern programming technique. Practice this to handle any
+                                ordering requirement.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question5">
+            <h3>Question 5: Binary Number Pattern</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print a triangle pattern alternating 1 and 0 (checkered pattern of numbers).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>1<br>0 1<br>1 0 1<br>0 1 0 1<br>1 0 1 0 1</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class BinaryPattern {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                if ((i + j) % 2 == 0) {
+                    System.out.print("1 ");
+                } else {
+                    System.out.print("0 ");
+                }
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Mathematical pattern for alternation:</strong> (i + j) % 2 elegantly creates
+                                checkerboard effect. When sum is even, print 1; when odd, print 0. Math creates the
+                                pattern logic automatically.</li>
+                            <li><strong>Understanding modulo for alternation:</strong> Modulo 2 gives 0 or 1, perfect
+                                for binary choice. This technique is fundamental for any alternating pattern (colors,
+                                symbols, values).</li>
+                            <li><strong>Position-based logic:</strong> Pattern depends on BOTH row (i) and column (j)
+                                positions, not just one. Adding them creates diagonal alternation, making a
+                                checkerboard.</li>
+                            <li><strong>Algorithmic thinking:</strong> Instead of manually tracking state, we derive it
+                                from position. This is algorithmic thinking - using mathematical relationships to
+                                generate patterns automatically.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top:40px"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>Number Patterns - Practice Worksheet</strong></p>
+            <p>Master number-based patterns in Java</p>
+            <p>&copy; 2026 Java Learning Platform</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('.sidebar nav a').forEach(link => { link.addEventListener('click', function () { document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active')); this.classList.add('active') }) });</script>
+</body>
+
+</html>

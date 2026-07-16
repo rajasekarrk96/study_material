@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Java - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none;
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333;
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0;
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px;
+        }
+
+        .explanation ol {
+            line-height: 1.8;
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Introduction Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>Introduction to Java - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Java basics with these practice problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Hello World Program</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that prints "Hello, World!" to the console. This is the most basic Java program
+                that demonstrates the structure of a Java class and the main method.
+            </div>
+
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br>
+                (No input required)<br><br>
+
+                <strong>Sample Output 1:</strong><br>
+                <code>Hello, World!</code><br><br>
+
+                <strong>Sample Input 2:</strong><br>
+                (No input required)<br><br>
+
+                <strong>Sample Output 2:</strong><br>
+                <code>Hello, World!</code>
+            </div>
+
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}</code></div>
+
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Class Declaration:</strong> <code>public class HelloWorld</code> - Declares a
+                                public class named HelloWorld. In Java, every program must have at least one class.</li>
+                            <li><strong>Main Method:</strong> <code>public static void main(String[] args)</code> - This
+                                is the entry point of any Java program. The JVM looks for this method to start
+                                execution.</li>
+                            <li><strong>Print Statement:</strong> <code>System.out.println("Hello, World!");</code> -
+                                Prints the text "Hello, World!" to the console and moves to a new line.</li>
+                            <li><strong>Semicolon:</strong> Every statement in Java must end with a semicolon (;).</li>
+                            <li><strong>Curly Braces:</strong> The { } braces define the scope of the class and method.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Print Your Name</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that takes your name as input from the user and prints a greeting message
+                "Hello, [Your Name]!".
+            </div>
+
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br>
+                <code>John</code><br><br>
+
+                <strong>Sample Output 1:</strong><br>
+                <code>Hello, John!</code><br><br>
+
+                <strong>Sample Input 2:</strong><br>
+                <code>Sarah</code><br><br>
+
+                <strong>Sample Output 2:</strong><br>
+                <code>Hello, Sarah!</code>
+            </div>
+
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class PrintName {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter your name: ");
+        String name = sn.nextLine();
+        
+        System.out.println("Hello, " + name + "!");
+        
+        sn.close();
+    }
+}</code></div>
+
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Import Scanner:</strong> <code>import java.util.Scanner;</code> - Imports the
+                                Scanner class for reading user input.</li>
+                            <li><strong>Create Scanner Object:</strong>
+                                <code>Scanner sn = new Scanner(System.in);</code> - Creates a Scanner object to read
+                                input from the console.
+                            </li>
+                            <li><strong>Prompt User:</strong> <code>System.out.print("Enter your name: ");</code> -
+                                Displays a message asking for input (without moving to a new line).</li>
+                            <li><strong>Read Input:</strong> <code>String name = sn.nextLine();</code> - Reads the
+                                entire line of text entered by the user and stores it in the variable 'name'.</li>
+                            <li><strong>Print Greeting:</strong>
+                                <code>System.out.println("Hello, " + name + "!");</code> - Concatenates strings and
+                                prints the greeting message.
+                            </li>
+                            <li><strong>Close Scanner:</strong> <code>sn.close();</code> - Closes the Scanner to free up
+                                resources.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Simple Addition</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that takes two numbers as input and prints their sum.
+            </div>
+
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br>
+                <code>10<br>20</code><br><br>
+
+                <strong>Sample Output 1:</strong><br>
+                <code>Sum: 30</code><br><br>
+
+                <strong>Sample Input 2:</strong><br>
+                <code>45<br>55</code><br><br>
+
+                <strong>Sample Output 2:</strong><br>
+                <code>Sum: 100</code>
+            </div>
+
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class SimpleAddition {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter first number: ");
+        int num1 = sn.nextInt();
+        
+        System.out.print("Enter second number: ");
+        int num2 = sn.nextInt();
+        
+        int sum = num1 + num2;
+        
+        System.out.println("Sum: " + sum);
+        
+        sn.close();
+    }
+}</code></div>
+
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Create Scanner:</strong> Initialize Scanner object to read user input.</li>
+                            <li><strong>Read First Number:</strong> <code>int num1 = sn.nextInt();</code> - Reads an
+                                integer from the user and stores it in num1.</li>
+                            <li><strong>Read Second Number:</strong> <code>int num2 = sn.nextInt();</code> - Reads
+                                another integer and stores it in num2.</li>
+                            <li><strong>Calculate Sum:</strong> <code>int sum = num1 + num2;</code> - Adds the two
+                                numbers and stores the result in the sum variable.</li>
+                            <li><strong>Display Result:</strong> Prints the sum to the console.</li>
+                            <li><strong>Close Scanner:</strong> Always close the Scanner when done to prevent resource
+                                leaks.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Display Multiple Lines</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that displays your name, age, and city on separate lines.
+            </div>
+
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br>
+                <code>Alice<br>25<br>New York</code><br><br>
+
+                <strong>Sample Output 1:</strong><br>
+                <code>Name: Alice<br>Age: 25<br>City: New York</code><br><br>
+
+                <strong>Sample Input 2:</strong><br>
+                <code>Bob<br>30<br>London</code><br><br>
+
+                <strong>Sample Output 2:</strong><br>
+                <code>Name: Bob<br>Age: 30<br>City: London</code>
+            </div>
+
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class DisplayInfo {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter your name: ");
+        String name = sn.nextLine();
+        
+        System.out.print("Enter your age: ");
+        int age = sn.nextInt();
+        sn.nextLine(); // Consume newline
+        
+        System.out.print("Enter your city: ");
+        String city = sn.nextLine();
+        
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("City: " + city);
+        
+        sn.close();
+    }
+}</code></div>
+
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Read Name:</strong> <code>String name = sn.nextLine();</code> - Reads the entire
+                                line for the name.</li>
+                            <li><strong>Read Age:</strong> <code>int age = sn.nextInt();</code> - Reads an integer for
+                                age.</li>
+                            <li><strong>Consume Newline:</strong> <code>sn.nextLine();</code> - This is important! After
+                                reading an integer, we need to consume the leftover newline character.</li>
+                            <li><strong>Read City:</strong> <code>String city = sn.nextLine();</code> - Reads the city
+                                name.</li>
+                            <li><strong>Display Information:</strong> Uses three separate println statements to display
+                                each piece of information on a new line.</li>
+                            <li><strong>Close Scanner:</strong> Clean up resources by closing the Scanner.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Simple Calculator (Addition and Multiplication)</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that takes two numbers as input and displays both their sum and product.
+            </div>
+
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br>
+                <code>5<br>3</code><br><br>
+
+                <strong>Sample Output 1:</strong><br>
+                <code>Sum: 8<br>Product: 15</code><br><br>
+
+                <strong>Sample Input 2:</strong><br>
+                <code>12<br>4</code><br><br>
+
+                <strong>Sample Output 2:</strong><br>
+                <code>Sum: 16<br>Product: 48</code>
+            </div>
+
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class SimpleCalculator {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter first number: ");
+        int num1 = sn.nextInt();
+        
+        System.out.print("Enter second number: ");
+        int num2 = sn.nextInt();
+        
+        int sum = num1 + num2;
+        int product = num1 * num2;
+        
+        System.out.println("Sum: " + sum);
+        System.out.println("Product: " + product);
+        
+        sn.close();
+    }
+}</code></div>
+
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Initialize Scanner:</strong> Create Scanner object for reading input.</li>
+                            <li><strong>Read Two Numbers:</strong> Use <code>nextInt()</code> to read two integer values
+                                from the user.</li>
+                            <li><strong>Calculate Sum:</strong> <code>int sum = num1 + num2;</code> - Adds the two
+                                numbers using the + operator.</li>
+                            <li><strong>Calculate Product:</strong> <code>int product = num1 * num2;</code> - Multiplies
+                                the two numbers using the * operator.</li>
+                            <li><strong>Display Results:</strong> Print both the sum and product on separate lines.</li>
+                            <li><strong>Close Scanner:</strong> Release the Scanner resource.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Introduction to Java - Practice Worksheet</strong></p>
+            <p>Master the basics of Java programming</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

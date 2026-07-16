@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varargs - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Methods Worksheet</h5>
+        <a href="index.html" class="nav-link">← Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Varargs - Practice</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master Variable Arguments (Varargs) in Java.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Sum of Variable Arguments</h3>
+            <div class="explanation">Write a Java method named <code>sumAll</code> that accepts a variable number of
+                integers and returns their sum. Call it with different numbers of arguments.</div>
+            <div class="code-block"><code>class _01_ {
+
+    static int sumAll(int... numbers) {
+        int total = 0;
+        for (int n : numbers) {
+            total += n;
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Sum 1: " + sumAll(1, 2, 3));
+        System.out.println("Sum 2: " + sumAll(10, 20, 30, 40, 50));
+        System.out.println("Sum 3: " + sumAll());
+    }
+}</code></div>
+            <div class="output-block"><code>Sum 1: 6
+Sum 2: 150
+Sum 3: 0</code></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Print Names</h3>
+            <div class="explanation">Write a Java method named <code>printNames</code> that accepts a variable number of
+                <code>String</code> arguments and prints each one on a new line.</div>
+            <div class="code-block"><code>class _02_ {
+
+    static void printNames(String... names) {
+        for (String name : names) {
+            System.out.println("Hello, " + name);
+        }
+    }
+
+    public static void main(String[] args) {
+        printNames("Alice", "Bob", "Charlie");
+    }
+}</code></div>
+            <div class="output-block"><code>Hello, Alice
+Hello, Bob
+Hello, Charlie</code></div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Varargs Module - Practice Worksheet</strong></p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Keyword - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Final Keyword Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Final Keyword - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master final variables, methods, and classes with compile-time restrictions.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Final Variable - Constants</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Constants class with a final variable PI initialized to 3.14. Attempt to
+                change the value of PI in the main method and show that it results in a compile-time error.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _01_ {
+    public static void main(String[] args) {
+
+        final double PI = 3.14;
+        System.out.println("PI = " + PI);
+
+        // PI = 3.14159;   // ❌ Compile-time error: cannot assign a value to final variable PI
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>PI = 3.14</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Final Variable:</strong> Once assigned, value cannot be changed</li>
+                    <li><strong>Compile-Time Error:</strong> Attempting to reassign causes compilation failure</li>
+                    <li><strong>Constants:</strong> Final variables are typically used for constants</li>
+                    <li><strong>Naming Convention:</strong> Constants are usually named in UPPERCASE</li>
+                </ul>
+                <strong>Error Message:</strong> "cannot assign a value to final variable PI"
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Final Method - Prevent Overriding</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create an Animal class with a final method sleep() that prints "Animal is
+                sleeping". Create a Dog class that extends Animal and tries to override the sleep() method. Demonstrate
+                that overriding the final method is not allowed.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Animal {
+    final void sleep() {
+        System.out.println("Animal is sleeping");
+    }
+}
+
+class Dog extends Animal {
+    // void sleep() {                      // ❌ Compile-time error
+    //     System.out.println("Dog sleeping");
+    // }
+}
+
+class _02_ {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.sleep();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Animal is sleeping</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Final Method:</strong> Cannot be overridden in subclasses</li>
+                    <li><strong>Inheritance:</strong> Dog inherits sleep() but cannot override it</li>
+                    <li><strong>Method Binding:</strong> Final methods are bound at compile-time</li>
+                    <li><strong>Use Case:</strong> Critical methods that must maintain consistent behavior</li>
+                </ul>
+                <strong>Error Message:</strong> "sleep() in Dog cannot override sleep() in Animal; overridden method is
+                final"
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Final Class - Prevent Inheritance</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a FinalClass with a final class modifier and attempt to extend it in another
+                class. Show that extending a final class is not allowed.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>final class FinalClass {
+    void display() {
+        System.out.println("Final class");
+    }
+}
+
+// class Child extends FinalClass {       // ❌ Compile-time error
+// }
+
+class _03_ {
+    public static void main(String[] args) {
+        FinalClass f = new FinalClass();
+        f.display();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Final class</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Final Class:</strong> Cannot be extended or inherited</li>
+                    <li><strong>Immutability:</strong> Often used for immutable classes like String</li>
+                    <li><strong>Security:</strong> Prevents modification through inheritance</li>
+                    <li><strong>Examples:</strong> String, Integer, Math classes are final</li>
+                </ul>
+                <strong>Error Message:</strong> "cannot inherit from final FinalClass"
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Final Method Parameters</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Calculator class with a method add(final int a, final int b) that adds two
+                numbers. Show that the final parameters cannot be modified within the method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Calculator {
+
+    int add(final int a, final int b) {
+
+        // a = a + 1;    // ❌ Compile-time error
+        // b = b + 1;    // ❌ Compile-time error
+
+        return a + b;
+    }
+}
+
+class _04_ {
+    public static void main(String[] args) {
+        Calculator c = new Calculator();
+        System.out.println("Sum = " + c.add(5, 10));
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Sum = 15</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Final Parameters:</strong> Method parameters declared as final cannot be reassigned</li>
+                    <li><strong>Read-Only:</strong> Parameters can be read but not modified</li>
+                    <li><strong>Safety:</strong> Prevents accidental modification of input values</li>
+                    <li><strong>Best Practice:</strong> Useful for ensuring parameter integrity</li>
+                </ul>
+                <strong>Error Message:</strong> "final parameter a cannot be assigned"
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Final Method in Base Class</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a base class Base with a final method show() and a derived class Derived
+                that tries to override the show() method. Demonstrate that overriding a final method is not permitted.
+            </div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Base {
+    final void show() {
+        System.out.println("Base show method");
+    }
+}
+
+class Derived extends Base {
+    // void show() {                       // ❌ Compile-time error
+    //     System.out.println("Derived show");
+    // }
+}
+
+class _05_ {
+    public static void main(String[] args) {
+        Derived d = new Derived();
+        d.show();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Base show method</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Method Finality:</strong> Final methods in base class cannot be overridden</li>
+                    <li><strong>Polymorphism Limitation:</strong> Final methods prevent runtime polymorphism</li>
+                    <li><strong>Inheritance Chain:</strong> All subclasses use the base class implementation</li>
+                    <li><strong>Design Decision:</strong> Use final when method behavior must remain consistent</li>
+                </ul>
+                <strong>Error Message:</strong> "show() in Derived cannot override show() in Base; overridden method is
+                final"
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>Final Keyword Module - Practice Worksheet</strong></p>
+            <p>Master constants, method restrictions, and inheritance control</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

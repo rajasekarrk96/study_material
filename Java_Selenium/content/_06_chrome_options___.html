@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  06 chrome options   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>06. Chrome Options & configurations</h1>
+
+<h2>📖 Introduction</h2>
+<p>The <strong>ChromeOptions</strong> class is your gateway to customizing the ChromeDriver session. It allows you to
+    modify how the browser behaves <em>before</em> it even launches. Whether you need to run tests without a UI
+    (Headless), disable annoying popups, or load a specific profile, ChromeOptions is the tool for the job.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>How to customize the browser startup behavior</li>
+    <li>Running tests in <strong>Headless Mode</strong> for CI/CD efficiency</li>
+    <li>Handling SSL certificate errors automatically</li>
+    <li>Disabling browser notifications and info bars</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>Common Capabilities</h3>
+<p>You create an instance of <code>ChromeOptions</code>, add arguments or capabilities to it, and then pass it to the
+    <code>ChromeDriver</code> constructor.
+</p>
+
+<ul>
+    <li><strong>Headless Mode:</strong> Runs the browser in the background without a GUI. This relies on less system
+        resources and is faster. Essential for servers (Jenkins, Docker).</li>
+    <li><strong>Incognito:</strong> Starts the browser in private mode, ensuring no cookies or cache persist from
+        previous sessions.</li>
+    <li><strong>Start Maximized:</strong> Ensures the window is full-screen to prevent layout issues where elements
+        might be hidden.</li>
+    <li><strong>Disable Notifications:</strong> Blocks the "Show Notifications?" popup that often blocks other elements.
+    </li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+<p>Here is how to configure your browser session:</p>
+
+<h3>Essential Configurations</h3>
+<pre><code>ChromeOptions options = new ChromeOptions();
+
+// 1. Headless Mode (No UI)
+options.addArguments("--headless=new"); // Updated syntax for Chrome 109+
+
+// 2. Incognito Mode
+options.addArguments("--incognito");
+
+// 3. Start Maximized
+options.addArguments("start-maximized");
+
+// 4. Accept Insecure Certs (for staging environments)
+options.setAcceptInsecureCerts(true);
+
+// 5. Initialize Driver with Options
+WebDriver driver = new ChromeDriver(options);
+driver.get("https://google.com");</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Headless Debugging:</strong> When running in headless mode, you can't see what's happening. If a test
+        fails, rely heavily on screenshots and logs to debug.</p>
+    <p><strong>Syntax Changes:</strong> Chrome arguments change over time. For example, <code>--headless</code> is now
+        preferred as <code>--headless=new</code> for better functionality in modern Chrome.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Target URL:</strong> <a href="https://expired.badssl.com/" target="_blank"
+            style="color:#00e676">https://expired.badssl.com/</a></p>
+    <p><strong>Goal:</strong> Bypass security warnings.</p>
+    <ol>
+        <li>Try to open the URL without options. You should see a "Your connection is not private" error.</li>
+        <li>Close the driver.</li>
+        <li>Create <code>ChromeOptions</code> and set <code>setAcceptInsecureCerts(true)</code>.</li>
+        <li>Initialize the driver with these options and open the URL again.</li>
+        <li>Verify you can access the page content.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: How do you handle a browser notification popup (e.g., Allow/Block Location)?</strong></p>
+    <p><strong>Answer:</strong> These are native browser popups, not HTML. We handle them using
+        <code>ChromeOptions</code> by passing <code>--disable-notifications</code> argument before launching the
+        browser.
+    </p>
+
+    <p><strong>Q2: Why use Headless mode?</strong></p>
+    <p><strong>Answer:</strong> It is faster and consumes fewer resources (CPU/RAM). It is required for environments
+        without a display (like Linux servers or Docker containers) in CI/CD pipelines.</p>
+</blockquote>
+
+<a href="worksheets/ws_chrome_options.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

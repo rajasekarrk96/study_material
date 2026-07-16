@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Dimensional Arrays - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Single Dimensional Arrays</h5>
+        <a href="../../index.html#arrays">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#basics">Array Basics</a>
+        <a href="#declaration">Declaration</a>
+        <a href="#initialization">Initialization</a>
+        <a href="#accessing">Accessing Elements</a>
+        <a href="#examples">Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Single Dimensional Arrays</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Single Dimensional Arrays in Java</h1>
+            <p class="lead text-muted">Store multiple values of the same type in a single variable.</p>
+        </div>
+
+        <div class="section" id="basics">
+            <h4>What is an Array?</h4>
+            <p>An array is a container that holds a fixed number of values of the same data type. Arrays are indexed
+                starting from 0.</p>
+            <ul>
+                <li><strong>Fixed Size:</strong> Size is determined at creation and cannot change</li>
+                <li><strong>Same Type:</strong> All elements must be of the same data type</li>
+                <li><strong>Indexed:</strong> Elements accessed using index (0 to length-1)</li>
+                <li><strong>Contiguous Memory:</strong> Elements stored in consecutive memory locations</li>
+            </ul>
+        </div>
+
+        <div class="section" id="declaration">
+            <h4>Array Declaration</h4>
+            <pre><code>// Syntax
+dataType[] arrayName;
+dataType arrayName[];  // Alternative syntax
+
+// Examples
+int[] numbers;
+String[] names;
+double[] prices;</code></pre>
+        </div>
+
+        <div class="section" id="initialization">
+            <h4>Array Initialization</h4>
+
+            <h5>Method 1: Declare and Initialize Separately</h5>
+            <pre><code>int[] numbers;
+numbers = new int[5];  // Creates array of 5 integers (all 0)</code></pre>
+
+            <h5>Method 2: Declare and Initialize Together</h5>
+            <pre><code>int[] numbers = new int[5];</code></pre>
+
+            <h5>Method 3: Initialize with Values</h5>
+            <pre><code>int[] numbers = {10, 20, 30, 40, 50};
+String[] fruits = {"Apple", "Banana", "Orange"};</code></pre>
+        </div>
+
+        <div class="section" id="accessing">
+            <h4>Accessing Array Elements</h4>
+            <pre><code>public class ArrayAccess {
+    public static void main(String[] args) {
+        int[] numbers = {10, 20, 30, 40, 50};
+        
+        // Access elements
+        System.out.println("First element: " + numbers[0]);
+        System.out.println("Third element: " + numbers[2]);
+        
+        // Modify elements
+        numbers[1] = 25;
+        System.out.println("Modified second element: " + numbers[1]);
+        
+        // Array length
+        System.out.println("Array length: " + numbers.length);
+    }
+}</code></pre>
+            <div class="output">
+                First element: 10<br>
+                Third element: 30<br>
+                Modified second element: 25<br>
+                Array length: 5
+            </div>
+        </div>
+
+        <div class="section" id="examples">
+            <h4>Example 1: Iterate Through Array</h4>
+            <pre><code>public class ArrayIteration {
+    public static void main(String[] args) {
+        String[] fruits = {"Apple", "Banana", "Orange", "Mango"};
+        
+        // Using for loop
+        System.out.println("Using for loop:");
+        for (int i = 0; i < fruits.length; i++) {
+            System.out.println(fruits[i]);
+        }
+        
+        // Using for-each loop
+        System.out.println("\nUsing for-each loop:");
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+    }
+}</code></pre>
+            <div class="output">
+                Using for loop:<br>
+                Apple<br>
+                Banana<br>
+                Orange<br>
+                Mango<br><br>
+                Using for-each loop:<br>
+                Apple<br>
+                Banana<br>
+                Orange<br>
+                Mango
+            </div>
+
+            <h4>Example 2: Find Sum and Average</h4>
+            <pre><code>public class ArraySum {
+    public static void main(String[] args) {
+        int[] numbers = {10, 20, 30, 40, 50};
+        int sum = 0;
+        
+        for (int num : numbers) {
+            sum += num;
+        }
+        
+        double average = (double) sum / numbers.length;
+        
+        System.out.println("Sum: " + sum);
+        System.out.println("Average: " + average);
+    }
+}</code></pre>
+            <div class="output">
+                Sum: 150<br>
+                Average: 30.0
+            </div>
+
+            <h4>Example 3: Find Maximum Element</h4>
+            <pre><code>public class FindMax {
+    public static void main(String[] args) {
+        int[] numbers = {45, 23, 67, 12, 89, 34};
+        int max = numbers[0];
+        
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] > max) {
+                max = numbers[i];
+            }
+        }
+        
+        System.out.println("Maximum element: " + max);
+    }
+}</code></pre>
+            <div class="output">
+                Maximum element: 89
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Single Dimensional Arrays Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

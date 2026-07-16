@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Modifiers - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Access Modifiers</h5>
+        <a href="../../index.html#oop">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#intro">Introduction</a>
+        <a href="#public">Public</a>
+        <a href="#private">Private</a>
+        <a href="#protected">Protected</a>
+        <a href="#default">Default</a>
+        <a href="#comparison">Comparison</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Access Modifiers</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Access Modifiers in Java</h1>
+            <p class="lead text-muted">Control visibility and accessibility of classes, methods, and variables.</p>
+        </div>
+
+        <div class="section" id="intro">
+            <h4>What are Access Modifiers?</h4>
+            <p>Access modifiers in Java are keywords that set the accessibility (visibility) of classes, methods,
+                constructors, and variables. They control which parts of your code can access specific members of a
+                class.</p>
+
+            <h5>Four Types of Access Modifiers:</h5>
+            <ul>
+                <li><strong>public</strong> - Accessible from anywhere</li>
+                <li><strong>private</strong> - Accessible only within the same class</li>
+                <li><strong>protected</strong> - Accessible within the same package and subclasses</li>
+                <li><strong>default</strong> (no modifier) - Accessible only within the same package</li>
+            </ul>
+
+            <div class="note">
+                <strong>💡 Important:</strong> Access modifiers are fundamental to encapsulation, one of the four
+                pillars of OOP.
+            </div>
+        </div>
+
+        <div class="section" id="public">
+            <h4>1. Public Access Modifier</h4>
+            <p>The <code>public</code> modifier makes a class, method, or variable accessible from anywhere in the
+                program.</p>
+
+            <h5>Example 1: Public Class and Methods</h5>
+            <pre><code>public class PublicDemo {
+    public String name = "Public Variable";
+    
+    public void display() {
+        System.out.println("This is a public method");
+    }
+}
+
+class TestPublic {
+    public static void main(String[] args) {
+        PublicDemo obj = new PublicDemo();
+        System.out.println(obj.name);  // Accessible
+        obj.display();                  // Accessible
+    }
+}</code></pre>
+            <div class="output">
+                Public Variable<br>
+                This is a public method
+            </div>
+
+            <h5>Example 2: Public Constructor</h5>
+            <pre><code>public class Student {
+    private String name;
+    private int age;
+    
+    // Public constructor - can be called from anywhere
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public void displayInfo() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+public class TestStudent {
+    public static void main(String[] args) {
+        Student s = new Student("Alice", 20);
+        s.displayInfo();
+    }
+}</code></pre>
+            <div class="output">
+                Name: Alice, Age: 20
+            </div>
+
+            <div class="note">
+                <strong>✅ Use Public When:</strong> You want the member to be accessible from any class in any package.
+            </div>
+        </div>
+
+        <div class="section" id="private">
+            <h4>2. Private Access Modifier</h4>
+            <p>The <code>private</code> modifier makes a member accessible only within the same class. It provides the
+                highest level of encapsulation.</p>
+
+            <h5>Example 1: Private Variables</h5>
+            <pre><code>class BankAccount {
+    private String accountNumber;
+    private double balance;
+    
+    public BankAccount(String accNum, double bal) {
+        accountNumber = accNum;
+        balance = bal;
+    }
+    
+    // Public methods to access private variables
+    public double getBalance() {
+        return balance;
+    }
+    
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: " + amount);
+        }
+    }
+}
+
+public class TestBank {
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount("ACC001", 1000);
+        
+        // acc.balance = 5000;  // ERROR: balance is private
+        
+        System.out.println("Balance: " + acc.getBalance());
+        acc.deposit(500);
+        System.out.println("New Balance: " + acc.getBalance());
+    }
+}</code></pre>
+            <div class="output">
+                Balance: 1000.0<br>
+                Deposited: 500.0<br>
+                New Balance: 1500.0
+            </div>
+
+            <h5>Example 2: Private Methods</h5>
+            <pre><code>class Calculator {
+    private int add(int a, int b) {
+        return a + b;
+    }
+    
+    private int multiply(int a, int b) {
+        return a * b;
+    }
+    
+    public int calculate(int a, int b) {
+        int sum = add(a, b);           // Private method called internally
+        int product = multiply(a, b);   // Private method called internally
+        return sum + product;
+    }
+}
+
+public class TestCalculator {
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        
+        // calc.add(5, 3);  // ERROR: add() is private
+        
+        System.out.println("Result: " + calc.calculate(5, 3));
+    }
+}</code></pre>
+            <div class="output">
+                Result: 23
+            </div>
+
+            <div class="note">
+                <strong>✅ Use Private When:</strong> You want to hide implementation details and protect data from
+                external access.
+            </div>
+        </div>
+
+        <div class="section" id="protected">
+            <h4>3. Protected Access Modifier</h4>
+            <p>The <code>protected</code> modifier makes a member accessible within the same package and in subclasses
+                (even if they're in different packages).</p>
+
+            <h5>Example 1: Protected Variables in Inheritance</h5>
+            <pre><code>class Animal {
+    protected String species;
+    protected int age;
+    
+    protected void displayInfo() {
+        System.out.println("Species: " + species + ", Age: " + age);
+    }
+}
+
+class Dog extends Animal {
+    void setDetails(String species, int age) {
+        this.species = species;  // Accessible - protected in parent
+        this.age = age;          // Accessible - protected in parent
+    }
+    
+    void show() {
+        displayInfo();  // Accessible - protected method from parent
+    }
+}
+
+public class TestProtected {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.setDetails("Canine", 5);
+        dog.show();
+    }
+}</code></pre>
+            <div class="output">
+                Species: Canine, Age: 5
+            </div>
+
+            <h5>Example 2: Protected Methods</h5>
+            <pre><code>class Vehicle {
+    protected void startEngine() {
+        System.out.println("Engine started");
+    }
+    
+    protected void stopEngine() {
+        System.out.println("Engine stopped");
+    }
+}
+
+class Car extends Vehicle {
+    public void drive() {
+        startEngine();  // Protected method accessible in subclass
+        System.out.println("Car is driving");
+        stopEngine();   // Protected method accessible in subclass
+    }
+}
+
+public class TestVehicle {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.drive();
+    }
+}</code></pre>
+            <div class="output">
+                Engine started<br>
+                Car is driving<br>
+                Engine stopped
+            </div>
+
+            <div class="note">
+                <strong>✅ Use Protected When:</strong> You want subclasses to access the member but keep it hidden from
+                unrelated classes.
+            </div>
+        </div>
+
+        <div class="section" id="default">
+            <h4>4. Default Access Modifier (Package-Private)</h4>
+            <p>When no access modifier is specified, it's called default or package-private. Members are accessible only
+                within the same package.</p>
+
+            <h5>Example 1: Default Access</h5>
+            <pre><code>class DefaultDemo {
+    String message = "Default access";  // No modifier = default
+    
+    void display() {  // No modifier = default
+        System.out.println(message);
+    }
+}
+
+class TestDefault {
+    public static void main(String[] args) {
+        DefaultDemo obj = new DefaultDemo();
+        System.out.println(obj.message);  // Accessible - same package
+        obj.display();                     // Accessible - same package
+    }
+}</code></pre>
+            <div class="output">
+                Default access<br>
+                Default access
+            </div>
+
+            <h5>Example 2: Package-Level Access</h5>
+            <pre><code>// File: Helper.java (in package com.example)
+package com.example;
+
+class Helper {  // Default class - accessible only in com.example package
+    void assist() {
+        System.out.println("Helping within package");
+    }
+}
+
+// File: Main.java (in package com.example)
+package com.example;
+
+public class Main {
+    public static void main(String[] args) {
+        Helper helper = new Helper();  // Accessible - same package
+        helper.assist();
+    }
+}</code></pre>
+            <div class="output">
+                Helping within package
+            </div>
+
+            <div class="note">
+                <strong>✅ Use Default When:</strong> You want to restrict access to classes within the same package
+                only.
+            </div>
+        </div>
+
+        <div class="section" id="comparison">
+            <h4>Access Modifiers Comparison</h4>
+
+            <h5>Accessibility Table:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Same Class</th>
+                        <th>Same Package</th>
+                        <th>Subclass</th>
+                        <th>Other Packages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>public</code></td>
+                        <td>✅ Yes</td>
+                        <td>✅ Yes</td>
+                        <td>✅ Yes</td>
+                        <td>✅ Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>protected</code></td>
+                        <td>✅ Yes</td>
+                        <td>✅ Yes</td>
+                        <td>✅ Yes</td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><code>default</code></td>
+                        <td>✅ Yes</td>
+                        <td>✅ Yes</td>
+                        <td>❌ No</td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><code>private</code></td>
+                        <td>✅ Yes</td>
+                        <td>❌ No</td>
+                        <td>❌ No</td>
+                        <td>❌ No</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Complete Example - All Modifiers:</h5>
+            <pre><code>public class AccessModifierDemo {
+    public String publicVar = "Public";
+    protected String protectedVar = "Protected";
+    String defaultVar = "Default";
+    private String privateVar = "Private";
+    
+    public void testAccess() {
+        // All accessible within the same class
+        System.out.println(publicVar);
+        System.out.println(protectedVar);
+        System.out.println(defaultVar);
+        System.out.println(privateVar);
+    }
+}
+
+class SamePackageClass {
+    void test() {
+        AccessModifierDemo obj = new AccessModifierDemo();
+        System.out.println(obj.publicVar);     // ✅ Accessible
+        System.out.println(obj.protectedVar);  // ✅ Accessible
+        System.out.println(obj.defaultVar);    // ✅ Accessible
+        // System.out.println(obj.privateVar); // ❌ NOT Accessible
+    }
+}
+
+class SubclassInSamePackage extends AccessModifierDemo {
+    void test() {
+        System.out.println(publicVar);     // ✅ Accessible
+        System.out.println(protectedVar);  // ✅ Accessible
+        System.out.println(defaultVar);    // ✅ Accessible
+        // System.out.println(privateVar); // ❌ NOT Accessible
+    }
+}</code></pre>
+
+            <h5>Best Practices:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Recommended Modifier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Instance variables</td>
+                        <td><code>private</code></td>
+                    </tr>
+                    <tr>
+                        <td>Getter/Setter methods</td>
+                        <td><code>public</code></td>
+                    </tr>
+                    <tr>
+                        <td>Methods for subclasses</td>
+                        <td><code>protected</code></td>
+                    </tr>
+                    <tr>
+                        <td>Helper methods (internal use)</td>
+                        <td><code>private</code></td>
+                    </tr>
+                    <tr>
+                        <td>Package-level utilities</td>
+                        <td><code>default</code></td>
+                    </tr>
+                    <tr>
+                        <td>API methods</td>
+                        <td><code>public</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Access Modifiers Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

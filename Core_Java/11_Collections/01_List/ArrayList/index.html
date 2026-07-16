@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArrayList - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>ArrayList</h5>
+        <a href="../../../index.html#advanced">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#intro">Introduction</a>
+        <a href="#declaration">Declaration</a>
+        <a href="#methods">Methods</a>
+        <a href="#iteration">Iteration</a>
+        <a href="#examples">Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>ArrayList</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>ArrayList in Java</h1>
+            <p class="lead text-muted">Dynamic, resizable array implementation from the Collections Framework.</p>
+        </div>
+
+        <div class="section" id="intro">
+            <h4>What is ArrayList?</h4>
+            <p>ArrayList is a resizable array implementation that can grow or shrink dynamically. Unlike arrays, you
+                don't need to specify the size at creation.</p>
+
+            <h5>ArrayList vs Array:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Array</th>
+                        <th>ArrayList</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Size</td>
+                        <td>Fixed</td>
+                        <td>Dynamic (resizable)</td>
+                    </tr>
+                    <tr>
+                        <td>Type</td>
+                        <td>Primitives & Objects</td>
+                        <td>Objects only</td>
+                    </tr>
+                    <tr>
+                        <td>Performance</td>
+                        <td>Faster</td>
+                        <td>Slightly slower</td>
+                    </tr>
+                    <tr>
+                        <td>Methods</td>
+                        <td>Limited</td>
+                        <td>Many built-in methods</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>When to Use ArrayList:</h5>
+            <ul>
+                <li>Size is unknown or changes frequently</li>
+                <li>Need to add/remove elements dynamically</li>
+                <li>Want to use built-in methods (sort, search, etc.)</li>
+            </ul>
+        </div>
+
+        <div class="section" id="declaration">
+            <h4>Declaration and Creation</h4>
+
+            <h5>Basic Syntax:</h5>
+            <pre><code>import java.util.ArrayList;
+
+ArrayList&lt;Type&gt; listName = new ArrayList&lt;&gt;();</code></pre>
+
+            <h5>Examples:</h5>
+            <pre><code>import java.util.ArrayList;
+
+public class ArrayListDeclaration {
+    public static void main(String[] args) {
+        // ArrayList of Strings
+        ArrayList&lt;String&gt; names = new ArrayList&lt;&gt;();
+        
+        // ArrayList of Integers
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
+        
+        // ArrayList of Doubles
+        ArrayList&lt;Double&gt; prices = new ArrayList&lt;&gt;();
+        
+        // ArrayList with initial capacity
+        ArrayList&lt;String&gt; fruits = new ArrayList&lt;&gt;(10);
+        
+        System.out.println("ArrayLists created successfully!");
+    }
+}</code></pre>
+            <div class="output">
+                ArrayLists created successfully!
+            </div>
+
+            <div class="note">
+                <strong>💡 Note:</strong> ArrayList stores objects only. For primitives, use wrapper classes (Integer,
+                Double, Boolean, etc.)
+            </div>
+        </div>
+
+        <div class="section" id="methods">
+            <h4>Common ArrayList Methods</h4>
+
+            <h5>Adding Elements:</h5>
+            <pre><code>ArrayList&lt;String&gt; fruits = new ArrayList&lt;&gt;();
+
+fruits.add("Apple");           // Add at end
+fruits.add("Banana");
+fruits.add(1, "Orange");       // Add at index 1
+
+System.out.println(fruits);    // [Apple, Orange, Banana]</code></pre>
+
+            <h5>Accessing Elements:</h5>
+            <pre><code>String first = fruits.get(0);      // Get element at index 0
+int size = fruits.size();          // Get size
+boolean isEmpty = fruits.isEmpty(); // Check if empty
+
+System.out.println("First fruit: " + first);
+System.out.println("Total fruits: " + size);</code></pre>
+
+            <h5>Modifying Elements:</h5>
+            <pre><code>fruits.set(0, "Mango");    // Replace element at index 0
+System.out.println(fruits); // [Mango, Orange, Banana]</code></pre>
+
+            <h5>Removing Elements:</h5>
+            <pre><code>fruits.remove(0);              // Remove by index
+fruits.remove("Banana");       // Remove by value
+fruits.clear();                // Remove all elements</code></pre>
+
+            <h5>Searching:</h5>
+            <pre><code>boolean hasApple = fruits.contains("Apple");
+int index = fruits.indexOf("Orange");  // Returns -1 if not found</code></pre>
+
+            <h5>Complete Example:</h5>
+            <pre><code>import java.util.ArrayList;
+
+public class ArrayListMethods {
+    public static void main(String[] args) {
+        ArrayList&lt;String&gt; colors = new ArrayList&lt;&gt;();
+        
+        // Add elements
+        colors.add("Red");
+        colors.add("Green");
+        colors.add("Blue");
+        System.out.println("Colors: " + colors);
+        
+        // Get element
+        String firstColor = colors.get(0);
+        System.out.println("First color: " + firstColor);
+        
+        // Size
+        System.out.println("Total colors: " + colors.size());
+        
+        // Modify
+        colors.set(1, "Yellow");
+        System.out.println("After modification: " + colors);
+        
+        // Contains
+        System.out.println("Has Blue? " + colors.contains("Blue"));
+        
+        // Remove
+        colors.remove("Red");
+        System.out.println("After removal: " + colors);
+    }
+}</code></pre>
+            <div class="output">
+                Colors: [Red, Green, Blue]<br>
+                First color: Red<br>
+                Total colors: 3<br>
+                After modification: [Red, Yellow, Blue]<br>
+                Has Blue? true<br>
+                After removal: [Yellow, Blue]
+            </div>
+        </div>
+
+        <div class="section" id="iteration">
+            <h4>Iterating Through ArrayList</h4>
+
+            <h5>Method 1: For Loop</h5>
+            <pre><code>ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
+numbers.add(10);
+numbers.add(20);
+numbers.add(30);
+
+for (int i = 0; i &lt; numbers.size(); i++) {
+    System.out.println(numbers.get(i));
+}</code></pre>
+
+            <h5>Method 2: For-Each Loop</h5>
+            <pre><code>for (Integer num : numbers) {
+    System.out.println(num);
+}</code></pre>
+
+            <h5>Method 3: Iterator</h5>
+            <pre><code>import java.util.Iterator;
+
+Iterator&lt;Integer&gt; it = numbers.iterator();
+while (it.hasNext()) {
+    System.out.println(it.next());
+}</code></pre>
+
+            <h5>Method 4: forEach (Java 8+)</h5>
+            <pre><code>numbers.forEach(num -&gt; System.out.println(num));</code></pre>
+        </div>
+
+        <div class="section" id="examples">
+            <h4>Practical Examples</h4>
+
+            <h5>Example 1: Student Management</h5>
+            <pre><code>import java.util.ArrayList;
+
+public class StudentList {
+    public static void main(String[] args) {
+        ArrayList&lt;String&gt; students = new ArrayList&lt;&gt;();
+        
+        // Add students
+        students.add("Alice");
+        students.add("Bob");
+        students.add("Charlie");
+        students.add("Diana");
+        
+        System.out.println("Total students: " + students.size());
+        System.out.println("\nStudent List:");
+        
+        for (int i = 0; i &lt; students.size(); i++) {
+            System.out.println((i + 1) + ". " + students.get(i));
+        }
+        
+        // Search for a student
+        String searchName = "Bob";
+        if (students.contains(searchName)) {
+            System.out.println("\n" + searchName + " is in the class!");
+        }
+    }
+}</code></pre>
+            <div class="output">
+                Total students: 4<br><br>
+                Student List:<br>
+                1. Alice<br>
+                2. Bob<br>
+                3. Charlie<br>
+                4. Diana<br><br>
+                Bob is in the class!
+            </div>
+
+            <h5>Example 2: Shopping Cart</h5>
+            <pre><code>import java.util.ArrayList;
+
+public class ShoppingCart {
+    public static void main(String[] args) {
+        ArrayList&lt;String&gt; cart = new ArrayList&lt;&gt;();
+        ArrayList&lt;Double&gt; prices = new ArrayList&lt;&gt;();
+        
+        // Add items
+        cart.add("Laptop");
+        prices.add(999.99);
+        
+        cart.add("Mouse");
+        prices.add(25.50);
+        
+        cart.add("Keyboard");
+        prices.add(75.00);
+        
+        // Display cart
+        System.out.println("Shopping Cart:");
+        double total = 0;
+        
+        for (int i = 0; i &lt; cart.size(); i++) {
+            System.out.printf("%s - $%.2f\n", cart.get(i), prices.get(i));
+            total += prices.get(i);
+        }
+        
+        System.out.printf("\nTotal: $%.2f\n", total);
+    }
+}</code></pre>
+            <div class="output">
+                Shopping Cart:<br>
+                Laptop - $999.99<br>
+                Mouse - $25.50<br>
+                Keyboard - $75.00<br><br>
+                Total: $1100.49
+            </div>
+
+            <h5>Example 3: Sorting ArrayList</h5>
+            <pre><code>import java.util.ArrayList;
+import java.util.Collections;
+
+public class SortArrayList {
+    public static void main(String[] args) {
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
+        numbers.add(45);
+        numbers.add(12);
+        numbers.add(78);
+        numbers.add(23);
+        numbers.add(56);
+        
+        System.out.println("Original: " + numbers);
+        
+        // Sort ascending
+        Collections.sort(numbers);
+        System.out.println("Sorted (ascending): " + numbers);
+        
+        // Sort descending
+        Collections.sort(numbers, Collections.reverseOrder());
+        System.out.println("Sorted (descending): " + numbers);
+    }
+}</code></pre>
+            <div class="output">
+                Original: [45, 12, 78, 23, 56]<br>
+                Sorted (ascending): [12, 23, 45, 56, 78]<br>
+                Sorted (descending): [78, 56, 45, 23, 12]
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>ArrayList Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

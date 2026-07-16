@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>While Loop - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>While Loop Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>While Loop - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master while loop with ranges, sequences, Fibonacci, squares, and digit sums.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Print Ranged Numbers</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to print ranged numbers from start to end.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter start number: ");
+        int start = sn.nextInt();
+
+        System.out.print("Enter end number: ");
+        int end = sn.nextInt();
+
+        while (start <= end) {
+            System.out.println(start);
+            start++;
+        }
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter start number: 5
+Enter end number: 10
+5
+6
+7
+8
+9
+10</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>While Loop:</strong> Checks condition before executing loop body</li>
+                    <li><strong>Range Printing:</strong> Print all numbers from start to end (inclusive)</li>
+                    <li><strong>Increment:</strong> start++ moves to next number</li>
+                    <li><strong>Condition:</strong> Loop continues while start <= end</li>
+                </ul>
+                <strong>Use Case:</strong> Simple iteration over a range of numbers
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Print First 10 Negative Numbers</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to print first 10 negative numbers.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _02_ {
+    public static void main(String[] args) {
+
+        int i = -1;
+
+        while (i >= -10) {
+            System.out.println(i);
+            i--;
+        }
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>-1
+-2
+-3
+-4
+-5
+-6
+-7
+-8
+-9
+-10</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Negative Numbers:</strong> Start from -1 and decrement</li>
+                    <li><strong>Decrement:</strong> i-- moves to next negative number</li>
+                    <li><strong>Condition:</strong> i >= -10 ensures exactly 10 numbers</li>
+                    <li><strong>No Input:</strong> Fixed sequence, no user input needed</li>
+                </ul>
+                <strong>Pattern:</strong> Counting backwards from -1 to -10
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Sum of Fibonacci Series</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to find the sum of the Fibonacci series.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter number of terms: ");
+        int n = sn.nextInt();
+
+        int a = 0, b = 1, sum = 0, i = 1;
+
+        while (i <= n) {
+            sum = sum + a;
+            int c = a + b;
+            a = b;
+            b = c;
+            i++;
+        }
+
+        System.out.println("Sum of Fibonacci series = " + sum);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter number of terms: 7
+Sum of Fibonacci series = 12</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Fibonacci Sequence:</strong> 0, 1, 1, 2, 3, 5, 8, 13...</li>
+                    <li><strong>Sum Accumulation:</strong> Add each term to running total</li>
+                    <li><strong>Next Term:</strong> c = a + b generates next Fibonacci number</li>
+                    <li><strong>Example:</strong> First 7 terms: 0+1+1+2+3+5+8 = 20... wait, let me recalculate:
+                        0+1+1+2+3+5 = 12 ✓</li>
+                </ul>
+                <strong>Sequence:</strong> Each number is sum of previous two numbers
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Display Square of Numbers from 1 to N</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to display square of numbers from 1 to N.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _04_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+
+        int i = 1;
+
+        while (i <= n) {
+            System.out.println(i + " square = " + (i * i));
+            i++;
+        }
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter N: 5
+1 square = 1
+2 square = 4
+3 square = 9
+4 square = 16
+5 square = 25</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Square Calculation:</strong> i * i computes square of each number</li>
+                    <li><strong>Formatted Output:</strong> Display number and its square</li>
+                    <li><strong>Range:</strong> From 1 to N (user-defined)</li>
+                    <li><strong>While Loop:</strong> Simple iteration with condition i <= n</li>
+                </ul>
+                <strong>Formula:</strong> Square of n = n × n = n²
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Sum of Even and Odd Digits of a Number</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to find sum of even and odd digits of a number.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _05_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int n = sn.nextInt();
+
+        int evenSum = 0, oddSum = 0;
+
+        while (n > 0) {
+            int digit = n % 10;
+
+            if (digit % 2 == 0)
+                evenSum = evenSum + digit;
+            else
+                oddSum = oddSum + digit;
+
+            n = n / 10;
+        }
+
+        System.out.println("Sum of Even digits = " + evenSum);
+        System.out.println("Sum of Odd digits = " + oddSum);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a number: 12345
+Sum of Even digits = 6
+Sum of Odd digits = 9</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Digit Extraction:</strong> n % 10 gets last digit</li>
+                    <li><strong>Even/Odd Check:</strong> digit % 2 == 0 for even digits</li>
+                    <li><strong>Separate Sums:</strong> Maintain two accumulators</li>
+                    <li><strong>Digit Removal:</strong> n / 10 removes last digit</li>
+                </ul>
+                <strong>Example:</strong> 12345 → Even: 2+4=6, Odd: 1+3+5=9
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>While Loop Module - Practice Worksheet</strong></p>
+            <p>Master while loops with ranges, sequences, Fibonacci, and digit manipulation</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

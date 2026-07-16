@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>CRUD Operations Worksheet</h5>
+        <a href="../02_CRUD_Operations/index.html"
+            style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>CRUD Operations - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master CRUD (Create, Read, Update, Delete) operations with JDBC through these real-world database
+                applications.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Social Networking Platform - User Profile Creation</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Build a social networking platform using JDBC. This example demonstrates user profile creation
+                functionality.
+                A complete social networking platform would include:
+                <ul>
+                    <li>User profile management (create, update, delete)</li>
+                    <li>Friend connections and social graph</li>
+                    <li>Messaging system</li>
+                    <li>Post creation and commenting</li>
+                    <li>Notification management</li>
+                </ul>
+                This example focuses on the <strong>CREATE</strong> operation for user profiles.
+                <br><br>
+                <strong>Database Setup:</strong> Create a database named <code>socialdb</code> with a <code>users</code>
+                table
+                containing columns: <code>id</code> and <code>username</code>.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.sql.*;
+
+class _03_ {
+    public static void main(String[] args) {
+
+        try {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/socialdb", "root", "password");
+
+            PreparedStatement ps =
+                    con.prepareStatement("INSERT INTO users VALUES (?, ?)");
+
+            ps.setInt(1, 1);
+            ps.setString(2, "john_doe");
+
+            ps.executeUpdate();
+            System.out.println("User Profile Created");
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>User Profile Created</code></div>
+
+            <h4>Database Schema</h4>
+            <div class="code-block"><code>CREATE DATABASE socialdb;
+
+USE socialdb;
+
+CREATE TABLE users (
+    id INT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL
+);
+
+-- After running the program, verify:
+SELECT * FROM users;
+-- Output: 1 | john_doe
+
+-- Extended schema for a full social network:
+CREATE TABLE friends (
+    user_id INT,
+    friend_id INT,
+    status VARCHAR(20),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (friend_id) REFERENCES users(id)
+);
+
+CREATE TABLE posts (
+    post_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    content TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE comments (
+    comment_id INT PRIMARY KEY AUTO_INCREMENT,
+    post_id INT,
+    user_id INT,
+    comment_text TEXT,
+    FOREIGN KEY (post_id) REFERENCES posts(post_id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>CREATE Operation:</strong> INSERT statement adds new user profiles to the database</li>
+                    <li><strong>Primary Key:</strong> <code>id</code> uniquely identifies each user</li>
+                    <li><strong>UNIQUE Constraint:</strong> Ensures no duplicate usernames</li>
+                    <li><strong>PreparedStatement:</strong> Safely handles user input to prevent SQL injection</li>
+                </ul>
+                <strong>Extension Ideas:</strong> Implement friend requests, messaging, posts with likes/comments, and
+                real-time notifications.
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Online Auction System - Item Listing</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Develop an online auction system using JDBC. This example demonstrates item listing functionality.
+                A complete auction system would include:
+                <ul>
+                    <li>Item listing and management</li>
+                    <li>Bidding system with real-time updates</li>
+                    <li>Auction management (start, end, extend)</li>
+                    <li>User authentication and authorization</li>
+                    <li>Payment processing integration</li>
+                    <li>Email notifications for bids and auction results</li>
+                </ul>
+                This example focuses on the <strong>CREATE</strong> operation for listing items.
+                <br><br>
+                <strong>Database Setup:</strong> Create a database named <code>auctiondb</code> with an
+                <code>items</code> table
+                containing columns: <code>id</code>, <code>name</code>, and <code>price</code>.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.sql.*;
+
+class _04_ {
+    public static void main(String[] args) {
+
+        try {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/auctiondb", "root", "password");
+
+            PreparedStatement ps =
+                    con.prepareStatement("INSERT INTO items VALUES (?, ?, ?)");
+
+            ps.setInt(1, 201);
+            ps.setString(2, "Laptop");
+            ps.setDouble(3, 30000);
+
+            ps.executeUpdate();
+            System.out.println("Item Listed Successfully");
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Item Listed Successfully</code></div>
+
+            <h4>Database Schema</h4>
+            <div class="code-block"><code>CREATE DATABASE auctiondb;
+
+USE auctiondb;
+
+CREATE TABLE items (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price DOUBLE NOT NULL
+);
+
+-- After running the program, verify:
+SELECT * FROM items;
+-- Output: 201 | Laptop | 30000.0
+
+-- Extended schema for a full auction system:
+CREATE TABLE auctions (
+    auction_id INT PRIMARY KEY AUTO_INCREMENT,
+    item_id INT,
+    start_time DATETIME,
+    end_time DATETIME,
+    starting_price DOUBLE,
+    current_price DOUBLE,
+    status VARCHAR(20),
+    FOREIGN KEY (item_id) REFERENCES items(id)
+);
+
+CREATE TABLE bids (
+    bid_id INT PRIMARY KEY AUTO_INCREMENT,
+    auction_id INT,
+    user_id INT,
+    bid_amount DOUBLE,
+    bid_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (auction_id) REFERENCES auctions(auction_id)
+);
+
+CREATE TABLE payments (
+    payment_id INT PRIMARY KEY AUTO_INCREMENT,
+    auction_id INT,
+    user_id INT,
+    amount DOUBLE,
+    payment_status VARCHAR(20),
+    payment_date TIMESTAMP,
+    FOREIGN KEY (auction_id) REFERENCES auctions(auction_id)
+);</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Data Types:</strong>
+                        <ul>
+                            <li><code>setInt()</code> - For integer item IDs</li>
+                            <li><code>setString()</code> - For item names</li>
+                            <li><code>setDouble()</code> - For prices (supports decimal values)</li>
+                        </ul>
+                    </li>
+                    <li><strong>CRUD - Create:</strong> INSERT operation adds new auction items</li>
+                    <li><strong>Price Handling:</strong> DOUBLE data type for accurate price representation</li>
+                    <li><strong>Transaction Safety:</strong> PreparedStatement prevents injection attacks</li>
+                </ul>
+                <strong>Extension Ideas:</strong> Add bidding logic, auction timers, winner notification, payment
+                gateway integration, and bid history tracking.
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="../02_CRUD_Operations/index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>CRUD Operations Module - Practice Worksheet</strong></p>
+            <p>Master database operations in Java</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

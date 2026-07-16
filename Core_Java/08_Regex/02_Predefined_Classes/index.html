@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predefined Classes - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Predefined Classes</h5>
+        <a href="../../index.html#regex">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#classes">Classes</a>
+        <a href="#examples">Examples</a>
+    </div>
+    <div class="top-nav">
+        <h2>Regex Predefined Classes</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Predefined Character Classes</h1>
+            <p class="lead text-muted">Use shorthand character classes like \d, \w, \s in regex patterns.</p>
+        </div>
+        <div class="section" id="classes">
+            <h4>Common Predefined Classes</h4>
+            <table class="table">
+                <tr>
+                    <th>Class</th>
+                    <th>Meaning</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>\d</td>
+                    <td>Any digit [0-9]</td>
+                    <td>Matches: 5, 9</td>
+                </tr>
+                <tr>
+                    <td>\D</td>
+                    <td>Non-digit</td>
+                    <td>Matches: a, @</td>
+                </tr>
+                <tr>
+                    <td>\w</td>
+                    <td>Word character [a-zA-Z0-9_]</td>
+                    <td>Matches: a, 5, _</td>
+                </tr>
+                <tr>
+                    <td>\W</td>
+                    <td>Non-word character</td>
+                    <td>Matches: @, #</td>
+                </tr>
+                <tr>
+                    <td>\s</td>
+                    <td>Whitespace</td>
+                    <td>Matches: space, tab</td>
+                </tr>
+                <tr>
+                    <td>\S</td>
+                    <td>Non-whitespace</td>
+                    <td>Matches: a, 5</td>
+                </tr>
+            </table>
+        </div>
+        <div class="section" id="examples">
+            <h4>Example: Using Predefined Classes</h4>
+            <pre><code>import java.util.regex.*;
+
+public class PredefinedDemo {
+    public static void main(String[] args) {
+        String text = "Phone: 123-456-7890";
+        
+        // \d+ matches one or more digits
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(text);
+        
+        System.out.println("Numbers found:");
+        while (m.find()) {
+            System.out.println(m.group());
+        }
+    }
+}</code></pre>
+            <div class="output">
+                Numbers found:<br>
+                123<br>
+                456<br>
+                7890
+            </div>
+        </div>
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn-worksheet">Go to Practice Worksheets →</a>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Predefined Classes Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

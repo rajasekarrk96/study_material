@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArrayList - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>ArrayList Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>ArrayList - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master ArrayList operations with dynamic array manipulations and element management.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Create ArrayList, Add Colors & Print</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to create a new array list, add some colors (string) and print
+                out the collection.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.ArrayList;
+
+class _01_ {
+    public static void main(String[] args) {
+
+        ArrayList&lt;String&gt; colors = new ArrayList&lt;&gt;();
+
+        colors.add("Red");
+        colors.add("Green");
+        colors.add("Blue");
+        colors.add("Yellow");
+
+        System.out.println(colors);
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>[Red, Green, Blue, Yellow]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>ArrayList Creation:</strong> Dynamic array that can grow/shrink</li>
+                    <li><strong>add():</strong> Appends element to the end of the list</li>
+                    <li><strong>Generic Type:</strong> &lt;String&gt; ensures type safety</li>
+                    <li><strong>toString():</strong> Automatically called when printing</li>
+                </ul>
+                <strong>Advantages:</strong> Dynamic size, easy to use, maintains insertion order
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Iterate Through All Elements</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to iterate through all elements in an array list.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.ArrayList;
+
+class _02_ {
+    public static void main(String[] args) {
+
+        ArrayList&lt;String&gt; colors = new ArrayList&lt;&gt;();
+
+        colors.add("Red");
+        colors.add("Green");
+        colors.add("Blue");
+
+        for (String c : colors) {
+            System.out.println(c);
+        }
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Red
+Green
+Blue</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>For-Each Loop:</strong> Enhanced for loop for easy iteration</li>
+                    <li><strong>Read-Only:</strong> Cannot modify list during for-each iteration</li>
+                    <li><strong>Cleaner Syntax:</strong> More readable than traditional for loop</li>
+                    <li><strong>Alternatives:</strong> Can use for loop with index or Iterator</li>
+                </ul>
+                <strong>Best Practice:</strong> Use for-each when you don't need the index
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Insert Element at First Position</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to insert an element into the array list at the first
+                position.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.ArrayList;
+
+class _03_ {
+    public static void main(String[] args) {
+
+        ArrayList&lt;String&gt; colors = new ArrayList&lt;&gt;();
+
+        colors.add("Green");
+        colors.add("Blue");
+
+        colors.add(0, "Red");
+
+        System.out.println(colors);
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>[Red, Green, Blue]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>add(index, element):</strong> Inserts element at specified position</li>
+                    <li><strong>Index 0:</strong> First position in the list</li>
+                    <li><strong>Shifting:</strong> Existing elements shift to the right</li>
+                    <li><strong>Performance:</strong> O(n) operation due to element shifting</li>
+                </ul>
+                <strong>Note:</strong> For frequent insertions at beginning, consider LinkedList
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Update Specific Array Element</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to update specific array element by given element.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.ArrayList;
+
+class _04_ {
+    public static void main(String[] args) {
+
+        ArrayList&lt;String&gt; colors = new ArrayList&lt;&gt;();
+
+        colors.add("Red");
+        colors.add("Green");
+        colors.add("Blue");
+
+        colors.set(1, "Yellow");
+
+        System.out.println(colors);
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>[Red, Yellow, Blue]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>set(index, element):</strong> Replaces element at specified index</li>
+                    <li><strong>Index 1:</strong> Second element (0-based indexing)</li>
+                    <li><strong>Returns Old Value:</strong> set() returns the replaced element</li>
+                    <li><strong>Performance:</strong> O(1) constant time operation</li>
+                </ul>
+                <strong>Validation:</strong> Ensure index is within bounds (0 to size-1)
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Remove Third Element</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to remove the third element from an array list.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.ArrayList;
+
+class _05_ {
+    public static void main(String[] args) {
+
+        ArrayList&lt;String&gt; colors = new ArrayList&lt;&gt;();
+
+        colors.add("Red");
+        colors.add("Green");
+        colors.add("Blue");
+        colors.add("Yellow");
+
+        colors.remove(2);
+
+        System.out.println(colors);
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>[Red, Green, Yellow]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>remove(index):</strong> Removes element at specified position</li>
+                    <li><strong>Index 2:</strong> Third element (0-based indexing)</li>
+                    <li><strong>Shifting:</strong> Elements after removed index shift left</li>
+                    <li><strong>Alternative:</strong> remove(Object) removes by value</li>
+                </ul>
+                <strong>Returns:</strong> The removed element, useful for verification
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>ArrayList Module - Practice Worksheet</strong></p>
+            <p>Master dynamic array operations with ArrayList</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

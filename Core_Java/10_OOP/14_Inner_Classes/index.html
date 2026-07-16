@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inner Classes - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Inner Classes</h5>
+        <a href="../../index.html#oop">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#intro">Introduction</a>
+        <a href="#member">Member Inner Class</a>
+        <a href="#static">Static Nested Class</a>
+        <a href="#local">Local Inner Class</a>
+        <a href="#anonymous">Anonymous Inner Class</a>
+        <a href="#examples">Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Inner Classes</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Inner Classes in Java</h1>
+            <p class="lead text-muted">Classes defined within another class for better encapsulation and code
+                organization.</p>
+        </div>
+
+        <div class="section" id="intro">
+            <h4>What are Inner Classes?</h4>
+            <p>Inner classes (also called nested classes) are classes defined within another class. They provide a way
+                to logically group classes that are only used in one place, increase encapsulation, and make code more
+                readable and maintainable.</p>
+
+            <h5>Types of Inner Classes:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Access to Outer Class</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Member Inner Class</td>
+                        <td>Non-static class inside another class</td>
+                        <td>Can access all members (including private)</td>
+                    </tr>
+                    <tr>
+                        <td>Static Nested Class</td>
+                        <td>Static class inside another class</td>
+                        <td>Can only access static members</td>
+                    </tr>
+                    <tr>
+                        <td>Local Inner Class</td>
+                        <td>Class defined inside a method</td>
+                        <td>Can access final/effectively final local variables</td>
+                    </tr>
+                    <tr>
+                        <td>Anonymous Inner Class</td>
+                        <td>Class without a name, defined inline</td>
+                        <td>Used for one-time implementations</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Advantages of Inner Classes:</h5>
+            <ul>
+                <li><strong>Encapsulation:</strong> Hide implementation details from other classes</li>
+                <li><strong>Readability:</strong> Logical grouping of classes that belong together</li>
+                <li><strong>Access:</strong> Can access private members of outer class</li>
+                <li><strong>Callbacks:</strong> Useful for event handling and callbacks</li>
+            </ul>
+        </div>
+
+        <div class="section" id="member">
+            <h4>1. Member Inner Class</h4>
+            <p>A non-static class defined at the member level of another class. It has access to all members of the
+                outer class, including private members.</p>
+
+            <h5>Syntax:</h5>
+            <pre><code>class OuterClass {
+    // Outer class members
+    
+    class InnerClass {
+        // Inner class members
+    }
+}</code></pre>
+
+            <h5>Example 1: Basic Member Inner Class</h5>
+            <pre><code>class Outer {
+    private String message = "Hello from Outer Class";
+    
+    // Member Inner Class
+    class Inner {
+        void display() {
+            System.out.println(message);  // Can access private member
+        }
+    }
+    
+    void createInner() {
+        Inner inner = new Inner();
+        inner.display();
+    }
+}
+
+public class MemberInnerDemo {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        outer.createInner();
+        
+        // Alternative way to create inner class object
+        Outer.Inner inner = outer.new Inner();
+        inner.display();
+    }
+}</code></pre>
+            <div class="output">
+                Hello from Outer Class<br>
+                Hello from Outer Class
+            </div>
+
+            <h5>Example 2: Inner Class Accessing Outer Members</h5>
+            <pre><code>class Car {
+    private String brand = "Toyota";
+    private int speed = 0;
+    
+    class Engine {
+        private int horsepower = 150;
+        
+        void start() {
+            speed = 60;  // Modify outer class variable
+            System.out.println(brand + " engine started!");
+            System.out.println("Speed: " + speed + " km/h");
+            System.out.println("Horsepower: " + horsepower);
+        }
+    }
+    
+    void startCar() {
+        Engine engine = new Engine();
+        engine.start();
+    }
+}
+
+public class CarDemo {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.startCar();
+    }
+}</code></pre>
+            <div class="output">
+                Toyota engine started!<br>
+                Speed: 60 km/h<br>
+                Horsepower: 150
+            </div>
+
+            <div class="note">
+                <strong>💡 Key Points:</strong>
+                <ul>
+                    <li>Inner class object requires an outer class object</li>
+                    <li>Can access all members of outer class (even private)</li>
+                    <li>Cannot have static members (except static final constants)</li>
+                    <li>Syntax to create: <code>Outer.Inner inner = outer.new Inner();</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="static">
+            <h4>2. Static Nested Class</h4>
+            <p>A static class defined inside another class. It doesn't require an instance of the outer class and can
+                only access static members of the outer class.</p>
+
+            <h5>Syntax:</h5>
+            <pre><code>class OuterClass {
+    static class StaticNestedClass {
+        // Static nested class members
+    }
+}</code></pre>
+
+            <h5>Example 1: Basic Static Nested Class</h5>
+            <pre><code>class Outer {
+    private static String staticMessage = "Static Message";
+    private String instanceMessage = "Instance Message";
+    
+    static class StaticNested {
+        void display() {
+            System.out.println(staticMessage);  // Can access static members
+            // System.out.println(instanceMessage);  // ERROR: Cannot access instance members
+        }
+    }
+}
+
+public class StaticNestedDemo {
+    public static void main(String[] args) {
+        // No need for outer class instance
+        Outer.StaticNested nested = new Outer.StaticNested();
+        nested.display();
+    }
+}</code></pre>
+            <div class="output">
+                Static Message
+            </div>
+
+            <h5>Example 2: Builder Pattern Using Static Nested Class</h5>
+            <pre><code>class Student {
+    private String name;
+    private int age;
+    private String course;
+    
+    private Student(Builder builder) {
+        this.name = builder.name;
+        this.age = builder.age;
+        this.course = builder.course;
+    }
+    
+    // Static Nested Builder Class
+    static class Builder {
+        private String name;
+        private int age;
+        private String course;
+        
+        Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+        
+        Builder setAge(int age) {
+            this.age = age;
+            return this;
+        }
+        
+        Builder setCourse(String course) {
+            this.course = course;
+            return this;
+        }
+        
+        Student build() {
+            return new Student(this);
+        }
+    }
+    
+    void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Course: " + course);
+    }
+}
+
+public class BuilderDemo {
+    public static void main(String[] args) {
+        Student student = new Student.Builder()
+            .setName("John")
+            .setAge(20)
+            .setCourse("Computer Science")
+            .build();
+        
+        student.display();
+    }
+}</code></pre>
+            <div class="output">
+                Name: John<br>
+                Age: 20<br>
+                Course: Computer Science
+            </div>
+
+            <div class="note">
+                <strong>💡 Key Points:</strong>
+                <ul>
+                    <li>Doesn't need outer class instance to be created</li>
+                    <li>Can only access static members of outer class</li>
+                    <li>Can have static and non-static members</li>
+                    <li>Commonly used for Builder pattern</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="local">
+            <h4>3. Local Inner Class</h4>
+            <p>A class defined inside a method or block. It can access the members of the outer class and final or
+                effectively final local variables of the enclosing method.</p>
+
+            <h5>Example 1: Basic Local Inner Class</h5>
+            <pre><code>class Outer {
+    private String outerField = "Outer Field";
+    
+    void outerMethod() {
+        final String localVar = "Local Variable";
+        
+        // Local Inner Class
+        class LocalInner {
+            void display() {
+                System.out.println(outerField);
+                System.out.println(localVar);  // Can access final local variables
+            }
+        }
+        
+        LocalInner inner = new LocalInner();
+        inner.display();
+    }
+}
+
+public class LocalInnerDemo {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        outer.outerMethod();
+    }
+}</code></pre>
+            <div class="output">
+                Outer Field<br>
+                Local Variable
+            </div>
+
+            <h5>Example 2: Local Class for Validation</h5>
+            <pre><code>class Validator {
+    void validateEmail(String email) {
+        final String emailPattern = "^[A-Za-z0-9+_.-]+@(.+)$";
+        
+        // Local Inner Class
+        class EmailValidator {
+            boolean isValid() {
+                return email.matches(emailPattern);
+            }
+            
+            void printResult() {
+                if (isValid()) {
+                    System.out.println(email + " is valid");
+                } else {
+                    System.out.println(email + " is invalid");
+                }
+            }
+        }
+        
+        EmailValidator validator = new EmailValidator();
+        validator.printResult();
+    }
+}
+
+public class ValidationDemo {
+    public static void main(String[] args) {
+        Validator validator = new Validator();
+        validator.validateEmail("test@example.com");
+        validator.validateEmail("invalid-email");
+    }
+}</code></pre>
+            <div class="output">
+                test@example.com is valid<br>
+                invalid-email is invalid
+            </div>
+
+            <div class="note">
+                <strong>💡 Key Points:</strong>
+                <ul>
+                    <li>Defined inside a method or block</li>
+                    <li>Scope limited to the method/block where it's defined</li>
+                    <li>Can access final or effectively final local variables</li>
+                    <li>Cannot be accessed outside the method</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="anonymous">
+            <h4>4. Anonymous Inner Class</h4>
+            <p>A class without a name that is defined and instantiated in a single expression. Commonly used for
+                implementing interfaces or extending classes on-the-fly.</p>
+
+            <h5>Example 1: Anonymous Class Implementing Interface</h5>
+            <pre><code>interface Greeting {
+    void sayHello();
+}
+
+public class AnonymousDemo {
+    public static void main(String[] args) {
+        // Anonymous Inner Class
+        Greeting greeting = new Greeting() {
+            @Override
+            public void sayHello() {
+                System.out.println("Hello from Anonymous Class!");
+            }
+        };
+        
+        greeting.sayHello();
+    }
+}</code></pre>
+            <div class="output">
+                Hello from Anonymous Class!
+            </div>
+
+            <h5>Example 2: Anonymous Class Extending Abstract Class</h5>
+            <pre><code>abstract class Animal {
+    abstract void makeSound();
+}
+
+public class AnimalDemo {
+    public static void main(String[] args) {
+        // Anonymous class extending Animal
+        Animal dog = new Animal() {
+            @Override
+            void makeSound() {
+                System.out.println("Woof! Woof!");
+            }
+        };
+        
+        Animal cat = new Animal() {
+            @Override
+            void makeSound() {
+                System.out.println("Meow! Meow!");
+            }
+        };
+        
+        dog.makeSound();
+        cat.makeSound();
+    }
+}</code></pre>
+            <div class="output">
+                Woof! Woof!<br>
+                Meow! Meow!
+            </div>
+
+            <h5>Example 3: Anonymous Class with Thread</h5>
+            <pre><code>public class ThreadDemo {
+    public static void main(String[] args) {
+        // Anonymous class implementing Runnable
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 1; i <= 5; i++) {
+                    System.out.println("Count: " + i);
+                }
+            }
+        });
+        
+        thread.start();
+    }
+}</code></pre>
+            <div class="output">
+                Count: 1<br>
+                Count: 2<br>
+                Count: 3<br>
+                Count: 4<br>
+                Count: 5
+            </div>
+
+            <div class="note">
+                <strong>💡 Key Points:</strong>
+                <ul>
+                    <li>No class name, defined inline</li>
+                    <li>Used for one-time implementations</li>
+                    <li>Can implement one interface or extend one class</li>
+                    <li>Cannot have constructors (no name!)</li>
+                    <li>Modern alternative: Lambda expressions (Java 8+)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="examples">
+            <h4>Practical Examples</h4>
+
+            <h5>Example 1: Data Structure with Inner Class</h5>
+            <pre><code>class LinkedList {
+    private Node head;
+    
+    // Member Inner Class
+    private class Node {
+        int data;
+        Node next;
+        
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+    
+    void add(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newNode;
+        }
+    }
+    
+    void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+}
+
+public class LinkedListDemo {
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.display();
+    }
+}</code></pre>
+            <div class="output">
+                10 -> 20 -> 30 -> null
+            </div>
+
+            <h5>Example 2: Event Handling with Anonymous Class</h5>
+            <pre><code>interface ClickListener {
+    void onClick();
+}
+
+class Button {
+    private String label;
+    private ClickListener listener;
+    
+    Button(String label) {
+        this.label = label;
+    }
+    
+    void setOnClickListener(ClickListener listener) {
+        this.listener = listener;
+    }
+    
+    void click() {
+        System.out.println(label + " button clicked!");
+        if (listener != null) {
+            listener.onClick();
+        }
+    }
+}
+
+public class EventDemo {
+    public static void main(String[] args) {
+        Button submitBtn = new Button("Submit");
+        
+        // Anonymous inner class for event handling
+        submitBtn.setOnClickListener(new ClickListener() {
+            @Override
+            public void onClick() {
+                System.out.println("Form submitted!");
+            }
+        });
+        
+        submitBtn.click();
+    }
+}</code></pre>
+            <div class="output">
+                Submit button clicked!<br>
+                Form submitted!
+            </div>
+
+            <h5>Comparison Table:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Member Inner</th>
+                        <th>Static Nested</th>
+                        <th>Local Inner</th>
+                        <th>Anonymous</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Needs Outer Instance</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Can Have Static Members</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Access Outer Members</td>
+                        <td>All</td>
+                        <td>Static only</td>
+                        <td>All</td>
+                        <td>All</td>
+                    </tr>
+                    <tr>
+                        <td>Has Name</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Common Use Case</td>
+                        <td>Helper classes</td>
+                        <td>Builder pattern</td>
+                        <td>Limited scope logic</td>
+                        <td>Event handlers</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Inner Classes Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

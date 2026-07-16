@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groups - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Groups</h5>
+        <a href="../../index.html#regex">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#concept">Concept</a>
+        <a href="#examples">Examples</a>
+    </div>
+    <div class="top-nav">
+        <h2>Regex Groups</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Regex Groups</h1>
+            <p class="lead text-muted">Capture and extract parts of matched patterns.</p>
+        </div>
+        <div class="section" id="concept">
+            <h4>What are Groups?</h4>
+            <p>Groups allow you to capture parts of a match using parentheses (). Each group can be accessed separately.
+            </p>
+            <ul>
+                <li>() creates a capturing group</li>
+                <li>group(0) returns entire match</li>
+                <li>group(1), group(2)... return captured groups</li>
+            </ul>
+        </div>
+        <div class="section" id="examples">
+            <h4>Example: Extracting Date Parts</h4>
+            <pre><code>import java.util.regex.*;
+
+public class GroupDemo {
+    public static void main(String[] args) {
+        String date = "2024-01-15";
+        
+        // Pattern with 3 groups: (year)-(month)-(day)
+        Pattern p = Pattern.compile("(\\d{4})-(\\d{2})-(\\d{2})");
+        Matcher m = p.matcher(date);
+        
+        if (m.find()) {
+            System.out.println("Full match: " + m.group(0));
+            System.out.println("Year: " + m.group(1));
+            System.out.println("Month: " + m.group(2));
+            System.out.println("Day: " + m.group(3));
+        }
+    }
+}</code></pre>
+            <div class="output">
+                Full match: 2024-01-15<br>
+                Year: 2024<br>
+                Month: 01<br>
+                Day: 15
+            </div>
+        </div>
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn-worksheet">Go to Practice Worksheets →</a>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Groups Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Union / Union All - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Union / Union All</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Union / Union All</h2>
+                <p class="topic-desc">The UNION and UNION ALL operators are used to combine the result-set of two or more SELECT statements.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Tables</h3>
+                        <p class="subtopic-desc">Sample data from two different tables used for the following examples.</p>
+            <div class="output-box">
+                <div style='display: flex; gap: 20px; flex-wrap: wrap;'>
+                    <div style='flex: 1; min-width: 200px;'>
+                        <strong style='color: var(--accent-primary);'>Table 1: customers</strong>
+                        <table style='border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px;'>
+                            <thead><tr><th>cust_id</th><th>name</th><th>city</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Arun</td><td>Chennai</td></tr>
+                                <tr><td>2</td><td>Ravi</td><td>Madurai</td></tr>
+                                <tr><td>3</td><td>Sita</td><td>Trichy</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style='flex: 1; min-width: 200px;'>
+                        <strong style='color: var(--accent-secondary);'>Table 2: suppliers</strong>
+                        <table style='border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px;'>
+                            <thead><tr><th>supp_id</th><th>name</th><th>city</th></tr></thead>
+                            <tbody>
+                                <tr><td>101</td><td>Kumar</td><td>Chennai</td></tr>
+                                <tr><td>102</td><td>Meena</td><td>Coimbatore</td></tr>
+                                <tr><td>103</td><td>Rani</td><td>Madurai</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">UNION Example</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Combines cities from both tables and <strong>removes duplicate values</strong>.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> city <span class="sql-keyword">FROM</span> customers\nUNION\nSELECT city <span class="sql-keyword">FROM</span> suppliers;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> city <span class="sql-keyword">FROM</span> customers\nUNION\nSELECT city <span class="sql-keyword">FROM</span> suppliers;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 50%; font-size: 13px;'>
+                    <thead><tr><th>city</th></tr></thead>
+                    <tbody>
+                        <tr><td>Chennai</td></tr>
+                        <tr><td>Madurai</td></tr>
+                        <tr><td>Trichy</td></tr>
+                        <tr><td>Coimbatore</td></tr>
+                    </tbody>
+                </table>
+                <br>✔ Duplicate cities (Chennai, Madurai) appear only once.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">UNION ALL Example</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Combines cities from both tables and <strong>keeps all values</strong>, including duplicates.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> city <span class="sql-keyword">FROM</span> customers\nUNION <span class="sql-keyword">ALL</span>\nSELECT city <span class="sql-keyword">FROM</span> suppliers;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> city <span class="sql-keyword">FROM</span> customers\nUNION <span class="sql-keyword">ALL</span>\nSELECT city <span class="sql-keyword">FROM</span> suppliers;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 50%; font-size: 13px;'>
+                    <thead><tr><th>city</th></tr></thead>
+                    <tbody>
+                        <tr><td>Chennai</td></tr>
+                        <tr><td>Madurai</td></tr>
+                        <tr><td>Trichy</td></tr>
+                        <tr><td>Chennai</td></tr>
+                        <tr><td>Coimbatore</td></tr>
+                        <tr><td>Madurai</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Display all student names from both tables using UNION (removes duplicates).</strong><br>
+    <button class="toggle-btn" data-target="ans-t24-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t24-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name FROM students
+UNION
+SELECT name FROM new_students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+
+| name   |
++--------+
+| Arun   |
+| Priya  |
+| Kiran  |
+| Meena  |
+| Ravi   |
+| Sita   |
++--------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display all student names from both tables using UNION ALL (keeps duplicates).</strong><br>
+    <button class="toggle-btn" data-target="ans-t24-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t24-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name FROM students
+UNION ALL
+SELECT name FROM new_students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+
+| name   |
++--------+
+| Arun   |
+| Priya  |
+| Kiran  |
+| Meena  |
+| Arun   |
+| Ravi   |
+| Sita   |
++--------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Count total distinct student names from both tables using UNION.</strong><br>
+    <button class="toggle-btn" data-target="ans-t24-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t24-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT COUNT(*) AS total_names
+FROM (
+    SELECT name FROM students
+    UNION
+    SELECT name FROM new_students
+) AS combined;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------------+
+| total_names|
++------------+
+| 6          |
++------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Count total student names including duplicates using UNION ALL.</strong><br>
+    <button class="toggle-btn" data-target="ans-t24-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t24-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT COUNT(*) AS total_names
+FROM (
+    SELECT name FROM students
+    UNION ALL
+    SELECT name FROM new_students
+) AS combined;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------------+
+| total_names|
++------------+
+| 7          |
++------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display names from both tables ordered alphabetically using UNION.</strong><br>
+    <button class="toggle-btn" data-target="ans-t24-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t24-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name FROM students
+UNION
+SELECT name FROM new_students
+ORDER BY name;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+
+| name   |
++--------+
+| Arun   |
+| Kiran  |
+| Meena  |
+| Priya  |
+| Ravi   |
+| Sita   |
++--------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='24_order-by.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Order By</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='26_joins.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Joins →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

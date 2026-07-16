@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nested If - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Nested If</h5>
+        <a href="../../index.html#control">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#syntax">Syntax</a>
+        <a href="#example">Example</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Nested If Statement</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Nested If Statement in Java</h1>
+            <p class="lead text-muted">Place if statements inside other if statements to check multiple conditions
+                hierarchically.</p>
+        </div>
+
+        <div class="section" id="syntax">
+            <h4>Syntax</h4>
+            <pre><code>if (condition1) {
+    // Outer if block
+    if (condition2) {
+        // Inner if block (nested)
+        // Executes only if both conditions are true
+    }
+}</code></pre>
+            <ul>
+                <li>An if statement inside another if statement</li>
+                <li>Inner if executes only if outer if is true</li>
+                <li>Can nest multiple levels deep</li>
+                <li>Useful for checking dependent conditions</li>
+            </ul>
+        </div>
+
+        <div class="section" id="example">
+            <h4>Example: Age and License Check</h4>
+            <pre><code>public class NestedIfExample {
+    public static void main(String[] args) {
+        int age = 20;
+        boolean hasLicense = true;
+        
+        if (age >= 18) {
+            System.out.println("You are an adult");
+            
+            if (hasLicense) {
+                System.out.println("You can drive a car");
+            } else {
+                System.out.println("You need a license to drive");
+            }
+        } else {
+            System.out.println("You are a minor");
+            System.out.println("You cannot drive");
+        }
+        
+        // Another example: Number check
+        int num = 15;
+        
+        if (num > 0) {
+            if (num % 2 == 0) {
+                System.out.println(num + " is positive and even");
+            } else {
+                System.out.println(num + " is positive and odd");
+            }
+        } else {
+            System.out.println(num + " is not positive");
+        }
+    }
+}</code></pre>
+            <div class="output">
+                You are an adult<br>
+                You can drive a car<br>
+                15 is positive and odd
+            </div>
+            <div class="note">
+                <strong>💡 Best Practice:</strong> Avoid too many nesting levels (max 2-3) as it makes code hard to
+                read. Consider using logical operators or separate methods instead.
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Nested If Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

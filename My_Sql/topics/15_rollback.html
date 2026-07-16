@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rollback - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Rollback</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Rollback</h2>
+                <p class="topic-desc">ROLLBACK is a TCL command used to undo changes made in a transaction that is not yet committed.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">What does ROLLBACK do?</h3>
+                        <p class="subtopic-desc"><strong>🔹 Key Features</strong><br>🔹 Reverts changes made by INSERT, UPDATE, DELETE<br>🔹 Works only before COMMIT<br>🔹 Used to recover from mistakes</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Basic ROLLBACK</h3>
+                        <p class="subtopic-desc"><strong>🔹 Example</strong><br>Undoing an update.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code>START TRANSACTION;\n\nUPDATE students\nSET age = 25\nWHERE id = 1;\n\nROLLBACK;</code></pre><div class="output-box">✔ Result: Age remains unchanged</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">ROLLBACK with DELETE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Example</strong><br>Restoring a deleted row.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code>START TRANSACTION;\n\nDELETE <span class="sql-keyword">FROM</span> students\nWHERE id = 3;\n\nROLLBACK;</code></pre><div class="output-box">✔ Result: Row with ID 3 is restored</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">ROLLBACK with SAVEPOINT</h3>
+                        <p class="subtopic-desc"><strong>🔹 Example</strong><br>Partial rollback to a specific point.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code>SAVEPOINT sp1;\nROLLBACK TO sp1;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code>START TRANSACTION;\n\nINSERT <span class="sql-keyword">INTO</span> students <span class="sql-keyword">VALUES</span> (5, <span class="sql-string">'Kiran'</span>, 22);\nSAVEPOINT s1;\n\nUPDATE students <span class="sql-keyword">SET</span> age = 23 <span class="sql-keyword">WHERE</span> id = 5;\nROLLBACK TO s1;\n\nCOMMIT;</code></pre><div class="output-box">✔ Changes after SAVEPOINT s1 are undone.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Start a transaction and update a student’s age.</strong><br>
+    <button class="toggle-btn" data-target="ans-t14-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t14-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>START TRANSACTION;
+
+UPDATE students
+SET age = 30
+WHERE id = 1;</code></pre><br>
+        Output:<br>
+        Query OK, 1 row affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Undo the last update using ROLLBACK.</strong><br>
+    <button class="toggle-btn" data-target="ans-t14-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t14-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>ROLLBACK;</code></pre><br>
+        Output:<br>
+        Query OK
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Check whether the data is restored.</strong><br>
+    <button class="toggle-btn" data-target="ans-t14-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t14-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students WHERE id = 1;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Use SAVEPOINT and ROLLBACK to SAVEPOINT.</strong><br>
+    <button class="toggle-btn" data-target="ans-t14-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t14-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>START TRANSACTION;
+
+UPDATE students SET age = 25 WHERE id = 2;
+SAVEPOINT sp1;
+
+UPDATE students SET age = 35 WHERE id = 3;
+ROLLBACK TO sp1;</code></pre><br>
+        Output:<br>
+        Query OK, 1 row affected<br>
+        Query OK<br>
+        Query OK, 1 row affected<br>
+        Query OK
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display table after rollback to savepoint.</strong><br>
+    <button class="toggle-btn" data-target="ans-t14-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t14-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------------+------+
+| id | name         | age  |
++----+--------------+------+
+| 1  | Arun         | 22   |
+| 2  | Priya Sharma | 25   |
+| 3  | Kiran        | 23   |
+| 4  | Meena        | 24   |
++----+--------------+------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='14_alter-table.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Alter Table</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='16_delete-truncate-drop.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">DELETE / TRUNCATE / DROP →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

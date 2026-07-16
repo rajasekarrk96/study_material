@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  30 reports   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>30. Reports</h1>
+
+<h2>📖 Introduction</h2>
+<p>Running 100 tests is useless if you can't show the results to your manager. "Check the console logs" is not an
+    acceptable answer. Automation frameworks need beautiful, html-based reports with charts, steps, and screenshots.
+    <strong>Extent Reports</strong> (or Allure) is the standard for this.
+</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>Why TestNG default reports are insufficient</li>
+    <li>Integrating Extent Reports</li>
+    <li>Attaching Screenshots to Reports</li>
+    <li>Logging steps (Pass/Fail/Info)</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>Extent Reports Components</h3>
+<ul>
+    <li><strong>ExtentReports:</strong> The engine that generates the report.</li>
+    <li><strong>ExtentSparkReporter:</strong> Defines the UI/Theme of the report.</li>
+    <li><strong>ExtentTest:</strong> Represents a single test case in the report.</li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+<pre><code>// 1. Setup
+ExtentSparkReporter spark = new ExtentSparkReporter("report.html");
+ExtentReports extent = new ExtentReports();
+extent.attachReporter(spark);
+
+// 2. Create Test
+ExtentTest test = extent.createTest("Login Test");
+
+// 3. Log Steps
+test.info("Starting Login");
+test.pass("Entered Username");
+test.fail("Login Failed");
+
+// 4. Important! Write to file
+extent.flush();</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Flush:</strong> If you forget <code>extent.flush()</code> at the end of your suite (usually in
+        <code>@AfterSuite</code>), the report file will be created but will be completely empty (0 bytes).
+    </p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Generate a Report.</p>
+    <ol>
+        <li>Add ExtentReports dependency to pom.xml.</li>
+        <li>Create a Listener class.</li>
+        <li>On "onTestFailure", capture a screenshot and attach it to the report.</li>
+        <li>Run the suite and open the HTML file.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: How do you share results with stakeholders?</strong></p>
+    <p><strong>Answer:</strong> We use Extent Reports hosted on a CI server (Jenkins), or Allure Reports. We email the
+        link or summary to the team.</p>
+</blockquote>
+
+<a href="worksheets/ws_reports.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

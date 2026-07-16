@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Complete Learning Path</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Red headings */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #dc3545;
+        }
+
+        .navbar {
+            background-color: #000000 !important;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-brand img {
+            height: 35px;
+            width: auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white !important;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .module-card {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+            transition: all 0.3s ease;
+            border-left: 5px solid #dc3545;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        .module-card h4 {
+            color: #dc3545;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .module-card h4::before {
+            content: "📚";
+            margin-right: 10px;
+        }
+
+        .module-card p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .module-count {
+            display: inline-block;
+            background-color: #dc3545;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .module-link {
+            display: inline-block;
+            color: #dc3545;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .module-link:hover {
+            color: #ff4d5e;
+            text-decoration: underline;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #dc3545;
+            margin: 50px 0 30px;
+            border-bottom: 3px solid #dc3545;
+            padding-bottom: 10px;
+        }
+
+        .roadmap {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+        }
+
+        .roadmap ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .roadmap li {
+            padding: 10px 0;
+            color: #b0b0b0;
+            border-bottom: 1px solid #333;
+        }
+
+        .roadmap li:last-child {
+            border-bottom: none;
+        }
+
+        .roadmap li::before {
+            content: "→";
+            color: #dc3545;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .difficulty.beginner {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .difficulty.intermediate {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .difficulty.advanced {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        footer {
+            background-color: #000000;
+            color: #e0e0e0;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            border-top: 2px solid #dc3545;
+        }
+
+        /* Sidebar Navigation Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: #0a0a0a;
+            box-shadow: 2px 0 10px rgba(220, 53, 69, 0.3);
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #dc3545;
+            border-radius: 3px;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            left: 290px;
+            top: 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.5);
+            z-index: 1001;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-toggle:hover {
+            background: #c82333;
+            transform: scale(1.1);
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-280px);
+        }
+
+        .sidebar.collapsed+.sidebar-toggle {
+            left: 10px;
+        }
+
+        .main-content {
+            margin-left: 300px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 20px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-section-title {
+            padding: 12px 20px;
+            background: #1a1a1a;
+            cursor: pointer;
+            font-weight: 600;
+            color: #e0e0e0;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .sidebar-section-title:hover {
+            background: #2a2a2a;
+            border-left-color: #dc3545;
+        }
+
+        .sidebar-section-title.active {
+            background: #2a0a0a;
+            border-left-color: #dc3545;
+            color: #dc3545;
+        }
+
+        .sidebar-section-title .arrow {
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .sidebar-section-title.expanded .arrow {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-subtopics {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #0f0f0f;
+        }
+
+        .sidebar-subtopics.show {
+            max-height: 1000px;
+        }
+
+        .sidebar-subtopic {
+            padding: 10px 20px 10px 40px;
+            color: #b0b0b0;
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-subtopic:hover {
+            background: #2a2a2a;
+            color: #dc3545;
+            border-left-color: #dc3545;
+            padding-left: 45px;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 15px;
+            border-bottom: 2px solid #dc3545;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-header h3 {
+            color: #dc3545;
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-280px);
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .sidebar-toggle {
+                left: 10px;
+            }
+
+            .main-content {
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>📚 Topics</h3>
+        </div>
+
+        <!-- Basic Programs -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>01. Basic Programs</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="01_Basic_Programs/01_Introduction/index.html" class="sidebar-subtopic">Introduction</a>
+                <a href="01_Basic_Programs/02_Syntax/index.html" class="sidebar-subtopic">Syntax</a>
+                <a href="01_Basic_Programs/03_Variables/index.html" class="sidebar-subtopic">Variables</a>
+                <a href="01_Basic_Programs/04_DataTypes/index.html" class="sidebar-subtopic">Data Types</a>
+                <a href="01_Basic_Programs/05_Operators/index.html" class="sidebar-subtopic">Operators</a>
+                <a href="01_Basic_Programs/06_Input_Output/index.html" class="sidebar-subtopic">Input/Output</a>
+                <a href="01_Basic_Programs/07_Command_Line_Arguments/index.html" class="sidebar-subtopic">Command Line
+                    Arguments</a>
+            </div>
+        </div>
+
+        <!-- Conditionals -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>02. Conditional Statements</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="02_Conditionals/01_If/index.html" class="sidebar-subtopic">If Statement</a>
+                <a href="02_Conditionals/02_Else/index.html" class="sidebar-subtopic">Else Statement</a>
+                <a href="02_Conditionals/03_Else_If/index.html" class="sidebar-subtopic">Else-If Statement</a>
+                <a href="02_Conditionals/07_Switch/index.html" class="sidebar-subtopic">Switch Statement</a>
+            </div>
+        </div>
+
+        <!-- Loops -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>03. Loops</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="03_Loops/01_While/index.html" class="sidebar-subtopic">While Loop</a>
+                <a href="03_Loops/02_Do_While/index.html" class="sidebar-subtopic">Do-While Loop</a>
+                <a href="03_Loops/03_For/index.html" class="sidebar-subtopic">For Loop</a>
+                <a href="03_Loops/04_For_Each/index.html" class="sidebar-subtopic">For-Each Loop</a>
+            </div>
+        </div>
+
+        <!-- Pattern Programs -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>04. Pattern Programs</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="04_Pattern_Programs/01_Star_Patterns/index.html" class="sidebar-subtopic">Star Patterns</a>
+                <a href="04_Pattern_Programs/02_Number_Patterns/index.html" class="sidebar-subtopic">Number Patterns</a>
+                <a href="04_Pattern_Programs/04_Pyramid_Patterns/index.html" class="sidebar-subtopic">Pyramid
+                    Patterns</a>
+                <a href="04_Pattern_Programs/06_Diamond_Patterns/index.html" class="sidebar-subtopic">Diamond
+                    Patterns</a>
+            </div>
+        </div>
+
+        <!-- Arrays -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>05. Arrays</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="05_Arrays/01_Single_Dimensional/index.html" class="sidebar-subtopic">Single Dimensional
+                    Arrays</a>
+                <a href="05_Arrays/02_Multi_Dimensional/index.html" class="sidebar-subtopic">Multi-Dimensional
+                    Arrays</a>
+                <a href="05_Arrays/03_Array_Methods/index.html" class="sidebar-subtopic">Array Methods</a>
+            </div>
+        </div>
+
+        <!-- Methods -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>06. Methods/Functions</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="06_Methods/01_WPWR/index.html" class="sidebar-subtopic">Method Basics</a>
+                <a href="06_Methods/06_Method_Overloading/index.html" class="sidebar-subtopic">Method Overloading</a>
+                <a href="06_Methods/07_Recursion/index.html" class="sidebar-subtopic">Recursion</a>
+            </div>
+        </div>
+
+        <!-- Strings -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>07. Strings</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="07_Strings/01_String_Intro/index.html" class="sidebar-subtopic">String Basics</a>
+                <a href="07_Strings/02_String_Methods/index.html" class="sidebar-subtopic">String Methods</a>
+                <a href="07_Strings/07_StringBuilder/index.html" class="sidebar-subtopic">StringBuilder/Buffer</a>
+            </div>
+        </div>
+
+        <!-- Regex -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>08. Regular Expressions (Regex)</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="08_Regex/01_Character_Classes/index.html" class="sidebar-subtopic">Character Classes</a>
+                <a href="08_Regex/02_Predefined_Classes/index.html" class="sidebar-subtopic">Predefined Classes</a>
+                <a href="08_Regex/03_Quantifiers/index.html" class="sidebar-subtopic">Quantifiers</a>
+                <a href="08_Regex/04_Boundaries/index.html" class="sidebar-subtopic">Boundaries</a>
+                <a href="08_Regex/05_Groups/index.html" class="sidebar-subtopic">Groups</a>
+                <a href="08_Regex/06_Alternation/index.html" class="sidebar-subtopic">Alternation</a>
+                <a href="08_Regex/07_Pattern_Matcher/index.html" class="sidebar-subtopic">Pattern & Matcher</a>
+            </div>
+        </div>
+
+        <!-- Wrapper Classes -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>09. Wrapper Classes</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="09_Wrapper_Classes/01_Introduction/index.html" class="sidebar-subtopic">Introduction</a>
+                <a href="09_Wrapper_Classes/02_AutoBoxing_Unboxing/index.html" class="sidebar-subtopic">AutoBoxing &
+                    Unboxing</a>
+                <a href="09_Wrapper_Classes/03_Utility_Methods/index.html" class="sidebar-subtopic">Utility Methods</a>
+                <a href="09_Wrapper_Classes/04_Type_Conversion/index.html" class="sidebar-subtopic">Type Conversion</a>
+            </div>
+        </div>
+
+        <!-- OOP -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>10. Object-Oriented Programming</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="10_OOP/01_Class_and_Object/index.html" class="sidebar-subtopic">Classes & Objects</a>
+                <a href="10_OOP/02_Constructors/index.html" class="sidebar-subtopic">Constructors</a>
+                <a href="10_OOP/18_Access_Modifiers/index.html" class="sidebar-subtopic">Access Modifiers</a>
+                <a href="10_OOP/06_Final_Keyword/index.html" class="sidebar-subtopic">Final Keyword</a>
+                <a href="10_OOP/08_Inheritance/01_Single/index.html" class="sidebar-subtopic">Inheritance</a>
+                <a href="10_OOP/09_Super_Keyword/index.html" class="sidebar-subtopic">Super Keyword</a>
+                <a href="10_OOP/10_Polymorphism/01_CompileTime/index.html" class="sidebar-subtopic">Polymorphism</a>
+                <a href="10_OOP/10_Polymorphism/03_instanceof/index.html" class="sidebar-subtopic">instanceof
+                    Operator</a>
+                <a href="10_OOP/11_Abstract_Class/index.html" class="sidebar-subtopic">Abstraction & Interfaces</a>
+                <a href="10_OOP/07_Encapsulation/index.html" class="sidebar-subtopic">Encapsulation</a>
+                <a href="10_OOP/14_Inner_Classes/index.html" class="sidebar-subtopic">Inner Classes</a>
+            </div>
+        </div>
+
+        <!-- Collections -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>11. Collections Framework</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="11_Collections/00_Generics/01_Generic_Classes/index.html" class="sidebar-subtopic">Generics</a>
+                <a href="11_Collections/01_List/ArrayList/index.html" class="sidebar-subtopic">List (ArrayList)</a>
+                <a href="11_Collections/01_List/LinkedList/index.html" class="sidebar-subtopic">List (LinkedList)</a>
+                <a href="11_Collections/04_Map/HashMap/index.html" class="sidebar-subtopic">HashMap</a>
+                <a href="11_Collections/03_Set/HashSet/index.html" class="sidebar-subtopic">HashSet</a>
+            </div>
+        </div>
+
+        <!-- Exception Handling -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>12. Exception Handling</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="12_Exception_Handling/01_Try_Catch/index.html" class="sidebar-subtopic">Try-Catch-Finally</a>
+                <a href="12_Exception_Handling/06_Custom_Exceptions/index.html" class="sidebar-subtopic">Custom
+                    Exceptions</a>
+            </div>
+        </div>
+
+        <!-- File Handling -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>13. File Handling</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="13_File_Handling/01_File_Class/index.html" class="sidebar-subtopic">File I/O Streams</a>
+                <a href="13_File_Handling/09_Object_Serialization/index.html" class="sidebar-subtopic">Serialization</a>
+            </div>
+        </div>
+
+        <!-- Threading -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>14. Threading</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="14_Threading/01_Extending_Thread/index.html" class="sidebar-subtopic">Thread Basics</a>
+                <a href="14_Threading/04_Synchronization/index.html" class="sidebar-subtopic">Synchronization</a>
+            </div>
+        </div>
+
+        <!-- JDBC -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title" onclick="toggleSection(this)">
+                <span>15. JDBC Database Programming</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="sidebar-subtopics">
+                <a href="15_JDBC/02_Connection/index.html" class="sidebar-subtopic">JDBC Basics</a>
+                <a href="15_JDBC/06_CRUD_Operations/index.html" class="sidebar-subtopic">CRUD Operations</a>
+                <a href="15_JDBC/04_PreparedStatement/index.html" class="sidebar-subtopic">PreparedStatements</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="container">
+                <h1>Complete Java Learning Path</h1>
+                <p>Master Java from fundamentals to advanced concepts</p>
+                <p style="font-size: 1rem; opacity: 0.8;">A comprehensive curriculum with 15 modules covering everything
+                    from basic syntax to JDBC</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Syllabus -->
+            <div class="roadmap">
+                <h3 style="color: #dc3545; margin-bottom: 20px;">📋 Complete Course Syllabus</h3>
+                <ul>
+                    <li><strong>Module 01 - Basic Programs:</strong> Introduction to Java, Syntax & Structure,
+                        Variables, Data Types, Operators, Input/Output, Command Line Arguments</li>
+                    <li><strong>Module 02 - Conditional Statements:</strong> If Statement, Else Statement, Else-If
+                        Statement, Switch Statement</li>
+                    <li><strong>Module 03 - Loops:</strong> While Loop, Do-While Loop, For Loop, For-Each Loop</li>
+                    <li><strong>Module 04 - Pattern Programs:</strong> Star Patterns, Number Patterns, Pyramid Patterns,
+                        Diamond Patterns</li>
+                    <li><strong>Module 05 - Arrays:</strong> Single Dimensional Arrays, Multi-Dimensional Arrays, Array
+                        Methods</li>
+                    <li><strong>Module 06 - Methods/Functions:</strong> Method Basics (WPWR), Method Overloading,
+                        Recursion</li>
+                    <li><strong>Module 07 - Strings:</strong> String Basics, String Methods, StringBuilder &
+                        StringBuffer</li>
+                    <li><strong>Module 08 - Regular Expressions:</strong> Character Classes, Predefined Classes,
+                        Quantifiers, Boundaries, Groups, Alternation, Pattern & Matcher</li>
+                    <li><strong>Module 09 - Wrapper Classes:</strong> Introduction to Wrappers, AutoBoxing & Unboxing,
+                        Utility Methods, Type Conversion</li>
+                    <li><strong>Module 10 - Object-Oriented Programming:</strong> Classes & Objects, Constructors,
+                        Access Modifiers, Final Keyword, Inheritance, Super Keyword, Polymorphism, instanceof Operator,
+                        Abstraction & Interfaces, Encapsulation, Inner Classes</li>
+                    <li><strong>Module 11 - Collections Framework:</strong> Generics, ArrayList, LinkedList, HashMap,
+                        HashSet</li>
+                    <li><strong>Module 12 - Exception Handling:</strong> Try-Catch-Finally, Custom Exceptions</li>
+                    <li><strong>Module 13 - File Handling:</strong> File I/O Streams, Object Serialization</li>
+                    <li><strong>Module 14 - Threading:</strong> Thread Basics, Synchronization</li>
+                    <li><strong>Module 15 - JDBC Database Programming:</strong> JDBC Basics, CRUD Operations,
+                        PreparedStatements</li>
+                </ul>
+            </div>
+            <!-- Module 01: Basic Programs -->
+            <h2 class="section-title" id="basics">01. Basic Programs</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>01. Introduction</h4>
+                    <p>Learn what Java is, its history, features, why it's popular, and set up your development
+                        environment.
+                    </p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="01_Basic_Programs/01_Introduction/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>02. Syntax</h4>
+                    <p>Understand Java syntax rules, program structure, comments, packages, and how to organize your
+                        code.
+                    </p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="01_Basic_Programs/02_Syntax/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>03. Variables</h4>
+                    <p>Learn about variable declaration, initialization, types (local, instance, static), scope, and
+                        naming
+                        conventions.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="01_Basic_Programs/03_Variables/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>04. Data Types</h4>
+                    <p>Explore primitive types, reference types, type conversion, casting, and memory allocation in
+                        Java.
+                    </p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="01_Basic_Programs/04_DataTypes/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>05. Operators</h4>
+                    <p>Master arithmetic, logical, relational, bitwise, and assignment operators with practical
+                        examples.
+                    </p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="01_Basic_Programs/05_Operators/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>06. Input/Output</h4>
+                    <p>Learn console input and output using Scanner, System.in, and different methods for data
+                        interaction.
+                    </p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="01_Basic_Programs/06_Input_Output/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>07. Command Line Arguments</h4>
+                    <p>Understand how to pass arguments to Java programs and process command-line parameters.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="01_Basic_Programs/07_Command_Line_Arguments/index.html" class="module-link">Access
+                            Module
+                            →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 02: Conditionals -->
+            <h2 class="section-title" id="control">02. Conditional Statements</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>If Statement</h4>
+                    <p>Learn basic conditional execution with if statements and decision-making in your code.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="02_Conditionals/01_If/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Else Statement</h4>
+                    <p>Execute alternative code blocks when conditions are false using else statements.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="02_Conditionals/02_Else/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Else-If Statement</h4>
+                    <p>Handle multiple conditions with else-if statements for complex decision logic.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="02_Conditionals/03_Else_If/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Switch Statement</h4>
+                    <p>Use switch statements for cleaner code when checking multiple discrete values.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="02_Conditionals/07_Switch/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 03: Loops -->
+            <h2 class="section-title" id="loops">03. Loops</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>While Loop</h4>
+                    <p>Execute code repeatedly as long as a condition remains true.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="03_Loops/01_While/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Do-While Loop</h4>
+                    <p>Execute code at least once before checking the condition.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="03_Loops/02_Do_While/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>For Loop</h4>
+                    <p>Iterate a fixed number of times with controlled initialization, condition, and increment.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="03_Loops/03_For/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>For-Each Loop</h4>
+                    <p>Iterate over arrays and collections easily using the enhanced for loop syntax.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="03_Loops/04_For_Each/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 04: Pattern Programs -->
+            <h2 class="section-title" id="patterns">04. Pattern Programs</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>Star Patterns</h4>
+                    <p>Create geometric patterns using stars and loops - fundamental for loop practice.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="04_Pattern_Programs/01_Star_Patterns/index.html" class="module-link">Access Module
+                            →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Number Patterns</h4>
+                    <p>Generate patterns using numbers to strengthen loop logic understanding.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="04_Pattern_Programs/02_Number_Patterns/index.html" class="module-link">Access Module
+                            →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Pyramid Patterns</h4>
+                    <p>Build pyramid-shaped patterns - great for nested loop practice.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="04_Pattern_Programs/04_Pyramid_Patterns/index.html" class="module-link">Access Module
+                            →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Diamond Patterns</h4>
+                    <p>Create diamond-shaped patterns combining upward and downward pyramids.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="04_Pattern_Programs/06_Diamond_Patterns/index.html" class="module-link">Access Module
+                            →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 05: Arrays -->
+            <h2 class="section-title" id="arrays">05. Arrays</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>Single Dimensional Arrays</h4>
+                    <p>Declare, initialize, and use single-dimensional arrays for storing multiple values.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="05_Arrays/01_Single_Dimensional/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Multi-Dimensional Arrays</h4>
+                    <p>Work with 2D and 3D arrays for complex data structure representation.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="05_Arrays/02_Multi_Dimensional/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Array Methods</h4>
+                    <p>Use built-in array methods like sort(), binarySearch(), and toString().</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="05_Arrays/03_Array_Methods/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 06: Methods -->
+            <h2 class="section-title" id="methods">06. Methods/Functions</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>Method Basics</h4>
+                    <p>Learn method declaration, parameters, return types, and method calling.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="06_Methods/01_WPWR/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Method Overloading</h4>
+                    <p>Create multiple methods with the same name but different parameters.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="06_Methods/06_Method_Overloading/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Recursion</h4>
+                    <p>Write methods that call themselves to solve complex problems elegantly.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="06_Methods/07_Recursion/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 07: Strings -->
+            <h2 class="section-title" id="strings">07. Strings</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>String Basics</h4>
+                    <p>Learn String creation, immutability, and the String pool concept.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="07_Strings/01_String_Intro/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>String Methods</h4>
+                    <p>Master essential String methods like length(), charAt(), substring(), etc.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="07_Strings/02_String_Methods/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>StringBuilder/Buffer</h4>
+                    <p>Use mutable string classes for efficient string manipulations.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="07_Strings/07_StringBuilder/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 8: Regex -->
+            <h2 class="section-title" id="regex">08. Regular Expressions (Regex)</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>Character Classes</h4>
+                    <p>Learn to match specific sets of characters using character classes and ranges.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="08_Regex/01_Character_Classes/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Predefined Classes</h4>
+                    <p>Use predefined character classes like \d, \w, \s for common patterns.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="08_Regex/02_Predefined_Classes/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Quantifiers</h4>
+                    <p>Control pattern repetition with quantifiers like *, +, ?, and {n,m}.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="08_Regex/03_Quantifiers/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Pattern & Matcher</h4>
+                    <p>Master the Pattern and Matcher classes for regex operations in Java.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="08_Regex/07_Pattern_Matcher/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 9: Wrapper Classes -->
+            <h2 class="section-title" id="wrapper">09. Wrapper Classes</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>Introduction to Wrappers</h4>
+                    <p>Understand wrapper classes and their role in converting primitives to objects.</p>
+                    <span class="difficulty beginner">Beginner</span>
+                    <div style="margin-top: 15px;">
+                        <a href="09_Wrapper_Classes/01_Introduction/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>AutoBoxing & Unboxing</h4>
+                    <p>Learn automatic conversion between primitives and wrapper objects.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="09_Wrapper_Classes/02_AutoBoxing_Unboxing/index.html" class="module-link">Access Module
+                            →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Utility Methods</h4>
+                    <p>Explore useful methods provided by wrapper classes for data manipulation.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="09_Wrapper_Classes/03_Utility_Methods/index.html" class="module-link">Access Module
+                            →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Type Conversion</h4>
+                    <p>Master type conversion techniques using wrapper class methods.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="09_Wrapper_Classes/04_Type_Conversion/index.html" class="module-link">Access Module
+                            →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 10: OOP -->
+            <h2 class="section-title" id="oop">10. Object-Oriented Programming (OOP)</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>Classes & Objects</h4>
+                    <p>Understand the foundation of OOP with classes, objects, and their relationships.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/01_Class_and_Object/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Constructors</h4>
+                    <p>Master constructor types, overloading, and object initialization.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/02_Constructors/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Access Modifiers</h4>
+                    <p>Control visibility with public, private, protected, and default access levels.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/18_Access_Modifiers/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Final Keyword</h4>
+                    <p>Learn to create constants, prevent method overriding, and restrict inheritance with final.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/06_Final_Keyword/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Inheritance</h4>
+                    <p>Learn inheritance types - single, multilevel, hierarchical, and hybrid.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/08_Inheritance/01_Single/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Super Keyword</h4>
+                    <p>Access parent class variables, methods, and constructors using the super keyword.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/09_Super_Keyword/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Polymorphism</h4>
+                    <p>Implement method overloading, overriding, and runtime polymorphism.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/10_Polymorphism/01_CompileTime/index.html" class="module-link">Access Module
+                            →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>instanceof Operator</h4>
+                    <p>Perform safe type checking and downcasting with the instanceof operator.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/10_Polymorphism/03_instanceof/index.html" class="module-link">Access Module
+                            →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Abstraction & Interfaces</h4>
+                    <p>Create abstract classes and interfaces for flexible, extensible designs.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/11_Abstract_Class/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Encapsulation</h4>
+                    <p>Protect data with access modifiers and getter/setter methods.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/07_Encapsulation/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Inner Classes</h4>
+                    <p>Master nested classes including member, static, local, and anonymous inner classes.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="10_OOP/14_Inner_Classes/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 11: Collections -->
+            <h2 class="section-title" id="advanced">11. Collections Framework</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>Generics</h4>
+                    <p>Master type-safe programming with generic classes, methods, and wildcards.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <div style="margin-top: 15px;">
+                        <a href="11_Collections/00_Generics/01_Generic_Classes/index.html" class="module-link">Access
+                            Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>List (ArrayList)</h4>
+                    <p>Work with dynamic arrays using ArrayList and its methods.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="11_Collections/01_List/ArrayList/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>List (LinkedList)</h4>
+                    <p>Implement doubly-linked lists with LinkedList for efficient insertions and deletions.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="11_Collections/01_List/LinkedList/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>HashMap</h4>
+                    <p>Store key-value pairs efficiently with HashMap and related classes.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="11_Collections/04_Map/HashMap/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>HashSet</h4>
+                    <p>Use HashSet to store unique elements without duplicates.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="11_Collections/03_Set/HashSet/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 12: Exception Handling -->
+            <h2 class="section-title" id="exceptions">12. Exception Handling</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>Try-Catch-Finally</h4>
+                    <p>Handle exceptions gracefully with try-catch-finally blocks.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="12_Exception_Handling/01_Try_Catch/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Custom Exceptions</h4>
+                    <p>Create custom exception classes for application-specific error handling.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="12_Exception_Handling/06_Custom_Exceptions/index.html" class="module-link">Access
+                            Module
+                            →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 13: File Handling -->
+            <h2 class="section-title" id="files">13. File Handling</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>File I/O Streams</h4>
+                    <p>Read and write files using various stream classes and methods.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="13_File_Handling/01_File_Class/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Serialization</h4>
+                    <p>Serialize and deserialize objects for persistent storage.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="13_File_Handling/09_Object_Serialization/index.html" class="module-link">Access Module
+                            →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 14: Threading -->
+            <h2 class="section-title" id="threading">14. Threading</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>Thread Basics</h4>
+                    <p>Create and manage threads using Thread class and Runnable interface.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="14_Threading/01_Extending_Thread/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>Synchronization</h4>
+                    <p>Prevent thread conflicts with synchronization techniques.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="14_Threading/04_Synchronization/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 15: JDBC -->
+            <h2 class="section-title" id="jdbc">15. JDBC Database Programming</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>JDBC Basics</h4>
+                    <p>Connect to databases and execute SQL queries using JDBC API.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="15_JDBC/02_Connection/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>CRUD Operations</h4>
+                    <p>Implement Create, Read, Update, Delete operations with JDBC.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="15_JDBC/06_CRUD_Operations/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h4>PreparedStatements</h4>
+                    <p>Prevent SQL injection with parameterized queries and PreparedStatement.</p>
+                    <span class="difficulty advanced">Advanced</span>
+                    <div style="margin-top: 15px;">
+                        <a href="15_JDBC/04_PreparedStatement/index.html" class="module-link">Access Module →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div
+                style="background: #f0f9f0; border-left: 5px solid #27ae60; padding: 25px; border-radius: 8px; margin: 50px 0;">
+                <h3 style="color: #27ae60; margin-bottom: 15px;">📊 Curriculum Statistics</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div>
+                        <div style="font-size: 2rem; font-weight: 700; color: #27ae60;">15</div>
+                        <p style="color: #555; margin-bottom: 0;">Total Modules</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; font-weight: 700; color: #27ae60;">120+</div>
+                        <p style="color: #555; margin-bottom: 0;">Sub-Topics</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; font-weight: 700; color: #27ae60;">200+</div>
+                        <p style="color: #555; margin-bottom: 0;">Code Examples</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; font-weight: 700; color: #27ae60;">18</div>
+                        <p style="color: #555; margin-bottom: 0;">Weeks (Recommended)</p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End container -->
+    </div> <!-- End main-content -->
+
+    <footer>
+        <p>&copy; 2025 Java Learning Path. All rights reserved. | Comprehensive Java Curriculum</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">Designed for beginners to advanced learners | Updated:
+            November
+            2025</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Toggle sidebar visibility
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const toggleBtn = document.getElementById('sidebarToggle');
+
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+
+            // Change icon based on state
+            if (sidebar.classList.contains('collapsed')) {
+                toggleBtn.innerHTML = '☰';
+            } else {
+                toggleBtn.innerHTML = '✕';
+            }
+        }
+
+        // Toggle section expand/collapse
+        function toggleSection(element) {
+            const subtopics = element.nextElementSibling;
+            const arrow = element.querySelector('.arrow');
+
+            // Close all other sections
+            document.querySelectorAll('.sidebar-section-title').forEach(title => {
+                if (title !== element) {
+                    title.classList.remove('expanded', 'active');
+                    title.nextElementSibling.classList.remove('show');
+                }
+            });
+
+            // Toggle current section
+            element.classList.toggle('expanded');
+            element.classList.toggle('active');
+            subtopics.classList.toggle('show');
+        }
+
+        // Mobile responsive - close sidebar on mobile by default
+        if (window.innerWidth <= 768) {
+            document.getElementById('sidebar').classList.add('mobile-open');
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', function () {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('collapsed');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

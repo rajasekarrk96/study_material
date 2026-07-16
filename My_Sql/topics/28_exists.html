@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exists - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Exists</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Exists</h2>
+                <p class="topic-desc">The EXISTS operator is used to test for the existence of any record in a subquery.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Basic Concept & Syntax</h3>
+                        <p class="subtopic-desc"><strong>🔹 Logic</strong><br>The EXISTS operator returns TRUE if the subquery returns one or more records. It is often more efficient than IN for large datasets.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> column_name\nFROM table1\nWHERE <span class="sql-keyword">EXISTS</span> (\n    <span class="sql-keyword">SELECT</span> 1\n    <span class="sql-keyword">FROM</span> table2\n    <span class="sql-keyword">WHERE</span> condition\n);</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Tables</h3>
+                        <p class="subtopic-desc">Sample data used for the EXISTS examples.</p>
+            <div class="output-box">
+                <div style='display: flex; gap: 20px; flex-wrap: wrap;'>
+                    <div style='flex: 1; min-width: 200px;'>
+                        <strong style='color: var(--accent-primary);'>customers</strong>
+                        <table style='border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px;'>
+                            <thead><tr><th>cust_id</th><th>name</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Arun</td></tr>
+                                <tr><td>2</td><td>Ravi</td></tr>
+                                <tr><td>3</td><td>Meena</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style='flex: 1; min-width: 250px;'>
+                        <strong style='color: var(--accent-secondary);'>orders</strong>
+                        <table style='border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px;'>
+                            <thead><tr><th>order_id</th><th>cust_id</th><th>amount</th></tr></thead>
+                            <tbody>
+                                <tr><td>101</td><td>1</td><td>5000</td></tr>
+                                <tr><td>102</td><td>1</td><td>3000</td></tr>
+                                <tr><td>103</td><td>3</td><td>7000</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Example 1: Customers who have orders</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Find names of customers who have placed at least one order.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name\nFROM customers c\nWHERE <span class="sql-keyword">EXISTS</span> (\n    <span class="sql-keyword">SELECT</span> 1\n    <span class="sql-keyword">FROM</span> orders o\n    <span class="sql-keyword">WHERE</span> o.cust_id = c.cust_id\n);</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 50%; font-size: 13px;'>
+                    <thead><tr><th>name</th></tr></thead>
+                    <tbody>
+                        <tr><td>Arun</td></tr>
+                        <tr><td>Meena</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Example 2: Customers with no orders (NOT EXISTS)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Find names of customers who haven't placed any orders yet.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name\nFROM customers c\nWHERE <span class="sql-keyword">NOT</span> <span class="sql-keyword">EXISTS</span> (\n    <span class="sql-keyword">SELECT</span> 1\n    <span class="sql-keyword">FROM</span> orders o\n    <span class="sql-keyword">WHERE</span> o.cust_id = c.cust_id\n);</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 50%; font-size: 13px;'>
+                    <thead><tr><th>name</th></tr></thead>
+                    <tbody>
+                        <tr><td>Ravi</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Display students who belong to a department (using EXISTS).</strong><br>
+    <button class="toggle-btn" data-target="ans-t27-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t27-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT *
+FROM students s
+WHERE EXISTS (
+    SELECT 1
+    FROM department d
+    WHERE s.dept_id = d.dept_id
+);</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+---------+
+| id | name   | dept_id |
++----+--------+---------+
+| 1  | Arun   | 1       |
+| 2  | Priya  | 2       |
+| 3  | Kiran  | 1       |
++----+--------+---------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display students who do NOT belong to any department.</strong><br>
+    <button class="toggle-btn" data-target="ans-t27-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t27-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT *
+FROM students s
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM department d
+    WHERE s.dept_id = d.dept_id
+);</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+---------+
+| id | name   | dept_id |
++----+--------+---------+
+| 4  | Meena  | NULL    |
++----+--------+---------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Display departments that have at least one student.</strong><br>
+    <button class="toggle-btn" data-target="ans-t27-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t27-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT *
+FROM department d
+WHERE EXISTS (
+    SELECT 1
+    FROM students s
+    WHERE s.dept_id = d.dept_id
+);</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+---------+------------+
+| dept_id | dept_name  |
++---------+------------+
+| 1       | IT         |
+| 2       | HR         |
++---------+------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Display departments with no students.</strong><br>
+    <button class="toggle-btn" data-target="ans-t27-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t27-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT *
+FROM department d
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM students s
+    WHERE s.dept_id = d.dept_id
+);</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+---------+------------+
+| dept_id | dept_name  |
++---------+------------+
+| 3       | Finance    |
++---------+------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display students whose department exists and age > 22.</strong><br>
+    <button class="toggle-btn" data-target="ans-t27-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t27-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT *
+FROM students s
+WHERE EXISTS (
+    SELECT 1
+    FROM department d
+    WHERE s.dept_id = d.dept_id
+) AND age > 22;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+---------+
+| id | name   | dept_id |
++----+--------+---------+
+| 2  | Priya  | 2       |
+| 3  | Kiran  | 1       |
++----+--------+---------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='27_subqueries.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Subqueries</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='29_case.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Case →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

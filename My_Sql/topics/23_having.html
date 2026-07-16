@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Having - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Having</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Having</h2>
+                <p class="topic-desc">The HAVING clause is used to filter grouped data (results of GROUP BY). It works after aggregation, unlike WHERE.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Basic Concept & Syntax</h3>
+                        <p class="subtopic-desc"><strong>🔹 Note</strong><br>HAVING is used to filter groups, not rows. It is used when we want to apply a condition based on aggregate results.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> column_name, aggregate_function(column_name)\nFROM table_name\nGROUP BY column_name\nHAVING condition;</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Table: employees</h3>
+                        <p class="subtopic-desc">Sample data for HAVING examples.</p>
+            <div class="output-box">
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead>
+                        <tr><th>emp_id</th><th>name</th><th>department</th><th>salary</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Arun</td><td>IT</td><td>50000</td></tr>
+                        <tr><td>2</td><td>Ravi</td><td>HR</td><td>40000</td></tr>
+                        <tr><td>3</td><td>Meena</td><td>IT</td><td>60000</td></tr>
+                        <tr><td>4</td><td>Sita</td><td>HR</td><td>45000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Example 1: Departments with total salary > 90000</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Show departments where the group's total salary exceeds 90,000.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> department, <span class="sql-func">SUM</span>(salary) <span class="sql-keyword">AS</span> total_salary\nFROM employees\nGROUP BY department\nHAVING <span class="sql-func">SUM</span>(salary) &gt; 90000;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead>
+                        <tr><th>department</th><th>total_salary</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>IT</td><td>110000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Example 2: Departments with more than 1 employee</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Show departments that have more than one employee recorded.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> department, <span class="sql-func">COUNT</span>(emp_id) <span class="sql-keyword">AS</span> emp_count\nFROM employees\nGROUP BY department\nHAVING <span class="sql-func">COUNT</span>(emp_id) &gt; 1;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead>
+                        <tr><th>department</th><th>emp_count</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>IT</td><td>2</td></tr>
+                        <tr><td>HR</td><td>2</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Count students by age and display only ages having more than 1 student.</strong><br>
+    <button class="toggle-btn" data-target="ans-t22-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t22-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age, COUNT(*) AS student_count
+FROM students
+GROUP BY age
+HAVING COUNT(*) > 1;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+---------------+
+| age  | student_count |
++------+---------------+
+| 23   | 2             |
++------+---------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display age groups having exactly 1 student.</strong><br>
+    <button class="toggle-btn" data-target="ans-t22-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t22-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age, COUNT(*) AS student_count
+FROM students
+GROUP BY age
+HAVING COUNT(*) = 1;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+---------------+
+| age  | student_count |
++------+---------------+
+| 22   | 1             |
+| 24   | 1             |
++------+---------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Display sum of ages by age and show only sums greater than 22.</strong><br>
+    <button class="toggle-btn" data-target="ans-t22-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t22-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age, SUM(age) AS total_age
+FROM students
+GROUP BY age
+HAVING SUM(age) > 22;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+-----------+
+| age  | total_age |
++------+-----------+
+| 23   | 46        |
+| 24   | 24        |
++------+-----------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Display ages where count of students is less than 3.</strong><br>
+    <button class="toggle-btn" data-target="ans-t22-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t22-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age, COUNT(*) AS student_count
+FROM students
+GROUP BY age
+HAVING COUNT(*) < 3;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+---------------+
+| age  | student_count |
++------+---------------+
+| 22   | 1             |
+| 23   | 2             |
+| 24   | 1             |
++------+---------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display ages where count of students is between 1 and 2.</strong><br>
+    <button class="toggle-btn" data-target="ans-t22-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t22-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age, COUNT(*) AS student_count
+FROM students
+GROUP BY age
+HAVING COUNT(*) BETWEEN 1 AND 2;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+---------------+
+| age  | student_count |
++------+---------------+
+| 22   | 1             |
+| 23   | 2             |
+| 24   | 1             |
++------+---------------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='22_group-by.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Group By</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='24_order-by.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Order By →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

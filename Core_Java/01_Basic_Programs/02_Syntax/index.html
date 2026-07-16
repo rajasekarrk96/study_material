@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Syntax Basics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Java Syntax</h5><a href="../../index.html#basics">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e;"><a href="#rules">Rules</a><a href="#structure">Structure</a><a
+            href="#comments">Comments</a><a href="#packages">Packages</a><a href="#imports">Imports</a>
+    </div>
+    <div class="top-nav">
+        <h2>Java Syntax</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Java Syntax Basics</h1>
+            <p class="lead">Learn the fundamental syntax rules and structure that every Java program must follow.</p>
+        </div>
+
+        <div class="section" id="rules">
+            <h4>Syntax Rules</h4>
+            <p>Java syntax consists of rules that define how Java programs are written. Following these rules is
+                essential for code to compile and run.</p>
+            <ul>
+                <li>Every statement must end with a semicolon (;)</li>
+                <li>Java is case-sensitive (Main and main are different)</li>
+                <li>Curly braces {} define code blocks</li>
+                <li>Indentation improves readability (not required but recommended)</li>
+                <li>Comments are ignored by the compiler</li>
+            </ul>
+            <div class="example"><strong>✓ Valid vs Invalid:</strong><br>✓ System.out.println("Hello");<br>✗
+                System.out.println("Hello") // Missing semicolon<br>✓ public class Main {}<br>✗ public class main {} //
+                Wrong - should be Main</div>
+        </div>
+
+        <div class="section" id="structure">
+            <h4>Program Structure</h4>
+            <pre><code>// Import statements (at top)
+import java.util.Scanner;
+
+// Class declaration (must match filename)
+public class HelloWorld {
+    
+    // Main method (entry point)
+    public static void main(String[] args) {
+        // Executable statements
+        System.out.println("Hello, World!");
+    }
+    
+    // Other methods
+    public void displayMessage() {
+        System.out.println("This is a method");
+    }
+}</code></pre>
+            <p><strong>Key Components:</strong></p>
+            <ul>
+                <li><code>import</code> - Brings in external classes</li>
+                <li><code>public class</code> - Declares the main class</li>
+                <li><code>public static void main()</code> - Program entry point</li>
+                <li><code>String[] args</code> - Command line arguments</li>
+            </ul>
+        </div>
+
+        <div class="section" id="comments">
+            <h4>Comments in Java</h4>
+            <p>Comments are non-executable lines used to explain code and improve readability.</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Syntax</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Single-line</td>
+                        <td>//</td>
+                        <td>// This is a comment</td>
+                    </tr>
+                    <tr>
+                        <td>Multi-line</td>
+                        <td>/* */</td>
+                        <td>/* This is a<br>multi-line comment */</td>
+                    </tr>
+                    <tr>
+                        <td>Documentation</td>
+                        <td>/** */</td>
+                        <td>/** JavaDoc comment */<br>// Used for API documentation</td>
+                    </tr>
+                </tbody>
+            </table>
+            <pre><code>public class Comments {
+    public static void main(String[] args) {
+        // Single-line comment
+        int age = 25;  // Variable for age
+        
+        /* Multi-line comment
+           This can span multiple lines
+           Used for complex explanations */
+        System.out.println(age);
+        
+        /**
+         * Documentation comment
+         * Used for generating JavaDoc
+         * @param args Command line arguments
+         */
+    }
+}</code></pre>
+        </div>
+
+        <div class="section" id="packages">
+            <h4>Packages</h4>
+            <p>Packages organize Java classes into namespaces. They prevent naming conflicts and organize code
+                logically.</p>
+            <pre><code>// Package declaration (must be first line)
+package com.example.application;
+
+// Now this class belongs to the package
+public class MyClass {
+    public static void main(String[] args) {
+        System.out.println("Hello from package!");
+    }
+}</code></pre>
+            <p><strong>Package Naming Convention:</strong></p>
+            <ul>
+                <li>Use reverse domain names: com.company.project</li>
+                <li>All lowercase letters</li>
+                <li>Separated by dots (.)</li>
+                <li>Matches folder structure</li>
+            </ul>
+            <div class="note"><strong>💡 Example:</strong> For company "google.com", use "com.google.projectname"</div>
+        </div>
+
+        <div class="section" id="imports">
+            <h4>Import Statements</h4>
+            <p>Import statements bring classes from other packages into your program.</p>
+            <pre><code>// Import specific class
+import java.util.Scanner;
+
+// Import all classes from a package
+import java.util.*;
+
+// Import multiple specific classes
+import java.io.File;
+import java.io.FileReader;
+
+public class ImportExample {
+    public static void main(String[] args) {
+        // Scanner is available because of import
+        Scanner sc = new Scanner(System.in);
+        
+        // ArrayList is available due to import *
+        java.util.ArrayList list = new java.util.ArrayList();
+    }
+}</code></pre>
+            <p><strong>Common Packages:</strong></p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Package</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>java.lang</td>
+                        <td>Core Java classes (auto-imported)</td>
+                    </tr>
+                    <tr>
+                        <td>java.util</td>
+                        <td>Utility classes like Scanner, ArrayList</td>
+                    </tr>
+                    <tr>
+                        <td>java.io</td>
+                        <td>Input/Output classes</td>
+                    </tr>
+                    <tr>
+                        <td>java.sql</td>
+                        <td>Database classes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" id="ascii-notes">
+            <h4>ASCII Notes</h4>
+            <p>ASCII values are important when working with characters in Java code. Understanding ASCII helps in
+                character comparisons and conversions within your programs.</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="../ASCII_Reference.html" target="_blank" class="btn btn-info"
+                    style="background-color: #17a2b8; border: none; padding: 10px 20px; border-radius: 5px; color: white; text-decoration: none; font-weight: 600;">
+                    📊 View Interactive ASCII Chart →
+                </a>
+            </div>
+            <pre><code>Quick ASCII Reference:
+
+Control Characters:  32=SPACE  48-57=Numbers 0-9
+Uppercase:           65-90 = A-Z
+Lowercase:           97-122 = a-z
+Special:             33-47, 58-64, 91-96, 123-126</code></pre>
+            <p><strong>Character to ASCII Conversion in Java:</strong></p>
+            <pre><code>public class ASCIIConversion {
+    public static void main(String[] args) {
+        // Method 1: Direct casting char to int
+        char ch = 'A';
+        System.out.println("Char 'A' = " + (int)ch);
+        
+        // Method 2: Casting other characters
+        System.out.println("Char 'Z' = " + (int)'Z');
+        System.out.println("Char 'a' = " + (int)'a');
+        System.out.println("Char '0' = " + (int)'0');
+        System.out.println("Char ' ' = " + (int)' ');
+    }
+}</code></pre>
+            <div class="output">
+                Char 'A' = 65<br>
+                Char 'Z' = 90<br>
+                Char 'a' = 97<br>
+                Char '0' = 48<br>
+                Char ' ' = 32
+            </div>
+            <div class="example">
+                <strong>✓ Useful Fact:</strong> Difference between uppercase and lowercase is 32. 'A'=65, 'a'=97
+                (65+32=97)
+            </div>
+        </div>
+
+        <div class="worksheet-container"><a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice
+                Worksheets →</a></div>
+        <div style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0;">
+            <p>Java Syntax Module | November 2025</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' }); }));</script>
+</body>
+
+</html>

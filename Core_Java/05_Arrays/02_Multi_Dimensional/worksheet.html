@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Dimensional Array - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Array Worksheet</h5>
+        <a href="index.html" class="nav-link">← Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Multi Dimensional Array - Practice</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master multi-dimensional array operations, matrix mathematics, and matrix property analysis.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Add Two Matrices</h3>
+            <div class="explanation">Write a Java program to add two matrices of the same size.</div>
+            <div class="code-block"><code>class _11_ {
+    public static void main(String[] args) {
+        int[][] a = {{1, 2}, {3, 4}};
+        int[][] b = {{5, 6}, {7, 8}};
+        int[][] sum = new int[2][2];
+
+        System.out.println("Resulting Matrix Sum:");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                sum[i][j] = a[i][j] + b[i][j];
+                System.out.print(sum[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}</code></div>
+            <div class="output-block"><code>Resulting Matrix Sum:
+6 8 
+10 12 </code></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Matrix Multiplication</h3>
+            <div class="explanation">Write a Java program to multiply two 2x2 matrices.</div>
+            <div class="code-block"><code>class _12_ {
+    public static void main(String[] args) {
+        int[][] a = {{1, 2}, {3, 4}};
+        int[][] b = {{2, 0}, {1, 2}};
+        int[][] c = new int[2][2];
+
+        System.out.println("Matrix Multiplication Result:");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                for (int k = 0; k < 2; k++) {
+                    c[i][j] += a[i][k] * b[k][j];
+                }
+                System.out.print(c[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}</code></div>
+            <div class="output-block"><code>Matrix Multiplication Result:
+4 4 
+10 8 </code></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Transpose of a Matrix</h3>
+            <div class="explanation">Write a Java program to find the transpose of a 2x3 matrix.</div>
+            <div class="code-block"><code>class _13_ {
+    public static void main(String[] args) {
+        int[][] a = {{1, 2, 3}, {4, 5, 6}};
+
+        System.out.println("Transpose of the Matrix:");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                System.out.print(a[j][i] + " ");
+            }
+            System.out.println();
+        }
+    }
+}</code></div>
+            <div class="output-block"><code>Transpose of the Matrix:
+1 4 
+2 5 
+3 6 </code></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Sparse Matrix Check</h3>
+            <div class="explanation">Determine if a matrix is sparse (more than half of elements are zero).</div>
+            <div class="code-block"><code>class _14_ {
+    public static void main(String[] args) {
+        int[][] a = {
+            {0, 0, 3}, 
+            {0, 0, 0}, 
+            {1, 0, 0}
+        };
+        int count = 0;
+        int size = a.length * a[0].length;
+
+        for (int[] row : a) {
+            for (int val : row) {
+                if (val == 0) count++;
+            }
+        }
+
+        if (count > size / 2)
+            System.out.println("The matrix is a Sparse Matrix");
+        else
+            System.out.println("The matrix is NOT a Sparse Matrix");
+    }
+}</code></div>
+            <div class="output-block"><code>The matrix is a Sparse Matrix</code></div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Odd & Even Frequency</h3>
+            <div class="explanation">Write a Java program to find the frequency of odd and even numbers in a matrix.
+            </div>
+            <div class="code-block"><code>class _15_ {
+    public static void main(String[] args) {
+        int[][] a = {
+            {1, 2}, 
+            {3, 4},
+            {5, 6}
+        };
+        int odd = 0, even = 0;
+
+        for (int[] row : a) {
+            for (int val : row) {
+                if (val % 2 == 0) even++;
+                else odd++;
+            }
+        }
+
+        System.out.println("Frequency of Even numbers: " + even);
+        System.out.println("Frequency of Odd numbers: " + odd);
+    }
+}</code></div>
+            <div class="output-block"><code>Frequency of Even numbers: 3
+Frequency of Odd numbers: 3</code></div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Multi Dimensional Array Module - Practice Worksheet</strong></p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

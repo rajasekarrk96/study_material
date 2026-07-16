@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  28 testng   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>28. TestNG Testing Framework</h1>
+
+<h2>📖 Introduction</h2>
+<p>Selenium is just a browser automation tool. It doesn't know what a "Test" is. It doesn't generate reports. It doesn't
+    handle "Before" and "After" logic. That's why we pair Selenium with a Testing Framework like <strong>TestNG</strong>
+    (Test Next Generation). It organizes your scripts into manageable test suites.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>Annotations: @Test, @BeforeMethod, @AfterMethod, @BeforeSuite</li>
+    <li>Grouping tests (Smoke, Regression)</li>
+    <li>Running tests in Parallel</li>
+    <li>Data Providers (Data Driven Testing)</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>Key Annotations</h3>
+<ul>
+    <li><code>@Test</code>: Marks a method as a test case.</li>
+    <li><code>@BeforeMethod</code>: Runs before <strong>every</strong> test method (e.g., Open Browser).</li>
+    <li><code>@AfterMethod</code>: Runs after <strong>every</strong> test method (e.g., Close Browser).</li>
+    <li><code>@BeforeClass</code>: Runs once before the first test method in the class.</li>
+</ul>
+
+<h3>xml Configuration</h3>
+<p>TestNG uses a <code>testng.xml</code> file to control execution (which tests to run, parallel settings, listeners).
+</p>
+
+<h2>💻 Code Examples</h2>
+<pre><code>public class LoginTest {
+
+    WebDriver driver;
+
+    @BeforeMethod
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.get("https://app.com");
+    }
+
+    @Test(priority=1)
+    public void verifyTitle() {
+        Assert.assertEquals(driver.getTitle(), "My App");
+    }
+
+    @Test(priority=2)
+    public void loginFlow() {
+        // login code...
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
+}</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Execution Order:</strong> By default, TestNG runs tests alphabetically, NOT in the order written in the
+        file. Always use <code>priority=X</code> or <code>dependsOnMethods="name"</code> to control order.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Create a Test Suite.</p>
+    <ol>
+        <li>Create two test classes: <code>LoginTest</code> and <code>SearchTest</code>.</li>
+        <li>Create a <code>testng.xml</code> file.</li>
+        <li>Configure it to run both classes.</li>
+        <li>Run the XML suite.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: Difference between @BeforeMethod and @BeforeClass?</strong></p>
+    <p><strong>Answer:</strong> <code>@BeforeMethod</code> runs before <em>each</em> @Test method (repeatedly).
+        <code>@BeforeClass</code> runs <em>once</em> before any test in that class begins.
+    </p>
+</blockquote>
+
+<a href="worksheets/ws_testng.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

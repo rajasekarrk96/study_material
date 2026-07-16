@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constraints - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Constraints</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Constraints</h2>
+                <p class="topic-desc">Constraints are rules applied to table columns to ensure data accuracy, integrity, and reliability.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">NOT NULL</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Prevents a column from having NULL values.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code>column_name datatype <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span></code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> students (\n    student_id <span class="sql-keyword">INT</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span>,\n    student_name <span class="sql-keyword">VARCHAR</span>(50) <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span>\n);</code></pre><div class="output-box">❌ NULL values not allowed in student_id and student_name</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">UNIQUE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Ensures all values in a column are different.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code>column_name datatype <span class="sql-keyword">UNIQUE</span></code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> users (\n    email <span class="sql-keyword">VARCHAR</span>(100) <span class="sql-keyword">UNIQUE</span>\n);</code></pre><div class="output-box">❌ Duplicate email values not allowed</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">PRIMARY KEY</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Uniquely identifies each record in a table (NOT NULL + UNIQUE).</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">PRIMARY KEY</span> (column_name)</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> employees (\n    employee_id <span class="sql-keyword">INT</span> <span class="sql-keyword">PRIMARY KEY</span>,\n    employee_name <span class="sql-keyword">VARCHAR</span>(50)\n);</code></pre><div class="output-box">✔ Each employee_id is unique and not null</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">FOREIGN KEY</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Creates a relationship between two tables.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">FOREIGN KEY</span> (column_name)\nREFERENCES parent_table(column_name)</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> orders (\n    order_id <span class="sql-keyword">INT</span> <span class="sql-keyword">PRIMARY KEY</span>,\n    customer_id <span class="sql-keyword">INT</span>,\n    <span class="sql-keyword">FOREIGN KEY</span> (customer_id)\n    <span class="sql-keyword">REFERENCES</span> customers(customer_id)\n);</code></pre><div class="output-box">❌ Cannot insert a customer_id that does not exist in customers</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">CHECK</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Restricts values based on a condition.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">CHECK</span> (condition)</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> products (\n    price DECIMAL(10,2),\n    <span class="sql-keyword">CHECK</span> (price &gt; 0)\n);</code></pre><div class="output-box">❌ Price must be greater than 0</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="6">DEFAULT</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Assigns a default value if no value is provided.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code>column_name datatype <span class="sql-keyword">DEFAULT</span> value</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> accounts (\n    status <span class="sql-keyword">VARCHAR</span>(20) <span class="sql-keyword">DEFAULT</span> <span class="sql-string">'Active'</span>\n);</code></pre><div class="output-box">✔ If status not given → 'Active' is inserted</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="7">AUTO_INCREMENT (MySQL)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Automatically generates incrementing numbers.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code>column_name <span class="sql-keyword">INT</span> AUTO_INCREMENT</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> classes (\n    class_id <span class="sql-keyword">INT</span> AUTO_INCREMENT <span class="sql-keyword">PRIMARY KEY</span>,\n    class_name <span class="sql-keyword">VARCHAR</span>(50)\n);</code></pre><div class="output-box">✔ class_id values → 1, 2, 3, 4, ...</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Create a table students with NOT NULL constraint on name.</strong><br>
+    <button class="toggle-btn" data-target="ans-t6-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t6-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE TABLE students (
+    id INT,
+    name VARCHAR(50) NOT NULL,
+    age INT
+);</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Create a table users with UNIQUE constraint on email.</strong><br>
+    <button class="toggle-btn" data-target="ans-t6-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t6-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE TABLE users (
+    user_id INT,
+    email VARCHAR(100) UNIQUE
+);</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Create a table employee with PRIMARY KEY.</strong><br>
+    <button class="toggle-btn" data-target="ans-t6-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t6-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50)
+);</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Create two tables using FOREIGN KEY constraint.</strong><br>
+    <button class="toggle-btn" data-target="ans-t6-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t6-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE TABLE department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+
+CREATE TABLE staff (
+    staff_id INT,
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES department(dept_id)
+);</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Create a table with CHECK and DEFAULT constraints.</strong><br>
+    <button class="toggle-btn" data-target="ans-t6-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t6-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE TABLE product (
+    product_id INT,
+    price DECIMAL(8,2) CHECK (price > 0),
+    status VARCHAR(20) DEFAULT 'Available'
+);</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='06_rename-table.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Rename Table</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='08_indexes.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Indexes →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

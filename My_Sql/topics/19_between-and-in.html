@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BETWEEN & IN - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">BETWEEN & IN</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">BETWEEN & IN</h2>
+                <p class="topic-desc">Both BETWEEN and IN are used for filtering data in the WHERE clause.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">BETWEEN Operator</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to filter values within a range (inclusive).</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> *\nFROM table_name\nWHERE <span class="sql-keyword">column</span> BETWEEN value1 <span class="sql-keyword">AND</span> value2;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> *\nFROM students\nWHERE age BETWEEN 18 <span class="sql-keyword">AND</span> 22;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>id</th><th>name</th><th>age</th></tr></thead><tbody><tr><td>2</td><td>Anu</td><td>18</td></tr><tr><td>3</td><td>Ravi</td><td>21</td></tr><tr><td>4</td><td>Kiran</td><td>22</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">BETWEEN with Dates</h3>
+                        <p class="subtopic-desc"><strong>🔹 Usage</strong><br>Filters records based on a date range.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> *\nFROM orders\nWHERE order_date BETWEEN <span class="sql-string">'2024-01-01'</span> <span class="sql-keyword">AND</span> <span class="sql-string">'2024-01-31'</span>;</code></pre><div class="output-box">✔ Returns all orders placed in January 2024.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">IN Operator</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to match multiple specific values from a list.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> *\nFROM table_name\nWHERE <span class="sql-keyword">column</span> IN (value1, value2, value3);</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> *\nFROM students\nWHERE city IN (<span class="sql-string">'Chennai'</span>, <span class="sql-string">'Delhi'</span>);</code></pre><div class="output-box">✔ Returns students from either Chennai or Delhi.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">NOT BETWEEN & NOT IN</h3>
+                        <p class="subtopic-desc"><strong>🔹 Negation</strong><br>Excludes values within the specified range or list.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- <span class="sql-keyword">NOT</span> BETWEEN\nSELECT * <span class="sql-keyword">FROM</span> students <span class="sql-keyword">WHERE</span> age <span class="sql-keyword">NOT</span> BETWEEN 18 <span class="sql-keyword">AND</span> 22;\n\n-- <span class="sql-keyword">NOT</span> IN\nSELECT * <span class="sql-keyword">FROM</span> students <span class="sql-keyword">WHERE</span> city <span class="sql-keyword">NOT</span> IN (<span class="sql-string">'Chennai'</span>, <span class="sql-string">'Delhi'</span>);</span></code></pre><div class="output-box">⚠️ <strong>Note:</strong> If the column contains NULL, NOT IN may return no rows.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">BETWEEN vs IN (Comparison)</h3>
+                        <p class="subtopic-desc"><strong>Comparison Table</strong></p>
+            <div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><tr><th style='border: 1px solid var(--glass-border); padding: 4px;'>Feature</th><th style='border: 1px solid var(--glass-border); padding: 4px;'>BETWEEN</th><th style='border: 1px solid var(--glass-border); padding: 4px;'>IN</th></tr><tr><td style='border: 1px solid var(--glass-border); padding: 4px;'>Used for</td><td style='border: 1px solid var(--glass-border); padding: 4px;'>Range</td><td style='border: 1px solid var(--glass-border); padding: 4px;'>List of values</td></tr><tr><td style='border: 1px solid var(--glass-border); padding: 4px;'>Inclusive</td><td style='border: 1px solid var(--glass-border); padding: 4px;'>Yes</td><td style='border: 1px solid var(--glass-border); padding: 4px;'>Yes</td></tr><tr><td style='border: 1px solid var(--glass-border); padding: 4px;'>Works with</td><td style='border: 1px solid var(--glass-border); padding: 4px;'>Numbers, dates</td><td style='border: 1px solid var(--glass-border); padding: 4px;'>Numbers, strings</td></tr><tr><td style='border: 1px solid var(--glass-border); padding: 4px;'>Performance</td><td style='border: 1px solid var(--glass-border); padding: 4px;'>Fast for ranges</td><td style='border: 1px solid var(--glass-border); padding: 4px;'>Fast for small lists</td></tr></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Display students whose age is between 22 and 24.</strong><br>
+    <button class="toggle-btn" data-target="ans-t18-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t18-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE age BETWEEN 22 AND 24;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 2  | Priya  | 23   |
+| 3  | Kiran  | 23   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display students whose age is NOT between 22 and 24.</strong><br>
+    <button class="toggle-btn" data-target="ans-t18-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t18-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE age NOT BETWEEN 22 AND 24;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 5  | Ravi   | 25   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Display students whose name is IN the given list.</strong><br>
+    <button class="toggle-btn" data-target="ans-t18-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t18-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE name IN ('Arun', 'Meena');</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Display students whose name is NOT IN the given list.</strong><br>
+    <button class="toggle-btn" data-target="ans-t18-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t18-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE name NOT IN ('Arun', 'Meena');</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 2  | Priya  | 23   |
+| 3  | Kiran  | 23   |
+| 5  | Ravi   | 25   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Use BETWEEN with DATE values.</strong><br>
+    <button class="toggle-btn" data-target="ans-t18-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t18-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE join_date BETWEEN '2024-01-01' AND '2024-12-31';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------------+
+| id | name   | join_date  |
++----+--------+------------+
+| 1  | Arun   | 2024-01-15 |
+| 2  | Priya  | 2024-03-10 |
++----+--------+------------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='18_operators.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Operators</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='20_pattern-matching.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Pattern Matching (LIKE) →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

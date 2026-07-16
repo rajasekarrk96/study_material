@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELETE / TRUNCATE / DROP - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">DELETE / TRUNCATE / DROP</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">DELETE / TRUNCATE / DROP</h2>
+                <p class="topic-desc">Commands to remove data or entire table structures.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">DELETE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Removes selected rows (or all rows) from a table.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">DELETE</span> <span class="sql-keyword">FROM</span> table_name\nWHERE condition;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">DELETE</span> <span class="sql-keyword">FROM</span> students\nWHERE age &lt; 20;</code></pre><div class="output-box"><strong>🔹 Key Points</strong><br>✔ DML command<br>✔ Can use WHERE<br>✔ Can be rolled back<br>✔ Triggers are fired<br>✔ Slower for large data</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">TRUNCATE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Removes all rows from a table at once.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">TRUNCATE</span> <span class="sql-keyword">TABLE</span> table_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">TRUNCATE</span> <span class="sql-keyword">TABLE</span> students;</code></pre><div class="output-box"><strong>🔹 Key Points</strong><br>✔ DDL command<br>✔ No WHERE clause allowed<br>✔ Cannot be rolled back<br>✔ Faster than DELETE<br>✔ Resets AUTO_INCREMENT</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">DROP</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Deletes the entire table structure along with all its data.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">TABLE</span> table_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">TABLE</span> students;</code></pre><div class="output-box"><strong>🔹 Key Points</strong><br>✔ DDL command<br>✔ Table no longer exists<br>✔ Cannot be rolled back<br>✔ Frees storage space</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Delete a specific record (student with id = 2).</strong><br>
+    <button class="toggle-btn" data-target="ans-t15-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t15-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELETE FROM students
+WHERE id = 2;</code></pre><br>
+        Output:<br>
+        Query OK, 1 row affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Delete all records from students table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t15-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t15-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELETE FROM students;</code></pre><br>
+        Output:<br>
+        Query OK, 4 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Rollback the DELETE operation.</strong><br>
+    <button class="toggle-btn" data-target="ans-t15-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t15-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>ROLLBACK;</code></pre><br>
+        Output:<br>
+        Query OK
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Remove all records using TRUNCATE.</strong><br>
+    <button class="toggle-btn" data-target="ans-t15-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t15-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>TRUNCATE TABLE students;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Delete the entire table using DROP.</strong><br>
+    <button class="toggle-btn" data-target="ans-t15-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t15-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DROP TABLE students;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='15_rollback.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Rollback</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='17_filtering.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Filtering →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

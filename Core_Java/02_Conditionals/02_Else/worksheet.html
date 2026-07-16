@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Else Statement - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none;
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333;
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0;
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px;
+        }
+
+        .explanation ol {
+            line-height: 1.8;
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Else Statement Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Else Statement - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Java Else Statements with these practice problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Check Even or Odd</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that checks if a number is even or odd. Print "Even" if the number is even,
+                otherwise print "Odd".
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>24</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Even</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>17</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Odd</code>
+            </div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class EvenOdd {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter a number: ");
+        int num = sn.nextInt();
+        
+        if (num % 2 == 0) {
+            System.out.println("Even");
+        } else {
+            System.out.println("Odd");
+        }
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>The else clause provides an alternative path:</strong> While a standalone if
+                                executes code only when the condition is true, adding else ensures something always
+                                happens. This is perfect for binary decisions like even/odd, yes/no, pass/fail.</li>
+                            <li><strong>Exactly one block will execute:</strong> Either the if block runs (when num % 2
+                                == 0) or the else block runs (when num % 2 != 0). They never both execute. This mutual
+                                exclusivity is fundamental to if-else logic.</li>
+                            <li><strong>Else eliminates silent failures:</strong> Without else, odd numbers would
+                                produce no output. Adding else guarantees user feedback for all inputs, improving user
+                                experience and making debugging easier.</li>
+                            <li><strong>The else block needs no condition:</strong> It automatically handles all cases
+                                not caught by the if. This "catch-all" behavior makes code simpler and prevents logical
+                                gaps in your program.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Check Positive or Negative</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that checks if a number is positive or negative. Print "Positive" if the number is
+                greater than or equal to 0, otherwise print "Negative".
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>15</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Positive</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>-8</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Negative</code>
+            </div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class PositiveNegative {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter a number: ");
+        int num = sn.nextInt();
+        
+        if (num >= 0) {
+            System.out.println("Positive");
+        } else {
+            System.out.println("Negative");
+        }
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Choosing >= instead of > matters:</strong> This code treats 0 as positive. If
+                                the requirement were different (0 as negative or neither), you'd adjust the condition.
+                                Understanding these boundary cases is critical for correct logic.</li>
+                            <li><strong>If-else perfectly models binary classification:</strong> When data falls into
+                                exactly two categories (positive/negative, on/off, open/closed), if-else is the ideal
+                                structure. It's clearer than multiple ifs and prevents logical errors.</li>
+                            <li><strong>The else guarantees complete coverage:</strong> Since every number is either >=
+                                0 or < 0, this if-else handles all possible inputs. There's no third case, no edge case
+                                    left unhandled.</li>
+                            <li><strong>Boolean complement is implicit:</strong> The else condition is implicitly "not
+                                (num >= 0)" which equals "num < 0". You don't write this condition explicitly, making
+                                    code more concise and less error-prone.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Check Voting Eligibility</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that checks if a person can vote. If age is 18 or above, print "Eligible to vote",
+                otherwise print "Not eligible to vote".
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>20</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Eligible to vote</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>16</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Not eligible to vote</code>
+            </div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class VotingEligibility {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter your age: ");
+        int age = sn.nextInt();
+        
+        if (age >= 18) {
+            System.out.println("Eligible to vote");
+        } else {
+            System.out.println("Not eligible to vote");
+        }
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Else improves user feedback dramatically:</strong> Compare to a standalone if
+                                statement that prints only for eligible voters. With else, ineligible users get explicit
+                                feedback explaining why they saw no positive message.</li>
+                            <li><strong>Real-world rules often require binary responses:</strong> Access control,
+                                permissions, eligibility checks - these require yes/no answers. If-else directly models
+                                this requirement without additional complexity.</li>
+                            <li><strong>Negative feedback is often more important:</strong> When users don't qualify,
+                                telling them why is crucial. The else block delivers this negative feedback, preventing
+                                confusion and improving usability.</li>
+                            <li><strong>Consider the real-world implications:</strong> In production, you'd validate
+                                that age is reasonable (not negative, not impossibly high). The logic shown here assumes
+                                valid input, but robust applications add error handling.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+        <footer>
+            <p><strong>Else Statement - Practice Worksheet</strong></p>
+            <p>Master conditional logic with if-else statements in Java</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Comparisons - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>String Comparisons Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>String Comparisons - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master different methods of comparing strings in Java.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: == vs equals() Comparison</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the difference between == and equals() when
+                comparing strings. Create strings using both literals and new keyword, then compare them using both
+                methods.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String input = sn.nextLine();
+
+        String s1 = input;  // Literal
+        String s2 = input;  // Same literal
+        String s3 = new String(input);  // new keyword
+        String s4 = new String(input);  // Another new
+
+        System.out.println("\n=== Using == (Reference Comparison) ===");
+        System.out.println("s1 == s2: " + (s1 == s2));  // true (same pool reference)
+        System.out.println("s1 == s3: " + (s1 == s3));  // false (different locations)
+        System.out.println("s3 == s4: " + (s3 == s4));  // false (different heap objects)
+
+        System.out.println("\n=== Using equals() (Content Comparison) ===");
+        System.out.println("s1.equals(s2): " + s1.equals(s2));  // true
+        System.out.println("s1.equals(s3): " + s1.equals(s3));  // true
+        System.out.println("s3.equals(s4): " + s3.equals(s4));  // true
+
+        System.out.println("\n✓ == compares memory addresses (references)");
+        System.out.println("✓ equals() compares actual content (values)");
+        System.out.println("✓ Always use equals() for string comparison!");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: Java
+
+=== Using == (Reference Comparison) ===
+s1 == s2: true
+s1 == s3: false
+s3 == s4: false
+
+=== Using equals() (Content Comparison) ===
+s1.equals(s2): true
+s1.equals(s3): true
+s3.equals(s4): true
+
+✓ == compares memory addresses (references)
+✓ equals() compares actual content (values)
+✓ Always use equals() for string comparison!</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>== Operator:</strong> Compares object references (memory addresses)</li>
+                    <li><strong>equals() Method:</strong> Compares string content character-by-character</li>
+                    <li><strong>Pool vs Heap:</strong> Affects == results but not equals() results</li>
+                    <li><strong>Best Practice:</strong> Always use equals() for string content comparison</li>
+                </ul>
+                <strong>Warning:</strong> Using == for strings can lead to unexpected bugs
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: compareTo() for Lexicographic Ordering</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that uses compareTo() to:
+                • Compare two strings lexicographically
+                • Sort an array of strings in alphabetical order
+                • Explain the return values (negative, zero, positive)</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter first string: ");
+        String s1 = sn.nextLine();
+
+        System.out.print("Enter second string: ");
+        String s2 = sn.nextLine();
+
+        int result = s1.compareTo(s2);
+
+        System.out.println("\ncompareTo() result: " + result);
+
+        if (result < 0) {
+            System.out.println("\"" + s1 + "\" comes BEFORE \"" + s2 + "\"");
+        } else if (result > 0) {
+            System.out.println("\"" + s1 + "\" comes AFTER \"" + s2 + "\"");
+        } else {
+            System.out.println("\"" + s1 + "\" is EQUAL to \"" + s2 + "\"");
+        }
+
+        // Sorting example
+        System.out.print("\nHow many strings to sort? ");
+        int n = sn.nextInt();
+        sn.nextLine();  // consume newline
+
+        String[] arr = new String[n];
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter string " + (i + 1) + ": ");
+            arr[i] = sn.nextLine();
+        }
+
+        // Bubble sort using compareTo()
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j].compareTo(arr[j + 1]) > 0) {
+                    String temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.println("\nSorted order:");
+        for (String str : arr) {
+            System.out.println(str);
+        }
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter first string: Apple
+Enter second string: Banana
+
+compareTo() result: -1
+"Apple" comes BEFORE "Banana"
+
+How many strings to sort? 4
+Enter string 1: Dog
+Enter string 2: Apple
+Enter string 3: Cat
+Enter string 4: Banana
+
+Sorted order:
+Apple
+Banana
+Cat
+Dog</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Return Values:</strong> Negative (less), 0 (equal), Positive (greater)</li>
+                    <li><strong>Lexicographic:</strong> Dictionary order based on Unicode values</li>
+                    <li><strong>Case Sensitive:</strong> Uppercase letters come before lowercase</li>
+                    <li><strong>Sorting:</strong> Perfect for alphabetical sorting algorithms</li>
+                </ul>
+                <strong>Formula:</strong> s1.compareTo(s2) returns s1 - s2 (first differing character)
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: equalsIgnoreCase() for Case-Insensitive Comparison</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that implements a login system where username comparison is
+                case-insensitive. Use equalsIgnoreCase() to validate user input against stored credentials.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        String storedUsername = "Admin";
+        String storedPassword = "Pass123";
+
+        System.out.println("=== Login System ===");
+        System.out.print("Enter username: ");
+        String username = sn.next();
+
+        System.out.print("Enter password: ");
+        String password = sn.next();
+
+        // Username: case-insensitive
+        boolean usernameMatch = username.equalsIgnoreCase(storedUsername);
+
+        // Password: case-sensitive
+        boolean passwordMatch = password.equals(storedPassword);
+
+        System.out.println("\n=== Validation Results ===");
+        System.out.println("Username check (case-insensitive):");
+        System.out.println("  Input: " + username);
+        System.out.println("  Stored: " + storedUsername);
+        System.out.println("  Match: " + usernameMatch);
+
+        System.out.println("\nPassword check (case-sensitive):");
+        System.out.println("  Input: " + password);
+        System.out.println("  Stored: " + storedPassword);
+        System.out.println("  Match: " + passwordMatch);
+
+        if (usernameMatch && passwordMatch) {
+            System.out.println("\n✓ LOGIN SUCCESSFUL!");
+        } else {
+            System.out.println("\n✗ LOGIN FAILED!");
+            if (!usernameMatch) System.out.println("  - Invalid username");
+            if (!passwordMatch) System.out.println("  - Invalid password");
+        }
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>=== Login System ===
+Enter username: admin
+Enter password: Pass123
+
+=== Validation Results ===
+Username check (case-insensitive):
+  Input: admin
+  Stored: Admin
+  Match: true
+
+Password check (case-sensitive):
+  Input: Pass123
+  Stored: Pass123
+  Match: true
+
+✓ LOGIN SUCCESSFUL!
+
+--- Another attempt ---
+Enter username: ADMIN
+Enter password: pass123
+
+Username check (case-insensitive):
+  Input: ADMIN
+  Stored: Admin
+  Match: true
+
+Password check (case-sensitive):
+  Input: pass123
+  Stored: Pass123
+  Match: false
+
+✗ LOGIN FAILED!
+  - Invalid password</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>equalsIgnoreCase():</strong> Ignores case differences in comparison</li>
+                    <li><strong>Use Cases:</strong> Usernames, email addresses, commands</li>
+                    <li><strong>Security:</strong> Passwords should use equals() (case-sensitive)</li>
+                    <li><strong>User-Friendly:</strong> Reduces login errors from caps lock</li>
+                </ul>
+                <strong>Pattern:</strong> Case-insensitive for identifiers, case-sensitive for secrets
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: compareToIgnoreCase() for Case-Insensitive Sorting</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that sorts strings in case-insensitive alphabetical order
+                using compareToIgnoreCase(). Compare the results with regular compareTo() sorting.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _04_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("How many strings? ");
+        int n = sn.nextInt();
+        sn.nextLine();
+
+        String[] arr1 = new String[n];
+        String[] arr2 = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter string " + (i + 1) + ": ");
+            arr1[i] = sn.nextLine();
+            arr2[i] = arr1[i];  // Copy for second sort
+        }
+
+        // Sort using compareTo() (case-sensitive)
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr1[j].compareTo(arr1[j + 1]) > 0) {
+                    String temp = arr1[j];
+                    arr1[j] = arr1[j + 1];
+                    arr1[j + 1] = temp;
+                }
+            }
+        }
+
+        // Sort using compareToIgnoreCase() (case-insensitive)
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr2[j].compareToIgnoreCase(arr2[j + 1]) > 0) {
+                    String temp = arr2[j];
+                    arr2[j] = arr2[j + 1];
+                    arr2[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.println("\n=== Case-Sensitive Sort (compareTo) ===");
+        for (String str : arr1) {
+            System.out.println(str);
+        }
+
+        System.out.println("\n=== Case-Insensitive Sort (compareToIgnoreCase) ===");
+        for (String str : arr2) {
+            System.out.println(str);
+        }
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>How many strings? 5
+Enter string 1: apple
+Enter string 2: Banana
+Enter string 3: CHERRY
+Enter string 4: date
+Enter string 5: Elderberry
+
+=== Case-Sensitive Sort (compareTo) ===
+Banana
+CHERRY
+Elderberry
+apple
+date
+
+=== Case-Insensitive Sort (compareToIgnoreCase) ===
+apple
+Banana
+CHERRY
+date
+Elderberry</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>compareTo():</strong> Uppercase before lowercase (A-Z then a-z)</li>
+                    <li><strong>compareToIgnoreCase():</strong> True alphabetical order</li>
+                    <li><strong>Unicode Order:</strong> compareTo() follows ASCII/Unicode values</li>
+                    <li><strong>User Expectations:</strong> Case-insensitive usually more intuitive</li>
+                </ul>
+                <strong>Tip:</strong> Use compareToIgnoreCase() for user-facing alphabetical lists
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: String Comparison Methods Summary</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a comprehensive Java program that demonstrates all string comparison methods
+                with the same pair of strings. Show equals(), equalsIgnoreCase(), compareTo(), compareToIgnoreCase(),
+                and == operator with detailed explanations.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _05_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter first string: ");
+        String s1 = sn.nextLine();
+
+        System.out.print("Enter second string: ");
+        String s2 = sn.nextLine();
+
+        System.out.println("\n=== COMPARISON METHODS SUMMARY ===");
+
+        // 1. == operator
+        System.out.println("\n1. == (Reference Comparison)");
+        System.out.println("   s1 == s2: " + (s1 == s2));
+        System.out.println("   Compares: Memory addresses");
+        System.out.println("   Use for: Reference equality (rarely needed)");
+
+        // 2. equals()
+        System.out.println("\n2. equals() (Content Comparison)");
+        System.out.println("   s1.equals(s2): " + s1.equals(s2));
+        System.out.println("   Compares: Exact content (case-sensitive)");
+        System.out.println("   Use for: Standard string comparison");
+
+        // 3. equalsIgnoreCase()
+        System.out.println("\n3. equalsIgnoreCase() (Case-Insensitive)");
+        System.out.println("   s1.equalsIgnoreCase(s2): " + s1.equalsIgnoreCase(s2));
+        System.out.println("   Compares: Content ignoring case");
+        System.out.println("   Use for: Usernames, commands, emails");
+
+        // 4. compareTo()
+        System.out.println("\n4. compareTo() (Lexicographic Order)");
+        int result1 = s1.compareTo(s2);
+        System.out.println("   s1.compareTo(s2): " + result1);
+        System.out.println("   Returns: " + getCompareResult(result1));
+        System.out.println("   Use for: Sorting (case-sensitive)");
+
+        // 5. compareToIgnoreCase()
+        System.out.println("\n5. compareToIgnoreCase() (Case-Insensitive Order)");
+        int result2 = s1.compareToIgnoreCase(s2);
+        System.out.println("   s1.compareToIgnoreCase(s2): " + result2);
+        System.out.println("   Returns: " + getCompareResult(result2));
+        System.out.println("   Use for: Sorting (case-insensitive)");
+
+        // Summary
+        System.out.println("\n=== QUICK REFERENCE ===");
+        System.out.println("✓ For equality: use equals()");
+        System.out.println("✓ For case-insensitive equality: use equalsIgnoreCase()");
+        System.out.println("✓ For sorting: use compareTo()");
+        System.out.println("✓ For case-insensitive sorting: use compareToIgnoreCase()");
+        System.out.println("✗ Avoid == for string comparison!");
+
+        sn.close();
+    }
+
+    public static String getCompareResult(int result) {
+        if (result < 0) return "Negative (s1 < s2)";
+        else if (result > 0) return "Positive (s1 > s2)";
+        else return "Zero (s1 == s2)";
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter first string: Hello
+Enter second string: hello
+
+=== COMPARISON METHODS SUMMARY ===
+
+1. == (Reference Comparison)
+   s1 == s2: false
+   Compares: Memory addresses
+   Use for: Reference equality (rarely needed)
+
+2. equals() (Content Comparison)
+   s1.equals(s2): false
+   Compares: Exact content (case-sensitive)
+   Use for: Standard string comparison
+
+3. equalsIgnoreCase() (Case-Insensitive)
+   s1.equalsIgnoreCase(s2): true
+   Compares: Content ignoring case
+   Use for: Usernames, commands, emails
+
+4. compareTo() (Lexicographic Order)
+   s1.compareTo(s2): -32
+   Returns: Negative (s1 < s2)
+   Use for: Sorting (case-sensitive)
+
+5. compareToIgnoreCase() (Case-Insensitive Order)
+   s1.compareToIgnoreCase(s2): 0
+   Returns: Zero (s1 == s2)
+   Use for: Sorting (case-insensitive)
+
+=== QUICK REFERENCE ===
+✓ For equality: use equals()
+✓ For case-insensitive equality: use equalsIgnoreCase()
+✓ For sorting: use compareTo()
+✓ For case-insensitive sorting: use compareToIgnoreCase()
+✗ Avoid == for string comparison!</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Method Selection:</strong> Choose based on use case</li>
+                    <li><strong>Equality vs Ordering:</strong> equals() for equality, compareTo() for sorting</li>
+                    <li><strong>Case Sensitivity:</strong> Regular vs IgnoreCase variants</li>
+                    <li><strong>Return Types:</strong> boolean for equals, int for compareTo</li>
+                </ul>
+                <strong>Cheat Sheet:</strong> equals() = equality, compareTo() = ordering, IgnoreCase = case-blind
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>String Comparisons Module - Practice Worksheet</strong></p>
+            <p>Master all string comparison methods in Java</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

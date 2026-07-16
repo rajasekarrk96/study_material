@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  31 extra   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>31. Extras</h1>
+
+<h2>📖 Introduction</h2>
+<p>"It works on my machine" is the most dangerous phrase in software development. Modern automation runs on pipelines,
+    not laptops. This section covers the advanced topics that turn a "script writer" into an "Automation Architect".</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>CI/CD (Jenkins/GitHub Actions)</li>
+    <li>Headless Execution</li>
+    <li>Docker & Selenium Grid</li>
+    <li>Parallel Execution</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>Jenkins (CI/CD)</h3>
+<p>A tool that watches your code repository. When you push changes, it automatically:</p>
+<ol>
+    <li>Downloads the code.</li>
+    <li>Runs <code>mvn test</code>.</li>
+    <li>Generates Reports.</li>
+    <li>Emails results.</li>
+</ol>
+
+<h3>Docker</h3>
+<p>Solves environment issues. You can run your tests inside a "container" that has Chrome and Java pre-installed,
+    guaranteeing it works exactly the same everywhere.</p>
+
+<h2>💻 Code Examples</h2>
+
+<h3>Running via Command Line (for Jenkins)</h3>
+<pre><code># Pass browser as a parameter
+mvn test -Dbrowser=chrome -Dheadless=true</code></pre>
+
+<h3>GitHub Actions Workflow (yaml)</h3>
+<pre><code>name: Java CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+    - name: Test
+      run: mvn test</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Hardcoded Paths:</strong> If your code has <code>C:\Users\Sedhu\Desktop\file.txt</code>, it will fail on
+        Jenkins. Always use relative paths.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Run from CMD.</p>
+    <ol>
+        <li>Open your terminal.</li>
+        <li>Navigate to the project root.</li>
+        <li>Run <code>mvn clean test</code>.</li>
+        <li>Review the output in the console.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: Why do we use Jenkins?</strong></p>
+    <p><strong>Answer:</strong> To enable Continuous Testing. It allows nightly runs and regression testing on every
+        code commit without human intervention.</p>
+</blockquote>
+
+<a href="worksheets/ws_extras.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

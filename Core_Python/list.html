@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Lists - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#access">Access Items</a></li>
+                        <li><a href="#change">Change Items</a></li>
+                        <li><a href="#add">Add Items</a></li>
+                        <li><a href="#remove">Remove Items</a></li>
+                        <li><a href="#loop">Loop Lists</a></li>
+                        <li><a href="#comprehension">List Comprehension</a></li>
+                        <li><a href="#sort">Sort Lists</a></li>
+                        <li><a href="#methods">List Methods</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python Lists</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>Lists are used to store multiple items in a single variable.</p>
+                    <p>Lists are created using square brackets:</p>
+                    <pre class="code-block">
+thislist = ["apple", "banana", "cherry"]
+print(thislist)
+</pre>
+                    <h3>List Items</h3>
+                    <ul>
+                        <li><strong>Ordered:</strong> The items have a defined order, and that order will not change.
+                        </li>
+                        <li><strong>Changeable:</strong> We can change, add, and remove items in a list after it has
+                            been created.</li>
+                        <li><strong>Allow Duplicates:</strong> Since lists are indexed, lists can have items with the
+                            same value.</li>
+                    </ul>
+
+                    <h2 id="access">Access Items</h2>
+                    <p>List items are indexed and you can access them by referring to the index number:</p>
+                    <pre class="code-block">
+thislist = ["apple", "banana", "cherry"]
+print(thislist[1]) # banana
+</pre>
+                    <p>Negative indexing means start from the end: <code>-1</code> refers to the last item.</p>
+
+                    <h2 id="change">Change Item Value</h2>
+                    <p>To change the value of a specific item, refer to the index number:</p>
+                    <pre class="code-block">
+thislist = ["apple", "banana", "cherry"]
+thislist[1] = "blackcurrant"
+print(thislist)
+</pre>
+
+                    <h2 id="add">Add Items</h2>
+                    <h3>Append Items</h3>
+                    <p>To add an item to the end of the list, use the <code>append()</code> method:</p>
+                    <pre class="code-block">
+thislist = ["apple", "banana", "cherry"]
+thislist.append("orange")
+</pre>
+
+                    <h3>Insert Items</h3>
+                    <p>To insert a list item at a specified index, use the <code>insert()</code> method:</p>
+                    <pre class="code-block">
+thislist = ["apple", "banana", "cherry"]
+thislist.insert(1, "orange")
+</pre>
+
+                    <h2 id="remove">Remove Items</h2>
+                    <h3>Remove Specified Item</h3>
+                    <p>The <code>remove()</code> method removes the specified item:</p>
+                    <pre class="code-block">
+thislist = ["apple", "banana", "cherry"]
+thislist.remove("banana")
+</pre>
+
+                    <h3>Remove Specified Index</h3>
+                    <p>The <code>pop()</code> method removes the specified index (or the last item if index is not
+                        specified):</p>
+                    <pre class="code-block">
+thislist = ["apple", "banana", "cherry"]
+thislist.pop(1)
+</pre>
+
+                    <h2 id="create-list">Create Python Lists</h2>
+                    <p>A list is created by placing elements inside square brackets <code>[]</code>, separated by
+                        commas.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+list_name = [item1, item2, item3, ...]
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+thislist = ["apple", "banana", "cherry"]
+for x in thislist:
+  print(x)
+</pre>
+
+                    <h2 id="loop">Loop Lists</h2>
+                    <p>You can loop through the list items by using a <code>for</code> loop:</p>
+                    <pre class="code-block">
+thislist = ["apple", "banana", "cherry"]
+for x in thislist:
+  print(x)
+</pre>
+
+                    <h2 id="comprehension">List Comprehension</h2>
+                    <p>List comprehension offers a shorter syntax when you want to create a new list based on the values
+                        of an existing list.</p>
+                    <pre class="code-block">
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+
+newlist = [x for x in fruits if "a" in x]
+
+print(newlist) 
+</pre>
+
+                    <h2 id="sort">Sort Lists</h2>
+                    <p>List objects have a <code>sort()</code> method that will sort the list alphanumerically,
+                        ascending, by default:</p>
+                    <pre class="code-block">
+thislist = ["orange", "mango", "kiwi", "pineapple", "banana"]
+thislist.sort()
+print(thislist)
+</pre>
+
+                    <h2 id="methods">List Methods</h2>
+                    <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
+                        <tr style="background-color: #f1f1f1; text-align: left;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Method</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Description</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">append()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Adds an element at the end of the list
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">clear()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Removes all the elements from the list
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">copy()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns a copy of the list</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">count()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns the number of elements with the
+                                specified value</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">extend()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Add the elements of a list (or any
+                                iterable), to the end of the current list</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">index()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns the index of the first element
+                                with the specified value</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">insert()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Adds an element at the specified position
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">pop()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Removes the element at the specified
+                                position</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">remove()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Removes the item with the specified value
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">reverse()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Reverses the order of the list</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">sort()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Sorts the list</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a Python program to sum all the items in a list.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def sum_list(items):
+    return sum(items)
+
+print(sum_list([10, 20, 30]))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a Python program to multiplies all the items in a list.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def multiply_list(items):
+    total = 1
+    for x in items:
+        total *= x
+    return total
+
+print(multiply_list([2, 3, 4]))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a Python program to get the largest number from a list.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def max_num(items):
+    return max(items)
+
+print(max_num([10, 50, 20, 90]))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a Python program to get the smallest number from a list.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def min_num(items):
+    return min(items)
+
+print(min_num([10, 50, 2, 90]))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a Python program to count the number of strings where the string length is 2 or
+                            more and the first and last character are same from a given list of strings.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def match_words(words):
+    ctr = 0
+    for word in words:
+        if len(word) > 1 and word[0] == word[-1]:
+            ctr += 1
+    return ctr
+
+print(match_words(['abc', 'xyz', 'aba', '1221']))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a Python program to remove duplicates from a list.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>a = [10, 20, 30, 20, 10, 50, 60, 40, 80, 50, 40]
+unique_items = list(set(a))
+print(unique_items)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a Python program to clone or copy a list.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>original_list = [10, 22, 44, 23, 4]
+new_list = list(original_list)
+print(original_list)
+print(new_list)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a Python program to find the list of words that are longer than n from a given list
+                            of words.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def long_words(n, str):
+    word_len = []
+    txt = str.split(" ")
+    for x in txt:
+        if len(x) > n:
+            word_len.append(x)
+    return word_len
+
+print(long_words(3, "The quick brown fox jumps over the lazy dog"))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a Python function that takes two lists and returns True if they have at least one
+                            common member.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def common_data(list1, list2):
+    result = False
+    for x in list1:
+        for y in list2:
+            if x == y:
+                result = True
+                return result
+    return result
+
+print(common_data([1, 2, 3, 4, 5], [5, 6, 7, 8, 9]))
+print(common_data([1, 2, 3, 4, 5], [6, 7, 8, 9]))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a Python program to print a specified list after removing the 0th, 4th and 5th
+                            elements.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>color = ['Red', 'Green', 'White', 'Black', 'Pink', 'Yellow']
+color = [x for (i,x) in enumerate(color) if i not in (0,4,5)]
+print(color)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

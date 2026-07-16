@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methods (WPWOR) - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Methods Worksheet</h5>
+        <a href="index.html" class="nav-link">← Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Methods (WPWOR) - Practice</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master Methods with Parameters and Without Return Values (WPWOR) by practicing these exercises.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Check Positive, Negative, or Zero</h3>
+            <div class="explanation">Write a Java method named <code>checkNumber</code> that accepts an integer and
+                checks if it is negative, positive, or zero. Print the result directly from the method.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+
+    static void checkNumber(int n) {
+        if (n > 0)
+            System.out.println("Positive");
+        else if (n < 0)
+            System.out.println("Negative");
+        else
+            System.out.println("Zero");
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int n = sn.nextInt();
+        checkNumber(n);
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter a number: -5
+Negative</code></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Smallest of Three Numbers</h3>
+            <div class="explanation">Write a Java method named <code>printSmallest</code> that accepts three integers
+                and prints the smallest number among them.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+
+    static void printSmallest(int a, int b, int c) {
+        int smallest = Math.min(a, Math.min(b, c));
+        System.out.println("Smallest: " + smallest);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter three numbers: ");
+        int a = sn.nextInt();
+        int b = sn.nextInt();
+        int c = sn.nextInt();
+
+        printSmallest(a, b, c);
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter three numbers: 12 5 8
+Smallest: 5</code></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Greatest Common Divisor (GCD)</h3>
+            <div class="explanation">Write a Java method named <code>printGCD</code> that accepts two integers and
+                prints their Greatest Common Divisor (GCD).</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+
+    static void printGCD(int a, int b) {
+        int originalA = a, originalB = b;
+        while (b != 0) {
+            int t = b;
+            b = a % b;
+            a = t;
+        }
+        System.out.println("GCD of " + originalA + " and " + originalB + " is: " + a);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter two numbers: ");
+        int x = sn.nextInt();
+        int y = sn.nextInt();
+
+        printGCD(x, y);
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter two numbers: 12 18
+GCD of 12 and 18 is: 6</code></div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Methods (WPWOR) Module - Practice Worksheet</strong></p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

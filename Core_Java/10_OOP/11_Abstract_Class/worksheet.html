@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Interface Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Interface - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master Java interfaces with polymorphism, abstraction, and multiple implementations.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Flyable Interface</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to create an interface Flyable with a method called fly_obj().
+                Create three classes Spacecraft, Airplane, and Helicopter that implement the Flyable interface.
+                Implement the fly_obj() method for each of the three classes.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>interface Flyable {
+    void fly_obj();
+}
+
+class Spacecraft implements Flyable {
+    public void fly_obj() {
+        System.out.println("Spacecraft is flying");
+    }
+}
+
+class Airplane implements Flyable {
+    public void fly_obj() {
+        System.out.println("Airplane is flying");
+    }
+}
+
+class Helicopter implements Flyable {
+    public void fly_obj() {
+        System.out.println("Helicopter is flying");
+    }
+}
+
+class _01_ {
+    public static void main(String[] args) {
+        Flyable f1 = new Spacecraft();
+        Flyable f2 = new Airplane();
+        Flyable f3 = new Helicopter();
+
+        f1.fly_obj();
+        f2.fly_obj();
+        f3.fly_obj();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Spacecraft is flying
+Airplane is flying
+Helicopter is flying</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Interface:</strong> Defines a contract that classes must implement</li>
+                    <li><strong>Polymorphism:</strong> All three classes treated as Flyable type</li>
+                    <li><strong>Abstract Method:</strong> fly_obj() has no body in interface</li>
+                    <li><strong>Multiple Implementations:</strong> Each class provides its own implementation</li>
+                </ul>
+                <strong>Real-World Use:</strong> Common behavior across different types of objects
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Encryptable Interface</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to create an interface Encryptable with methods encrypt(String
+                data) and decrypt(String encryptedData) that define encryption and decryption operations. Create two
+                classes AES and RSA that implement the Encryptable interface and provide their own encryption and
+                decryption algorithms.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>interface Encryptable {
+    String encrypt(String data);
+    String decrypt(String encryptedData);
+}
+
+class AES implements Encryptable {
+    public String encrypt(String data) {
+        return "AES_ENC(" + data + ")";
+    }
+
+    public String decrypt(String encryptedData) {
+        return "AES_DEC(" + encryptedData + ")";
+    }
+}
+
+class RSA implements Encryptable {
+    public String encrypt(String data) {
+        return "RSA_ENC(" + data + ")";
+    }
+
+    public String decrypt(String encryptedData) {
+        return "RSA_DEC(" + encryptedData + ")";
+    }
+}
+
+class _02_ {
+    public static void main(String[] args) {
+        Encryptable e1 = new AES();
+        Encryptable e2 = new RSA();
+
+        System.out.println(e1.encrypt("HELLO"));
+        System.out.println(e2.encrypt("WORLD"));
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>AES_ENC(HELLO)
+RSA_ENC(WORLD)</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Multiple Methods:</strong> Interface can declare multiple abstract methods</li>
+                    <li><strong>Return Types:</strong> Methods can return values (String in this case)</li>
+                    <li><strong>Strategy Pattern:</strong> Different encryption algorithms with same interface</li>
+                    <li><strong>Interchangeable:</strong> Can swap AES with RSA without changing client code</li>
+                </ul>
+                <strong>Real-World Use:</strong> Security systems, plugin architectures, algorithm selection
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Sortable Interface</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to create an interface Sortable with a method sort() that
+                sorts an array of integers in ascending order. Create two classes BubbleSort and SelectionSort that
+                implement the Sortable interface and provide their own implementations of the sort() method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>interface Sortable {
+    void sort(int[] arr);
+}
+
+class BubbleSort implements Sortable {
+    public void sort(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int t = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = t;
+                }
+            }
+        }
+    }
+}
+
+class SelectionSort implements Sortable {
+    public void sort(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            int min = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[min])
+                    min = j;
+            }
+            int t = arr[i];
+            arr[i] = arr[min];
+            arr[min] = t;
+        }
+    }
+}
+
+class _03_ {
+    public static void main(String[] args) {
+        int[] arr = {5, 3, 1, 4, 2};
+
+        Sortable s = new BubbleSort();
+        s.sort(arr);
+
+        for (int i : arr)
+            System.out.print(i + " ");
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>1 2 3 4 5</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Array Parameters:</strong> Interface methods can accept arrays</li>
+                    <li><strong>Different Algorithms:</strong> BubbleSort vs SelectionSort implementation</li>
+                    <li><strong>In-Place Modification:</strong> Array is modified directly</li>
+                    <li><strong>Algorithm Abstraction:</strong> Client doesn't need to know sorting details</li>
+                </ul>
+                <strong>Comparison:</strong> BubbleSort: O(n²), SelectionSort: O(n²) - both quadratic time
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Playable Interface</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to create an interface Playable with a method play() that
+                takes no arguments and returns void. Create three classes Football, Volleyball, and Basketball that
+                implement the Playable interface and override the play() method to play the respective sports.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>interface Playable {
+    void play();
+}
+
+class Football implements Playable {
+    public void play() {
+        System.out.println("Playing Football");
+    }
+}
+
+class Volleyball implements Playable {
+    public void play() {
+        System.out.println("Playing Volleyball");
+    }
+}
+
+class Basketball implements Playable {
+    public void play() {
+        System.out.println("Playing Basketball");
+    }
+}
+
+class _04_ {
+    public static void main(String[] args) {
+        Playable p1 = new Football();
+        Playable p2 = new Volleyball();
+        Playable p3 = new Basketball();
+
+        p1.play();
+        p2.play();
+        p3.play();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Playing Football
+Playing Volleyball
+Playing Basketball</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Simple Interface:</strong> Single method with no parameters</li>
+                    <li><strong>Uniform Behavior:</strong> All sports have common play() action</li>
+                    <li><strong>Reference Type:</strong> Playable reference can hold any implementing class</li>
+                    <li><strong>Loose Coupling:</strong> Main method doesn't depend on specific sport classes</li>
+                </ul>
+                <strong>Design Benefit:</strong> Easy to add new sports without changing existing code
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Searchable Interface</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to create an interface Searchable with a method search(String
+                keyword) that searches for a given keyword in a text document. Create two classes Document and WebPage
+                that implement the Searchable interface and provide their own implementations of the search() method.
+            </div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>interface Searchable {
+    void search(String keyword);
+}
+
+class Document implements Searchable {
+    public void search(String keyword) {
+        System.out.println("Searching \"" + keyword + "\" in Document");
+    }
+}
+
+class WebPage implements Searchable {
+    public void search(String keyword) {
+        System.out.println("Searching \"" + keyword + "\" in WebPage");
+    }
+}
+
+class _05_ {
+    public static void main(String[] args) {
+        Searchable s1 = new Document();
+        Searchable s2 = new WebPage();
+
+        s1.search("Java");
+        s2.search("OOPS");
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Searching "Java" in Document
+Searching "OOPS" in WebPage</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>String Parameters:</strong> Interface methods can accept String arguments</li>
+                    <li><strong>Common Functionality:</strong> Both Document and WebPage support searching</li>
+                    <li><strong>Different Contexts:</strong> Same operation in different environments</li>
+                    <li><strong>Extensibility:</strong> Easy to add new searchable types (PDF, Email, etc.)</li>
+                </ul>
+                <strong>Real-World Use:</strong> Search engines, content management systems, file explorers
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>Interface Module - Practice Worksheet</strong></p>
+            <p>Master abstraction and polymorphism with Java interfaces</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

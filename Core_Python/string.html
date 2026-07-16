@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Strings - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#slicing">Slicing</a></li>
+                        <li><a href="#modify">Modify Strings</a></li>
+                        <li><a href="#concat">Concatenation</a></li>
+                        <li><a href="#format">Format Strings</a></li>
+                        <li><a href="#escape">Escape Characters</a></li>
+                        <li><a href="#methods">String Methods</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python Strings</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>Strings in Python are surrounded by either single quotation marks, or double quotation marks.</p>
+                    <p><code>"hello"</code> is the same as <code>'hello'</code>.</p>
+
+                    <h3>Multiline Strings</h3>
+                    <p>You can assign a multiline string to a variable by using three quotes:</p>
+                    <pre class="code-block">
+a = """Lorem ipsum dolor sit amet,
+consectetur adipiscing elit,
+sed do eiusmod tempor incididunt
+ut labore et dolore magna aliqua."""
+print(a)
+</pre>
+
+                    <h2 id="slicing">Slicing Strings</h2>
+                    <p>You can return a range of characters by using the slice syntax.</p>
+                    <p>Specify the start index and the end index, separated by a colon, to return a part of the string.
+                    </p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+string_variable[start_index : end_index]
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+b = "Hello, World!"
+print(b[2:5])   # llo
+print(b[:5])    # Hello (from start)
+print(b[2:])    # llo, World! (to end)
+</pre>
+
+                    <h3>Negative Indexing</h3>
+                    <p>Use negative indexes to start the slice from the end of the string:</p>
+                    <pre class="code-block">
+b = "Hello, World!"
+print(b[-5:-2]) # orl
+</pre>
+
+                    <h2 id="modify">Modifying Strings</h2>
+                    <p>Python has a set of built-in methods that you can use on strings.</p>
+
+                    <h3>Upper Case</h3>
+                    <pre class="code-block">
+a = "Hello, World!"
+print(a.upper())  # HELLO, WORLD!
+</pre>
+
+                    <h3>Lower Case</h3>
+                    <pre class="code-block">
+a = "Hello, World!"
+print(a.lower())  # hello, world!
+</pre>
+
+                    <h3>Remove Whitespace</h3>
+                    <p><code>strip()</code> removes whitespace from the beginning or the end:</p>
+                    <pre class="code-block">
+a = " Hello, World! "
+print(a.strip()) # "Hello, World!"
+</pre>
+
+                    <h3>Replace String</h3>
+                    <pre class="code-block">
+a = "Hello, World!"
+print(a.replace("H", "J")) # Jello, World!
+</pre>
+
+                    <h3>Split String</h3>
+                    <p><code>split()</code> returns a list where the text between the specified separator becomes the
+                        list items:</p>
+                    <pre class="code-block">
+a = "Hello, World!"
+print(a.split(",")) # ['Hello', ' World!']
+</pre>
+
+                    <h2 id="concat">String Concatenation</h2>
+                    <p>To concatenate, or combine, two strings you can use the + operator.</p>
+                    <pre class="code-block">
+a = "Hello"
+b = "World"
+c = a + " " + b
+print(c) # Hello World
+</pre>
+
+                    <h2 id="format">String Formatting (f-strings)</h2>
+                    <p>To insert numbers into strings, use f-strings (available in Python 3.6+).</p>
+                    <p>Put an <code>f</code> in front of the string, and add curly brackets <code>{}</code> containing
+                        variables:</p>
+                    <pre class="code-block">
+age = 36
+txt = f"My name is John, I am {age}"
+print(txt)
+</pre>
+
+                    <h2 id="escape">Escape Characters</h2>
+                    <p>To insert characters that are illegal in a string, use an escape character <code>\</code>.</p>
+                    <pre class="code-block">
+txt = "We are the so-called \"Vikings\" from the north."
+</pre>
+                    <ul>
+                        <li><code>\'</code> Single Quote</li>
+                        <li><code>\\</code> Backslash</li>
+                        <li><code>\n</code> New Line</li>
+                        <li><code>\t</code> Tab</li>
+                    </ul>
+
+                    <h2 id="methods">String Methods</h2>
+                    <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
+                        <tr style="background-color: #f1f1f1; text-align: left;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Method</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Description</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">capitalize()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Converts the first character to upper
+                                case</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">count()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns the number of times a specified
+                                value occurs</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">find()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Searches the string for a specified value
+                                and returns the position</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">join()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Joins the elements of an iterable to the
+                                end of the string</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a program to find the length of a string without using len().</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>s = input("Enter a string: ")
+count = 0
+for char in s:
+    count += 1
+print("Length:", count)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a program to count the frequency of a specific character in a string.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>s = input("Enter a string: ")
+char = input("Enter character to count: ")
+print("Count:", s.count(char))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a program to get a string made of the first 2 and the last 2 chars from a given a
+                            string.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>s = input("Enter a string: ")
+if len(s) < 2:
+    print("Empty String")
+else:
+    new_str = s[:2] + s[-2:]
+    print("Result:", new_str)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a program to check if a string is a palindrome.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>s = input("Enter a string: ")
+if s == s[::-1]:
+    print("Palindrome")
+else:
+    print("Not a Palindrome")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a program to count the number of vowels in a string.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>s = input("Enter a string: ")
+vowels = "aeiouAEIOU"
+count = 0
+for char in s:
+    if char in vowels:
+        count += 1
+print("Vowels:", count)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a program to remove duplicate characters from a string (preserving order).</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>s = input("Enter a string: ")
+result = ""
+for char in s:
+    if char not in result:
+        result += char
+print("String without duplicates:", result)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a program to replace all spaces in a string with hyphens.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>s = input("Enter a string: ")
+print("Result:", s.replace(" ", "-"))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a program to count total number of words in a string.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>s = input("Enter a string: ")
+words = s.split()
+print("Total words:", len(words))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a program to check if two strings are anagrams.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>s1 = input("Enter first string: ")
+s2 = input("Enter second string: ")
+if sorted(s1) == sorted(s2):
+    print("Anagrams")
+else:
+    print("Not Anagrams")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a program to check if a string contains only digits.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>s = input("Enter a string: ")
+if s.isdigit():
+    print("Contains only digits")
+else:
+    print("Contains non-digits")</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Types - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none;
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333;
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0;
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px;
+        }
+
+        .explanation ol {
+            line-height: 1.8;
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Data Types Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Data Types - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Java data types with these practice problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Primitive Data Types Demonstration</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that demonstrates all primitive data types by taking input for each type and
+                displaying them.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>25<br>5000000000<br>3.14<br>9.99<br>A<br>true</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>byte: 25<br>long: 5000000000<br>float: 3.14<br>double: 9.99<br>char: A<br>boolean: true</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>100<br>9876543210<br>2.5<br>7.89<br>Z<br>false</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>byte: 100<br>long: 9876543210<br>float: 2.5<br>double: 7.89<br>char: Z<br>boolean: false</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class PrimitiveTypes {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter byte value: ");
+        byte b = sn.nextByte();
+        
+        System.out.print("Enter long value: ");
+        long l = sn.nextLong();
+        
+        System.out.print("Enter float value: ");
+        float f = sn.nextFloat();
+        
+        System.out.print("Enter double value: ");
+        double d = sn.nextDouble();
+        
+        System.out.print("Enter char value: ");
+        char c = sn.next().charAt(0);
+        
+        System.out.print("Enter boolean value: ");
+        boolean bool = sn.nextBoolean();
+        
+        System.out.println("byte: " + b);
+        System.out.println("long: " + l);
+        System.out.println("float: " + f);
+        System.out.println("double: " + d);
+        System.out.println("char: " + c);
+        System.out.println("boolean: " + bool);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Byte:</strong> 8-bit integer, range -128 to 127. Read using
+                                <code>nextByte()</code>.</li>
+                            <li><strong>Long:</strong> 64-bit integer for large numbers. Read using
+                                <code>nextLong()</code>.</li>
+                            <li><strong>Float:</strong> 32-bit floating point number. Read using
+                                <code>nextFloat()</code>.</li>
+                            <li><strong>Double:</strong> 64-bit floating point for more precision. Read using
+                                <code>nextDouble()</code>.</li>
+                            <li><strong>Char:</strong> Single character. Read using <code>next().charAt(0)</code>.</li>
+                            <li><strong>Boolean:</strong> true or false value. Read using <code>nextBoolean()</code>.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Type Casting - Widening</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that demonstrates automatic type casting (widening) by converting an int to a
+                double.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>42</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Integer value: 42<br>Double value: 42.0</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>100</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Integer value: 100<br>Double value: 100.0</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class WideningCast {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter an integer: ");
+        int intValue = sn.nextInt();
+        
+        // Automatic widening conversion
+        double doubleValue = intValue;
+        
+        System.out.println("Integer value: " + intValue);
+        System.out.println("Double value: " + doubleValue);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Read Integer:</strong> Get an integer value from the user.</li>
+                            <li><strong>Automatic Conversion:</strong> <code>double doubleValue = intValue;</code> -
+                                Java automatically converts int to double (widening).</li>
+                            <li><strong>Widening Cast:</strong> Smaller data types can be automatically converted to
+                                larger types without data loss.</li>
+                            <li><strong>Conversion Order:</strong> byte → short → int → long → float → double</li>
+                            <li><strong>No Explicit Cast Needed:</strong> This conversion happens automatically.</li>
+                            <li><strong>Display Results:</strong> Show both the original integer and converted double
+                                value.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Type Casting - Narrowing</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that demonstrates explicit type casting (narrowing) by converting a double to an
+                int.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>9.99</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Double value: 9.99<br>Integer value: 9</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>15.75</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Double value: 15.75<br>Integer value: 15</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class NarrowingCast {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter a double value: ");
+        double doubleValue = sn.nextDouble();
+        
+        // Explicit narrowing conversion
+        int intValue = (int) doubleValue;
+        
+        System.out.println("Double value: " + doubleValue);
+        System.out.println("Integer value: " + intValue);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Read Double:</strong> Get a double value from the user.</li>
+                            <li><strong>Explicit Cast:</strong> <code>(int) doubleValue</code> - We must explicitly cast
+                                double to int using (int).</li>
+                            <li><strong>Data Loss:</strong> The decimal part is truncated (not rounded), so 9.99 becomes
+                                9.</li>
+                            <li><strong>Narrowing Cast:</strong> Converting larger types to smaller types requires
+                                explicit casting.</li>
+                            <li><strong>Potential Issues:</strong> If the value is too large for int, it will overflow.
+                            </li>
+                            <li><strong>Syntax:</strong> Use parentheses with the target type: (targetType) value</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: String to Primitive Conversion</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that converts String inputs to different primitive types (int, double, boolean) and
+                performs calculations.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>10<br>5.5<br>true</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Integer: 10<br>Double: 5.5<br>Boolean: true<br>Sum: 15.5</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>20<br>3.2<br>false</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Integer: 20<br>Double: 3.2<br>Boolean: false<br>Sum: 23.2</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class StringConversion {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter integer as string: ");
+        String strInt = sn.nextLine();
+        int num = Integer.parseInt(strInt);
+        
+        System.out.print("Enter double as string: ");
+        String strDouble = sn.nextLine();
+        double decimal = Double.parseDouble(strDouble);
+        
+        System.out.print("Enter boolean as string: ");
+        String strBool = sn.nextLine();
+        boolean flag = Boolean.parseBoolean(strBool);
+        
+        double sum = num + decimal;
+        
+        System.out.println("Integer: " + num);
+        System.out.println("Double: " + decimal);
+        System.out.println("Boolean: " + flag);
+        System.out.println("Sum: " + sum);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Read Strings:</strong> Read all inputs as strings using <code>nextLine()</code>.
+                            </li>
+                            <li><strong>Parse Integer:</strong> <code>Integer.parseInt()</code> converts String to int.
+                            </li>
+                            <li><strong>Parse Double:</strong> <code>Double.parseDouble()</code> converts String to
+                                double.</li>
+                            <li><strong>Parse Boolean:</strong> <code>Boolean.parseBoolean()</code> converts String to
+                                boolean.</li>
+                            <li><strong>Calculate Sum:</strong> Add the integer and double values.</li>
+                            <li><strong>Wrapper Classes:</strong> Integer, Double, and Boolean are wrapper classes that
+                                provide parsing methods.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Data Type Size and Range</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that displays the size (in bytes) and range of int and long data types, then takes
+                input and shows if it fits in each type.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>2147483647</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>int size: 4 bytes<br>long size: 8 bytes<br>Your number: 2147483647<br>Fits in int: true<br>Fits in long: true</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>9223372036854775807</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>int size: 4 bytes<br>long size: 8 bytes<br>Your number: 9223372036854775807<br>Fits in int: false<br>Fits in long: true</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class DataTypeSize {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.println("int size: " + Integer.BYTES + " bytes");
+        System.out.println("long size: " + Long.BYTES + " bytes");
+        
+        System.out.print("Enter a number: ");
+        long number = sn.nextLong();
+        
+        boolean fitsInInt = (number >= Integer.MIN_VALUE && number <= Integer.MAX_VALUE);
+        boolean fitsInLong = true; // Always true if we can read it as long
+        
+        System.out.println("Your number: " + number);
+        System.out.println("Fits in int: " + fitsInInt);
+        System.out.println("Fits in long: " + fitsInLong);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Display Sizes:</strong> Use <code>Integer.BYTES</code> and
+                                <code>Long.BYTES</code> to show size in bytes.</li>
+                            <li><strong>Read Number:</strong> Read as long to handle large numbers.</li>
+                            <li><strong>Check Int Range:</strong> Compare with <code>Integer.MIN_VALUE</code> and
+                                <code>Integer.MAX_VALUE</code>.</li>
+                            <li><strong>Int Range:</strong> -2,147,483,648 to 2,147,483,647 (4 bytes)</li>
+                            <li><strong>Long Range:</strong> -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 (8
+                                bytes)</li>
+                            <li><strong>Practical Use:</strong> Choose appropriate data types based on the range of
+                                values you need to store.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+        <footer>
+            <p><strong>Data Types - Practice Worksheet</strong></p>
+            <p>Master Java primitive types, casting, and conversions</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

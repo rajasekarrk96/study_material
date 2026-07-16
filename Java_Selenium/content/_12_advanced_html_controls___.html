@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  12 advanced html controls   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>12. Advanced HTML Controls</h1>
+
+<h2>📖 Introduction</h2>
+<p>Blindly interacting with elements is a recipe for flaky tests. Before you click or type, you often need to verify the
+    state of an element: Is it visible? Is it enabled? Is it already checked? Furthermore, you'll arguably spend more
+    time <em>reading</em> data from the screen (validation) than entering it.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>Verifying if elements are displayed, enabled, or selected</li>
+    <li>Retrieving text and attribute values for assertions</li>
+    <li>The difference between <code>getText()</code> and <code>getAttribute("value")</code></li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>1. Verification Commands (Boolean)</h3>
+<p>These return <code>true</code> or <code>false</code>. Use them in <code>if</code> conditions or assertions.</p>
+<ul>
+    <li><code>isDisplayed()</code>: Checks if the element is rendered and visible on the page.</li>
+    <li><code>isEnabled()</code>: Checks if the element is interactive (not disabled/grayed out).</li>
+    <li><code>isSelected()</code>: Checks if a Checkbox or Radio Button is checked.</li>
+</ul>
+
+<h3>2. Retrieval Commands (String)</h3>
+<p>Used to extract data for validation.</p>
+<ul>
+    <li><code>getText()</code>: Gets the inner text between opening and closing tags (e.g.,
+        <code>&lt;h1&gt;Text&lt;/h1&gt;</code>).
+    </li>
+    <li><code>getAttribute("attributeName")</code>: Gets the value of a specific attribute (e.g., <code>href</code>,
+        <code>class</code>, <code>value</code>).
+    </li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+<p>Validation logic example:</p>
+
+<h3>Safe Interaction</h3>
+<pre><code>WebElement submitBtn = driver.findElement(By.id("submit"));
+
+// 1. Check if safe to click
+if(submitBtn.isDisplayed() && submitBtn.isEnabled()) {
+    submitBtn.click();
+} else {
+    System.out.println("Button is disabled!");
+}
+
+// 2. Validate Checkbox
+WebElement chk = driver.findElement(By.id("terms"));
+if(chk.isSelected()) {
+    System.out.println("Already agreed to terms");
+}</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>getText() vs getAttribute("value"):</strong> This is the #1 confusion. If you type valid into an
+        <code>&lt;input&gt;</code> box, <code>getText()</code> will return empty string! You MUST use
+        <code>getAttribute("value")</code> to get typed text.
+    </p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Validate a Profile Page.</p>
+    <ol>
+        <li>Verify the "Save" button is disabled initially.</li>
+        <li>Type a new email address.</li>
+        <li>Verify the "Save" button becomes enabled.</li>
+        <li>Click "Save".</li>
+        <li>Verify the success message text says "Profile Updated".</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: Can you use isSelected() on a button?</strong></p>
+    <p><strong>Answer:</strong> No, it generally returns false. It is designed for
+        <code>&lt;input type='checkbox'&gt;</code> and <code>&lt;input type='radio'&gt;</code> elements.
+    </p>
+</blockquote>
+
+<a href="worksheets/ws_advanced_html.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

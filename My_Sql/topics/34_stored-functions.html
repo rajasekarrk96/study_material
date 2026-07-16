@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stored Functions - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Stored Functions</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Stored Functions</h2>
+                <p class="topic-desc">A Stored Function is a database object that returns exactly one value and can be used within SQL statements like built-in functions.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Key Points</h3>
+                        <p class="subtopic-desc"><ul>\n<li>Must return exactly one value.</li>\n<li>Used inside SELECT, WHERE, and ORDER BY clauses.</li>\n<li>Cannot perform DML operations like INSERT, UPDATE, or DELETE on tables.</li>\n<li>Uses the RETURN keyword to send back a value.</li>\n</ul></p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code>DELIMITER //\n\nCREATE <span class="sql-keyword">FUNCTION</span> function_name(parameter datatype)\nRETURNS datatype\nDETERMINISTIC\nBEGIN\n    RETURN value;\nEND //\n\nDELIMITER ;</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Table: employees</h3>
+                        <p class="subtopic-desc">Sample data used for function examples.</p>
+            <div class="output-box">
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>emp_id</th><th>name</th><th>salary</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Arun</td><td>50000</td></tr>
+                        <tr><td>2</td><td>Ravi</td><td>40000</td></tr>
+                        <tr><td>3</td><td>Meena</td><td>60000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Example 1: Create Stored Function</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Create a reusable function to calculate a 10% bonus.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code>DELIMITER //\n\nCREATE <span class="sql-keyword">FUNCTION</span> get_bonus(salary <span class="sql-keyword">INT</span>)\nRETURNS <span class="sql-keyword">INT</span>\nDETERMINISTIC\nBEGIN\n    RETURN salary * 0.10;\nEND //\n\nDELIMITER ;</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Example 2: Use Stored Function</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Call the custom function within a SELECT statement.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name, salary, get_bonus(salary) <span class="sql-keyword">AS</span> bonus\nFROM employees;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>name</th><th>salary</th><th>bonus</th></tr></thead>
+                    <tbody>
+                        <tr><td>Arun</td><td>50000</td><td>5000</td></tr>
+                        <tr><td>Ravi</td><td>40000</td><td>4000</td></tr>
+                        <tr><td>Meena</td><td>60000</td><td>6000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Example 3: Stored Function with IF</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Create a function that uses logic internally.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code>DELIMITER //\n\nCREATE <span class="sql-keyword">FUNCTION</span> grade(marks <span class="sql-keyword">INT</span>)\nRETURNS <span class="sql-keyword">VARCHAR</span>(20)\nDETERMINISTIC\nBEGIN\n    RETURN <span class="sql-keyword">IF</span>(marks &gt;= 50, <span class="sql-string">'Pass'</span>, <span class="sql-string">'Fail'</span>);\nEND //\n\nDELIMITER ;</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Drop Stored Function</h3>
+                        <p class="subtopic-desc">Remove the function from the database metadata.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">FUNCTION</span> get_bonus;</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Create a function to calculate square of a number.</strong><br>
+    <button class="toggle-btn" data-target="ans-t33-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t33-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE FUNCTION square_num(n INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    RETURN n * n;
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>SELECT square_num(5) AS square;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+
+| square |
++--------+
+| 25     |
++--------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Function to check if student is adult (age ≥ 18).</strong><br>
+    <button class="toggle-btn" data-target="ans-t33-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t33-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE FUNCTION is_adult(age INT)
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+    RETURN IF(age >= 18, 'Adult', 'Minor');
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>SELECT is_adult(22) AS status;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+
+| status |
++--------+
+| Adult  |
++--------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Function to calculate total marks with bonus.</strong><br>
+    <button class="toggle-btn" data-target="ans-t33-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t33-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE FUNCTION total_marks(marks INT, bonus INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    RETURN marks + bonus;
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>SELECT total_marks(80, 5) AS total;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+-------+
+| total |
++-------+
+| 85    |
++-------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Function to convert Celsius to Fahrenheit.</strong><br>
+    <button class="toggle-btn" data-target="ans-t33-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t33-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE FUNCTION c_to_f(celsius FLOAT)
+RETURNS FLOAT
+DETERMINISTIC
+BEGIN
+    RETURN (celsius * 9/5) + 32;
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>SELECT c_to_f(25) AS fahrenheit;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------------+
+| fahrenheit |
++------------+
+| 77.0       |
++------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Function to get grade based on marks.</strong><br>
+    <button class="toggle-btn" data-target="ans-t33-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t33-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DELIMITER $$
+
+CREATE FUNCTION get_grade(marks INT)
+RETURNS VARCHAR(2)
+DETERMINISTIC
+BEGIN
+    RETURN CASE
+        WHEN marks >= 85 THEN 'A'
+        WHEN marks >= 70 THEN 'B'
+        ELSE 'C'
+    END;
+END $$
+
+DELIMITER ;</code></pre><br>
+        Usage Example:<br><pre class='code-block-minimal'><code>SELECT get_grade(90) AS grade;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+-------+
+| grade |
++-------+
+| A     |
++-------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='33_if-statement.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← IF (MySQL)</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='35_loops.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Loops (Procedures) →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

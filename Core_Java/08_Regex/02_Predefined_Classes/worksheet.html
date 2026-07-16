@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predefined Classes - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Predefined Classes Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>Predefined Classes - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master predefined character classes like \d, \w, and \s with these Java Regex exercises.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Validate a 10-Digit Mobile Number</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to validate a mobile number. A valid mobile number must:
+                <ul>
+                    <li>Contain exactly 10 digits</li>
+                    <li>Not contain any letters or special characters</li>
+                </ul>
+                Use the predefined character class <code>\d</code> for this validation.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+public class MobileValidator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter mobile number: ");
+        String mobile = sc.next();
+
+        // \\d{10} means exactly 10 digits
+        if (mobile.matches("\\d{10}")) {
+            System.out.println("Valid Mobile Number");
+        } else {
+            System.out.println("Invalid Mobile Number");
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Input: 9876543210
+Output: Valid Mobile Number
+
+Input: 12345
+Output: Invalid Mobile Number (too short)
+
+Input: 98765abc10
+Output: Invalid Mobile Number (contains letters)</code></div>
+
+            <h4>Regex Pattern Explanation</h4>
+            <div class="code-block"><code>\\d{10}
+
+Breakdown:
+- \\d  : Predefined class matching any digit [0-9]
+- {10} : Quantifier - exactly 10 occurrences</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Predefined Class \d:</strong> Shorthand for [0-9]. Remember to use double backslash
+                        <code>\\d</code> in Java strings.</li>
+                    <li><strong>Exact Match {n}:</strong> The quantifier ensures the length is exactly as specified.
+                    </li>
+                    <li><strong>matches() method:</strong> Validates the entire string against the pattern.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Remove All Whitespaces from a String</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to remove all types of whitespace characters (spaces, tabs, newlines) from a given
+                string using regex.
+                <br><br>
+                <strong>Example:</strong> "J a v a Is P o w e r f u l" → "JavaIsPowerful"
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>public class RemoveWhitespace {
+    public static void main(String[] args) {
+        String str = "J a v a   Is P o w e r f u l";
+        
+        // \\s matches any whitespace character
+        String result = str.replaceAll("\\s", "");
+        
+        System.out.println("Original: " + str);
+        System.out.println("Cleaned:  " + result);
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Original: J a v a   Is P o w e r f u l
+Cleaned:  JavaIsPowerful</code></div>
+
+            <h4>Regex Pattern Explanation</h4>
+            <div class="code-block"><code>\\s
+
+Breakdown:
+- \\s : Predefined class matching any whitespace character (space, \t, \n, \r, \f)</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Predefined Class \s:</strong> Matches spaces, tabs, and other invisible characters.</li>
+                    <li><strong>replaceAll():</strong> Replaces every character matching the pattern with the specified
+                        replacement string.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Predefined Classes Module - Practice Worksheet</strong></p>
+            <p>Master Java Regex Predefined Classes</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

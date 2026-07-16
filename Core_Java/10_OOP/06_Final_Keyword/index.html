@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Keyword - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Final Keyword</h5>
+        <a href="../../index.html#oop">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#intro">Introduction</a>
+        <a href="#variables">Final Variables</a>
+        <a href="#methods">Final Methods</a>
+        <a href="#classes">Final Classes</a>
+        <a href="#examples">Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Final Keyword</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Final Keyword in Java</h1>
+            <p class="lead text-muted">Restrict modification and inheritance using the final keyword.</p>
+        </div>
+
+        <div class="section" id="intro">
+            <h4>What is the Final Keyword?</h4>
+            <p>The <code>final</code> keyword in Java is used to restrict the user from modifying a variable, method, or
+                class. Once declared as final, they cannot be changed, overridden, or inherited respectively.</p>
+
+            <h5>Uses of Final Keyword:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Applied To</th>
+                        <th>Effect</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Variable</td>
+                        <td>Creates a constant (cannot be reassigned)</td>
+                        <td>Mathematical constants, configuration values</td>
+                    </tr>
+                    <tr>
+                        <td>Method</td>
+                        <td>Prevents method overriding</td>
+                        <td>Critical methods that shouldn't be changed</td>
+                    </tr>
+                    <tr>
+                        <td>Class</td>
+                        <td>Prevents inheritance</td>
+                        <td>Immutable classes, security-sensitive classes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" id="variables">
+            <h4>1. Final Variables</h4>
+            <p>A final variable can be assigned only once. Once assigned, its value cannot be changed.</p>
+
+            <h5>Example 1: Final Local Variable</h5>
+            <pre><code>public class FinalVariableDemo {
+    public static void main(String[] args) {
+        final int MAX_VALUE = 100;
+        System.out.println("Max Value: " + MAX_VALUE);
+        
+        // MAX_VALUE = 200;  // ERROR: Cannot assign a value to final variable
+    }
+}</code></pre>
+            <div class="output">
+                Max Value: 100
+            </div>
+
+            <h5>Example 2: Final Instance Variable</h5>
+            <pre><code>class Student {
+    final String SCHOOL_NAME = "ABC School";  // Initialized at declaration
+    final int rollNumber;  // Blank final variable
+    
+    Student(int roll) {
+        rollNumber = roll;  // Must be initialized in constructor
+    }
+    
+    void display() {
+        System.out.println("School: " + SCHOOL_NAME);
+        System.out.println("Roll Number: " + rollNumber);
+    }
+}
+
+public class FinalInstanceDemo {
+    public static void main(String[] args) {
+        Student s = new Student(101);
+        s.display();
+        
+        // s.rollNumber = 102;  // ERROR: Cannot assign to final variable
+    }
+}</code></pre>
+            <div class="output">
+                School: ABC School<br>
+                Roll Number: 101
+            </div>
+
+            <h5>Example 3: Final Static Variable (Constants)</h5>
+            <pre><code>class MathConstants {
+    static final double PI = 3.14159;
+    static final double E = 2.71828;
+    
+    static void displayConstants() {
+        System.out.println("PI = " + PI);
+        System.out.println("E = " + E);
+    }
+}
+
+public class FinalStaticDemo {
+    public static void main(String[] args) {
+        MathConstants.displayConstants();
+        System.out.println("Circle Area: " + (MathConstants.PI * 5 * 5));
+    }
+}</code></pre>
+            <div class="output">
+                PI = 3.14159<br>
+                E = 2.71828<br>
+                Circle Area: 78.53975
+            </div>
+
+            <div class="note">
+                <strong>💡 Naming Convention:</strong> Final variables (constants) are typically named in UPPERCASE with
+                underscores (e.g., MAX_VALUE, PI).
+            </div>
+        </div>
+
+        <div class="section" id="methods">
+            <h4>2. Final Methods</h4>
+            <p>A final method cannot be overridden by subclasses. This ensures the method's behavior remains consistent
+                across the inheritance hierarchy.</p>
+
+            <h5>Example 1: Final Method Cannot Be Overridden</h5>
+            <pre><code>class Parent {
+    final void display() {
+        System.out.println("This is a final method in Parent class");
+    }
+    
+    void show() {
+        System.out.println("This is a normal method");
+    }
+}
+
+class Child extends Parent {
+    // void display() {  // ERROR: Cannot override final method
+    //     System.out.println("Trying to override");
+    // }
+    
+    @Override
+    void show() {
+        System.out.println("Overridden show method in Child");
+    }
+}
+
+public class FinalMethodDemo {
+    public static void main(String[] args) {
+        Child c = new Child();
+        c.display();
+        c.show();
+    }
+}</code></pre>
+            <div class="output">
+                This is a final method in Parent class<br>
+                Overridden show method in Child
+            </div>
+
+            <h5>Example 2: Final Method for Security</h5>
+            <pre><code>class BankAccount {
+    private double balance;
+    
+    BankAccount(double balance) {
+        this.balance = balance;
+    }
+    
+    // Critical method that should not be overridden
+    final double getBalance() {
+        return balance;
+    }
+    
+    void deposit(double amount) {
+        balance += amount;
+    }
+}
+
+class SavingsAccount extends BankAccount {
+    SavingsAccount(double balance) {
+        super(balance);
+    }
+    
+    // Cannot override getBalance() - it's final
+    
+    @Override
+    void deposit(double amount) {
+        super.deposit(amount);
+        System.out.println("Deposited: " + amount);
+    }
+}
+
+public class BankDemo {
+    public static void main(String[] args) {
+        SavingsAccount acc = new SavingsAccount(1000);
+        acc.deposit(500);
+        System.out.println("Balance: " + acc.getBalance());
+    }
+}</code></pre>
+            <div class="output">
+                Deposited: 500.0<br>
+                Balance: 1500.0
+            </div>
+        </div>
+
+        <div class="section" id="classes">
+            <h4>3. Final Classes</h4>
+            <p>A final class cannot be extended (inherited). This is used when you want to prevent inheritance for
+                security or design reasons.</p>
+
+            <h5>Example 1: Final Class Cannot Be Inherited</h5>
+            <pre><code>final class ImmutableClass {
+    private final int value;
+    
+    ImmutableClass(int value) {
+        this.value = value;
+    }
+    
+    int getValue() {
+        return value;
+    }
+}
+
+// class ExtendedClass extends ImmutableClass {  // ERROR: Cannot inherit from final class
+// }
+
+public class FinalClassDemo {
+    public static void main(String[] args) {
+        ImmutableClass obj = new ImmutableClass(100);
+        System.out.println("Value: " + obj.getValue());
+    }
+}</code></pre>
+            <div class="output">
+                Value: 100
+            </div>
+
+            <h5>Example 2: Real-World Final Classes</h5>
+            <pre><code>// String class is final in Java
+final class MyString {
+    private final String value;
+    
+    MyString(String value) {
+        this.value = value;
+    }
+    
+    String getValue() {
+        return value;
+    }
+    
+    int length() {
+        return value.length();
+    }
+}
+
+public class StringDemo {
+    public static void main(String[] args) {
+        MyString str = new MyString("Hello");
+        System.out.println("String: " + str.getValue());
+        System.out.println("Length: " + str.length());
+        
+        // Real Java String class is also final
+        String javaStr = "World";
+        System.out.println("Java String: " + javaStr);
+    }
+}</code></pre>
+            <div class="output">
+                String: Hello<br>
+                Length: 5<br>
+                Java String: World
+            </div>
+
+            <div class="note">
+                <strong>📌 Important Java Classes that are Final:</strong>
+                <ul>
+                    <li><code>String</code> - Immutability and security</li>
+                    <li><code>Integer, Double, Boolean</code> - Wrapper classes</li>
+                    <li><code>Math</code> - Utility class</li>
+                    <li><code>System</code> - System utilities</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="examples">
+            <h4>Practical Examples</h4>
+
+            <h5>Example 1: Configuration Class with Final Variables</h5>
+            <pre><code>class AppConfig {
+    static final String APP_NAME = "MyApp";
+    static final String VERSION = "1.0.0";
+    static final int MAX_USERS = 1000;
+    static final boolean DEBUG_MODE = true;
+    
+    static void displayConfig() {
+        System.out.println("Application: " + APP_NAME);
+        System.out.println("Version: " + VERSION);
+        System.out.println("Max Users: " + MAX_USERS);
+        System.out.println("Debug Mode: " + DEBUG_MODE);
+    }
+}
+
+public class ConfigDemo {
+    public static void main(String[] args) {
+        AppConfig.displayConfig();
+    }
+}</code></pre>
+            <div class="output">
+                Application: MyApp<br>
+                Version: 1.0.0<br>
+                Max Users: 1000<br>
+                Debug Mode: true
+            </div>
+
+            <h5>Example 2: Final Parameters</h5>
+            <pre><code>class Calculator {
+    int add(final int a, final int b) {
+        // a = 10;  // ERROR: Cannot assign to final parameter
+        return a + b;
+    }
+    
+    void display(final String message) {
+        // message = "Changed";  // ERROR: Cannot modify final parameter
+        System.out.println(message);
+    }
+}
+
+public class FinalParameterDemo {
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        System.out.println("Sum: " + calc.add(5, 3));
+        calc.display("Hello, Final Parameters!");
+    }
+}</code></pre>
+            <div class="output">
+                Sum: 8<br>
+                Hello, Final Parameters!
+            </div>
+
+            <h5>Comparison Table:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Final Variable</th>
+                        <th>Final Method</th>
+                        <th>Final Class</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Purpose</td>
+                        <td>Create constants</td>
+                        <td>Prevent overriding</td>
+                        <td>Prevent inheritance</td>
+                    </tr>
+                    <tr>
+                        <td>Can be changed?</td>
+                        <td>No</td>
+                        <td>No (in subclass)</td>
+                        <td>No (cannot extend)</td>
+                    </tr>
+                    <tr>
+                        <td>Initialization</td>
+                        <td>Required once</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Common Use</td>
+                        <td>PI, MAX_VALUE</td>
+                        <td>Security methods</td>
+                        <td>String, Integer</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Final Keyword Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type Conversion - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Type Conversion</h5>
+        <a href="../../index.html">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#string">To String</a>
+        <a href="#numeric">Numeric Conversion</a>
+        <a href="#examples">Examples</a>
+    </div>
+    <div class="top-nav">
+        <h2>Type Conversion</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Type Conversion with Wrappers</h1>
+            <p class="lead text-muted">Convert between different data types using wrapper classes.</p>
+        </div>
+        <div class="section" id="string">
+            <h4>Converting to String</h4>
+            <pre><code>public class ToStringDemo {
+    public static void main(String[] args) {
+        int num = 123;
+        double decimal = 3.14;
+        boolean flag = true;
+        
+        // Using toString()
+        String str1 = Integer.toString(num);
+        String str2 = Double.toString(decimal);
+        String str3 = Boolean.toString(flag);
+        
+        System.out.println("String from int: " + str1);
+        System.out.println("String from double: " + str2);
+        System.out.println("String from boolean: " + str3);
+        
+        // Using String.valueOf()
+        String str4 = String.valueOf(num);
+        System.out.println("Using valueOf: " + str4);
+    }
+}</code></pre>
+            <div class="output">
+                String from int: 123<br>
+                String from double: 3.14<br>
+                String from boolean: true<br>
+                Using valueOf: 123
+            </div>
+        </div>
+        <div class="section" id="numeric">
+            <h4>Numeric Conversions</h4>
+            <pre><code>public class NumericConversionDemo {
+    public static void main(String[] args) {
+        Integer num = 100;
+        
+        // Integer to other types
+        double d = num.doubleValue();
+        long l = num.longValue();
+        byte b = num.byteValue();
+        
+        System.out.println("Double: " + d);
+        System.out.println("Long: " + l);
+        System.out.println("Byte: " + b);
+        
+        // String to different numeric types
+        String str = "42";
+        int i = Integer.parseInt(str);
+        double dbl = Double.parseDouble(str);
+        long lng = Long.parseLong(str);
+        
+        System.out.println("Int: " + i);
+        System.out.println("Double: " + dbl);
+        System.out.println("Long: " + lng);
+    }
+}</code></pre>
+            <div class="output">
+                Double: 100.0<br>
+                Long: 100<br>
+                Byte: 100<br>
+                Int: 42<br>
+                Double: 42.0<br>
+                Long: 42
+            </div>
+        </div>
+        <div class="section" id="examples">
+            <h4>Binary and Hex Conversion</h4>
+            <pre><code>public class BaseConversionDemo {
+    public static void main(String[] args) {
+        int num = 42;
+        
+        // To binary
+        String binary = Integer.toBinaryString(num);
+        System.out.println("Binary: " + binary);
+        
+        // To hex
+        String hex = Integer.toHexString(num);
+        System.out.println("Hex: " + hex);
+        
+        // To octal
+        String octal = Integer.toOctalString(num);
+        System.out.println("Octal: " + octal);
+        
+        // From binary to int
+        int fromBinary = Integer.parseInt("101010", 2);
+        System.out.println("From binary: " + fromBinary);
+    }
+}</code></pre>
+            <div class="output">
+                Binary: 101010<br>
+                Hex: 2a<br>
+                Octal: 52<br>
+                From binary: 42
+            </div>
+        </div>
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Type Conversion Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  07 page load strategy   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>07. Page Load Strategy</h1>
+
+<h2>📖 Introduction</h2>
+<p>By default, when you tell Selenium to go to a URL, it waits for the <strong>entire</strong> page to finish loading
+    before it executes the next line of code. This includes all images, stylesheets, and third-party scripts. For
+    modern, heavy websites, this can be agonizingly slow. <strong>PageLoadStrategy</strong> allows you to take control
+    of this behavior and speed up your tests.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The three types of Page Load Strategies: NORMAL, EAGER, and NONE</li>
+    <li>How to drastically reduce test execution time</li>
+    <li>Risks associated with aggressive load strategies</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>The Three Strategies</h3>
+<ol>
+    <li><strong>NORMAL (Default):</strong> Selenium waits for the <code>document.readyState</code> to be "complete". It
+        waits for all resources (images, css, scripts) to load. It is the safest but slowest.</li>
+
+    <li><strong>EAGER:</strong> Selenium waits for <code>document.readyState</code> to be "interactive". Ideally, the
+        HTML content is loaded and parsed, but images and sub-resources might still be loading. This is significantly
+        faster and usually safe for text interaction.</li>
+
+    <li><strong>NONE:</strong> Selenium does not wait at all. It returns control immediately after the initial page
+        request. This is the fastest but requires you to manage explicit waits for every single element you want to
+        interact with.</li>
+</ol>
+
+<h2>💻 Code Examples</h2>
+<p>You set the strategy using <code>ChromeOptions</code>:</p>
+
+<h3>Using EAGER Strategy</h3>
+<pre><code>ChromeOptions options = new ChromeOptions();
+options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+
+WebDriver driver = new ChromeDriver(options);
+long startTime = System.currentTimeMillis();
+
+driver.get("https://www.amazon.com"); // Loads much faster
+
+long endTime = System.currentTimeMillis();
+System.out.println("Load Time: " + (endTime - startTime));</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Stale Element Exceptions:</strong> If you use <code>NONE</code> or <code>EAGER</code>, the page might
+        still be rendering when you try to find an element. You MUST use <strong>Explicit Waits</strong> (WebDriverWait)
+        to ensure elements are present before interacting.</p>
+    <p><strong>Inconsistent Flakiness:</strong> A test might pass on a fast network but fail on a slow one if you use
+        aggressive load strategies without proper synchronization.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Target URL:</strong> <a href="https://cnn.com" target="_blank" style="color:#00e676">https://cnn.com</a>
+        (or any media-heavy site)</p>
+    <p><strong>Goal:</strong> compare load times.</p>
+    <ol>
+        <li>Run a script with default (NORMAL) strategy and measure time to open CNN.</li>
+        <li>Run the same script with EAGER strategy.</li>
+        <li>Observe the significant time difference.</li>
+        <li>Try to click a headline immediately after loading with EAGER to see if it works.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: When should you use PageLoadStrategy.NONE?</strong></p>
+    <p><strong>Answer:</strong> Only when you are an expert at handling synchronization. It is useful for Single Page
+        Applications (SPAs) where the 'load' event doesn't accurately reflect the application state, or when performance
+        is the absolute highest priority.</p>
+</blockquote>
+
+<a href="worksheets/ws_page_load_strategy.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

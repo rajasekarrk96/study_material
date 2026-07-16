@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methods With Parameters With Return - Java Learning Module</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Methods (WPWR)</h5>
+        <a href="../../index.html#methods">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#section1">Method Fundamentals</a>
+        <a href="#section2">Syntax and Structure</a>
+        <a href="#section3">Parameters</a>
+        <a href="#section4">Return Values</a>
+        <a href="#section5">Complete Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h1>Methods With Parameters With Return (WPWR)</h1>
+    </div>
+
+    <div class="main-content">
+        <!-- Section 1: Method Fundamentals -->
+        <div class="section" id="section1">
+            <h2>Section 1: Method Fundamentals</h2>
+            <p>
+                A <strong>method</strong> is a reusable block of code that performs a specific task. Methods help
+                organize code,
+                reduce repetition, and make programs easier to maintain. A method with parameters accepts input values,
+                and with a return type, it sends output back to the caller.
+            </p>
+
+            <h3>Benefits of Methods</h3>
+            <ul>
+                <li>Code reusability - write once, use many times</li>
+                <li>Better organization and readability</li>
+                <li>Easier debugging and maintenance</li>
+                <li>Modularity - divide code into logical pieces</li>
+            </ul>
+
+            <div class="note-box">
+                <h4>💡 WPWR Definition</h4>
+                <p><strong>WPWR = With Parameters With Return</strong><br>
+                    This means the method accepts input parameters and returns a value to the caller.</p>
+            </div>
+
+            <div class="example-box">
+                <h4>🎯 Real-World Example</h4>
+                <p>A calculator function: you input two numbers (parameters) and get the sum back (return value).</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Method Syntax and Structure -->
+        <div class="section" id="section2">
+            <h2>Section 2: Method Syntax and Structure</h2>
+            <p>Every method has a specific structure with access modifiers, return type, name, and parameters:</p>
+
+            <h3>Basic Syntax</h3>
+            <div class="code-block"><code>accessModifier returnType methodName(paramType param1, paramType param2, ...) {
+    // Method body
+    // Perform operations
+    return value;  // Return result
+}</code></div>
+
+            <h3>Components Breakdown</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>accessModifier</td>
+                        <td>Visibility of method (public/private)</td>
+                        <td><code>public</code></td>
+                    </tr>
+                    <tr>
+                        <td>returnType</td>
+                        <td>Type of value the method returns</td>
+                        <td><code>int</code>, <code>double</code>, <code>String</code></td>
+                    </tr>
+                    <tr>
+                        <td>methodName</td>
+                        <td>Identifier for the method</td>
+                        <td><code>calculateSum</code></td>
+                    </tr>
+                    <tr>
+                        <td>parameters</td>
+                        <td>Input values the method accepts</td>
+                        <td><code>int a, int b</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Complete Example</h3>
+            <div class="code-block"><code>public class Calculator {
+    // Method with parameters and return type
+    public int add(int num1, int num2) {
+        int result = num1 + num2;
+        return result;  // Return the result
+    }
+    
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        int sum = calc.add(10, 20);
+        System.out.println("Sum: " + sum);  // Output: Sum: 30
+    }
+}</code></div>
+
+            <div class="note-box">
+                <h4>📝 Method Naming Convention</h4>
+                <p>Use camelCase for method names (start lowercase, each word after starts uppercase): calculateTotal,
+                    getUserAge, etc.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Parameters and Arguments -->
+        <div class="section" id="section3">
+            <h2>Section 3: Parameters and Arguments</h2>
+            <p>Parameters are variables defined in the method signature, while arguments are actual values passed when
+                calling the method:</p>
+
+            <h3>Parameter Types</h3>
+            <div class="code-block"><code>// Method definition with parameters
+public void printDetails(String name, int age, double salary) {
+    System.out.println("Name: " + name);
+    System.out.println("Age: " + age);
+    System.out.println("Salary: $" + salary);
+}
+
+// Method call with arguments
+printDetails("Alice", 30, 50000.0);  // "Alice" is argument for name parameter</code></div>
+
+            <h3>Example 1: Multiple Parameters</h3>
+            <div class="code-block"><code>public class EmployeeInfo {
+    public void displayEmployee(String empName, int empID, String dept) {
+        System.out.println("Employee: " + empName);
+        System.out.println("ID: " + empID);
+        System.out.println("Department: " + dept);
+    }
+    
+    public static void main(String[] args) {
+        EmployeeInfo emp = new EmployeeInfo();
+        emp.displayEmployee("John Doe", 101, "IT");
+    }
+}</code></div>
+
+            <h3>Example 2: Parameter Type Conversion</h3>
+            <div class="code-block"><code>public class TypeConversion {
+    public void processData(int intValue, double doubleValue, String strValue) {
+        System.out.println("Integer: " + intValue);
+        System.out.println("Double: " + doubleValue);
+        System.out.println("String: " + strValue);
+    }
+    
+    public static void main(String[] args) {
+        TypeConversion tc = new TypeConversion();
+        tc.processData(42, 3.14, "Hello");
+    }
+}</code></div>
+
+            <h3>Example 3: Array as Parameter</h3>
+            <div class="code-block"><code>public class ArrayParameter {
+    public void printArray(int[] numbers) {
+        for (int num : numbers) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+    
+    public static void main(String[] args) {
+        ArrayParameter ap = new ArrayParameter();
+        int[] data = {10, 20, 30, 40, 50};
+        ap.printArray(data);  // Output: 10 20 30 40 50
+    }
+}</code></div>
+
+            <div class="note-box">
+                <h4>⚠️ Parameter Rules</h4>
+                <ul>
+                    <li>Parameters must have both type and name</li>
+                    <li>Multiple parameters are separated by commas</li>
+                    <li>Order of arguments must match order of parameters</li>
+                    <li>Type of arguments must match parameter types</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 4: Return Values -->
+        <div class="section" id="section4">
+            <h2>Section 4: Return Values</h2>
+            <p>The return statement sends a value back from the method to the caller:</p>
+
+            <h3>Return Types</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Return Type</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>void</td>
+                        <td>Method doesn't return anything</td>
+                        <td><code>public void display() { }</code></td>
+                    </tr>
+                    <tr>
+                        <td>int</td>
+                        <td>Returns an integer value</td>
+                        <td><code>public int getAge() { return 25; }</code></td>
+                    </tr>
+                    <tr>
+                        <td>double</td>
+                        <td>Returns a decimal value</td>
+                        <td><code>public double getPrice() { return 19.99; }</code></td>
+                    </tr>
+                    <tr>
+                        <td>String</td>
+                        <td>Returns text</td>
+                        <td><code>public String getName() { return "John"; }</code></td>
+                    </tr>
+                    <tr>
+                        <td>boolean</td>
+                        <td>Returns true or false</td>
+                        <td><code>public boolean isValid() { return true; }</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Example 1: Returning Simple Value</h3>
+            <div class="code-block"><code>public class MathOperations {
+    public int multiply(int a, int b) {
+        return a * b;
+    }
+    
+    public double divide(double a, double b) {
+        return a / b;
+    }
+    
+    public static void main(String[] args) {
+        MathOperations math = new MathOperations();
+        System.out.println("5 × 4 = " + math.multiply(5, 4));    // Output: 20
+        System.out.println("10 ÷ 2 = " + math.divide(10, 2));    // Output: 5.0
+    }
+}</code></div>
+
+            <h3>Example 2: Returning String</h3>
+            <div class="code-block"><code>public class StringReturn {
+    public String getGrade(int marks) {
+        if (marks >= 90) return "A+";
+        else if (marks >= 80) return "A";
+        else if (marks >= 70) return "B";
+        else return "C";
+    }
+    
+    public static void main(String[] args) {
+        StringReturn sr = new StringReturn();
+        System.out.println("Grade: " + sr.getGrade(85));  // Output: Grade: A
+    }
+}</code></div>
+
+            <h3>Example 3: Returning Array</h3>
+            <div class="code-block"><code>public class ArrayReturn {
+    public int[] getEvenNumbers(int n) {
+        int[] evens = new int[n];
+        int count = 0;
+        for (int i = 2; count < n; i += 2) {
+            evens[count] = i;
+            count++;
+        }
+        return evens;  // Return the array
+    }
+    
+    public static void main(String[] args) {
+        ArrayReturn ar = new ArrayReturn();
+        int[] result = ar.getEvenNumbers(5);
+        for (int num : result) {
+            System.out.print(num + " ");  // Output: 2 4 6 8 10
+        }
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Return Statement Rules</h4>
+                <ul>
+                    <li>Must match the declared return type</li>
+                    <li>Can only have one return statement that executes</li>
+                    <li>Ends method execution immediately</li>
+                    <li>void methods don't have return values</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 5: Complete Method Examples -->
+        <div class="section" id="section5">
+            <h2>Section 5: Complete Method Examples</h2>
+            <p>Real-world examples combining parameters and return values:</p>
+
+            <h3>Example 1: Temperature Converter</h3>
+            <div class="code-block"><code>public class TemperatureConverter {
+    public double celsiusToFahrenheit(double celsius) {
+        return (celsius * 9/5) + 32;
+    }
+    
+    public double fahrenheitToCelsius(double fahrenheit) {
+        return (fahrenheit - 32) * 5/9;
+    }
+    
+    public static void main(String[] args) {
+        TemperatureConverter tc = new TemperatureConverter();
+        System.out.println("0°C = " + tc.celsiusToFahrenheit(0) + "°F");
+        System.out.println("32°F = " + tc.fahrenheitToCelsius(32) + "°C");
+    }
+}</code></div>
+
+            <h3>Example 2: String Manipulation</h3>
+            <div class="code-block"><code>public class StringUtilities {
+    public String reverseString(String str) {
+        return new StringBuilder(str).reverse().toString();
+    }
+    
+    public int countVowels(String str) {
+        int count = 0;
+        for (char c : str.toLowerCase().toCharArray()) {
+            if ("aeiou".indexOf(c) >= 0) count++;
+        }
+        return count;
+    }
+    
+    public static void main(String[] args) {
+        StringUtilities su = new StringUtilities();
+        System.out.println("Reversed: " + su.reverseString("Hello"));
+        System.out.println("Vowels in 'Hello': " + su.countVowels("Hello"));
+    }
+}</code></div>
+
+            <h3>Example 3: Statistical Calculations</h3>
+            <div class="code-block"><code>public class Statistics {
+    public double findAverage(int[] numbers) {
+        int sum = 0;
+        for (int num : numbers) sum += num;
+        return (double) sum / numbers.length;
+    }
+    
+    public int findMax(int[] numbers) {
+        int max = numbers[0];
+        for (int num : numbers) {
+            if (num > max) max = num;
+        }
+        return max;
+    }
+    
+    public static void main(String[] args) {
+        Statistics stats = new Statistics();
+        int[] data = {45, 78, 92, 56, 88};
+        System.out.println("Average: " + stats.findAverage(data));
+        System.out.println("Maximum: " + stats.findMax(data));
+    }
+}</code></div>
+
+            <h3>Example 4: Payment Calculator</h3>
+            <div class="code-block"><code>public class PaymentCalculator {
+    public double calculateNetSalary(double basicSalary, double taxRate) {
+        double tax = basicSalary * taxRate / 100;
+        return basicSalary - tax;
+    }
+    
+    public double calculateBonus(double basicSalary, int yearsOfService) {
+        if (yearsOfService >= 5) {
+            return basicSalary * 0.20;  // 20% bonus
+        } else if (yearsOfService >= 2) {
+            return basicSalary * 0.10;  // 10% bonus
+        }
+        return 0;  // No bonus
+    }
+    
+    public static void main(String[] args) {
+        PaymentCalculator pc = new PaymentCalculator();
+        double salary = 50000;
+        System.out.println("Net Salary: $" + pc.calculateNetSalary(salary, 15));
+        System.out.println("Bonus: $" + pc.calculateBonus(salary, 6));
+    }
+}</code></div>
+
+            <div class="note-box">
+                <h4>💡 Best Practices</h4>
+                <ul>
+                    <li>Methods should do one thing well</li>
+                    <li>Use descriptive names</li>
+                    <li>Keep methods short and focused</li>
+                    <li>Document complex methods with comments</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Worksheet Button -->
+        <div style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
+            <a href="worksheet.html" class="btn-worksheet">Open Worksheet & Exercises</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

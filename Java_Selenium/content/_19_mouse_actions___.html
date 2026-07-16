@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  19 mouse actions   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>19. Mouse Actions</h1>
+
+<h2>📖 Introduction</h2>
+<p>While standard clicks are handled by the <code>click()</code> method, many modern web applications require complex
+    mouse interactions like <strong>hovering</strong>, <strong>right-clicking</strong>, and
+    <strong>double-clicking</strong>. Selenium's <code>Actions</code> class is designed to handle these low-level input
+    device interactions.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>How to perform Mouse Hover (Move to Element)</li>
+    <li>How to Right-Click (Context Click)</li>
+    <li>How to Double-Click</li>
+    <li>Understanding the <code>build()</code> and <code>perform()</code> methods</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>The Actions Class</h3>
+<p>To use mouse actions, you must instantiate the <code>Actions</code> class and pass the <code>WebDriver</code>
+    instance to its constructor:</p>
+<pre><code>Actions act = new Actions(driver);</code></pre>
+
+<h3>Common Methods</h3>
+<ul>
+    <li><code>moveToElement(element)</code>: Hovers the mouse over an element.</li>
+    <li><code>contextClick(element)</code>: Performs a right-click on an element.</li>
+    <li><code>doubleClick(element)</code>: Performs a double-click on an element.</li>
+    <li><code>clickAndHold(element)</code>: Clicks without releasing.</li>
+</ul>
+
+<p><strong>Important:</strong> Most <code>Actions</code> methods won't execute until you call <code>.perform()</code> at
+    the end of the chain.</p>
+
+<h2>💻 Code Examples</h2>
+
+<h3>Mouse Hover Example</h3>
+<pre><code>WebElement menu = driver.findElement(By.id("menu"));
+Actions act = new Actions(driver);
+act.moveToElement(menu).perform();</code></pre>
+
+<h3>Right Click Example</h3>
+<pre><code>WebElement box = driver.findElement(By.id("box"));
+act.contextClick(box).perform();</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Chaining Actions:</strong> If you are chaining multiple actions (e.g., move, then click), remember that
+        <code>perform()</code> internally calls <code>build().perform()</code>. For single actions,
+        <code>perform()</code> is sufficient.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Automate a hidden menu interaction.</p>
+    <ol>
+        <li>Navigate to the practice page.</li>
+        <li>Hover over the "Menu" to make sub-options visible.</li>
+        <li>Perform a right-click on a target area to trigger a custom context menu.</li>
+    </ol>
+</div>
+
+<a href="worksheets/ws_mouse.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

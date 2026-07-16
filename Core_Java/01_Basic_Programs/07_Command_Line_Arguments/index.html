@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Line Arguments - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Command Line Args</h5>
+        <a href="../../index.html#basics">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#what">What are Args</a>
+        <a href="#syntax">Syntax</a>
+        <a href="#example">Example</a>
+        <a href="#conversion">Type Conversion</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Command Line Arguments</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Command Line Arguments in Java</h1>
+            <p class="lead text-muted">Learn how to pass arguments to Java programs from the command line and process
+                them within your code.</p>
+        </div>
+
+        <div class="section" id="what">
+            <h4>What are Command Line Arguments?</h4>
+            <p>Command line arguments are parameters passed to a Java program when it is executed from the command line
+                or terminal. They allow you to provide input to your program without hardcoding values or using Scanner.
+            </p>
+            <ul>
+                <li>Passed as strings in the <code>String[] args</code> parameter of the main method</li>
+                <li>Accessed using array indexing: <code>args[0]</code>, <code>args[1]</code>, etc.</li>
+                <li>Useful for configuration, file paths, or runtime parameters</li>
+                <li>All arguments are received as String type</li>
+            </ul>
+            <div class="note">
+                <strong>💡 Note:</strong> The name "args" is conventional but you can use any valid identifier. However,
+                it must be a String array.
+            </div>
+        </div>
+
+        <div class="section" id="syntax">
+            <h4>Syntax</h4>
+            <pre><code>public class ClassName {
+    public static void main(String[] args) {
+        // args[0] - first argument
+        // args[1] - second argument
+        // args.length - number of arguments
+    }
+}</code></pre>
+            <p><strong>Running with arguments:</strong></p>
+            <pre><code>// Compilation
+javac ClassName.java
+
+// Execution with arguments
+java ClassName arg1 arg2 arg3</code></pre>
+        </div>
+
+        <div class="section" id="example">
+            <h4>Example: Basic Command Line Arguments</h4>
+            <pre><code>public class CommandLineDemo {
+    public static void main(String[] args) {
+        // Check if arguments are provided
+        if (args.length == 0) {
+            System.out.println("No arguments provided!");
+            return;
+        }
+        
+        // Display number of arguments
+        System.out.println("Number of arguments: " + args.length);
+        
+        // Display all arguments
+        System.out.println("\nArguments received:");
+        for (int i = 0; i < args.length; i++) {
+            System.out.println("Argument " + i + ": " + args[i]);
+        }
+    }
+}</code></pre>
+            <p><strong>Execution:</strong></p>
+            <pre><code>java CommandLineDemo Hello World Java</code></pre>
+            <div class="output">
+                Number of arguments: 3<br><br>
+                Arguments received:<br>
+                Argument 0: Hello<br>
+                Argument 1: World<br>
+                Argument 2: Java
+            </div>
+        </div>
+
+        <div class="section" id="conversion">
+            <h4>Type Conversion</h4>
+            <p>Since all command line arguments are strings, you need to convert them to other data types when needed.
+            </p>
+            <pre><code>public class Calculator {
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Usage: java Calculator num1 num2");
+            return;
+        }
+        
+        // Convert String to int
+        int num1 = Integer.parseInt(args[0]);
+        int num2 = Integer.parseInt(args[1]);
+        
+        // Perform calculations
+        System.out.println("Sum: " + (num1 + num2));
+        System.out.println("Difference: " + (num1 - num2));
+        System.out.println("Product: " + (num1 * num2));
+        
+        if (num2 != 0) {
+            System.out.println("Division: " + (num1 / num2));
+        }
+    }
+}</code></pre>
+            <p><strong>Execution:</strong></p>
+            <pre><code>java Calculator 10 5</code></pre>
+            <div class="output">
+                Sum: 15<br>
+                Difference: 5<br>
+                Product: 50<br>
+                Division: 2
+            </div>
+            <div class="example">
+                <strong>✓ Common Conversions:</strong><br>
+                • <code>Integer.parseInt(str)</code> - String to int<br>
+                • <code>Double.parseDouble(str)</code> - String to double<br>
+                • <code>Boolean.parseBoolean(str)</code> - String to boolean<br>
+                • <code>Long.parseLong(str)</code> - String to long
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Command Line Arguments Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

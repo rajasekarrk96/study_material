@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrapper Classes - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Wrapper Classes</h5>
+        <a href="../../index.html">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#concept">Concept</a>
+        <a href="#types">Types</a>
+        <a href="#examples">Examples</a>
+    </div>
+    <div class="top-nav">
+        <h2>Wrapper Classes</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Wrapper Classes in Java</h1>
+            <p class="lead text-muted">Convert primitive types to objects using wrapper classes.</p>
+        </div>
+        <div class="section" id="concept">
+            <h4>What are Wrapper Classes?</h4>
+            <p>Wrapper classes convert primitive data types into objects. Each primitive type has a corresponding
+                wrapper class.</p>
+            <ul>
+                <li>Primitives can't be used in collections</li>
+                <li>Wrappers provide utility methods</li>
+                <li>Enable object-oriented features</li>
+            </ul>
+        </div>
+        <div class="section" id="types">
+            <h4>Primitive to Wrapper Mapping</h4>
+            <table class="table">
+                <tr>
+                    <th>Primitive</th>
+                    <th>Wrapper Class</th>
+                </tr>
+                <tr>
+                    <td>byte</td>
+                    <td>Byte</td>
+                </tr>
+                <tr>
+                    <td>short</td>
+                    <td>Short</td>
+                </tr>
+                <tr>
+                    <td>int</td>
+                    <td>Integer</td>
+                </tr>
+                <tr>
+                    <td>long</td>
+                    <td>Long</td>
+                </tr>
+                <tr>
+                    <td>float</td>
+                    <td>Float</td>
+                </tr>
+                <tr>
+                    <td>double</td>
+                    <td>Double</td>
+                </tr>
+                <tr>
+                    <td>char</td>
+                    <td>Character</td>
+                </tr>
+                <tr>
+                    <td>boolean</td>
+                    <td>Boolean</td>
+                </tr>
+            </table>
+        </div>
+        <div class="section" id="examples">
+            <h4>Example: Creating Wrapper Objects</h4>
+            <pre><code>public class WrapperDemo {
+    public static void main(String[] args) {
+        // Creating wrapper objects
+        Integer num = Integer.valueOf(10);
+        Double decimal = Double.valueOf(3.14);
+        Character ch = Character.valueOf('A');
+        Boolean flag = Boolean.valueOf(true);
+        
+        System.out.println("Integer: " + num);
+        System.out.println("Double: " + decimal);
+        System.out.println("Character: " + ch);
+        System.out.println("Boolean: " + flag);
+        
+        // Converting back to primitive
+        int primitiveInt = num.intValue();
+        double primitiveDouble = decimal.doubleValue();
+        
+        System.out.println("Primitive int: " + primitiveInt);
+        System.out.println("Primitive double: " + primitiveDouble);
+    }
+}</code></pre>
+            <div class="output">
+                Integer: 10<br>
+                Double: 3.14<br>
+                Character: A<br>
+                Boolean: true<br>
+                Primitive int: 10<br>
+                Primitive double: 3.14
+            </div>
+        </div>
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Wrapper Classes Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

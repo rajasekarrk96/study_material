@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  08 locators   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>08. Selenium Locators</h1>
+
+<h2>📖 Introduction</h2>
+<p>"If you can't identify it, you can't automate it." Locators are the fundamental building blocks of any Selenium
+    script. They are the addresses that tell Selenium exactly which HTML element (button, textbox, link) you want to
+    interact with on the web page.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The 8 different types of locators in Selenium</li>
+    <li>When to use which locator strategy</li>
+    <li>The difference between Absolute and Relative XPath</li>
+    <li>Why CSS Selectors are often preferred over XPath</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>The 8 Locator Strategies</h3>
+<p>Selenium provides 8 mechanisms to find elements, typically using the <code>By</code> class:</p>
+<ol>
+    <li><strong>ID:</strong> The Gold Standard. Fast, unique, and reliable. Always use this if available.</li>
+    <li><strong>Name:</strong> Good alternative if ID is missing.</li>
+    <li><strong>ClassName:</strong> Useful for grouping elements, but be careful of duplicates.</li>
+    <li><strong>TagName:</strong> Best for finding groups of elements (e.g., all <code>&lt;a&gt;</code> tags).</li>
+    <li><strong>LinkText:</strong> Finds hyperlinks by their exact visible text.</li>
+    <li><strong>PartialLinkText:</strong> Finds hyperlinks by a portion of their visible text.</li>
+    <li><strong>CSS Selector:</strong> The "Swiss Army Knife". Fast and supports complex relationships.</li>
+    <li><strong>XPath:</strong> The "Nuclear Option". Most powerful, can traverse up the DOM, but can be slower and
+        brittle if not reliable.</li>
+</ol>
+
+<h3>XPath vs. CSS Selector</h3>
+<p>This is a classic debate. <strong>CSS Selectors</strong> are generally faster and have cleaner syntax.
+    <strong>XPath</strong> is necessary when you need to navigate UP the DOM (from child to parent) or locate by text
+    content, which CSS cannot do.
+</p>
+
+<h2>💻 Code Examples</h2>
+<p>Here is how you use each locator strategy in Java:</p>
+
+<h3>Locator Examples</h3>
+<pre><code>// 1. By ID (Best)
+driver.findElement(By.id("username"));
+
+// 2. By Name
+driver.findElement(By.name("email_address"));
+
+// 3. By ClassName
+driver.findElement(By.className("login-btn"));
+
+// 4. By CSS Selector (ID)
+driver.findElement(By.cssSelector("#username"));
+
+// 5. By CSS Selector (Class)
+driver.findElement(By.cssSelector(".login-btn"));
+
+// 6. By XPath (Relative)
+driver.findElement(By.xpath("//input[@id='username']"));
+
+// 7. By LinkText
+driver.findElement(By.linkText("Forgot Password?"));
+</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Avoid Absolute XPath:</strong> Never use XPaths like <code>/html/body/div[1]/div[2]/form/input</code>. If
+        the developer adds one div at the top, your test breaks. Always use Relative XPath (starting with
+        <code>//</code>).
+    </p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Target URL:</strong> <a href="https://www.facebook.com" target="_blank"
+            style="color:#00e676">https://www.facebook.com</a></p>
+    <p><strong>Goal:</strong> Identify the correct locators for the Login Form.</p>
+    <ol>
+        <li>Locate the "Email" field using <strong>ID</strong>.</li>
+        <li>Locate the "Password" field using <strong>Name</strong>.</li>
+        <li>Locate the "Log In" button using <strong>CSS Selector</strong>.</li>
+        <li>Locate the "Forgotten password?" link using <strong>LinkText</strong>.</li>
+        <li>Locate the "Create new account" button using <strong>XPath</strong>.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: Which is faster, XPath or CSS Selector?</strong></p>
+    <p><strong>Answer:</strong> CSS Selector is technically faster because most browsers implement it natively. XPath
+        engines can be slightly slower, but in modern browsers, the difference is negligible for small test suites.</p>
+
+    <p><strong>Q2: How do you handle dynamic elements (ids that change)?</strong></p>
+    <p><strong>Answer:</strong> We cannot use the full ID. We use strategies like <code>contains()</code>,
+        <code>starts-with()</code>, or locate by text, or locate a stable parent and traverse down.
+    </p>
+</blockquote>
+
+<a href="worksheets/ws_locators.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

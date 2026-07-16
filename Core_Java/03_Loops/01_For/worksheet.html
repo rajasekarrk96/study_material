@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Loop - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>For Loop Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>For Loop - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master for loop with digit manipulation, HCF, happy numbers, conversions, and series.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Sum of Even and Odd Digits of a Number</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a program to get an integer and then print the sum of the even and odd
+                digits.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int n = sn.nextInt();
+
+        int evenSum = 0, oddSum = 0;
+
+        for (; n > 0; n = n / 10) {
+            int d = n % 10;
+            if (d % 2 == 0)
+                evenSum += d;
+            else
+                oddSum += d;
+        }
+
+        System.out.println("Sum of Even digits = " + evenSum);
+        System.out.println("Sum of Odd digits = " + oddSum);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a number: 12345
+Sum of Even digits = 6
+Sum of Odd digits = 9</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Digit Extraction:</strong> n % 10 gets last digit, n / 10 removes it</li>
+                    <li><strong>For Loop:</strong> Continues while n > 0</li>
+                    <li><strong>Conditional Sum:</strong> Check if digit is even or odd</li>
+                    <li><strong>Accumulation:</strong> evenSum and oddSum track totals</li>
+                </ul>
+                <strong>Logic:</strong> 12345 → digits: 5(odd), 4(even), 3(odd), 2(even), 1(odd)
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: HCF of Two Numbers</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a program to calculate HCF (Highest Common Factor) of two given numbers.
+            </div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        int a = sn.nextInt();
+
+        System.out.print("Enter second number: ");
+        int b = sn.nextInt();
+
+        int hcf = 1;
+        int min = (a < b) ? a : b;
+
+        for (int i = 1; i <= min; i++) {
+            if (a % i == 0 && b % i == 0)
+                hcf = i;
+        }
+
+        System.out.println("HCF = " + hcf);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter first number: 24
+Enter second number: 36
+HCF = 12</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>HCF/GCD:</strong> Largest number that divides both numbers</li>
+                    <li><strong>Optimization:</strong> Loop only up to minimum of two numbers</li>
+                    <li><strong>Divisibility Check:</strong> Both a % i == 0 and b % i == 0</li>
+                    <li><strong>Update HCF:</strong> Keep updating to find highest common factor</li>
+                </ul>
+                <strong>Example:</strong> Factors of 24: 1,2,3,4,6,8,12,24; Factors of 36: 1,2,3,4,6,9,12,18,36 → HCF =
+                12
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Happy Number Check</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a program to find if the given number is a happy number or not. Examples: 7,
+                19 are happy numbers.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter number: ");
+        int n = sn.nextInt();
+
+        int temp = n;
+
+        for (; n != 1 && n != 4; ) {
+            int sum = 0;
+
+            for (; n > 0; n = n / 10) {
+                int d = n % 10;
+                sum += d * d;
+            }
+            n = sum;
+        }
+
+        if (n == 1)
+            System.out.println(temp + " is a Happy Number");
+        else
+            System.out.println(temp + " is not a Happy Number");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter number: 19
+19 is a Happy Number
+
+Enter number: 20
+20 is not a Happy Number</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Happy Number:</strong> Sum of squares of digits eventually reaches 1</li>
+                    <li><strong>Cycle Detection:</strong> If reaches 4, it will loop forever (not happy)</li>
+                    <li><strong>Nested Loops:</strong> Outer loop repeats process, inner sums squares</li>
+                    <li><strong>Example:</strong> 19 → 1²+9² = 82 → 8²+2² = 68 → 6²+8² = 100 → 1²+0²+0² = 1 ✓</li>
+                </ul>
+                <strong>Termination:</strong> Loop stops when n == 1 (happy) or n == 4 (unhappy cycle)
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Decimal to Binary Conversion</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to convert a decimal number to binary number.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _04_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter decimal number: ");
+        int n = sn.nextInt();
+
+        int binary = 0, place = 1;
+
+        for (; n > 0; n = n / 2) {
+            int rem = n % 2;
+            binary += rem * place;
+            place *= 10;
+        }
+
+        System.out.println("Binary = " + binary);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter decimal number: 13
+Binary = 1101</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Binary Conversion:</strong> Repeatedly divide by 2, collect remainders</li>
+                    <li><strong>Place Value:</strong> Build binary number from right to left</li>
+                    <li><strong>Remainder:</strong> n % 2 gives binary digit (0 or 1)</li>
+                    <li><strong>Process:</strong> 13 → 13/2=6 rem 1 → 6/2=3 rem 0 → 3/2=1 rem 1 → 1/2=0 rem 1 → 1101
+                    </li>
+                </ul>
+                <strong>Algorithm:</strong> Divide by 2, store remainder, repeat until quotient is 0
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Series: 1, 1, 2, 3, 4, 9, 8, 27, 16, 81…</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a program to print the given series: 1, 1, 2, 3, 4, 9, 8, 27, 16, 81…
+                HINT: Odd positions have 2^n values (n=0,1,2…), even positions have 3^n values (n=0,1,2…)</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _05_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter number of terms: ");
+        int n = sn.nextInt();
+
+        int p2 = 0, p3 = 0;
+
+        for (int i = 1; i <= n; i++) {
+            if (i % 2 != 0) {
+                System.out.print((int)Math.pow(2, p2) + " ");
+                p2++;
+            } else {
+                System.out.print((int)Math.pow(3, p3) + " ");
+                p3++;
+            }
+        }
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter number of terms: 10
+1 1 2 3 4 9 8 27 16 81</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Alternating Pattern:</strong> Odd positions use powers of 2, even use powers of 3</li>
+                    <li><strong>Math.pow():</strong> Calculates power (2^0, 2^1, 2^2... and 3^0, 3^1, 3^2...)</li>
+                    <li><strong>Position Check:</strong> i % 2 != 0 for odd positions</li>
+                    <li><strong>Series:</strong> Pos 1:2^0=1, Pos 2:3^0=1, Pos 3:2^1=2, Pos 4:3^1=3, Pos 5:2^2=4...</li>
+                </ul>
+                <strong>Pattern:</strong> Odd: 2^0, 2^1, 2^2, 2^3... | Even: 3^0, 3^1, 3^2, 3^3...
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>For Loop Module - Practice Worksheet</strong></p>
+            <p>Master for loops with digit manipulation, mathematical algorithms, and series</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

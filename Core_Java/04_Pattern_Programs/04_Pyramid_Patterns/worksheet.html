@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramid Patterns - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px
+        }
+
+        .explanation ol {
+            line-height: 1.8
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Pyramid Patterns Worksheet</h5><a href="index.html"
+            style="color:#dc3545;text-decoration:none;display:block;margin-bottom:10px">← Back to Module</a>
+        <hr style="border-color:#34495e;margin:15px 0">
+        <nav><a href="#question1" class="nav-link active">Question 1</a><a href="#question2" class="nav-link">Question
+                2</a><a href="#question3" class="nav-link">Question 3</a><a href="#question4" class="nav-link">Question
+                4</a><a href="#question5" class="nav-link">Question 5</a></nav>
+    </div>
+    <div class="top-nav">
+        <h2>Pyramid Patterns - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Pyramid Patterns with these practice problems.</p>
+        </div>
+
+        <div class="section-card" id="question1">
+            <h3>Question 1: Full Star Pyramid</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print a centered pyramid of stars.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>    *<br>   ***<br>  *****<br> *******<br>*********</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class FullPyramid {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            // Print spaces
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+            // Print stars
+            for (int k = 1; k <= 2 * i - 1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Three loops for pyramid:</strong> Outer loop for rows, first inner loop for
+                                leading spaces, second inner loop for stars. This spaces-then-stars pattern is
+                                fundamental to all centered patterns.</li>
+                            <li><strong>Space formula: n - i:</strong> Row 1 has n-1 spaces, row 2 has n-2 spaces, etc.
+                                As row increases, spaces decrease, pushing stars toward center. This creates pyramid
+                                alignment.</li>
+                            <li><strong>Stars formula: 2*i - 1:</strong> Creates odd number sequence (1, 3, 5, 7, 9).
+                                Row 1 has 1 star, row 2 has 3, row 3 has 5. Odd numbers create symmetric expansion.</li>
+                            <li><strong>Why 2*i - 1?:</strong> For symmetry! Row i needs i stars on left of center,
+                                center star, i-1 stars on right = 2i-1 total. This formula builds symmetric pyramids
+                                automatically.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question2">
+            <h3>Question 2: Inverted Pyramid</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print an upside-down pyramid (starts wide, narrows to point).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>*********<br> *******<br>  *****<br>   ***<br>    *</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class InvertedPyramid {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = n; i >= 1; i--) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= 2 * i - 1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Reverse outer loop for inversion:</strong> Counting i from n down to 1 flips the
+                                pyramid. First row (i=n) has most stars, last row (i=1) has one star. Direction reversal
+                                inverts the shape.</li>
+                            <li><strong>Same formulas work in reverse:</strong> n-i for spaces and 2*i-1 for stars still
+                                work! When i is large (start), spaces are few and stars are many. As i decreases, spaces
+                                increase and stars decrease.</li>
+                            <li><strong>Pattern symmetry principle:</strong> Many patterns have inverse versions. To
+                                invert, usually just reverse the loop direction. The mathematical relationships often
+                                don't need changing.</li>
+                            <li><strong>Diamond is pyramid + inverted:</strong> Understanding this pyramid prepares you
+                                for diamond patterns, which combine upward and inverted pyramids. Building blocks
+                                combine into complex shapes.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question3">
+            <h3>Question 3: Number Pyramid</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print a pyramid with numbers increasing towards center (1 2 3 2 1 pattern).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>4</code><br><br><strong>Sample Output
+                    1:</strong><br><code>   1<br>  121<br> 12321<br>1234321</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class NumberPyramid {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= i; k++) {
+                System.out.print(k);
+            }
+            for (int m = i - 1; m >= 1; m--) {
+                System.out.print(m);
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Four loops for complex pattern:</strong> Spaces, ascending numbers, descending
+                                numbers, then newline. Breaking complex patterns into phases (spaces, left half, right
+                                half) makes them manageable.</li>
+                            <li><strong>Ascending then descending creates symmetry:</strong> First number loop prints
+                                1,2,3... up to i. Second prints i-1, i-2... down to 1. Together they form mirrored
+                                number sequence.</li>
+                            <li><strong>Why start descending at i-1?:</strong> If we started at i, center would repeat
+                                (1231321 not 123321). Starting one below avoids duplication, creating proper palindrome.
+                            </li>
+                            <li><strong>Palindromic pattern technique:</strong> This ascending-descending approach works
+                                for any symmetric pattern. Numbers, letters, symbols - same technique. Master it for all
+                                palindromic patterns.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question4">
+            <h3>Question 4: Hollow Pyramid</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print a pyramid with stars only on edges, hollow inside.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>    *<br>   * *<br>  *   *<br> *     *<br>*********</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class HollowPyramid {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= 2 * i - 1; k++) {
+                if (k == 1 || k == 2 * i - 1 || i == n) {
+                    System.out.print("*");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Conditional printing for hollow effect:</strong> Print star if first position
+                                (k==1) OR last position (k==2*i-1) OR bottom row (i==n). Else print space. This creates
+                                border-only pattern.</li>
+                            <li><strong>Base must be filled:</strong> Condition i==n ensures bottom row is completely
+                                filled. Without it, base would be hollow too, which looks wrong for pyramid.</li>
+                            <li><strong>Spaces maintain alignment:</strong> Printing space (not nothing) for hollow
+                                parts keeps structure aligned. Hollow doesn't mean absent - it means visible empty space
+                                character.</li>
+                            <li><strong>OR logic for borders:</strong> Left edge OR right edge OR base - combining these
+                                with || handles all border cases. This OR pattern applies to hollowing any shape.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question5">
+            <h3>Question 5: Pascal's Triangle Numbers</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print Pascal's Triangle pattern (each number is sum of two above it).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>    1<br>   1 1<br>  1 2 1<br> 1 3 3 1<br>1 4 6 4 1</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class PascalTriangle {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                System.out.print(" ");
+            }
+            int num = 1;
+            for (int k = 0; k <= i; k++) {
+                System.out.print(num + " ");
+                num = num * (i - k) / (k + 1);
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Mathematical formula for coefficients:</strong> Each number in Pascal's triangle
+                                is a binomial coefficient. Formula num = num * (i-k) / (k+1) generates next number from
+                                current without storing previous rows.</li>
+                            <li><strong>Start each row with num=1:</strong> Every row in Pascal's triangle starts with
+                                1. We initialize num=1 per row, then use formula to generate subsequent numbers.</li>
+                            <li><strong>Pattern has deep math connections:</strong> Pascal's triangle appears in
+                                probability, algebra, combinatorics. It's not just a pattern exercise - it's fundamental
+                                to mathematics and computer science.</li>
+                            <li><strong>Algorithmic vs storage approach:</strong> Could store previous row in array and
+                                sum pairs. This formula approach calculates on-the-fly, showing how math can replace
+                                storage. Both valid, formula is more elegant.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top:40px"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>Pyramid Patterns - Practice Worksheet</strong></p>
+            <p>Master centered pyramid patterns in Java</p>
+            <p>&copy; 2026 Java Learning Platform</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('.sidebar nav a').forEach(link => { link.addEventListener('click', function () { document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active')); this.classList.add('active') }) });</script>
+</body>
+
+</html>

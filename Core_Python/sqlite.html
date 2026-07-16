@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python SQLite - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#create-table">Create Table</a></li>
+                        <li><a href="#insert">Insert</a></li>
+                        <li><a href="#select">Select</a></li>
+                        <li><a href="#update">Update</a></li>
+                        <li><a href="#delete">Delete</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python SQLite</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>Python has built-in support for SQLite3, which provides an interface for interacting with SQLite
+                        databases.</p>
+                    <p>To use it, you must first create a connection variable that connects to the database.</p>
+
+                    <h2 id="connect">Create Connection</h2>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+conn = sqlite3.connect(database_name)
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+import sqlite3
+
+# This will create 'test.db' if it doesn't exist
+conn = sqlite3.connect('test.db')
+print("Opened database successfully")
+</pre>
+
+                    <h2 id="create-table">Create Table</h2>
+                    <p>To execute SQL statements (like CREATE TABLE), you need a cursor object.</p>
+                    <pre class="code-block">
+conn = sqlite3.connect('test.db')
+print("Opened database successfully")
+
+conn.execute('''CREATE TABLE COMPANY
+         (ID INT PRIMARY KEY     NOT NULL,
+         NAME           TEXT    NOT NULL,
+         AGE            INT     NOT NULL,
+         ADDRESS        CHAR(50),
+         SALARY         REAL);''')
+
+print("Table created successfully")
+conn.close()
+</pre>
+
+                    <h2 id="insert">Insert Operation</h2>
+                    <p>To insert records into a table, use the <code>INSERT</code> statement.</p>
+                    <pre class="code-block">
+conn = sqlite3.connect('test.db')
+
+conn.execute("INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) \
+      VALUES (1, 'Paul', 32, 'California', 20000.00 )")
+
+conn.execute("INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) \
+      VALUES (2, 'Allen', 25, 'Texas', 15000.00 )")
+
+conn.execute("INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) \
+      VALUES (3, 'Teddy', 23, 'Norway', 20000.00 )")
+
+conn.commit() # Save changes
+print("Records created successfully")
+conn.close()
+</pre>
+
+                    <h2 id="select">Select Operation</h2>
+                    <p>To retrieve data, use the <code>SELECT</code> statement and fetch the results.</p>
+                    <pre class="code-block">
+conn = sqlite3.connect('test.db')
+cursor = conn.execute("SELECT id, name, address, salary from COMPANY")
+
+for row in cursor:
+   print("ID = ", row[0])
+   print("NAME = ", row[1])
+   print("ADDRESS = ", row[2])
+   print("SALARY = ", row[3], "\n")
+
+print("Operation done successfully")
+conn.close()
+</pre>
+
+                    <h2 id="update">Update Operation</h2>
+                    <p>Use the <code>UPDATE</code> statement to modify existing records.</p>
+                    <pre class="code-block">
+conn = sqlite3.connect('test.db')
+
+conn.execute("UPDATE COMPANY set SALARY = 25000.00 where ID = 1")
+conn.commit()
+
+print("Total number of rows updated :", conn.total_changes)
+
+cursor = conn.execute("SELECT id, name, address, salary from COMPANY")
+for row in cursor:
+   print("ID = ", row[0])
+   print("NAME = ", row[1])
+   print("SALARY = ", row[3], "\n")
+
+conn.close()
+</pre>
+
+                    <h2 id="delete">Delete Operation</h2>
+                    <p>Use the <code>DELETE</code> statement to remove records.</p>
+                    <pre class="code-block">
+conn = sqlite3.connect('test.db')
+
+conn.execute("DELETE from COMPANY where ID = 2;")
+conn.commit()
+
+print("Total number of rows deleted :", conn.total_changes)
+
+cursor = conn.execute("SELECT id, name, address, salary from COMPANY")
+for row in cursor:
+   print("ID = ", row[0])
+   print("NAME = ", row[1])
+   print("SALARY = ", row[3], "\n")
+
+conn.close()
+</pre>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a program to connect to an SQLite database named 'school.db'.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import sqlite3
+conn = sqlite3.connect('school.db')
+print("Connected")
+conn.close()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a program to create a table 'STUDENTS' with ID, Name, and Grade.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import sqlite3
+conn = sqlite3.connect('school.db')
+conn.execute('''CREATE TABLE IF NOT EXISTS STUDENTS
+         (ID INT PRIMARY KEY NOT NULL,
+         NAME TEXT NOT NULL,
+         GRADE TEXT NOT NULL);''')
+print("Table created")
+conn.close()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a program to insert a student into the STUDENTS table.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import sqlite3
+conn = sqlite3.connect('school.db')
+conn.execute("INSERT INTO STUDENTS (ID,NAME,GRADE) VALUES (1, 'Alice', 'A')")
+conn.commit()
+print("Inserted")
+conn.close()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a program to select and print all students from the table.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import sqlite3
+conn = sqlite3.connect('school.db')
+cursor = conn.execute("SELECT * from STUDENTS")
+for row in cursor:
+    print(row)
+conn.close()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a program to update a student's grade.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import sqlite3
+conn = sqlite3.connect('school.db')
+conn.execute("UPDATE STUDENTS set GRADE = 'A+' where ID = 1")
+conn.commit()
+print("Updated")
+conn.close()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a program to delete a student from the table using ID.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import sqlite3
+conn = sqlite3.connect('school.db')
+conn.execute("DELETE from STUDENTS where ID = 1")
+conn.commit()
+print("Deleted")
+conn.close()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a program to insert multiple rows using excutemany.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import sqlite3
+conn = sqlite3.connect('school.db')
+data = [(2, 'Bob', 'B'), (3, 'Charlie', 'C')]
+conn.executemany("INSERT INTO STUDENTS (ID, NAME, GRADE) VALUES (?, ?, ?)", data)
+conn.commit()
+print("Inserted Many")
+conn.close()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a program to fetch only one row using fetchone().</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import sqlite3
+conn = sqlite3.connect('school.db')
+cursor = conn.execute("SELECT * from STUDENTS")
+print(cursor.fetchone())
+conn.close()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a program to drop the STUDENTS table.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import sqlite3
+conn = sqlite3.connect('school.db')
+conn.execute("DROP TABLE IF EXISTS STUDENTS")
+print("Table Dropped")
+conn.close()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a program to handle database connection errors using try-except.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import sqlite3
+try:
+    conn = sqlite3.connect('school.db')
+    print("Success")
+except sqlite3.Error as e:
+    print("Error:", e)
+finally:
+    if conn:
+        conn.close()</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

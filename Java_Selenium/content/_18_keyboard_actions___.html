@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  18 keyboard actions   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>18. Keyboard Actions</h1>
+
+<h2>📖 Introduction</h2>
+<p>While <code>sendKeys()</code> is great for typing text, sometimes you need to perform special keyboard operations
+    like pressing <strong>Enter</strong>, <strong>Tab</strong>, or holding down modifier keys (<strong>Shift</strong>,
+    <strong>Ctrl</strong>, <strong>Alt</strong>). Selenium provides the <code>Keys</code> enum and the
+    <code>Actions</code> class for these tasks.
+</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>How to press special keys (Enter, Esc, Tab, etc.)</li>
+    <li>How to simulate key chords (Ctrl+C, Ctrl+V)</li>
+    <li>How to hold down keys while typing (Shift for Uppercase)</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>The Keys Enum</h3>
+<p>You can pass special keys directly to <code>sendKeys</code>:</p>
+<pre><code>element.sendKeys(Keys.ENTER);
+element.sendKeys(Keys.TAB);</code></pre>
+
+<h3>Complex Key Interactions</h3>
+<p>For holding keys down, use the <code>Actions</code> class:</p>
+<pre><code>Actions act = new Actions(driver);
+act.keyDown(Keys.SHIFT).sendKeys("hello").keyUp(Keys.SHIFT).perform();</code></pre>
+
+<h2>💻 Code Examples</h2>
+
+<h3>Copy and Paste (Ctrl+A, Ctrl+C, Ctrl+V)</h3>
+<pre><code>WebElement input1 = driver.findElement(By.id("input1"));
+WebElement input2 = driver.findElement(By.id("input2"));
+
+Actions act = new Actions(driver);
+
+// Select All and Copy from Input 1
+input1.sendKeys(Keys.CONTROL, "a");
+input1.sendKeys(Keys.CONTROL, "c");
+
+// Paste into Input 2
+input2.sendKeys(Keys.CONTROL, "v");
+</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>OS Differences:</strong> On Mac, you usually use <code>Keys.COMMAND</code> instead of
+        <code>Keys.CONTROL</code>. This can make tests flaky across operating systems.
+    </p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Fill a form without using the mouse.</p>
+    <ol>
+        <li>Focus on the "Name" field.</li>
+        <li>Type a name in LOWERCASE but hold SHIFT to make it UPPERCASE.</li>
+        <li>Press TAB to move to the next field.</li>
+        <li>Press ENTER to submit the form.</li>
+    </ol>
+</div>
+
+<a href="worksheets/ws_keyboard.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

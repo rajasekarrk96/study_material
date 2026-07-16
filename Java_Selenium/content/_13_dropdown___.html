@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  13 dropdown   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>13. Dropdown Handling</h1>
+
+<h2>📖 Introduction</h2>
+<p>Dropdowns are common UI elements used to select options from a list. In Selenium, handling them depends on how they
+    are built in the HTML. Some are standard HTML <code>&lt;select&gt;</code> tags, while others are "fancy" dynamic
+    dropdowns made with <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> tags (like in Bootstrap or React apps).
+</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>How to handle standard Static Dropdowns using the <code>Select</code> class</li>
+    <li>Methods to select by Index, Value, and Visible Text</li>
+    <li>Strategies to handle Dynamic (Custom) Dropdowns</li>
+    <li>How to handle Multi-Select Dropdowns</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>1. Static Dropdowns (The Select Class)</h3>
+<p>If the dropdown is created using the <code>&lt;select&gt;</code> tag, Selenium makes it easy. You
+    <strong>cannot</strong> just click options; you must use the <code>Select</code> class.
+</p>
+<ul>
+    <li><code>selectByVisibleText("Text")</code>: Selects the option that displays the text "Text".
+        <strong>(Recommended)</strong>
+    </li>
+    <li><code>selectByValue("val")</code>: Selects the option with <code>value="val"</code>.</li>
+    <li><code>selectByIndex(0)</code>: Selects the first option. (Risky if order changes).</li>
+</ul>
+
+<h3>2. Dynamic Dropdowns</h3>
+<p>These are not <code>&lt;select&gt;</code> tags. They are interactive lists. To handle them:</p>
+<ol>
+    <li>Click the dropdown to expand it.</li>
+    <li>Wait for options to be visible.</li>
+    <li>Find the list of options (usually <code>li</code> tags) using specific locators.</li>
+    <li>Iterate through the list and click the one you want.</li>
+</ol>
+
+<h2>💻 Code Examples</h2>
+
+<h3>Static Dropdown Example</h3>
+<pre><code>// 1. Find the element
+WebElement staticDropdown = driver.findElement(By.id("country_select"));
+
+// 2. Wrap it with Select class
+Select dropdown = new Select(staticDropdown);
+
+// 3. Select option
+dropdown.selectByVisibleText("India");
+System.out.println("Selected: " + dropdown.getFirstSelectedOption().getText());
+</code></pre>
+
+<h3>Dynamic Dropdown Example</h3>
+<pre><code>// 1. Click to open
+driver.findElement(By.id("autosuggest")).sendKeys("ind");
+
+// 2. Find all matching options
+List&lt;WebElement&gt; options = driver.findElements(By.cssSelector("li.ui-menu-item a"));
+
+// 3. Iterate and click
+for(WebElement option : options) {
+    if(option.getText().equalsIgnoreCase("India")) {
+        option.click();
+        break;
+    }
+}
+</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>UnexpectedTagNameException:</strong> This error occurs if you try to use the <code>Select</code> class on
+        an element that is NOT a <code>&lt;select&gt;</code> tag. Always check the HTML source first!</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> handle a Country selection form.</p>
+    <ol>
+        <li>Select "United States" from the static dropdown.</li>
+        <li>Print all available options in the console.</li>
+        <li>Type "Can" in the dynamic search box and select "Canada" from the suggestions.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: How do you check if a dropdown allows multiple selections?</strong></p>
+    <p><strong>Answer:</strong> Use the <code>select.isMultiple()</code> method. It returns a boolean.</p>
+
+    <p><strong>Q2: How to deselect an option?</strong></p>
+    <p><strong>Answer:</strong> You can use <code>deselectBy...()</code> methods, but this only works for
+        <strong>Multi-Select</strong> dropdowns. You cannot deselect an option in a standard single-select dropdown.
+    </p>
+</blockquote>
+
+<a href="worksheets/ws_dropdown.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

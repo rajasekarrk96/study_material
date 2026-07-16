@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  05 auto webdriver manager   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>05. Auto WebDriver Manager</h1>
+
+<h2>📖 Introduction</h2>
+<p>Managing browser drivers manually is a pain. In the past, you had to download a specific version of
+    <code>chromedriver.exe</code> or <code>geckodriver.exe</code>, place it in your project, and set a system property.
+    If your browser automatically updated, your test would break instantly. <strong>Selenium Manager</strong> (and tools
+    like WebDriverManager) solves this problem permanently.
+</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The "Old Way" of managing drivers manually</li>
+    <li>How Selenium Manager (Selenium 4.6+) works automatically</li>
+    <li>How to use the external <code>WebDriverManager</code> library (legacy projects)</li>
+    <li>Benefits of automated driver management</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>The Old Manual Way (Before Selenium 4.6)</h3>
+<p>Historically, you had to manually download the driver executable that matched your browser version and set the path
+    in your code:</p>
+<pre><code>System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver.exe");
+WebDriver driver = new ChromeDriver();</code></pre>
+<p><strong>The Problem:</strong> When Chrome auto-updates from version 100 to 101, your version 100 driver stops
+    working. You have to manually download the new driver. This is a maintenance nightmare.</p>
+
+<h3>The New Way: Selenium Manager (Selenium 4.6+)</h3>
+<p>Selenium now includes a tool called <strong>Selenium Manager</strong> out of the box. It detects your installed
+    browser version, downloads the matching driver if needed, and caches it.</p>
+<ul>
+    <li><strong>Zero Configuration:</strong> You simply instantiate the driver. Selenium handles the rest.</li>
+    <li><strong>Cross-Browser:</strong> Works for Chrome, Firefox, Edge, etc.</li>
+</ul>
+
+<h3>WebDriverManager (Boni Garcia)</h3>
+<p>Before Selenium 4.6, the industry standard was an external library called <em>WebDriverManager</em>. You might see
+    this in older codebases. It does essentially the same thing as Selenium Manager but requires an extra dependency.
+</p>
+
+<h2>💻 Code Examples</h2>
+<p>Here is how you handle drivers in modern Selenium:</p>
+
+<h3>Modern Approach (Selenium 4.6+)</h3>
+<pre><code>// No setup needed! Selenium Manager handles it automatically.
+WebDriver driver = new ChromeDriver();
+driver.get("https://google.com");</code></pre>
+
+<h3>Legacy Approach (WebDriverManager Library)</h3>
+<pre><code>// Requires 'io.github.bonigarcia:webdrivermanager' dependency
+WebDriverManager.chromedriver().setup();
+WebDriver driver = new ChromeDriver();</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Don't Mix Approaches:</strong> If you are using Selenium 4.6+, you do NOT need
+        <code>WebDriverManager.chromedriver().setup()</code>. Remove the Boni Garcia dependency to keep your project
+        clean.
+    </p>
+    <p><strong>Network Access:</strong> The first time you run a test, Selenium Manager needs internet access to
+        download the driver. Ensure your firewall allows it.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Verify automatic driver management.</p>
+    <ol>
+        <li>Create a new Test class.</li>
+        <li>Do NOT set any `System.setProperty` specifics.</li>
+        <li>Do NOT use `WebDriverManager.setup()`.</li>
+        <li>Simply call `new ChromeDriver()` and open "https://google.com".</li>
+        <li>Observe the console logs; you might see Selenium Manager activity.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: What happens if the browser version and driver version do not match?</strong></p>
+    <p><strong>Answer:</strong> You will get a <code>SessionNotCreatedException</code> stating that "This version of
+        ChromeDriver only supports Chrome version X". Automated managers verify this match to prevent errors.</p>
+
+    <p><strong>Q2: Is WebDriverManager still relevant after Selenium 4.6?</strong></p>
+    <p><strong>Answer:</strong> Mostly no. Selenium Manager is now the standard. However, WebDriverManager offers
+        advanced features like downloading specific browser versions for testing, which Selenium Manager is still
+        evolving to support fully.</p>
+</blockquote>
+
+<a href="worksheets/ws_auto_webdriver.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

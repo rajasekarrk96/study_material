@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  24 file upload download   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>24. File Upload & Download</h1>
+
+<h2>📖 Introduction</h2>
+<p>Uploading resumes, profile pictures, or documents is a common user journey. Testing it automatically can be tricky
+    because file dialogs ("Choose File" popup) are Native OS windows, not HTML. Selenium cannot click inside them.
+    Fortunately, there is a simple workaround.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The standard <code>sendKeys</code> trick for uploading files</li>
+    <li>Handling uploads when <code>type="file"</code> is missing (using Robot)</li>
+    <li>Verifying file downloads using Java File I/O</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>1. The "sendKeys" Method (The Golden Path)</h3>
+<p>If the upload element in the DOM looks like <code>&lt;input type="file"&gt;</code>, you are in luck. You do NOT click
+    it. You simply send the <strong>Absolute Path</strong> of the file to it.</p>
+<pre><code>driver.findElement(By.id("upload")).sendKeys("C:\\users\\me\\photo.jpg");</code></pre>
+<p>This bypasses the system dialog entirely.</p>
+
+<h3>2. The Robot Class Method (The Hard Way)</h3>
+<p>If the element is not an <code>input</code> tag (e.g., a custom button triggering a hidden input), you might forced
+    to click it. This opens the Windows File Explorer. You must use Java's <code>Right</code> class to simulate keyboard
+    presses (Copy path to clipboard, Paste, Enter).</p>
+
+<h2>💻 Code Examples</h2>
+<p>We focus on the standard approach:</p>
+
+<h3>Standard Upload</h3>
+<pre><code>// 1. Define file path (Use double backslashes for Windows)
+String filePath = "C:\\test\\data.txt";
+
+// 2. Identify the input element (hidden or visible)
+WebElement uploadElement = driver.findElement(By.id("file-upload"));
+
+// 3. Send path
+uploadElement.sendKeys(filePath);
+
+// 4. Submit
+driver.findElement(By.id("submit")).click();</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Invalid File Path:</strong> The most common error is a typo in the file path. Use Java's
+        <code>System.getProperty("user.dir")</code> to make paths relative to your project folder for portability.
+    </p>
+    <p><strong>Clicking the Button:</strong> Beginners often click the upload button, the file dialog opens, and the
+        script hangs because Selenium is waiting for the click logic to complete, but the OS dialog blocks the browser.
+    </p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Upload a Resume.</p>
+    <ol>
+        <li>Navigate to a Job Portal.</li>
+        <li>Locate the upload input field.</li>
+        <li>Upload a dummy text file.</li>
+        <li>Assert the success message "File Uploaded Successfully".</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: How do you verify a file was downloaded successfully?</strong></p>
+    <p><strong>Answer:</strong> Selenium can't track downloads. Validation is done by checking the file system (Download
+        folder) for the existence of the file with the expected name using Java's <code>File</code> class.</p>
+</blockquote>
+
+<a href="worksheets/ws_file_upload.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

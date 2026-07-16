@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksheet: XPath Basics</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00e676;
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-light: #e0e0e0;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            height: calc(100vh - 50px);
+        }
+
+        .pane-questions {
+            width: 40%;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pane-header {
+            padding: 15px;
+            background: #252525;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .questions-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .question-card {
+            background: #2d2d2d;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .q-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .q-text {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .q-hint {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            font-style: italic;
+            padding: 8px;
+            background: #1a1a1a;
+            border-radius: 3px;
+            border-left: 2px solid #666;
+        }
+
+        .pane-practice {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f0f0;
+        }
+
+        .browser-bar {
+            background: #e0e0e0;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .url-box {
+            background: #fff;
+            padding: 5px 12px;
+            border-radius: 12px;
+            flex: 1;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #555;
+            border: 1px solid #ccc;
+        }
+
+        .app-view {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+        }
+
+        .mock-app {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+        }
+
+        .solutions-panel {
+            background: #1a1a1a;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sol-header {
+            padding: 10px 20px;
+            background: #252525;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .sol-header:hover {
+            color: #fff;
+            background: #333;
+        }
+
+        .sol-content {
+            padding: 15px;
+            display: none;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #dcdcaa;
+            background: #111;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .sol-content.visible {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button.form-control {
+            background: #4a90e2;
+            color: white;
+            cursor: pointer;
+            border: none;
+            margin-top: 10px;
+        }
+
+        button.form-control:hover {
+            background: #357abd;
+        }
+
+        .element-id {
+            padding: 5px 10px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin: 3px 0;
+        }
+
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .test-table th,
+        .test-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .test-table th {
+            background: #f5f5f5;
+            font-weight: bold;
+        }
+
+        .test-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .highlight {
+            background: #fffbcc;
+            padding: 2px 4px;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            margin: 8px 0;
+            border-left: 3px solid #4a90e2;
+        }
+
+        /* Syntax Highlighting */
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-variable {
+            color: #9cdcfe;
+        }
+
+        .code-method {
+            color: #dcdcaa;
+        }
+
+        .code-class {
+            color: #4ec9b0;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><i class="fas fa-code"></i> Practice: XPath Basics</h1><a href="../index.html" style="color:#888; text-decoration:none;"><i class="fas fa-home"></i> Home</a>
+    </header>
+    <div class="workspace">
+        <div class="pane-questions">
+            <div class="pane-header"><i class="fas fa-tasks"></i> Assignments (6 Tasks)</div>
+            <div class="questions-list">
+                <div class="question-card">
+                    <div class="q-title">Task 01: Simple Attribute XPath</div>
+                    <div class="q-text">Find the <strong>First Name</strong> input field using XPath with the
+                        <code>id</code> attribute. <br><strong>(Instruction: Use the ID locator 'fname' for this
+                            XPath)</strong>
+                    </div>
+                    <div class="q-hint">💡 Hint: Pattern is <code>//tag[@attribute='value']</code></div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 02: Text-based XPath</div>
+                    <div class="q-text">Locate the <strong>Login</strong> button by its text content using
+                        <code>text()</code>.
+                    </div>
+                    <div class="q-hint">💡 Hint: Use <code>//button[text()='Login']</code></div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 03: Multiple Attributes</div>
+                    <div class="q-text">Find the <strong>Email</strong> field using both <code>name</code> and
+                        <code>type</code> attributes.
+                    </div>
+                    <div class="q-hint">💡 Hint: Combine with <code>and</code> operator</div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 04: Partial Text Match</div>
+                    <div class="q-text">Select the "Remember me" checkbox using <code>contains()</code> function.</div>
+                    <div class="q-hint">💡 Hint: Use <code>contains(text(), 'Remember')</code></div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 05: Index-based XPath</div>
+                    <div class="q-text">Find the <strong>second row</strong> in the Users table using positional index
+                        <code>[2]</code>.
+                    </div>
+                    <div class="q-hint">💡 Hint: Use <code>//tr[2]</code></div>
+                </div>
+
+                <div class="question-card">
+                    <div class="q-title">Task 06: Sibling Navigation</div>
+                    <div class="q-text">From the "Password" label, find its associated input field using
+                        <code>following-sibling</code>.
+                    </div>
+                    <div class="q-hint">💡 Hint: <code>//label[text()='Password']/following-sibling::input</code></div>
+                </div>
+            </div>
+            <div class="solutions-panel">
+                <div class="sol-header" onclick="toggleSolutions()">
+                    <span><i class="fas fa-code"></i> Solutions</span>
+                    <i class="fas fa-chevron-up" id="sol-icon"></i>
+                </div>
+                <div class="sol-content" id="sol-body">
+                    <pre style="margin:0;"><code><span class="code-keyword">package</span> <span class="code-class">Selenium</span>;
+ 
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.By</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebDriver</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.chrome.ChromeDriver</span>;
+ 
+<span class="code-keyword">public class</span> <span class="code-class">_09_XPathBasics</span> <span class="code-punctuation">{</span>
+    <span class="code-keyword">public static void</span> <span class="code-method">main</span><span class="code-punctuation">(</span><span class="code-class">String</span><span class="code-punctuation">[]</span> args<span class="code-punctuation">)</span> <span class="code-punctuation">{</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Started ---"</span><span class="code-punctuation">);</span>
+        <span class="code-class">WebDriver</span> <span class="code-variable">driver</span> <span class="code-punctuation">=</span> <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Navigating to XPath Basics worksheet..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">get</span><span class="code-punctuation">(</span><span class="code-string">"http://127.0.0.1:5501/Java_Selinium/worksheets/ws_01_xpath_basics.html"</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-comment">// Task 01: Simple Attribute XPath</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 01: Locating 'First Name' via ID attribute..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//input[@id='fname']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 02: Text-based XPath</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 02: Locating 'Login' button via text()..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//button[text()='Login']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 03: Multiple Attributes</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 03: Locating 'Email' via multiple attributes..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//input[@name='user_email_addr' and @type='email']"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 04: Partial Text Match</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 04: Locating checkbox via contains() text..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//label[contains(text(), 'Remember')]/input"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 05: Index-based XPath</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 05: Locating second row in table via index..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//tbody/tr[2]"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 06: Sibling Navigation</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 06: Locating password input via sibling label..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">xpath</span><span class="code-punctuation">(</span><span class="code-string">"//label[text()='Password']/following-sibling::input"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Ended ---"</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">quit</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+    <span class="code-punctuation">}</span>
+<span class="code-punctuation">}</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="pane-practice">
+            <div class="browser-bar"><i class="fas fa-globe" style="color:#666"></i>
+                <div class="url-box">https://practice-labs.com/authentication</div>
+            </div>
+            <div class="app-view">
+                <div class="mock-app">
+                    <!-- Top Navigation Bar -->
+                    <div
+                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 12px 20px; margin: -30px -30px 20px -30px; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: relative;">
+                        <div style="color: white; font-weight: 600; font-size: 1.1rem;">
+                            <i class="fas fa-code" style="margin-right: 8px;"></i>XPath Basics
+                        </div>
+                        <button onclick="window.location.href='ws_02_xpath_advanced.html'"
+                            style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(10px); position: absolute; right: 20px;"
+                            onmouseover="this.style.background='white'; this.style.color='#667eea';"
+                            onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white';">
+                            <i class="fas fa-arrow-right" style="margin-right: 6px;"></i>XPath Advanced
+                        </button>
+                    </div>
+
+                    <h2>User Authentication</h2>
+
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="fname" name="firstname" class="form-control"
+                            placeholder="Enter first name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="user_login_id" name="username" class="form-control"
+                            placeholder="Enter username">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="user_email_addr" class="form-control"
+                            placeholder="Enter email address">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="pwd_field" class="form-control" placeholder="Enter password">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="remember_checkbox"> Remember me for 30 days
+                        </label>
+                    </div>
+
+                    <button class="form-control" onclick="alert('Login successful!')">Login</button>
+
+                    <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+
+                    <h3>Recent Users</h3>
+                    <table class="test-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="user_row_1">
+                                <td>john_doe</td>
+                                <td>john@example.com</td>
+                                <td>Active</td>
+                            </tr>
+                            <tr id="user_row_2">
+                                <td>jane_smith</td>
+                                <td>jane@example.com</td>
+                                <td>Active</td>
+                            </tr>
+                            <tr id="user_row_3">
+                                <td>bob_wilson</td>
+                                <td>bob@example.com</td>
+                                <td>Inactive</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleSolutions() {
+            const solBody = document.getElementById('sol-body');
+            const solIcon = document.getElementById('sol-icon');
+            solBody.classList.toggle('visible');
+            solIcon.className = solBody.classList.contains('visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+        }
+    </script>
+</body>
+
+</html>

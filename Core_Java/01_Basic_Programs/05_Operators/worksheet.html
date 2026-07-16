@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operators - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none;
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333;
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0;
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px;
+        }
+
+        .explanation ol {
+            line-height: 1.8;
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Operators Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Operators - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Java operators with these practice problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Basic Arithmetic Calculator</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that performs all basic arithmetic operations (+, -, *, /, %) on two numbers and
+                displays the results.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>20<br>3</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Addition: 23<br>Subtraction: 17<br>Multiplication: 60<br>Division: 6<br>Modulus: 2</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>15<br>4</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Addition: 19<br>Subtraction: 11<br>Multiplication: 60<br>Division: 3<br>Modulus: 3</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class ArithmeticOps {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter first number: ");
+        int a = sn.nextInt();
+        
+        System.out.print("Enter second number: ");
+        int b = sn.nextInt();
+        
+        System.out.println("Addition: " + (a + b));
+        System.out.println("Subtraction: " + (a - b));
+        System.out.println("Multiplication: " + (a * b));
+        System.out.println("Division: " + (a / b));
+        System.out.println("Modulus: " + (a % b));
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Arithmetic operators perform mathematical calculations:</strong> Each operator
+                                has a specific purpose - addition combines values, subtraction finds difference,
+                                multiplication scales values, division splits into equal parts, and modulus finds the
+                                remainder.</li>
+                            <li><strong>Integer division truncates decimals:</strong> When dividing 20 by 3, we get 6
+                                (not 6.67) because both operands are integers. The fractional part is discarded.</li>
+                            <li><strong>Modulus reveals remainder information:</strong> The % operator is particularly
+                                useful for determining divisibility, cycling through ranges, or extracting digits from
+                                numbers.</li>
+                            <li><strong>Order of operations matters:</strong> Java follows PEMDAS rules - parentheses,
+                                then multiplication/division/modulus (left to right), then addition/subtraction (left to
+                                right).</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Increment and Decrement Operators</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that demonstrates the difference between pre-increment (++x) and post-increment
+                (x++) operators.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>5</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Original: 5<br>Post-increment: 5<br>After post: 6<br>Pre-increment: 7<br>After pre: 7</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>10</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Original: 10<br>Post-increment: 10<br>After post: 11<br>Pre-increment: 12<br>After pre: 12</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class IncrementDemo {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter a number: ");
+        int x = sn.nextInt();
+        
+        System.out.println("Original: " + x);
+        System.out.println("Post-increment: " + (x++));
+        System.out.println("After post: " + x);
+        System.out.println("Pre-increment: " + (++x));
+        System.out.println("After pre: " + x);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Post-increment (x++) uses then increments:</strong> The current value is used in
+                                the expression first, then the variable is incremented. This is why we see the original
+                                value (5) printed, but x becomes 6 afterward.</li>
+                            <li><strong>Pre-increment (++x) increments then uses:</strong> The variable is incremented
+                                first, then the new value is used in the expression. So x becomes 7 before being
+                                printed.</li>
+                            <li><strong>The timing difference is crucial:</strong> In complex expressions, choosing pre
+                                vs post increment can completely change the result. For example, <code>array[i++]</code>
+                                vs <code>array[++i]</code> access different elements.</li>
+                            <li><strong>Both permanently modify the variable:</strong> Regardless of pre or post, the
+                                variable's value increases by 1. The difference is only in when that new value becomes
+                                available to the surrounding expression.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Relational and Logical Operators</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that checks if a number is within a specific range (10-50) using relational and
+                logical operators.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>25</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Is 25 >= 10? true<br>Is 25 <= 50? true<br>Is 25 in range [10-50]? true</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>75</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Is 75 >= 10? true<br>Is 75 <= 50? false<br>Is 75 in range [10-50]? false</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class RangeCheck {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter a number: ");
+        int num = sn.nextInt();
+        
+        boolean greaterThan10 = num >= 10;
+        boolean lessThan50 = num <= 50;
+        boolean inRange = greaterThan10 && lessThan50;
+        
+        System.out.println("Is " + num + " >= 10? " + greaterThan10);
+        System.out.println("Is " + num + " <= 50? " + lessThan50);
+        System.out.println("Is " + num + " in range [10-50]? " + inRange);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Relational operators create boolean conditions:</strong> Operators like >=,
+                                <=,==, !=compare values and return true or false. They form the building blocks of
+                                    decision-making in programs.</li>
+                            <li><strong>Logical AND (&&) requires both conditions:</strong> For a number to be in range,
+                                it must satisfy BOTH conditions simultaneously - it must be >= 10 AND <= 50. If either
+                                    is false, the whole expression is false.</li>
+                            <li><strong>Breaking down complex conditions improves clarity:</strong> By storing
+                                intermediate boolean results in variables, we make the logic easier to understand and
+                                debug. This is better than writing one giant expression.</li>
+                            <li><strong>Short-circuit evaluation optimizes performance:</strong> The && operator stops
+                                checking as soon as it finds a false condition. If num < 10, Java won't even check if
+                                    num <=50 because the result is already determined to be false.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Ternary Operator</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that uses the ternary operator to find the maximum of two numbers.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>45<br>32</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Maximum: 45</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>18<br>27</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Maximum: 27</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class TernaryMax {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter first number: ");
+        int a = sn.nextInt();
+        
+        System.out.print("Enter second number: ");
+        int b = sn.nextInt();
+        
+        int max = (a > b) ? a : b;
+        
+        System.out.println("Maximum: " + max);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Ternary operator is a compact if-else:</strong> The syntax
+                                <code>(condition) ? valueIfTrue : valueIfFalse</code> replaces a full if-else block,
+                                making code more concise for simple decisions.</li>
+                            <li><strong>The condition determines which value is returned:</strong> If a > b evaluates to
+                                true, the expression returns a. Otherwise, it returns b. Only one of the two values is
+                                ever evaluated.</li>
+                            <li><strong>Best used for simple value selection:</strong> Ternary operators excel at
+                                choosing between two values based on a condition. For complex logic with multiple
+                                statements, traditional if-else is clearer.</li>
+                            <li><strong>Ternary operators can be nested but avoid overuse:</strong> While you can nest
+                                ternary operators like <code>a > b ? a : (b > c ? b : c)</code>, this quickly becomes
+                                unreadable. Use if-else for complex scenarios.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Compound Assignment Operators</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that demonstrates compound assignment operators (+=, -=, *=, /=, %=) by performing
+                cumulative operations on a number.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>100<br>5</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Initial: 100<br>After += 5: 105<br>After -= 5: 100<br>After *= 5: 500<br>After /= 5: 100<br>After %= 5: 0</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>50<br>3</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Initial: 50<br>After += 3: 53<br>After -= 3: 50<br>After *= 3: 150<br>After /= 3: 50<br>After %= 3: 2</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class CompoundOps {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter starting value: ");
+        int value = sn.nextInt();
+        
+        System.out.print("Enter operand: ");
+        int operand = sn.nextInt();
+        
+        System.out.println("Initial: " + value);
+        
+        value += operand;
+        System.out.println("After += " + operand + ": " + value);
+        
+        value -= operand;
+        System.out.println("After -= " + operand + ": " + value);
+        
+        value *= operand;
+        System.out.println("After *= " + operand + ": " + value);
+        
+        value /= operand;
+        System.out.println("After /= " + operand + ": " + value);
+        
+        value %= operand;
+        System.out.println("After %= " + operand + ": " + value);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Compound operators combine operation with assignment:</strong>
+                                <code>value += 5</code> is shorthand for <code>value = value + 5</code>. This pattern
+                                reduces code repetition and makes the intent clearer - we're modifying the variable in
+                                place.</li>
+                            <li><strong>Each operation builds on the previous result:</strong> The value changes
+                                cumulatively through the program. Starting at 100, adding 5 gives 105, then subtracting
+                                5 returns to 100, then multiplying by 5 gives 500, and so on.</li>
+                            <li><strong>Compound operators are more efficient:</strong> Beyond being shorter to write,
+                                compound operators can be slightly faster because the variable is only evaluated once.
+                                In <code>array[i] += 5</code>, the index i is calculated once, whereas
+                                <code>array[i] = array[i] + 5</code> calculates it twice.</li>
+                            <li><strong>Understanding the flow is key:</strong> Each operation permanently modifies the
+                                variable, so the order matters. If we did *= before +=, we'd get different results. This
+                                demonstrates how state changes accumulate in programs.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+        <footer>
+            <p><strong>Operators - Practice Worksheet</strong></p>
+            <p>Master Java operators and their practical applications</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

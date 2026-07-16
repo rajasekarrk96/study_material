@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nested If - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px
+        }
+
+        .explanation ol {
+            line-height: 1.8
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Nested If Worksheet</h5><a href="index.html"
+            style="color:#dc3545;text-decoration:none;display:block;margin-bottom:10px">← Back to Module</a>
+        <hr style="border-color:#34495e;margin:15px 0">
+        <nav><a href="#question1" class="nav-link active">Question 1</a><a href="#question2" class="nav-link">Question
+                2</a></nav>
+    </div>
+    <div class="top-nav">
+        <h2>Nested If - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Nested If Statements with these practice problems.</p>
+        </div>
+        <div class="section-card" id="question1">
+            <h3>Question 1: Driving License Eligibility</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Check if person can get a driving license: Age must be 18+ AND must pass written
+                test (score >= 70).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>20</code> (age)<br><code>75</code>
+                (score)<br><br><strong>Sample Output
+                    1:</strong><br><code>Eligible for license</code><br><br><strong>Sample Input
+                    2:</strong><br><code>16</code> (age)<br><code>80</code> (score)<br><br><strong>Sample Output
+                    2:</strong><br><code>Not eligible - too young</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class DrivingLicense {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter age: ");
+        int age = sn.nextInt();
+        System.out.print("Enter test score: ");
+        int score = sn.nextInt();
+        
+        if (age >= 18) {
+            if (score >= 70) {
+                System.out.println("Eligible for license");
+            } else {
+                System.out.println("Not eligible - failed test");
+            }
+        } else {
+            System.out.println("Not eligible - too young");
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Nesting creates dependent conditions:</strong> The inner if (score check) only
+                                runs if outer if (age check) passes. This models real-world logic where certain checks
+                                only matter after prerequisites are met.</li>
+                            <li><strong>Different error messages provide clarity:</strong> Failed age check and failed
+                                test give different messages. Nesting allows specific feedback at each decision point
+                                rather than generic "not eligible".</li>
+                            <li><strong>Avoids unnecessary checks:</strong> If person is 16, we never evaluate their
+                                test score. Nesting is more efficient than checking both conditions always, and models
+                                real processes better.</li>
+                            <li><strong>Could use &&, but nesting is clearer:</strong> While (age>=18 && score>=70)
+                                works, nesting provides better structure for different failure messages and makes the
+                                decision hierarchy explicit.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div class="section-card" id="question2">
+            <h3>Question 2: Triangle Validity</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Check if three sides can form a valid triangle. Rule: sum of any two sides must be
+                greater than the third side (must check all three combinations).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>3 4 5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Valid triangle</code><br><br><strong>Sample Input
+                    2:</strong><br><code>1 2 5</code><br><br><strong>Sample Output
+                    2:</strong><br><code>Not a valid triangle</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class TriangleValidity {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter three sides: ");
+        int a = sn.nextInt();
+        int b = sn.nextInt();
+        int c = sn.nextInt();
+        
+        if (a + b > c) {
+            if (b + c > a) {
+                if (a + c > b) {
+                    System.out.println("Valid triangle");
+                } else {
+                    System.out.println("Not a valid triangle");
+                }
+            } else {
+                System.out.println("Not a valid triangle");
+            }
+        } else {
+            System.out.println("Not a valid triangle");
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Three-level nesting checks three conditions:</strong> Each nesting level
+                                represents one triangle inequality. All three must be true for a valid triangle, making
+                                this deep nesting appropriate.</li>
+                            <li><strong>Alternative: use && operator:</strong> Could write if((a+b>c) && (b+c>a) &&
+                                (a+c>b)). Nested version is more verbose but shows step-by-step validation process
+                                clearly.</li>
+                            <li><strong>Geometric rules become code logic:</strong> Mathematical triangle inequality
+                                theorem translates directly to nested if structure. Programming often implements
+                                mathematical or scientific principles this way.</li>
+                            <li><strong>Consider avoiding deep nesting:</strong> Three levels is getting complex. In
+                                production, you'd likely use && for readability. Nesting is best for 2 levels max;
+                                beyond that, other patterns are clearer.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div style="margin-top:40px"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>Nested If - Practice Worksheet</strong></p>
+            <p>Master hierarchical decision-making in Java</p>
+            <p>&copy; 2026 Java Learning Platform</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('.sidebar nav a').forEach(link => { link.addEventListener('click', function () { document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active')); this.classList.add('active') }) });</script>
+</body>
+
+</html>

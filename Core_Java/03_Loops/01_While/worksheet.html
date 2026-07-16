@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>While Loop - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px
+        }
+
+        .explanation ol {
+            line-height: 1.8
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>While Loop Worksheet</h5><a href="index.html"
+            style="color:#dc3545;text-decoration:none;display:block;margin-bottom:10px">← Back to Module</a>
+        <hr style="border-color:#34495e;margin:15px 0">
+        <nav><a href="#question1" class="nav-link active">Question 1</a><a href="#question2" class="nav-link">Question
+                2</a><a href="#question3" class="nav-link">Question 3</a><a href="#question4" class="nav-link">Question
+                4</a><a href="#question5" class="nav-link">Question 5</a></nav>
+    </div>
+    <div class="top-nav">
+        <h2>While Loop - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of While Loops with these practice problems.</p>
+        </div>
+
+        <div class="section-card" id="question1">
+            <h3>Question 1: Print Numbers from Start to End</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that takes two numbers (start and end) and prints all numbers
+                from start to end using a while loop.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input
+                    1:</strong><br><code>Enter start number: 5<br>Enter end number: 10</code><br><br><strong>Sample
+                    Output 1:</strong><br><code>5<br>6<br>7<br>8<br>9<br>10</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class PrintNumbers {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter start number: ");
+        int start = sn.nextInt();
+        System.out.print("Enter end number: ");
+        int end = sn.nextInt();
+        
+        while (start <= end) {
+            System.out.println(start);
+            start++;
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>While loop checks condition before each iteration:</strong> The condition (start
+                                <= end) is evaluated before entering the loop body. If false initially, the loop never
+                                    executes.</li>
+                            <li><strong>Loop variable must be updated:</strong> The start++ increments the counter each
+                                iteration. Without this, you'd have an infinite loop since start would never exceed end.
+                            </li>
+                            <li><strong>Simple counting pattern:</strong> This is the most basic while loop use case -
+                                counting from one number to another. Master this pattern as it forms the foundation for
+                                more complex loops.</li>
+                            <li><strong>Comparison with for loop:</strong> This same task could be done with a for loop,
+                                but while loops are better when the number of iterations isn't known in advance or when
+                                the update logic is more complex.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question2">
+            <h3>Question 2: Sum of Digits</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a program that calculates the sum of all digits in a number using a while
+                loop.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>1234</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Sum of digits: 10</code><br><br><strong>Sample Input
+                    2:</strong><br><code>567</code><br><br><strong>Sample Output
+                    2:</strong><br><code>Sum of digits: 18</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class SumDigits {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num = sn.nextInt();
+        int sum = 0;
+        
+        while (num > 0) {
+            sum += num % 10;  // Add last digit
+            num /= 10;        // Remove last digit
+        }
+        System.out.println("Sum of digits: " + sum);
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Extracting digits with modulo:</strong> num % 10 gets the rightmost digit. For
+                                1234, it gives 4. This is a crucial technique for digit manipulation.</li>
+                            <li><strong>Removing digits with division:</strong> num /= 10 removes the last digit. 1234
+                                becomes 123. Integer division automatically truncates the decimal.</li>
+                            <li><strong>Loop continues until num becomes 0:</strong> Each iteration processes one digit.
+                                When all digits are processed, num becomes 0 and the loop stops.</li>
+                            <li><strong>Pattern for digit processing:</strong> This extract-and-remove pattern (% and /)
+                                is fundamental for many number manipulation problems like reversing digits, counting
+                                digits, or checking palindromes.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question3">
+            <h3>Question 3: Factorial Calculator</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Calculate the factorial of a number using a while loop. Factorial of n (n!) = n ×
+                (n-1) × (n-2) × ... × 1.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Factorial of 5 = 120</code><br><br><strong>Sample Input
+                    2:</strong><br><code>4</code><br><br><strong>Sample Output
+                    2:</strong><br><code>Factorial of 4 = 24</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class Factorial {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sn.nextInt();
+        int factorial = 1;
+        int i = n;
+        
+        while (i > 0) {
+            factorial *= i;
+            i--;
+        }
+        System.out.println("Factorial of " + n + " = " + factorial);
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Initialize result to 1, not 0:</strong> Factorial uses multiplication, so
+                                starting with 0 would make everything 0. Always initialize multiplicative accumulators
+                                to 1.</li>
+                            <li><strong>Countdown approach:</strong> Starting from n and counting down to 1 is natural
+                                for factorial. Could also count up from 1 to n - both work equally well.</li>
+                            <li><strong>Handle edge case of 0:</strong> This code works for 0! which equals 1 (the loop
+                                never runs, factorial stays 1). Understanding edge cases prevents bugs.</li>
+                            <li><strong>Overflow consideration:</strong> Factorials grow extremely fast. 13! exceeds int
+                                range. For large numbers, use long or BigInteger. This demonstrates why understanding
+                                data types matters.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question4">
+            <h3>Question 4: Reverse a Number</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a program to reverse the digits of a number using a while loop.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>1234</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Reversed: 4321</code><br><br><strong>Sample Input
+                    2:</strong><br><code>5060</code><br><br><strong>Sample Output
+                    2:</strong><br><code>Reversed: 605</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class ReverseNumber {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num = sn.nextInt();
+        int reversed = 0;
+        
+        while (num > 0) {
+            reversed = reversed * 10 + num % 10;
+            num /= 10;
+        }
+        System.out.println("Reversed: " + reversed);
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Build reversed number digit by digit:</strong> Each iteration extracts the last
+                                digit of num and appends it to reversed. This gradually builds the number in reverse
+                                order.</li>
+                            <li><strong>The × 10 operation shifts digits left:</strong> Multiplying by 10 makes room for
+                                the new digit. 12 × 10 = 120, then adding 3 gives 123. This is how we construct
+                                multi-digit numbers.</li>
+                            <li><strong>Trailing zeros are lost:</strong> Notice 5060 becomes 605, not 0605. When
+                                building integers, leading zeros don't exist. If you need to preserve them, use strings
+                                instead.</li>
+                            <li><strong>Common algorithm pattern:</strong> This extract-transform-build pattern appears
+                                in many problems: reversing, digit manipulation, number base conversion. Master it for
+                                algorithmic thinking.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question5">
+            <h3>Question 5: Fibonacci Sequence</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print the first N numbers of the Fibonacci sequence using a while loop. Fibonacci:
+                0, 1, 1, 2, 3, 5, 8...</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>7</code><br><br><strong>Sample Output
+                    1:</strong><br><code>0 1 1 2 3 5 8</code><br><br><strong>Sample Input
+                    2:</strong><br><code>5</code><br><br><strong>Sample Output 2:</strong><br><code>0 1 1 2 3</code>
+            </div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class Fibonacci {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        int first = 0, second = 1, count = 0;
+        
+        while (count < n) {
+            System.out.print(first + " ");
+            int next = first + second;
+            first = second;
+            second = next;
+            count++;
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Track two previous numbers:</strong> Fibonacci requires the two preceding
+                                numbers to calculate the next. Variables first and second maintain this sliding window
+                                of values.</li>
+                            <li><strong>Update pattern crucial:</strong> Store next in temp variable, then shift: first
+                                becomes second, second becomes next. Direct assignment like "first = second; second =
+                                first + second" would use new first value incorrectly.</li>
+                            <li><strong>Counter-based termination:</strong> Using count < n is clearer than trying to
+                                    make first or second the loop condition. Sometimes an explicit counter is the
+                                    simplest solution.</li>
+                            <li><strong>Famous sequence in programming:</strong> Fibonacci appears everywhere -
+                                recursion examples, dynamic programming, algorithm complexity analysis. Understanding it
+                                builds foundational CS knowledge.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top:40px"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>While Loop - Practice Worksheet</strong></p>
+            <p>Master iteration with while loops in Java</p>
+            <p>&copy; 2026 Java Learning Platform</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('.sidebar nav a').forEach(link => { link.addEventListener('click', function () { document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active')); this.classList.add('active') }) });</script>
+</body>
+
+</html>

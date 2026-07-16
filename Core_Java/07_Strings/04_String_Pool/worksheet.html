@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Pool - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>String Pool Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>String Pool - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master the String Pool concept and memory optimization in Java.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: String Literal vs new String()</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the difference between string literals and
+                strings created with new keyword. Use == and equals() to compare references and values.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String input = sn.nextLine();
+
+        // String literals - stored in String Pool
+        String s1 = input;
+        String s2 = input;
+
+        // new keyword - creates object in heap
+        String s3 = new String(input);
+        String s4 = new String(input);
+
+        System.out.println("\nString Literals (Pool):");
+        System.out.println("s1: " + s1);
+        System.out.println("s2: " + s2);
+        System.out.println("s1 == s2: " + (s1 == s2));  // Same reference
+        System.out.println("s1.equals(s2): " + s1.equals(s2));  // Same value
+
+        System.out.println("\nnew String() (Heap):");
+        System.out.println("s3: " + s3);
+        System.out.println("s4: " + s4);
+        System.out.println("s3 == s4: " + (s3 == s4));  // Different references
+        System.out.println("s3.equals(s4): " + s3.equals(s4));  // Same value
+
+        System.out.println("\nLiteral vs new:");
+        System.out.println("s1 == s3: " + (s1 == s3));  // Different locations
+        System.out.println("s1.equals(s3): " + s1.equals(s3));  // Same value
+
+        System.out.println("\n✓ Literals share same object in pool");
+        System.out.println("✓ new String() creates separate objects in heap");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: Java
+
+String Literals (Pool):
+s1: Java
+s2: Java
+s1 == s2: true
+s1.equals(s2): true
+
+new String() (Heap):
+s3: Java
+s4: Java
+s3 == s4: false
+s3.equals(s4): true
+
+Literal vs new:
+s1 == s3: false
+s1.equals(s3): true
+
+✓ Literals share same object in pool
+✓ new String() creates separate objects in heap</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>String Pool:</strong> Literals stored in special memory area</li>
+                    <li><strong>Heap Memory:</strong> new String() creates objects outside pool</li>
+                    <li><strong>== Operator:</strong> Compares memory references (addresses)</li>
+                    <li><strong>equals() Method:</strong> Compares actual string content</li>
+                </ul>
+                <strong>Best Practice:</strong> Use string literals for better memory efficiency
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: intern() Method Demonstration</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the intern() method. Show how it moves a
+                heap string to the pool and allows reference comparison to work.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String input = sn.nextLine();
+
+        String s1 = new String(input);  // Heap
+        String s2 = input;  // Pool
+        String s3 = s1.intern();  // Move to pool
+
+        System.out.println("\nBefore intern():");
+        System.out.println("s1 (heap): " + s1);
+        System.out.println("s2 (pool): " + s2);
+        System.out.println("s1 == s2: " + (s1 == s2));  // false
+
+        System.out.println("\nAfter intern():");
+        System.out.println("s3 = s1.intern()");
+        System.out.println("s3 (pool): " + s3);
+        System.out.println("s3 == s2: " + (s3 == s2));  // true
+        System.out.println("s1 == s3: " + (s1 == s3));  // false
+
+        System.out.println("\n✓ intern() returns reference from pool");
+        System.out.println("✓ s3 and s2 point to same pool object");
+        System.out.println("✓ s1 still points to heap object");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: Hello
+
+Before intern():
+s1 (heap): Hello
+s2 (pool): Hello
+s1 == s2: false
+
+After intern():
+s3 = s1.intern()
+s3 (pool): Hello
+s3 == s2: true
+s1 == s3: false
+
+✓ intern() returns reference from pool
+✓ s3 and s2 point to same pool object
+✓ s1 still points to heap object</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>intern() Method:</strong> Returns pool reference if exists, adds if not</li>
+                    <li><strong>Memory Optimization:</strong> Reduces duplicate strings in memory</li>
+                    <li><strong>Reference Equality:</strong> Interned strings can use == for comparison</li>
+                    <li><strong>Original Unchanged:</strong> intern() doesn't modify original object</li>
+                </ul>
+                <strong>Use Case:</strong> Useful when dealing with many duplicate strings
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: String Pool with Concatenation</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that shows how string concatenation affects pool storage.
+                Compare compile-time concatenation (literals) vs runtime concatenation (variables).</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        // Compile-time concatenation - goes to pool
+        String s1 = "Hello" + "World";  // Compiler combines to "HelloWorld"
+        String s2 = "HelloWorld";
+
+        System.out.println("Compile-time concatenation:");
+        System.out.println("s1 = \"Hello\" + \"World\"");
+        System.out.println("s2 = \"HelloWorld\"");
+        System.out.println("s1 == s2: " + (s1 == s2));  // true
+
+        // Runtime concatenation - creates new object
+        System.out.print("\nEnter first part: ");
+        String part1 = sn.next();
+        System.out.print("Enter second part: ");
+        String part2 = sn.next();
+
+        String s3 = part1 + part2;  // Runtime concatenation
+        String s4 = "HelloWorld";
+
+        System.out.println("\nRuntime concatenation:");
+        System.out.println("s3 = part1 + part2 = " + s3);
+        System.out.println("s4 = \"HelloWorld\"");
+        System.out.println("s3 == s4: " + (s3 == s4));  // false
+        System.out.println("s3.equals(s4): " + s3.equals(s4));  // true if same value
+
+        // Using intern() to add to pool
+        String s5 = s3.intern();
+        System.out.println("\nAfter intern():");
+        System.out.println("s5 = s3.intern()");
+        System.out.println("s5 == s4: " + (s5 == s4));  // true if same value
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Compile-time concatenation:
+s1 = "Hello" + "World"
+s2 = "HelloWorld"
+s1 == s2: true
+
+Enter first part: Hello
+Enter second part: World
+
+Runtime concatenation:
+s3 = part1 + part2 = HelloWorld
+s4 = "HelloWorld"
+s3 == s4: false
+s3.equals(s4): true
+
+After intern():
+s5 = s3.intern()
+s5 == s4: true</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Compile-Time:</strong> Literal concatenation optimized by compiler</li>
+                    <li><strong>Runtime:</strong> Variable concatenation creates new object</li>
+                    <li><strong>Compiler Optimization:</strong> "Hello" + "World" becomes "HelloWorld" at compile time
+                    </li>
+                    <li><strong>Pool Addition:</strong> intern() can add runtime strings to pool</li>
+                </ul>
+                <strong>Rule:</strong> Only literal concatenation goes directly to pool
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Multiple References to Pool</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that creates multiple string variables with the same literal
+                value. Demonstrate that they all share the same object in the pool, saving memory.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _04_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String value = sn.nextLine();
+
+        // Create multiple variables with same literal
+        String s1 = value;
+        String s2 = value;
+        String s3 = value;
+        String s4 = value;
+        String s5 = value;
+
+        System.out.println("\nAll variables:");
+        System.out.println("s1: " + s1);
+        System.out.println("s2: " + s2);
+        System.out.println("s3: " + s3);
+        System.out.println("s4: " + s4);
+        System.out.println("s5: " + s5);
+
+        System.out.println("\nReference comparisons:");
+        System.out.println("s1 == s2: " + (s1 == s2));
+        System.out.println("s2 == s3: " + (s2 == s3));
+        System.out.println("s3 == s4: " + (s3 == s4));
+        System.out.println("s4 == s5: " + (s4 == s5));
+        System.out.println("s1 == s5: " + (s1 == s5));
+
+        System.out.println("\n✓ All 5 variables point to SAME object in pool");
+        System.out.println("✓ Memory saved: 4 duplicate objects avoided");
+        System.out.println("✓ Only 1 String object created for \"" + value + "\"");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: Java
+
+All variables:
+s1: Java
+s2: Java
+s3: Java
+s4: Java
+s5: Java
+
+Reference comparisons:
+s1 == s2: true
+s2 == s3: true
+s3 == s4: true
+s4 == s5: true
+s1 == s5: true
+
+✓ All 5 variables point to SAME object in pool
+✓ Memory saved: 4 duplicate objects avoided
+✓ Only 1 String object created for "Java"</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Memory Efficiency:</strong> Pool prevents duplicate string objects</li>
+                    <li><strong>Reference Sharing:</strong> Multiple variables can reference same object</li>
+                    <li><strong>Automatic Optimization:</strong> JVM handles pool management</li>
+                    <li><strong>Space Savings:</strong> Significant for applications with many strings</li>
+                </ul>
+                <strong>Benefit:</strong> Reduces memory footprint in string-heavy applications
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Pool vs Heap Memory Comparison</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that creates the same string value using both pool (literal)
+                and heap (new) methods. Count and compare the number of objects created in each approach.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _05_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String value = sn.nextLine();
+
+        System.out.print("How many times to create? ");
+        int count = sn.nextInt();
+
+        // Method 1: Using literals (Pool)
+        System.out.println("\n=== Method 1: String Literals (Pool) ===");
+        String[] poolStrings = new String[count];
+        for (int i = 0; i < count; i++) {
+            poolStrings[i] = value;
+        }
+
+        System.out.println("Created " + count + " variables");
+        System.out.println("Checking references:");
+        boolean allSame = true;
+        for (int i = 1; i < count; i++) {
+            if (poolStrings[0] != poolStrings[i]) {
+                allSame = false;
+                break;
+            }
+        }
+        System.out.println("All point to same object: " + allSame);
+        System.out.println("Objects created: 1");
+
+        // Method 2: Using new (Heap)
+        System.out.println("\n=== Method 2: new String() (Heap) ===");
+        String[] heapStrings = new String[count];
+        for (int i = 0; i < count; i++) {
+            heapStrings[i] = new String(value);
+        }
+
+        System.out.println("Created " + count + " variables");
+        System.out.println("Checking references:");
+        int uniqueObjects = 0;
+        for (int i = 0; i < count; i++) {
+            boolean unique = true;
+            for (int j = 0; j < i; j++) {
+                if (heapStrings[i] == heapStrings[j]) {
+                    unique = false;
+                    break;
+                }
+            }
+            if (unique) uniqueObjects++;
+        }
+        System.out.println("All point to same object: false");
+        System.out.println("Objects created: " + uniqueObjects);
+
+        System.out.println("\n=== Comparison ===");
+        System.out.println("Pool approach: 1 object for " + count + " variables");
+        System.out.println("Heap approach: " + count + " objects for " + count + " variables");
+        System.out.println("Memory saved: " + (count - 1) + " objects");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: Test
+How many times to create? 5
+
+=== Method 1: String Literals (Pool) ===
+Created 5 variables
+Checking references:
+All point to same object: true
+Objects created: 1
+
+=== Method 2: new String() (Heap) ===
+Created 5 variables
+Checking references:
+All point to same object: false
+Objects created: 5
+
+=== Comparison ===
+Pool approach: 1 object for 5 variables
+Heap approach: 5 objects for 5 variables
+Memory saved: 4 objects</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Pool Efficiency:</strong> One object serves multiple references</li>
+                    <li><strong>Heap Overhead:</strong> Each new creates separate object</li>
+                    <li><strong>Scalability:</strong> Pool benefits increase with more duplicates</li>
+                    <li><strong>Performance:</strong> Pool reduces garbage collection pressure</li>
+                </ul>
+                <strong>Recommendation:</strong> Always prefer string literals unless heap object specifically needed
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>String Pool Module - Practice Worksheet</strong></p>
+            <p>Master String Pool memory optimization and efficient string management</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

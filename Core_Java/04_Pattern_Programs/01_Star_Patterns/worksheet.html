@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Patterns - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px
+        }
+
+        .explanation ol {
+            line-height: 1.8
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Star Patterns Worksheet</h5><a href="index.html"
+            style="color:#dc3545;text-decoration:none;display:block;margin-bottom:10px">← Back to Module</a>
+        <hr style="border-color:#34495e;margin:15px 0">
+        <nav><a href="#question1" class="nav-link active">Question 1</a><a href="#question2" class="nav-link">Question
+                2</a><a href="#question3" class="nav-link">Question 3</a><a href="#question4" class="nav-link">Question
+                4</a><a href="#question5" class="nav-link">Question 5</a></nav>
+    </div>
+    <div class="top-nav">
+        <h2>Star Patterns - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Star Patterns with these practice problems.</p>
+        </div>
+
+        <div class="section-card" id="question1">
+            <h3>Question 1: Right Triangle Star Pattern</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a program to print a right-angled triangle pattern using stars.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>*<br>**<br>***<br>****<br>*****</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class RightTriangle {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Nested loops are fundamental to patterns:</strong> Outer loop (i) controls rows,
+                                inner loop (j) controls columns. This row-column relationship is the foundation of all
+                                2D pattern programming.</li>
+                            <li><strong>Inner loop depends on outer:</strong> Inner loop runs from 1 to i, meaning row 1
+                                has 1 star, row 2 has 2 stars, etc. This dependency creates the triangle shape.</li>
+                            <li><strong>println() after inner loop:</strong> After printing all stars for a row,
+                                println() moves cursor to next line. Understanding when to use print() vs println() is
+                                crucial for pattern control.</li>
+                            <li><strong>Practice makes perfect:</strong> This simple pattern teaches the template for
+                                all pattern problems. Master this, and you can adapt it to create any 2D shape by
+                                changing loop boundaries and print logic.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question2">
+            <h3>Question 2: Square Star Pattern</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print a square pattern of stars with all sides equal.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>4</code><br><br><strong>Sample Output
+                    1:</strong><br><code>****<br>****<br>****<br>****</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class SquarePattern {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Independent loops create squares:</strong> Both loops run from 1 to n
+                                independently. This creates n rows with n stars each - a perfect square. Understanding
+                                when loops should depend on each other vs be independent is key.</li>
+                            <li><strong>Simplest nested loop pattern:</strong> This is the baseline pattern. All other
+                                patterns build on this by adding conditions or changing loop boundaries. Always start
+                                simple before adding complexity.</li>
+                            <li><strong>Constant iterations per row:</strong> Every row has exactly n stars because
+                                inner loop always runs n times regardless of outer loop value. Compare this to the
+                                triangle where inner loop depends on i.</li>
+                            <li><strong>Building block for hollow patterns:</strong> To make this hollow, you'd add if
+                                conditions checking positions. The square structure remains, but logic inside determines
+                                what to print.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question3">
+            <h3>Question 3: Inverted Right Triangle</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print an inverted right triangle starting with N stars and decreasing.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>*****<br>****<br>***<br>**<br>*</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class InvertedTriangle {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = n; i >= 1; i--) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Countdown in outer loop:</strong> Starting from n and decrementing (i--)
+                                reverses the pattern. First row has n stars, second has n-1, etc. Direction of counting
+                                matters for pattern orientation.</li>
+                            <li><strong>Inner loop still depends on i:</strong> Even though i counts down, inner loop
+                                still runs 1 to i, so it naturally decreases. The dependency creates the inverse
+                                triangle automatically.</li>
+                            <li><strong>Alternative approach exists:</strong> Could count i up (1 to n) and inner loop
+                                as (1 to n-i+1). Both work! Multiple solutions exist - choose what makes most logical
+                                sense.</li>
+                            <li><strong>Pattern reversal technique:</strong> Reversing outer loop direction is a common
+                                technique to flip patterns. Apply this concept to any upward pattern to make it
+                                inverted.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question4">
+            <h3>Question 4: Hollow Square Pattern</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print a hollow square with stars on borders only, spaces inside.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>*****<br>*   *<br>*   *<br>*   *<br>*****</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class HollowSquare {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (i == 1 || i == n || j == 1 || j == n) {
+                    System.out.print("*");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Condition-based printing:</strong> Same loop structure as filled square, but if
+                                condition controls what prints. Print star if on border (first/last row OR first/last
+                                column), else print space.</li>
+                            <li><strong>Understanding OR logic:</strong> i==1 || i==n checks top/bottom rows. j==1 ||
+                                j==n checks left/right columns. Combining these with OR catches all border positions.
+                            </li>
+                            <li><strong>Hollow pattern template:</strong> This conditional approach works for hollowing
+                                any shape. Identify border conditions, print symbol there, space elsewhere. Applies to
+                                triangles, pyramids, diamonds.</li>
+                            <li><strong>Mind the else clause:</strong> Printing space in else is crucial. Without it,
+                                inner positions print nothing (collapsed), breaking alignment. Spaces maintain structure
+                                even when invisible.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question5">
+            <h3>Question 5: Reverse Right Triangle</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print a right triangle aligned to the right (spaces on left, stars on right).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>    *<br>   **<br>  ***<br> ****<br>*****</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class ReverseTriangle {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= i; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Two inner loops for two sections:</strong> First inner loop prints spaces (n-i
+                                spaces), second prints stars (i stars). Total per row is always n characters,
+                                maintaining alignment.</li>
+                            <li><strong>Spaces first, stars second:</strong> Order matters! Spaces must print before
+                                stars to push stars to the right. Reversing this would create a left-aligned triangle.
+                            </li>
+                            <li><strong>Complementary relationship:</strong> As i increases, spaces decrease (n-i) and
+                                stars increase (i). They always sum to n, keeping width constant. This balance is key to
+                                aligned patterns.</li>
+                            <li><strong>Foundation for pyramids:</strong> This space+symbol pattern is core to centered
+                                pyramids. Pyramid is just this pattern but with stars on both sides of center. Master
+                                this to understand pyramid logic.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top:40px"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>Star Patterns - Practice Worksheet</strong></p>
+            <p>Master nested loops with star patterns in Java</p>
+            <p>&copy; 2026 Java Learning Platform</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('.sidebar nav a').forEach(link => { link.addEventListener('click', function () { document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active')); this.classList.add('active') }) });</script>
+</body>
+
+</html>

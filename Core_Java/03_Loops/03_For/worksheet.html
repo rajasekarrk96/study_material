@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Loop - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px
+        }
+
+        .explanation ol {
+            line-height: 1.8
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>For Loop Worksheet</h5><a href="index.html"
+            style="color:#dc3545;text-decoration:none;display:block;margin-bottom:10px">← Back to Module</a>
+        <hr style="border-color:#34495e;margin:15px 0">
+        <nav><a href="#question1" class="nav-link active">Question 1</a><a href="#question2" class="nav-link">Question
+                2</a><a href="#question3" class="nav-link">Question 3</a><a href="#question4" class="nav-link">Question
+                4</a><a href="#question5" class="nav-link">Question 5</a></nav>
+    </div>
+    <div class="top-nav">
+        <h2>For Loop - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of For Loops with these practice problems.</p>
+        </div>
+
+        <div class="section-card" id="question1">
+            <h3>Question 1: Multiplication Table</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print multiplication table of a given number from 1 to 10 using for loop.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>5 x 1 = 5<br>5 x 2 = 10<br>5 x 3 = 15<br>...<br>5 x 10 = 50</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class MultiplicationTable {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter number: ");
+        int num = sn.nextInt();
+        
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(num + " x " + i + " = " + (num * i));
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>For loop excels at known iterations:</strong> We know exactly how many times to
+                                loop (10 times for table 1-10). For loops are perfect when iteration count is
+                                predetermined.</li>
+                            <li><strong>Three-part structure clarity:</strong> Initialization (int i=1), condition (i
+                                <=10), increment (i++) are all visible in one line. This makes the loop's behavior
+                                    immediately obvious.</li>
+                            <li><strong>Loop variable scope:</strong> Variable i exists only within the for loop. After
+                                loop ends, i is gone. This prevents variable pollution in your code.</li>
+                            <li><strong>Classic counting pattern:</strong> Starting at 1 and counting to N is the most
+                                common for loop pattern. Master this and you can handle array iterations, mathematical
+                                series, and more.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question2">
+            <h3>Question 2: Pattern Printing (Stars)</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print a right triangle pattern of stars. For N=5, print 1 star, then 2, then 3, up
+                to 5.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>4</code><br><br><strong>Sample Output
+                    1:</strong><br><code>*<br>**<br>***<br>****</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class StarPattern {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Nested loops for 2D patterns:</strong> Outer loop controls rows (i from 1 to n),
+                                inner loop controls columns/stars per row (j from 1 to i). This row-column thinking is
+                                fundamental.</li>
+                            <li><strong>Inner loop depends on outer:</strong> Key insight - j goes from 1 to i (not n).
+                                First row has 1 star (i=1, j=1), second row has 2 stars (i=2, j=1,2). The dependency
+                                creates the triangle.</li>
+                            <li><strong>print vs println distinction:</strong> Inner loop uses print() to put stars on
+                                same line. After inner loop completes, println() moves to next line. Understanding
+                                output control is crucial.</li>
+                            <li><strong>Pattern printing develops logic:</strong> These problems build algorithmic
+                                thinking. Same nested structure applies to number patterns, pyramids, diamonds. Master
+                                the template, not just this specific pattern.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question3">
+            <h3>Question 3: Check Prime Number</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Check if a number is prime. A prime number is only divisible by 1 and itself.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>7</code><br><br><strong>Sample Output
+                    1:</strong><br><code>7 is Prime</code><br><br><strong>Sample Input
+                    2:</strong><br><code>12</code><br><br><strong>Sample Output
+                    2:</strong><br><code>12 is Not Prime</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class PrimeCheck {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter number: ");
+        int num = sn.nextInt();
+        boolean isPrime = true;
+        
+        if (num <= 1) {
+            isPrime = false;
+        } else {
+            for (int i = 2; i <= num/2; i++) {
+                if (num % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+        
+        System.out.println(num + (isPrime ? " is Prime" : " is Not Prime"));
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Flag variable pattern:</strong> isPrime starts true (assume prime), then we look
+                                for evidence it's not. If we find a divisor, set flag false and break. This
+                                innocent-until-proven-guilty approach is common.</li>
+                            <li><strong>Optimization - check to N/2:</strong> No need to check beyond num/2 because
+                                larger numbers can't divide evenly into num. For 12, checking 2,3,4,5,6 is enough. This
+                                halves work.</li>
+                            <li><strong>Early exit with break:</strong> Once we find one divisor, we know it's not
+                                prime. break immediately exits the loop, saving unnecessary iterations. Efficiency
+                                matters in algorithms.</li>
+                            <li><strong>Edge case handling:</strong> Numbers ≤ 1 aren't prime by definition. Always
+                                handle edge cases before main logic. 2 is the smallest prime and is correctly handled
+                                (loop never runs, stays true).</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question4">
+            <h3>Question 4: Sum of Even Numbers in Range</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Find sum of all even numbers between 1 and N using for loop.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>10</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Sum of even numbers: 30</code><br>(2+4+6+8+10=30)</div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class SumEven {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        int sum = 0;
+        
+        for (int i = 2; i <= n; i += 2) {
+            sum += i;
+        }
+        
+        System.out.println("Sum of even numbers: " + sum);
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Smart loop increment saves checks:</strong> Starting at 2 and incrementing by 2
+                                (i += 2) only visits even numbers. More efficient than checking if (i % 2 == 0) every
+                                iteration.</li>
+                            <li><strong>Increment can be any value:</strong> Usually we use i++, but i += 2 (or i += 5,
+                                i *= 2, etc.) is valid. For loops are flexible - increment doesn't have to be +1.</li>
+                            <li><strong>Accumulator initialized outside loop:</strong> sum starts at 0 before loop. If
+                                initialized inside, it would reset to 0 each iteration, losing accumulated value. Scope
+                                placement matters.</li>
+                            <li><strong>Alternative approach exists:</strong> Could loop 1 to n with if (i%2==0) sum+=i.
+                                Both work, but i+=2 is cleaner and faster. Multiple solutions exist - choose the most
+                                elegant.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question5">
+            <h3>Question 5: Factorial with For Loop</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Calculate factorial of N using for loop. N! = N × (N-1) × ... × 2 × 1.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>6</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Factorial of 6 = 720</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class Factorial {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sn.nextInt();
+        long factorial = 1;
+        
+        for (int i = 1; i <= n; i++) {
+            factorial *= i;
+        }
+        
+        System.out.println("Factorial of " + n + " = " + factorial);
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>For loop simplicity for factorials:</strong> All three parts (init, condition,
+                                increment) are straightforward. For loops make factorial cleaner than while loops -
+                                everything's in one line.</li>
+                            <li><strong>Use long for factorial results:</strong> Factorials grow explosively. 13!
+                                exceeds int's limit (2 billion). Using long extends range to 20!. For bigger, need
+                                BigInteger.</li>
+                            <li><strong>Multiplication accumulator pattern:</strong> Like sum uses +=, factorial uses
+                                *=. Initialize to 1 (not 0!), then multiply by each number. This accumulate-by-operation
+                                pattern is universal.</li>
+                            <li><strong>Could countdown instead:</strong> for (int i = n; i > 0; i--) works too. Count
+                                up or down - mathematically equivalent. Choose based on what feels more natural for the
+                                problem.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top:40px"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>For Loop - Practice Worksheet</strong></p>
+            <p>Master counted iteration in Java</p>
+            <p>&copy; 2026 Java Learning Platform</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('.sidebar nav a').forEach(link => { link.addEventListener('click', function () { document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active')); this.classList.add('active') }) });</script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methods WOPWR - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Methods (WOPWR)</h5>
+        <a href="../../index.html#methods">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#concept">Concept</a>
+        <a href="#syntax">Syntax</a>
+        <a href="#examples">Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Methods Without Parameters With Return (WOPWR)</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Methods Without Parameters With Return</h1>
+            <p class="lead text-muted">Methods that don't accept input but return a value.</p>
+        </div>
+
+        <div class="section" id="concept">
+            <h4>What is WOPWR?</h4>
+            <p><strong>WOPWR = Without Parameters With Return</strong></p>
+            <p>These methods don't accept any parameters but return a value to the caller. They often work with class
+                variables or generate values.</p>
+            <ul>
+                <li>No input parameters needed</li>
+                <li>Return a value using return statement</li>
+                <li>Useful for getters, calculations, or value generation</li>
+            </ul>
+        </div>
+
+        <div class="section" id="syntax">
+            <h4>Syntax</h4>
+            <pre><code>public returnType methodName() {
+    // Method body
+    return value;
+}</code></pre>
+        </div>
+
+        <div class="section" id="examples">
+            <h4>Example 1: Getter Methods</h4>
+            <pre><code>public class Student {
+    private String name = "Alice";
+    private int age = 20;
+    
+    public String getName() {
+        return name;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    public static void main(String[] args) {
+        Student s = new Student();
+        System.out.println("Name: " + s.getName());
+        System.out.println("Age: " + s.getAge());
+    }
+}</code></pre>
+            <div class="output">
+                Name: Alice<br>
+                Age: 20
+            </div>
+
+            <h4>Example 2: Random Number Generator</h4>
+            <pre><code>public class RandomGen {
+    public int getRandomNumber() {
+        return (int)(Math.random() * 100);
+    }
+    
+    public static void main(String[] args) {
+        RandomGen gen = new RandomGen();
+        System.out.println("Random: " + gen.getRandomNumber());
+    }
+}</code></pre>
+
+            <h4>Example 3: Current Time</h4>
+            <pre><code>public class TimeUtil {
+    public String getCurrentTime() {
+        return java.time.LocalTime.now().toString();
+    }
+    
+    public static void main(String[] args) {
+        TimeUtil util = new TimeUtil();
+        System.out.println("Time: " + util.getCurrentTime());
+    }
+}</code></pre>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn-worksheet">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Methods WOPWR Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrapper Classes - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Wrapper Classes Worksheet</h5>
+        <a href="01_Introduction/index.html"
+            style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Wrapper Classes - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master wrapper class methods for type conversion, validation, and comparison.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Check Two Floating-Point Numbers Same Up to Three Decimal Places</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that reads two floating-point numbers and tests whether they
+                are the same up to three decimal places.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter first floating number: ");
+        double a = sn.nextDouble();
+
+        System.out.print("Enter second floating number: ");
+        double b = sn.nextDouble();
+
+        int x = (int)(a * 1000);
+        int y = (int)(b * 1000);
+
+        if (x == y)
+            System.out.println("Same up to three decimal places");
+        else
+            System.out.println("Not same up to three decimal places");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter first floating number: 3.14159
+Enter second floating number: 3.14156
+Same up to three decimal places</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Precision Comparison:</strong> Multiply by 1000 to shift 3 decimal places</li>
+                    <li><strong>Type Casting:</strong> Convert to int to truncate decimal places</li>
+                    <li><strong>Wrapper Class:</strong> Uses Double wrapper for floating-point operations</li>
+                    <li><strong>Equality Check:</strong> Compare integer representations for precision</li>
+                </ul>
+                <strong>Logic:</strong> 3.14159 × 1000 = 3141.59 → (int) 3141, 3.14156 × 1000 = 3141.56 → (int) 3141
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Check Whether a String is a Valid Number Using Wrapper Class</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that validates whether the string is a valid number using
+                wrapper class.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String s = sn.next();
+
+        try {
+            Double d = Double.parseDouble(s);
+            System.out.println("Valid Number");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid Number");
+        }
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: 123.45
+Valid Number
+
+Enter a string: abc
+Invalid Number</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>parseDouble():</strong> Wrapper class method to convert String to Double</li>
+                    <li><strong>Exception Handling:</strong> try-catch block handles invalid input</li>
+                    <li><strong>NumberFormatException:</strong> Thrown when string cannot be parsed as number</li>
+                    <li><strong>Validation:</strong> Safe way to check if string represents valid number</li>
+                </ul>
+                <strong>Wrapper Methods:</strong> Integer.parseInt(), Double.parseDouble(), Boolean.parseBoolean()
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Compare Two Numbers Using compareTo() Method</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program by using compareTo() method in wrapper class for comparing two
+                numbers.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        Integer a = sn.nextInt();
+
+        System.out.print("Enter second number: ");
+        Integer b = sn.nextInt();
+
+        int result = a.compareTo(b);
+
+        if (result == 0)
+            System.out.println("Both numbers are equal");
+        else if (result > 0)
+            System.out.println("First number is greater");
+        else
+            System.out.println("Second number is greater");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter first number: 25
+Enter second number: 15
+First number is greater
+
+Enter first number: 10
+Enter second number: 10
+Both numbers are equal</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>compareTo():</strong> Wrapper class method for object comparison</li>
+                    <li><strong>Return Values:</strong> 0 (equal), positive (greater), negative (less)</li>
+                    <li><strong>Integer Wrapper:</strong> Converts primitive int to Integer object</li>
+                    <li><strong>Object Comparison:</strong> Enables sorting and ordering operations</li>
+                </ul>
+                <strong>compareTo() Returns:</strong> a.compareTo(b) → 0 if a==b, >0 if a>b, <0 if a<b </div>
+            </div>
+
+            <div style="margin-top: 40px;"><a href="01_Introduction/index.html" class="btn-worksheet">← Back to
+                    Module</a></div>
+            <footer>
+                <p><strong>Wrapper Classes Module - Practice Worksheet</strong></p>
+                <p>Master type conversion, validation, and comparison with wrapper classes</p>
+                <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+            </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

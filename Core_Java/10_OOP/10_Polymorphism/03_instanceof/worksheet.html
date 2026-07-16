@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>instanceof Operator - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>instanceof Operator Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>instanceof Operator - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master type checking, inheritance validation, and safe downcasting with instanceof.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Basic Type Checking with instanceof</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that creates objects of different types (String, Integer,
+                Double, Boolean) and uses the instanceof operator to check their types. Print whether each object is an
+                instance of its respective class.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String str = sn.next();
+
+        System.out.print("Enter an integer: ");
+        Integer num = sn.nextInt();
+
+        System.out.print("Enter a decimal number: ");
+        Double decimal = sn.nextDouble();
+
+        System.out.print("Enter a boolean (true/false): ");
+        Boolean bool = sn.nextBoolean();
+
+        System.out.println("\nType Checking Results:");
+        System.out.println("str instanceof String: " + (str instanceof String));
+        System.out.println("num instanceof Integer: " + (num instanceof Integer));
+        System.out.println("decimal instanceof Double: " + (decimal instanceof Double));
+        System.out.println("bool instanceof Boolean: " + (bool instanceof Boolean));
+
+        // Cross-type checking
+        System.out.println("\nCross-Type Checking:");
+        System.out.println("str instanceof Integer: " + (str instanceof Integer));
+        System.out.println("num instanceof String: " + (num instanceof String));
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: Hello
+Enter an integer: 42
+Enter a decimal number: 3.14
+Enter a boolean (true/false): true
+
+Type Checking Results:
+str instanceof String: true
+num instanceof Integer: true
+decimal instanceof Double: true
+bool instanceof Boolean: true
+
+Cross-Type Checking:
+str instanceof Integer: false
+num instanceof String: false</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>instanceof Operator:</strong> Returns true if object is instance of specified type</li>
+                    <li><strong>Type Safety:</strong> Prevents ClassCastException by checking types before casting</li>
+                    <li><strong>Wrapper Classes:</strong> Works with wrapper objects like Integer, Double, Boolean</li>
+                    <li><strong>False for Incompatible Types:</strong> Returns false when checking unrelated types</li>
+                </ul>
+                <strong>Syntax:</strong> object instanceof ClassName → returns boolean (true/false)
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: instanceof with Inheritance Hierarchy</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a class hierarchy: Animal (parent) → Dog (child) → Puppy (grandchild).
+                Create objects of each type and use instanceof to check if objects are instances of their own class,
+                parent class, and grandparent class. Demonstrate that a child object is an instance of all its parent
+                classes.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class Animal {
+    String name;
+
+    Animal(String name) {
+        this.name = name;
+    }
+}
+
+class Dog extends Animal {
+    String breed;
+
+    Dog(String name, String breed) {
+        super(name);
+        this.breed = breed;
+    }
+}
+
+class Puppy extends Dog {
+    int age;
+
+    Puppy(String name, String breed, int age) {
+        super(name, breed);
+        this.age = age;
+    }
+}
+
+class _02_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter puppy name: ");
+        String name = sn.next();
+
+        System.out.print("Enter breed: ");
+        String breed = sn.next();
+
+        System.out.print("Enter age (months): ");
+        int age = sn.nextInt();
+
+        Puppy puppy = new Puppy(name, breed, age);
+        Dog dog = new Dog("Max", "Labrador");
+        Animal animal = new Animal("Generic");
+
+        System.out.println("\nPuppy instanceof checks:");
+        System.out.println("puppy instanceof Puppy: " + (puppy instanceof Puppy));
+        System.out.println("puppy instanceof Dog: " + (puppy instanceof Dog));
+        System.out.println("puppy instanceof Animal: " + (puppy instanceof Animal));
+
+        System.out.println("\nDog instanceof checks:");
+        System.out.println("dog instanceof Dog: " + (dog instanceof Dog));
+        System.out.println("dog instanceof Animal: " + (dog instanceof Animal));
+        System.out.println("dog instanceof Puppy: " + (dog instanceof Puppy));
+
+        System.out.println("\nAnimal instanceof checks:");
+        System.out.println("animal instanceof Animal: " + (animal instanceof Animal));
+        System.out.println("animal instanceof Dog: " + (animal instanceof Dog));
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter puppy name: Buddy
+Enter breed: Beagle
+Enter age (months): 3
+
+Puppy instanceof checks:
+puppy instanceof Puppy: true
+puppy instanceof Dog: true
+puppy instanceof Animal: true
+
+Dog instanceof checks:
+dog instanceof Dog: true
+dog instanceof Animal: true
+dog instanceof Puppy: false
+
+Animal instanceof checks:
+animal instanceof Animal: true
+animal instanceof Dog: false</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Inheritance Chain:</strong> Child object is instance of all parent classes</li>
+                    <li><strong>Upward Compatibility:</strong> Puppy is Dog, Dog is Animal (transitive)</li>
+                    <li><strong>Downward Incompatibility:</strong> Animal is NOT Dog, Dog is NOT Puppy</li>
+                    <li><strong>IS-A Relationship:</strong> instanceof validates the IS-A relationship</li>
+                </ul>
+                <strong>Rule:</strong> Child instanceof Parent = true, but Parent instanceof Child = false
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: instanceof with Interfaces</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create an interface Drawable with a draw() method. Create two classes Circle and
+                Rectangle that implement Drawable. Use instanceof to check if objects implement the Drawable interface
+                and to distinguish between Circle and Rectangle objects.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+interface Drawable {
+    void draw();
+}
+
+class Circle implements Drawable {
+    int radius;
+
+    Circle(int radius) {
+        this.radius = radius;
+    }
+
+    public void draw() {
+        System.out.println("Drawing Circle with radius: " + radius);
+    }
+}
+
+class Rectangle implements Drawable {
+    int length, width;
+
+    Rectangle(int length, int width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    public void draw() {
+        System.out.println("Drawing Rectangle: " + length + "x" + width);
+    }
+}
+
+class _03_ {
+    public static void checkAndDraw(Drawable shape) {
+        System.out.println("\nChecking object type:");
+        System.out.println("shape instanceof Drawable: " + (shape instanceof Drawable));
+        System.out.println("shape instanceof Circle: " + (shape instanceof Circle));
+        System.out.println("shape instanceof Rectangle: " + (shape instanceof Rectangle));
+
+        if (shape instanceof Circle) {
+            Circle c = (Circle) shape;
+            System.out.println("It's a Circle with radius: " + c.radius);
+        } else if (shape instanceof Rectangle) {
+            Rectangle r = (Rectangle) shape;
+            System.out.println("It's a Rectangle: " + r.length + "x" + r.width);
+        }
+
+        shape.draw();
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter circle radius: ");
+        int radius = sn.nextInt();
+        Circle circle = new Circle(radius);
+
+        System.out.print("Enter rectangle length: ");
+        int length = sn.nextInt();
+        System.out.print("Enter rectangle width: ");
+        int width = sn.nextInt();
+        Rectangle rect = new Rectangle(length, width);
+
+        checkAndDraw(circle);
+        checkAndDraw(rect);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter circle radius: 5
+Enter rectangle length: 10
+Enter rectangle width: 6
+
+Checking object type:
+shape instanceof Drawable: true
+shape instanceof Circle: true
+shape instanceof Rectangle: false
+It's a Circle with radius: 5
+Drawing Circle with radius: 5
+
+Checking object type:
+shape instanceof Drawable: true
+shape instanceof Circle: false
+shape instanceof Rectangle: true
+It's a Rectangle: 10x6
+Drawing Rectangle: 10x6</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Interface Checking:</strong> instanceof works with interfaces too</li>
+                    <li><strong>Implementation Validation:</strong> Check if object implements specific interface</li>
+                    <li><strong>Type Distinction:</strong> Distinguish between different implementations</li>
+                    <li><strong>Safe Downcasting:</strong> Cast to specific type after instanceof check</li>
+                </ul>
+                <strong>Pattern:</strong> Check interface first, then specific implementation class
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Safe Downcasting with instanceof</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a parent class Employee with a method work(). Create two child classes
+                Manager (with method manageTeam()) and Developer (with method writeCode()). Create an array of Employee
+                objects containing both Managers and Developers. Use instanceof to safely downcast and call
+                type-specific methods.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class Employee {
+    String name;
+    double salary;
+
+    Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    void work() {
+        System.out.println(name + " is working");
+    }
+}
+
+class Manager extends Employee {
+    int teamSize;
+
+    Manager(String name, double salary, int teamSize) {
+        super(name, salary);
+        this.teamSize = teamSize;
+    }
+
+    void manageTeam() {
+        System.out.println(name + " manages a team of " + teamSize + " people");
+    }
+}
+
+class Developer extends Employee {
+    String language;
+
+    Developer(String name, double salary, String language) {
+        super(name, salary);
+        this.language = language;
+    }
+
+    void writeCode() {
+        System.out.println(name + " writes code in " + language);
+    }
+}
+
+class _04_ {
+    public static void processEmployee(Employee emp) {
+        emp.work();
+
+        // Safe downcasting using instanceof
+        if (emp instanceof Manager) {
+            Manager mgr = (Manager) emp;
+            mgr.manageTeam();
+            System.out.println("Salary: $" + mgr.salary);
+        } else if (emp instanceof Developer) {
+            Developer dev = (Developer) emp;
+            dev.writeCode();
+            System.out.println("Salary: $" + dev.salary);
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter manager name: ");
+        String mgrName = sn.next();
+        System.out.print("Enter manager salary: ");
+        double mgrSalary = sn.nextDouble();
+        System.out.print("Enter team size: ");
+        int teamSize = sn.nextInt();
+
+        System.out.print("Enter developer name: ");
+        String devName = sn.next();
+        System.out.print("Enter developer salary: ");
+        double devSalary = sn.nextDouble();
+        System.out.print("Enter programming language: ");
+        String language = sn.next();
+
+        Employee[] employees = {
+            new Manager(mgrName, mgrSalary, teamSize),
+            new Developer(devName, devSalary, language)
+        };
+
+        System.out.println("\nProcessing Employees:");
+        for (Employee emp : employees) {
+            processEmployee(emp);
+        }
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter manager name: Alice
+Enter manager salary: 80000
+Enter team size: 5
+Enter developer name: Bob
+Enter developer salary: 70000
+Enter programming language: Java
+
+Processing Employees:
+Alice is working
+Alice manages a team of 5 people
+Salary: $80000.0
+
+Bob is working
+Bob writes code in Java
+Salary: $70000.0</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Safe Downcasting:</strong> Always check with instanceof before casting</li>
+                    <li><strong>Prevents ClassCastException:</strong> Avoids runtime errors from invalid casts</li>
+                    <li><strong>Type-Specific Behavior:</strong> Access child class methods safely</li>
+                    <li><strong>Polymorphic Arrays:</strong> Store different types in parent class array</li>
+                </ul>
+                <strong>Best Practice:</strong> if (obj instanceof ChildClass) { ChildClass c = (ChildClass) obj; }
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: instanceof with null and Polymorphism</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Shape class with an area() method. Create Circle and Square subclasses
+                that override area(). Write a method that accepts a Shape object and uses instanceof to: 1) Check if
+                the object is null, 2) Identify the specific shape type, 3) Calculate and display the area with
+                type-specific information.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class Shape {
+    double area() {
+        return 0;
+    }
+}
+
+class Circle extends Shape {
+    double radius;
+
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+    double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Square extends Shape {
+    double side;
+
+    Square(double side) {
+        this.side = side;
+    }
+
+    double area() {
+        return side * side;
+    }
+}
+
+class _05_ {
+    public static void analyzeShape(Shape shape) {
+        // Check for null
+        if (shape == null) {
+            System.out.println("Shape is null");
+            System.out.println("null instanceof Shape: " + (shape instanceof Shape));
+            return;
+        }
+
+        System.out.println("\nAnalyzing Shape:");
+        System.out.println("shape instanceof Shape: " + (shape instanceof Shape));
+
+        if (shape instanceof Circle) {
+            Circle c = (Circle) shape;
+            System.out.println("Type: Circle");
+            System.out.println("Radius: " + c.radius);
+            System.out.println("Area: " + String.format("%.2f", c.area()));
+        } else if (shape instanceof Square) {
+            Square s = (Square) shape;
+            System.out.println("Type: Square");
+            System.out.println("Side: " + s.side);
+            System.out.println("Area: " + String.format("%.2f", s.area()));
+        } else {
+            System.out.println("Type: Generic Shape");
+            System.out.println("Area: " + shape.area());
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter circle radius: ");
+        double radius = sn.nextDouble();
+        Circle circle = new Circle(radius);
+
+        System.out.print("Enter square side: ");
+        double side = sn.nextDouble();
+        Square square = new Square(side);
+
+        Shape nullShape = null;
+
+        analyzeShape(circle);
+        analyzeShape(square);
+        analyzeShape(nullShape);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter circle radius: 7
+Enter square side: 5
+
+Analyzing Shape:
+shape instanceof Shape: true
+Type: Circle
+Radius: 7.0
+Area: 153.94
+
+Analyzing Shape:
+shape instanceof Shape: true
+Type: Square
+Side: 5.0
+Area: 25.00
+
+Shape is null
+null instanceof Shape: false</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>null Handling:</strong> instanceof returns false for null objects</li>
+                    <li><strong>Null Safety:</strong> Prevents NullPointerException when checking types</li>
+                    <li><strong>Polymorphism:</strong> Parent reference can hold child objects</li>
+                    <li><strong>Type Identification:</strong> Determine actual object type at runtime</li>
+                </ul>
+                <strong>Important:</strong> Always returns false for null, making it safe for null checks
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>instanceof Operator Module - Practice Worksheet</strong></p>
+            <p>Master type checking, safe downcasting, and polymorphic behavior validation</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

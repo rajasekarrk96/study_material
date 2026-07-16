@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Tuples - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#access">Access Tuples</a></li>
+                        <li><a href="#update">Update Tuples</a></li>
+                        <li><a href="#unpack">Unpack Tuples</a></li>
+                        <li><a href="#loop">Loop Tuples</a></li>
+                        <li><a href="#join">Join Tuples</a></li>
+                        <li><a href="#methods">Tuple Methods</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python Tuples</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>Tuples are used to store multiple items in a single variable.</p>
+                    <p>A tuple is a collection which is ordered and <strong>unchangeable</strong>.</p>
+                    <p>Tuples are written with round brackets.</p>
+                    <pre class="code-block">
+thistuple = ("apple", "banana", "cherry")
+print(thistuple)
+</pre>
+                    <h3>Tuple Items</h3>
+                    <ul>
+                        <li><strong>Ordered:</strong> The items have a defined order, and that order will not change.
+                        </li>
+                        <li><strong>Unchangeable:</strong> We cannot change, add or remove items after the tuple has
+                            been created.</li>
+                        <li><strong>Allow Duplicates:</strong> Since tuples are indexed, they can have items with the
+                            same value.</li>
+                    </ul>
+
+                    <h2 id="access">Access Tuple Items</h2>
+                    <p>You can access tuple items by referring to the index number, inside square brackets:</p>
+                    <pre class="code-block">
+thistuple = ("apple", "banana", "cherry")
+print(thistuple[1])
+</pre>
+                    <h3>Range of Indexes</h3>
+                    <p>You can specify a range of indexes by specifying where to start and where to end the range.</p>
+                    <pre class="code-block">
+thistuple = ("apple", "banana", "cherry", "orange", "kiwi", "melon", "mango")
+print(thistuple[2:5])
+</pre>
+
+                    <h2 id="update">Update Tuples</h2>
+                    <p>Tuples are unchangeable, meaning that you cannot change, add, or remove items once the tuple is
+                        created.</p>
+                    <p>But there is a workaround. You can convert the tuple into a list, change the list, and convert
+                        the list back into a tuple.</p>
+                    <pre class="code-block">
+x = ("apple", "banana", "cherry")
+y = list(x)
+y[1] = "kiwi"
+x = tuple(y)
+
+print(x)
+</pre>
+
+                    <h2 id="unpack">Unpacking a Tuple</h2>
+                    <p>When we create a tuple, we normally assign values to it. This is called "packing" a tuple:</p>
+                    <p>But, in Python, we are also allowed to extract the values back into variables. This is called
+                        "unpacking":</p>
+                    <pre class="code-block">
+fruits = ("apple", "banana", "cherry")
+
+(green, yellow, red) = fruits
+
+print(green)
+print(yellow)
+print(red)
+</pre>
+
+                    <h2 id="loop">Loop Tuples</h2>
+                    <p>You can loop through the tuple items by using a <code>for</code> loop.</p>
+                    <pre class="code-block">
+thistuple = ("apple", "banana", "cherry")
+for x in thistuple:
+  print(x)
+</pre>
+
+                    <h2 id="create-tuple">Create Tuple</h2>
+                    <p>A tuple is created by placing all the items (elements) inside parentheses <code>()</code>,
+                        separated by commas.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+tuple_name = (item1, item2, item3, ...)
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+tuple1 = ("a", "b" , "c")
+tuple2 = (1, 2, 3)
+
+tuple3 = tuple1 + tuple2
+</pre>
+
+                    <h2 id="join">Join Tuples</h2>
+                    <p>To join two or more tuples you can use the <code>+</code> operator:</p>
+                    <pre class="code-block">
+tuple1 = ("a", "b" , "c")
+tuple2 = (1, 2, 3)
+
+tuple3 = tuple1 + tuple2
+print(tuple3)
+</pre>
+
+                    <h2 id="methods">Tuple Methods</h2>
+                    <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
+                        <tr style="background-color: #f1f1f1; text-align: left;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Method</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Description</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">count()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns the number of times a specified
+                                value occurs in a tuple</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">index()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Searches the tuple for a specified value
+                                and returns the position of where it was found</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a Python program to create a tuple with different data types.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>tuplex = ("tuple", False, 3.2, 1)
+print(tuplex)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a Python program to create a tuple with one item.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>thistuple = ("apple",)
+print(type(thistuple))
+
+# NOT a tuple
+thistuple = ("apple")
+print(type(thistuple))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a Python program to unpack a tuple in several variables.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>tuplex = (4, 8, 3) 
+n1, n2, n3 = tuplex
+print(n1 + n2 + n3)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a Python program to convert a tuple to a string.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>tup = ('e', 'x', 'e', 'r', 'c', 'i', 's', 'e', 's')
+str =  ''.join(tup)
+print(str)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a Python program to find the repeated items of a tuple.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>tuplex = (2, 4, 5, 6, 2, 3, 4, 4, 7)
+count = tuplex.count(4)
+print(count)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a Python program to check whether an element exists within a tuple.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>tuplex = ("w", 3, "r", "e", "s", "o", "u", "r", "c", "e")
+print("r" in tuplex)
+print(5 in tuplex)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a Python program to convert a list to a tuple.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>listx = [5, 10, 7, 4, 15, 3]
+tuplex = tuple(listx)
+print(tuplex)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a Python program to remove an item from a tuple.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>tuplex = "Hello", "World", "Python"
+listx = list(tuplex)
+listx.remove("World")
+tuplex = tuple(listx)
+print(tuplex)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a Python program to find the index of an item of a tuple.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>tuplex = ("w", 3, "r", "e", "s", "o", "u", "r", "c", "e")
+index = tuplex.index("r")
+print(index)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a Python program to reverse a tuple.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>x = ("w3resource")
+y = reversed(x)
+print(tuple(y))
+# OR
+x = (5, 10, 15, 20)
+y = x[::-1]
+print(y)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

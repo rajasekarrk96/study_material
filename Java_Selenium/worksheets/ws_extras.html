@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksheet: Extras</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00e676;
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-light: #e0e0e0;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            height: calc(100vh - 50px);
+        }
+
+        .pane-questions {
+            width: 40%;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pane-header {
+            padding: 15px;
+            background: #252525;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .questions-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .question-card {
+            background: #2d2d2d;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .q-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .q-text {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .pane-practice {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f0f0;
+        }
+
+        .browser-bar {
+            background: #e0e0e0;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .url-box {
+            background: #fff;
+            padding: 5px 12px;
+            border-radius: 12px;
+            flex: 1;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #555;
+            border: 1px solid #ccc;
+        }
+
+        .app-view {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            color: #333;
+        }
+
+        .solutions-panel {
+            background: #1a1a1a;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sol-header {
+            padding: 10px 20px;
+            background: #252525;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .sol-header:hover {
+            color: #fff;
+            background: #333;
+        }
+
+        .sol-content {
+            padding: 15px;
+            display: none;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            color: #dcdcaa;
+            background: #111;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .sol-content.visible {
+            display: block;
+        }
+
+        /* Syntax Highlighting */
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-variable {
+            color: #9cdcfe;
+        }
+
+        .code-method {
+            color: #dcdcaa;
+        }
+
+        .code-class {
+            color: #4ec9b0;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .terminal-window {
+            background: #1e1e1e;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            font-family: 'Consolas', monospace;
+        }
+
+        .terminal-header {
+            background: #333;
+            padding: 5px 15px;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .terminal-body {
+            padding: 15px;
+            color: #ccc;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .cmd-prompt {
+            color: #00e676;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><i class="fas fa-star"></i> Practice: Extras</h1>
+        <a href="../index.html" style="color:#888; text-decoration:none;"><i class="fas fa-home"></i> Home</a>
+    </header>
+    <div class="workspace">
+        <div class="pane-questions">
+            <div class="pane-header"><i class="fas fa-tasks"></i> Assignments</div>
+            <div class="questions-list">
+                <div class="question-card">
+                    <div class="q-title">Task 01: Headless Mode</div>
+                    <div class="q-text">Pass the argument to run Chrome in Headless mode (no UI).</div>
+                </div>
+                <div class="question-card">
+                    <div class="q-title">Task 02: Command Line Params</div>
+                    <div class="q-text">How do you pass the browser name from Maven command like `mvn test
+                        -Dbrowser=...`?</div>
+                </div>
+            </div>
+            <div class="solutions-panel">
+                <div class="sol-header" onclick="toggleSolutions()">
+                    <span><i class="fas fa-code"></i> Solutions</span>
+                    <i class="fas fa-chevron-up" id="sol-icon"></i>
+                </div>
+                <div class="sol-content" id="sol-body">
+                    <pre style="margin:0;">
+<code>
+<span class="code-keyword">package</span> Selenium<span class="code-punctuation">;</span>
+
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebDriver</span><span class="code-punctuation">;</span>
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.chrome.ChromeDriver</span><span class="code-punctuation">;</span>
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.chrome.ChromeOptions</span><span class="code-punctuation">;</span>
+
+<span class="code-keyword">public class</span> <span class="code-class">_31_Extras</span> <span class="code-punctuation">{</span>
+
+    <span class="code-keyword">public static void</span> <span class="code-method">main</span>
+    <span class="code-punctuation">(</span><span class="code-class">String</span><span class="code-punctuation">[]</span> args<span class="code-punctuation">)</span>
+    <span class="code-punctuation">{</span>
+
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Started ---"</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-comment">// Task 01: Headless Execution</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 01: Configuring and launching Chrome in headless mode..."</span><span class="code-punctuation">);</span>
+        <span class="code-class">ChromeOptions</span> <span class="code-variable">options</span> <span class="code-punctuation">=</span> <span class="code-keyword">new</span> <span class="code-class">ChromeOptions</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+        <span class="code-variable">options</span><span class="code-punctuation">.</span><span class="code-method">addArguments</span><span class="code-punctuation">(</span><span class="code-string">"--headless"</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+        <span class="code-class">WebDriver</span> <span class="code-variable">driver</span> <span class="code-punctuation">=</span> <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span><span class="code-punctuation">(</span><span class="code-variable">options</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Navigating to Extras worksheet..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">get</span><span class="code-punctuation">(</span><span class="code-string">"http://127.0.0.1:5501/Java_Selinium/worksheets/ws_extras.html"</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+ 
+        <span class="code-comment">// Task 02: Dynamic Browser Selection</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 02: Retrieving dynamic browser property..."</span><span class="code-punctuation">);</span>
+        <span class="code-class">String</span> <span class="code-variable">browser</span> <span class="code-punctuation">=</span> <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-method">getProperty</span><span class="code-punctuation">(</span><span class="code-string">"browser"</span><span class="code-punctuation">,</span> <span class="code-string">"chrome"</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Selected Browser: "</span> <span class="code-punctuation">+</span> <span class="code-variable">browser</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Ended ---"</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">quit</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+    <span class="code-punctuation">}</span>
+<span class="code-punctuation">}</span>
+</code>
+</pre>
+
+                </div>
+            </div>
+        </div>
+        <div class="pane-practice">
+            <div class="browser-bar"><i class="fas fa-terminal" style="color:#666"></i>
+                <div class="url-box">CI/CD Terminal</div>
+            </div>
+            <div class="app-view">
+                <div class="terminal-window">
+                    <div class="terminal-header">Jenkins / GitHub Actions</div>
+                    <div class="terminal-body">
+                        <div><span class="cmd-prompt">$</span>mvn test -Dheadless=true</div>
+                        <div>[INFO] Running TestSuite</div>
+                        <div>[INFO] Starting ChromeDriver (Headless)</div>
+                        <div>[INFO] Tests run: 5, Failures: 0, Errors: 0</div>
+                        <div style="color:#00e676">[INFO] BUILD SUCCESS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script>function toggleSolutions() { const b = document.getElementById('sol-body'); const i = document.getElementById('sol-icon'); b.classList.toggle('visible'); i.className = b.classList.contains('visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-up'; }</script>
+</body>
+
+</html>

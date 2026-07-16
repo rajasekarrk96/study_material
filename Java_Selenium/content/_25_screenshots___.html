@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  25 screenshots   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>25. Screenshots</h1>
+
+<h2>📖 Introduction</h2>
+<p>A test automation framework without screenshots is blind. When a test fails overnight, you need to see exactly what
+    the user saw. was it a 404 error? A popup blocking the button? A broken layout? Taking a screenshot at the moment of
+    failure is the most critical debugging aid you have.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The <code>TakesScreenshot</code> interface</li>
+    <li>Capturing the entire visible viewport</li>
+    <li>Capturing a specific WebElement (Selenium 4 feature)</li>
+    <li>Saving the screenshot to a file</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>Typecasting to TakesScreenshot</h3>
+<p>The standard WebDriver instance needs to be "cast" (converted) to <code>TakesScreenshot</code> to access capture
+    methods.</p>
+<pre><code>TakesScreenshot ts = (TakesScreenshot) driver;
+File src = ts.getScreenshotAs(OutputType.FILE);</code></pre>
+
+<h3>Saving the File</h3>
+<p>The screenshot starts as a temporary file in memory. You must move it to a permanent location (like a "Screenshots"
+    folder) immediately using <code>FileUtils</code> or standard Java NIO.</p>
+
+<h2>💻 Code Examples</h2>
+<p>Capturing evidence:</p>
+
+<h3>Full Page Screenshot</h3>
+<pre><code>// 1. Capture
+File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+
+// 2. Define Destination
+File destFile = new File("./screenshots/failure.png");
+
+// 3. Save (Standard Java)
+Files.copy(srcFile.toPath(), destFile.toPath());</code></pre>
+
+<h3>Element Screenshot (Selenium 4+)</h3>
+<pre><code>WebElement logo = driver.findElement(By.id("logo"));
+File logoSrc = logo.getScreenshotAs(OutputType.FILE);
+// Save logoSrc...</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Overwrite Risk:</strong> If you name every screenshot "error.png", the next run will overwrite the
+        previous one. Always append a Timestamp to the filename (e.g., "error_20231015_1200.png") to keep a history.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Capture Failure Evidence.</p>
+    <ol>
+        <li>Try to login with bad credentials.</li>
+        <li>Assert that an error message appears.</li>
+        <li>Take a screenshot of the error message element itself (not the whole page).</li>
+        <li>Save it as "login_error.png".</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: What interface allows taking screenshots?</strong></p>
+    <p><strong>Answer:</strong> <code>TakesScreenshot</code>.</p>
+
+    <p><strong>Q2: Can you take a screenshot of the full long scrolling page?</strong></p>
+    <p><strong>Answer:</strong> Standard Selenium creates a viewport screenshot (what is visible). For full-page
+        screenshots (scrolling automatically), automated tools like AShot or standard Firefox Driver full-page
+        capabilities are often required.</p>
+</blockquote>
+
+<a href="worksheets/ws_screenshots.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

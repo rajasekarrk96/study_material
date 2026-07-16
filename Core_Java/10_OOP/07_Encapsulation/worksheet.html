@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encapsulation - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Encapsulation Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Encapsulation - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master data hiding and access control with getters and setters.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Student Class - Basic Encapsulation</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Student class with the following attributes and methods:
+                • Private attributes name and grade
+                • Public methods setName, getName, setGrade, and getGrade to set and get the values of the attributes
+                • A method displayStudentInfo to print the student's information</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    private String name;
+    private char grade;
+
+    public void setName(String n) {
+        name = n;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setGrade(char g) {
+        grade = g;
+    }
+
+    public char getGrade() {
+        return grade;
+    }
+
+    void displayStudentInfo() {
+        System.out.println("Name: " + name);
+        System.out.println("Grade: " + grade);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        _01_ s = new _01_();
+
+        System.out.print("Enter name: ");
+        s.setName(sn.next());
+
+        System.out.print("Enter grade: ");
+        s.setGrade(sn.next().charAt(0));
+
+        s.displayStudentInfo();
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter name: Alice
+Enter grade: A
+Name: Alice
+Grade: A</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Private Attributes:</strong> name and grade cannot be accessed directly</li>
+                    <li><strong>Public Getters/Setters:</strong> Controlled access to private data</li>
+                    <li><strong>Data Hiding:</strong> Internal state is protected from external modification</li>
+                    <li><strong>Encapsulation:</strong> Data and methods bundled together in a class</li>
+                </ul>
+                <strong>Benefits:</strong> Validation can be added in setters, data integrity maintained
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Product Class - Price Management</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Product class with the following attributes and methods:
+                • Private attributes productName and price
+                • Public methods setProductName, getProductName, setPrice, and getPrice to set and get the values of the
+                attributes
+                • A method displayProductInfo to print the product's information</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+    private String productName;
+    private double price;
+
+    public void setProductName(String p) {
+        productName = p;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setPrice(double pr) {
+        price = pr;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    void displayProductInfo() {
+        System.out.println("Product Name: " + productName);
+        System.out.println("Price: " + price);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        _02_ p = new _02_();
+
+        System.out.print("Enter product name: ");
+        p.setProductName(sn.next());
+
+        System.out.print("Enter price: ");
+        p.setPrice(sn.nextDouble());
+
+        p.displayProductInfo();
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter product name: Laptop
+Enter price: 45000
+Product Name: Laptop
+Price: 45000.0</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Private Fields:</strong> productName and price are hidden</li>
+                    <li><strong>Controlled Access:</strong> Only through getter/setter methods</li>
+                    <li><strong>Data Type Safety:</strong> price is double, ensuring decimal values</li>
+                    <li><strong>Information Hiding:</strong> Implementation details are concealed</li>
+                </ul>
+                <strong>Enhancement:</strong> Can add price validation (e.g., price > 0) in setter
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Employee Class - Multiple Attributes</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create an Employee class with the following attributes and methods:
+                • Private attributes employeeId, name, and salary
+                • Public methods setEmployeeId, getEmployeeId, setName, getName, setSalary, and getSalary to set and get
+                the values of the attributes
+                • A method displayEmployeeInfo to print the employee's information</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+    private int employeeId;
+    private String name;
+    private double salary;
+
+    public void setEmployeeId(int id) {
+        employeeId = id;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setName(String n) {
+        name = n;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setSalary(double s) {
+        salary = s;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    void displayEmployeeInfo() {
+        System.out.println("Employee ID: " + employeeId);
+        System.out.println("Name: " + name);
+        System.out.println("Salary: " + salary);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        _03_ e = new _03_();
+
+        System.out.print("Enter employee ID: ");
+        e.setEmployeeId(sn.nextInt());
+
+        System.out.print("Enter name: ");
+        e.setName(sn.next());
+
+        System.out.print("Enter salary: ");
+        e.setSalary(sn.nextDouble());
+
+        e.displayEmployeeInfo();
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter employee ID: 101
+Enter name: Ravi
+Enter salary: 50000
+Employee ID: 101
+Name: Ravi
+Salary: 50000.0</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Multiple Private Fields:</strong> Three attributes encapsulated</li>
+                    <li><strong>Getter/Setter Pairs:</strong> One pair for each private attribute</li>
+                    <li><strong>Data Protection:</strong> Salary information is sensitive and protected</li>
+                    <li><strong>Consistent Interface:</strong> Uniform access pattern for all attributes</li>
+                </ul>
+                <strong>Real-World:</strong> Employee data requires strict access control
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: BankAccount Class - Transaction Methods</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a BankAccount class with the following attributes and methods:
+                • Private attributes accountNumber and balance
+                • Public methods setAccountNumber, getAccountNumber, setBalance, and getBalance to set and get the
+                values of the attributes
+                • A method deposit to add money to the balance
+                • A method withdraw to subtract money from the balance
+                • A method displayAccountInfo to print the account details</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _04_ {
+    private String accountNumber;
+    private double balance;
+
+    public void setAccountNumber(String acc) {
+        accountNumber = acc;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setBalance(double b) {
+        balance = b;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    void deposit(double amt) {
+        balance += amt;
+    }
+
+    void withdraw(double amt) {
+        balance -= amt;
+    }
+
+    void displayAccountInfo() {
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Balance: " + balance);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        _04_ acc = new _04_();
+
+        System.out.print("Enter account number: ");
+        acc.setAccountNumber(sn.next());
+
+        System.out.print("Enter initial balance: ");
+        acc.setBalance(sn.nextDouble());
+
+        System.out.print("Enter deposit amount: ");
+        acc.deposit(sn.nextDouble());
+
+        System.out.print("Enter withdraw amount: ");
+        acc.withdraw(sn.nextDouble());
+
+        acc.displayAccountInfo();
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter account number: ACC1001
+Enter initial balance: 10000
+Enter deposit amount: 5000
+Enter withdraw amount: 2000
+Account Number: ACC1001
+Balance: 13000.0</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Encapsulated Balance:</strong> Balance cannot be directly modified</li>
+                    <li><strong>Transaction Methods:</strong> deposit() and withdraw() control balance changes</li>
+                    <li><strong>Business Logic:</strong> Methods can include validation (e.g., sufficient funds)</li>
+                    <li><strong>Security:</strong> Critical financial data is protected</li>
+                </ul>
+                <strong>Enhancement:</strong> Add balance validation in withdraw() to prevent negative balance
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: LibraryBook Class - Book Management</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a LibraryBook class with the following attributes and methods:
+                • Private attributes bookId, title, and author
+                • Public methods setBookId, getBookId, setTitle, getTitle, setAuthor, and getAuthor to set and get the
+                values of the attributes
+                • A method displayBookInfo to print the book details</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _05_ {
+    private int bookId;
+    private String title;
+    private String author;
+
+    public void setBookId(int id) {
+        bookId = id;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setTitle(String t) {
+        title = t;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setAuthor(String a) {
+        author = a;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    void displayBookInfo() {
+        System.out.println("Book ID: " + bookId);
+        System.out.println("Title: " + title);
+        System.out.println("Author: " + author);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        _05_ b = new _05_();
+
+        System.out.print("Enter book ID: ");
+        b.setBookId(sn.nextInt());
+
+        System.out.print("Enter title: ");
+        b.setTitle(sn.next());
+
+        System.out.print("Enter author: ");
+        b.setAuthor(sn.next());
+
+        b.displayBookInfo();
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter book ID: 501
+Enter title: Java
+Enter author: Gosling
+Book ID: 501
+Title: Java
+Author: Gosling</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Complete Encapsulation:</strong> All three attributes are private</li>
+                    <li><strong>Read/Write Access:</strong> Both getters and setters provided</li>
+                    <li><strong>Data Integrity:</strong> Book information protected from unauthorized changes</li>
+                    <li><strong>Library System:</strong> Models real-world book management</li>
+                </ul>
+                <strong>Pattern:</strong> Standard encapsulation pattern with getter/setter pairs
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>Encapsulation Module - Practice Worksheet</strong></p>
+            <p>Master data hiding and controlled access with getters and setters</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

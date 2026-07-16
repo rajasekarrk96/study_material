@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group By - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Group By</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Group By</h2>
+                <p class="topic-desc">Groups records with identical values into summary rows. Often used with aggregate functions (COUNT, SUM, AVG, MIN, MAX).</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Table: employees</h3>
+                        <p class="subtopic-desc">Sample data used for the following examples.</p>
+            <div class="output-box">
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead>
+                        <tr><th>emp_id</th><th>name</th><th>department</th><th>salary</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Arun</td><td>IT</td><td>50000</td></tr>
+                        <tr><td>2</td><td>Ravi</td><td>HR</td><td>40000</td></tr>
+                        <tr><td>3</td><td>Meena</td><td>IT</td><td>60000</td></tr>
+                        <tr><td>4</td><td>Sita</td><td>HR</td><td>45000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Basic Syntax</h3>
+                        <p class="subtopic-desc"><strong>🔹 Note</strong><br>The GROUP BY statement is often used with aggregate functions (COUNT, MAX, MIN, SUM, AVG) to group the result-set by one or more columns.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> column_name(s)\nFROM table_name\nWHERE condition\nGROUP BY column_name(s)\nORDER BY column_name(s);</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Example 1: Total salary by department</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Calculates the sum of salaries for each department using the SUM() function.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> department, <span class="sql-func">SUM</span>(salary) <span class="sql-keyword">AS</span> total_salary\nFROM employees\nGROUP BY department;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> department, <span class="sql-func">SUM</span>(salary) <span class="sql-keyword">AS</span> total_salary\nFROM employees\nGROUP BY department;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead>
+                        <tr><th>department</th><th>total_salary</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>IT</td><td>110000</td></tr>
+                        <tr><td>HR</td><td>85000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Example 2: Count employees in each department</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Counts the number of employees in each department using the COUNT() function.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> department, <span class="sql-func">COUNT</span>(emp_id) <span class="sql-keyword">AS</span> total_employees\nFROM employees\nGROUP BY department;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> department, <span class="sql-func">COUNT</span>(emp_id) <span class="sql-keyword">AS</span> total_employees\nFROM employees\nGROUP BY department;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead>
+                        <tr><th>department</th><th>total_employees</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>IT</td><td>2</td></tr>
+                        <tr><td>HR</td><td>2</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">GROUP BY with WHERE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>The WHERE clause filters rows BEFORE they are grouped.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> department, <span class="sql-func">AVG</span>(salary) <span class="sql-keyword">AS</span> avg_salary\nFROM employees\nWHERE salary &gt; 45000\nGROUP BY department;</code></pre><div class="output-box">✔ Calculation performed only on employees with salary > 45000.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Count the number of students in each age group.</strong><br>
+    <button class="toggle-btn" data-target="ans-t21-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t21-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age, COUNT(*) AS student_count
+FROM students
+GROUP BY age;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+---------------+
+| age  | student_count |
++------+---------------+
+| 22   | 1             |
+| 23   | 2             |
+| 24   | 1             |
++------+---------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Sum of ages for each age group.</strong><br>
+    <button class="toggle-btn" data-target="ans-t21-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t21-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age, SUM(age) AS total_age
+FROM students
+GROUP BY age;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+-----------+
+| age  | total_age |
++------+-----------+
+| 22   | 22        |
+| 23   | 46        |
+| 24   | 24        |
++------+-----------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Display average age for each age group.</strong><br>
+    <button class="toggle-btn" data-target="ans-t21-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t21-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age, AVG(age) AS average_age
+FROM students
+GROUP BY age;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+-------------+
+| age  | average_age |
++------+-------------+
+| 22   | 22.0        |
+| 23   | 23.0        |
+| 24   | 24.0        |
++------+-------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Count students by age where age is greater than 22.</strong><br>
+    <button class="toggle-btn" data-target="ans-t21-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t21-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age, COUNT(*) AS student_count
+FROM students
+WHERE age > 22
+GROUP BY age;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+---------------+
+| age  | student_count |
++------+---------------+
+| 23   | 2             |
+| 24   | 1             |
++------+---------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Count students by age and order by count descending.</strong><br>
+    <button class="toggle-btn" data-target="ans-t21-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t21-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age, COUNT(*) AS student_count
+FROM students
+GROUP BY age
+ORDER BY student_count DESC;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+---------------+
+| age  | student_count |
++------+---------------+
+| 23   | 2             |
+| 22   | 1             |
+| 24   | 1             |
++------+---------------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='21_functions.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Functions</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='23_having.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Having →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

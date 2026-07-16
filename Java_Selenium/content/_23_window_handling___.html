@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  23 window handling   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>23. Window Handling</h1>
+
+<h2>📖 Introduction</h2>
+<p>Modern web applications often spawn new browser tabs or windows for things like Terms of Service, Login via Google,
+    or Advertisements. When a new window opens, your WebDriver script <strong>does not</strong> automatically follow it.
+    It stays stuck on the original page. You must manually "switch" the driver's focus to the new window to interact
+    with it.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>What is a Window Handle?</li>
+    <li>How to Switch between multiple open windows/tabs</li>
+    <li>How to close a specific window and return to the parent</li>
+    <li>Iterating through window sets</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>Window Handles</h3>
+<p>Every open browser tab has a unique identifier called a <strong>Window Handle</strong> (a String). </p>
+<ul>
+    <li><code>driver.getWindowHandle()</code>: ID of current tab.</li>
+    <li><code>driver.getWindowHandles()</code>: Set of IDs for ALL open tabs.</li>
+</ul>
+
+<h3>The Logic</h3>
+<ol>
+    <li>Store the ID of the Parent window.</li>
+    <li>Click the link that opens a Child window.</li>
+    <li>Get all Window Handles.</li>
+    <li>Loop through them. If the handle is NOT the Parent handle, switch to it.</li>
+    <li>Perform actions.</li>
+    <li>Close Child window.</li>
+    <li>Switch back to Parent window.</li>
+</ol>
+
+<h2>💻 Code Examples</h2>
+<pre><code>// 1. Store Parent ID
+String parentGUID = driver.getWindowHandle();
+
+// 2. Click link (Opens new tab)
+driver.findElement(By.id("new-tab-btn")).click();
+
+// 3. Switch to Child
+Set&lt;String&gt; allHandles = driver.getWindowHandles();
+
+for(String handle : allHandles) {
+    if(!handle.equals(parentGUID)) {
+        driver.switchTo().window(handle);
+        break; 
+    }
+}
+
+// 4. Working in Child Tab
+System.out.println("Child Title: " + driver.getTitle());
+driver.close(); // Close Child only
+
+// 5. Back to Parent
+driver.switchTo().window(parentGUID);
+System.out.println("Back to Parent");</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>NoSuchWindowException:</strong> This happens if you close a window (<code>driver.close()</code>) but
+        forget to switch back to a valid window (<code>driver.switchTo().window(...)</code>). The driver is technically
+        "floating" in a closed window context.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Handle a Login Popup.</p>
+    <ol>
+        <li>Click "Login with Google".</li>
+        <li>Switch to the new popup window.</li>
+        <li>Type email credentials (just find element).</li>
+        <li>Close the popup.</li>
+        <li>Verify you are back on the homepage.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: Can WebDriver handle Windows-based popups?</strong></p>
+    <p><strong>Answer:</strong> No. WebDriver handles Browser windows/tabs only. For OS-level popups (like Print Preview
+        or File Upload), you need <code>Robot</code> class or AutoIT.</p>
+</blockquote>
+
+<a href="worksheets/ws_window_handling.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

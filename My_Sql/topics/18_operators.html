@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operators - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Operators</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Operators</h2>
+                <p class="topic-desc">Operators are symbols used to perform operations on data in SQL queries.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Arithmetic Operators</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used for mathematical calculations.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> salary, salary * 12 <span class="sql-keyword">AS</span> annual_salary\nFROM employees;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>Operator</th><th>Meaning</th></tr></thead><tbody><tr><td>+</td><td>Addition</td></tr><tr><td>-</td><td>Subtraction</td></tr><tr><td>*</td><td>Multiplication</td></tr><tr><td>/</td><td>Division</td></tr><tr><td>%</td><td>Modulus</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Comparison (Relational) Operators</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to compare values.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE age &gt;= 21;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>Operator</th><th>Meaning</th></tr></thead><tbody><tr><td>=</td><td>Equal</td></tr><tr><td>!= or &lt;&gt;</td><td>Not equal</td></tr><tr><td>&gt;</td><td>Greater than</td></tr><tr><td>&lt;</td><td>Less than</td></tr><tr><td>&gt;=</td><td>Greater or equal</td></tr><tr><td>&lt;=</td><td>Less or equal</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Logical Operators</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to combine conditions.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE age &gt; 20 <span class="sql-keyword">AND</span> city = <span class="sql-string">'Chennai'</span>;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>Operator</th><th>Meaning</th></tr></thead><tbody><tr><td>AND</td><td>All conditions true</td></tr><tr><td>OR</td><td>Any condition true</td></tr><tr><td>NOT</td><td>Negates condition</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">BETWEEN Operator</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Checks if a value is within a range.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE age BETWEEN 18 <span class="sql-keyword">AND</span> 22;</code></pre><div class="output-box">✔ Success: Filters students in the specified age range.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">IN Operator</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Checks if a value matches any value in a list.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE city IN (<span class="sql-string">'Chennai'</span>, <span class="sql-string">'Delhi'</span>);</code></pre><div class="output-box">✔ Success: Filters students from the listed cities.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="6">LIKE Operator</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used for pattern matching with wildcards (% and _).</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE name LIKE <span class="sql-string">'A%'</span>;</code></pre><div class="output-box">✔ Success: Matches names starting with 'A'.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="7">IS NULL Operator</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to check for NULL values.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE email IS <span class="sql-keyword">NULL</span>;</code></pre><div class="output-box">✔ Success: Filters rows where email is missing.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="8">EXISTS Operator</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Checks if a subquery returns any rows.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> orders o\nWHERE <span class="sql-keyword">EXISTS</span> (\n  <span class="sql-keyword">SELECT</span> 1 <span class="sql-keyword">FROM</span> customers c\n  <span class="sql-keyword">WHERE</span> c.id = o.customer_id\n);</code></pre><div class="output-box">✔ Success: Returns orders only for existing customers.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="9">ANY / ALL Operators</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to compare a value against a set of values returned by a subquery.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE marks &gt; <span class="sql-keyword">ALL</span> (\n  <span class="sql-keyword">SELECT</span> marks <span class="sql-keyword">FROM</span> exams <span class="sql-keyword">WHERE</span> subject = <span class="sql-string">'Math'</span>\n);</code></pre><div class="output-box">✔ Success: Filters students with marks higher than all math exam marks.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Use Arithmetic operator (+) to increase age by 1.</strong><br>
+    <button class="toggle-btn" data-target="ans-t17-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t17-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, age + 1 AS next_age
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+----------+
+| name   | next_age |
++--------+----------+
+| Arun   | 23       |
+| Priya  | 24       |
+| Kiran  | 24       |
+| Meena  | 25       |
++--------+----------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Use Comparison operator (>) to filter students older than 22.</strong><br>
+    <button class="toggle-btn" data-target="ans-t17-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t17-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE age > 22;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 2  | Priya  | 23   |
+| 3  | Kiran  | 23   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Use Logical operator (AND).</strong><br>
+    <button class="toggle-btn" data-target="ans-t17-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t17-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE age > 22 AND name <> 'Meena';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 2  | Priya  | 23   |
+| 3  | Kiran  | 23   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Use Logical operator (OR).</strong><br>
+    <button class="toggle-btn" data-target="ans-t17-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t17-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE age = 22 OR name = 'Meena';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Use NOT operator.</strong><br>
+    <button class="toggle-btn" data-target="ans-t17-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t17-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE NOT age = 23;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='17_filtering.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Filtering</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='19_between-and-in.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">BETWEEN & IN →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

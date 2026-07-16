@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Updates - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Safe Updates</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Safe Updates</h2>
+                <p class="topic-desc">Safe Update Mode is a MySQL feature that prevents accidental UPDATE or DELETE operations on an entire table.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Error due to Safe Update</h3>
+                        <p class="subtopic-desc"><strong>🔹 Symptom</strong><br>Occurs when trying to update/delete without a WHERE clause using a primary key.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- Error Code: 1175\n-- You are using safe <span class="sql-keyword">update</span> mode <span class="sql-keyword">and</span> you tried to <span class="sql-keyword">update</span> a <span class="sql-keyword">table</span> without a <span class="sql-keyword">WHERE</span> that uses a KEY <span class="sql-keyword">column</span>.</span></code></pre><div class="output-box">❌ Operation blocked by MySQL Workbench</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">UPDATE not allowed (Safe Mode ON)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Example</strong><br>A generic update without a key in the WHERE clause.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- ❌ Wrong (will cause Error 1175)\nUPDATE students\nSET age = 22;</span></code></pre><div class="output-box">❌ Error: Safe update mode enabled</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Correct UPDATE (Safe Mode ON)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Solution</strong><br>Always use the Primary Key in the WHERE clause.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> students\nSET age = 22\nWHERE id = 1;</code></pre><div class="output-box">✔ Correct: Primary key used. Update successful.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">Disable Safe Update (Temporary)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Command</strong><br>Turns off safe mode for the current session.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SET</span> SQL_SAFE_UPDATES = 0;\n\n<span class="sql-comment">-- ✔️ <span class="sql-func">Now</span> you can run:\nUPDATE students\nSET age = 22;</span></code></pre><div class="output-box">✔ Safe mode disabled for this session.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Enable Safe Update Again</h3>
+                        <p class="subtopic-desc"><strong>🔹 Best Practice</strong><br>Always turn safe mode back on after performing bulk updates.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SET</span> SQL_SAFE_UPDATES = 1;</code></pre><div class="output-box">✔ Safe mode re-enabled.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. 1️⃣ Error due to Safe Update</strong><br>
+    <div style="margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>-- Error Code: 1175\n-- You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column.</code></pre><br>
+        Output:<br>
+        ❌ Operation blocked by MySQL Workbench
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. 2️⃣ UPDATE not allowed (Safe Mode ON)</strong><br>
+    <div style="margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>-- ❌ Wrong (will cause Error 1175)\nUPDATE students\nSET age = 22;</code></pre><br>
+        Output:<br>
+        ❌ Error: Safe update mode enabled
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. 3️⃣ Correct UPDATE (Safe Mode ON)</strong><br>
+    <div style="margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>UPDATE students\nSET age = 22\nWHERE id = 1;</code></pre><br>
+        Output:<br>
+        ✔ Correct: Primary key used. Update successful.
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. 4️⃣ Disable Safe Update (Temporary)</strong><br>
+    <div style="margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SET SQL_SAFE_UPDATES = 0;\n\n-- ✔️ Now you can run:\nUPDATE students\nSET age = 22;</code></pre><br>
+        Output:<br>
+        ✔ Safe mode disabled for this session.
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. 5️⃣ Enable Safe Update Again</strong><br>
+    <div style="margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SET SQL_SAFE_UPDATES = 1;</code></pre><br>
+        Output:<br>
+        ✔ Safe mode re-enabled.
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='12_update.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Update</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='14_alter-table.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Alter Table →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

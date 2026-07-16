@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Object-Oriented Programming</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sidebar Styling */
+        #sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        #sidebar h5 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-top: 10px;
+        }
+
+        #sidebar a {
+            display: block;
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 12px;
+            margin: 5px 0;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        #sidebar a:hover {
+            background-color: #34495e;
+            color: #3498db;
+            padding-left: 16px;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 260px;
+            right: 0;
+            height: 60px;
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            z-index: 999;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .top-nav h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-left: 260px;
+            margin-top: 70px;
+            padding: 40px;
+        }
+
+        .module-header {
+            margin-bottom: 40px;
+        }
+
+        .module-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .module-header .lead {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Section Styling */
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .section h4 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h4::before {
+            content: "▸";
+            color: #3498db;
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Code Blocks */
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Tables */
+        .table {
+            margin: 20px 0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .table thead th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 15px;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            color: #555;
+            border-color: #e0e0e0;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Bullet Points */
+        .section ul,
+        .section ol {
+            margin: 15px 0 20px 0;
+            padding-left: 25px;
+        }
+
+        .section ul li,
+        .section ol li {
+            color: #555;
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+
+        .section strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        /* Note/Alert Blocks */
+        .note {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .note strong {
+            color: #2980b9;
+        }
+
+        .example {
+            background-color: #f0f9f0;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .example strong {
+            color: #27ae60;
+        }
+
+        /* Output Block */
+        .output {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #333;
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background-color: #3498db;
+            border: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .worksheet-container {
+            text-align: center;
+            margin: 50px 0 30px 0;
+            padding: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #sidebar {
+                transform: translateX(-100%);
+            }
+
+            .top-nav {
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .module-header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h5>Java Training</h5>
+        <a href="../../index.html">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#oop-fundamentals">OOP Fundamentals</a>
+        <a href="#classes-objects">Classes & Objects</a>
+        <a href="#inheritance">Inheritance</a>
+        <a href="#polymorphism">Polymorphism</a>
+        <a href="#encapsulation">Encapsulation</a>
+        <a href="#abstraction">Abstraction</a>
+        <a href="#interfaces">Interfaces</a>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <div class="top-nav">
+        <h2>Java Object-Oriented Programming</h2>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Module Header -->
+        <div class="module-header">
+            <h1>Java Object-Oriented Programming (OOP)</h1>
+            <p class="lead text-muted">Master the fundamental concepts of Object-Oriented Programming in Java. Learn
+                about classes, objects, inheritance, polymorphism, encapsulation, and abstraction to write scalable,
+                maintainable Java applications.</p>
+        </div>
+
+        <!-- Section 1: OOP Fundamentals -->
+        <div class="section" id="oop-fundamentals">
+            <h4>What is Object-Oriented Programming?</h4>
+            <p>Object-Oriented Programming (OOP) is a programming paradigm that organizes software design around objects
+                and data rather than functions and logic. In Java, everything revolves around objects, which are
+                instances of classes. OOP helps you write code that is modular, reusable, and easier to maintain.</p>
+
+            <p><strong>Key Principles of OOP:</strong></p>
+            <ul>
+                <li><strong>Encapsulation:</strong> Bundling data and methods together, hiding internal details</li>
+                <li><strong>Abstraction:</strong> Hiding complex implementation details, showing only essential features
+                </li>
+                <li><strong>Inheritance:</strong> Creating new classes based on existing ones to promote code reuse</li>
+                <li><strong>Polymorphism:</strong> Objects can take multiple forms or methods can have multiple
+                    behaviors</li>
+            </ul>
+
+            <p><strong>Benefits of OOP in Java:</strong></p>
+            <ul>
+                <li>Improved code organization and structure</li>
+                <li>Better code reusability through inheritance</li>
+                <li>Enhanced security through encapsulation</li>
+                <li>Flexibility through polymorphism</li>
+                <li>Easier maintenance and debugging</li>
+            </ul>
+
+            <div class="note">
+                <strong>💡 Key Insight:</strong> OOP is the foundation of Java. Understanding these four pillars will
+                make you a better Java developer and help you design robust applications.
+            </div>
+        </div>
+
+        <!-- Section 2: Classes and Objects -->
+        <div class="section" id="classes-objects">
+            <h4>Classes and Objects: The Building Blocks</h4>
+            <p>A <strong>class</strong> is a blueprint or template for creating objects. An <strong>object</strong> is
+                an instance of a class, representing a real-world entity with specific attributes and behaviors. Every
+                class in Java has a constructor, which is a special method used to initialize objects.</p>
+
+            <p><strong>Components of a Class:</strong></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Attributes (Fields)</strong></td>
+                        <td>Variables that store data for the object</td>
+                        <td><code>private String name;</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Methods</strong></td>
+                        <td>Functions that define the behavior of the object</td>
+                        <td><code>public void getName() { ... }</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Constructor</strong></td>
+                        <td>Special method that initializes the object</td>
+                        <td><code>public Person(String name) { ... }</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modifiers</strong></td>
+                        <td>Keywords that control access to members</td>
+                        <td><code>public, private, protected</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Basic Class Definition Syntax:</strong></p>
+            <pre><code>public class Student {
+    // Attributes
+    private String name;
+    private int studentId;
+    private double gpa;
+
+    // Constructor
+    public Student(String name, int studentId, double gpa) {
+        this.name = name;
+        this.studentId = studentId;
+        this.gpa = gpa;
+    }
+
+    // Methods
+    public void displayInfo() {
+        System.out.println("Name: " + name);
+        System.out.println("ID: " + studentId);
+        System.out.println("GPA: " + gpa);
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+}</code></pre>
+
+            <p><strong>Creating and Using Objects:</strong></p>
+            <pre><code>// Creating an object (instantiation)
+Student student1 = new Student("Alice Johnson", 101, 3.8);
+Student student2 = new Student("Bob Smith", 102, 3.5);
+
+// Calling methods
+student1.displayInfo();
+System.out.println("GPA: " + student1.getGpa());</code></pre>
+
+            <div class="output">
+                Name: Alice Johnson<br>
+                ID: 101<br>
+                GPA: 3.8<br>
+                GPA: 3.8
+            </div>
+
+            <div class="example">
+                <strong>✓ Real-World Example:</strong> Think of a class as a recipe for cookies. The recipe (class)
+                contains ingredients (attributes) and instructions (methods). Each batch of cookies you make (object)
+                follows the same recipe but can have different flavors (different attribute values).
+            </div>
+
+            <div class="note">
+                <strong>💡 Key Concept:</strong> Use the <code>new</code> keyword to create an object. The constructor
+                is automatically called when you instantiate a class. Always use meaningful names for classes
+                (capitalized) and follow Java naming conventions.
+            </div>
+        </div>
+
+        <!-- Section 3: Inheritance -->
+        <div class="section" id="inheritance">
+            <h4>Inheritance: Extending Classes and Promoting Reuse</h4>
+            <p>Inheritance allows you to create a new class based on an existing class. The new class (child/subclass)
+                inherits all the attributes and methods of the existing class (parent/superclass). This promotes code
+                reuse and establishes a logical hierarchy.</p>
+
+            <p><strong>Types of Inheritance in Java:</strong></p>
+            <ul>
+                <li><strong>Single Inheritance:</strong> A child class inherits from one parent class</li>
+                <li><strong>Multilevel Inheritance:</strong> A class inherits from a class that inherits from another
+                    class</li>
+                <li><strong>Hierarchical Inheritance:</strong> Multiple child classes inherit from one parent class</li>
+            </ul>
+
+            <p><strong>Inheritance Syntax:</strong></p>
+            <pre><code>// Parent class
+public class Animal {
+    protected String name;
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    public void eat() {
+        System.out.println(name + " is eating.");
+    }
+
+    public void sleep() {
+        System.out.println(name + " is sleeping.");
+    }
+}
+
+// Child class inherits from Animal
+public class Dog extends Animal {
+    private String breed;
+
+    public Dog(String name, String breed) {
+        super(name);  // Call parent constructor
+        this.breed = breed;
+    }
+
+    // Override parent method
+    @Override
+    public void eat() {
+        System.out.println(name + " is eating dog food.");
+    }
+
+    // New method specific to Dog
+    public void bark() {
+        System.out.println(name + " says: Woof! Woof!");
+    }
+}</code></pre>
+
+            <p><strong>Using Inherited Classes:</strong></p>
+            <pre><code>Dog myDog = new Dog("Max", "Golden Retriever");
+myDog.eat();      // Output: Max is eating dog food.
+myDog.sleep();    // Output: Max is sleeping.
+myDog.bark();     // Output: Max says: Woof! Woof!</code></pre>
+
+            <div class="output">
+                Max is eating dog food.<br>
+                Max is sleeping.<br>
+                Max says: Woof! Woof!
+            </div>
+
+            <div class="example">
+                <strong>✓ Real-World Example:</strong> A Vehicle is the parent class with properties like speed and
+                color. Car and Motorcycle are child classes that inherit from Vehicle but add their own specific
+                features like numberOfDoors and hasCarrier.
+            </div>
+
+            <div class="note">
+                <strong>💡 Key Concept:</strong> Use the <code>extends</code> keyword to create an inheritance
+                relationship. Use <code>super()</code> to call the parent constructor. Override methods using the
+                <code>@Override</code> annotation to provide specialized behavior in child classes.
+            </div>
+        </div>
+
+        <!-- Section 4: Polymorphism -->
+        <div class="section" id="polymorphism">
+            <h4>Polymorphism: One Interface, Multiple Forms</h4>
+            <p>Polymorphism means "many forms." It allows objects to take multiple forms and enables you to use a single
+                reference variable to point to objects of different types. There are two main types of polymorphism in
+                Java: compile-time (method overloading) and runtime (method overriding).</p>
+
+            <p><strong>Method Overloading (Compile-time Polymorphism):</strong></p>
+            <p>Multiple methods with the same name but different parameters in the same class.</p>
+            <pre><code>public class Calculator {
+    // Overloaded methods with different parameter types
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public double add(double a, double b) {
+        return a + b;
+    }
+
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+
+Calculator calc = new Calculator();
+System.out.println(calc.add(5, 10));              // Calls first method
+System.out.println(calc.add(5.5, 10.5));         // Calls second method
+System.out.println(calc.add(5, 10, 15));         // Calls third method</code></pre>
+
+            <div class="output">
+                15<br>
+                16.0<br>
+                30
+            </div>
+
+            <p><strong>Method Overriding (Runtime Polymorphism):</strong></p>
+            <p>A child class provides a specific implementation of a method already present in the parent class.</p>
+            <pre><code>public class Shape {
+    public void draw() {
+        System.out.println("Drawing a generic shape");
+    }
+}
+
+public class Circle extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Drawing a circle");
+    }
+}
+
+public class Rectangle extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Drawing a rectangle");
+    }
+}
+
+// Polymorphic behavior
+Shape shape1 = new Circle();
+Shape shape2 = new Rectangle();
+
+shape1.draw();    // Output: Drawing a circle
+shape2.draw();    // Output: Drawing a rectangle</code></pre>
+
+            <div class="output">
+                Drawing a circle<br>
+                Drawing a rectangle
+            </div>
+
+            <div class="example">
+                <strong>✓ Real-World Example:</strong> A payment system can accept multiple payment methods (CreditCard,
+                PayPal, Bitcoin). Each has its own implementation of the process() method. The system doesn't need to
+                know which specific payment method is being used; it just calls process() on any Payment object.
+            </div>
+
+            <div class="note">
+                <strong>💡 Key Concept:</strong> Polymorphism makes your code flexible and extensible. Always use parent
+                class references to point to child class objects. This allows you to add new classes without modifying
+                existing code, following the Open-Closed Principle.
+            </div>
+        </div>
+
+        <!-- Section 5: Encapsulation -->
+        <div class="section" id="encapsulation">
+            <h4>Encapsulation: Data Hiding and Protection</h4>
+            <p>Encapsulation is the practice of bundling data (attributes) and methods together, while hiding the
+                internal details from the outside world. This is achieved through access modifiers like
+                <code>private</code>, <code>public</code>, and <code>protected</code>. Encapsulation protects data
+                integrity and provides controlled access through getters and setters.</p>
+
+            <p><strong>Access Modifiers in Java:</strong></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Same Class</th>
+                        <th>Same Package</th>
+                        <th>Subclass</th>
+                        <th>Outside</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>private</code></td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td><code>protected</code></td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td><code>public</code></td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>default (no modifier)</code></td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Encapsulation with Getters and Setters:</strong></p>
+            <pre><code>public class BankAccount {
+    private String accountNumber;
+    private double balance;
+    private String accountHolder;
+
+    // Constructor
+    public BankAccount(String accountNumber, double balance, String accountHolder) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.accountHolder = accountHolder;
+    }
+
+    // Getter for balance
+    public double getBalance() {
+        return balance;
+    }
+
+    // Setter for balance with validation
+    public void setBalance(double amount) {
+        if (amount >= 0) {
+            this.balance = amount;
+        } else {
+            System.out.println("Balance cannot be negative!");
+        }
+    }
+
+    // Method to deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: $" + amount);
+        }
+    }
+
+    // Method to withdraw money
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount);
+        } else {
+            System.out.println("Invalid withdrawal amount!");
+        }
+    }
+}</code></pre>
+
+            <p><strong>Using Encapsulated Class:</strong></p>
+            <pre><code>BankAccount account = new BankAccount("12345", 1000, "John Doe");
+account.deposit(500);           // Output: Deposited: $500
+System.out.println("Balance: $" + account.getBalance()); // Output: Balance: $1500
+account.withdraw(200);          // Output: Withdrawn: $200
+account.setBalance(-100);       // Output: Balance cannot be negative!</code></pre>
+
+            <div class="output">
+                Deposited: $500<br>
+                Balance: $1500<br>
+                Withdrawn: $200<br>
+                Balance cannot be negative!
+            </div>
+
+            <div class="example">
+                <strong>✓ Real-World Example:</strong> An ATM machine encapsulates the banking system. Users can only
+                interact through public methods like withdraw() and deposit(). They cannot directly access the internal
+                balance or account data, ensuring security and data integrity.
+            </div>
+
+            <div class="note">
+                <strong>💡 Key Concept:</strong> Always make data fields private and provide public getters and setters.
+                This allows you to add validation logic, control access, and change internal implementation without
+                affecting external code. This is crucial for maintaining data integrity.
+            </div>
+        </div>
+
+        <!-- Section 6: Abstraction and Interfaces -->
+        <div class="section" id="abstraction">
+            <h4>Abstraction: Hiding Complexity</h4>
+            <p>Abstraction is the process of hiding complex implementation details and showing only the essential
+                features of an object. In Java, this is achieved using abstract classes and interfaces. Abstraction
+                helps you focus on what an object does rather than how it does it.</p>
+
+            <p><strong>Abstract Classes:</strong></p>
+            <p>An abstract class cannot be instantiated and may contain abstract methods (without implementation) and
+                concrete methods (with implementation).</p>
+            <pre><code>// Abstract class
+public abstract class Vehicle {
+    private String color;
+
+    public Vehicle(String color) {
+        this.color = color;
+    }
+
+    // Abstract method (must be implemented by subclasses)
+    public abstract void start();
+    public abstract void stop();
+
+    // Concrete method
+    public void displayColor() {
+        System.out.println("Vehicle color: " + color);
+    }
+}
+
+// Concrete class implementing abstract methods
+public class Car extends Vehicle {
+    public Car(String color) {
+        super(color);
+    }
+
+    @Override
+    public void start() {
+        System.out.println("Car engine started with a key.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Car engine stopped.");
+    }
+}
+
+// Using abstract class
+Car myCar = new Car("Red");
+myCar.start();           // Output: Car engine started with a key.
+myCar.displayColor();    // Output: Vehicle color: Red
+myCar.stop();            // Output: Car engine stopped.</code></pre>
+
+            <div class="output">
+                Car engine started with a key.<br>
+                Vehicle color: Red<br>
+                Car engine stopped.
+            </div>
+
+            <div class="note">
+                <strong>💡 Key Concept:</strong> Use abstract classes when you have a common base with shared code.
+                Abstract methods define a contract that all subclasses must follow. This ensures consistency across
+                different implementations while allowing flexibility.
+            </div>
+        </div>
+
+        <!-- Section 7: Interfaces -->
+        <div class="section" id="interfaces">
+            <h4>Interfaces: Defining Contracts</h4>
+            <p>An interface is a contract that specifies what methods a class must implement. Unlike abstract classes,
+                interfaces contain only abstract methods (and now static/default methods in Java 8+) and no instance
+                variables. Interfaces enable multiple inheritance of type in Java and are useful for defining standard
+                behaviors that unrelated classes can implement.</p>
+
+            <p><strong>Interface Definition and Implementation:</strong></p>
+            <pre><code>// Interface definition
+public interface Drawable {
+    void draw();
+    void erase();
+}
+
+public interface Resizable {
+    void resize(int width, int height);
+}
+
+// Class implementing multiple interfaces
+public class Shape implements Drawable, Resizable {
+    private String name;
+
+    public Shape(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Drawing " + name);
+    }
+
+    @Override
+    public void erase() {
+        System.out.println("Erasing " + name);
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        System.out.println("Resizing " + name + " to " + width + "x" + height);
+    }
+}
+
+// Using interfaces
+Shape shape = new Shape("Triangle");
+shape.draw();                    // Output: Drawing Triangle
+shape.resize(100, 150);         // Output: Resizing Triangle to 100x150
+shape.erase();                   // Output: Erasing Triangle</code></pre>
+
+            <div class="output">
+                Drawing Triangle<br>
+                Resizing Triangle to 100x150<br>
+                Erasing Triangle
+            </div>
+
+            <p><strong>Interface vs Abstract Class Comparison:</strong></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Interface</th>
+                        <th>Abstract Class</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Methods</strong></td>
+                        <td>All abstract (Java 7) / Can have default methods (Java 8+)</td>
+                        <td>Mix of abstract and concrete methods</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Variables</strong></td>
+                        <td>Static and final only</td>
+                        <td>Any type of variables</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inheritance</strong></td>
+                        <td>Multiple inheritance possible</td>
+                        <td>Single inheritance only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Instantiation</strong></td>
+                        <td>Cannot be instantiated</td>
+                        <td>Cannot be instantiated</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Use Case</strong></td>
+                        <td>Define contracts for unrelated classes</td>
+                        <td>Share code among closely related classes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="example">
+                <strong>✓ Real-World Example:</strong> In a music player application, implement interfaces like Playable
+                (play, pause, stop) and Recordable (record, stopRecording) for different media types like Audio and
+                Video. Each class implements only the interfaces relevant to it.
+            </div>
+
+            <div class="note">
+                <strong>💡 Key Concept:</strong> Use interfaces to define what a class can do (contracts), and use
+                abstract classes to define what a class is (hierarchy). Interfaces promote loose coupling and make your
+                code more flexible and testable. Consider using interfaces as your primary design tool.
+            </div>
+        </div>
+
+        <!-- Worksheet Button -->
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">
+                Go to Practice Worksheets →
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Java OOP Module | Last Updated: November 2025</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Attempt to load sidebar
+        fetch('../../includes/sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                // Sidebar content would be injected here if the file exists
+                // For now, we have a built-in sidebar in HTML
+            })
+            .catch(error => {
+                // Sidebar HTML is already built-in, so fetch failure is fine
+                console.log('Sidebar file not found, using built-in sidebar');
+            });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

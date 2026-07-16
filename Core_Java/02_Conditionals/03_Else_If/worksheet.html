@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Else-If Statement - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px
+        }
+
+        .explanation ol {
+            line-height: 1.8
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Else-If Worksheet</h5>
+        <a href="index.html" style="color:#dc3545;text-decoration:none;display:block;margin-bottom:10px">← Back to
+            Module</a>
+        <hr style="border-color:#34495e;margin:15px 0">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Else-If Statement - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Java Else-If Statements with these practice problems.</p>
+        </div>
+        <div class="section-card" id="question1">
+            <h3>Question 1: Grade Calculator</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that assigns grades based on marks. 90+ = A, 80-89 = B, 70-79
+                = C, 60-69 = D, below 60 = F.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>85</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Grade: B</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>55</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Grade: F</code>
+            </div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class GradeCalculator {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter marks: ");
+        int marks = sn.nextInt();
+        
+        if (marks >= 90) {
+            System.out.println("Grade: A");
+        } else if (marks >= 80) {
+            System.out.println("Grade: B");
+        } else if (marks >= 70) {
+            System.out.println("Grade: C");
+        } else if (marks >= 60) {
+            System.out.println("Grade: D");
+        } else {
+            System.out.println("Grade: F");
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Order matters in else-if chains:</strong> We check highest values first (90+)
+                                because once a condition matches, remaining conditions are skipped. If we checked 60+
+                                first, a score of 85 would incorrectly get grade D.</li>
+                            <li><strong>Overlapping ranges work naturally:</strong> Though all conditions use >=, they
+                                don't conflict because of the chain structure. When marks=85, it fails >= 90, then
+                                succeeds >= 80 and stops.</li>
+                            <li><strong>Only one block executes ever:</strong> Unlike separate if statements which would
+                                all execute, else-if ensures exactly one grade is assigned. This prevents multiple
+                                outputs and logical errors.</li>
+                            <li><strong>Final else catches all remaining cases:</strong> Any marks below 60
+                                automatically get F without needing an explicit condition. This ensures complete
+                                coverage of all possible inputs.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div class="section-card" id="question2">
+            <h3>Question 2: Month to Days</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a program that takes a month number (1-12) and prints the number of days in
+                that month (assume non-leap year).</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>2</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>28 days</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>7</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>31 days</code>
+            </div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class MonthDays {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter month (1-12): ");
+        int month = sn.nextInt();
+        
+        if (month == 2) {
+            System.out.println("28 days");
+        } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+            System.out.println("30 days");
+        } else if (month >= 1 && month <= 12) {
+            System.out.println("31 days");
+        } else {
+            System.out.println("Invalid month");
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Group similar cases with OR operator:</strong> Months 4,6,9,11 all have 30 days,
+                                so using || (OR) combines them into one condition. This is more efficient than four
+                                separate else-if blocks.</li>
+                            <li><strong>Validate input to prevent errors:</strong> The final else-if checks if month is
+                                between 1-12 before assigning 31 days. This catches invalid inputs like 0 or 15.</li>
+                            <li><strong>Most specific conditions first:</strong> February is special (28 days), so we
+                                check it first. Then grouped 30-day months, then remaining valid months get 31 days by
+                                elimination.</li>
+                            <li><strong>Error handling improves robustness:</strong> The final else provides user
+                                feedback for invalid input rather than silently failing or crashing. Real-world
+                                applications need this defensive programming.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div class="section-card" id="question3">
+            <h3>Question 3: Temperature Category</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Categorize temperature: below 0 = "Freezing", 0-15 = "Cold", 16-25 = "Moderate",
+                above 25 = "Hot".</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>-5</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Freezing</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>30</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Hot</code>
+            </div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class TemperatureCategory {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter temperature: ");
+        int temp = sn.nextInt();
+        
+        if (temp < 0) {
+            System.out.println("Freezing");
+        } else if (temp <= 15) {
+            System.out.println("Cold");
+        } else if (temp <= 25) {
+            System.out.println("Moderate");
+        } else {
+            System.out.println("Hot");
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Boundary values require careful operators:</strong> Using <= for "Cold" (temp
+                                    <=15) means 15 is included in Cold category. Using < would put 15 in Moderate. These
+                                    details matter for correctness.</li>
+                            <li><strong>Sequential checks build implicit ranges:</strong> We don't write "temp >= 0 &&
+                                temp <= 15" for Cold because the if (temp < 0) already failed, so temp must be>= 0. The
+                                    chain builds ranges automatically.</li>
+                            <li><strong>Code clarity vs explicit conditions:</strong> Could write all conditions
+                                explicitly with && for clarity, but the chain structure makes them implicit.
+                                Understanding this implicit logic is key to reading others' code.</li>
+                            <li><strong>Real-world categorization pattern:</strong> Many applications categorize
+                                continuous values into discrete ranges - scores to grades, income to tax brackets, age
+                                to life stages. Else-if is the standard tool for this.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div style="margin-top:40px"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>Else-If Statement - Practice Worksheet</strong></p>
+            <p>Master multi-way conditional logic in Java</p>
+            <p>&copy; 2026 Java Learning Platform</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('.sidebar nav a').forEach(link => { link.addEventListener('click', function () { document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active')); this.classList.add('active') }) });</script>
+</body>
+
+</html>

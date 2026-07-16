@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Introduction - Basics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <h3>📚 Topics</h3>
+        </div>
+        <a href="../../index.html#basics">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#what-is-java">What is Java</a>
+        <a href="#why-java">Why Java</a>
+        <a href="#history">History</a>
+        <a href="#features">Features</a>
+        <a href="#environment">Environment Setup</a>
+        <a href="#first-program">First Program</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Java Introduction</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Introduction to Java Programming</h1>
+            <p class="lead text-muted">Learn the fundamentals of Java, its history, features, and set up your
+                development environment to write your first Java program.</p>
+        </div>
+
+        <div class="section" id="what-is-java">
+            <h4>What is Java?</h4>
+            <p>Java is a high-level, object-oriented, general-purpose programming language created by James Gosling at
+                Sun Microsystems in 1995. It is one of the most popular programming languages used for building
+                scalable, robust applications across various domains.</p>
+            <p><strong>Key Characteristics:</strong></p>
+            <ul>
+                <li>Simple and easy to learn syntax similar to C++</li>
+                <li>Compiled and interpreted language (bytecode execution)</li>
+                <li>Strongly typed and supports object-oriented programming</li>
+                <li>Automatic memory management through garbage collection</li>
+                <li>Rich standard library and framework ecosystem</li>
+            </ul>
+            <div class="note">
+                <strong>💡 Know:</strong> Java's motto is "Write Once, Run Anywhere" (WORA), which means Java code
+                compiled on one platform can run on any other platform with Java Runtime Environment (JRE).
+            </div>
+        </div>
+
+        <div class="section" id="why-java">
+            <h4>Why Learn Java?</h4>
+            <p>Java is used in millions of devices and applications worldwide. Here are compelling reasons to learn
+                Java:</p>
+            <ul>
+                <li><strong>High Demand:</strong> One of the most sought-after programming skills in the job market</li>
+                <li><strong>Versatile:</strong> Used for web development, mobile apps (Android), enterprise
+                    applications, and more</li>
+                <li><strong>Stable & Mature:</strong> 25+ years of development with proven reliability</li>
+                <li><strong>Strong Community:</strong> Massive community support, libraries, and frameworks (Spring,
+                    Hibernate, etc.)</li>
+                <li><strong>Cross-Platform:</strong> Write code once, run anywhere</li>
+                <li><strong>Secure:</strong> Built-in security features protect against various attacks</li>
+                <li><strong>Performance:</strong> Just-in-Time (JIT) compilation provides excellent runtime performance
+                </li>
+            </ul>
+            <div class="example">
+                <strong>✓ Real-World Applications:</strong> LinkedIn, Twitter, Uber, Netflix, eBay, and Google all use
+                Java in their backend systems.
+            </div>
+        </div>
+
+        <div class="section" id="history">
+            <h4>History of Java</h4>
+            <p>Understanding Java's evolution helps appreciate its design decisions and capabilities.</p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Version</th>
+                        <th>Major Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1995</td>
+                        <td>Java 1.0</td>
+                        <td>Initial release, Applets, AWT</td>
+                    </tr>
+                    <tr>
+                        <td>1998</td>
+                        <td>Java 1.2</td>
+                        <td>Collections Framework, Swing</td>
+                    </tr>
+                    <tr>
+                        <td>2004</td>
+                        <td>Java 5</td>
+                        <td>Generics, Annotations, Enums</td>
+                    </tr>
+                    <tr>
+                        <td>2011</td>
+                        <td>Java 7</td>
+                        <td>Try-with-resources, Diamond Operator</td>
+                    </tr>
+                    <tr>
+                        <td>2014</td>
+                        <td>Java 8</td>
+                        <td>Lambda Expressions, Streams API, Functional Programming</td>
+                    </tr>
+                    <tr>
+                        <td>2021</td>
+                        <td>Java 17 (LTS)</td>
+                        <td>Records, Sealed Classes, Pattern Matching</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" id="features">
+            <h4>Key Features of Java</h4>
+            <p>Java provides several powerful features that make it ideal for building robust applications:</p>
+            <ul>
+                <li><strong>Object-Oriented:</strong> Everything is an object, promoting modularity and reusability</li>
+                <li><strong>Platform Independent:</strong> Bytecode runs on JVM across all platforms</li>
+                <li><strong>Secure:</strong> Built-in security features, classloader, bytecode verifier</li>
+                <li><strong>Multi-threaded:</strong> Built-in support for concurrent programming</li>
+                <li><strong>Robust:</strong> Strong memory management, exception handling, type checking</li>
+                <li><strong>Distributed:</strong> Designed for building networked applications</li>
+                <li><strong>Dynamic:</strong> Runtime flexibility and reflection capabilities</li>
+            </ul>
+            <div class="note">
+                <strong>💡 Key Concept:</strong> The JVM (Java Virtual Machine) is the heart of Java's platform
+                independence. It acts as an intermediary between your Java code and the operating system.
+            </div>
+        </div>
+
+        <div class="section" id="environment">
+            <h4>Java Development Environment Setup</h4>
+            <p><strong>Required Components:</strong></p>
+            <ul>
+                <li><strong>JDK (Java Development Kit):</strong> Contains tools for developing Java applications
+                    (compiler, debugger, etc.)</li>
+                <li><strong>JRE (Java Runtime Environment):</strong> Minimum environment to run Java applications
+                    (included in JDK)</li>
+                <li><strong>IDE (Integrated Development Environment):</strong> Tools like Eclipse, IntelliJ IDEA, or VS
+                    Code</li>
+            </ul>
+            <p><strong>Installation Steps:</strong></p>
+            <pre><code>1. Download JDK from oracle.com (Java 17 or later recommended)
+2. Run the installer and follow the installation wizard
+3. Set JAVA_HOME environment variable
+4. Add JDK's bin directory to PATH
+5. Verify installation:
+   - Open Command Prompt/Terminal
+   - Type: java -version
+   - Type: javac -version</code></pre>
+            <div class="output">
+                java version "17.0.1" 2021-10-19 LTS<br>
+                Java(TM) SE Runtime Environment (build 17.0.1+12-39)<br>
+                Java HotSpot(TM) 64-Bit Server VM (build 17.0.1+12-39, mixed mode, sharing)
+            </div>
+        </div>
+
+        <div class="section" id="first-program">
+            <h4>Your First Java Program</h4>
+            <p>Let's write the classic "Hello, World!" program to understand Java's basic structure.</p>
+            <pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}</code></pre>
+            <p><strong>Program Breakdown:</strong></p>
+            <ul>
+                <li><code>public class HelloWorld</code> - Declares a public class named HelloWorld (filename must
+                    match)</li>
+                <li><code>public static void main(String[] args)</code> - Entry point of the program</li>
+                <li><code>System.out.println()</code> - Prints text to console followed by a newline</li>
+            </ul>
+            <p><strong>Compilation and Execution:</strong></p>
+            <pre><code>// Save file as: HelloWorld.java
+
+// Compilation (creates HelloWorld.class)
+javac HelloWorld.java
+
+// Execution
+java HelloWorld</code></pre>
+            <div class="output">
+                Hello, World!
+            </div>
+            <div class="example">
+                <strong>✓ Program Structure:</strong> Every Java application must have at least one class with a main()
+                method. The main method is where execution begins. The String[] args parameter allows you to pass
+                command-line arguments to your program.
+            </div>
+            <div class="note">
+                <strong>💡 Key Points:</strong> Java is case-sensitive. The filename must match the public class name.
+                Method names are case-sensitive too. Always use meaningful class names following naming conventions
+                (PascalCase for classes, camelCase for methods).
+            </div>
+        </div>
+
+        <div class="section" id="ascii-notes">
+            <h4>ASCII Notes</h4>
+            <p>ASCII (American Standard Code for Information Interchange) is the standard character encoding system.
+                Java uses ASCII for character representation in the char data type.</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="../ASCII_Reference.html" target="_blank" class="btn btn-info"
+                    style="background-color: #17a2b8; border: none; padding: 10px 20px; border-radius: 5px; color: white; text-decoration: none; font-weight: 600;">
+                    📊 View Interactive ASCII Chart →
+                </a>
+            </div>
+            <pre><code>ASCII Quick Reference:
+
+DEC  CHAR  DEC  CHAR  DEC  CHAR  DEC  CHAR
+---  ----  ---  ----  ---  ----  ---  ----
+ 32  SPACE  48   0    65   A     97   a
+ 33   !    49   1    66   B     98   b
+ 34   "    50   2    67   C     99   c
+ 35   #    51   3    68   D    100   d
+ 36   $    52   4    69   E    101   e
+ 37   %    53   5    70   F    102   f
+ 38   &    54   6    71   G    103   g
+ 39   '    55   7    72   H    104   h
+ 40   (    56   8    73   I    105   i
+ 41   )    57   9    74   J    106   j</code></pre>
+            <p><strong>Using ASCII in Java:</strong></p>
+            <pre><code>public class ASCIIExample {
+    public static void main(String[] args) {
+        // Cast char to int to get ASCII value
+        char letter = 'A';
+        int ascii = (int) letter;
+        System.out.println("ASCII value of 'A': " + ascii);
+        
+        // Cast int to char to get character from ASCII
+        int code = 65;
+        char character = (char) code;
+        System.out.println("Character from ASCII 65: " + character);
+        
+        // Print ASCII values of uppercase letters
+        System.out.println("\nASCII Table:");
+        for (int i = 65; i <= 90; i++) {
+            System.out.print((char)i + " ");
+        }
+    }
+}</code></pre>
+            <div class="output">
+                ASCII value of 'A': 65<br>
+                Character from ASCII 65: A<br>
+                <br>
+                ASCII Table:<br>
+                A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+            </div>
+            <div class="note">
+                <strong>💡 ASCII Ranges:</strong> Numbers (48-57), Uppercase (65-90), Lowercase (97-122), Special
+                characters start at 32 (space)
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">
+                Go to Practice Worksheets →
+            </a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Java Introduction Module | Last Updated: November 2025</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compile-Time Polymorphism - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Compile-Time Polymorphism</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Compile-Time Polymorphism - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master method overloading and compile-time polymorphism in Java.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Calculator with Method Overloading</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Calculator class with overloaded add() methods that can:
+                • Add two integers
+                • Add three integers
+                • Add two double values
+                • Add an array of integers
+                Demonstrate all versions with user input.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class Calculator {
+    // Add two integers
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    // Add three integers
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    // Add two doubles
+    public double add(double a, double b) {
+        return a + b;
+    }
+
+    // Add array of integers
+    public int add(int[] numbers) {
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
+        return sum;
+    }
+}
+
+class _01_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        Calculator calc = new Calculator();
+
+        System.out.print("Enter two integers: ");
+        int a = sn.nextInt();
+        int b = sn.nextInt();
+        System.out.println("Sum (2 ints): " + calc.add(a, b));
+
+        System.out.print("Enter three integers: ");
+        int x = sn.nextInt();
+        int y = sn.nextInt();
+        int z = sn.nextInt();
+        System.out.println("Sum (3 ints): " + calc.add(x, y, z));
+
+        System.out.print("Enter two doubles: ");
+        double d1 = sn.nextDouble();
+        double d2 = sn.nextDouble();
+        System.out.println("Sum (2 doubles): " + calc.add(d1, d2));
+
+        System.out.print("Enter array size: ");
+        int size = sn.nextInt();
+        int[] arr = new int[size];
+        System.out.print("Enter " + size + " numbers: ");
+        for (int i = 0; i < size; i++) {
+            arr[i] = sn.nextInt();
+        }
+        System.out.println("Sum (array): " + calc.add(arr));
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter two integers: 10 20
+Sum (2 ints): 30
+Enter three integers: 5 10 15
+Sum (3 ints): 30
+Enter two doubles: 3.5 2.5
+Sum (2 doubles): 6.0
+Enter array size: 4
+Enter 4 numbers: 1 2 3 4
+Sum (array): 10</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Method Overloading:</strong> Same method name, different parameter lists</li>
+                    <li><strong>Parameter Count:</strong> Different number of parameters (2 vs 3 integers)</li>
+                    <li><strong>Parameter Type:</strong> Different data types (int vs double)</li>
+                    <li><strong>Parameter Structure:</strong> Single values vs array</li>
+                </ul>
+                <strong>Compile-Time:</strong> Java determines which method to call based on arguments at compile time
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Area Calculator for Different Shapes</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Shape class with overloaded area() methods to calculate:
+                • Area of a circle (radius)
+                • Area of a rectangle (length, width)
+                • Area of a triangle (base, height)
+                • Area of a square (side)</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class Shape {
+    // Circle area
+    public double area(double radius) {
+        return Math.PI * radius * radius;
+    }
+
+    // Rectangle area
+    public double area(double length, double width) {
+        return length * width;
+    }
+
+    // Triangle area
+    public double area(int base, int height) {
+        return 0.5 * base * height;
+    }
+
+    // Square area (using single int parameter)
+    public int area(int side) {
+        return side * side;
+    }
+}
+
+class _02_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        Shape shape = new Shape();
+
+        System.out.print("Enter circle radius: ");
+        double radius = sn.nextDouble();
+        System.out.println("Circle area: " + String.format("%.2f", shape.area(radius)));
+
+        System.out.print("Enter rectangle length and width: ");
+        double length = sn.nextDouble();
+        double width = sn.nextDouble();
+        System.out.println("Rectangle area: " + String.format("%.2f", shape.area(length, width)));
+
+        System.out.print("Enter triangle base and height: ");
+        int base = sn.nextInt();
+        int height = sn.nextInt();
+        System.out.println("Triangle area: " + shape.area(base, height));
+
+        System.out.print("Enter square side: ");
+        int side = sn.nextInt();
+        System.out.println("Square area: " + shape.area(side));
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter circle radius: 7
+Circle area: 153.94
+Enter rectangle length and width: 10 5
+Rectangle area: 50.00
+Enter triangle base and height: 8 6
+Triangle area: 24.0
+Enter square side: 4
+Square area: 16</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Same Method Name:</strong> All methods named area() for consistency</li>
+                    <li><strong>Different Signatures:</strong> Differentiated by parameter count and type</li>
+                    <li><strong>Return Type:</strong> Can vary (double vs int) but not used for overloading</li>
+                    <li><strong>Semantic Clarity:</strong> Overloading makes API intuitive</li>
+                </ul>
+                <strong>Design:</strong> Single parameter (circle/square) vs two parameters (rectangle/triangle)
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: String Formatter with Multiple Options</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Formatter class with overloaded format() methods that can:
+                • Format a string to uppercase
+                • Format a string with a prefix and suffix
+                • Format a string by repeating it n times
+                • Format a string by replacing spaces with a character</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class Formatter {
+    // Uppercase format
+    public String format(String str) {
+        return str.toUpperCase();
+    }
+
+    // Prefix and suffix format
+    public String format(String str, String prefix, String suffix) {
+        return prefix + str + suffix;
+    }
+
+    // Repeat n times
+    public String format(String str, int times) {
+        String result = "";
+        for (int i = 0; i < times; i++) {
+            result += str;
+        }
+        return result;
+    }
+
+    // Replace spaces with character
+    public String format(String str, char replacement) {
+        return str.replace(' ', replacement);
+    }
+}
+
+class _03_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        Formatter fmt = new Formatter();
+
+        System.out.print("Enter a string: ");
+        String text = sn.nextLine();
+
+        System.out.println("\n1. Uppercase: " + fmt.format(text));
+
+        System.out.print("Enter prefix: ");
+        String prefix = sn.next();
+        System.out.print("Enter suffix: ");
+        String suffix = sn.next();
+        sn.nextLine(); // consume newline
+        System.out.println("2. With prefix/suffix: " + fmt.format(text, prefix, suffix));
+
+        System.out.print("Enter repeat count: ");
+        int times = sn.nextInt();
+        System.out.println("3. Repeated: " + fmt.format(text, times));
+
+        System.out.print("Enter replacement character for spaces: ");
+        char replacement = sn.next().charAt(0);
+        System.out.println("4. Spaces replaced: " + fmt.format(text, replacement));
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: hello world
+
+1. Uppercase: HELLO WORLD
+Enter prefix: [
+Enter suffix: ]
+2. With prefix/suffix: [hello world]
+Enter repeat count: 3
+3. Repeated: hello worldhello worldhello world
+Enter replacement character for spaces: _
+4. Spaces replaced: hello_world</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Mixed Parameters:</strong> String alone, String + String + String, String + int, String
+                        + char</li>
+                    <li><strong>Parameter Order:</strong> Order matters in method signature</li>
+                    <li><strong>Type Distinction:</strong> int vs char parameters create different signatures</li>
+                    <li><strong>Utility Methods:</strong> Overloading provides flexible API</li>
+                </ul>
+                <strong>Signature:</strong> format(String), format(String,String,String), format(String,int),
+                format(String,char)
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Constructor Overloading for Student Class</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Student class with overloaded constructors:
+                • Default constructor (no parameters)
+                • Constructor with name only
+                • Constructor with name and age
+                • Constructor with name, age, and grade
+                Display student details for each constructor type.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class Student {
+    String name;
+    int age;
+    char grade;
+
+    // Default constructor
+    public Student() {
+        this.name = "Unknown";
+        this.age = 0;
+        this.grade = 'N';
+    }
+
+    // Constructor with name
+    public Student(String name) {
+        this.name = name;
+        this.age = 0;
+        this.grade = 'N';
+    }
+
+    // Constructor with name and age
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+        this.grade = 'N';
+    }
+
+    // Constructor with all parameters
+    public Student(String name, int age, char grade) {
+        this.name = name;
+        this.age = age;
+        this.grade = grade;
+    }
+
+    public void display() {
+        System.out.println("Name: " + name + ", Age: " + age + ", Grade: " + grade);
+    }
+}
+
+class _04_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        Student s1 = new Student();
+        System.out.println("Student 1 (default):");
+        s1.display();
+
+        System.out.print("\nEnter name for Student 2: ");
+        String name = sn.next();
+        Student s2 = new Student(name);
+        System.out.println("Student 2 (name only):");
+        s2.display();
+
+        System.out.print("\nEnter name and age for Student 3: ");
+        String name2 = sn.next();
+        int age = sn.nextInt();
+        Student s3 = new Student(name2, age);
+        System.out.println("Student 3 (name + age):");
+        s3.display();
+
+        System.out.print("\nEnter name, age, and grade for Student 4: ");
+        String name3 = sn.next();
+        int age2 = sn.nextInt();
+        char grade = sn.next().charAt(0);
+        Student s4 = new Student(name3, age2, grade);
+        System.out.println("Student 4 (all details):");
+        s4.display();
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Student 1 (default):
+Name: Unknown, Age: 0, Grade: N
+
+Enter name for Student 2: Alice
+Student 2 (name only):
+Name: Alice, Age: 0, Grade: N
+
+Enter name and age for Student 3: Bob 20
+Student 3 (name + age):
+Name: Bob, Age: 20, Grade: N
+
+Enter name, age, and grade for Student 4: Charlie 22 A
+Student 4 (all details):
+Name: Charlie, Age: 22, Grade: A</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Constructor Overloading:</strong> Multiple constructors with different parameters</li>
+                    <li><strong>Default Values:</strong> Partial constructors set defaults for missing fields</li>
+                    <li><strong>Flexibility:</strong> Allows object creation with varying levels of information</li>
+                    <li><strong>Progressive Parameters:</strong> Each constructor adds more parameters</li>
+                </ul>
+                <strong>Pattern:</strong> Common in Java classes to provide multiple initialization options
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Print Utility with Type-Specific Formatting</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Printer class with overloaded print() methods that format output
+                differently based on type:
+                • Print integer with "Number: " prefix
+                • Print double with 2 decimal places
+                • Print string in quotes
+                • Print boolean as "TRUE" or "FALSE"
+                • Print array elements separated by commas</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class Printer {
+    // Print integer
+    public void print(int num) {
+        System.out.println("Number: " + num);
+    }
+
+    // Print double with 2 decimals
+    public void print(double num) {
+        System.out.println("Decimal: " + String.format("%.2f", num));
+    }
+
+    // Print string in quotes
+    public void print(String str) {
+        System.out.println("\"" + str + "\"");
+    }
+
+    // Print boolean
+    public void print(boolean value) {
+        System.out.println(value ? "TRUE" : "FALSE");
+    }
+
+    // Print array
+    public void print(int[] arr) {
+        System.out.print("Array: [");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i < arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+}
+
+class _05_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        Printer p = new Printer();
+
+        System.out.print("Enter an integer: ");
+        int num = sn.nextInt();
+        p.print(num);
+
+        System.out.print("Enter a double: ");
+        double decimal = sn.nextDouble();
+        p.print(decimal);
+
+        System.out.print("Enter a string: ");
+        sn.nextLine(); // consume newline
+        String text = sn.nextLine();
+        p.print(text);
+
+        System.out.print("Enter a boolean (true/false): ");
+        boolean flag = sn.nextBoolean();
+        p.print(flag);
+
+        System.out.print("Enter array size: ");
+        int size = sn.nextInt();
+        int[] arr = new int[size];
+        System.out.print("Enter " + size + " numbers: ");
+        for (int i = 0; i < size; i++) {
+            arr[i] = sn.nextInt();
+        }
+        p.print(arr);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter an integer: 42
+Number: 42
+Enter a double: 3.14159
+Decimal: 3.14
+Enter a string: Hello World
+"Hello World"
+Enter a boolean (true/false): true
+TRUE
+Enter array size: 5
+Enter 5 numbers: 10 20 30 40 50
+Array: [10, 20, 30, 40, 50]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Type-Based Overloading:</strong> Different behavior for each data type</li>
+                    <li><strong>Automatic Selection:</strong> Compiler chooses correct method based on argument type
+                    </li>
+                    <li><strong>Custom Formatting:</strong> Each type gets appropriate formatting</li>
+                    <li><strong>Polymorphic Behavior:</strong> Same method name, different implementations</li>
+                </ul>
+                <strong>Advantage:</strong> Single method name (print) works with any data type
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>Compile-Time Polymorphism Module - Practice Worksheet</strong></p>
+            <p>Master method overloading and constructor overloading in Java</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

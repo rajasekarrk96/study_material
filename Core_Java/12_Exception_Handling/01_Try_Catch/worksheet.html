@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try-Catch - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Try-Catch Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+            <a href="#question6" class="nav-link">Question 6</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Try-Catch - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master Java exception handling with try-catch-finally blocks and exception types.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: try-catch-finally Blocks</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of try-catch-finally blocks to
+                handle exceptions. Show how the finally block executes regardless of whether an exception occurs.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _01_ {
+    public static void main(String[] args) {
+
+        try {
+            int a = 10 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println("Exception caught");
+        } finally {
+            System.out.println("Finally block executed");
+        }
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Exception caught
+Finally block executed</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>try Block:</strong> Contains code that might throw an exception</li>
+                    <li><strong>catch Block:</strong> Handles the exception if thrown</li>
+                    <li><strong>finally Block:</strong> Always executes (cleanup code)</li>
+                    <li><strong>Execution Order:</strong> try → catch (if exception) → finally</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Multiple catch Blocks</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of multiple catch blocks to handle
+                different types of exceptions. Show how specific exceptions are caught before general exceptions.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _02_ {
+    public static void main(String[] args) {
+
+        try {
+            int[] arr = new int[5];
+            arr[10] = 50;
+        } catch (ArithmeticException e) {
+            System.out.println("Arithmetic Exception");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array Index Out Of Bounds Exception");
+        } catch (Exception e) {
+            System.out.println("General Exception");
+        }
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Array Index Out Of Bounds Exception</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Multiple catch:</strong> Handle different exception types</li>
+                    <li><strong>Order Matters:</strong> Specific exceptions before general ones</li>
+                    <li><strong>First Match:</strong> Only one catch block executes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: throw and throws Keywords</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of throw and throws keywords to
+                handle exceptions. Show how to explicitly throw an exception and declare it in the method signature.
+            </div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _03_ {
+
+    static void checkAge(int age) throws ArithmeticException {
+        if (age < 18)
+            throw new ArithmeticException("Not eligible");
+        else
+            System.out.println("Eligible");
+    }
+
+    public static void main(String[] args) {
+        checkAge(16);
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Exception in thread "main" java.lang.ArithmeticException: Not eligible
+    at _03_.checkAge(_03_.java:5)
+    at _03_.main(_03_.java:11)</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>throw:</strong> Explicitly throws an exception</li>
+                    <li><strong>throws:</strong> Declares exceptions in method signature</li>
+                    <li><strong>Propagation:</strong> Exception propagates to caller</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Checked and Unchecked Exceptions</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of checked and unchecked exceptions.
+                Show the difference between exceptions that must be handled and those that don't require explicit
+                handling.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.*;
+
+class _07_ {
+    public static void main(String[] args) {
+
+        try {
+            FileReader fr = new FileReader("file.txt"); // Checked
+        } catch (Exception e) {
+            System.out.println("Checked exception handled");
+        }
+
+        int a = 10 / 0; // Unchecked exception
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Checked exception handled
+Exception in thread "main" java.lang.ArithmeticException: / by zero</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Checked:</strong> Must be caught or declared (IOException, SQLException)</li>
+                    <li><strong>Unchecked:</strong> Runtime exceptions (ArithmeticException, NullPointerException)</li>
+                    <li><strong>Compile-time:</strong> Checked exceptions verified at compile time</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: StackTraceElement Class</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of the StackTraceElement class to
+                print the stack trace of an exception. Show how to access detailed information about where the exception
+                occurred.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _08_ {
+    public static void main(String[] args) {
+
+        try {
+            int a = 10 / 0;
+        } catch (Exception e) {
+            StackTraceElement[] st = e.getStackTrace();
+            for (StackTraceElement s : st) {
+                System.out.println(s);
+            }
+        }
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>_08_.main(_08_.java:5)</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>getStackTrace():</strong> Returns array of StackTraceElement</li>
+                    <li><strong>Stack Trace:</strong> Shows method call hierarchy</li>
+                    <li><strong>Debugging:</strong> Helps locate exception source</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="section-card" id="question6">
+            <h3>Question 6: finally for Cleanup Operations</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of the finally block to perform
+                cleanup operations after handling an exception. Show that finally executes even when an exception is
+                caught.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _09_ {
+    public static void main(String[] args) {
+
+        try {
+            int a = 5 / 0;
+        } catch (Exception e) {
+            System.out.println("Exception handled");
+        } finally {
+            System.out.println("Cleanup done");
+        }
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Exception handled
+Cleanup done</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>finally Always Runs:</strong> Executes regardless of exception</li>
+                    <li><strong>Cleanup:</strong> Close resources, release locks</li>
+                    <li><strong>Use Cases:</strong> File closing, database connections, network sockets</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>Try-Catch Module - Practice Worksheet</strong></p>
+            <p>Master Java exception handling fundamentals</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Syntax - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none;
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333;
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0;
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px;
+        }
+
+        .explanation ol {
+            line-height: 1.8;
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Syntax Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>Java Syntax - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Java syntax with these practice problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Single-Line Comment Program</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that prints "Learning Java Syntax" and includes a single-line comment explaining
+                what the program does.
+            </div>
+
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br>
+                (No input required)<br><br>
+
+                <strong>Sample Output 1:</strong><br>
+                <code>Learning Java Syntax</code><br><br>
+
+                <strong>Sample Input 2:</strong><br>
+                (No input required)<br><br>
+
+                <strong>Sample Output 2:</strong><br>
+                <code>Learning Java Syntax</code>
+            </div>
+
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class CommentExample {
+    public static void main(String[] args) {
+        // This program demonstrates single-line comments
+        System.out.println("Learning Java Syntax");
+    }
+}</code></div>
+
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Single-Line Comment:</strong> <code>//</code> is used for single-line comments.
+                                Everything after // on that line is ignored by the compiler.</li>
+                            <li><strong>Class Declaration:</strong> Defines a public class named CommentExample.</li>
+                            <li><strong>Main Method:</strong> The entry point of the program.</li>
+                            <li><strong>Print Statement:</strong> Outputs the text to the console.</li>
+                            <li><strong>Comments Purpose:</strong> Comments help explain code to other programmers and
+                                to yourself when you revisit code later.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Multi-Line Comment Program</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that calculates the area of a rectangle. Include a multi-line comment at the
+                beginning explaining the program's purpose.
+            </div>
+
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br>
+                <code>5<br>10</code><br><br>
+
+                <strong>Sample Output 1:</strong><br>
+                <code>Area of rectangle: 50</code><br><br>
+
+                <strong>Sample Input 2:</strong><br>
+                <code>7<br>8</code><br><br>
+
+                <strong>Sample Output 2:</strong><br>
+                <code>Area of rectangle: 56</code>
+            </div>
+
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+/*
+ * This program calculates the area of a rectangle
+ * Formula: Area = length * width
+ * Author: Java Student
+ */
+public class RectangleArea {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter length: ");
+        int length = sn.nextInt();
+        
+        System.out.print("Enter width: ");
+        int width = sn.nextInt();
+        
+        int area = length * width;
+        
+        System.out.println("Area of rectangle: " + area);
+        
+        sn.close();
+    }
+}</code></div>
+
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Multi-Line Comment:</strong> <code>/* ... */</code> is used for multi-line
+                                comments. Everything between /* and */ is ignored by the compiler.</li>
+                            <li><strong>Import Scanner:</strong> Imports the Scanner class for user input.</li>
+                            <li><strong>Read Dimensions:</strong> Reads length and width from the user.</li>
+                            <li><strong>Calculate Area:</strong> Multiplies length and width to get the area.</li>
+                            <li><strong>Display Result:</strong> Prints the calculated area.</li>
+                            <li><strong>Documentation:</strong> Multi-line comments are often used for documentation at
+                                the beginning of classes or methods.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Proper Indentation Practice</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that takes a number and prints whether it's positive or negative. Use proper
+                indentation to make the code readable.
+            </div>
+
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br>
+                <code>15</code><br><br>
+
+                <strong>Sample Output 1:</strong><br>
+                <code>The number is positive</code><br><br>
+
+                <strong>Sample Input 2:</strong><br>
+                <code>-8</code><br><br>
+
+                <strong>Sample Output 2:</strong><br>
+                <code>The number is negative</code>
+            </div>
+
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class CheckNumber {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter a number: ");
+        int number = sn.nextInt();
+        
+        if (number > 0) {
+            System.out.println("The number is positive");
+        } else if (number < 0) {
+            System.out.println("The number is negative");
+        } else {
+            System.out.println("The number is zero");
+        }
+        
+        sn.close();
+    }
+}</code></div>
+
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Proper Indentation:</strong> Notice how code inside braces { } is indented. This
+                                makes the code structure clear and readable.</li>
+                            <li><strong>Read Number:</strong> Gets an integer input from the user.</li>
+                            <li><strong>Conditional Check:</strong> Uses if-else statements to check if the number is
+                                positive, negative, or zero.</li>
+                            <li><strong>Code Blocks:</strong> Each condition has its own code block enclosed in braces.
+                            </li>
+                            <li><strong>Readability:</strong> Proper indentation is crucial for understanding code
+                                structure, especially in larger programs.</li>
+                            <li><strong>Best Practice:</strong> Always use consistent indentation (typically 4 spaces or
+                                1 tab).</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Variable Naming Conventions</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that calculates the total price of items including tax. Use proper variable naming
+                conventions (camelCase for variables).
+            </div>
+
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br>
+                <code>100<br>10</code><br><br>
+
+                <strong>Sample Output 1:</strong><br>
+                <code>Total Price: 110.0</code><br><br>
+
+                <strong>Sample Input 2:</strong><br>
+                <code>500<br>5</code><br><br>
+
+                <strong>Sample Output 2:</strong><br>
+                <code>Total Price: 525.0</code>
+            </div>
+
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class CalculatePrice {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter item price: ");
+        double itemPrice = sn.nextDouble();
+        
+        System.out.print("Enter tax percentage: ");
+        double taxPercentage = sn.nextDouble();
+        
+        double taxAmount = (itemPrice * taxPercentage) / 100;
+        double totalPrice = itemPrice + taxAmount;
+        
+        System.out.println("Total Price: " + totalPrice);
+        
+        sn.close();
+    }
+}</code></div>
+
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>CamelCase Naming:</strong> Variable names like <code>itemPrice</code>,
+                                <code>taxPercentage</code>, and <code>totalPrice</code> follow camelCase convention
+                                (first word lowercase, subsequent words capitalized).
+                            </li>
+                            <li><strong>Descriptive Names:</strong> Variable names clearly describe what they store,
+                                making the code self-documenting.</li>
+                            <li><strong>Read Input:</strong> Uses <code>nextDouble()</code> to read decimal numbers.
+                            </li>
+                            <li><strong>Calculate Tax:</strong> Computes tax amount as a percentage of the item price.
+                            </li>
+                            <li><strong>Calculate Total:</strong> Adds tax to the original price.</li>
+                            <li><strong>Naming Rules:</strong> Variables must start with a letter, $, or _. They cannot
+                                start with a number or contain spaces.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Semicolon and Statement Termination</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that demonstrates proper use of semicolons by calculating the average of three
+                numbers.
+            </div>
+
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br>
+                <code>10<br>20<br>30</code><br><br>
+
+                <strong>Sample Output 1:</strong><br>
+                <code>Average: 20.0</code><br><br>
+
+                <strong>Sample Input 2:</strong><br>
+                <code>15<br>25<br>35</code><br><br>
+
+                <strong>Sample Output 2:</strong><br>
+                <code>Average: 25.0</code>
+            </div>
+
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class CalculateAverage {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter first number: ");
+        int num1 = sn.nextInt();
+        
+        System.out.print("Enter second number: ");
+        int num2 = sn.nextInt();
+        
+        System.out.print("Enter third number: ");
+        int num3 = sn.nextInt();
+        
+        double sum = num1 + num2 + num3;
+        double average = sum / 3.0;
+        
+        System.out.println("Average: " + average);
+        
+        sn.close();
+    }
+}</code></div>
+
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Semicolons:</strong> Notice that every statement ends with a semicolon (;). This
+                                is mandatory in Java.</li>
+                            <li><strong>Statement Termination:</strong> The semicolon tells the compiler where one
+                                statement ends and another begins.</li>
+                            <li><strong>Read Three Numbers:</strong> Reads three integer values from the user.</li>
+                            <li><strong>Calculate Sum:</strong> Adds all three numbers together.</li>
+                            <li><strong>Calculate Average:</strong> Divides the sum by 3.0 (using 3.0 instead of 3
+                                ensures we get a decimal result).</li>
+                            <li><strong>Missing Semicolon Error:</strong> Forgetting a semicolon is one of the most
+                                common syntax errors in Java and will prevent your program from compiling.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Java Syntax - Practice Worksheet</strong></p>
+            <p>Master Java syntax rules and conventions</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

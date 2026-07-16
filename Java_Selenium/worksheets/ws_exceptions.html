@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksheet: Exceptions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00e676;
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-light: #e0e0e0;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            height: calc(100vh - 50px);
+        }
+
+        .pane-questions {
+            width: 40%;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pane-header {
+            padding: 15px;
+            background: #252525;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .questions-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .question-card {
+            background: #2d2d2d;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .q-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .pane-practice {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f0f0;
+        }
+
+        .browser-bar {
+            background: #e0e0e0;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .app-view {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            color: #333;
+        }
+
+        .exception-box {
+            background: #222;
+            color: #ff5f56;
+            font-family: monospace;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #555;
+            margin-bottom: 20px;
+        }
+
+        .solutions-panel {
+            background: #1a1a1a;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .sol-header {
+            padding: 12px 20px;
+            background: #252525;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #aaa;
+        }
+
+        .sol-content {
+            display: none;
+            padding: 15px;
+            background: #111;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: Consolas, monospace;
+        }
+
+        .sol-content.visible {
+            display: block;
+        }
+
+        /* Buttons */
+        .demo-btn {
+            padding: 10px 16px;
+            margin: 10px 0;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #btn {
+            background: #ff9800;
+        }
+
+        #dynamicBtn {
+            background: #00e676;
+            display: none;
+        }
+
+        /* ========= SYNTAX HIGHLIGHTING ========= */
+        .sol-content pre {
+            background: #111;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .sol-content code {
+            color: #d4d4d4;
+            font-family: Consolas, monospace;
+            line-height: 1.6;
+        }
+
+        .sol-content .code-keyword {
+            color: #569cd6;
+            font-weight: 600;
+        }
+
+        .sol-content .code-class {
+            color: #4ec9b0;
+        }
+
+        .sol-content .code-method {
+            color: #dcdcaa;
+        }
+
+        .sol-content .code-variable {
+            color: #9cdcfe;
+        }
+
+        .sol-content .code-string {
+            color: #ce9178;
+        }
+
+        .sol-content .code-number {
+            color: #b5cea8;
+        }
+
+        .sol-content .code-comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
+        /* ===== Syntax Highlighting (REQUIRED) ===== */
+        .code-keyword {
+            color: #569cd6;
+            /* blue */
+            font-weight: 600;
+        }
+
+        .code-class {
+            color: #4ec9b0;
+            /* teal */
+        }
+
+        .code-method {
+            color: #dcdcaa;
+            /* yellow */
+        }
+
+        .code-variable {
+            color: #9cdcfe;
+            /* light blue */
+        }
+
+        .code-string {
+            color: #ce9178;
+            /* orange */
+        }
+
+        .code-number {
+            color: #b5cea8;
+            /* green */
+        }
+
+        .code-comment {
+            color: #6a9955;
+            /* green */
+            font-style: italic;
+        }
+
+        /* Code block base */
+        pre code {
+            color: #d4d4d4;
+            background: #111;
+            display: block;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1><i class="fas fa-bug"></i> Practice: Exceptions</h1>
+    </header>
+
+    <div class="workspace">
+
+        <!-- LEFT -->
+        <div class="pane-questions">
+            <div class="pane-header">Assignments</div>
+            <div class="questions-list">
+                <div class="question-card">
+                    <div class="q-title">Task 01: Stale Ref</div>
+                    <div>What causes StaleElementReferenceException? How do you fix it?</div>
+                </div>
+                <div class="question-card">
+                    <div class="q-title">Task 02: No Such Element</div>
+                    <div>Locator is correct, but exception occurs. Why?</div>
+                </div>
+            </div>
+
+            <!-- ✅ SOLUTION PANEL -->
+            <div class="solutions-panel">
+                <div class="sol-header" onclick="toggleSolution()">
+                    <span><i class="fas fa-code"></i> Solution</span>
+                    <i class="fas fa-chevron-up" id="icon"></i>
+                </div>
+
+                <div class="sol-content" id="solution">
+                    <!-- ✅ YOUR JAVA CODE INSERTED HERE -->
+                    <pre style="margin:0;"><code><span class="code-keyword">package</span> <span class="code-class">Selenium</span>;
+ 
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.By</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebDriver</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebElement</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.chrome.ChromeDriver</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.support.ui.ExpectedConditions</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.support.ui.WebDriverWait</span>;
+<span class="code-keyword">import</span> <span class="code-class">java.time.Duration</span>;
+ 
+<span class="code-keyword">public class</span> <span class="code-class">_26_CommonExceptions</span> <span class="code-punctuation">{</span>
+    <span class="code-keyword">public static void</span> <span class="code-method">main</span><span class="code-punctuation">(</span><span class="code-class">String</span><span class="code-punctuation">[]</span> args<span class="code-punctuation">)</span> <span class="code-punctuation">{</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Started ---"</span><span class="code-punctuation">);</span>
+        <span class="code-class">WebDriver</span> <span class="code-variable">driver</span> <span class="code-punctuation">=</span> <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">manage</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">window</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-method">.maximize</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Navigating to Exceptions worksheet..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">get</span><span class="code-punctuation">(</span><span class="code-string">"http://127.0.0.1:5501/Java_Selinium/worksheets/ws_exceptions.html"</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-class">WebDriverWait</span> <span class="code-variable">wait</span> <span class="code-punctuation">=</span> <span class="code-keyword">new</span> <span class="code-class">WebDriverWait</span><span class="code-punctuation">(</span><span class="code-variable">driver</span><span class="code-punctuation">,</span> <span class="code-class">Duration</span><span class="code-punctuation">.</span><span class="code-method">ofSeconds</span><span class="code-punctuation">(</span><span class="code-number">10</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-comment">// Task 01: StaleElementReferenceException</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 01: Handling StaleElementReferenceException..."</span><span class="code-punctuation">);</span>
+        <span class="code-class">WebElement</span> <span class="code-variable">btn</span> <span class="code-punctuation">=</span> <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">id</span><span class="code-punctuation">(</span><span class="code-string">"btn"</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Refreshing the page to make element reference stale..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">navigate</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">refresh</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Re-locating element to avoid StaleElementReferenceException..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">btn</span> <span class="code-punctuation">=</span> <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">findElement</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">id</span><span class="code-punctuation">(</span><span class="code-string">"btn"</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+        <span class="code-variable">btn</span><span class="code-punctuation">.</span><span class="code-method">click</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-comment">// Task 02: NoSuchElementException (Timing issue)</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 02: Handling NoSuchElementException with WebDriverWait..."</span><span class="code-punctuation">);</span>
+        <span class="code-class">WebElement</span> <span class="code-variable">dynamicBtn</span> <span class="code-punctuation">=</span> <span class="code-variable">wait</span><span class="code-punctuation">.</span><span class="code-method">until</span><span class="code-punctuation">(</span>
+            <span class="code-class">ExpectedConditions</span><span class="code-punctuation">.</span><span class="code-method">visibilityOfElementLocated</span><span class="code-punctuation">(</span><span class="code-class">By</span><span class="code-punctuation">.</span><span class="code-method">id</span><span class="code-punctuation">(</span><span class="code-string">"dynamicBtn"</span><span class="code-punctuation">)</span><span class="code-punctuation">)</span>
+        <span class="code-punctuation">);</span>
+        <span class="code-variable">dynamicBtn</span><span class="code-punctuation">.</span><span class="code-method">click</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Dynamic button successfully clicked."</span><span class="code-punctuation">);</span>
+ 
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Ended ---"</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">quit</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+    <span class="code-punctuation">}</span>
+<span class="code-punctuation">}</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="pane-practice">
+            <div class="browser-bar">
+                <i class="fas fa-terminal"></i>
+                <div>Exception Demo Area</div>
+            </div>
+
+            <div class="app-view">
+                <div class="exception-box">
+                    DOM refresh → stale element reference
+                </div>
+
+                <button id="btn" class="demo-btn" onclick="location.reload()">Refresh Button</button>
+                <button id="dynamicBtn" class="demo-btn" onclick="alert('Clicked')">Dynamic Button</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSolution() {
+            const s = document.getElementById("solution");
+            const i = document.getElementById("icon");
+            s.classList.toggle("visible");
+            i.className = s.classList.contains("visible")
+                ? "fas fa-chevron-down"
+                : "fas fa-chevron-up";
+        }
+
+        setTimeout(() => {
+            document.getElementById("dynamicBtn").style.display = "block";
+        }, 3000);
+    </script>
+
+</body>
+
+</html>

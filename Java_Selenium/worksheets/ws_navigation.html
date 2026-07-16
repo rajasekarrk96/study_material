@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksheet: Navigation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00e676;
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-light: #e0e0e0;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            height: calc(100vh - 50px);
+        }
+
+        .pane-questions {
+            width: 40%;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pane-header {
+            padding: 15px;
+            background: #252525;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .questions-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .question-card {
+            background: #2d2d2d;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .q-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .q-text {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .pane-practice {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f0f0;
+        }
+
+        .browser-bar {
+            background: #e0e0e0;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .url-box {
+            background: #fff;
+            padding: 5px 12px;
+            border-radius: 12px;
+            flex: 1;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #555;
+            border: 1px solid #ccc;
+        }
+
+        .app-view {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            color: #333;
+        }
+
+        .solutions-panel {
+            background: #1a1a1a;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sol-header {
+            padding: 10px 20px;
+            background: #252525;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .sol-header:hover {
+            color: #fff;
+            background: #333;
+        }
+
+        .sol-content {
+            padding: 15px;
+            display: none;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            color: #dcdcaa;
+            background: #111;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .sol-content.visible {
+            display: block;
+        }
+
+        /* Syntax Highlighting */
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-variable {
+            color: #9cdcfe;
+        }
+
+        .code-method {
+            color: #dcdcaa;
+        }
+
+        .code-class {
+            color: #4ec9b0;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .browser-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .ctrl-btn {
+            font-size: 20px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .ctrl-btn:hover {
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><i class="fas fa-compass"></i> Practice: Navigation</h1>
+        <a href="../index.html" style="color:#888; text-decoration:none;"><i class="fas fa-home"></i> Home</a>
+    </header>
+    <div class="workspace">
+        <div class="pane-questions">
+            <div class="pane-header"><i class="fas fa-tasks"></i> Assignments</div>
+            <div class="questions-list">
+                <div class="question-card">
+                    <div class="q-title">Task 01: Navigate to Multiple URLs</div>
+                    <div class="q-text">
+                        Navigate to "https://www.google.com" using <code>navigate().to()</code>.
+                        Then navigate to "https://www.facebook.com".
+                        Print the current URL after each navigation using <code>getCurrentUrl()</code>.
+                    </div>
+                </div>
+                <div class="question-card">
+                    <div class="q-title">Task 02: Browser History Navigation</div>
+                    <div class="q-text">
+                        After completing Task 01, use <code>navigate().back()</code> to go back to Google.
+                        Verify you're on Google by checking the URL contains "google".
+                        Then use <code>navigate().forward()</code> to return to Facebook and verify the URL.
+                    </div>
+                </div>
+                <div class="question-card">
+                    <div class="q-title">Task 03: Page Refresh Operations</div>
+                    <div class="q-text">
+                        Navigate to "https://www.amazon.com".
+                        Use <code>navigate().refresh()</code> to reload the page.
+                        Print the page title before and after refresh to confirm the page reloaded successfully.
+                    </div>
+                </div>
+            </div>
+            <div class="solutions-panel">
+                <div class="sol-header" onclick="toggleSolutions()">
+                    <span><i class="fas fa-code"></i> Solutions</span>
+                    <i class="fas fa-chevron-up" id="sol-icon"></i>
+                </div>
+                <div class="sol-content" id="sol-body">
+                    <pre style="margin:0;"><code>
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebDriver</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.chrome.ChromeDriver</span>;
+
+<span class="code-keyword">public class</span> <span class="code-class">_10_Navigation</span> {
+    <span class="code-keyword">public static void</span> <span class="code-method">main</span><span class="code-punctuation">(</span><span class="code-class">String</span><span class="code-punctuation">[]</span> args<span class="code-punctuation">)</span> <span class="code-punctuation">{</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Started ---"</span><span class="code-punctuation">);</span>
+        <span class="code-class">WebDriver</span> <span class="code-variable">driver</span> <span class="code-punctuation">=</span> <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+
+        <span class="code-comment">// Task 01: Navigate to Multiple URLs</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 01: Navigating to Google and Facebook..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">navigate</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">to</span><span class="code-punctuation">(</span><span class="code-string">"https://www.google.com"</span><span class="code-punctuation">);</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Current URL: "</span> <span class="code-punctuation">+</span> <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">getCurrentUrl</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">navigate</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">to</span><span class="code-punctuation">(</span><span class="code-string">"https://www.facebook.com"</span><span class="code-punctuation">);</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Current URL: "</span> <span class="code-punctuation">+</span> <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">getCurrentUrl</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+
+        <span class="code-comment">// Task 02: Browser History Navigation</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 02: Testing back and forward navigation..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">navigate</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">back</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Navigated back to: "</span> <span class="code-punctuation">+</span> <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">getCurrentUrl</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">navigate</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">forward</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">;</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Navigated forward to: "</span> <span class="code-punctuation">+</span> <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">getCurrentUrl</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+
+        <span class="code-comment">// Task 03: Page Refresh Operations</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Executing Task 03: Navigating to Amazon and refreshing..."</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">navigate</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">to</span><span class="code-punctuation">(</span><span class="code-string">"https://www.amazon.com"</span><span class="code-punctuation">);</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Title before refresh: "</span> <span class="code-punctuation">+</span> <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">getTitle</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">navigate</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">.</span><span class="code-method">refresh</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"Title after refresh: "</span> <span class="code-punctuation">+</span> <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">getTitle</span><span class="code-punctuation">(</span><span class="code-punctuation">)</span><span class="code-punctuation">);</span>
+
+        <span class="code-class">System</span><span class="code-punctuation">.</span><span class="code-keyword">out</span><span class="code-punctuation">.</span><span class="code-method">println</span><span class="code-punctuation">(</span><span class="code-string">"--- Selenium Lab Session Ended ---"</span><span class="code-punctuation">);</span>
+        <span class="code-variable">driver</span><span class="code-punctuation">.</span><span class="code-method">quit</span><span class="code-punctuation">(</span><span class="code-punctuation">);</span>
+    <span class="code-punctuation">}</span>
+}
+</code></pre>
+
+                </div>
+            </div>
+        </div>
+        <div class="pane-practice">
+            <div class="browser-bar"><i class="fas fa-globe" style="color:#666"></i>
+                <div class="url-box">History API</div>
+            </div>
+            <div class="app-view">
+                <div class="browser-controls">
+                    <i class="fas fa-arrow-left ctrl-btn" title="Back"></i>
+                    <i class="fas fa-arrow-right ctrl-btn" title="Forward"></i>
+                    <i class="fas fa-redo ctrl-btn" title="Refresh"></i>
+                </div>
+                <div style="text-align:center; color:#777;">
+                    (Visual representation of browser controls)
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>function toggleSolutions() { const b = document.getElementById('sol-body'); const i = document.getElementById('sol-icon'); b.classList.toggle('visible'); i.className = b.classList.contains('visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-up'; }</script>
+</body>
+
+</html>

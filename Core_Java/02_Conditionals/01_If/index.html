@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If Statement - Java Learning Module</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <div id="sidebar">
+        <h5>If Statement</h5>
+        <a href="../../index.html#control">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#what-is">What is If?</a>
+        <a href="#syntax">Syntax</a>
+        <a href="#examples">Examples</a>
+        <a href="#best-practices">Best Practices</a>
+    </div>
+
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <h1>If Statement</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Section 1: What is an If Statement -->
+        <div class="section" id="what-is">
+            <h2>Section 1: What is an If Statement?</h2>
+            <p>
+                An <strong>if statement</strong> is a fundamental control structure in Java that allows you to execute
+                code conditionally.
+                It tests a Boolean condition and, if that condition evaluates to <code>true</code>, the code block
+                inside the if statement is executed.
+                If the condition is <code>false</code>, the code is skipped.
+            </p>
+
+            <h3>Key Concepts</h3>
+            <ul>
+                <li><strong>Boolean Condition:</strong> A condition that evaluates to either <code>true</code> or
+                    <code>false</code>
+                </li>
+                <li><strong>Conditional Execution:</strong> Code that runs only when a specific condition is met</li>
+                <li><strong>Decision Making:</strong> Allow your program to make choices based on data or user input
+                </li>
+            </ul>
+
+            <div class="note-box">
+                <h4>💡 Important Note</h4>
+                <p>If statements are essential for creating dynamic programs that respond to different situations.
+                    Without conditional statements, programs would always execute the same sequence of operations.</p>
+            </div>
+
+            <div class="example-box">
+                <h4>🎯 Real-World Example</h4>
+                <p>Think of an if statement like a security gate. If you have the correct pass (condition is true), you
+                    enter the building (code executes). If you don't have the pass (condition is false), you don't
+                    enter.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: If Statement Syntax -->
+        <div class="section" id="syntax">
+            <h2>Section 2: If Statement Syntax</h2>
+            <p>The basic structure of an if statement is simple and follows a consistent pattern:</p>
+
+            <h3>Basic Syntax</h3>
+            <div class="code-block"><code>if (condition) {
+    // Code to execute if condition is true
+}</code></div>
+
+            <h3>Components Breakdown</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>if</code></td>
+                            <td>Keyword that starts the conditional statement</td>
+                            <td><code>if</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>condition</code></td>
+                            <td>Expression that evaluates to true or false</td>
+                            <td><code>age > 18</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>{}</code></td>
+                            <td>Braces that contain the code block</td>
+                            <td><code>{ System.out.println("Adult"); }</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Complete Example with Explanation</h3>
+            <div class="code-block"><code>public class Main {
+    public static void main(String[] args) {
+        int temperature = 30;
+        
+        if (temperature > 25) {
+            System.out.println("It's hot outside!");
+        }
+    }
+}</code></div>
+
+            <div class="note-box">
+                <h4>📝 Remember</h4>
+                <p>The condition must be enclosed in parentheses. The curly braces <code>{}</code> define the scope of
+                    the code that belongs to the if statement. Even a single statement should ideally be enclosed in
+                    braces for clarity.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Single If Statement Examples -->
+        <div class="section" id="examples">
+            <h2>Section 3: Single If Statement Examples</h2>
+            <p>Let's look at practical examples of simple if statements that test different types of conditions:</p>
+
+            <h3>Example 1: Age Verification</h3>
+            <div class="code-block"><code>public class AgeCheck {
+    public static void main(String[] args) {
+        int age = 20;
+        
+        if (age >= 18) {
+            System.out.println("You are an adult.");
+        }
+        // Output: You are an adult.
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>The condition <code>age >= 18</code> is evaluated. Since age is 20, which is greater than or equal to
+                    18, the condition is true. The message "You are an adult." is printed.</p>
+            </div>
+
+            <h3>Example 2: Grade Evaluation</h3>
+            <div class="code-block"><code>public class GradeCheck {
+    public static void main(String[] args) {
+        int marks = 85;
+        
+        if (marks >= 80) {
+            System.out.println("Grade: A");
+            System.out.println("Excellent performance!");
+        }
+        // Output: Grade: A
+        //         Excellent performance!
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>Here we have multiple statements inside the if block. All of them will execute if the condition is
+                    true. Since 85 >= 80, both print statements execute.</p>
+            </div>
+
+            <h3>Example 3: String Equality Check</h3>
+            <div class="code-block"><code>public class StringCheck {
+    public static void main(String[] args) {
+        String username = "admin";
+        
+        if (username.equals("admin")) {
+            System.out.println("Access granted!");
+        }
+        // Output: Access granted!
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>For strings, use the <code>.equals()</code> method to compare values. The condition checks if
+                    username equals "admin", which it does, so the message is printed.</p>
+            </div>
+
+            <h3>Example 4: Number Range Check</h3>
+            <div class="code-block"><code>public class RangeCheck {
+    public static void main(String[] args) {
+        int score = 50;
+        
+        if (score > 0 && score <= 100) {
+            System.out.println("Valid score!");
+        }
+        // Output: Valid score!
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>This example uses the AND operator <code>&&</code> to check multiple conditions. Both conditions must
+                    be true for the code to execute. Since 50 > 0 AND 50 <= 100, the message prints.</p>
+            </div>
+        </div>
+
+        <!-- Section 4: Multiple Conditions -->
+        <div class="section">
+            <h2>Section 4: Multiple Conditions</h2>
+            <p>You can combine multiple conditions using logical operators to create more complex decision-making
+                scenarios:</p>
+
+            <h3>Logical Operators</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Symbol</th>
+                            <th>Meaning</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AND</td>
+                            <td><code>&&</code></td>
+                            <td>Both conditions must be true</td>
+                            <td><code>age > 18 && hasLicense</code></td>
+                        </tr>
+                        <tr>
+                            <td>OR</td>
+                            <td><code>||</code></td>
+                            <td>At least one condition must be true</td>
+                            <td><code>day.equals("Saturday") || day.equals("Sunday")</code></td>
+                        </tr>
+                        <tr>
+                            <td>NOT</td>
+                            <td><code>!</code></td>
+                            <td>Reverses the boolean value</td>
+                            <td><code>!isRaining</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Example 1: AND Operator</h3>
+            <div class="code-block"><code>public class MultipleConditions {
+    public static void main(String[] args) {
+        int age = 25;
+        boolean hasLicense = true;
+        
+        if (age >= 18 && hasLicense) {
+            System.out.println("You can drive!");
+        }
+        // Output: You can drive!
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>Both conditions must be true: age must be >= 18 AND hasLicense must be true. Since both are
+                    satisfied, the message prints.</p>
+            </div>
+
+            <h3>Example 2: OR Operator</h3>
+            <div class="code-block"><code>public class OrExample {
+    public static void main(String[] args) {
+        int day = 6; // Saturday = 6, Sunday = 7
+        
+        if (day == 6 || day == 7) {
+            System.out.println("It's the weekend!");
+        }
+        // Output: It's the weekend!
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>At least one condition must be true. Since day equals 6 (Saturday), the condition is true. Only one
+                    part of the OR needs to be true.</p>
+            </div>
+
+            <h3>Example 3: NOT Operator</h3>
+            <div class="code-block"><code>public class NotExample {
+    public static void main(String[] args) {
+        boolean isRaining = false;
+        
+        if (!isRaining) {
+            System.out.println("Let's go to the park!");
+        }
+        // Output: Let's go to the park!
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>The NOT operator <code>!</code> reverses the value. Since isRaining is false, <code>!isRaining</code>
+                    becomes true, so the code executes.</p>
+            </div>
+
+            <h3>Example 4: Complex Combined Conditions</h3>
+            <div class="code-block"><code>public class ComplexCondition {
+    public static void main(String[] args) {
+        int age = 22;
+        boolean isCitizen = true;
+        boolean hasIncome = true;
+        
+        if ((age >= 18 && isCitizen) || (hasIncome && age >= 21)) {
+            System.out.println("Eligible to vote and work!");
+        }
+        // Output: Eligible to vote and work!
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>Parentheses help organize complex conditions. This checks if either group of conditions is true.
+                    Here, the first group (age >= 18 AND isCitizen) is true, so the entire condition is true.</p>
+            </div>
+        </div>
+
+        <!-- Section 5: Nested If Statements -->
+        <div class="section" id="best-practices">
+            <h2>Section 5: Nested If Statements</h2>
+            <p>
+                <strong>Nested if statements</strong> are if statements inside other if statements. They allow you to
+                create more sophisticated decision-making logic
+                by testing conditions at multiple levels.
+            </p>
+
+            <h3>Structure of Nested If</h3>
+            <div class="code-block"><code>if (firstCondition) {
+    if (secondCondition) {
+        // Code executes if both conditions are true
+    }
+}</code></div>
+
+            <h3>Example 1: Age and Income Verification</h3>
+            <div class="code-block"><code>public class LoanEligibility {
+    public static void main(String[] args) {
+        int age = 30;
+        int income = 50000;
+        
+        if (age >= 18) {
+            if (income >= 30000) {
+                System.out.println("Eligible for loan!");
+            }
+        }
+        // Output: Eligible for loan!
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>First, we check if age >= 18. If true, we then check if income >= 30000. Only if both conditions are
+                    true does the person become eligible for a loan.</p>
+            </div>
+
+            <h3>Example 2: Grade Assignment System</h3>
+            <div class="code-block"><code>public class GradeAssignment {
+    public static void main(String[] args) {
+        int marks = 88;
+        
+        if (marks >= 80) {
+            if (marks >= 90) {
+                System.out.println("Grade: A+");
+            }
+            if (marks >= 85 && marks < 90) {
+                System.out.println("Grade: A");
+            }
+            if (marks >= 80 && marks < 85) {
+                System.out.println("Grade: A-");
+            }
+        }
+        // Output: Grade: A
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>This creates multiple levels of checking. First, we verify the marks are >= 80. Then we check the
+                    exact range to assign the appropriate grade. Since 88 falls in the 85-90 range, "Grade: A" is
+                    printed.</p>
+            </div>
+
+            <h3>Example 3: Discount Calculation</h3>
+            <div class="code-block"><code>public class DiscountCalculator {
+    public static void main(String[] args) {
+        double amount = 5000;
+        boolean isMember = true;
+        
+        if (amount > 1000) {
+            if (isMember) {
+                double discount = amount * 0.20; // 20% discount for members
+                System.out.println("Discount: $" + discount);
+                System.out.println("Final Price: $" + (amount - discount));
+            } else {
+                double discount = amount * 0.10; // 10% discount for non-members
+                System.out.println("Discount: $" + discount);
+                System.out.println("Final Price: $" + (amount - discount));
+            }
+        }
+        // Output: Discount: $1000.0
+        //         Final Price: $4000.0
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>First, we check if the amount exceeds 1000. If yes, we then check if the customer is a member.
+                    Members get 20% discount, non-members get 10%.</p>
+            </div>
+
+            <h3>Example 4: Three-Level Nested Decision</h3>
+            <div class="code-block"><code>public class JobFitness {
+    public static void main(String[] args) {
+        int age = 28;
+        int experience = 5;
+        double gpa = 3.8;
+        
+        if (age >= 22) {
+            if (experience >= 3) {
+                if (gpa >= 3.5) {
+                    System.out.println("Senior Position Offered!");
+                } else {
+                    System.out.println("Junior Position Offered!");
+                }
+            } else {
+                System.out.println("Internship Position Offered!");
+            }
+        } else {
+            System.out.println("Too young. Apply after graduation.");
+        }
+        // Output: Senior Position Offered!
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>🔍 Explanation</h4>
+                <p>This demonstrates three levels of nesting. Each level further refines the decision. First check age,
+                    then experience, then GPA. Based on all three factors, an appropriate position is offered.</p>
+            </div>
+
+            <div class="note-box">
+                <h4>⚠️ Best Practice Warning</h4>
+                <p>While nested if statements are powerful, deeply nested code can become hard to read and maintain. If
+                    you have more than 3 levels of nesting, consider using else-if statements or switch statements for
+                    better code readability.</p>
+            </div>
+        </div>
+
+        <!-- Worksheet Button -->
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

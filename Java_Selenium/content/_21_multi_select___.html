@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  21 multi select   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>21. Multi-Select Dropdowns</h1>
+
+<h2>📖 Introduction</h2>
+<p>Most lists allow collecting one item at a time, but some interfaces require selecting multiple items simultaneously.
+    This could be a standard multi-select listbox or a complex grid where you hold <strong>CTRL</strong> or
+    <strong>SHIFT</strong> to choose multiple rows.
+</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>Handling Standard Multi-select Dropdowns</li>
+    <li>Using <code>isMultiple()</code> to verify dropdown type</li>
+    <li>Deselecting options (only valid for multi-selects)</li>
+    <li>Simulating CTRL+Click for custom grids</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>1. Standard Multi-Select (Select Class)</h3>
+<p>If an HTML <code>&lt;select&gt;</code> tag has the <code>multiple</code> attribute, you can select multiple options
+    using the standard <code>Select</code> class.</p>
+<ul>
+    <li><code>select.isMultiple()</code>: Returns true if multiple selection is allowed.</li>
+    <li><code>select.deselectAll()</code>: Clears all selections.</li>
+    <li><code>select.selectBy...()</code>: Can be called multiple times to add to the selection.</li>
+</ul>
+
+<h3>2. Custom Multi-Select (Actions Class)</h3>
+<p>For modern UI grids (div/span based) that emulate list behavior, you typically need to hold the <strong>Control
+        (Ctrl)</strong> or <strong>Command</strong> key while clicking items.</p>
+
+<h2>💻 Code Examples</h2>
+<p>Key techniques for multi-selection:</p>
+
+<h3>Standard Listbox</h3>
+<pre><code>Select select = new Select(driver.findElement(By.id("colors")));
+
+if(select.isMultiple()) {
+    // Select Red and Blue
+    select.selectByVisibleText("Red");
+    select.selectByVisibleText("Blue");
+    
+    // Verify 2 items are selected
+    List&lt;WebElement&gt; selected = select.getAllSelectedOptions();
+    System.out.println("Selected count: " + selected.size());
+    
+    // Deselect Blue
+    select.deselectByVisibleText("Blue");
+}</code></pre>
+
+<h3>Custom Grid (CTRL+Click)</h3>
+<pre><code>Actions actions = new Actions(driver);
+WebElement item1 = driver.findElement(By.id("row-1"));
+WebElement item2 = driver.findElement(By.id("row-3"));
+
+// Hold CTRL, Click Item 1, Click Item 2, Release CTRL
+actions.keyDown(Keys.CONTROL)
+       .click(item1)
+       .click(item2)
+       .keyUp(Keys.CONTROL)
+       .perform();</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Deselect Exception:</strong> Trying to use <code>deselectAll()</code> or <code>deselectBy...()</code> on
+        a standard single-select dropdown will throw an <code>UnsupportedOperationException</code>.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Manage a Skills Profile.</p>
+    <ol>
+        <li>Check if the "Skills" list allows multiple selection.</li>
+        <li>Select "Java" and "Python".</li>
+        <li>Deselect "Java".</li>
+        <li>Print all currently selected skills.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: How do you select all options in a multi-select dropdown?</strong></p>
+    <p><strong>Answer:</strong> Iterate through <code>select.getOptions()</code> and call <code>selectBy...</code> for
+        each one, or verify <code>isMultiple()</code> first.</p>
+</blockquote>
+
+<a href="worksheets/ws_multi_select.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

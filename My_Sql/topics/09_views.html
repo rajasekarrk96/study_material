@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Views - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Views</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Views</h2>
+                <p class="topic-desc">A VIEW is a virtual table created from a SQL query. It does not store data itself; it shows data from one or more tables.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Basic Concepts</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>A virtual table that represents the result of a stored query.<br><br>🔹 Simplifies complex queries<br>🔹 Improves security<br>🔹 Reusable query<br>🔹 Always shows latest data</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">CREATE VIEW</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Creates a view that filters or combines data from existing tables.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">VIEW</span> view_name <span class="sql-keyword">AS</span>\nSELECT column1, column2\nFROM table_name\nWHERE condition;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">VIEW</span> high_salary_employees <span class="sql-keyword">AS</span>\nSELECT emp_id, emp_name, salary\nFROM employees\nWHERE salary &gt; 50000;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>emp_id</th><th>emp_name</th><th>salary</th></tr></thead><tbody><tr><td>101</td><td>Arun</td><td>60000</td></tr><tr><td>103</td><td>Priya</td><td>70000</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Update Data Using VIEW</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Updating records through a view also updates the underlying base table.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> view_name\nSET <span class="sql-keyword">column</span> = value\nWHERE condition;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> high_salary_employees\nSET salary = 65000\nWHERE emp_id = 101;</code></pre><div class="output-box">✔ Original table <strong>employees</strong> is updated.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">DROP VIEW</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Deletes the virtual table definition from the database.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">VIEW</span> view_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">VIEW</span> high_salary_employees;</code></pre><div class="output-box">Query OK, 0 rows affected</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Create a VIEW to display only id and name from students.</strong><br>
+    <button class="toggle-btn" data-target="ans-t8-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t8-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE VIEW student_view AS
+SELECT id, name FROM students;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display data from the VIEW student_view.</strong><br>
+    <button class="toggle-btn" data-target="ans-t8-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t8-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM student_view;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+
+| id | name   |
++----+--------+
+| 1  | Arun   |
+| 2  | Priya  |
+| 3  | Kiran  |
++----+--------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Create a VIEW with a condition (age > 20).</strong><br>
+    <button class="toggle-btn" data-target="ans-t8-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t8-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE VIEW adult_students AS
+SELECT * FROM students
+WHERE age > 20;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Update data through a VIEW.</strong><br>
+    <button class="toggle-btn" data-target="ans-t8-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t8-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>UPDATE student_view
+SET name = 'Arun Kumar'
+WHERE id = 1;</code></pre><br>
+        Output:<br>
+        Query OK, 1 row affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Drop (delete) the VIEW adult_students.</strong><br>
+    <button class="toggle-btn" data-target="ans-t8-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t8-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DROP VIEW adult_students;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='08_indexes.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Indexes</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='10_select.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Select →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

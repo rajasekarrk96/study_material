@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encapsulation - Java Learning Module</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Encapsulation</h5>
+        <a href="../../index.html#oop">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#section1">What is Encapsulation</a>
+        <a href="#section2">Access Modifiers</a>
+        <a href="#section3">Getters and Setters</a>
+        <a href="#section4">Data Hiding</a>
+        <a href="#section5">Real-World Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h1>Encapsulation</h1>
+    </div>
+
+    <div class="main-content">
+        <!-- Section 1: What is Encapsulation -->
+        <div class="section">
+            <h2>Section 1: What is Encapsulation?</h2>
+            <p>
+                <strong>Encapsulation</strong> is one of the four fundamental OOP principles. It is the mechanism of
+                wrapping data (variables) and code (methods) together as a single unit. It also involves hiding the
+                internal state of an object and requiring all interaction to be performed through an object's methods.
+            </p>
+
+            <h3>Key Concepts</h3>
+            <ul>
+                <li><strong>Data Hiding:</strong> Restricting direct access to some of an object's components</li>
+                <li><strong>Controlled Access:</strong> Providing public methods to access and modify private data</li>
+                <li><strong>Protection:</strong> Preventing unauthorized access and modification of data</li>
+                <li><strong>Flexibility:</strong> Ability to change implementation without affecting other code</li>
+            </ul>
+
+            <div class="note-box">
+                <h4>💡 Key Benefit</h4>
+                <p>Encapsulation protects data integrity by preventing external code from directly accessing and
+                    modifying an object's internal state. This leads to more maintainable and secure code.</p>
+            </div>
+
+            <div class="example-box">
+                <h4>🎯 Real-World Analogy</h4>
+                <p>Think of a capsule medicine - the medicine (data) is wrapped inside a protective shell (class). You
+                    can't directly access the medicine; you must take the whole capsule. Similarly, encapsulation wraps
+                    data and provides controlled access through methods.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Access Modifiers -->
+        <div class="section">
+            <h2>Section 2: Access Modifiers</h2>
+            <p>Access modifiers control the visibility and accessibility of classes, methods, and variables:</p>
+
+            <h3>Access Modifier Types</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Class</th>
+                        <th>Package</th>
+                        <th>Subclass</th>
+                        <th>World</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>public</code></td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>protected</code></td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td><code>default</code></td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td><code>private</code></td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Access Modifier Examples</h3>
+            <div class="code-block"><code>public class AccessModifierDemo {
+    // Public - accessible everywhere
+    public String publicVar = "Public";
+    
+    // Protected - accessible in same package and subclasses
+    protected String protectedVar = "Protected";
+    
+    // Default (no modifier) - accessible only in same package
+    String defaultVar = "Default";
+    
+    // Private - accessible only within this class
+    private String privateVar = "Private";
+    
+    public void display() {
+        // All variables accessible within the same class
+        System.out.println(publicVar);
+        System.out.println(protectedVar);
+        System.out.println(defaultVar);
+        System.out.println(privateVar);
+    }
+}</code></div>
+
+            <div class="note-box">
+                <h4>📝 Best Practice</h4>
+                <p>Always make instance variables <code>private</code> and provide <code>public</code> getter/setter
+                    methods to access them. This is the core principle of encapsulation.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Getters and Setters -->
+        <div class="section">
+            <h2>Section 3: Getters and Setters</h2>
+            <p>Getter and setter methods provide controlled access to private variables:</p>
+
+            <h3>Why Use Getters and Setters?</h3>
+            <ul>
+                <li>Control how variables are accessed and modified</li>
+                <li>Add validation logic before setting values</li>
+                <li>Make variables read-only or write-only</li>
+                <li>Change internal implementation without affecting external code</li>
+            </ul>
+
+            <h3>Basic Getter and Setter Example</h3>
+            <div class="code-block"><code>public class Student {
+    // Private variables (encapsulated)
+    private String name;
+    private int age;
+    private double gpa;
+    
+    // Getter for name
+    public String getName() {
+        return name;
+    }
+    
+    // Setter for name
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    // Getter for age
+    public int getAge() {
+        return age;
+    }
+    
+    // Setter for age with validation
+    public void setAge(int age) {
+        if (age > 0 && age < 150) {
+            this.age = age;
+        } else {
+            System.out.println("Invalid age!");
+        }
+    }
+    
+    // Getter for GPA
+    public double getGpa() {
+        return gpa;
+    }
+    
+    // Setter for GPA with validation
+    public void setGpa(double gpa) {
+        if (gpa >= 0.0 && gpa <= 4.0) {
+            this.gpa = gpa;
+        } else {
+            System.out.println("Invalid GPA! Must be between 0.0 and 4.0");
+        }
+    }
+}</code></div>
+
+            <h3>Using Getters and Setters</h3>
+            <div class="code-block"><code>public class TestStudent {
+    public static void main(String[] args) {
+        Student student = new Student();
+        
+        // Using setters to set values
+        student.setName("Alice");
+        student.setAge(20);
+        student.setGpa(3.8);
+        
+        // Using getters to retrieve values
+        System.out.println("Name: " + student.getName());
+        System.out.println("Age: " + student.getAge());
+        System.out.println("GPA: " + student.getGpa());
+        
+        // Validation in action
+        student.setAge(-5);      // Invalid age!
+        student.setGpa(5.0);     // Invalid GPA! Must be between 0.0 and 4.0
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Name: Alice<br>Age: 20<br>GPA: 3.8<br>Invalid age!<br>Invalid GPA! Must be between 0.0 and 4.0</p>
+            </div>
+
+            <div class="note-box">
+                <h4>💡 Naming Convention</h4>
+                <p>Getter methods start with <code>get</code> followed by the variable name with first letter
+                    capitalized (e.g., <code>getName()</code>). Setter methods start with <code>set</code> (e.g.,
+                    <code>setName()</code>). For boolean variables, use <code>is</code> instead of <code>get</code>
+                    (e.g., <code>isActive()</code>).
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 4: Data Hiding and Protection -->
+        <div class="section">
+            <h2>Section 4: Data Hiding and Protection</h2>
+            <p>Data hiding is achieved by making variables private and providing controlled access through methods:</p>
+
+            <h3>Without Encapsulation (Bad Practice)</h3>
+            <div class="code-block"><code>public class BankAccount {
+    public double balance;  // Public - anyone can modify!
+}
+
+public class Test {
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount();
+        acc.balance = 1000;
+        
+        // Direct access - dangerous!
+        acc.balance = -500;  // Invalid balance allowed!
+        System.out.println("Balance: " + acc.balance);
+    }
+}</code></div>
+
+            <h3>With Encapsulation (Good Practice)</h3>
+            <div class="code-block"><code>public class BankAccount {
+    private double balance;  // Private - protected!
+    
+    public BankAccount(double initialBalance) {
+        if (initialBalance >= 0) {
+            this.balance = initialBalance;
+        } else {
+            this.balance = 0;
+        }
+    }
+    
+    // Getter
+    public double getBalance() {
+        return balance;
+    }
+    
+    // Controlled deposit
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: $" + amount);
+        } else {
+            System.out.println("Invalid deposit amount!");
+        }
+    }
+    
+    // Controlled withdrawal
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount);
+        } else {
+            System.out.println("Invalid withdrawal!");
+        }
+    }
+}
+
+public class TestBank {
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount(1000);
+        
+        System.out.println("Initial Balance: $" + acc.getBalance());
+        
+        acc.deposit(500);
+        acc.withdraw(200);
+        
+        // Cannot directly set negative balance
+        // acc.balance = -500;  // Compile error - balance is private!
+        
+        acc.withdraw(2000);  // Invalid withdrawal!
+        
+        System.out.println("Final Balance: $" + acc.getBalance());
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Initial Balance: $1000.0<br>Deposited: $500.0<br>Withdrawn: $200.0<br>Invalid
+                    withdrawal!<br>Final Balance: $1300.0</p>
+            </div>
+
+            <div class="note-box">
+                <h4>⚠️ Important</h4>
+                <p>Encapsulation prevents invalid data from being set. By making variables private and using methods
+                    with validation, you ensure data integrity and consistency.</p>
+            </div>
+        </div>
+
+        <!-- Section 5: Real-World Examples -->
+        <div class="section">
+            <h2>Section 5: Real-World Examples</h2>
+            <p>Practical examples demonstrating encapsulation in real-world scenarios:</p>
+
+            <h3>Example 1: Employee Management System</h3>
+            <div class="code-block"><code>public class Employee {
+    private String name;
+    private int empID;
+    private double salary;
+    private String department;
+    
+    public Employee(String name, int empID, double salary, String department) {
+        this.name = name;
+        this.empID = empID;
+        this.salary = salary;
+        this.department = department;
+    }
+    
+    // Getters
+    public String getName() {
+        return name;
+    }
+    
+    public int getEmpID() {
+        return empID;
+    }
+    
+    public double getSalary() {
+        return salary;
+    }
+    
+    public String getDepartment() {
+        return department;
+    }
+    
+    // Setters with validation
+    public void setName(String name) {
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name;
+        }
+    }
+    
+    public void setSalary(double salary) {
+        if (salary > 0) {
+            this.salary = salary;
+        } else {
+            System.out.println("Salary must be positive!");
+        }
+    }
+    
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+    
+    // Business method
+    public void giveRaise(double percentage) {
+        if (percentage > 0 && percentage <= 50) {
+            salary += salary * (percentage / 100);
+            System.out.println("Salary increased by " + percentage + "%");
+        } else {
+            System.out.println("Invalid raise percentage!");
+        }
+    }
+    
+    public void displayInfo() {
+        System.out.println("Employee ID: " + empID);
+        System.out.println("Name: " + name);
+        System.out.println("Department: " + department);
+        System.out.println("Salary: $" + salary);
+    }
+}</code></div>
+
+            <h3>Example 2: Product Inventory</h3>
+            <div class="code-block"><code>public class Product {
+    private String productID;
+    private String name;
+    private double price;
+    private int quantity;
+    
+    public Product(String productID, String name, double price, int quantity) {
+        this.productID = productID;
+        this.name = name;
+        setPrice(price);      // Use setter for validation
+        setQuantity(quantity); // Use setter for validation
+    }
+    
+    // Getters
+    public String getProductID() {
+        return productID;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public double getPrice() {
+        return price;
+    }
+    
+    public int getQuantity() {
+        return quantity;
+    }
+    
+    // Setters with validation
+    public void setPrice(double price) {
+        if (price >= 0) {
+            this.price = price;
+        } else {
+            System.out.println("Price cannot be negative!");
+            this.price = 0;
+        }
+    }
+    
+    public void setQuantity(int quantity) {
+        if (quantity >= 0) {
+            this.quantity = quantity;
+        } else {
+            System.out.println("Quantity cannot be negative!");
+            this.quantity = 0;
+        }
+    }
+    
+    // Business methods
+    public void addStock(int amount) {
+        if (amount > 0) {
+            quantity += amount;
+            System.out.println("Added " + amount + " units to stock");
+        }
+    }
+    
+    public boolean removeStock(int amount) {
+        if (amount > 0 && amount <= quantity) {
+            quantity -= amount;
+            System.out.println("Removed " + amount + " units from stock");
+            return true;
+        } else {
+            System.out.println("Insufficient stock!");
+            return false;
+        }
+    }
+    
+    public void displayProduct() {
+        System.out.println("Product ID: " + productID);
+        System.out.println("Name: " + name);
+        System.out.println("Price: $" + price);
+        System.out.println("Quantity: " + quantity);
+    }
+}
+
+public class TestProduct {
+    public static void main(String[] args) {
+        Product product = new Product("P001", "Laptop", 999.99, 50);
+        product.displayProduct();
+        
+        System.out.println();
+        product.addStock(20);
+        product.removeStock(10);
+        
+        System.out.println("\nUpdated Product:");
+        product.displayProduct();
+    }
+}</code></div>
+
+            <div class="note-box">
+                <h4>💡 Encapsulation Benefits</h4>
+                <ul>
+                    <li><strong>Data Protection:</strong> Prevents invalid data from corrupting object state</li>
+                    <li><strong>Flexibility:</strong> Internal implementation can change without affecting external code
+                    </li>
+                    <li><strong>Maintainability:</strong> Easier to modify and debug encapsulated code</li>
+                    <li><strong>Reusability:</strong> Well-encapsulated classes are easier to reuse</li>
+                    <li><strong>Security:</strong> Sensitive data remains hidden from external access</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Worksheet Button -->
+        <div style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
+            <a href="worksheet.html" class="worksheet-btn">📝 Open Worksheet & Exercises</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

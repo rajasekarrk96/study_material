@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Keyword - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Super Keyword Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Super Keyword - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master parent class access with super for variables, constructors, and methods.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Using super to Call Parent Method</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Person class with a method introduce() that prints "I am a person". Then
+                create a Student class that extends Person and overrides the introduce() method to print "I am a
+                student". In the Student class, use the super keyword to call the introduce() method of the Person
+                class. Demonstrate this in the main method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Person {
+    void introduce() {
+        System.out.println("I am a person");
+    }
+}
+
+class Student extends Person {
+    void introduce() {
+        super.introduce();
+        System.out.println("I am a student");
+    }
+}
+
+class _01_ {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.introduce();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>I am a person
+I am a student</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Method Overriding:</strong> Student overrides Person's introduce() method</li>
+                    <li><strong>super.method():</strong> Calls parent class method from child class</li>
+                    <li><strong>Extending Functionality:</strong> Child adds behavior while keeping parent's</li>
+                    <li><strong>Execution Order:</strong> Parent method executes first, then child's code</li>
+                </ul>
+                <strong>Use Case:</strong> Extending parent functionality without losing original behavior
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Using super to Call Parent Constructor</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Vehicle class with a constructor that initializes the model attribute.
+                Create a Car class that extends Vehicle and has its own constructor which calls the Vehicle constructor
+                using the super keyword. Demonstrate this in the main method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Vehicle {
+    String model;
+
+    Vehicle(String m) {
+        model = m;
+    }
+}
+
+class Car extends Vehicle {
+    Car(String m) {
+        super(m);
+    }
+
+    void display() {
+        System.out.println("Model: " + model);
+    }
+}
+
+class _02_ {
+    public static void main(String[] args) {
+        Car c = new Car("Tesla");
+        c.display();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Model: Tesla</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>super():</strong> Calls parent class constructor</li>
+                    <li><strong>Constructor Chaining:</strong> Child constructor invokes parent constructor</li>
+                    <li><strong>First Statement:</strong> super() must be first statement in constructor</li>
+                    <li><strong>Parameter Passing:</strong> Arguments passed from child to parent constructor</li>
+                </ul>
+                <strong>Important:</strong> Parent constructor initializes inherited members
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Using super to Access Protected Method</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Guy class with a private attribute name and a protected method getName().
+                Create an Employee class that extends Guy and adds a method to print the name using the getName()
+                method. Use the super keyword to access the getName() method. Demonstrate this in the main method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Guy {
+    private String name;
+
+    Guy(String n) {
+        name = n;
+    }
+
+    protected String getName() {
+        return name;
+    }
+}
+
+class Employee extends Guy {
+    Employee(String n) {
+        super(n);
+    }
+
+    void printName() {
+        System.out.println("Name: " + super.getName());
+    }
+}
+
+class _03_ {
+    public static void main(String[] args) {
+        Employee e = new Employee("Ravi");
+        e.printName();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Name: Ravi</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Protected Access:</strong> Child can access protected members of parent</li>
+                    <li><strong>super.method():</strong> Explicitly calls parent's protected method</li>
+                    <li><strong>Encapsulation:</strong> Private field accessed through protected getter</li>
+                    <li><strong>Constructor Chain:</strong> Employee passes name to Guy constructor</li>
+                </ul>
+                <strong>Access Modifiers:</strong> Protected allows access in subclasses
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Using super to Call Overridden Method</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Shape class with a method area() that returns a default area of 0. Create
+                a Rectangle class that extends Shape and overrides the area() method to calculate the area of a
+                rectangle. In the Rectangle class, use super.area() to call the method in the Shape class. Demonstrate
+                this in the main method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Shape {
+    double area() {
+        return 0;
+    }
+}
+
+class Rectangle extends Shape {
+    double length = 5;
+    double width = 4;
+
+    double area() {
+        System.out.println("Default Area: " + super.area());
+        return length * width;
+    }
+}
+
+class _04_ {
+    public static void main(String[] args) {
+        Rectangle r = new Rectangle();
+        System.out.println("Rectangle Area: " + r.area());
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Default Area: 0.0
+Rectangle Area: 20.0</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Method Overriding:</strong> Rectangle overrides Shape's area() method</li>
+                    <li><strong>super.area():</strong> Calls parent's version of overridden method</li>
+                    <li><strong>Return Values:</strong> Both methods return double values</li>
+                    <li><strong>Polymorphism:</strong> Child provides specific implementation</li>
+                </ul>
+                <strong>Pattern:</strong> Calling parent method before adding child-specific logic
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Using super to Access Parent Class Data</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a BankAccount class with private attributes accountNumber and balance.
+                Create a SavingsAccount class that extends BankAccount and adds an attribute interestRate. In the
+                SavingsAccount class, use super to access the accountNumber and balance from the BankAccount class.
+                Demonstrate this in the main method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class BankAccount {
+    private String accountNumber;
+    private double balance;
+
+    BankAccount(String acc, double bal) {
+        accountNumber = acc;
+        balance = bal;
+    }
+
+    protected String getAccountNumber() {
+        return accountNumber;
+    }
+
+    protected double getBalance() {
+        return balance;
+    }
+}
+
+class SavingsAccount extends BankAccount {
+    double interestRate;
+
+    SavingsAccount(String acc, double bal, double rate) {
+        super(acc, bal);
+        interestRate = rate;
+    }
+
+    void displayAccount() {
+        System.out.println("Account Number: " + super.getAccountNumber());
+        System.out.println("Balance: " + super.getBalance());
+        System.out.println("Interest Rate: " + interestRate);
+    }
+}
+
+class _05_ {
+    public static void main(String[] args) {
+        SavingsAccount s = new SavingsAccount("SB1001", 5000, 4.5);
+        s.displayAccount();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Account Number: SB1001
+Balance: 5000.0
+Interest Rate: 4.5</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Private Members:</strong> Parent's private fields accessed via protected getters</li>
+                    <li><strong>super() Constructor:</strong> Initializes parent class attributes</li>
+                    <li><strong>super.method():</strong> Calls parent's getter methods</li>
+                    <li><strong>Inheritance:</strong> Child extends parent with additional attribute</li>
+                </ul>
+                <strong>Best Practice:</strong> Use getters to access private parent fields
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>Super Keyword Module - Practice Worksheet</strong></p>
+            <p>Master parent class access with super keyword</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

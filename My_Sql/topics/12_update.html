@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Update</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Update</h2>
+                <p class="topic-desc">The UPDATE statement is used to modify existing records in a table.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Basic UPDATE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to change the value of one or more columns for specific rows matching a condition.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> table_name\nSET column1 = value1\nWHERE condition;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> students\nSET age = 22\nWHERE id = 1;</code></pre><div class="output-box"><div style='display: flex; gap: 20px; flex-wrap: wrap;'><div style='flex: 1; min-width: 150px;'><strong>Before</strong><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>id</th><th>name</th><th>age</th></tr></thead><tbody><tr><td>1</td><td>Ravi</td><td>21</td></tr></tbody></table></div> <div style='flex: 1; min-width: 150px;'><strong>After</strong><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>id</th><th>name</th><th>age</th></tr></thead><tbody><tr><td>1</td><td>Ravi</td><td>22</td></tr></tbody></table></div></div></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">UPDATE Multiple Columns</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Modifies multiple fields for the same record in a single statement.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> students\nSET age = 23,\n    name = <span class="sql-string">'Ravi Kumar'</span>\nWHERE id = 1;</code></pre><div class="output-box">✔ Name and age updated for student ID 1</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">UPDATE Multiple Rows</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Applies changes to all rows that meet the WHERE condition.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> students\nSET age = age + 1\nWHERE age &lt; 21;</code></pre><div class="output-box">✔ Incremented age for all students younger than 21</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">UPDATE Without WHERE (⚠️ Risky)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Warning</strong><br>If you omit the WHERE clause, ALL records in the table will be updated!</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> students\nSET age = 25;</code></pre><div class="output-box">📌 <strong>Updates all rows</strong> in the students table.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">UPDATE with SAFE UPDATE Mode (MySQL)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Rule</strong><br>In MySQL Safe Mode, you must use a WHERE clause with a key column (like Primary Key).</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> students\nSET age = 24\nWHERE id = 2;</code></pre><div class="output-box">❌ Without WHERE → <strong>Error Code: 1175</strong></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Update age of student with id = 1 to 21.</strong><br>
+    <button class="toggle-btn" data-target="ans-t11-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t11-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>UPDATE students
+SET age = 21
+WHERE id = 1;</code></pre><br>
+        Output:<br>
+        Query OK, 1 row affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Update name of student with id = 2.</strong><br>
+    <button class="toggle-btn" data-target="ans-t11-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t11-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>UPDATE students
+SET name = 'Priya Sharma'
+WHERE id = 2;</code></pre><br>
+        Output:<br>
+        Query OK, 1 row affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Update age to 23 for all students whose age is NULL.</strong><br>
+    <button class="toggle-btn" data-target="ans-t11-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t11-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>UPDATE students
+SET age = 23
+WHERE age IS NULL;</code></pre><br>
+        Output:<br>
+        Query OK, 1 row affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Increase age of all students by 1 year.</strong><br>
+    <button class="toggle-btn" data-target="ans-t11-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t11-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>UPDATE students
+SET age = age + 1;</code></pre><br>
+        Output:<br>
+        Query OK, 4 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display updated records from students table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t11-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t11-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------------+------+
+| id | name         | age  |
++----+--------------+------+
+| 1  | Arun         | 22   |
+| 2  | Priya Sharma | 23   |
+| 3  | Kiran        | 23   |
+| 4  | Meena        | 24   |
++----+--------------+------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='11_aliases.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Aliases (AS)</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='13_safe-updates.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Safe Updates →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

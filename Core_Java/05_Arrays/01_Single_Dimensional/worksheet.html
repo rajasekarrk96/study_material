@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Dimensional Array - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Array Worksheet</h5>
+        <a href="index.html" class="nav-link">← Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+            <a href="#question6" class="nav-link">Question 6</a>
+            <a href="#question7" class="nav-link">Question 7</a>
+            <a href="#question8" class="nav-link">Question 8</a>
+            <a href="#question9" class="nav-link">Question 9</a>
+            <a href="#question10" class="nav-link">Question 10</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Single Dimensional Array - Practice</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master basic array operations, searching, sorting, and manipulation techniques.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Sum of Each Number with Itself</h3>
+            <div class="explanation">Write a Java program to calculate the sum of each number with itself in an array.
+            </div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter size: ");
+        int n = sn.nextInt();
+        int[] arr = new int[n];
+
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++)
+            arr[i] = sn.nextInt();
+
+        System.out.println("Sum of each number with itself:");
+        for (int i = 0; i < n; i++)
+            System.out.println(arr[i] + " + " + arr[i] + " = " + (arr[i] + arr[i]));
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter size: 3
+Enter 3 elements:
+5 10 15
+Sum of each number with itself:
+5 + 5 = 10
+10 + 10 = 20
+15 + 15 = 30</code></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Find Index of an Element</h3>
+            <div class="explanation">Write a Java program to find the index of a specific element in an array.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        int[] arr = {10, 20, 30, 40, 50};
+
+        System.out.print("Enter element to search: ");
+        int key = sn.nextInt();
+
+        boolean found = false;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == key) {
+                System.out.println("Element " + key + " found at Index: " + i);
+                found = true;
+                break;
+            }
+        }
+        
+        if(!found) System.out.println("Element not found");
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter element to search: 30
+Element 30 found at Index: 2</code></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Insert Element at Specific Position</h3>
+            <div class="explanation">Write a Java program to insert an element at a specific position into an array.
+            </div>
+            <div class="code-block"><code>import java.util.Scanner;
+import java.util.Arrays;
+
+class _03_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        int[] arr = {10, 20, 30, 40};
+        int[] newArr = new int[arr.length + 1];
+
+        System.out.print("Enter element to insert: ");
+        int val = sn.nextInt();
+        System.out.print("Enter position (0 to " + arr.length + "): ");
+        int pos = sn.nextInt();
+
+        for (int i = 0, j = 0; i < newArr.length; i++) {
+            if (i == pos) {
+                newArr[i] = val;
+            } else {
+                newArr[i] = arr[j++];
+            }
+        }
+
+        System.out.println("Array after insertion: " + Arrays.toString(newArr));
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter element to insert: 25
+Enter position: 2
+Array after insertion: [10, 20, 25, 30, 40]</code></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Second Largest Element</h3>
+            <div class="explanation">Write a Java program to find the second largest element in an array.</div>
+            <div class="code-block"><code>class _04_ {
+    public static void main(String[] args) {
+        int[] arr = {10, 40, 20, 50, 30};
+        int max = Integer.MIN_VALUE;
+        int second = Integer.MIN_VALUE;
+
+        for (int i : arr) {
+            if (i > max) {
+                second = max;
+                max = i;
+            } else if (i > second && i != max) {
+                second = i;
+            }
+        }
+
+        System.out.println("Maximum: " + max);
+        System.out.println("Second Largest: " + second);
+    }
+}</code></div>
+            <div class="output-block"><code>Maximum: 50
+Second Largest: 40</code></div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Copy Array in Reverse Order</h3>
+            <div class="explanation">Take 10 integer inputs and store them in an array. Copy all elements into another
+                array in reverse order.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+import java.util.Arrays;
+
+class _05_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        int[] original = new int[10];
+        int[] reversed = new int[10];
+
+        System.out.println("Enter 10 integers:");
+        for (int i = 0; i < 10; i++) {
+            original[i] = sn.nextInt();
+        }
+
+        for (int i = 0; i < 10; i++) {
+            reversed[i] = original[9 - i];
+        }
+
+        System.out.println("Reversed Array: " + Arrays.toString(reversed));
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter 10 integers: 1 2 3 4 5 6 7 8 9 10
+Reversed Array: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]</code></div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="section-card" id="question6">
+            <h3>Question 6: Remove Duplicates & New Length</h3>
+            <div class="explanation">Remove duplicate elements from a sorted array and return the new length. Sample:
+                [20, 20, 30, 40, 50, 50, 50] &rarr; length 4.</div>
+            <div class="code-block"><code>class _06_ {
+    public static void main(String[] args) {
+        int[] arr = {20, 20, 30, 40, 50, 50, 50};
+        int n = arr.length;
+        
+        if (n == 0 || n == 1) return;
+
+        int j = 0;
+        for (int i = 0; i < n - 1; i++) {
+            if (arr[i] != arr[i + 1]) {
+                arr[j++] = arr[i];
+            }
+        }
+        arr[j++] = arr[n - 1];
+
+        System.out.println("Revised Array size: " + j);
+        System.out.print("Unique elements: ");
+        for (int k = 0; k < j; k++) {
+            System.out.print(arr[k] + " ");
+        }
+    }
+}</code></div>
+            <div class="output-block"><code>Revised Array size: 4
+Unique elements: 20 30 40 50</code></div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="section-card" id="question7">
+            <h3>Question 7: Move All Zeros to End</h3>
+            <div class="explanation">Move all 0's to the end while maintaining the relative order of non-zero elements.
+            </div>
+            <div class="code-block"><code>import java.util.Arrays;
+
+class _07_ {
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 0, 3, 12};
+        int nonZeroIndex = 0;
+
+        for (int val : arr) {
+            if (val != 0) {
+                arr[nonZeroIndex++] = val;
+            }
+        }
+
+        while (nonZeroIndex < arr.length) {
+            arr[nonZeroIndex++] = 0;
+        }
+
+        System.out.println("After moving zeros: " + Arrays.toString(arr));
+    }
+}</code></div>
+            <div class="output-block"><code>After moving zeros: [1, 3, 12, 0, 0]</code></div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="section-card" id="question8">
+            <h3>Question 8: Count Pairs with Given Sum</h3>
+            <div class="explanation">Find how many pairs of elements in the array sum up to a target value K.</div>
+            <div class="code-block"><code>class _08_ {
+    public static void main(String[] args) {
+        int[] arr = {1, 5, 7, -1};
+        int target = 6;
+        int count = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] + arr[j] == target) {
+                    count++;
+                    System.out.println("Pair found: (" + arr[i] + ", " + arr[j] + ")");
+                }
+            }
+        }
+
+        System.out.println("Total pairs with sum " + target + " is " + count);
+    }
+}</code></div>
+            <div class="output-block"><code>Pair found: (1, 5)
+Pair found: (7, -1)
+Total pairs with sum 6 is 2</code></div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="section-card" id="question9">
+            <h3>Question 9: Find Missing Number</h3>
+            <div class="explanation">Given an array containing n-1 unique numbers in the range 1 to n, find the missing
+                number.</div>
+            <div class="code-block"><code>class _09_ {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 4, 5};
+        int n = 5;
+        
+        // Sum of first n natural numbers
+        int expectedSum = n * (n + 1) / 2;
+        int actualSum = 0;
+        
+        for (int num : arr) {
+            actualSum += num;
+        }
+
+        System.out.println("Missing Number is: " + (expectedSum - actualSum));
+    }
+}</code></div>
+            <div class="output-block"><code>Missing Number is: 3</code></div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="section-card" id="question10">
+            <h3>Question 10: Cyclic Rotation</h3>
+            <div class="explanation">Cyclically rotate the array clockwise by one position.</div>
+            <div class="code-block"><code>import java.util.Arrays;
+
+class _10_ {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5};
+        int last = arr[arr.length - 1];
+
+        for (int i = arr.length - 1; i > 0; i--) {
+            arr[i] = arr[i - 1];
+        }
+
+        arr[0] = last;
+
+        System.out.println("Rotated Array: " + Arrays.toString(arr));
+    }
+}</code></div>
+            <div class="output-block"><code>Rotated Array: [5, 1, 2, 3, 4]</code></div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Single Dimensional Array Module - Practice Worksheet</strong></p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

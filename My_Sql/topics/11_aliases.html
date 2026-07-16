@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aliases (AS) - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Aliases (AS)</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Aliases (AS)</h2>
+                <p class="topic-desc">AS is used to give a temporary alias (name) to a column or table. It makes the output more readable.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">AS with Column Alias</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to rename a column in the result set for better readability.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> column_name <span class="sql-keyword">AS</span> alias_name\nFROM table_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name <span class="sql-keyword">AS</span> student_name, age <span class="sql-keyword">AS</span> student_age\nFROM students;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>student_name</th><th>student_age</th></tr></thead><tbody><tr><td>Ravi</td><td>21</td></tr><tr><td>Anu</td><td>20</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">AS with Table Alias</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to give a table a short name, especially useful when joining tables.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> <span class="sql-keyword">column</span>\nFROM table_name <span class="sql-keyword">AS</span> alias;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> s.name, s.age\nFROM students <span class="sql-keyword">AS</span> s;</code></pre><div class="output-box">✔ Query executed using table alias 's'</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">AS with Calculated Column</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to give a name to columns created by mathematical operations or expressions.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name, salary * 12 <span class="sql-keyword">AS</span> annual_salary\nFROM employees;</code></pre><div class="output-box"><strong>Result</strong><br><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><tr><th style='border: 1px solid var(--glass-border); padding: 4px;'>name</th><th style='border: 1px solid var(--glass-border); padding: 4px;'>annual_salary</th></tr><tr><td style='border: 1px solid var(--glass-border); padding: 4px;'>John</td><td style='border: 1px solid var(--glass-border); padding: 4px;'>360000</td></tr></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">AS in Aggregate Functions</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to name the result of aggregate functions like COUNT, SUM, AVG, etc.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> <span class="sql-func">COUNT</span>(*) <span class="sql-keyword">AS</span> total_students\nFROM students;</code></pre><div class="output-box"><strong>Result</strong><br><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><tr><th style='border: 1px solid var(--glass-border); padding: 4px;'>total_students</th></tr><tr><td style='border: 1px solid var(--glass-border); padding: 4px;'>10</td></tr></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Display name column with alias student_name.</strong><br>
+    <button class="toggle-btn" data-target="ans-t10-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t10-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name AS student_name
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------------+
+| student_name |
++--------------+
+| Arun         |
+| Priya        |
+| Kiran        |
+| Meena        |
++--------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display age column with alias student_age.</strong><br>
+    <button class="toggle-btn" data-target="ans-t10-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t10-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT age AS student_age
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+-------------+
+| student_age |
++-------------+
+| 20          |
+| 21          |
+| 22          |
+| NULL        |
++-------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Use alias for table name.</strong><br>
+    <button class="toggle-btn" data-target="ans-t10-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t10-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT s.name, s.age
+FROM students AS s;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+------+
+| name   | age  |
++--------+------+
+| Arun   | 20   |
+| Priya  | 21   |
+| Kiran  | 22   |
+| Meena  | NULL |
++--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Display calculated column using alias.</strong><br>
+    <button class="toggle-btn" data-target="ans-t10-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t10-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, age + 1 AS next_year_age
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+---------------+
+| name   | next_year_age |
++--------+---------------+
+| Arun   | 21            |
+| Priya  | 22            |
+| Kiran  | 23            |
+| Meena  | NULL          |
++--------+---------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Use alias in ORDER BY clause.</strong><br>
+    <button class="toggle-btn" data-target="ans-t10-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t10-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name AS student_name, age
+FROM students
+ORDER BY student_name;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------------+------+
+| student_name | age  |
++--------------+------+
+| Arun         | 20   |
+| Kiran        | 22   |
+| Meena        | NULL |
+| Priya        | 21   |
++--------------+------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='10_select.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Select</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='12_update.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Update →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

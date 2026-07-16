@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content: iFrame Handling</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">🏠 Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+
+            <h1>15. iFrame Handling</h1>
+
+            <h2>📖 Introduction</h2>
+            <p>An <strong>iFrame</strong> (Inline Frame) is essentially a webpage embedded inside another webpage. It's like a picture-in-picture
+                mode for HTML. The challenge in automation is that Selenium <strong>cannot see</strong> elements inside an iFrame unless you
+                explicitly switch into it. If you try to find an element inside a frame without switching, you will get a
+                <code>NoSuchElementException</code>.
+            </p>
+
+            <h2>💡 What You'll Learn</h2>
+            <ul>
+                <li>How to identify if an element is inside an iFrame</li>
+                <li>Methods to switch into an iFrame (Index, ID/Name, WebElement)</li>
+                <li>How to switch back to the main page</li>
+                <li>Handling nested iFrames</li>
+            </ul>
+
+            <h2>🔍 Detailed Explanation</h2>
+
+            <h3>Switching to a Frame</h3>
+            <p>You must use the <code>driver.switchTo().frame(...)</code> command. There are three ways to target a frame:</p>
+
+            <ol>
+                <li>
+                    <strong>By Index:</strong> <code>driver.switchTo().frame(0);</code><br>
+                    <em>Pros:</em> Fast. <em>Cons:</em> Risky if frame order changes.
+                </li>
+                <li>
+                    <strong>By ID or Name:</strong> <code>driver.switchTo().frame("frame_id");</code><br>
+                    <em>Pros:</em> Reliable if IDs vary. <em>Cons:</em> Not all frames have IDs.
+                </li>
+                <li>
+                    <strong>By WebElement:</strong> (Best Practice)<br>
+                    <code>driver.switchTo().frame(driver.findElement(By.cssSelector("iframe.demo")));</code><br>
+                    <em>Pros:</em> Most robust method.
+                </li>
+            </ol>
+
+            <h3>Switching Back</h3>
+            <p>After you are done with the frame, you must return to the parent page to interact with other elements:</p>
+            <pre><code>driver.switchTo().defaultContent();</code></pre>
+
+            <h2>💻 Code Examples</h2>
+            <pre><code>// 1. Locate the iframe
+WebElement frame = driver.findElement(By.id("content-frame"));
+
+// 2. Switch into it
+driver.switchTo().frame(frame);
+
+// 3. Interact with element INSIDE frame
+driver.findElement(By.id("submit-btn")).click();
+
+// 4. Return to main page
+driver.switchTo().defaultContent();
+</code></pre>
+
+            <h2>⚠️ Common Pitfalls</h2>
+            <blockquote>
+                <p><strong>Hidden Frames:</strong> Always check if your target element is inside an <code>&lt;iframe&gt;</code> tag
+                    in the DOM. Right-click the element and check the hierarchy.</p>
+            </blockquote>
+
+            <h2>🎯 Real-World Scenario</h2>
+            <div class="scenario-box">
+                <h3>Practice Scenario</h3>
+                <p><strong>Goal:</strong> Handle a registration form embedded in a frame.</p>
+                <ol>
+                    <li>Switch to the "Registration" iframe.</li>
+                    <li>Fill out the form fields inside the frame.</li>
+                    <li>Switch back to the main page and click the "Terms & Conditions" link in the footer.</li>
+                </ol>
+            </div>
+
+            <h2>📝 Interview Questions</h2>
+            <blockquote>
+                <p><strong>Q: How do you handle nested frames?</strong></p>
+                <p><strong>A:</strong> Switch to the parent frame first, then switch to the child frame. To exit, use
+                    <code>parentFrame()</code> to go up one level or <code>defaultContent()</code> to go to the top.
+                </p>
+            </blockquote>
+
+            <a href="worksheets/ws_iframes.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtering - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Filtering</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Filtering</h2>
+                <p class="topic-desc">Filtering is used to retrieve specific rows from a table based on conditions. Mainly done using WHERE clause.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">WHERE Clause (Basic Filtering)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to filter records based on a specified condition.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * \nFROM table_name\nWHERE condition;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * \nFROM students\nWHERE age &gt; 20;</code></pre><div class="output-box">✔ Displays students older than 20</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Comparison Operators</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Operators used to compare values.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE age &gt;= 21;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>Operator</th><th>Meaning</th></tr></thead><tbody><tr><td>=</td><td>Equal</td></tr><tr><td>!= / &lt;&gt;</td><td>Not equal</td></tr><tr><td>&gt;</td><td>Greater than</td></tr><tr><td>&lt;</td><td>Less than</td></tr><tr><td>&gt;=</td><td>Greater or equal</td></tr><tr><td>&lt;=</td><td>Less or equal</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">AND / OR / NOT (Logical Filtering)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to combine multiple conditions.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- <span class="sql-keyword">AND</span> condition\nSELECT * <span class="sql-keyword">FROM</span> students\nWHERE age &gt; 20 <span class="sql-keyword">AND</span> city = <span class="sql-string">'Chennai'</span>;\n\n-- <span class="sql-keyword">OR</span> condition\nSELECT * <span class="sql-keyword">FROM</span> students\nWHERE city = <span class="sql-string">'Delhi'</span> <span class="sql-keyword">OR</span> city = <span class="sql-string">'Mumbai'</span>;\n\n-- <span class="sql-keyword">NOT</span> condition\nSELECT * <span class="sql-keyword">FROM</span> students\nWHERE <span class="sql-keyword">NOT</span> city = <span class="sql-string">'Chennai'</span>;</span></code></pre><div class="output-box">✔ Complex logical filtering applied.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">IN (Multiple Values)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Specifies multiple possible values for a column.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE city IN (<span class="sql-string">'Chennai'</span>, <span class="sql-string">'Delhi'</span>);</code></pre><div class="output-box">✔ Returns students from Chennai or Delhi.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">BETWEEN (Range)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Selects values within a given range (inclusive).</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE age BETWEEN 18 <span class="sql-keyword">AND</span> 22;</code></pre><div class="output-box">✔ Returns students aged 18 to 22.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="6">LIKE (Pattern Matching)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Searches for a specified pattern in a column.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- Starts with A\nSELECT * <span class="sql-keyword">FROM</span> students\nWHERE name LIKE <span class="sql-string">'A%'</span>;\n\n-- Contains <span class="sql-string">'an'</span>\nSELECT * <span class="sql-keyword">FROM</span> students\nWHERE name LIKE <span class="sql-string">'%an%'</span>;</span></code></pre><div class="output-box">✔ Patterns matched using wildcards (% and _).</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="7">IS NULL / IS NOT NULL</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to check for empty (NULL) values.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE email IS <span class="sql-keyword">NULL</span>;</code></pre><div class="output-box">✔ Displays students without an email address.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="8">Filtering with Dates</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Applying conditions to date columns.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> orders\nWHERE order_date &gt;= <span class="sql-string">'2024-01-01'</span>;</code></pre><div class="output-box">✔ Returns orders from 2024 onwards.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="9">HAVING (Filter Groups)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to filter groups created by GROUP BY (WHERE cannot filter groups).</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> city, <span class="sql-func">COUNT</span>(*)\nFROM students\nGROUP BY city\nHAVING <span class="sql-func">COUNT</span>(*) &gt; 2;</code></pre><div class="output-box">✔ Only shows cities with more than 2 students.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Display students whose age is greater than 21.</strong><br>
+    <button class="toggle-btn" data-target="ans-t16-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t16-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE age > 21;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 3  | Kiran  | 23   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display students whose age is between 21 and 23.</strong><br>
+    <button class="toggle-btn" data-target="ans-t16-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t16-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE age BETWEEN 21 AND 23;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 2  | Priya  | 23   |
+| 3  | Kiran  | 23   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Display students whose name is either Arun or Meena.</strong><br>
+    <button class="toggle-btn" data-target="ans-t16-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t16-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE name IN ('Arun', 'Meena');</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Display students whose name starts with 'P'.</strong><br>
+    <button class="toggle-btn" data-target="ans-t16-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t16-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE name LIKE 'P%';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 2  | Priya  | 23   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display students whose age is NOT NULL.</strong><br>
+    <button class="toggle-btn" data-target="ans-t16-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t16-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE age IS NOT NULL;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 2  | Priya  | 23   |
+| 3  | Kiran  | 23   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='16_delete-truncate-drop.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← DELETE / TRUNCATE / DROP</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='18_operators.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Operators →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

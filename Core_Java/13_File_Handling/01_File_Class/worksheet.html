@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Class - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>File Class Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+            <a href="#question6" class="nav-link">Question 6</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>File Class - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master Java file operations using the File class and file I/O streams.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Check Read and Write Permissions</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to check if a file or directory has read and write permission.
+                Use the File class methods to determine the access permissions.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.File;
+
+class _01_ {
+    public static void main(String[] args) {
+
+        File f = new File("test.txt");
+
+        System.out.println("Readable: " + f.canRead());
+        System.out.println("Writable: " + f.canWrite());
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Readable: true
+Writable: true
+
+(or)
+
+Readable: false
+Writable: false
+(if file doesn't exist or no permissions)</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>File Class:</strong> Represents file and directory pathnames</li>
+                    <li><strong>canRead():</strong> Tests whether application can read the file</li>
+                    <li><strong>canWrite():</strong> Tests whether application can modify the file</li>
+                    <li><strong>canExecute():</strong> Tests whether application can execute the file</li>
+                </ul>
+                <strong>Additional Methods:</strong>
+                <ul>
+                    <li><code>setReadable(boolean)</code> - Set read permission</li>
+                    <li><code>setWritable(boolean)</code> - Set write permission</li>
+                    <li><code>setExecutable(boolean)</code> - Set execute permission</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Get Last Modification Date and Time</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to get the last modification date and time of a file.
+                Display the timestamp in a readable format using the Date class.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.File;
+import java.util.Date;
+
+class _02_ {
+    public static void main(String[] args) {
+
+        File f = new File("test.txt");
+
+        Date d = new Date(f.lastModified());
+        System.out.println("Last Modified: " + d);
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Last Modified: Tue Jan 07 14:30:25 IST 2026
+
+(or)
+
+Last Modified: Thu Jan 01 00:00:00 IST 1970
+(if file doesn't exist, returns 0L)</code></div>
+
+            <h4>Alternative Approaches</h4>
+            <div class="code-block"><code>// Approach 1: Using SimpleDateFormat
+import java.text.SimpleDateFormat;
+
+SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+String formattedDate = sdf.format(new Date(f.lastModified()));
+System.out.println("Last Modified: " + formattedDate);
+
+// Approach 2: Using Java 8+ (Files and Instant)
+import java.nio.file.*;
+import java.time.Instant;
+
+Path path = Paths.get("test.txt");
+Instant instant = Files.getLastModifiedTime(path).toInstant();
+System.out.println("Last Modified: " + instant);
+
+// Approach 3: Get milliseconds directly
+long millis = f.lastModified();
+System.out.println("Timestamp: " + millis + " ms");</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>lastModified():</strong> Returns time in milliseconds since epoch (Jan 1, 1970)</li>
+                    <li><strong>Date Class:</strong> Converts milliseconds to readable date</li>
+                    <li><strong>Epoch Time:</strong> Number of milliseconds since January 1, 1970, 00:00:00 GMT</li>
+                </ul>
+                <strong>Use Cases:</strong> File synchronization, backup systems, cache validation
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Get File Size in Bytes, KB, MB</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to get file size in bytes, kilobytes (KB), and megabytes (MB).
+                Convert the file size from bytes to larger units for better readability.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.File;
+
+class _03_ {
+    public static void main(String[] args) {
+
+        File f = new File("test.txt");
+
+        long bytes = f.length();
+        double kb = bytes / 1024.0;
+        double mb = kb / 1024.0;
+
+        System.out.println("Bytes: " + bytes);
+        System.out.println("KB: " + kb);
+        System.out.println("MB: " + mb);
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Bytes: 2048
+KB: 2.0
+MB: 0.001953125
+
+(for a 2KB file)</code></div>
+
+            <h4>Enhanced Version with Formatting</h4>
+            <div class="code-block"><code>import java.io.File;
+import java.text.DecimalFormat;
+
+class FileSizeFormatted {
+    public static void main(String[] args) {
+        File f = new File("test.txt");
+        
+        long bytes = f.length();
+        double kb = bytes / 1024.0;
+        double mb = kb / 1024.0;
+        double gb = mb / 1024.0;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        
+        System.out.println("Bytes: " + bytes);
+        System.out.println("KB: " + df.format(kb));
+        System.out.println("MB: " + df.format(mb));
+        System.out.println("GB: " + df.format(gb));
+        
+        // Smart formatting
+        System.out.println("\nBest Format: " + getReadableSize(bytes));
+    }
+    
+    static String getReadableSize(long bytes) {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) return (bytes / 1024.0) + " KB";
+        if (bytes < 1024 * 1024 * 1024) return (bytes / (1024.0 * 1024)) + " MB";
+        return (bytes / (1024.0 * 1024 * 1024)) + " GB";
+    }
+}</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>length():</strong> Returns file size in bytes (returns 0 if file doesn't exist)</li>
+                    <li><strong>Unit Conversion:</strong> 1 KB = 1024 bytes, 1 MB = 1024 KB, 1 GB = 1024 MB</li>
+                    <li><strong>Floating Point:</strong> Use 1024.0 (not 1024) for decimal results</li>
+                </ul>
+                <strong>Storage Units:</strong>
+                <ul>
+                    <li>1 Byte (B) = 8 bits</li>
+                    <li>1 Kilobyte (KB) = 1,024 bytes</li>
+                    <li>1 Megabyte (MB) = 1,024 KB = 1,048,576 bytes</li>
+                    <li>1 Gigabyte (GB) = 1,024 MB</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Store File Content Line by Line into Array</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to store text file content line by line into an array.
+                Read each line from the file and store it in an ArrayList for processing.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.*;
+import java.util.ArrayList;
+
+class _04_ {
+    public static void main(String[] args) {
+
+        ArrayList<String> lines = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (Exception e) {
+            System.out.println("Error reading file");
+        }
+
+        for (String s : lines) {
+            System.out.println(s);
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Line 1 content
+Line 2 content
+Line 3 content
+...
+
+(or)
+
+Error reading file
+(if file doesn't exist)</code></div>
+
+            <h4>Alternative Approaches</h4>
+            <div class="code-block"><code>// Approach 1: Using Files.readAllLines() (Java 7+)
+import java.nio.file.*;
+import java.util.List;
+
+List<String> lines = Files.readAllLines(Paths.get("test.txt"));
+for (String line : lines) {
+    System.out.println(line);
+}
+
+// Approach 2: Using Scanner
+import java.util.*;
+import java.io.*;
+
+ArrayList<String> lines = new ArrayList<>();
+try (Scanner sc = new Scanner(new File("test.txt"))) {
+    while (sc.hasNextLine()) {
+        lines.add(sc.nextLine());
+    }
+}
+
+// Approach 3: Convert to String Array
+String[] linesArray = lines.toArray(new String[0]);</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>BufferedReader:</strong> Efficient reading of text files</li>
+                    <li><strong>FileReader:</strong> Reads character files</li>
+                    <li><strong>readLine():</strong> Reads a line of text, returns null at EOF</li>
+                    <li><strong>try-with-resources:</strong> Automatically closes resources</li>
+                </ul>
+                <strong>Why BufferedReader?</strong> More efficient than FileReader alone due to buffering
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Append Text to Existing File</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to append text to an existing file without overwriting its current content.
+                Use FileWriter with append mode enabled.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.FileWriter;
+
+class _05_ {
+    public static void main(String[] args) {
+
+        try (FileWriter fw = new FileWriter("test.txt", true)) {
+            fw.write("\nThis text is appended.");
+            System.out.println("Text appended successfully");
+        } catch (Exception e) {
+            System.out.println("Error writing file");
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Text appended successfully</code></div>
+
+            <h4>FileWriter Modes</h4>
+            <div class="code-block"><code>// Mode 1: Overwrite (default)
+FileWriter fw = new FileWriter("test.txt");
+// Deletes existing content and writes new content
+
+// Mode 2: Append
+FileWriter fw = new FileWriter("test.txt", true);
+// Keeps existing content and adds new content at the end
+
+// Example: Appending multiple lines
+try (FileWriter fw = new FileWriter("test.txt", true)) {
+    fw.write("Line 1\n");
+    fw.write("Line 2\n");
+    fw.write("Line 3\n");
+}
+
+// Using BufferedWriter for better performance
+import java.io.*;
+
+try (BufferedWriter bw = new BufferedWriter(new FileWriter("test.txt", true))) {
+    bw.write("Appended line");
+    bw.newLine();  // Platform-independent newline
+}</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>FileWriter(file, true):</strong> Second parameter enables append mode</li>
+                    <li><strong>write():</strong> Writes string to file</li>
+                    <li><strong>\n:</strong> Newline character (use bw.newLine() for platform independence)</li>
+                    <li><strong>Auto-close:</strong> try-with-resources ensures file is closed</li>
+                </ul>
+                <strong>Important:</strong> Always close FileWriter to flush data to disk
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="section-card" id="question6">
+            <h3>Question 6: Check if Path is File or Directory</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to check if given pathname is a directory or a file.
+                Use File class methods to determine the type of the path.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.File;
+
+class _06_ {
+    public static void main(String[] args) {
+
+        File f = new File("test.txt");
+
+        if (f.isFile())
+            System.out.println("It is a file");
+        else if (f.isDirectory())
+            System.out.println("It is a directory");
+        else
+            System.out.println("Path does not exist");
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>It is a file
+
+(or)
+
+It is a directory
+
+(or)
+
+Path does not exist</code></div>
+
+            <h4>Enhanced Version with More Details</h4>
+            <div class="code-block"><code>import java.io.File;
+
+class FileInfo {
+    public static void main(String[] args) {
+        File f = new File("test.txt");
+        
+        System.out.println("Path: " + f.getPath());
+        System.out.println("Absolute Path: " + f.getAbsolutePath());
+        System.out.println("Exists: " + f.exists());
+        
+        if (f.exists()) {
+            System.out.println("Is File: " + f.isFile());
+            System.out.println("Is Directory: " + f.isDirectory());
+            System.out.println("Is Hidden: " + f.isHidden());
+            System.out.println("Name: " + f.getName());
+            System.out.println("Parent: " + f.getParent());
+            
+            if (f.isDirectory()) {
+                String[] files = f.list();
+                System.out.println("Contains " + files.length + " items");
+            }
+        }
+    }
+}
+
+// List all files in a directory
+File dir = new File(".");
+if (dir.isDirectory()) {
+    File[] files = dir.listFiles();
+    for (File file : files) {
+        System.out.println((file.isDirectory() ? "[DIR] " : "[FILE] ") + file.getName());
+    }
+}</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>isFile():</strong> Returns true if path is a file</li>
+                    <li><strong>isDirectory():</strong> Returns true if path is a directory</li>
+                    <li><strong>exists():</strong> Returns true if file/directory exists</li>
+                    <li><strong>Both return false:</strong> If path doesn't exist</li>
+                </ul>
+                <strong>Additional File Methods:</strong>
+                <ul>
+                    <li><code>getName()</code> - Get file/directory name</li>
+                    <li><code>getPath()</code> - Get path string</li>
+                    <li><code>getAbsolutePath()</code> - Get full path</li>
+                    <li><code>getParent()</code> - Get parent directory</li>
+                    <li><code>list()</code> - List directory contents (names)</li>
+                    <li><code>listFiles()</code> - List directory contents (File objects)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>File Class Module - Practice Worksheet</strong></p>
+            <p>Master Java file operations and I/O</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

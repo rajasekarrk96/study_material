@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACID Properties in SQL - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">ACID Properties in SQL</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+                <article class="topic-card">
+                    <h2 class="topic-title">ACID Properties in SQL</h2>
+                    <p class="topic-desc">ACID properties ensure that database transactions are reliable and safe.
+                        <br>ACID = <strong>Atomicity</strong>, <strong>Consistency</strong>, <strong>Isolation</strong>,
+                        <strong>Durability</strong>.
+                    </p>
+
+                    <div class="subtopics-container">
+                        <div class="subtopic-card">
+                            <h3 class="subtopic-title" data-section-num="1">Atomicity</h3>
+                            <p class="subtopic-desc"><strong>🔹 Definition</strong><br>A transaction is all or nothing.
+                                If one operation fails, the entire transaction is rolled back.</p>
+                            <div class="code-label label-example">🔹 Example</div>
+                            <pre class="code-block-minimal"><code><span class="sql-keyword">START</span> <span class="sql-keyword">TRANSACTION</span>;
+
+<span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> accounts <span class="sql-keyword">VALUES</span> (1, <span class="sql-string">'Vetri'</span>, 5000);
+<span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> accounts <span class="sql-keyword">VALUES</span> (2, <span class="sql-string">'Ravi'</span>, 3000);
+
+<span class="sql-keyword">ROLLBACK</span>;</code></pre>
+                            <div class="output-box">0 rows inserted<br>(accounts table remains unchanged)</div>
+                        </div>
+
+                        <div class="subtopic-card">
+                            <h3 class="subtopic-title" data-section-num="2">Consistency</h3>
+                            <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Ensures the database always
+                                follows rules, constraints, and integrity.</p>
+                            <div class="code-label label-example">🔹 Example</div>
+                            <pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> accounts
+<span class="sql-keyword">SET</span> balance = -1000
+<span class="sql-keyword">WHERE</span> id = 1;</code></pre>
+                            <div class="output-box">ERROR: CHECK constraint failed<br>(No change in table)</div>
+                        </div>
+
+                        <div class="subtopic-card">
+                            <h3 class="subtopic-title" data-section-num="3">Isolation</h3>
+                            <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Transactions execute
+                                independently without affecting each other.</p>
+                            <div class="code-label label-example">🔹 Example</div>
+                            <pre
+                                class="code-block-minimal"><code><span class="sql-comment">-- Transaction 1</span>
+<span class="sql-keyword">START</span> <span class="sql-keyword">TRANSACTION</span>;
+<span class="sql-keyword">UPDATE</span> accounts <span class="sql-keyword">SET</span> balance = balance - 500 <span class="sql-keyword">WHERE</span> id = 1;
+
+<span class="sql-comment">-- Transaction 2</span>
+<span class="sql-keyword">SELECT</span> balance <span class="sql-keyword">FROM</span> accounts <span class="sql-keyword">WHERE</span> id = 1;</code></pre>
+                            <div class="output-box">Transaction 2 shows old balance (uncommitted data not visible)</div>
+                        </div>
+
+                        <div class="subtopic-card">
+                            <h3 class="subtopic-title" data-section-num="4">Durability</h3>
+                            <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Once committed, data is
+                                permanently saved, even after failure.</p>
+                            <div class="code-label label-example">🔹 Example</div>
+                            <pre class="code-block-minimal"><code><span class="sql-keyword">COMMIT</span>;</code></pre>
+                            <div class="output-box">Transaction committed successfully<br>(Data remains saved
+                                permanently)</div>
+                        </div>
+                        <div class="subtopic-card">
+                            <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                            <p class="subtopic-desc">
+                            <div style="margin-bottom: 20px;">
+                                <strong>Q1. Atomicity</strong><br>
+                                A money transfer deducts 500 from Account 1 and adds 500 to Account 2.<br>
+                                Second query fails. What will be the final output?<br>
+                                <button class="toggle-btn" data-target="ans-q1"
+                                    style="margin-top: 10px; display: block;">Show Answer</button>
+                                <div id="ans-q1" style="display:none; margin-top:10px;">
+                                    <strong>Query:</strong><br>
+                                    <pre class='code-block-minimal'><code><span class="sql-keyword">START</span> <span class="sql-keyword">TRANSACTION</span>;
+
+<span class="sql-keyword">UPDATE</span> accounts <span class="sql-keyword">SET</span> balance = balance - 500 <span class="sql-keyword">WHERE</span> acc_id = 1;
+<span class="sql-keyword">UPDATE</span> accounts <span class="sql-keyword">SET</span> balance = balance + 500 <span class="sql-keyword">WHERE</span> acc_id = 3;
+
+<span class="sql-keyword">COMMIT</span>;</code></pre><br>
+                                    <strong>Output:</strong><br>
+                                    ❌ Error (Account 3 does not exist)<br>
+                                    Transaction ROLLBACK<br>
+                                    <br>
+                                    <table style='border-collapse: collapse; width: 60%; font-size: 13px;'>
+                                        <thead>
+                                            <tr>
+                                                <th>acc_id</th>
+                                                <th>balance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>5000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>3000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                    ➡ Atomicity ensured (all or nothing)
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <strong>Q2. Consistency</strong><br>
+                                Salary must be ≥ 10000. What happens if we insert salary = 8000?<br>
+                                <button class="toggle-btn" data-target="ans-q2"
+                                    style="margin-top: 10px; display: block;">Show Answer</button>
+                                <div id="ans-q2" style="display:none; margin-top:10px;">
+                                    <strong>Table:</strong><br>
+                                    <pre class='code-block-minimal'><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> employee (
+  emp_id <span class="sql-keyword">INT</span> <span class="sql-keyword">PRIMARY KEY</span>,
+  salary <span class="sql-keyword">INT</span> <span class="sql-keyword">CHECK</span> (salary >= 10000)
+);</code></pre><br>
+                                    <strong>Query:</strong><br>
+                                    <pre
+                                        class='code-block-minimal'><code><span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> employee <span class="sql-keyword">VALUES</span> (101, 8000);</code></pre>
+                                    <br>
+                                    <strong>Output:</strong><br>
+                                    ❌ Error: CHECK constraint failed<br>
+                                    ❌ Row NOT inserted<br>
+                                    <br>
+                                    ➡ Consistency maintained
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <strong>Q3. Isolation</strong><br>
+                                Transaction T1 updates price but does not commit. What value will T2 see?<br>
+                                <button class="toggle-btn" data-target="ans-q3"
+                                    style="margin-top: 10px; display: block;">Show Answer</button>
+                                <div id="ans-q3" style="display:none; margin-top:10px;">
+                                    <strong>Transaction T1:</strong><br>
+                                    <pre
+                                        class='code-block-minimal'><code><span class="sql-keyword">START</span> <span class="sql-keyword">TRANSACTION</span>;
+<span class="sql-keyword">UPDATE</span> product <span class="sql-keyword">SET</span> price = 1200 <span class="sql-keyword">WHERE</span> id = 1;</code></pre>
+                                    <br>
+                                    <strong>Transaction T2:</strong><br>
+                                    <pre
+                                        class='code-block-minimal'><code><span class="sql-keyword">SELECT</span> price <span class="sql-keyword">FROM</span> product <span class="sql-keyword">WHERE</span> id = 1;</code></pre>
+                                    <br>
+                                    <strong>Output (T2):</strong><br>
+                                    <table style='border-collapse: collapse; width: 60%; font-size: 13px;'>
+                                        <thead>
+                                            <tr>
+                                                <th>price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                    ➡ Uncommitted data not visible → Isolation
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <strong>Q4. Durability</strong><br>
+                                After commit, system crashes. Will data remain?<br>
+                                <button class="toggle-btn" data-target="ans-q4"
+                                    style="margin-top: 10px; display: block;">Show Answer</button>
+                                <div id="ans-q4" style="display:none; margin-top:10px;">
+                                    <strong>Query:</strong><br>
+                                    <pre class='code-block-minimal'><code><span class="sql-keyword">START</span> <span class="sql-keyword">TRANSACTION</span>;
+<span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> orders <span class="sql-keyword">VALUES</span> (1, <span class="sql-string">'Laptop'</span>, 50000);
+<span class="sql-keyword">COMMIT</span>;</code></pre><br>
+                                    <strong>After Restart:</strong><br>
+                                    <pre
+                                        class='code-block-minimal'><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> orders;</code></pre>
+                                    <br>
+                                    <strong>Output:</strong><br>
+                                    <table style='border-collapse: collapse; width: 60%; font-size: 13px;'>
+                                        <thead>
+                                            <tr>
+                                                <th>order_id</th>
+                                                <th>product</th>
+                                                <th>price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Laptop</td>
+                                                <td>50000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                    ➡ Committed data is permanent → Durability
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <strong>Q5. Identify ACID using Query Output</strong><br>
+                                <button class="toggle-btn" data-target="ans-q5"
+                                    style="margin-top: 10px; display: block;">Show Answer</button>
+                                <div id="ans-q5" style="display:none; margin-top:10px;">
+                                    <strong>Query:</strong><br>
+                                    <pre class='code-block-minimal'><code><span class="sql-keyword">START</span> <span class="sql-keyword">TRANSACTION</span>;
+<span class="sql-keyword">DELETE</span> <span class="sql-keyword">FROM</span> students <span class="sql-keyword">WHERE</span> id = 5;
+<span class="sql-keyword">ROLLBACK</span>;</code></pre><br>
+                                    <strong>Output:</strong><br>
+                                    <table style='border-collapse: collapse; width: 60%; font-size: 13px;'>
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Arun</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                    <strong>ACID Property:</strong><br>
+                                    ✅ Atomicity (rollback restores data)
+                                </div>
+                            </div>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="page-navigation">
+                        <div class="nav-btn prev" onclick="window.location.href='39_cte.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← CTE (Common Table Expression)</div>
+                        </div>
+                        <div></div>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+
+</html>

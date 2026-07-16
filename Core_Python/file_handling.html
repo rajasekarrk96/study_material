@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Handling in Python - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#modes">File Modes</a></li>
+                        <li><a href="#open">Open/Close File</a></li>
+                        <li><a href="#read">Read File</a></li>
+                        <li><a href="#write">Write/Create</a></li>
+                        <li><a href="#delete">Delete File</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>File Handling in Python</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>File handling is an important part of any web application.</p>
+                    <p>Python has several functions for creating, reading, updating, and deleting files.</p>
+                    <p>The key function for working with files in Python is the <code>open()</code> function.</p>
+
+                    <h2 id="modes">File Handling Modes</h2>
+                    <p>The <code>open()</code> function takes two parameters: filename and mode.</p>
+                    <p>There are four different methods (modes) for opening a file:</p>
+                    <ul>
+                        <li><strong>"r" - Read</strong> - Default value. Opens a file for reading, error if the file
+                            does not exist.</li>
+                        <li><strong>"a" - Append</strong> - Opens a file for appending, creates the file if it does not
+                            exist.</li>
+                        <li><strong>"w" - Write</strong> - Opens a file for writing, creates the file if it does not
+                            exist.</li>
+                        <li><strong>"x" - Create</strong> - Creates the specified file, returns an error if the file
+                            exists.</li>
+                    </ul>
+                    <p>In addition you can specify if the file should be handled as binary or text mode:</p>
+                    <ul>
+                        <li><strong>"t" - Text</strong> - Default value. Text mode.</li>
+                        <li><strong>"b" - Binary</strong> - Binary mode (e.g. images).</li>
+                    </ul>
+
+                    <h2 id="open">Open and Close File</h2>
+                    <p>To open a file for reading it is enough to specify the name of the file:</p>
+                    <pre class="code-block">
+f = open("demofile.txt")
+# The code above is the same as:
+f = open("demofile.txt", "rt")
+</pre>
+                    <p>It is good practice to always close the file when you are done with it.</p>
+                    <pre class="code-block">
+f = open("demofile.txt", "r")
+print(f.read())
+f.close()
+</pre>
+
+                    <h2 id="read">Read File</h2>
+                    <p>The <code>read()</code> method allows you to read the content of the file.</p>
+                    <pre class="code-block">
+f = open("demofile.txt", "r")
+print(f.read())
+</pre>
+                    <p><strong>Read Only Parts of the File:</strong> By default the read() method returns the whole
+                        text, but you can also specify how many characters you want to return:</p>
+                    <pre class="code-block">
+f = open("demofile.txt", "r")
+print(f.read(5))
+</pre>
+                    <p><strong>Read Lines:</strong> You can return one line by using the <code>readline()</code> method:
+                    </p>
+                    <pre class="code-block">
+f = open("demofile.txt", "r")
+print(f.readline())
+</pre>
+
+                    <h2 id="write">Write/Create Files</h2>
+                    <p>To write to an existing file, you must add a parameter to the open() function:</p>
+                    <ul>
+                        <li><code>"a"</code> - Append - will append to the end of the file</li>
+                        <li><code>"w"</code> - Write - will overwrite any existing content</li>
+                    </ul>
+                    <pre class="code-block">
+# Append
+f = open("demofile2.txt", "a")
+f.write("Now the file has more content!")
+f.close()
+
+# Overwrite
+f = open("demofile3.txt", "w")
+f.write("Woops! I have deleted the content!")
+f.close()
+</pre>
+
+                    <h2 id="delete">Delete File</h2>
+                    <p>To delete a file, you must import the OS module, and run its <code>os.remove()</code> function:
+                    </p>
+                    <pre class="code-block">
+import os
+os.remove("demofile.txt")
+</pre>
+                    <p><strong>Check if File exist:</strong> To avoid getting an error, you might want to check if the
+                        file exists before you try to delete it:</p>
+                    <pre class="code-block">
+import os
+if os.path.exists("demofile.txt"):
+  os.remove("demofile.txt")
+else:
+  print("The file does not exist")
+</pre>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a Python program to read an entire text file.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def file_read(fname):
+    with open(fname, "r") as txt:
+        print(txt.read())
+
+file_read('test.txt')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a Python program to read first n lines of a file.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from itertools import islice
+
+def file_read_from_head(fname, nlines):
+    with open(fname) as f:
+        for line in islice(f, nlines):
+            print(line, end='')
+
+file_read_from_head('test.txt', 2)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a Python program to append text to a file and display the text.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def file_read(fname):
+    with open(fname, "a") as myfile:
+        myfile.write("Python Exercises\n")
+    
+    with open(fname, "r") as txt:
+        print(txt.read())
+
+file_read('abc.txt')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a Python program to read last n lines of a file.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import os
+
+def file_read_from_tail(fname, lines):
+    bufsize = 8192
+    fsize = os.stat(fname).st_size
+    iter = 0
+    with open(fname) as f:
+        if bufsize > fsize:
+            bufsize = fsize - 1
+        
+        data = []
+        while True:
+            iter += 1
+            f.seek(fsize - bufsize * iter)
+            data.extend(f.readlines())
+            if len(data) >= lines or f.tell() == 0:
+                print(''.join(data[-lines:]))
+                break
+
+file_read_from_tail('test.txt', 2)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a Python program to read a file line by line and store it into a list.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def file_read(fname):
+    with open(fname) as f:
+        # content_list is the list that contains the read lines
+        content_list = f.readlines()
+        print(content_list)
+
+file_read('test.txt')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a Python program to read a file line by line store it into a variable.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def file_read(fname):
+    with open(fname, "r") as myfile:
+        data = myfile.readlines()
+        print(data)
+
+file_read('test.txt')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a Python program to read a file line by line store it into an array.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def file_read(fname):
+    content_array = []
+    with open(fname) as f:
+        for line in f:
+            content_array.append(line)
+        print(content_array)
+
+file_read('test.txt')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a Python program to count the number of lines in a text file.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def file_lengthy(fname):
+    param_i = 0
+    with open(fname) as f:
+        for i, l in enumerate(f):
+            param_i = i
+    return param_i + 1
+
+print("Number of lines in the file:", file_lengthy("test.txt"))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a Python program to count the frequency of words in a file.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>from collections import Counter
+
+def word_count(fname):
+    with open(fname) as f:
+        return Counter(f.read().split())
+
+print("Number of words in the file:", word_count("test.txt"))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a Python program to get the file size of a plain file.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import os
+
+def file_size(fname):
+    statinfo = os.stat(fname)
+    return statinfo.st_size
+
+print("File size in bytes of a plain file:", file_size("test.txt"))</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleAnswer(button) {
+            const answerDiv = button.nextElementSibling;
+            if (answerDiv.style.display === "block") {
+                answerDiv.style.display = "none";
+                button.textContent = "Show Answer";
+            } else {
+                answerDiv.style.display = "block";
+                button.textContent = "Hide Answer";
+            }
+        }
+    </script>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

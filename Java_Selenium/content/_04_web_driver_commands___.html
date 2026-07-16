@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  04 web driver commands   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>04. WebDriver Commands</h1>
+
+<h2>📖 Introduction</h2>
+<p>The <strong>WebDriver</strong> interface is the heart of Selenium. It controls the browser directly, just like a real
+    user. Before we can interact with specific elements (like buttons or text boxes), we must first master how to
+    control the browser window itself—opening pages, checking titles, and managing the session.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>How to launch a new browser window and navigate to URLs</li>
+    <li>Methods to fetch data from the current page (Title, URL, Page Source)</li>
+    <li>The critical difference between closing a window and quitting the session</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>1. Browser Navigation</h3>
+<p>The most basic command is opening a webpage.</p>
+<ul>
+    <li><code>driver.get("url")</code>: Loads a new web page in the current browser window. It waits for the page to
+        load completely before proceeding.</li>
+</ul>
+
+<h3>2. Fetching Page Information</h3>
+<p>Once on a page, we often need to verify we are in the right place.</p>
+<ul>
+    <li><code>driver.getTitle()</code>: Fetches the title of the current page. Essential for validation assertions.</li>
+    <li><code>driver.getCurrentUrl()</code>: Returns the string representing the current URL. useful for redirect
+        verification.</li>
+    <li><code>driver.getPageSource()</code>: Returns the entire HTML source code of the page content.</li>
+</ul>
+
+<h3>3. Closing the Browser</h3>
+<p>Ending your test session properly is mandatory.</p>
+<ul>
+    <li><code>driver.close()</code>: Closes only the current window that the driver is currently controlling.</li>
+    <li><code>driver.quit()</code>: Closes all windows opened by the WebDriver session and safely terminates the
+        process.</li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+<p>Let's look at a script that navigates to a logical flow:</p>
+
+<h3>Basic Browser Operations</h3>
+<pre><code>WebDriver driver = new ChromeDriver();
+
+// 1. Open a website
+driver.get("https://opensource-demo.orangehrmlive.com/");
+
+// 2. Capture and print Title for validation
+String title = driver.getTitle();
+System.out.println("Page Title: " + title);
+
+// 3. Validation Logic
+if(title.contains("OrangeHRM")) {
+    System.out.println("Test Passed: Title Matched");
+} else {
+    System.out.println("Test Failed: Title Mismatch");
+}
+
+// 4. Capture Current URL
+System.out.println("Current URL: " + driver.getCurrentUrl());
+
+// 5. Clean up
+driver.quit();
+</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Use `quit()` over `close()`:</strong> Beginners often use <code>close()</code> at the end of a test. If
+        your test opened multiple tabs or popups, <code>close()</code> will leave them open, consuming memory (memory
+        leaks). Always prefer <code>quit()</code> at the end of a test suite.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Target URL:</strong> <a href="https://opensource-demo.orangehrmlive.com/" target="_blank"
+            style="color:#00e676">https://opensource-demo.orangehrmlive.com/</a></p>
+    <p><strong>Goal:</strong> Automate this validation flow:</p>
+    <ol>
+        <li>Launch the browser and maximize it.</li>
+        <li>Open the OrangeHRM Demo URL.</li>
+        <li>Verify if the Title contains "OrangeHRM".</li>
+        <li>Print the length of the Title string.</li>
+        <li>Verify if the URL contains "login".</li>
+        <li>Get the Page Source and check if it contains the word "dashboard". (Negative test).</li>
+        <li>Close the browser.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: What is the difference between driver.get() and driver.navigate().to()?</strong></p>
+    <p><strong>Answer:</strong> Functionally they are similar. However, <code>driver.get()</code> waits for the page to
+        load completely (DOM `readyState` to be complete), whereas <code>navigate().to()</code> does not wait and is
+        used for browser history operations (back, forward, refresh).</p>
+
+    <p><strong>Q2: What is the return type of driver.getTitle()?</strong></p>
+    <p><strong>Answer:</strong> It returns a <code>String</code>.</p>
+</blockquote>
+
+<a href="worksheets/ws_webdriver_commands.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

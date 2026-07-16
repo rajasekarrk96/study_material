@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  10 navigation   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>10. Browser Navigation</h1>
+
+<h2>📖 Introduction</h2>
+<p>Browsing the web isn't just about going to a URL. Users click "Back" when they make a mistake, "Forward" to return,
+    and "Refresh" when pages get stuck. Selenium provides the <strong>Navigation</strong> interface to simulate these
+    exact browser actions.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The difference between <code>driver.get()</code> and <code>driver.navigate().to()</code></li>
+    <li>How to simulate Back, Forward, and Refresh actions</li>
+    <li>Maintaining browser history</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>The Navigation Interface</h3>
+<p>While <code>driver.get("url")</code> is the most common way to open a page, Selenium accesses browser history through
+    <code>driver.navigate()</code>.
+</p>
+<ul>
+    <li><strong>navigate().to(url):</strong> Functionally similar to <code>get()</code>.</li>
+    <li><strong>navigate().back():</strong> Simulates clicking the browser's Back button.</li>
+    <li><strong>navigate().forward():</strong> Simulates clicking the browser's Forward button.</li>
+    <li><strong>navigate().refresh():</strong> Reloads the current page.</li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+<p>Here is a common navigation flow:</p>
+
+<h3>Navigation Commands</h3>
+<pre><code>WebDriver driver = new ChromeDriver();
+
+// 1. Go to Google
+driver.get("https://google.com");
+
+// 2. Go to Facebook (Google is now in history)
+driver.navigate().to("https://facebook.com");
+
+// 3. Go Setup Back to Google
+driver.navigate().back();
+
+// 4. Go Forward to Facebook
+driver.navigate().forward();
+
+// 5. Refresh the page
+driver.navigate().refresh();</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Don't Overuse `navigate().to()`:</strong> While it works like <code>get()</code>, it's idiomatic to use
+        <code>get()</code> for the initial page load. <code>navigate()</code> is best reserved for when you specifically
+        intend to interact with history or perform a sequence of moves.
+    </p>
+    <p><strong>State Loss on Refresh:</strong> Remember that <code>refresh()</code> will reload the DOM. Any elements
+        you found <em>before</em> the refresh become "stale" and cannot be used. You must find them again.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Verify Breadcrumb / History behavior.</p>
+    <ol>
+        <li>Open an E-commerce site (like Amazon).</li>
+        <li>Search for a product.</li>
+        <li>Click on a product detail page.</li>
+        <li>Click the Browser "Back" button using Selenium.</li>
+        <li>Verify you are back on the Search Results page.</li>
+        <li>Click "Forward" and verify you are on the Product page again.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: What is the main difference between driver.get() and driver.navigate().to()?</strong></p>
+    <p><strong>Answer:</strong> In functionality, they are almost identical. <code>driver.get()</code> is concise and
+        standard for loading pages. <code>driver.navigate().to()</code> is part of the Navigation interface which
+        suggests an intention to modify history, but both wait for the page load strategy to complete.</p>
+</blockquote>
+
+<a href="worksheets/ws_navigation.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+<h2>🧑‍💻 Practice Tasks</h2>
+<ul>
+    <li><strong>Task 1:</strong> Open <code>https://google.com</code>, enter a search term in the search box using <code>sendKeys()</code>, and submit the form.</li>
+    <li><strong>Task 2:</strong> After searching, use <code>driver.navigate().refresh()</code> to refresh the results page. Observe if the search term remains.</li>
+    <li><strong>Task 3:</strong> Navigate to another site (e.g., <code>https://facebook.com</code>) using <code>navigate().to()</code>, then use <code>navigate().back()</code> to return to Google. Verify you are back on the search results.</li>
+    <li><strong>Task 4:</strong> Use <code>navigate().forward()</code> to go forward to Facebook again.</li>
+    <li><strong>Task 5:</strong> Try using <code>navigate().refresh()</code> on Facebook and observe any changes.</li>
+</ul>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

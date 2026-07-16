@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantifiers - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Quantifiers Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>Quantifiers - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master regex quantifiers and replacement patterns with string manipulation problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Add Dash Before and After Every Vowel</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to add a dash (-) before and after every vowel in a given string.
+                <br><br>
+                <strong>Vowels to match:</strong> a, e, i, o, u (both lowercase and uppercase)
+                <br><br>
+                <strong>Examples:</strong>
+                <ul>
+                    <li>"education" → "-e-d-u-c-a-t-i--o-n"</li>
+                    <li>"hello" → "h-e-ll-o-"</li>
+                    <li>"Java" → "J-a-v-a-"</li>
+                </ul>
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _04_ {
+    public static void main(String[] args) {
+
+        String str = "education";
+
+        String result = str.replaceAll("([aeiouAEIOU])", "-$1-");
+
+        System.out.println(result);
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Input: "education"
+Output: -e-d-u-c-a-t-i--o-n
+
+Input: "hello"
+Output: h-e-ll-o-
+
+Input: "Java"
+Output: J-a-v-a-
+
+Input: "programming"
+Output: pr-o-gr-a-mm-i-ng
+
+Input: "AEIOU"
+Output: -A--E--I--O--U-</code></div>
+
+            <h4>Regex Pattern Explanation</h4>
+            <div class="code-block"><code>Pattern: ([aeiouAEIOU])
+Replacement: -$1-
+
+Breakdown:
+- (         : Start of capturing group
+- [aeiouAEIOU] : Character class matching any vowel (lowercase or uppercase)
+  - aeiou   : Lowercase vowels
+  - AEIOU   : Uppercase vowels
+- )         : End of capturing group
+- $1        : Reference to captured group (the matched vowel)
+
+How it works:
+1. Find each vowel in the string
+2. Capture it in group 1
+3. Replace with: dash + captured vowel + dash
+4. Result: "-vowel-"</code></div>
+
+            <h4>Understanding Capturing Groups</h4>
+            <div class="code-block"><code>// Capturing Group Syntax
+(pattern)     : Captures the matched text
+$1, $2, ...   : References captured groups in replacement
+
+Example:
+Pattern:      "([aeiou])"
+Input:        "hello"
+Matches:      "e" and "o"
+Replacement:  "-$1-"
+Result:       "h-e-ll-o-"
+
+// Multiple Groups Example
+Pattern:      "(\\w)(\\d)"
+Input:        "a1b2"
+Replacement:  "$2$1"
+Result:       "1a2b" (swaps letter and digit)</code></div>
+
+            <h4>Alternative Approaches</h4>
+            <div class="code-block"><code>// Approach 1: Case-insensitive flag (not in replaceAll)
+Pattern pattern = Pattern.compile("([aeiou])", Pattern.CASE_INSENSITIVE);
+Matcher matcher = pattern.matcher(str);
+String result = matcher.replaceAll("-$1-");
+
+// Approach 2: Without capturing group (less efficient)
+String result = str.replaceAll("a", "-a-")
+                   .replaceAll("e", "-e-")
+                   .replaceAll("i", "-i-")
+                   .replaceAll("o", "-o-")
+                   .replaceAll("u", "-u-")
+                   .replaceAll("A", "-A-")
+                   .replaceAll("E", "-E-")
+                   .replaceAll("I", "-I-")
+                   .replaceAll("O", "-O-")
+                   .replaceAll("U", "-U-");
+
+// Approach 3: Using lookahead/lookbehind (advanced)
+String result = str.replaceAll("(?=[aeiouAEIOU])", "-")
+                   .replaceAll("(?<=[aeiouAEIOU])", "-");</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Character Class []:</strong> Matches any single character from the set</li>
+                    <li><strong>Capturing Group ():</strong> Captures matched text for later reference</li>
+                    <li><strong>Backreference $1:</strong> Refers to the first captured group</li>
+                    <li><strong>replaceAll():</strong> Replaces all occurrences matching the pattern</li>
+                </ul>
+                <strong>Common Pitfalls:</strong>
+                <ul>
+                    <li>Consecutive vowels create double dashes: "aa" → "-a--a-"</li>
+                    <li>Forgetting uppercase vowels will miss matches</li>
+                    <li>Using replace() instead of replaceAll() only replaces first occurrence</li>
+                </ul>
+                <strong>Real-World Applications:</strong>
+                <ul>
+                    <li>Text formatting and decoration</li>
+                    <li>String transformation and manipulation</li>
+                    <li>Pattern-based text processing</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Quantifiers Module - Practice Worksheet</strong></p>
+            <p>Master regex quantifiers and replacement patterns</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

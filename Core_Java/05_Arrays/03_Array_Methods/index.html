@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Methods - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Array Methods</h5>
+        <a href="../../index.html#arrays">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#arrays-class">Arrays Class</a>
+        <a href="#sort">Sorting</a>
+        <a href="#search">Searching</a>
+        <a href="#copy">Copying</a>
+        <a href="#compare">Comparing</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Array Methods</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Array Methods in Java</h1>
+            <p class="lead text-muted">Use built-in array methods like sort(), binarySearch(), and toString().</p>
+        </div>
+
+        <div class="section" id="arrays-class">
+            <h4>java.util.Arrays Class</h4>
+            <p>The Arrays class provides static methods to manipulate arrays. Import it to use these powerful utility
+                methods.</p>
+            <pre><code>import java.util.Arrays;</code></pre>
+            <div class="note">
+                <strong>💡 Key Point:</strong> All methods in Arrays class are static, so call them using
+                Arrays.methodName()
+            </div>
+        </div>
+
+        <div class="section" id="sort">
+            <h4>Sorting Arrays</h4>
+            <pre><code>import java.util.Arrays;
+
+public class ArraySort {
+    public static void main(String[] args) {
+        int[] numbers = {5, 2, 8, 1, 9, 3};
+        
+        System.out.println("Before sort: " + Arrays.toString(numbers));
+        
+        // Sort in ascending order
+        Arrays.sort(numbers);
+        
+        System.out.println("After sort: " + Arrays.toString(numbers));
+        
+        // Sort specific range (index 1 to 4)
+        int[] arr = {9, 5, 3, 7, 1, 8};
+        Arrays.sort(arr, 1, 4);
+        System.out.println("Partial sort: " + Arrays.toString(arr));
+    }
+}</code></pre>
+            <div class="output">
+                Before sort: [5, 2, 8, 1, 9, 3]<br>
+                After sort: [1, 2, 3, 5, 8, 9]<br>
+                Partial sort: [9, 3, 5, 7, 1, 8]
+            </div>
+        </div>
+
+        <div class="section" id="search">
+            <h4>Binary Search</h4>
+            <pre><code>import java.util.Arrays;
+
+public class ArraySearch {
+    public static void main(String[] args) {
+        int[] numbers = {1, 3, 5, 7, 9, 11, 13};
+        
+        // Array MUST be sorted for binarySearch
+        int index = Arrays.binarySearch(numbers, 7);
+        System.out.println("Index of 7: " + index);
+        
+        // Search for non-existent element
+        int notFound = Arrays.binarySearch(numbers, 6);
+        System.out.println("Index of 6: " + notFound);  // Returns negative value
+    }
+}</code></pre>
+            <div class="output">
+                Index of 7: 3<br>
+                Index of 6: -4
+            </div>
+            <div class="note">
+                <strong>⚠️ Important:</strong> binarySearch() requires a sorted array. Returns negative value if element
+                not found.
+            </div>
+        </div>
+
+        <div class="section" id="copy">
+            <h4>Copying Arrays</h4>
+            <pre><code>import java.util.Arrays;
+
+public class ArrayCopy {
+    public static void main(String[] args) {
+        int[] original = {1, 2, 3, 4, 5};
+        
+        // Method 1: copyOf()
+        int[] copy1 = Arrays.copyOf(original, original.length);
+        System.out.println("Copy: " + Arrays.toString(copy1));
+        
+        // Method 2: copyOfRange()
+        int[] copy2 = Arrays.copyOfRange(original, 1, 4);
+        System.out.println("Range copy: " + Arrays.toString(copy2));
+        
+        // Method 3: clone()
+        int[] copy3 = original.clone();
+        System.out.println("Clone: " + Arrays.toString(copy3));
+    }
+}</code></pre>
+            <div class="output">
+                Copy: [1, 2, 3, 4, 5]<br>
+                Range copy: [2, 3, 4]<br>
+                Clone: [1, 2, 3, 4, 5]
+            </div>
+        </div>
+
+        <div class="section" id="compare">
+            <h4>Other Useful Methods</h4>
+            <pre><code>import java.util.Arrays;
+
+public class ArrayMethods {
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 3};
+        int[] arr2 = {1, 2, 3};
+        int[] arr3 = {1, 2, 4};
+        
+        // equals() - compare arrays
+        System.out.println("arr1 equals arr2: " + Arrays.equals(arr1, arr2));
+        System.out.println("arr1 equals arr3: " + Arrays.equals(arr1, arr3));
+        
+        // fill() - fill array with value
+        int[] arr = new int[5];
+        Arrays.fill(arr, 7);
+        System.out.println("Filled: " + Arrays.toString(arr));
+        
+        // toString() - convert to string
+        String[] names = {"Alice", "Bob", "Charlie"};
+        System.out.println("Names: " + Arrays.toString(names));
+    }
+}</code></pre>
+            <div class="output">
+                arr1 equals arr2: true<br>
+                arr1 equals arr3: false<br>
+                Filled: [7, 7, 7, 7, 7]<br>
+                Names: [Alice, Bob, Charlie]
+            </div>
+            <div class="example">
+                <strong>✓ Common Methods:</strong><br>
+                • <code>Arrays.sort()</code> - Sort array<br>
+                • <code>Arrays.binarySearch()</code> - Search sorted array<br>
+                • <code>Arrays.toString()</code> - Convert to string<br>
+                • <code>Arrays.equals()</code> - Compare arrays<br>
+                • <code>Arrays.fill()</code> - Fill with value<br>
+                • <code>Arrays.copyOf()</code> - Copy array
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Array Methods Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

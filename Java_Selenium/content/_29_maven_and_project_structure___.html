@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  29 maven and project structure   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>29. Maven Project Structure</h1>
+
+<h2>📖 Introduction</h2>
+<p>Professional Selenium projects are not just a collection of .java files. They need to manage dependencies (like
+    Selenium jars, TestNG jars), compilation, and build lifecycles. <strong>Maven</strong> is the industry standard
+    Build Automation Tool for Java.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>Why we need Maven (Dependency Management)</li>
+    <li>Understanding <code>pom.xml</code></li>
+    <li>Correct folder structure (src/main vs src/test)</li>
+    <li>Running tests from Command Line</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>The pom.xml</h3>
+<p>POM stands for Project Object Model. It is the heart of the project. You define valid dependencies here, and Maven
+    automatically downloads them from the internet.</p>
+
+<h3>Standard Layout</h3>
+<pre>
+MyProject
+ ├── src
+ │    ├── main
+ │    │    └── java (Page Objects, Utilities)
+ │    └── test
+ │         ├── java (Test Cases)
+ │         └── resources (Test Data, Config files)
+ └── pom.xml
+</pre>
+
+<h2>💻 Code Examples</h2>
+
+<h3>pom.xml snippet</h3>
+<pre><code class="language-xml">&lt;dependencies&gt;
+    &lt;!-- Selenium --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;
+        &lt;artifactId&gt;selenium-java&lt;/artifactId&gt;
+        &lt;version&gt;4.10.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- TestNG --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.testng&lt;/groupId&gt;
+        &lt;artifactId&gt;testng&lt;/artifactId&gt;
+        &lt;version&gt;7.7.0&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Scope Issues:</strong> If you mark a dependency as <code>&lt;scope&gt;test&lt;/scope&gt;</code>, it will
+        not be available in <code>src/main/java</code>. This is intentional. Test libraries should live in
+        <code>src/test</code>.
+    </p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Update a Dependency.</p>
+    <ol>
+        <li>Check your current Selenium version in <code>pom.xml</code>.</li>
+        <li>Go to <a href="https://mvnrepository.com">mvnrepository.com</a>.</li>
+        <li>Find the latest version.</li>
+        <li>Update the <code>&lt;version&gt;</code> tag.</li>
+        <li>Reload Maven project to download new jars.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: What is the command to run tests from Maven?</strong></p>
+    <p><strong>Answer:</strong> <code>mvn test</code>.</p>
+</blockquote>
+
+<a href="worksheets/ws_maven.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

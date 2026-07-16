@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>CRUD Operations</h5>
+        <a href="../../index.html#jdbc">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#overview">Overview</a>
+        <a href="#create">Create</a>
+        <a href="#read">Read</a>
+        <a href="#update">Update</a>
+        <a href="#delete">Delete</a>
+    </div>
+    <div class="top-nav">
+        <h2>CRUD Operations</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>CRUD Operations with JDBC</h1>
+            <p class="lead text-muted">Implement Create, Read, Update, Delete operations on databases</p>
+        </div>
+        <div class="section" id="overview">
+            <h4>What are CRUD Operations?</h4>
+            <p>CRUD stands for Create, Read, Update, Delete - the four basic operations for persistent storage.</p>
+            <ul>
+                <li><strong>Create (INSERT):</strong> Add new records</li>
+                <li><strong>Read (SELECT):</strong> Retrieve existing records</li>
+                <li><strong>Update (UPDATE):</strong> Modify existing records</li>
+                <li><strong>Delete (DELETE):</strong> Remove records</li>
+            </ul>
+        </div>
+        <div class="section" id="create">
+            <h4>Create - INSERT Operation</h4>
+            <pre><code>String sql = "INSERT INTO students (name, age, grade) VALUES (?, ?, ?)";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+pstmt.setString(1, "Alice");
+pstmt.setInt(2, 20);
+pstmt.setString(3, "A");
+int rows = pstmt.executeUpdate();
+System.out.println(rows + " record inserted.");</code></pre>
+        </div>
+        <div class="section" id="read">
+            <h4>Read - SELECT Operation</h4>
+            <pre><code>String sql = "SELECT * FROM students WHERE age > ?";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+pstmt.setInt(1, 18);
+ResultSet rs = pstmt.executeQuery();
+
+while (rs.next()) {
+    System.out.println("ID: " + rs.getInt("id"));
+    System.out.println("Name: " + rs.getString("name"));
+    System.out.println("Age: " + rs.getInt("age"));
+    System.out.println("---");
+}</code></pre>
+        </div>
+        <div class="section" id="update">
+            <h4>Update - UPDATE Operation</h4>
+            <pre><code>String sql = "UPDATE students SET grade = ? WHERE id = ?";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+pstmt.setString(1, "A+");
+pstmt.setInt(2, 101);
+int rows = pstmt.executeUpdate();
+System.out.println(rows + " record updated.");</code></pre>
+        </div>
+        <div class="section" id="delete">
+            <h4>Delete - DELETE Operation</h4>
+            <pre><code>String sql = "DELETE FROM students WHERE id = ?";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+pstmt.setInt(1, 101);
+int rows = pstmt.executeUpdate();
+System.out.println(rows + " record deleted.");</code></pre>
+
+            <h4>Complete CRUD Example</h4>
+            <pre><code>import java.sql.*;
+
+public class CRUDExample {
+    static final String URL = "jdbc:mysql://localhost:3306/school";
+    static final String USER = "root";
+    static final String PASS = "root";
+    
+    public static void main(String[] args) {
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
+            // CREATE
+            insertStudent(conn, "Bob", 22, "B");
+            
+            // READ
+            readAllStudents(conn);
+            
+            // UPDATE
+            updateStudent(conn, 1, "A+");
+            
+            // DELETE
+            deleteStudent(conn, 1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    static void insertStudent(Connection conn, String name, int age, String grade) throws SQLException {
+        String sql = "INSERT INTO students (name, age, grade) VALUES (?, ?, ?)";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, name);
+        pstmt.setInt(2, age);
+        pstmt.setString(3, grade);
+        pstmt.executeUpdate();
+        System.out.println("Student inserted.");
+    }
+    
+    static void readAllStudents(Connection conn) throws SQLException {
+        String sql = "SELECT * FROM students";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            System.out.println(rs.getInt("id") + " - " + rs.getString("name"));
+        }
+    }
+    
+    static void updateStudent(Connection conn, int id, String newGrade) throws SQLException {
+        String sql = "UPDATE students SET grade = ? WHERE id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, newGrade);
+        pstmt.setInt(2, id);
+        pstmt.executeUpdate();
+        System.out.println("Student updated.");
+    }
+    
+    static void deleteStudent(Connection conn, int id) throws SQLException {
+        String sql = "DELETE FROM students WHERE id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        pstmt.executeUpdate();
+        System.out.println("Student deleted.");
+    }
+}</code></pre>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>CRUD Operations Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

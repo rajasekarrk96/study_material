@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input/Output - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none;
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333;
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0;
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px;
+        }
+
+        .explanation ol {
+            line-height: 1.8;
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Input/Output Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Input/Output - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Java input/output operations with these practice problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Reading Different Data Types</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that reads different types of input (String, int, double) and displays them in a
+                formatted manner.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>Alice<br>25<br>5.9</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Name: Alice<br>Age: 25 years<br>Height: 5.9 feet</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>Bob<br>30<br>6.1</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Name: Bob<br>Age: 30 years<br>Height: 6.1 feet</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class ReadMultipleTypes {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter name: ");
+        String name = sn.nextLine();
+        
+        System.out.print("Enter age: ");
+        int age = sn.nextInt();
+        
+        System.out.print("Enter height: ");
+        double height = sn.nextDouble();
+        
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age + " years");
+        System.out.println("Height: " + height + " feet");
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Scanner provides type-specific input methods:</strong> Each data type has its
+                                own method - nextLine() for strings, nextInt() for integers, nextDouble() for decimals.
+                                This type safety prevents runtime errors from invalid input.</li>
+                            <li><strong>Reading order matters for mixed input:</strong> We read the string first using
+                                nextLine() to avoid the newline character issue. If we read numbers first, we'd need an
+                                extra nextLine() call to consume the leftover newline.</li>
+                            <li><strong>Formatted output enhances readability:</strong> By adding units like "years" and
+                                "feet", we make the output self-explanatory. This is crucial for user-facing
+                                applications where context matters.</li>
+                            <li><strong>Resource management with close():</strong> Calling sn.close() releases system
+                                resources. While not critical in small programs, it's good practice and prevents
+                                resource leaks in larger applications.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Formatted Output with printf</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that displays a student's information using printf for formatted output with
+                specific decimal places and alignment.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>John<br>85.678<br>92.345</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Student: John<br>Math Score: 85.68<br>Science Score: 92.35<br>Average: 89.01</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>Sarah<br>78.456<br>88.234</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Student: Sarah<br>Math Score: 78.46<br>Science Score: 88.23<br>Average: 83.35</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class FormattedOutput {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter student name: ");
+        String name = sn.nextLine();
+        
+        System.out.print("Enter math score: ");
+        double math = sn.nextDouble();
+        
+        System.out.print("Enter science score: ");
+        double science = sn.nextDouble();
+        
+        double average = (math + science) / 2;
+        
+        System.out.printf("Student: %s%n", name);
+        System.out.printf("Math Score: %.2f%n", math);
+        System.out.printf("Science Score: %.2f%n", science);
+        System.out.printf("Average: %.2f%n", average);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>printf enables precise formatting control:</strong> Unlike println which just
+                                converts values to strings, printf lets us specify exact formatting - number of decimal
+                                places, padding, alignment, etc.</li>
+                            <li><strong>Format specifiers define output structure:</strong> %s means string, %.2f means
+                                floating-point with 2 decimal places, %n is a platform-independent newline. These
+                                placeholders are replaced by the actual values in order.</li>
+                            <li><strong>Decimal precision prevents misleading accuracy:</strong> Showing 85.678 as 85.68
+                                is more appropriate for scores. The extra digits suggest false precision - we're not
+                                measuring to thousandths of a point.</li>
+                            <li><strong>Consistent formatting improves professionalism:</strong> All scores display with
+                                exactly 2 decimal places, creating a clean, aligned output. This attention to detail
+                                makes applications feel polished and trustworthy.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Handling Input Buffer Issues</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that correctly handles mixed input (numbers followed by strings) by managing the
+                input buffer properly.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>101<br>Computer Science<br>3.8</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Student ID: 101<br>Course: Computer Science<br>GPA: 3.8</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>205<br>Mechanical Engineering<br>3.5</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Student ID: 205<br>Course: Mechanical Engineering<br>GPA: 3.5</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class BufferHandling {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter student ID: ");
+        int id = sn.nextInt();
+        sn.nextLine(); // Consume the newline
+        
+        System.out.print("Enter course name: ");
+        String course = sn.nextLine();
+        
+        System.out.print("Enter GPA: ");
+        double gpa = sn.nextDouble();
+        
+        System.out.println("Student ID: " + id);
+        System.out.println("Course: " + course);
+        System.out.println("GPA: " + gpa);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>The newline character causes input issues:</strong> When you type "101" and
+                                press Enter, nextInt() reads "101" but leaves the Enter key (newline character) in the
+                                buffer. If we immediately call nextLine(), it reads that leftover newline as an empty
+                                string.</li>
+                            <li><strong>Consuming the newline prevents skipped input:</strong> The extra sn.nextLine()
+                                after nextInt() reads and discards that leftover newline character, clearing the buffer
+                                for the next actual input.</li>
+                            <li><strong>This pattern applies to all numeric inputs:</strong> Whenever you read numbers
+                                (nextInt, nextDouble, etc.) before strings (nextLine), you need to consume the newline.
+                                This is one of the most common Scanner pitfalls.</li>
+                            <li><strong>Understanding the buffer is key:</strong> Scanner doesn't automatically clear
+                                input - it reads character by character from a buffer. Knowing what's left in the buffer
+                                after each read operation helps you write robust input code.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Reading Multiple Words</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that demonstrates the difference between next() and nextLine() when reading
+                multi-word input.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>Hello World<br>Java Programming</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Using next(): Hello<br>Using nextLine(): World<br>Full line: Java Programming</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>Good Morning<br>Happy Coding</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Using next(): Good<br>Using nextLine(): Morning<br>Full line: Happy Coding</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class NextVsNextLine {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter two words: ");
+        String word1 = sn.next();
+        String remaining = sn.nextLine();
+        
+        System.out.print("Enter a full sentence: ");
+        String sentence = sn.nextLine();
+        
+        System.out.println("Using next(): " + word1);
+        System.out.println("Using nextLine(): " + remaining.trim());
+        System.out.println("Full line: " + sentence);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>next() reads until whitespace:</strong> It stops at the first space, tab, or
+                                newline. So "Hello World" with next() only captures "Hello", leaving " World" in the
+                                buffer.</li>
+                            <li><strong>nextLine() reads until newline:</strong> It captures everything up to and
+                                including the Enter key, then discards the newline. This is why it can read multi-word
+                                input like "Java Programming".</li>
+                            <li><strong>Combining both requires understanding buffer state:</strong> After next() reads
+                                "Hello", the buffer contains " World\n". When we call nextLine(), it reads " World"
+                                (with leading space). We use trim() to remove that space.</li>
+                            <li><strong>Choose the right method for your needs:</strong> Use next() when you want single
+                                words (like parsing commands). Use nextLine() when you need full sentences or phrases.
+                                Mixing them requires careful buffer management.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Creating a Simple Receipt</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that takes item details and creates a formatted receipt with proper alignment and
+                calculations.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>Laptop<br>999.99<br>2</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>========== RECEIPT ==========<br>Item: Laptop<br>Price: $999.99<br>Quantity: 2<br>Total: $1999.98<br>============================</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>Mouse<br>25.50<br>3</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>========== RECEIPT ==========<br>Item: Mouse<br>Price: $25.50<br>Quantity: 3<br>Total: $76.50<br>============================</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class Receipt {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter item name: ");
+        String item = sn.nextLine();
+        
+        System.out.print("Enter price: ");
+        double price = sn.nextDouble();
+        
+        System.out.print("Enter quantity: ");
+        int quantity = sn.nextInt();
+        
+        double total = price * quantity;
+        
+        System.out.println("========== RECEIPT ==========");
+        System.out.println("Item: " + item);
+        System.out.printf("Price: $%.2f%n", price);
+        System.out.println("Quantity: " + quantity);
+        System.out.printf("Total: $%.2f%n", total);
+        System.out.println("============================");
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Structured output creates professional appearance:</strong> The header and
+                                footer lines (====) frame the receipt, making it visually distinct and easy to read.
+                                This simple formatting dramatically improves user experience.</li>
+                            <li><strong>Consistent decimal formatting for currency:</strong> Using %.2f ensures all
+                                monetary values show exactly 2 decimal places, which is standard for currency. $25.5
+                                becomes $25.50, maintaining professional presentation.</li>
+                            <li><strong>Calculation happens before display:</strong> We compute the total first, then
+                                display all information together. This separation of logic (calculation) from
+                                presentation (output) is a fundamental programming principle.</li>
+                            <li><strong>Real-world application demonstrates concepts:</strong> This receipt program
+                                combines multiple I/O concepts - reading different types, formatting output, performing
+                                calculations. It shows how basic I/O operations build into practical applications.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+        <footer>
+            <p><strong>Input/Output - Practice Worksheet</strong></p>
+            <p>Master Java input/output operations and formatting</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

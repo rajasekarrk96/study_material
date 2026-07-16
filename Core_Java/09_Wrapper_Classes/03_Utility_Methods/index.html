@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrapper Utility Methods - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Utility Methods</h5>
+        <a href="../../index.html">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#parsing">Parsing</a>
+        <a href="#comparison">Comparison</a>
+        <a href="#constants">Constants</a>
+    </div>
+    <div class="top-nav">
+        <h2>Wrapper Utility Methods</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Wrapper Class Utility Methods</h1>
+            <p class="lead text-muted">Use built-in methods for parsing, comparison, and conversion.</p>
+        </div>
+        <div class="section" id="parsing">
+            <h4>Parsing Methods</h4>
+            <pre><code>public class ParsingDemo {
+    public static void main(String[] args) {
+        // String to primitive
+        int num = Integer.parseInt("123");
+        double decimal = Double.parseDouble("3.14");
+        boolean flag = Boolean.parseBoolean("true");
+        
+        System.out.println("Parsed int: " + num);
+        System.out.println("Parsed double: " + decimal);
+        System.out.println("Parsed boolean: " + flag);
+        
+        // String to wrapper object
+        Integer numObj = Integer.valueOf("456");
+        System.out.println("Integer object: " + numObj);
+    }
+}</code></pre>
+            <div class="output">
+                Parsed int: 123<br>
+                Parsed double: 3.14<br>
+                Parsed boolean: true<br>
+                Integer object: 456
+            </div>
+        </div>
+        <div class="section" id="comparison">
+            <h4>Comparison Methods</h4>
+            <pre><code>public class ComparisonDemo {
+    public static void main(String[] args) {
+        Integer a = 10;
+        Integer b = 20;
+        
+        // compare() method
+        int result = Integer.compare(a, b);
+        System.out.println("Compare result: " + result);  // Negative
+        
+        // compareTo() method
+        System.out.println("a.compareTo(b): " + a.compareTo(b));
+        
+        // equals() method
+        System.out.println("a.equals(b): " + a.equals(b));
+    }
+}</code></pre>
+            <div class="output">
+                Compare result: -1<br>
+                a.compareTo(b): -1<br>
+                a.equals(b): false
+            </div>
+        </div>
+        <div class="section" id="constants">
+            <h4>Constants and Limits</h4>
+            <pre><code>public class ConstantsDemo {
+    public static void main(String[] args) {
+        System.out.println("Integer MAX: " + Integer.MAX_VALUE);
+        System.out.println("Integer MIN: " + Integer.MIN_VALUE);
+        System.out.println("Double MAX: " + Double.MAX_VALUE);
+        System.out.println("Double MIN: " + Double.MIN_VALUE);
+        System.out.println("Character MAX: " + (int)Character.MAX_VALUE);
+    }
+}</code></pre>
+        </div>
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Wrapper Utility Methods Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

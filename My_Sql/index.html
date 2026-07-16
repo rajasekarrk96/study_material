@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Master | Study Notes</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-area" id="brandLogo" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+                <button id="menuToggle" class="sidebar-toggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics...">
+            </div>
+            <nav class="nav-list" id="navList">
+                <!-- Javascript will populate this -->
+
+
+            </nav>
+
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="actions">
+                    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">🌙</button>
+                </div>
+            </header>
+
+            <div class="content-scroll-area" id="contentArea">
+                <!-- Welcome Hero Section -->
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Master SQL with Interactive Learning</h1>
+                        <p class="hero-desc">Comprehensive SQL study notes covering everything from basics to advanced
+                            concepts. Learn at your own pace with clear examples and practical exercises.</p>
+
+                        <div class="hero-stats">
+                            <div class="stat-card">
+                                <div class="stat-number">40</div>
+                                <div class="stat-label">Topics Covered</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">100+</div>
+                                <div class="stat-label">SQL Examples</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">50+</div>
+                                <div class="stat-label">Practice Questions</div>
+                            </div>
+                        </div>
+
+                        <button class="cta-button" onclick="window.location.href='topics/01_introduction.html'">
+                            Start Learning →
+                        </button>
+                    </div>
+
+                    <!-- Features Grid -->
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <h3>Structured Learning</h3>
+                            <p>Organized topics from basics to advanced concepts</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💻</div>
+                            <h3>Practical Examples</h3>
+                            <p>Real-world SQL queries with output demonstrations</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Quick Reference</h3>
+                            <p>Fast search and navigation to find what you need</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3>Practice Worksheets</h3>
+                            <p>Test your knowledge with interactive exercises</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Start Topics -->
+                    <div class="quick-topics">
+                        <h2 class="section-title">Popular Topics</h2>
+                        <div class="topic-grid">
+                            <div class="quick-topic-card" onclick="window.location.href='topics/26_joins.html'">
+                                <span class="topic-num">26</span>
+                                <span class="topic-name">Joins</span>
+                            </div>
+                            <div class="quick-topic-card" onclick="window.location.href='topics/27_subqueries.html'">
+                                <span class="topic-num">27</span>
+                                <span class="topic-name">Subqueries</span>
+                            </div>
+                            <div class="quick-topic-card" onclick="window.location.href='topics/21_functions.html'">
+                                <span class="topic-num">21</span>
+                                <span class="topic-name">Functions</span>
+                            </div>
+                            <div class="quick-topic-card" onclick="window.location.href='topics/07_constraints.html'">
+                                <span class="topic-num">07</span>
+                                <span class="topic-name">Constraints</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="nav.js"></script>
+    <script src="app.js?v=2"></script>
+</body>
+
+</html>

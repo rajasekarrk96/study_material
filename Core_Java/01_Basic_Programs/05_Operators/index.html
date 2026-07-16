@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Operators Module</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h5>Java Operators</h5>
+        <a href="../../index.html#basics"
+            style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#section1" class="nav-link active">Arithmetic Operators</a>
+            <a href="#section2" class="nav-link">Relational Operators</a>
+            <a href="#section3" class="nav-link">Logical Operators</a>
+            <a href="#section4" class="nav-link">Assignment Operators</a>
+            <a href="#section5" class="nav-link">Ternary Operator</a>
+        </nav>
+    </div>
+
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <h2>Java Operators Module</h2>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="module-header">
+            <h1>Java Operators</h1>
+            <p>Learn about different types of operators in Java and how to use them effectively in your programs.</p>
+        </div>
+
+        <!-- Section 1: Arithmetic Operators -->
+        <div class="section-card" id="section1">
+            <h3>Section 1: Arithmetic Operators</h3>
+
+            <h4>Overview</h4>
+            <div class="explanation">
+                Arithmetic operators are used to perform basic mathematical operations on numeric values. These
+                operators work with integers and floating-point numbers. Java supports five basic arithmetic operators:
+                addition (+), subtraction (-), multiplication (*), division (/), and modulus (%).
+            </div>
+
+            <h4>Operators Table</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Symbol</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Addition</td>
+                            <td>+</td>
+                            <td>Adds two numbers</td>
+                            <td>10 + 5</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>Subtraction</td>
+                            <td>-</td>
+                            <td>Subtracts second from first</td>
+                            <td>10 - 5</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Multiplication</td>
+                            <td>*</td>
+                            <td>Multiplies two numbers</td>
+                            <td>10 * 5</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>Division</td>
+                            <td>/</td>
+                            <td>Divides first by second</td>
+                            <td>10 / 5</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Modulus</td>
+                            <td>%</td>
+                            <td>Returns remainder</td>
+                            <td>10 % 3</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Code Example</h4>
+            <div class="code-block"><code>public class ArithmeticOperators {
+    public static void main(String[] args) {
+        int a = 20;
+        int b = 10;
+        
+        // Addition
+        int add = a + b;
+        System.out.println("Addition: " + add);
+        
+        // Subtraction
+        int sub = a - b;
+        System.out.println("Subtraction: " + sub);
+        
+        // Multiplication
+        int mul = a * b;
+        System.out.println("Multiplication: " + mul);
+        
+        // Division
+        int div = a / b;
+        System.out.println("Division: " + div);
+        
+        // Modulus
+        int mod = a % b;
+        System.out.println("Modulus: " + mod);
+        
+        // With floating-point
+        double x = 20.5;
+        double y = 10.2;
+        System.out.println("Float Division: " + (x / y));
+    }
+}</code></div>
+
+            <h4>Output</h4>
+            <div class="output-block"><code>Addition: 30
+Subtraction: 10
+Multiplication: 200
+Division: 2
+Modulus: 0
+Float Division: 2.0098039215686274</code></div>
+
+            <div class="notes-block">
+                <strong>Note:</strong> When dividing two integers, the result is truncated (decimal part is removed).
+                Use floating-point numbers for decimal results. The modulus operator (%) works only with integers.
+            </div>
+        </div>
+
+        <!-- Section 2: Relational Operators -->
+        <div class="section-card" id="section2">
+            <h3>Section 2: Relational Operators</h3>
+
+            <h4>Overview</h4>
+            <div class="explanation">
+                Relational operators are used to compare two values. They return a boolean result (true or false).
+                Relational operators are commonly used in conditional statements to make decisions based on comparisons.
+            </div>
+
+            <h4>Operators Table</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Symbol</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Equal to</td>
+                            <td>==</td>
+                            <td>Checks if equal</td>
+                            <td>10 == 10</td>
+                            <td>true</td>
+                        </tr>
+                        <tr>
+                            <td>Not equal to</td>
+                            <td>!=</td>
+                            <td>Checks if not equal</td>
+                            <td>10 != 5</td>
+                            <td>true</td>
+                        </tr>
+                        <tr>
+                            <td>Less than</td>
+                            <td>&lt;</td>
+                            <td>Checks if less than</td>
+                            <td>5 &lt; 10</td>
+                            <td>true</td>
+                        </tr>
+                        <tr>
+                            <td>Greater than</td>
+                            <td>&gt;</td>
+                            <td>Checks if greater than</td>
+                            <td>10 &gt; 5</td>
+                            <td>true</td>
+                        </tr>
+                        <tr>
+                            <td>Less than or equal</td>
+                            <td>&lt;=</td>
+                            <td>Checks if less than or equal</td>
+                            <td>10 &lt;= 10</td>
+                            <td>true</td>
+                        </tr>
+                        <tr>
+                            <td>Greater than or equal</td>
+                            <td>&gt;=</td>
+                            <td>Checks if greater than or equal</td>
+                            <td>10 &gt;= 5</td>
+                            <td>true</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Code Example</h4>
+            <div class="code-block"><code>public class RelationalOperators {
+    public static void main(String[] args) {
+        int a = 15;
+        int b = 10;
+        
+        System.out.println("a == b: " + (a == b));
+        System.out.println("a != b: " + (a != b));
+        System.out.println("a < b: " + (a < b));
+        System.out.println("a > b: " + (a > b));
+        System.out.println("a <= b: " + (a <= b));
+        System.out.println("a >= b: " + (a >= b));
+        
+        // Comparing with same values
+        int x = 20;
+        int y = 20;
+        
+        System.out.println("\nWhen x == y:");
+        System.out.println("x == y: " + (x == y));
+        System.out.println("x != y: " + (x != y));
+        System.out.println("x >= y: " + (x >= y));
+        System.out.println("x <= y: " + (x <= y));
+    }
+}</code></div>
+
+            <h4>Output</h4>
+            <div class="output-block"><code>a == b: false
+a != b: true
+a < b: false
+a > b: true
+a <= b: false
+a >= b: true
+
+When x == y:
+x == y: true
+x != y: false
+x >= y: true
+x <= y: true</code></div>
+
+            <div class="example-block">
+                <strong>Example:</strong> Use relational operators to validate user input or check conditions before
+                performing operations.
+            </div>
+        </div>
+
+        <!-- Section 3: Logical Operators -->
+        <div class="section-card" id="section3">
+            <h3>Section 3: Logical Operators</h3>
+
+            <h4>Overview</h4>
+            <div class="explanation">
+                Logical operators are used to combine two or more boolean conditions. They return a boolean result and
+                are essential for creating complex conditional statements. Java has three main logical operators: AND
+                (&&), OR (||), and NOT (!).
+            </div>
+
+            <h4>Operators Table</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Symbol</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AND</td>
+                            <td>&&</td>
+                            <td>True if both conditions are true</td>
+                            <td>true && false</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>OR</td>
+                            <td>||</td>
+                            <td>True if at least one condition is true</td>
+                            <td>true || false</td>
+                            <td>true</td>
+                        </tr>
+                        <tr>
+                            <td>NOT</td>
+                            <td>!</td>
+                            <td>Reverses the boolean value</td>
+                            <td>!true</td>
+                            <td>false</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Code Example</h4>
+            <div class="code-block"><code>public class LogicalOperators {
+    public static void main(String[] args) {
+        int age = 25;
+        int income = 50000;
+        boolean hasLicense = true;
+        
+        // AND operator (&&)
+        if (age >= 18 && hasLicense) {
+            System.out.println("Can drive: YES");
+        }
+        
+        // OR operator (||)
+        if (age < 18 || income < 30000) {
+            System.out.println("Eligible for subsidy: YES");
+        }
+        
+        // NOT operator (!)
+        if (!hasLicense) {
+            System.out.println("Need to get a license");
+        } else {
+            System.out.println("Have a valid license");
+        }
+        
+        // Complex condition
+        if ((age >= 21 && income >= 50000) || (hasLicense && age >= 18)) {
+            System.out.println("All conditions satisfied");
+        }
+        
+        // Truth table demonstration
+        System.out.println("\nTruth Table for AND:");
+        System.out.println("true && true = " + (true && true));
+        System.out.println("true && false = " + (true && false));
+        System.out.println("false && true = " + (false && true));
+        System.out.println("false && false = " + (false && false));
+    }
+}</code></div>
+
+            <h4>Output</h4>
+            <div class="output-block"><code>Can drive: YES
+Eligible for subsidy: YES
+Have a valid license
+All conditions satisfied
+
+Truth Table for AND:
+true && true = true
+true && false = false
+false && true = false
+false && false = false</code></div>
+
+            <div class="notes-block">
+                <strong>Note:</strong> The && operator uses short-circuit evaluation: if the first condition is false,
+                it doesn't evaluate the second. Similarly, || stops evaluating once it finds a true condition.
+            </div>
+        </div>
+
+        <!-- Section 4: Assignment Operators -->
+        <div class="section-card" id="section4">
+            <h3>Section 4: Assignment Operators</h3>
+
+            <h4>Overview</h4>
+            <div class="explanation">
+                Assignment operators are used to assign values to variables. The simple assignment operator is =, but
+                Java also provides compound assignment operators that combine assignment with other operations, making
+                code more concise.
+            </div>
+
+            <h4>Operators Table</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                            <th>Equivalent to</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>=</td>
+                            <td>Assign value</td>
+                            <td>a = 10</td>
+                            <td>Assign 10 to a</td>
+                        </tr>
+                        <tr>
+                            <td>+=</td>
+                            <td>Add and assign</td>
+                            <td>a += 5</td>
+                            <td>a = a + 5</td>
+                        </tr>
+                        <tr>
+                            <td>-=</td>
+                            <td>Subtract and assign</td>
+                            <td>a -= 5</td>
+                            <td>a = a - 5</td>
+                        </tr>
+                        <tr>
+                            <td>*=</td>
+                            <td>Multiply and assign</td>
+                            <td>a *= 5</td>
+                            <td>a = a * 5</td>
+                        </tr>
+                        <tr>
+                            <td>/=</td>
+                            <td>Divide and assign</td>
+                            <td>a /= 5</td>
+                            <td>a = a / 5</td>
+                        </tr>
+                        <tr>
+                            <td>%=</td>
+                            <td>Modulus and assign</td>
+                            <td>a %= 5</td>
+                            <td>a = a % 5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Code Example</h4>
+            <div class="code-block"><code>public class AssignmentOperators {
+    public static void main(String[] args) {
+        int a = 20;
+        
+        // Simple assignment
+        int b = a;
+        System.out.println("b = " + b);
+        
+        // += operator
+        a += 10;  // a = a + 10
+        System.out.println("After a += 10: " + a);
+        
+        // -= operator
+        a -= 5;   // a = a - 5
+        System.out.println("After a -= 5: " + a);
+        
+        // *= operator
+        a *= 2;   // a = a * 2
+        System.out.println("After a *= 2: " + a);
+        
+        // /= operator
+        a /= 4;   // a = a / 4
+        System.out.println("After a /= 4: " + a);
+        
+        // %= operator
+        a %= 3;   // a = a % 3
+        System.out.println("After a %= 3: " + a);
+        
+        // With strings
+        String str = "Hello";
+        str += " World";
+        System.out.println(str);
+    }
+}</code></div>
+
+            <h4>Output</h4>
+            <div class="output-block"><code>b = 20
+After a += 10: 30
+After a -= 5: 25
+After a *= 2: 50
+After a /= 4: 12
+After a %= 3: 0
+Hello World</code></div>
+
+            <div class="example-block">
+                <strong>Example:</strong> Compound assignment operators are useful in loops where you need to update
+                variable values repeatedly.
+            </div>
+        </div>
+
+        <!-- Section 5: Ternary Operator -->
+        <div class="section-card" id="section5">
+            <h3>Section 5: Ternary Operator</h3>
+
+            <h4>Overview</h4>
+            <div class="explanation">
+                The ternary operator (? :) is Java's only operator that takes three operands. It provides a concise way
+                to make decisions and assign values conditionally. It's also called the conditional operator. The syntax
+                is: condition ? value_if_true : value_if_false
+            </div>
+
+            <h4>Syntax</h4>
+            <div class="code-block"><code>variable = (condition) ? value_if_true : value_if_false;</code></div>
+
+            <h4>Code Example</h4>
+            <div class="code-block"><code>public class TernaryOperator {
+    public static void main(String[] args) {
+        // Basic ternary operator
+        int age = 20;
+        String status = (age >= 18) ? "Adult" : "Minor";
+        System.out.println("Status: " + status);
+        
+        // Finding maximum of two numbers
+        int a = 50;
+        int b = 30;
+        int max = (a > b) ? a : b;
+        System.out.println("Maximum: " + max);
+        
+        // Finding minimum of two numbers
+        int min = (a < b) ? a : b;
+        System.out.println("Minimum: " + min);
+        
+        // Nested ternary operator
+        int marks = 75;
+        String grade = (marks >= 90) ? "A" : 
+                       (marks >= 80) ? "B" : 
+                       (marks >= 70) ? "C" : 
+                       (marks >= 60) ? "D" : "F";
+        System.out.println("Grade: " + grade);
+        
+        // Comparing strings
+        String name = "Java";
+        String language = (name.equals("Java")) ? "Object-Oriented" : "Other";
+        System.out.println(name + " is: " + language);
+        
+        // With arithmetic
+        int number = 7;
+        String evenOdd = (number % 2 == 0) ? "Even" : "Odd";
+        System.out.println(number + " is " + evenOdd);
+    }
+}</code></div>
+
+            <h4>Output</h4>
+            <div class="output-block"><code>Status: Adult
+Maximum: 50
+Minimum: 30
+Grade: C
+Java is: Object-Oriented
+7 is Odd</code></div>
+
+            <div class="notes-block">
+                <strong>Note:</strong> The ternary operator is useful for simple conditions. For complex
+                decision-making, use if-else statements. Avoid deeply nested ternary operators as they reduce code
+                readability.
+            </div>
+
+            <div class="example-block">
+                <strong>Example:</strong> Use the ternary operator to assign values based on conditions or to return
+                values from methods concisely.
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p><strong>Java Operators Module</strong></p>
+            <p>Learn about arithmetic, relational, logical, assignment, and ternary operators</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Active link highlighting
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

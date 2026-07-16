@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If-Else Ladder - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>If-Else Ladder</h5>
+        <a href="../../index.html#control">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#syntax">Syntax</a>
+        <a href="#example">Example</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>If-Else Ladder</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>If-Else Ladder in Java</h1>
+            <p class="lead text-muted">Chain multiple if-else statements to test several conditions in sequence.</p>
+        </div>
+
+        <div class="section" id="syntax">
+            <h4>Syntax</h4>
+            <pre><code>if (condition1) {
+    // Code for condition1
+} else if (condition2) {
+    // Code for condition2
+} else if (condition3) {
+    // Code for condition3
+} else if (condition4) {
+    // Code for condition4
+} else {
+    // Default code if all conditions fail
+}</code></pre>
+            <ul>
+                <li>Tests multiple conditions from top to bottom</li>
+                <li>Executes the first true condition's block</li>
+                <li>Remaining conditions are skipped once a match is found</li>
+                <li>Final else is optional but recommended</li>
+            </ul>
+            <div class="note">
+                <strong>💡 Note:</strong> If-else ladder is same as else-if statement. It's just another name for the
+                same concept.
+            </div>
+        </div>
+
+        <div class="section" id="example">
+            <h4>Example: Month to Season</h4>
+            <pre><code>public class IfElseLadderExample {
+    public static void main(String[] args) {
+        int month = 7;
+        String season;
+        
+        if (month == 12 || month == 1 || month == 2) {
+            season = "Winter";
+        } else if (month == 3 || month == 4 || month == 5) {
+            season = "Spring";
+        } else if (month == 6 || month == 7 || month == 8) {
+            season = "Summer";
+        } else if (month == 9 || month == 10 || month == 11) {
+            season = "Autumn";
+        } else {
+            season = "Invalid month";
+        }
+        
+        System.out.println("Month " + month + " is in " + season);
+        
+        // Another example: Percentage to Grade
+        int percentage = 85;
+        
+        if (percentage >= 90) {
+            System.out.println("Grade: A+ (Excellent)");
+        } else if (percentage >= 80) {
+            System.out.println("Grade: A (Very Good)");
+        } else if (percentage >= 70) {
+            System.out.println("Grade: B (Good)");
+        } else if (percentage >= 60) {
+            System.out.println("Grade: C (Average)");
+        } else if (percentage >= 50) {
+            System.out.println("Grade: D (Pass)");
+        } else {
+            System.out.println("Grade: F (Fail)");
+        }
+    }
+}</code></pre>
+            <div class="output">
+                Month 7 is in Summer<br>
+                Grade: A (Very Good)
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>If-Else Ladder Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

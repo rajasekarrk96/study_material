@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order By - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Order By</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Order By</h2>
+                <p class="topic-desc">The ORDER BY clause is used to sort the result set in ascending (default) or descending order.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Basic Concept & Syntax</h3>
+                        <p class="subtopic-desc"><strong>🔹 Note</strong><br>By default, ORDER BY sorts the records in ascending order. To sort the records in descending order, use the DESC keyword.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> column1, column2, ...\nFROM table_name\nORDER BY column1, column2, ... ASC|DESC;</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Table: employees</h3>
+                        <p class="subtopic-desc">Sample data used for the following examples.</p>
+            <div class="output-box">
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead>
+                        <tr><th>emp_id</th><th>name</th><th>department</th><th>salary</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Arun</td><td>IT</td><td>50000</td></tr>
+                        <tr><td>2</td><td>Ravi</td><td>HR</td><td>40000</td></tr>
+                        <tr><td>3</td><td>Meena</td><td>IT</td><td>60000</td></tr>
+                        <tr><td>4</td><td>Sita</td><td>HR</td><td>45000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Example 1: Sort by salary (Ascending)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Sort employees from lowest salary to highest (Default behavior).</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name, salary \nFROM employees\nORDER BY salary;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead>
+                        <tr><th>name</th><th>salary</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ravi</td><td>40000</td></tr>
+                        <tr><td>Sita</td><td>45000</td></tr>
+                        <tr><td>Arun</td><td>50000</td></tr>
+                        <tr><td>Meena</td><td>60000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Example 2: Sort by salary (Descending)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Sort employees from highest salary to lowest using the DESC keyword.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name, salary \nFROM employees\nORDER BY salary DESC;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead>
+                        <tr><th>name</th><th>salary</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Meena</td><td>60000</td></tr>
+                        <tr><td>Arun</td><td>50000</td></tr>
+                        <tr><td>Sita</td><td>45000</td></tr>
+                        <tr><td>Ravi</td><td>40000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Example 3: Sort by multiple columns</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Sort by department first (Ascending), and then by salary (Descending) within each department.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * \nFROM employees\nORDER BY department ASC, salary DESC;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead>
+                        <tr><th>emp_id</th><th>name</th><th>department</th><th>salary</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>4</td><td>Sita</td><td>HR</td><td>45000</td></tr>
+                        <tr><td>2</td><td>Ravi</td><td>HR</td><td>40000</td></tr>
+                        <tr><td>3</td><td>Meena</td><td>IT</td><td>60000</td></tr>
+                        <tr><td>1</td><td>Arun</td><td>IT</td><td>50000</td></tr>
+                    </tbody>
+                </table>
+                <br>✔ Groups by department<br>✔ Highest salary first within each department</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Display all students ordered by age ascending.</strong><br>
+    <button class="toggle-btn" data-target="ans-t23-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t23-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+ORDER BY age ASC;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 2  | Priya  | 23   |
+| 3  | Kiran  | 23   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display all students ordered by age descending.</strong><br>
+    <button class="toggle-btn" data-target="ans-t23-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t23-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+ORDER BY age DESC;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 4  | Meena  | 24   |
+| 2  | Priya  | 23   |
+| 3  | Kiran  | 23   |
+| 1  | Arun   | 22   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Order students by name alphabetically.</strong><br>
+    <button class="toggle-btn" data-target="ans-t23-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t23-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+ORDER BY name ASC;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 3  | Kiran  | 23   |
+| 4  | Meena  | 24   |
+| 2  | Priya  | 23   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Order by multiple columns (age ascending, name descending).</strong><br>
+    <button class="toggle-btn" data-target="ans-t23-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t23-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+ORDER BY age ASC, name DESC;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 3  | Kiran  | 23   |
+| 2  | Priya  | 23   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display first 2 students ordered by age ascending.</strong><br>
+    <button class="toggle-btn" data-target="ans-t23-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t23-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+ORDER BY age ASC
+LIMIT 2;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 3  | Kiran  | 23   |
++----+--------+------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='23_having.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Having</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='25_union.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Union / Union All →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

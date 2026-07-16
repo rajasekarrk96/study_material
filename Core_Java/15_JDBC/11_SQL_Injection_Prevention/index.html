@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Injection Prevention - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>SQL Injection Prevention</h5><a href="../../index.html#jdbc">← Back to Home</a>
+        <hr style="border-color:#34495e;margin:15px 0"><a href="#concept">Concept</a>
+    </div>
+    <div class="top-nav">
+        <h2>SQL Injection Prevention</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Preventing SQL Injection Attacks</h1>
+            <p class="lead text-muted">Protect your database from malicious SQL injection</p>
+        </div>
+        <div class="section" id="concept">
+            <h4>What is SQL Injection?</h4>
+            <p>SQL injection is a security vulnerability where attackers insert malicious SQL code into queries.</p>
+            <div class="note"><strong>⚠️ NEVER use string concatenation for SQL queries!</strong></div>
+            <h4>Safe Approach - Use PreparedStatement</h4>
+            <pre><code>// UNSAFE - Vulnerable to SQL injection
+String query = "SELECT * FROM users WHERE name = '" + userInput + "'";
+
+// SAFE - Use PreparedStatement
+String query = "SELECT * FROM users WHERE name = ?";
+PreparedStatement pstmt = conn.prepareStatement(query);
+pstmt.setString(1, userInput);</code></pre>
+        </div>
+        <div
+            style="text-align:center;padding:40px 0;color:#999;font-size:14px;border-top:1px solid #e0e0e0;margin-top:40px">
+            <p>SQL Injection Prevention Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

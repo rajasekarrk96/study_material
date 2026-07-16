@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Types - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Data Types</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Data Types</h2>
+                <p class="topic-desc">Defines the type of data a column can hold.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Numeric Data Types</h3>
+                        <p class="subtopic-desc"><strong>Used to store numbers</strong><br><br>🔹 <strong>INT</strong> – Stores whole numbers<br>🔹 <strong>SMALLINT</strong> – Stores small whole numbers<br>🔹 <strong>BIGINT</strong> – Stores very large whole numbers<br>🔹 <strong>DECIMAL / NUMERIC</strong> – Stores exact decimal values<br>🔹 <strong>FLOAT</strong> – Stores approximate decimal numbers<br>🔹 <strong>DOUBLE</strong> – Stores large decimal numbers with precision</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Character / String Data Types</h3>
+                        <p class="subtopic-desc"><strong>Used to store text</strong><br><br>🔹 <strong>CHAR</strong> – Fixed-length character data<br>🔹 <strong>VARCHAR</strong> – Variable-length character data<br>🔹 <strong>TEXT</strong> – Stores long text</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Date & Time Data Types</h3>
+                        <p class="subtopic-desc"><strong>Used to store date and time values</strong><br><br>🔹 <strong>DATE</strong> – Stores date only<br>🔹 <strong>TIME</strong> – Stores time only<br>🔹 <strong>DATETIME</strong> – Stores date and time<br>🔹 <strong>TIMESTAMP</strong> – Stores current date & time automatically<br>🔹 <strong>YEAR</strong> – Stores year</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">Boolean Data Type</h3>
+                        <p class="subtopic-desc"><strong>Used to store true or false</strong><br><br>🔹 <strong>BOOLEAN / BOOL</strong> – Stores TRUE or FALSE values</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">ENUM Data Type</h3>
+                        <p class="subtopic-desc"><strong>Used to store one value from a predefined list</strong><br><br>🔹 <strong>ENUM</strong> – Allows only one value from a fixed set</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="6">SET Data Type</h3>
+                        <p class="subtopic-desc"><strong>Used to store multiple values from a predefined list</strong><br><br>🔹 <strong>SET</strong> – Allows multiple values from a fixed set</p>
+            
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="7">Binary Data Types</h3>
+                        <p class="subtopic-desc"><strong>Used to store binary data</strong><br><br>🔹 <strong>BINARY</strong> – Fixed-length binary data<br>🔹 <strong>VARBINARY</strong> – Variable-length binary data<br>🔹 <strong>BLOB</strong> – Stores large binary objects</p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='03_create-drop-table.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Create / Drop Table</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='05_insert-data.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Insert Data →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

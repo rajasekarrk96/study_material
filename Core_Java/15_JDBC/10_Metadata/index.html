@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Metadata - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Database Metadata</h5><a href="../../index.html#jdbc">← Back to Home</a>
+        <hr style="border-color:#34495e;margin:15px 0"><a href="#concept">Concept</a>
+    </div>
+    <div class="top-nav">
+        <h2>Database Metadata</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Database Metadata in JDBC</h1>
+            <p class="lead text-muted">Retrieve database and result set metadata information</p>
+        </div>
+        <div class="section" id="concept">
+            <h4>What is Metadata?</h4>
+            <p>Metadata provides information about the database, tables, columns, and result sets.</p>
+            <pre><code>DatabaseMetaData meta = conn.getMetaData();
+System.out.println("Driver: " + meta.getDriverName());
+System.out.println("Database: " + meta.getDatabaseProductName());</code></pre>
+        </div>
+        <div
+            style="text-align:center;padding:40px 0;color:#999;font-size:14px;border-top:1px solid #e0e0e0;margin-top:40px">
+            <p>Metadata Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

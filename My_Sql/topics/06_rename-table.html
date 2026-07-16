@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rename Table - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Rename Table</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Rename Table</h2>
+                <p class="topic-desc">In SQL, RENAME is used to change the name of a table.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Rename a table (MySQL / Oracle)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Changes the name of an existing table to a new name.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code>RENAME <span class="sql-keyword">TABLE</span> old_table_name TO new_table_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code>RENAME <span class="sql-keyword">TABLE</span> students TO learners;</code></pre><div class="output-box">Result: Table name changed from <strong>students</strong> → <strong>learners</strong></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Rename the table students to student_info.</strong><br>
+    <button class="toggle-btn" data-target="ans-t5-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t5-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>RENAME TABLE students TO student_info;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Rename the table employee to staff.</strong><br>
+    <button class="toggle-btn" data-target="ans-t5-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t5-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>RENAME TABLE employee TO staff;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Rename a column name to student_name in student_info.</strong><br>
+    <button class="toggle-btn" data-target="ans-t5-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t5-q3" style="display:none; margin-top:10px;">
+        Query (MySQL):<br><pre class='code-block-minimal'><code>ALTER TABLE student_info
+RENAME COLUMN name TO student_name;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Rename column age to student_age in student_info.</strong><br>
+    <button class="toggle-btn" data-target="ans-t5-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t5-q4" style="display:none; margin-top:10px;">
+        Query (Older MySQL):<br><pre class='code-block-minimal'><code>ALTER TABLE student_info
+CHANGE age student_age INT;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display the structure of student_info table after renaming.</strong><br>
+    <button class="toggle-btn" data-target="ans-t5-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t5-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DESCRIBE student_info;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| id           | int         | YES  |     | NULL    |       |
+| student_name | varchar(50) | YES  |     | NULL    |       |
+| student_age  | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='05_insert-data.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Insert Data</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='07_constraints.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Constraints →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

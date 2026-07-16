@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do-While Loop - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Do-While Loop</h5>
+        <a href="../../index.html#loops">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#syntax">Syntax</a>
+        <a href="#example">Example</a>
+        <a href="#difference">vs While</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Do-While Loop</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Do-While Loop in Java</h1>
+            <p class="lead text-muted">Execute code at least once, then repeat based on a condition.</p>
+        </div>
+
+        <div class="section" id="syntax">
+            <h4>Syntax</h4>
+            <pre><code>do {
+    // Code to execute
+    // Runs at least once
+} while (condition);</code></pre>
+            <ul>
+                <li>Code block executes first, then condition is checked</li>
+                <li>Guarantees at least one execution</li>
+                <li>Loop continues while condition is true</li>
+                <li>Note the semicolon after while(condition)</li>
+            </ul>
+        </div>
+
+        <div class="section" id="example">
+            <h4>Example: Print Numbers 1 to 5</h4>
+            <pre><code>public class DoWhileExample {
+    public static void main(String[] args) {
+        int i = 1;
+        
+        do {
+            System.out.println("Number: " + i);
+            i++;
+        } while (i <= 5);
+        
+        System.out.println("Loop ended");
+        
+        // Example showing at least one execution
+        int x = 10;
+        do {
+            System.out.println("This runs once even though x >= 10");
+        } while (x < 10);
+    }
+}</code></pre>
+            <div class="output">
+                Number: 1<br>
+                Number: 2<br>
+                Number: 3<br>
+                Number: 4<br>
+                Number: 5<br>
+                Loop ended<br>
+                This runs once even though x >= 10
+            </div>
+        </div>
+
+        <div class="section" id="difference">
+            <h4>Do-While vs While Loop</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Do-While Loop</th>
+                        <th>While Loop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Condition checked AFTER execution</td>
+                        <td>Condition checked BEFORE execution</td>
+                    </tr>
+                    <tr>
+                        <td>Executes at least once</td>
+                        <td>May not execute at all</td>
+                    </tr>
+                    <tr>
+                        <td>Exit-controlled loop</td>
+                        <td>Entry-controlled loop</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="note">
+                <strong>💡 Use Case:</strong> Use do-while when you need the code to run at least once, like menu-driven
+                programs or input validation.
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Do-While Loop Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

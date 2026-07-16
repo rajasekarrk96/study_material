@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none;
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333;
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0;
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px;
+        }
+
+        .explanation ol {
+            line-height: 1.8;
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Variables Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Variables - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Java variables with these practice problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Declare and Initialize Variables</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that declares and initializes three variables: an integer for age, a double for
+                height, and a String for name. Print all three values.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>25<br>5.9<br>John</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Name: John<br>Age: 25<br>Height: 5.9</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>30<br>6.1<br>Sarah</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Name: Sarah<br>Age: 30<br>Height: 6.1</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class DeclareVariables {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter age: ");
+        int age = sn.nextInt();
+        
+        System.out.print("Enter height: ");
+        double height = sn.nextDouble();
+        sn.nextLine(); // Consume newline
+        
+        System.out.print("Enter name: ");
+        String name = sn.nextLine();
+        
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Height: " + height);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Variable Declaration:</strong> We declare three variables with different data
+                                types: <code>int age</code>, <code>double height</code>, and <code>String name</code>.
+                            </li>
+                            <li><strong>Reading Integer:</strong> <code>nextInt()</code> reads an integer value for age.
+                            </li>
+                            <li><strong>Reading Double:</strong> <code>nextDouble()</code> reads a decimal value for
+                                height.</li>
+                            <li><strong>Consume Newline:</strong> After reading numeric values, we call
+                                <code>nextLine()</code> to consume the leftover newline character.
+                            </li>
+                            <li><strong>Reading String:</strong> <code>nextLine()</code> reads the entire line for the
+                                name.</li>
+                            <li><strong>Display Values:</strong> Print all three variables using concatenation.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Swap Two Numbers (With Temporary Variable)</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to swap two numbers using a temporary variable.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>10<br>20</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Before swap: a = 10, b = 20<br>After swap: a = 20, b = 10</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>5<br>15</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Before swap: a = 5, b = 15<br>After swap: a = 15, b = 5</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class SwapWithTemp {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter first number: ");
+        int a = sn.nextInt();
+        
+        System.out.print("Enter second number: ");
+        int b = sn.nextInt();
+        
+        System.out.println("Before swap: a = " + a + ", b = " + b);
+        
+        // Swapping using temporary variable
+        int temp = a;
+        a = b;
+        b = temp;
+        
+        System.out.println("After swap: a = " + a + ", b = " + b);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Read Two Numbers:</strong> Get values for variables a and b from the user.</li>
+                            <li><strong>Display Before:</strong> Show the original values before swapping.</li>
+                            <li><strong>Create Temporary Variable:</strong> <code>int temp = a;</code> - Store the value
+                                of a in a temporary variable.</li>
+                            <li><strong>Assign b to a:</strong> <code>a = b;</code> - Now a has the value of b.</li>
+                            <li><strong>Assign temp to b:</strong> <code>b = temp;</code> - Now b has the original value
+                                of a (stored in temp).</li>
+                            <li><strong>Display After:</strong> Show the swapped values.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Swap Two Numbers (Without Temporary Variable)</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to swap two numbers without using a temporary variable (using arithmetic
+                operations).
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>12<br>8</code><br><br>
+                <strong>Sample Output
+                    1:</strong><br><code>Before swap: a = 12, b = 8<br>After swap: a = 8, b = 12</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>100<br>50</code><br><br>
+                <strong>Sample Output
+                    2:</strong><br><code>Before swap: a = 100, b = 50<br>After swap: a = 50, b = 100</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class SwapWithoutTemp {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter first number: ");
+        int a = sn.nextInt();
+        
+        System.out.print("Enter second number: ");
+        int b = sn.nextInt();
+        
+        System.out.println("Before swap: a = " + a + ", b = " + b);
+        
+        // Swapping without temporary variable
+        a = a + b;  // a now contains sum
+        b = a - b;  // b now contains original a
+        a = a - b;  // a now contains original b
+        
+        System.out.println("After swap: a = " + a + ", b = " + b);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Read Values:</strong> Get two integer values from the user.</li>
+                            <li><strong>First Operation:</strong> <code>a = a + b;</code> - Store the sum of both
+                                numbers in a.</li>
+                            <li><strong>Second Operation:</strong> <code>b = a - b;</code> - Subtract b from the sum to
+                                get the original value of a, store it in b.</li>
+                            <li><strong>Third Operation:</strong> <code>a = a - b;</code> - Subtract the new b (original
+                                a) from the sum to get the original b, store it in a.</li>
+                            <li><strong>Result:</strong> The values are now swapped without using any extra variable.
+                            </li>
+                            <li><strong>Note:</strong> This method can cause overflow for very large numbers.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Variable Scope Demonstration</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that demonstrates local variable scope by calculating the sum and product of two
+                numbers in separate code blocks.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>6<br>4</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Sum: 10<br>Product: 24</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>9<br>3</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Sum: 12<br>Product: 27</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class VariableScope {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Enter first number: ");
+        int num1 = sn.nextInt();
+        
+        System.out.print("Enter second number: ");
+        int num2 = sn.nextInt();
+        
+        // Local variable in this block
+        {
+            int sum = num1 + num2;
+            System.out.println("Sum: " + sum);
+        }
+        
+        // Different local variable in this block
+        {
+            int product = num1 * num2;
+            System.out.println("Product: " + product);
+        }
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Method-Level Variables:</strong> <code>num1</code> and <code>num2</code> are
+                                accessible throughout the main method.</li>
+                            <li><strong>Block Scope:</strong> Variables declared inside { } are only accessible within
+                                that block.</li>
+                            <li><strong>First Block:</strong> <code>sum</code> is declared and used only within the
+                                first set of braces.</li>
+                            <li><strong>Second Block:</strong> <code>product</code> is declared in a separate block and
+                                is independent of the first block.</li>
+                            <li><strong>Scope Limitation:</strong> You cannot access <code>sum</code> outside its block,
+                                and you cannot access <code>product</code> outside its block.</li>
+                            <li><strong>Best Practice:</strong> Declare variables in the smallest scope necessary.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Final Variables (Constants)</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that calculates the area of a circle using a final variable for PI. The radius
+                should be taken as input.
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io">
+                <strong>Sample Input 1:</strong><br><code>7</code><br><br>
+                <strong>Sample Output 1:</strong><br><code>Area of circle: 153.93804002589985</code><br><br>
+                <strong>Sample Input 2:</strong><br><code>10</code><br><br>
+                <strong>Sample Output 2:</strong><br><code>Area of circle: 314.1592653589793</code>
+            </div>
+            <details class="solution-section">
+                <summary>Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class CircleArea {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        
+        // Final variable (constant)
+        final double PI = 3.14159265358979323846;
+        
+        System.out.print("Enter radius: ");
+        double radius = sn.nextDouble();
+        
+        double area = PI * radius * radius;
+        
+        System.out.println("Area of circle: " + area);
+        
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Final Keyword:</strong> <code>final double PI</code> - The <code>final</code>
+                                keyword makes PI a constant that cannot be changed.</li>
+                            <li><strong>Constant Naming:</strong> Constants are typically named in ALL_CAPS by
+                                convention.</li>
+                            <li><strong>Initialization:</strong> Final variables must be initialized when declared.</li>
+                            <li><strong>Read Radius:</strong> Get the radius value from the user.</li>
+                            <li><strong>Calculate Area:</strong> Use the formula: Area = π × r²</li>
+                            <li><strong>Immutability:</strong> Once assigned, the value of PI cannot be changed.
+                                Attempting to do so will cause a compilation error.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+        <footer>
+            <p><strong>Variables - Practice Worksheet</strong></p>
+            <p>Master variable declaration, initialization, and scope in Java</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

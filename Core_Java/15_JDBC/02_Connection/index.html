@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JDBC Connection - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>JDBC Connection</h5>
+        <a href="../../index.html#jdbc">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#basics">Connection Basics</a>
+        <a href="#steps">Connection Steps</a>
+        <a href="#example">Examples</a>
+    </div>
+    <div class="top-nav">
+        <h2>JDBC Connection</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Connecting to Database with JDBC</h1>
+            <p class="lead text-muted">Learn how to establish database connections using JDBC Driver Manager</p>
+        </div>
+        <div class="section" id="basics">
+            <h4>What is JDBC Connection?</h4>
+            <p>JDBC Connection represents a session with a specific database. SQL statements are executed and results
+                are returned within the context of a connection.</p>
+            <ul>
+                <li>Establishes connection between Java application and database</li>
+                <li>Uses DriverManager to manage different database drivers</li>
+                <li>Requires database URL, username, and password</li>
+                <li>Should be closed after use to free resources</li>
+            </ul>
+        </div>
+        <div class="section" id="steps">
+            <h4>Connection Steps</h4>
+            <pre><code>// 1. Load JDBC Driver (automatic in JDBC 4.0+)
+Class.forName("com.mysql.cj.jdbc.Driver");
+
+// 2. Create connection string
+String url = "jdbc:mysql://localhost:3306/mydb";
+String user = "root";
+String password = "password";
+
+// 3. Establish connection
+Connection conn = DriverManager.getConnection(url, user, password);
+
+// 4. Use connection...
+
+// 5. Close connection
+conn.close();</code></pre>
+        </div>
+        <div class="section" id="example">
+            <h4>Complete Example</h4>
+            <pre><code>import java.sql.*;
+
+public class JDBCExample {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/testdb";
+        String user = "root";
+        String password = "root";
+        
+        try {
+            // Establish connection
+            Connection conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Connected to database!");
+            
+            // Connection metadata
+            DatabaseMetaData meta = conn.getMetaData();
+            System.out.println("Driver: " + meta.getDriverName());
+            System.out.println("Database: " + meta.getDatabaseProductName());
+            
+            conn.close();
+            System.out.println("Connection closed.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+            <div class="output">
+                Connected to database!<br>
+                Driver: MySQL Connector/J<br>
+                Database: MySQL<br>
+                Connection closed.
+            </div>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>JDBC Connection Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

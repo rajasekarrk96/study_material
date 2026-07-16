@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loops in Python - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item has-subtopics active">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#loop">Loop</a></li>
+                        <li><a href="#while-loop">While Loop</a></li>
+                        <li><a href="#for-loop">For Loop</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Loops in Python</h1>
+                <div class="content-description">
+                    <h2 id="loop">Loop</h2>
+                    <p>A loop is a programming structure that allows you to repeat a set of instructions multiple times
+                        until a condition tells it to stop.</p>
+                    <p>A loop works through four essential parts:</p>
+                    <ol>
+                        <li><strong>Initialization (init)</strong> → You set the starting point of the loop.</li>
+                        <li><strong>Condition</strong> → The loop checks whether it should continue or stop.</li>
+                        <li><strong>Process</strong> → The instructions that run again and again inside the loop.</li>
+                        <li><strong>Iteration</strong> → The step that updates a value so the loop can move forward</li>
+                    </ol>
+                    <p>Python has two main types of loops:</p>
+                    <ul>
+                        <li>while loop</li>
+                        <li>for loop</li>
+                    </ul>
+
+                    <h3 id="for-loop">2. Python For Loop</h3>
+                    <p>A for loop is used for iterating over a sequence (that is either a list, a tuple, a dictionary, a
+                        set, or a string).</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+for item in sequence:
+    # code to execute
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+while condition:
+    # code to execute
+</pre>
+
+                    <h3 id="while-loop">1. Python While Loop</h3>
+                    <p>The while loop executes a set of statements as long as a condition is true.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+while condition:
+    # code to execute
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+n=1 #initialization
+while n<=10:    #condition
+    print(n)    #process
+    n+=1 #n=n+1 #iteration
+</pre>
+
+                    <h2 id="for-loop">For Loop</h2>
+                    <p>A for loop repeats a block of code a specific number of times. It uses a counter variable that
+                        automatically starts at a given value, increases by a fixed step, and stops before the end
+                        value.</p>
+                    <p>This is usually done using the <code>range()</code> function.</p>
+
+                    <h4>Examples:</h4>
+                    <p><strong>1. for x in range(10):</strong></p>
+                    <pre class="code-block">
+for x in range(10):   # 10 → end value (loop runs 0 to 9)
+    print(x)
+</pre>
+                    <ul>
+                        <li>Start = 0 (default)</li>
+                        <li>End = 10–1 = 9</li>
+                        <li>Step = 1 (default)</li>
+                    </ul>
+                    <h3 id="nested-loop">3. Nested Loops</h3>
+                    <p>A nested loop is a loop inside a loop.</p>
+                    <p>The "inner loop" will be executed one time for each iteration of the "outer loop".</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+for element in outer_sequence:
+    for element in inner_sequence:
+        # code
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+for x in range(1, 5): # start, end-1
+    print(x)
+</pre>
+                    <ul>
+                        <li>Start = 1</li>
+                        <li>End = 5–1 = 4</li>
+                        <li>Step = 1</li>
+                    </ul>
+                    <p>This prints 1, 2, 3, 4.</p>
+
+                    <p><strong>3. for x in range(1, 10, 1):</strong></p>
+                    <pre class="code-block">
+for x in range(1, 10, 1): # start, end-1, iteration(step)
+    print(x)
+</pre>
+                    <ul>
+                        <li>Start = 1</li>
+                        <li>End = 10–1 = 9</li>
+                        <li>Step = 1</li>
+                    </ul>
+                    <p>This prints 1 to 9, increasing by 1 each time.</p>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Workout Sheet (While Loop)</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a python program to find numbers between 100 and 400 (both included) where each
+                            digit of a number is an even number. The numbers obtained should be printed in a
+                            comma-separated sequence.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>st=int(input("Start: "))
+en=int(input("End: "))
+for x in range(st,en+1):
+   ct=0
+   for y in str(x):
+    if int(y)%2==0:
+        ct+=1
+   if len(str(x))==ct:
+        print(x)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a python program to print the multiplication table for the given number.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>print('Multiplication Table')
+a=int(input('Enter which multiplication table you want :'))
+b=1
+while b<=10:
+    c=a*b
+    print(a,"x",b ,"=",c)
+    b+=1</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a python program to count the number of even digits and odd digits from the numbers
+                            of the series of numbers.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>print("Count even/odd digits in a range")
+a=int(input('Starting:'))
+b=int(input('Ending:'))
+k=0
+h=0
+while a<=b:
+    if a%2==0:
+        k+=1
+    else:
+        h+=1
+    a+=1
+print("Number of Even numbers:",k,"Number of odd numbers:",h)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a python program to calculate the sum of series up to n term. For example, if n=5
+                            the series will become 2 + 22 + 222 + 2222 + 22222 = 24690.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>a=int(input('Enter the number of terms:'))
+n=1
+k=2
+s=0
+while n<=a:
+    print(k)
+    s+=k
+    k=k*10+2
+    n+=1
+print('Sum of the series:',s)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a python program to print the sum of digits of a number until it becomes a
+                            single-digit number.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>a = int(input("Enter the number:"))
+
+while a > 9:
+    s = 0
+    b = a
+    while b > 0:
+        s += b % 10
+        b //= 10
+    a = s
+print("Single digit result =", a)</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>Workout Sheet (For Loop)</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a python program to check if two numbers are twin primes.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def is_prime(n):
+    if n <= 1: return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+x = int(input("Enter first number: "))
+y = int(input("Enter second number: "))
+
+if is_prime(x) and is_prime(y) and abs(x - y) == 2:
+    print(x, "and", y, "are Twin Primes")
+else:
+    print(x, "and", y, "are NOT Twin Primes")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a python program to find the perfect square root of a number without using built-in
+                            functions.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>num=int(input('Enter a number: '))
+found = False
+for x in range(1, num + 1):
+    if x * x == num:
+        print(x, "is the square root of", num)
+        found = True
+        break
+    if x * x > num:
+        break
+
+if not found:
+    print(num, "is not a perfect square")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a python program to check if a number is a power of two.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>n = int(input('Enter a number: '))
+if n <= 0:
+    print(n, "is not a power of two")
+else:
+    temp = n
+    power = 0
+    while temp > 1:
+        if temp % 2 != 0:
+            break
+        temp //= 2
+        power += 1
+    
+    if temp == 1:
+        print(n, "is 2 to the power of", power)
+    else:
+        print(n, "is not a power of two")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a Python program to calculate the sum of the cubes of the first n natural numbers.
+                        </h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>n=int(input('Enter n: '))
+r=0
+for x in range (1,n+1):
+    y=x**3
+    print("Cube of", x, "is", y)
+    r+=y
+print('Sum of cubes:', r)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a Python program to calculate both GCD and LCM without using a separate function.
+                        </h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>a = int(input("Enter first number: "))
+b = int(input("Enter second number: "))
+
+gcd = 1
+for i in range(1, min(a, b) + 1):
+    if a % i == 0 and b % i == 0:
+        gcd = i
+
+lcm = (a * b) // gcd
+
+print("GCD of", a, "and", b, "is:", gcd)
+print("LCM of", a, "and", b, "is:", lcm)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleAnswer(button) {
+            const answerDiv = button.nextElementSibling;
+            if (answerDiv.style.display === "block") {
+                answerDiv.style.display = "none";
+                button.textContent = "Show Answer";
+            } else {
+                answerDiv.style.display = "block";
+                button.textContent = "Hide Answer";
+            }
+        }
+    </script>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

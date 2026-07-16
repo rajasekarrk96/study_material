@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python NumPy - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#install">Installation</a></li>
+                        <li><a href="#create">Create Array</a></li>
+                        <li><a href="#dimensions">Dimensions</a></li>
+                        <li><a href="#indexing">Indexing</a></li>
+                        <li><a href="#slicing">Slicing</a></li>
+                        <li><a href="#shape">Shape</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python NumPy</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>NumPy is a Python library used for working with arrays.</p>
+                    <p>It also has functions for working in domain of linear algebra, fourier transform, and matrices.
+                    </p>
+                    <p>NumPy was created in 2005 by Travis Oliphant. It is an open source project and you can use it
+                        freely.</p>
+                    <p>NumPy stands for Numerical Python.</p>
+
+                    <h2 id="install">Installation</h2>
+                    <p>If you have Python and PIP already installed on a system, then install it using this command:</p>
+                    <pre class="code-block">
+pip install numpy
+</pre>
+                    <p>Import NumPy in your applications by using the <code>import</code> keyword:</p>
+                    <pre class="code-block">
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+print(arr)
+</pre>
+
+                    <h2 id="create">Create a NumPy ndarray Object</h2>
+                    <p>NumPy is used to work with arrays. The array object in NumPy is called <code>ndarray</code>.</p>
+                    <p>We can create a NumPy <code>ndarray</code> object by using the <code>array()</code> function.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+np.array(object)
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+print(arr)
+print(type(arr)) # &lt;class 'numpy.ndarray'&gt;
+</pre>
+
+                    <h2 id="dimensions">Dimensions In Arrays</h2>
+                    <p><strong>0-D Arrays:</strong> 0-D arrays, or Scalars, are the elements in an array. Each value in
+                        an array is a 0-D array.</p>
+                    <p><strong>1-D Arrays:</strong> An array that has 0-D arrays as its elements is called
+                        uni-dimensional or 1-D array.</p>
+                    <p><strong>2-D Arrays:</strong> An array that has 1-D arrays as its elements is called a 2-D array.
+                        These are often used to represent matrix or 2nd order tensors.</p>
+                    <pre class="code-block">
+import numpy as np
+
+# 0-D
+arr0 = np.array(42)
+
+# 1-D
+arr1 = np.array([1, 2, 3, 4, 5])
+
+# 2-D
+arr2 = np.array([[1, 2, 3], [4, 5, 6]])
+
+# 3-D
+arr3 = np.array([[[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]])
+
+print(arr2.ndim) # Check number of dimensions
+</pre>
+
+                    <h2 id="indexing">Array Indexing</h2>
+                    <p>Array indexing is the same as accessing an array element.</p>
+                    <p>You can access an array element by referring to its index number.</p>
+                    <pre class="code-block">
+import numpy as np
+
+arr = np.array([1, 2, 3, 4])
+print(arr[0]) # 1
+print(arr[1]) # 2
+print(arr[2] + arr[3]) # 7
+</pre>
+                    <p>Access 2-D Arrays:</p>
+                    <pre class="code-block">
+import numpy as np
+
+arr = np.array([[1,2,3,4,5], [6,7,8,9,10]])
+
+print('2nd element on 1st row: ', arr[0, 1])
+</pre>
+
+                    <h2 id="slicing">Slicing Arrays</h2>
+                    <p>Slicing in python means taking elements from one given index to another given index.</p>
+                    <p>We pass slice instead of index like this: <code>[start:end]</code>.</p>
+                    <pre class="code-block">
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+
+print(arr[1:5]) # [2 3 4 5]
+print(arr[4:]) # [5 6 7]
+print(arr[:4]) # [1 2 3 4]
+</pre>
+
+                    <h2 id="shape">Array Shape</h2>
+                    <p>The shape of an array is the number of elements in each dimension.</p>
+                    <pre class="code-block">
+import numpy as np
+
+arr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+
+print(arr.shape) # (2, 4)
+</pre>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a program to import numpy as np and print the version.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import numpy as np
+print(np.__version__)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a program to create a 1-D array with numbers from 0 to 9.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import numpy as np
+arr = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+print(arr)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a program to create a 2-D array and print its shape.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import numpy as np
+arr = np.array([[1, 2], [3, 4]])
+print(arr.shape)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a program to access the element on the 2nd row, 3rd column of a 2-D array.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import numpy as np
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+print(arr[1, 2])</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a program to slice an array from index 2 to index 5.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import numpy as np
+arr = np.array([10, 20, 30, 40, 50, 60])
+print(arr[2:5])</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a program to check the number of dimensions of an array.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import numpy as np
+arr = np.array([1, 2, 3])
+print(arr.ndim)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a program to create an array with 5 dimensions.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import numpy as np
+arr = np.array([1, 2, 3, 4], ndmin=5)
+print(arr.ndim)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a program to iterate over a 1-D array.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import numpy as np
+arr = np.array([1, 2, 3])
+for x in arr:
+    print(x)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a program to reshape a 1-D array of 8 elements to a 2-D array (2x4).</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import numpy as np
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
+newarr = arr.reshape(2, 4)
+print(newarr)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a program to join two arrays.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import numpy as np
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+arr = np.concatenate((arr1, arr2))
+print(arr)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

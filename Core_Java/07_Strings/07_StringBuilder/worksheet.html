@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StringBuilder - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Strings Worksheet</h5>
+        <a href="index.html" class="nav-link">← Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>StringBuilder - Practice</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Practice fast mutable string operations using the StringBuilder class.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Concatenate Strings</h3>
+            <div class="explanation">Concatenate the string “World “ with string “Ending..” using StringBuilder.</div>
+            <div class="code-block"><code>class _01_ {
+    public static void main(String[] args) {
+
+        StringBuilder sb = new StringBuilder("World ");
+        sb.append("Ending..");
+
+        System.out.println("Result: " + sb);
+    }
+}</code></div>
+            <div class="output-block"><code>Result: World Ending..</code></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Reverse String</h3>
+            <div class="explanation">Write a Java program to reverse a given string “Palindrome” using StringBuilder.
+            </div>
+            <div class="code-block"><code>class _02_ {
+    public static void main(String[] args) {
+
+        StringBuilder sb = new StringBuilder("Palindrome");
+        sb.reverse();
+
+        System.out.println("Reversed: " + sb);
+    }
+}</code></div>
+            <div class="output-block"><code>Reversed: emordnilaP</code></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Insert Substring</h3>
+            <div class="explanation">Write a Java program to insert a substring “and apple” into a given string “ Mango
+                is a fruit” at position 6 using StringBuilder.</div>
+            <div class="code-block"><code>class _03_ {
+    public static void main(String[] args) {
+
+        StringBuilder sb = new StringBuilder(" Mango is a fruit");
+        sb.insert(6, "and apple");
+
+        System.out.println("Modified: " + sb);
+    }
+}</code></div>
+            <div class="output-block"><code>Modified:  Mangoand apple is a fruit</code></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Delete Substring</h3>
+            <div class="explanation">Write a Java program to delete a specific substring “happiness and” from a given
+                string “Plants gives happiness and joy” using StringBuilder.</div>
+            <div class="code-block"><code>class _04_ {
+    public static void main(String[] args) {
+
+        StringBuilder sb = 
+                new StringBuilder("Plants gives happiness and joy");
+
+        int start = sb.indexOf("happiness and");
+        int end = start + "happiness and".length();
+
+        if (start != -1) {
+            sb.delete(start, end);
+        }
+
+        System.out.println("After deletion: " + sb);
+    }
+}</code></div>
+            <div class="output-block"><code>After deletion: Plants gives  joy</code></div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Replace Substring</h3>
+            <div class="explanation">Write a Java program to replace a specific substring “World” with another substring
+                “Everyone” in a given string “Hello, World!” using StringBuilder.</div>
+            <div class="code-block"><code>class _05_ {
+    public static void main(String[] args) {
+
+        StringBuilder sb = new StringBuilder("Hello, World!");
+        int start = sb.indexOf("World");
+        int end = start + "World".length();
+
+        if (start != -1) {
+            sb.replace(start, end, "Everyone");
+        }
+
+        System.out.println("Final String: " + sb);
+    }
+}</code></div>
+            <div class="output-block"><code>Final String: Hello, Everyone!</code></div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>StringBuilder Module - Practice Worksheet</strong></p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

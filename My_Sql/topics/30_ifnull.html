@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFNULL - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">IFNULL</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">IFNULL</h2>
+                <p class="topic-desc">The IFNULL() function is used to replace NULL values with a specified value.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Basic Concept & Syntax</h3>
+                        <p class="subtopic-desc"><strong>🔹 Logic</strong><br>If the expression is NULL, this function returns a specified value. If the expression is NOT NULL, it returns the expression itself.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-func">IFNULL</span>(expression, value_if_null)</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Table: employees</h3>
+                        <p class="subtopic-desc">Sample data showing some NULL bonus values.</p>
+            <div class="output-box">
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>emp_id</th><th>name</th><th>bonus</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Arun</td><td>5000</td></tr>
+                        <tr><td>2</td><td>Ravi</td><td>NULL</td></tr>
+                        <tr><td>3</td><td>Meena</td><td>3000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Example 1: Replace NULL with 0</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Display a value of 0 instead of 'NULL' for employees without a bonus.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name, <span class="sql-func">IFNULL</span>(bonus, 0) <span class="sql-keyword">AS</span> bonus\nFROM employees;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 50%; font-size: 13px;'>
+                    <thead><tr><th>name</th><th>bonus</th></tr></thead>
+                    <tbody>
+                        <tr><td>Arun</td><td>5000</td></tr>
+                        <tr><td>Ravi</td><td>0</td></tr>
+                        <tr><td>Meena</td><td>3000</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Example 2: IFNULL with calculation</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Ensure mathematical operations don't result in NULL when adding columns.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name, salary + <span class="sql-func">IFNULL</span>(bonus, 0) <span class="sql-keyword">AS</span> total_salary\nFROM employees;</code></pre><div class="output-box">✔ Prevents the entire sum from becoming NULL if the bonus is missing.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Example 3: IFNULL with aggregate function</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Provide a fallback value for aggregate results.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> <span class="sql-func">IFNULL</span>(<span class="sql-func">SUM</span>(bonus), 0) <span class="sql-keyword">AS</span> total_bonus\nFROM employees;</code></pre><div class="output-box">✔ Ensures the query returns 0 instead of NULL if no bonuses exist in the filtered set.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Replace NULL email with 'Not Provided'.</strong><br>
+    <button class="toggle-btn" data-target="ans-t29-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t29-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, IFNULL(email, 'Not Provided') AS email
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+---------------+
+| name   | email         |
++--------+---------------+
+| Arun   | arun@example.com |
+| Priya  | Not Provided  |
+| Kiran  | kiran@example.com |
+| Meena  | Not Provided  |
++--------+---------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Calculate total marks, replacing NULL with 0.</strong><br>
+    <button class="toggle-btn" data-target="ans-t29-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t29-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, IFNULL(marks, 0) AS total_marks
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+------------+
+| name   | total_marks|
++--------+------------+
+| Arun   | 85         |
+| Priya  | 0          |
+| Kiran  | 90         |
+| Meena  | 0          |
++--------+------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Combine first_name and last_name, replacing NULL with empty string.</strong><br>
+    <button class="toggle-btn" data-target="ans-t29-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t29-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT CONCAT(IFNULL(first_name,''), ' ', IFNULL(last_name,'')) AS full_name
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------------+
+| full_name  |
++------------+
+| Arun Kumar |
+| Priya      |
+| Kiran      |
+| Meena      |
++------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Display student age, replace NULL with 18.</strong><br>
+    <button class="toggle-btn" data-target="ans-t29-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t29-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, IFNULL(age, 18) AS age
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+-----+
+| name   | age |
++--------+-----+
+| Arun   | 22  |
+| Priya  | 18  |
+| Kiran  | 23  |
+| Meena  | 18  |
++--------+-----+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Calculate adjusted total = marks + bonus, treat NULL as 0.</strong><br>
+    <button class="toggle-btn" data-target="ans-t29-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t29-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, IFNULL(marks,0) + IFNULL(bonus,0) AS adjusted_total
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+----------------+
+| name   | adjusted_total |
++--------+----------------+
+| Arun   | 90             |
+| Priya  | 5              |
+| Kiran  | 95             |
+| Meena  | 10             |
++--------+----------------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='29_case.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Case</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='31_limit.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Limit →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

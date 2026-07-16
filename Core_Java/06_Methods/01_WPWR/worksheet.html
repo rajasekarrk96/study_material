@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methods (WPWR) - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Methods Worksheet</h5>
+        <a href="index.html" class="nav-link">← Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Methods (WPWR) - Practice</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master Methods with Parameters and Return Values (WPWR) by solving these common logical problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Sum of Two Numbers</h3>
+            <div class="explanation">Write a program with a method named <code>getTotal</code> that accepts two integers
+                as an argument and return its sum. Call this method from <code>main()</code> and print the results.
+            </div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+
+    static int getTotal(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter two numbers: ");
+        int x = sn.nextInt();
+        int y = sn.nextInt();
+
+        System.out.println("Sum = " + getTotal(x, y));
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter two numbers: 10 20
+Sum = 30</code></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Check Even or Odd</h3>
+            <div class="explanation">Write a method named <code>isEven</code> that accepts an <code>int</code> argument.
+                The method should return <code>true</code> if the argument is even, or <code>false</code> otherwise.
+                Also, write a program to test your method.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+
+    static boolean isEven(int n) {
+        return n % 2 == 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int n = sn.nextInt();
+
+        System.out.println("Is Even: " + isEven(n));
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter a number: 4
+Is Even: true</code></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Base Raised to Exponent</h3>
+            <div class="explanation">Write a program with a method named <code>power</code> that accepts two integers,
+                base and exponent, and returns the result of raising the base to the exponent. Call this method from the
+                <code>main()</code> and print the result.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+
+    static int power(int base, int exp) {
+        int result = 1;
+        for (int i = 1; i <= exp; i++)
+            result *= base;
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter base: ");
+        int b = sn.nextInt();
+        System.out.print("Enter exponent: ");
+        int e = sn.nextInt();
+
+        System.out.println("Result: " + power(b, e));
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter base: 2
+Enter exponent: 3
+Result: 8</code></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Check Prime Number</h3>
+            <div class="explanation">Write a method named <code>isPrime</code> that checks if the given number is prime.
+                A prime number is a number that is evenly divisible only by itself and 1.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _04_ {
+
+    static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= n / 2; i++)
+            if (n % i == 0)
+                return false;
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int n = sn.nextInt();
+
+        System.out.println("Is Prime: " + isPrime(n));
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter a number: 7
+Is Prime: true</code></div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Palindrome Number Check</h3>
+            <div class="explanation">Write a method that takes as input a nonnegative integer and returns
+                <code>true</code> if the number is a palindrome; otherwise, it returns <code>false</code>.</div>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _05_ {
+
+    static boolean isPalindrome(int n) {
+        int rev = 0, temp = n;
+
+        while (temp > 0) {
+            rev = rev * 10 + temp % 10;
+            temp /= 10;
+        }
+        return rev == n;
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int n = sn.nextInt();
+
+        System.out.println("Is Palindrome: " + isPalindrome(n));
+
+        sn.close();
+    }
+}</code></div>
+            <div class="output-block"><code>Enter a number: 121
+Is Palindrome: true</code></div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Methods (WPWR) Module - Practice Worksheet</strong></p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

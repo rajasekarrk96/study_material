@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Inheritance Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Inheritance - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master single, multilevel, and hierarchical inheritance with method overriding.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Single Inheritance with Method Overriding</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create an Animal class with a method makeSound(). Then, create a Dog class that
+                extends the Animal class and overrides the makeSound() method to print "Bark". Demonstrate the use of
+                these classes in the main method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Animal {
+    void makeSound() {
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal {
+    void makeSound() {
+        System.out.println("Bark");
+    }
+}
+
+class _01_ {
+    public static void main(String[] args) {
+        Animal a = new Dog();
+        a.makeSound();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Bark</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Single Inheritance:</strong> Dog extends Animal (one parent, one child)</li>
+                    <li><strong>Method Overriding:</strong> Dog provides its own implementation of makeSound()</li>
+                    <li><strong>Polymorphism:</strong> Animal reference holds Dog object</li>
+                    <li><strong>Runtime Binding:</strong> Dog's method is called at runtime</li>
+                </ul>
+                <strong>Use Case:</strong> Specializing behavior in child classes
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Multilevel Inheritance</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Vehicle class with a method move(). Create a Car class that extends
+                Vehicle and adds a method honk(). Finally, create an ElectricCar class that extends Car and adds a
+                method charge(). Demonstrate the use of these classes in the main method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Vehicle {
+    void move() {
+        System.out.println("Vehicle is moving");
+    }
+}
+
+class Car extends Vehicle {
+    void honk() {
+        System.out.println("Car is honking");
+    }
+}
+
+class ElectricCar extends Car {
+    void charge() {
+        System.out.println("Electric car is charging");
+    }
+}
+
+class _02_ {
+    public static void main(String[] args) {
+        ElectricCar ec = new ElectricCar();
+        ec.move();
+        ec.honk();
+        ec.charge();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Vehicle is moving
+Car is honking
+Electric car is charging</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Multilevel Inheritance:</strong> Vehicle → Car → ElectricCar chain</li>
+                    <li><strong>Method Accumulation:</strong> ElectricCar has all methods from ancestors</li>
+                    <li><strong>Inheritance Chain:</strong> Each level adds new functionality</li>
+                    <li><strong>Access:</strong> Child can access all public/protected members of ancestors</li>
+                </ul>
+                <strong>Hierarchy:</strong> ElectricCar inherits from Car, which inherits from Vehicle
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Hierarchical Inheritance</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Shape class with a method draw(). Create Circle and Rectangle classes that
+                both extend Shape and override the draw() method to print "Drawing Circle" and "Drawing Rectangle",
+                respectively. Demonstrate the use of these classes in the main method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Shape {
+    void draw() {
+        System.out.println("Drawing Shape");
+    }
+}
+
+class Circle extends Shape {
+    void draw() {
+        System.out.println("Drawing Circle");
+    }
+}
+
+class Rectangle extends Shape {
+    void draw() {
+        System.out.println("Drawing Rectangle");
+    }
+}
+
+class _03_ {
+    public static void main(String[] args) {
+        Shape s1 = new Circle();
+        Shape s2 = new Rectangle();
+
+        s1.draw();
+        s2.draw();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Drawing Circle
+Drawing Rectangle</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Hierarchical Inheritance:</strong> Multiple children (Circle, Rectangle) from one parent
+                        (Shape)</li>
+                    <li><strong>Common Base:</strong> Both classes share Shape as parent</li>
+                    <li><strong>Polymorphic Behavior:</strong> Same reference type, different implementations</li>
+                    <li><strong>Code Reuse:</strong> Common functionality in parent, specific in children</li>
+                </ul>
+                <strong>Pattern:</strong> One parent class, multiple child classes
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Deep Multilevel Inheritance Chain</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create an Employee class with a method work(). Create a Manager class that extends
+                Employee and adds a method manage(). Create a TeamLead class that extends Manager and adds a method
+                lead(). Finally, create a Developer class that extends TeamLead and adds a method code(). Demonstrate
+                the use of these classes in the main method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Employee {
+    void work() {
+        System.out.println("Employee is working");
+    }
+}
+
+class Manager extends Employee {
+    void manage() {
+        System.out.println("Manager is managing");
+    }
+}
+
+class TeamLead extends Manager {
+    void lead() {
+        System.out.println("TeamLead is leading");
+    }
+}
+
+class Developer extends TeamLead {
+    void code() {
+        System.out.println("Developer is coding");
+    }
+}
+
+class _04_ {
+    public static void main(String[] args) {
+        Developer d = new Developer();
+        d.work();
+        d.manage();
+        d.lead();
+        d.code();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Employee is working
+Manager is managing
+TeamLead is leading
+Developer is coding</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>4-Level Hierarchy:</strong> Employee → Manager → TeamLead → Developer</li>
+                    <li><strong>Method Inheritance:</strong> Developer has access to all ancestor methods</li>
+                    <li><strong>Specialization:</strong> Each level adds specific functionality</li>
+                    <li><strong>IS-A Relationship:</strong> Developer IS-A TeamLead IS-A Manager IS-A Employee</li>
+                </ul>
+                <strong>Design:</strong> Each level represents increasing specialization
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Academic Hierarchy with Multilevel Inheritance</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Person class with a method introduce(). Create a Student class that
+                extends Person and adds a method study(). Create a PostgraduateStudent class that extends Student and
+                adds a method research(). Finally, create a PhDStudent class that extends PostgraduateStudent and adds a
+                method dissertation(). Demonstrate the use of these classes in the main method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Person {
+    void introduce() {
+        System.out.println("I am a person");
+    }
+}
+
+class Student extends Person {
+    void study() {
+        System.out.println("Student is studying");
+    }
+}
+
+class PostgraduateStudent extends Student {
+    void research() {
+        System.out.println("Postgraduate student is researching");
+    }
+}
+
+class PhDStudent extends PostgraduateStudent {
+    void dissertation() {
+        System.out.println("PhD student is writing dissertation");
+    }
+}
+
+class _05_ {
+    public static void main(String[] args) {
+        PhDStudent p = new PhDStudent();
+        p.introduce();
+        p.study();
+        p.research();
+        p.dissertation();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>I am a person
+Student is studying
+Postgraduate student is researching
+PhD student is writing dissertation</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Academic Progression:</strong> Person → Student → Postgraduate → PhD</li>
+                    <li><strong>Cumulative Capabilities:</strong> Each level adds new methods</li>
+                    <li><strong>Real-World Modeling:</strong> Represents actual academic hierarchy</li>
+                    <li><strong>Method Access:</strong> PhDStudent can call all inherited methods</li>
+                </ul>
+                <strong>Hierarchy:</strong> Models progression from general person to specialized PhD student
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>Inheritance Module - Practice Worksheet</strong></p>
+            <p>Master single, multilevel, and hierarchical inheritance</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

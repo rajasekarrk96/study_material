@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Variables</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Java Variables</h5>
+        <a href="../../index.html#basics">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#what-variables">What are Variables</a>
+        <a href="#declaring">Declaration & Initialization</a>
+        <a href="#types">Variable Types</a>
+        <a href="#scope">Variable Scope</a>
+        <a href="#naming">Naming Conventions</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Java Variables</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Understanding Variables in Java</h1>
+            <p class="lead text-muted">Learn how to declare, initialize, and use variables to store and manipulate data
+                in your Java programs.</p>
+        </div>
+
+        <div class="section" id="what-variables">
+            <h4>What is a Variable?</h4>
+            <p>A variable is a named storage location that holds a value. It is a container for storing data values that
+                your program can use and modify during execution. Each variable has a name, type, and value.</p>
+            <p><strong>Basic Variable Concepts:</strong></p>
+            <ul>
+                <li><strong>Name:</strong> Identifier used to reference the variable</li>
+                <li><strong>Type:</strong> Data type that determines what kind of values can be stored</li>
+                <li><strong>Value:</strong> The actual data stored in the variable</li>
+                <li><strong>Memory Address:</strong> Physical location in memory where the value is stored</li>
+            </ul>
+            <p><strong>Variable Example:</strong></p>
+            <pre><code>int age = 25;
+//  ^   ^    ^
+//  |   |    +--- Value (25)
+//  |   +-------- Variable Name (age)
+//  +----------- Data Type (int)</code></pre>
+            <div class="note">
+                <strong>💡 Key Concept:</strong> Variables are fundamental to programming. They allow you to store,
+                retrieve, and manipulate data dynamically during program execution.
+            </div>
+        </div>
+
+        <div class="section" id="declaring">
+            <h4>Declaring and Initializing Variables</h4>
+            <p>In Java, you must declare a variable with a type before using it. Declaration reserves memory space for
+                the variable.</p>
+            <p><strong>Syntax:</strong></p>
+            <pre><code>// Declaration only (variable has default value)
+int age;
+
+// Declaration with initialization
+int age = 25;
+
+// Multiple variables of same type
+int x = 10, y = 20, z = 30;</code></pre>
+            <p><strong>Complete Example:</strong></p>
+            <pre><code>public class VariableExample {
+    public static void main(String[] args) {
+        // Declaring and initializing variables
+        int age = 25;
+        double salary = 50000.50;
+        String name = "John";
+        boolean isStudent = true;
+        
+        // Using variables
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Salary: $" + salary);
+        System.out.println("Is Student: " + isStudent);
+        
+        // Modifying variables
+        age = 26;
+        salary = 55000.00;
+        System.out.println("\nAfter update:");
+        System.out.println("Age: " + age);
+        System.out.println("Salary: $" + salary);
+    }
+}</code></pre>
+            <div class="output">
+                Name: John<br>
+                Age: 25<br>
+                Salary: $50000.5<br>
+                Is Student: true<br>
+                <br>
+                After update:<br>
+                Age: 26<br>
+                Salary: $55000.0
+            </div>
+        </div>
+
+        <div class="section" id="types">
+            <h4>Types of Variables</h4>
+            <p>Java has three types of variables based on scope and lifetime:</p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Variable Type</th>
+                        <th>Scope</th>
+                        <th>Lifetime</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Local</strong></td>
+                        <td>Inside method/block</td>
+                        <td>Method execution</td>
+                        <td><code>int x = 10;</code> in main()</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Instance</strong></td>
+                        <td>Entire object</td>
+                        <td>Object lifetime</td>
+                        <td><code>String name;</code> in class body</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Static</strong></td>
+                        <td>Entire class</td>
+                        <td>Program execution</td>
+                        <td><code>static int count;</code> in class body</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Local Variables Example:</strong></p>
+            <pre><code>public class LocalVariables {
+    public static void main(String[] args) {
+        // Local variable - only exists in main method
+        int localVar = 100;
+        System.out.println("Local Variable: " + localVar);
+    }
+}</code></pre>
+            <p><strong>Instance Variables Example:</strong></p>
+            <pre><code>public class Student {
+    // Instance variables - each object has its own copy
+    String name;
+    int rollNumber;
+    double cgpa;
+    
+    public Student(String n, int r, double c) {
+        name = n;
+        rollNumber = r;
+        cgpa = c;
+    }
+}</code></pre>
+            <p><strong>Static Variables Example:</strong></p>
+            <pre><code>public class Counter {
+    // Static variable - shared across all objects
+    static int count = 0;
+    
+    public Counter() {
+        count++;
+    }
+    
+    public static void main(String[] args) {
+        new Counter();
+        new Counter();
+        new Counter();
+        System.out.println("Total objects: " + count);
+    }
+}</code></pre>
+            <div class="output">
+                Total objects: 3
+            </div>
+        </div>
+
+        <div class="section" id="scope">
+            <h4>Variable Scope and Lifetime</h4>
+            <p>Variable scope determines where in your code a variable can be accessed. Understanding scope prevents
+                errors and helps organize code properly.</p>
+            <pre><code>public class ScopeExample {
+    static int globalVar = 50;  // Static variable - class scope
+    int instanceVar = 30;       // Instance variable - object scope
+    
+    public void methodScope() {
+        int localVar = 20;      // Local variable - method scope
+        
+        if (localVar > 10) {
+            int blockVar = 5;   // Block variable - if block scope
+            System.out.println("Block Var: " + blockVar);
+            System.out.println("Local Var: " + localVar);
+            System.out.println("Instance Var: " + instanceVar);
+            System.out.println("Global Var: " + globalVar);
+        }
+        
+        // System.out.println(blockVar); // ERROR! Out of scope
+    }
+}</code></pre>
+            <div class="example">
+                <strong>✓ Scope Rules:</strong> Inner scopes can access outer scope variables, but outer scopes cannot
+                access inner scope variables. Variables declared in a block are only accessible within that block.
+            </div>
+            <div class="note">
+                <strong>💡 Best Practice:</strong> Declare variables in the smallest scope where they are needed. This
+                reduces memory usage and prevents accidental modifications from other parts of the code.
+            </div>
+        </div>
+
+        <div class="section" id="naming">
+            <h4>Variable Naming Conventions</h4>
+            <p>Following naming conventions makes your code more readable and maintainable. Java has established
+                standards for naming variables.</p>
+            <p><strong>Rules and Conventions:</strong></p>
+            <ul>
+                <li>Variable names must start with a letter, underscore (_), or dollar sign ($)</li>
+                <li>Subsequent characters can be letters, digits, underscores, or dollar signs</li>
+                <li>Variable names are case-sensitive (age and Age are different)</li>
+                <li>Cannot use Java reserved keywords (int, class, public, etc.)</li>
+                <li>Use camelCase convention (firstVariable, studentName, isActive)</li>
+                <li>Use meaningful, descriptive names</li>
+                <li>Avoid single-letter names except for loop counters (i, j, k)</li>
+            </ul>
+            <p><strong>Good Naming Examples:</strong></p>
+            <pre><code>✓ Good Names
+int studentAge;
+String firstName;
+boolean isActive;
+double grossSalary;
+
+✗ Poor Names
+int a;
+String x;
+int S_Age;
+int age1age2;
+double my_money;</code></pre>
+            <div class="note">
+                <strong>💡 Professional Practice:</strong> Write self-documenting code. Use variable names that clearly
+                indicate their purpose. This reduces the need for comments and makes code maintenance easier.
+            </div>
+        </div>
+
+        <div class="section" id="ascii-notes">
+            <h4>ASCII Notes</h4>
+            <p>Variables often store character data, and understanding ASCII is essential for working with char
+                variables in Java.</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="../ASCII_Reference.html" target="_blank" class="btn btn-info"
+                    style="background-color: #17a2b8; border: none; padding: 10px 20px; border-radius: 5px; color: white; text-decoration: none; font-weight: 600;">
+                    📊 View Interactive ASCII Chart →
+                </a>
+            </div>
+            <pre><code>ASCII Value Memory Representation:
+
+char letter = 'A';     // Stores ASCII 65 in memory
+int value = 65;        // Both occupy different memory</code></pre>
+            ┌─────────────────────────────────────────────┐
+            │ Variable: letter │
+            │ Type: char │
+            │ ASCII Value: 65 │
+            │ Memory: 2 bytes (Java) │
+            │ Value: 'A' │
+            └─────────────────────────────────────────────┘</code></pre>
+            <p><strong>ASCII with Variables in Java:</strong></p>
+            <pre><code>public class ASCIIVariables {
+    public static void main(String[] args) {
+        // Char variables and ASCII
+        char vowels[] = {'A', 'E', 'I', 'O', 'U'};
+        char digits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        
+        // Display ASCII values of vowels
+        System.out.println("Vowels ASCII Values:");
+        for (char v : vowels) {
+            System.out.println(v + " = " + (int)v);
+        }
+        
+        // Variables to store ASCII values
+        int startOfDigits = (int)'0';    // 48
+        int endOfDigits = (int)'9';      // 57
+        
+        System.out.println("\nDigit Range: " + startOfDigits + " to " + endOfDigits);
+    }
+}</code></pre>
+            <div class="output">
+                Vowels ASCII Values:<br>
+                A = 65<br>
+                E = 69<br>
+                I = 73<br>
+                O = 79<br>
+                U = 85<br>
+                <br>
+                Digit Range: 48 to 57
+            </div>
+            <div class="note">
+                <strong>💡 Variable Assignment:</strong> When you assign a char literal to a char variable, Java stores
+                the ASCII value in memory.
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">
+                Go to Practice Worksheets →
+            </a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Java Variables Module | Last Updated: November 2025</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

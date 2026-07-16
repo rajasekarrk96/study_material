@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JDBC Basics - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>JDBC Basics Worksheet</h5>
+        <a href="../01_Connection/index.html"
+            style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>JDBC Basics - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of JDBC (Java Database Connectivity) with these real-world database application
+                problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Banking Application with User Authentication</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Develop a banking application with multi-user support using JDBC. This example demonstrates user
+                authentication
+                by verifying username and password against a MySQL database. The application includes features such as:
+                <ul>
+                    <li>User authentication (login system)</li>
+                    <li>Database connectivity using JDBC</li>
+                    <li>PreparedStatement for SQL injection prevention</li>
+                    <li>Proper exception handling</li>
+                </ul>
+                <strong>Database Setup:</strong> Create a database named <code>bankdb</code> with a <code>users</code>
+                table
+                containing columns: <code>username</code> and <code>password</code>.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.sql.*;
+
+class _01_ {
+    public static void main(String[] args) {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/bankdb", "root", "password");
+
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT * FROM users WHERE username=? AND password=?");
+
+            ps.setString(1, "admin");
+            ps.setString(2, "admin123");
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next())
+                System.out.println("Login Successful");
+            else
+                System.out.println("Invalid Login");
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Login Successful
+
+-- OR --
+
+Invalid Login</code></div>
+
+            <h4>Database Schema</h4>
+            <div class="code-block"><code>CREATE DATABASE bankdb;
+
+USE bankdb;
+
+CREATE TABLE users (
+    username VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(50) NOT NULL
+);
+
+INSERT INTO users VALUES ('admin', 'admin123');
+INSERT INTO users VALUES ('user1', 'pass123');</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>JDBC Driver Loading:</strong> <code>Class.forName()</code> loads the MySQL JDBC driver
+                    </li>
+                    <li><strong>Connection:</strong> <code>DriverManager.getConnection()</code> establishes database
+                        connection</li>
+                    <li><strong>PreparedStatement:</strong> Prevents SQL injection by using parameterized queries</li>
+                    <li><strong>ResultSet:</strong> <code>rs.next()</code> checks if any matching record exists</li>
+                    <li><strong>Resource Management:</strong> Always close connections to prevent memory leaks</li>
+                </ul>
+                <strong>Security Note:</strong> In production, passwords should be hashed (e.g., using BCrypt) before
+                storing in the database.
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Hospital Management System - Patient Registration</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Create a hospital management system using JDBC with patient registration functionality. This application
+                demonstrates:
+                <ul>
+                    <li>Inserting patient records into a database</li>
+                    <li>Using PreparedStatement for data insertion</li>
+                    <li>Managing patient information (ID, name, disease)</li>
+                    <li>Proper database connection handling</li>
+                </ul>
+                <strong>Database Setup:</strong> Create a database named <code>hospitaldb</code> with a
+                <code>patient</code> table
+                containing columns: <code>id</code>, <code>name</code>, and <code>disease</code>.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.sql.*;
+
+class _02_ {
+    public static void main(String[] args) {
+
+        try {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/hospitaldb", "root", "password");
+
+            PreparedStatement ps =
+                    con.prepareStatement("INSERT INTO patient VALUES (?, ?, ?)");
+
+            ps.setInt(1, 101);
+            ps.setString(2, "Ravi");
+            ps.setString(3, "Fever");
+
+            ps.executeUpdate();
+            System.out.println("Patient Registered");
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Patient Registered</code></div>
+
+            <h4>Database Schema</h4>
+            <div class="code-block"><code>CREATE DATABASE hospitaldb;
+
+USE hospitaldb;
+
+CREATE TABLE patient (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    disease VARCHAR(100)
+);
+
+-- After running the program, verify:
+SELECT * FROM patient;
+-- Output: 101 | Ravi | Fever</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>INSERT Operation:</strong> <code>INSERT INTO patient VALUES (?, ?, ?)</code> adds new
+                        records</li>
+                    <li><strong>PreparedStatement Methods:</strong>
+                        <ul>
+                            <li><code>setInt()</code> - Sets integer parameter</li>
+                            <li><code>setString()</code> - Sets string parameter</li>
+                        </ul>
+                    </li>
+                    <li><strong>executeUpdate():</strong> Used for INSERT, UPDATE, DELETE operations (returns affected
+                        row count)</li>
+                    <li><strong>No Driver Loading:</strong> Modern JDBC drivers auto-register (JDBC 4.0+)</li>
+                </ul>
+                <strong>Extension Ideas:</strong> Add features like doctor scheduling, appointment booking, medical
+                record management, and billing.
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="../01_Connection/index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>JDBC Basics Module - Practice Worksheet</strong></p>
+            <p>Master database connectivity in Java</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

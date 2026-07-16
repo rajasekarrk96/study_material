@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes and Objects - Java Learning Module</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Classes and Objects</h5>
+        <a href="../../index.html#oop">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#section1">OOP Fundamentals</a>
+        <a href="#section2">Class Definition</a>
+        <a href="#section3">Objects</a>
+        <a href="#section4">Attributes and Methods</a>
+        <a href="#section5">Real-World Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h1>Classes and Objects</h1>
+    </div>
+
+    <div class="main-content">
+        <!-- Section 1: OOP Fundamentals -->
+        <div class="section">
+            <h2>Section 1: OOP Fundamentals</h2>
+            <p>
+                <strong>Object-Oriented Programming (OOP)</strong> is a programming paradigm based on the concept of
+                objects.
+                OOP provides a structured approach to solving problems by modeling real-world entities as objects that
+                interact with each other.
+                Java is designed with OOP as its core principle.
+            </p>
+
+            <h3>Four Pillars of OOP</h3>
+            <ul>
+                <li><strong>Encapsulation:</strong> Bundling data and methods together, hiding internal details</li>
+                <li><strong>Inheritance:</strong> Creating new classes based on existing ones</li>
+                <li><strong>Polymorphism:</strong> Objects can take multiple forms</li>
+                <li><strong>Abstraction:</strong> Showing only necessary details, hiding complexity</li>
+            </ul>
+
+            <div class="note-box">
+                <h4>💡 Key Benefit</h4>
+                <p>OOP makes code more modular, reusable, maintainable, and easier to understand. Real-world problems
+                    map naturally to objects.</p>
+            </div>
+
+            <div class="example-box">
+                <h4>🎯 Real-World Analogy</h4>
+                <p>Think of a class as a blueprint for a car. An object is an actual car built from that blueprint. Each
+                    car object has the same structure but can have different properties (color, model, etc.).</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Class Definition and Structure -->
+        <div class="section">
+            <h2>Section 2: Class Definition and Structure</h2>
+            <p>A class is a template (blueprint) for creating objects. It defines the structure and behavior:</p>
+
+            <h3>Class Syntax</h3>
+            <div class="code-block"><code>public class ClassName {
+    // Member variables (attributes)
+    public String name;
+    public int age;
+    
+    // Methods (behavior)
+    public void display() {
+        System.out.println("Name: " + name);
+    }
+}</code></div>
+
+            <h3>Class Components</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Class Declaration</td>
+                        <td>Starts the class definition</td>
+                        <td><code>public class Student</code></td>
+                    </tr>
+                    <tr>
+                        <td>Member Variables</td>
+                        <td>Data attributes of the class</td>
+                        <td><code>String name; int rollNumber;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Constructor</td>
+                        <td>Initializes objects</td>
+                        <td><code>public Student() { }</code></td>
+                    </tr>
+                    <tr>
+                        <td>Methods</td>
+                        <td>Define behavior</td>
+                        <td><code>public void study() { }</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Complete Class Example</h3>
+            <div class="code-block"><code>public class Student {
+    // Member Variables (Attributes)
+    public String name;
+    public int rollNumber;
+    public double gpa;
+    
+    // Constructor (initializes object)
+    public Student(String n, int roll, double g) {
+        name = n;
+        rollNumber = roll;
+        gpa = g;
+    }
+    
+    // Method (Behavior)
+    public void displayInfo() {
+        System.out.println("Name: " + name);
+        System.out.println("Roll: " + rollNumber);
+        System.out.println("GPA: " + gpa);
+    }
+}</code></div>
+
+            <div class="note-box">
+                <h4>📝 Naming Convention</h4>
+                <p>Class names should be nouns and start with an uppercase letter (PascalCase): Student, Car, Employee,
+                    BankAccount</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Objects and Instantiation -->
+        <div class="section">
+            <h2>Section 3: Objects and Instantiation</h2>
+            <p>An object is an instance of a class. Creating objects is called instantiation:</p>
+
+            <h3>Creating Objects</h3>
+            <div class="code-block"><code>// Syntax:
+ClassName objectName = new ClassName();
+
+// Example:
+Student student1 = new Student("John", 101, 3.8);
+Student student2 = new Student("Alice", 102, 3.9);</code></div>
+
+            <h3>Example: Object Creation</h3>
+            <div class="code-block"><code>public class ObjectCreation {
+    public static void main(String[] args) {
+        // Create first object
+        Student student1 = new Student("John", 101, 3.8);
+        student1.displayInfo();
+        
+        System.out.println();
+        
+        // Create second object
+        Student student2 = new Student("Alice", 102, 3.9);
+        student2.displayInfo();
+        
+        // Accessing object attributes
+        System.out.println("\nStudent 1 Name: " + student1.name);
+        System.out.println("Student 2 GPA: " + student2.gpa);
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Name: John<br>Roll: 101<br>GPA: 3.8<br><br>
+                    Name: Alice<br>Roll: 102<br>GPA: 3.9<br><br>
+                    Student 1 Name: John<br>Student 2 GPA: 3.9</p>
+            </div>
+
+            <h3>Understanding Object Creation Process</h3>
+            <div class="code-block"><code>// Step 1: Class is loaded in memory
+// Step 2: new keyword allocates memory for object
+// Step 3: Constructor is called to initialize the object
+// Step 4: Reference is assigned to variable
+
+Student s = new Student("Bob", 103, 3.7);
+// s holds a reference to the object in memory</code></div>
+
+            <div class="note-box">
+                <h4>⚠️ Important Concept</h4>
+                <p>Each object created is independent with its own data. Changing one object doesn't affect another
+                    object of the same class.</p>
+            </div>
+        </div>
+
+        <!-- Section 4: Attributes and Methods -->
+        <div class="section">
+            <h2>Section 4: Attributes and Methods</h2>
+            <p>Attributes (variables) hold data, while methods perform actions on that data:</p>
+
+            <h3>Attributes (Member Variables)</h3>
+            <div class="code-block"><code>public class Car {
+    // Attributes
+    public String color;
+    public String model;
+    public int year;
+    public double speed;  // Current speed
+}</code></div>
+
+            <h3>Methods (Behavior)</h3>
+            <div class="code-block"><code>public class Car {
+    public String color;
+    public String model;
+    
+    // Method 1: Display car info
+    public void display() {
+        System.out.println("Model: " + model);
+        System.out.println("Color: " + color);
+    }
+    
+    // Method 2: Accelerate
+    public void accelerate() {
+        System.out.println("Car is accelerating...");
+    }
+    
+    // Method 3: Stop
+    public void stop() {
+        System.out.println("Car stopped!");
+    }
+}</code></div>
+
+            <h3>Complete Example</h3>
+            <div class="code-block"><code>public class Car {
+    public String brand;
+    public String color;
+    public int year;
+    
+    public Car(String b, String c, int y) {
+        brand = b;
+        color = c;
+        year = y;
+    }
+    
+    public void displayDetails() {
+        System.out.println("Brand: " + brand);
+        System.out.println("Color: " + color);
+        System.out.println("Year: " + year);
+    }
+    
+    public void drive() {
+        System.out.println(brand + " is driving...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car("Toyota", "Blue", 2020);
+        car.displayDetails();
+        car.drive();
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Brand: Toyota<br>Color: Blue<br>Year: 2020<br>Toyota is driving...</p>
+            </div>
+
+            <div class="note-box">
+                <h4>💡 Method Purpose</h4>
+                <p>Methods encapsulate behavior. Instead of directly manipulating data, you call methods to perform
+                    actions, which improves code safety and reusability.</p>
+            </div>
+        </div>
+
+        <!-- Section 5: Real-World Class Examples -->
+        <div class="section">
+            <h2>Section 5: Real-World Class Examples</h2>
+            <p>Practical examples of designing and using classes for real-world scenarios:</p>
+
+            <h3>Example 1: Bank Account Class</h3>
+            <div class="code-block"><code>public class BankAccount {
+    public String accountNumber;
+    public String holder;
+    public double balance;
+    
+    public BankAccount(String num, String h, double b) {
+        accountNumber = num;
+        holder = h;
+        balance = b;
+    }
+    
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: $" + amount);
+    }
+    
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount);
+        } else {
+            System.out.println("Insufficient balance!");
+        }
+    }
+    
+    public void displayBalance() {
+        System.out.println("Account: " + accountNumber);
+        System.out.println("Balance: $" + balance);
+    }
+}
+
+public class TestBank {
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount("123456", "John", 1000);
+        acc.displayBalance();
+        acc.deposit(500);
+        acc.withdraw(200);
+        acc.displayBalance();
+    }
+}</code></div>
+
+            <h3>Example 2: Book Class</h3>
+            <div class="code-block"><code>public class Book {
+    public String title;
+    public String author;
+    public int year;
+    public double price;
+    
+    public Book(String t, String a, int y, double p) {
+        title = t;
+        author = a;
+        year = y;
+        price = p;
+    }
+    
+    public void applyDiscount(double discountPercent) {
+        price = price - (price * discountPercent / 100);
+        System.out.println("New price after " + discountPercent + "% discount: $" + price);
+    }
+    
+    public void display() {
+        System.out.println("Title: " + title);
+        System.out.println("Author: " + author);
+        System.out.println("Year: " + year);
+        System.out.println("Price: $" + price);
+    }
+}</code></div>
+
+            <h3>Example 3: Employee Class</h3>
+            <div class="code-block"><code>public class Employee {
+    public String name;
+    public int empID;
+    public String department;
+    public double salary;
+    
+    public Employee(String n, int id, String dept, double sal) {
+        name = n;
+        empID = id;
+        department = dept;
+        salary = sal;
+    }
+    
+    public void giveSalaryIncrease(double percentIncrease) {
+        salary = salary + (salary * percentIncrease / 100);
+    }
+    
+    public void displayEmployeeInfo() {
+        System.out.println("Name: " + name);
+        System.out.println("ID: " + empID);
+        System.out.println("Department: " + department);
+        System.out.println("Salary: $" + salary);
+    }
+}
+
+public class TestEmployee {
+    public static void main(String[] args) {
+        Employee emp1 = new Employee("John", 101, "IT", 50000);
+        emp1.displayEmployeeInfo();
+        emp1.giveSalaryIncrease(10);
+        System.out.println("After 10% increase:");
+        emp1.displayEmployeeInfo();
+    }
+}</code></div>
+
+            <div class="note-box">
+                <h4>💡 Design Principles</h4>
+                <ul>
+                    <li>One class should represent one entity</li>
+                    <li>Group related attributes and methods</li>
+                    <li>Methods should modify or use the class attributes</li>
+                    <li>Use meaningful names for clarity</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Worksheet Button -->
+        <div style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
+            <a href="worksheet.html" class="worksheet-btn">📝 Open Worksheet & Exercises</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

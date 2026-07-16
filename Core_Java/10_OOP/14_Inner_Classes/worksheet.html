@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inner Classes - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Inner Classes Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Inner Classes - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master nested classes with member, static, local, and anonymous inner class implementations.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Member Inner Class - Pet Owner System</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Imagine you are building a system to manage pets and their owners. Create an outer
+                class Owner representing a pet owner, with attributes like name and age. Inside Owner, define an inner
+                class Pet representing a pet, with attributes like name, age, and species. In the main() method,
+                instantiate an Owner object and then create a Pet object inside it. Finally, display the owner's name
+                and the pet's details.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Owner {
+    String name;
+    int age;
+
+    Owner(String n, int a) {
+        name = n;
+        age = a;
+    }
+
+    class Pet {
+        String petName;
+        int petAge;
+        String species;
+
+        Pet(String pn, int pa, String s) {
+            petName = pn;
+            petAge = pa;
+            species = s;
+        }
+
+        void displayPet() {
+            System.out.println("Pet Name: " + petName);
+            System.out.println("Pet Age: " + petAge);
+            System.out.println("Species: " + species);
+        }
+    }
+}
+
+class _01_ {
+    public static void main(String[] args) {
+        Owner o = new Owner("Ramesh", 35);
+        Owner.Pet p = o.new Pet("Buddy", 3, "Dog");
+
+        System.out.println("Owner Name: " + o.name);
+        p.displayPet();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Owner Name: Ramesh
+Pet Name: Buddy
+Pet Age: 3
+Species: Dog</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Member Inner Class:</strong> Pet class is non-static and nested inside Owner</li>
+                    <li><strong>Object Creation:</strong> Syntax: Owner.Pet p = o.new Pet(...)</li>
+                    <li><strong>Relationship:</strong> Pet depends on Owner instance</li>
+                    <li><strong>Access:</strong> Inner class can access outer class members</li>
+                </ul>
+                <strong>Real-World Use:</strong> Modeling has-a relationships where inner entity depends on outer
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Method-Local Inner Class</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the concept of method local inner classes.
+                In the Main class, define a method outerMethod() that declares a local variable outerVar initialized to
+                20. Inside outerMethod(), define a method-local inner class Inner that has a method display() which
+                prints the value of outerVar. Finally, invoke outerMethod() and within it, instantiate the inner class
+                Inner and call its display() method.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _02_ {
+
+    void outerMethod() {
+        int outerVar = 20;
+
+        class Inner {
+            void display() {
+                System.out.println("Outer Variable: " + outerVar);
+            }
+        }
+
+        Inner i = new Inner();
+        i.display();
+    }
+
+    public static void main(String[] args) {
+        _02_ obj = new _02_();
+        obj.outerMethod();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Outer Variable: 20</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Local Inner Class:</strong> Defined inside a method</li>
+                    <li><strong>Variable Access:</strong> Can access final/effectively final local variables</li>
+                    <li><strong>Scope:</strong> Inner class only visible within outerMethod()</li>
+                    <li><strong>Effectively Final:</strong> outerVar is not modified, so it's accessible</li>
+                </ul>
+                <strong>Use Case:</strong> When helper class is needed only within a specific method
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Static Nested Class - Restaurant Menu System</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Design a system for managing restaurants and their menus. Define an outer class
+                Restaurant representing a restaurant, with attributes like name and location. Inside Restaurant, define
+                a static nested class Menu representing the menu offered by the restaurant, with attributes like name,
+                description, and price of items. In the main() method, create a Restaurant object, and then create
+                instances of Menu to represent different menus offered by the restaurant. Display their details.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Restaurant {
+    String name;
+    String location;
+
+    Restaurant(String n, String l) {
+        name = n;
+        location = l;
+    }
+
+    static class Menu {
+        String itemName;
+        String description;
+        double price;
+
+        Menu(String i, String d, double p) {
+            itemName = i;
+            description = d;
+            price = p;
+        }
+
+        void displayMenu() {
+            System.out.println("Item: " + itemName);
+            System.out.println("Description: " + description);
+            System.out.println("Price: " + price);
+        }
+    }
+}
+
+class _03_ {
+    public static void main(String[] args) {
+        Restaurant r = new Restaurant("Spice Hub", "Chennai");
+
+        Restaurant.Menu m1 = new Restaurant.Menu("Biryani", "Chicken Biryani", 250);
+        Restaurant.Menu m2 = new Restaurant.Menu("Dosa", "Plain Dosa", 50);
+
+        System.out.println("Restaurant: " + r.name);
+        m1.displayMenu();
+        m2.displayMenu();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Restaurant: Spice Hub
+Item: Biryani
+Description: Chicken Biryani
+Price: 250.0
+Item: Dosa
+Description: Plain Dosa
+Price: 50.0</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Static Nested Class:</strong> Menu doesn't need Restaurant instance</li>
+                    <li><strong>Object Creation:</strong> new Restaurant.Menu(...) - no outer instance needed</li>
+                    <li><strong>Independence:</strong> Menu can exist without specific Restaurant object</li>
+                    <li><strong>Logical Grouping:</strong> Menu is logically related to Restaurant</li>
+                </ul>
+                <strong>Advantages:</strong> Menu items can be created independently of restaurant instances
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Anonymous Inner Class - Shopping Cart Payment</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a Java program that models a shopping cart functionality. Define an
+                interface Payment with a method processPayment(double amount) to simulate processing payments. In the
+                ShoppingCart class, implement a method checkout(double totalAmount, Payment payment) that takes the
+                total amount of the items in the cart and a payment object, and simulates the checkout process by
+                processing the payment. Use an anonymous inner class to implement the Payment interface within the
+                main() method to demonstrate a cash payment and a credit card payment.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>interface Payment {
+    void processPayment(double amount);
+}
+
+class ShoppingCart {
+
+    void checkout(double totalAmount, Payment payment) {
+        payment.processPayment(totalAmount);
+    }
+}
+
+class _04_ {
+    public static void main(String[] args) {
+        ShoppingCart cart = new ShoppingCart();
+
+        cart.checkout(500, new Payment() {
+            public void processPayment(double amount) {
+                System.out.println("Cash Payment of Rs." + amount);
+            }
+        });
+
+        cart.checkout(1200, new Payment() {
+            public void processPayment(double amount) {
+                System.out.println("Credit Card Payment of Rs." + amount);
+            }
+        });
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Cash Payment of Rs.500.0
+Credit Card Payment of Rs.1200.0</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Anonymous Inner Class:</strong> Implements Payment interface inline</li>
+                    <li><strong>No Class Name:</strong> Defined and instantiated in one expression</li>
+                    <li><strong>Multiple Implementations:</strong> Different behavior for each payment type</li>
+                    <li><strong>Strategy Pattern:</strong> Different payment strategies passed as objects</li>
+                </ul>
+                <strong>Modern Alternative:</strong> Lambda: cart.checkout(500, amount -> System.out.println(...))
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Nested Inner Classes - Building Management System</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Design a program to manage apartment buildings. Create an outer class Building
+                representing a building, with attributes like address and number of floors. Inside Building, define an
+                inner class Floor representing a floor of the building, with attributes like number and number of
+                apartments. Inside Floor, define another inner class Apartment representing an individual apartment,
+                with attributes like number, size, and occupancy status. In the main() method, create a Building object,
+                add some floors and apartments to it, and display their details.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Building {
+    String address;
+    int floors;
+
+    Building(String a, int f) {
+        address = a;
+        floors = f;
+    }
+
+    class Floor {
+        int floorNumber;
+        int apartments;
+
+        Floor(int fn, int ap) {
+            floorNumber = fn;
+            apartments = ap;
+        }
+
+        class Apartment {
+            int number;
+            double size;
+            boolean occupied;
+
+            Apartment(int n, double s, boolean o) {
+                number = n;
+                size = s;
+                occupied = o;
+            }
+
+            void displayApartment() {
+                System.out.println("Apartment No: " + number);
+                System.out.println("Size: " + size);
+                System.out.println("Occupied: " + occupied);
+            }
+        }
+    }
+}
+
+class _05_ {
+    public static void main(String[] args) {
+        Building b = new Building("MG Road", 5);
+        Building.Floor f = b.new Floor(2, 4);
+        Building.Floor.Apartment a = f.new Apartment(201, 850.5, true);
+
+        System.out.println("Building Address: " + b.address);
+        System.out.println("Floor Number: " + f.floorNumber);
+        a.displayApartment();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Building Address: MG Road
+Floor Number: 2
+Apartment No: 201
+Size: 850.5
+Occupied: true</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Nested Inner Classes:</strong> Apartment is inside Floor, which is inside Building</li>
+                    <li><strong>Multi-Level Nesting:</strong> Three levels of class hierarchy</li>
+                    <li><strong>Object Creation Chain:</strong> Building → Floor → Apartment</li>
+                    <li><strong>Hierarchical Relationship:</strong> Models real-world containment</li>
+                </ul>
+                <strong>Real-World Use:</strong> Complex hierarchical structures like organizations, file systems
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>Inner Classes Module - Practice Worksheet</strong></p>
+            <p>Master nested classes and advanced OOP concepts</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoboxing & Unboxing - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Autoboxing & Unboxing</h5>
+        <a href="../../index.html">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#autoboxing">Autoboxing</a>
+        <a href="#unboxing">Unboxing</a>
+        <a href="#examples">Examples</a>
+    </div>
+    <div class="top-nav">
+        <h2>Autoboxing & Unboxing</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Autoboxing and Unboxing</h1>
+            <p class="lead text-muted">Automatic conversion between primitives and wrapper objects.</p>
+        </div>
+        <div class="section" id="autoboxing">
+            <h4>Autoboxing</h4>
+            <p>Automatic conversion of primitive types to their corresponding wrapper objects.</p>
+            <pre><code>// Manual boxing (old way)
+Integer num1 = Integer.valueOf(10);
+
+// Autoboxing (automatic)
+Integer num2 = 10;  // Compiler converts int to Integer</code></pre>
+        </div>
+        <div class="section" id="unboxing">
+            <h4>Unboxing</h4>
+            <p>Automatic conversion of wrapper objects to primitive types.</p>
+            <pre><code>Integer num = 100;
+
+// Manual unboxing (old way)
+int value1 = num.intValue();
+
+// Auto-unboxing (automatic)
+int value2 = num;  // Compiler converts Integer to int</code></pre>
+        </div>
+        <div class="section" id="examples">
+            <h4>Example: Collections with Autoboxing</h4>
+            <pre><code>import java.util.ArrayList;
+
+public class AutoboxingDemo {
+    public static void main(String[] args) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        
+        // Autoboxing - int to Integer
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        
+        // Auto-unboxing - Integer to int
+        int sum = 0;
+        for (int num : numbers) {  // Auto-unboxing here
+            sum += num;
+        }
+        
+        System.out.println("Sum: " + sum);
+        
+        // Autoboxing in method calls
+        Integer max = Math.max(10, 20);  // Returns Integer
+        System.out.println("Max: " + max);
+    }
+}</code></pre>
+            <div class="output">
+                Sum: 60<br>
+                Max: 20
+            </div>
+        </div>
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Autoboxing & Unboxing Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

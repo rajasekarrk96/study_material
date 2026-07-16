@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show / Describe / Set / Explain - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Show / Describe / Set / Explain</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Show / Describe / Set / Explain</h2>
+                <p class="topic-desc">Commands used for database inspection, structure analysis, and configuration in MySQL.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">SHOW</h3>
+                        <p class="subtopic-desc">Used to display information about databases, tables, columns, or server status.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SHOW</span> DATABASES;\nSHOW TABLES;\nSHOW COLUMNS <span class="sql-keyword">FROM</span> employees;\nSHOW <span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> employees;</code></pre><div class="output-box">
+                <strong>Result (SHOW TABLES):</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>Tables_in_company</th></tr></thead>
+                    <tbody>
+                        <tr><td>employees</td></tr>
+                        <tr><td>departments</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">DESCRIBE (DESC)</h3>
+                        <p class="subtopic-desc">Used to see the structure of a table, including field names, data types, and keys.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">DESCRIBE</span> employees;\n<span class="sql-comment">-- <span class="sql-keyword">OR</span>\nDESC employees;</span></code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>Field</th><th>Type</th><th>Null</th><th>Key</th><th>Default</th><th>Extra</th></tr></thead>
+                    <tbody>
+                        <tr><td>emp_id</td><td>int</td><td>NO</td><td>PRI</td><td>NULL</td><td>auto_increment</td></tr>
+                        <tr><td>name</td><td>varchar(50)</td><td>YES</td><td></td><td>NULL</td><td></td></tr>
+                        <tr><td>salary</td><td>int</td><td>YES</td><td></td><td>NULL</td><td></td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">SET</h3>
+                        <p class="subtopic-desc">Used to assign values to system variables or user-defined variables.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SET</span> @total = 100;\nSET autocommit = 0;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> @total;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 50%; font-size: 13px;'>
+                    <thead><tr><th>@total</th></tr></thead>
+                    <tbody>
+                        <tr><td>100</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">EXPLAIN</h3>
+                        <p class="subtopic-desc">Used to analyze the query execution plan to understand how MySQL processes a query.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code>EXPLAIN <span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> employees <span class="sql-keyword">WHERE</span> salary &gt; 50000;</code></pre><div class="output-box">
+                <strong>Result (simplified):</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>id</th><th>select_type</th><th>table</th><th>type</th><th>key</th><th>rows</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>SIMPLE</td><td>employees</td><td>ALL</td><td>NULL</td><td>5</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. SHOW all databases.</strong><br>
+    <button class="toggle-btn" data-target="ans-t31-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t31-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SHOW DATABASES;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----------------+
+| Database       |
++----------------+
+| information_schema |
+| college        |
+| mysql          |
+| test           |
++----------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. SHOW all tables in the current database.</strong><br>
+    <button class="toggle-btn" data-target="ans-t31-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t31-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SHOW TABLES;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----------------+
+| Tables_in_college |
++----------------+
+| students       |
+| department     |
++----------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. DESCRIBE the structure of students table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t31-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t31-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DESCRIBE students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int         | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(50) | YES  |     | NULL    |                |
+| age    | int         | YES  |     | NULL    |                |
+| dept_id| int         | YES  |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. SET SQL mode to strict (example).</strong><br>
+    <button class="toggle-btn" data-target="ans-t31-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t31-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SET sql_mode = 'STRICT_ALL_TABLES';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>Query OK, 0 rows affected</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. EXPLAIN a SELECT query to see query execution plan.</strong><br>
+    <button class="toggle-btn" data-target="ans-t31-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t31-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>EXPLAIN SELECT * FROM students WHERE age > 22;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+-------------+---------+------+---------------+------+---------+------+--------+-------------+
+| id | select_type | table   | type | possible_keys | key  | key_len | ref  | rows   | Extra       |
++----+-------------+---------+------+---------------+------+---------+------+--------+-------------+
+| 1  | SIMPLE      | students| ALL  | NULL          | NULL | NULL    | NULL | 4      | Using where |
++----+-------------+---------+------+---------------+------+---------+------+--------+-------------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='31_limit.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Limit</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='33_if-statement.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">IF (MySQL) →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

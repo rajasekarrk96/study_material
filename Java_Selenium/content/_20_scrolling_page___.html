@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  20 scrolling page   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>20. Scrolling</h1>
+
+<h2>📖 Introduction</h2>
+<p>Sometimes the elements you need to interact with are not visible on the screen and require scrolling to bring them
+    into view. Since Selenium doesn't have a built-in <code>scroll</code> method in the <code>WebDriver</code>
+    interface, we typically use <strong>JavaScript</strong> via the <code>JavascriptExecutor</code> to perform scrolling
+    operations.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>How to use <code>JavascriptExecutor</code> for scrolling</li>
+    <li>How to scroll by a specific number of pixels</li>
+    <li>How to scroll to a specific element (Scroll into View)</li>
+    <li>How to scroll to the bottom or top of a page</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>JavascriptExecutor</h3>
+<p>To execute JavaScript in Selenium, you need to cast your <code>WebDriver</code> instance to
+    <code>JavascriptExecutor</code>:</p>
+<pre><code>JavascriptExecutor js = (JavascriptExecutor) driver;</code></pre>
+
+<h3>Common Scrolling Methods</h3>
+<ul>
+    <li><strong>Scroll by Pixels:</strong> <code>window.scrollBy(x, y)</code>
+        <pre><code>js.executeScript("window.scrollBy(0, 1000)"); // Scrolls down 1000px</code></pre>
+    </li>
+    <li><strong>Scroll to Element:</strong> <code>scrollIntoView()</code>
+        <pre><code>WebElement element = driver.findElement(By.id("footer"));
+js.executeScript("arguments[0].scrollIntoView(true);", element);</code></pre>
+    </li>
+    <li><strong>Scroll to Bottom:</strong>
+        <pre><code>js.executeScript("window.scrollTo(0, document.body.scrollHeight)");</code></pre>
+    </li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+
+<h3>Scrolling to a Specific Element</h3>
+<pre><code>WebElement footer = driver.findElement(By.id("footer"));
+JavascriptExecutor js = (JavascriptExecutor) driver;
+js.executeScript("arguments[0].scrollIntoView(true);", footer);</code></pre>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Handle an infinite scrolling page or a long landing page.</p>
+    <ol>
+        <li>Identify an element at the very bottom of the page (e.g., a "Terms of Service" link).</li>
+        <li>Use JavaScript to scroll until that element is visible.</li>
+        <li>Assert that the element is displayed before clicking it.</li>
+    </ol>
+</div>
+
+<a href="worksheets/ws_scrolling.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

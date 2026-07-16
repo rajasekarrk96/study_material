@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Dimensional Arrays - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Multi-Dimensional Arrays</h5>
+        <a href="../../index.html#arrays">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#2d-arrays">2D Arrays</a>
+        <a href="#declaration">Declaration</a>
+        <a href="#initialization">Initialization</a>
+        <a href="#accessing">Accessing Elements</a>
+        <a href="#examples">Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Multi-Dimensional Arrays</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Multi-Dimensional Arrays in Java</h1>
+            <p class="lead text-muted">Work with 2D and 3D arrays for complex data structure representation.</p>
+        </div>
+
+        <div class="section" id="2d-arrays">
+            <h4>What are Multi-Dimensional Arrays?</h4>
+            <p>A multi-dimensional array is an array of arrays. The most common is the 2D array (like a table with rows
+                and columns). Java also supports 3D arrays and higher dimensions.</p>
+            <ul>
+                <li><strong>2D Array:</strong> Array with rows and columns (like a matrix)</li>
+                <li><strong>3D Array:</strong> Array of 2D arrays (like a cube)</li>
+                <li>Used for matrices, tables, grids, game boards, etc.</li>
+            </ul>
+            <div class="note">
+                <strong>💡 Visualization:</strong> Think of a 2D array as a spreadsheet with rows and columns.
+            </div>
+        </div>
+
+        <div class="section" id="declaration">
+            <h4>Declaration and Syntax</h4>
+            <pre><code>// 2D Array Declaration
+dataType[][] arrayName;
+
+// Examples
+int[][] matrix;
+String[][] table;
+double[][] grid;
+
+// 3D Array
+int[][][] cube;</code></pre>
+        </div>
+
+        <div class="section" id="initialization">
+            <h4>Initialization Methods</h4>
+            <pre><code>// Method 1: Direct initialization
+int[][] matrix = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+
+// Method 2: Using new keyword
+int[][] arr = new int[3][4];  // 3 rows, 4 columns
+
+// Method 3: Jagged array (different column sizes)
+int[][] jagged = new int[3][];
+jagged[0] = new int[2];
+jagged[1] = new int[4];
+jagged[2] = new int[3];</code></pre>
+        </div>
+
+        <div class="section" id="accessing">
+            <h4>Accessing Elements</h4>
+            <pre><code>public class ArrayAccess {
+    public static void main(String[] args) {
+        int[][] matrix = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+        
+        // Access element at row 1, column 2
+        System.out.println("Element: " + matrix[1][2]);  // Output: 6
+        
+        // Modify element
+        matrix[0][0] = 10;
+        
+        // Get dimensions
+        System.out.println("Rows: " + matrix.length);
+        System.out.println("Columns: " + matrix[0].length);
+    }
+}</code></pre>
+            <div class="output">
+                Element: 6<br>
+                Rows: 3<br>
+                Columns: 3
+            </div>
+        </div>
+
+        <div class="section" id="examples">
+            <h4>Example: Matrix Operations</h4>
+            <pre><code>public class MatrixExample {
+    public static void main(String[] args) {
+        int[][] matrix = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+        
+        // Print matrix
+        System.out.println("Matrix:");
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        
+        // Calculate sum of all elements
+        int sum = 0;
+        for (int[] row : matrix) {
+            for (int num : row) {
+                sum += num;
+            }
+        }
+        System.out.println("\nSum of all elements: " + sum);
+        
+        // Find diagonal sum
+        int diagonalSum = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            diagonalSum += matrix[i][i];
+        }
+        System.out.println("Diagonal sum: " + diagonalSum);
+    }
+}</code></pre>
+            <div class="output">
+                Matrix:<br>
+                1 2 3<br>
+                4 5 6<br>
+                7 8 9<br><br>
+                Sum of all elements: 45<br>
+                Diagonal sum: 15
+            </div>
+            <div class="example">
+                <strong>✓ Common Uses:</strong><br>
+                • Representing matrices in mathematics<br>
+                • Game boards (chess, tic-tac-toe)<br>
+                • Image processing (pixels)<br>
+                • Spreadsheet data
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Multi-Dimensional Arrays Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

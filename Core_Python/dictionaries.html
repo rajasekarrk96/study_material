@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Dictionaries - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item active has-subtopics">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#access">Access Items</a></li>
+                        <li><a href="#change">Change Items</a></li>
+                        <li><a href="#add">Add Items</a></li>
+                        <li><a href="#remove">Remove Items</a></li>
+                        <li><a href="#loop">Loop Dicts</a></li>
+                        <li><a href="#copy">Copy Dicts</a></li>
+                        <li><a href="#nested">Nested Dicts</a></li>
+                        <li><a href="#methods">Methods</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python Dictionaries</h1>
+
+                <div class="content-description">
+                    <h2 id="intro">Introduction</h2>
+                    <p>Dictionaries are used to store data values in key:value pairs.</p>
+                    <p>A dictionary is a collection which is ordered*, changeable and does not allow duplicates.</p>
+                    <p>Dictionaries are written with curly brackets, and have keys and values:</p>
+                    <pre class="code-block">
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+print(thisdict)
+</pre>
+                    <h3>Dictionary Items</h3>
+                    <ul>
+                        <li><strong>Ordered:</strong> As of Python 3.7, dictionaries are ordered. In Python 3.6 and
+                            earlier, dictionaries are unordered.</li>
+                        <li><strong>Changeable:</strong> Dictionaries are changeable, meaning that we can change, add or
+                            remove items after the dictionary has been created.</li>
+                        <li><strong>Duplicates Not Allowed:</strong> Dictionaries cannot have two items with the same
+                            key.</li>
+                    </ul>
+
+                    <h2 id="access">Access Items</h2>
+                    <p>You can access the items of a dictionary by referring to its key name, inside square brackets:
+                    </p>
+                    <pre class="code-block">
+x = thisdict["model"]
+</pre>
+                    <p>There is also a method called `get()` that will give you the same result:</p>
+                    <pre class="code-block">
+x = thisdict.get("model")
+</pre>
+                    <h3>Get Keys, Values, and Items</h3>
+                    <pre class="code-block">
+keys = thisdict.keys()   # Returns a list of all the keys
+values = thisdict.values() # Returns a list of all the values
+items = thisdict.items()   # Returns a list of tuples (key, value)
+</pre>
+
+                    <h2 id="change">Change Items</h2>
+                    <p>You can change the value of a specific item by referring to its key name:</p>
+                    <pre class="code-block">
+thisdict["year"] = 2018
+</pre>
+                    <p>The <code>update()</code> method will update the dictionary with the items from the given
+                        argument.</p>
+                    <pre class="code-block">
+thisdict.update({"year": 2020})
+</pre>
+
+                    <h2 id="add">Add Items</h2>
+                    <p>Adding an item to the dictionary is done by using a new index key and assigning a value to it:
+                    </p>
+                    <pre class="code-block">
+thisdict["color"] = "red"
+</pre>
+
+                    <h2 id="remove">Remove Items</h2>
+                    <p>The <code>pop()</code> method removes the item with the specified key name:</p>
+                    <pre class="code-block">
+thisdict.pop("model")
+</pre>
+                    <p>The <code>popitem()</code> method removes the last inserted item.</p>
+                    <p>The <code>del</code> keyword removes the item with the specified key name:</p>
+                    <pre class="code-block">
+del thisdict["model"]
+</pre>
+
+                    <h2 id="loop">Loop Dictionaries</h2>
+                    <p>You can loop through a dictionary by using a <code>for</code> loop.</p>
+                    <pre class="code-block">
+# Print all key names
+for x in thisdict:
+  print(x)
+
+# Print all values
+for x in thisdict:
+  print(thisdict[x]) # or using thisdict.values()
+
+# Print keys and values
+for x, y in thisdict.items():
+  print(x, y)
+</pre>
+
+                    <h2 id="create-dictionary">Create Dictionary</h2>
+                    <p>A dictionary is created by placing items inside curly braces <code>{}</code> separated by commas.
+                    </p>
+                    <p>Each item has a key and a value expressed as <code>key:value</code>.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+dict_name = {
+    "key1": value1,
+    "key2": value2,
+    ...
+}
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+mydict = thisdict.copy()
+# OR
+mydict = dict(thisdict)
+</pre>
+
+                    <h2 id="copy">Copy a Dictionary</h2>
+                    <p>You cannot copy a dictionary simply by typing <code>dict2 = dict1</code>, because:
+                        <code>dict2</code> will only be a <em>reference</em> to <code>dict1</code>.
+                    </p>
+                    <pre class="code-block">
+mydict = thisdict.copy()
+# OR
+mydict = dict(thisdict)
+</pre>
+
+                    <h2 id="nested">Nested Dictionaries</h2>
+                    <p>A dictionary can contain dictionaries, this is called nested dictionaries.</p>
+                    <pre class="code-block">
+myfamily = {
+  "child1" : {
+    "name" : "Emil",
+    "year" : 2004
+  },
+  "child2" : {
+    "name" : "Tobias",
+    "year" : 2007
+  }
+}
+</pre>
+
+                    <h2 id="methods">Dictionary Methods</h2>
+                    <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
+                        <tr style="background-color: #f1f1f1; text-align: left;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Method</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Description</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">clear()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Removes all the elements from the
+                                dictionary</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">copy()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns a copy of the dictionary</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">fromkeys()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns a dictionary with the specified
+                                keys and value</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">get()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns the value of the specified key
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">items()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns a list containing a tuple for
+                                each key value pair</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">keys()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns a list containing the
+                                dictionary's keys</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">pop()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Removes the element with the specified
+                                key</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">popitem()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Removes the last inserted key-value pair
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">setdefault()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns the value of the specified key.
+                                If the key does not exist: insert the key, with the specified value</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">update()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Updates the dictionary with the specified
+                                key-value pairs</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">values()</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Returns a list of all the values in the
+                                dictionary</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a Python program to sort (ascending and descending) a dictionary by value.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>d = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
+print('Original:', d)
+sorted_asc = dict(sorted(d.items(), key=lambda item: item[1]))
+print('Ascending:', sorted_asc)
+sorted_desc = dict(sorted(d.items(), key=lambda item: item[1], reverse=True))
+print('Descending:', sorted_desc)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a Python program to add a key to a dictionary.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>d = {0: 10, 1: 20}
+d[2] = 30
+print(d)
+d.update({3: 40})
+print(d)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a Python program to concatenate following dictionaries to create a new one.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>dic1 = {1: 10, 2: 20}
+dic2 = {3: 30, 4: 40}
+dic3 = {5: 50, 6: 60}
+dic4 = {}
+for d in (dic1, dic2, dic3):
+    dic4.update(d)
+print(dic4)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a Python program to check whether a given key already exists in a dictionary.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>d = {1: 10, 2: 20, 3: 30, 4: 40, 5: 50, 6: 60}
+def is_key_present(x):
+    if x in d:
+        print('Key is present in the dictionary')
+    else:
+        print('Key is not present in the dictionary')
+is_key_present(5)
+is_key_present(9)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a Python program to generate and print a dictionary that contains a number (between
+                            1 and n) in the form (x, x*x).</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>n = int(input("Input a number "))
+d = dict()
+for x in range(1, n + 1):
+    d[x] = x * x
+print(d)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a Python program to sum all the items in a dictionary.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>my_dict = {'data1': 100, 'data2': -54, 'data3': 247}
+print(sum(my_dict.values()))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a Python program to multiply all the items in a dictionary.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>my_dict = {'data1': 10, 'data2': 5, 'data3': 2}
+result = 1
+for key in my_dict:
+    result = result * my_dict[key]
+print(result)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a Python program to remove a key from a dictionary.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>myDict = {'a': 1, 'b': 2, 'c': 3, 'd': 4}
+if 'a' in myDict:
+    del myDict['a']
+print(myDict)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a Python program to map two lists into a dictionary.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>keys = ['red', 'green', 'blue']
+values = ['#FF0000', '#008000', '#0000FF']
+color_dictionary = dict(zip(keys, values))
+print(color_dictionary)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a Python program to get the maximum and minimum value in a dictionary.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>my_dict = {'x': 500, 'y': 5874, 'z': 560}
+print('Maximum Value: ', max(my_dict.values()))
+print('Minimum Value: ', min(my_dict.values()))</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

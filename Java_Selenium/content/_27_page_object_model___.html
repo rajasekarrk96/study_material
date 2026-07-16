@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  27 page object model   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>27. Page Object Model</h1>
+
+<h2>📖 Introduction</h2>
+<p>As your test suite grows, having code like <code>driver.findElement(By.id("username"))</code> scattered fast
+    everywhere becomes a maintenance nightmare. If the developer changes the ID to "user_name", you have to fix it in 50
+    places.</p>
+<p><strong>Page Object Model (POM)</strong> is a design pattern that creates an "Object Repository" for your web
+    elements. Each web page corresponds to a Java Class.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The concept of separating Test Logic from Page Logic (Encapsulation)</li>
+    <li>Creating Page Classes</li>
+    <li>Using <code>@FindBy</code> annotations (PageFactory)</li>
+    <li>Benefits: Reusability, Maintainability, Readability</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>Structure</h3>
+<ul>
+    <li><strong>LoginPage.java:</strong> Contains WebElements (username, password, loginBtn) and methods (enterUser,
+        clickLogin).</li>
+    <li><strong>LoginTest.java:</strong> Contains the test assertions (Open browser, call LoginPage methods, Verify
+        success).</li>
+</ul>
+
+<h3>Page Factory</h3>
+<p>Selenium provides a <code>PageFactory</code> class to initialize elements defined with annotations.</p>
+
+<h2>💻 Code Examples</h2>
+
+<h3>Page Class</h3>
+<pre><code>public class LoginPage {
+    WebDriver driver;
+
+    // 1. Locators
+    @FindBy(id="username")
+    WebElement userField;
+
+    @FindBy(id="password")
+    WebElement passField;
+
+    // 2. Constructor
+    public LoginPage(WebDriver driver){
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    // 3. Actions
+    public void login(String u, String p){
+        userField.sendKeys(u);
+        passField.sendKeys(p);
+    }
+}</code></pre>
+
+<h3>Test Class</h3>
+<pre><code>@Test
+public void validLoginTest(){
+    LoginPage login = new LoginPage(driver);
+    login.login("admin", "admin123");
+}</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>InitElements:</strong> Beginners often forget <code>PageFactory.initElements(driver, this)</code> in the
+        constructor. This leads to a <code>NullPointerException</code> when you try to use any element.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Refactor legacy code.</p>
+    <ol>
+        <li>Create a <code>SearchPage</code> class.</li>
+        <li>Move the search box locator and search button locator into it.</li>
+        <li>Create a method <code>doSearch(String keyword)</code>.</li>
+        <li>Update your main test execution to use this new class.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: Is POM a Selenium feature?</strong></p>
+    <p><strong>Answer:</strong> No, it is a <strong>Design Pattern</strong>. Selenium supports it via PageFactory, but
+        you can implement POM without PageFactory too.</p>
+</blockquote>
+
+<a href="worksheets/ws_pom.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

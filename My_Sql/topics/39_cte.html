@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTE (Common Table Expression) - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">CTE (Common Table Expression)</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+                <article class="topic-card">
+                    <h2 class="topic-title">CTE (Common Table Expression)</h2>
+                    <p class="topic-desc">A CTE is a temporary result set that you can reference within a SELECT,
+                        INSERT, UPDATE, or DELETE statement, making complex queries readable.</p>
+                    <div class="subtopics-container">
+                        <div class="subtopic-card">
+                            <h3 class="subtopic-title" data-bullet="diamond">Basic Concept & Syntax</h3>
+                            <p class="subtopic-desc"><strong>🔹 Logic</strong><br>Think of it as a temporary named view
+                                that only exists for the duration of the query execution.</p>
+                            <div class="code-label label-syntax">🔹 Syntax</div>
+                            <pre
+                                class="code-block-minimal"><code>WITH cte_name (col1, col2) <span class="sql-keyword">AS</span> (\n    <span class="sql-keyword">SELECT</span> ...\n)\nSELECT * <span class="sql-keyword">FROM</span> cte_name;</code></pre>
+                        </div>
+
+                        <div class="subtopic-card">
+                            <h3 class="subtopic-title" data-section-num="1">Example: Non-Recursive CTE</h3>
+                            <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Simplify filtering IT employees into a
+                                readable sub-result.</p>
+                            <div class="code-label label-example">🔹 Example</div>
+                            <pre
+                                class="code-block-minimal"><code>WITH IT_Employees <span class="sql-keyword">AS</span> (\n    <span class="sql-keyword">SELECT</span> EmployeeID, Name, Salary\n    <span class="sql-keyword">FROM</span> Employees\n    <span class="sql-keyword">WHERE</span> Department = <span class="sql-string">'IT'</span>\n)\nSELECT * <span class="sql-keyword">FROM</span> IT_Employees;</code></pre>
+                            <div class="output-box">
+                                <strong>Result:</strong><br>
+                                <table style='border-collapse: collapse; width: 60%; font-size: 13px;'>
+                                    <thead>
+                                        <tr>
+                                            <th>EmployeeID</th>
+                                            <th>Name</th>
+                                            <th>Salary</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>John</td>
+                                            <td>5000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Bob</td>
+                                            <td>5500</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="subtopic-card">
+                            <h3 class="subtopic-title" data-section-num="2">Example: Recursive CTE</h3>
+                            <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Generate a numeric sequence from 1 to
+                                5.</p>
+                            <div class="code-label label-example">🔹 Example</div>
+                            <pre
+                                class="code-block-minimal"><code>WITH RECURSIVE Numbers <span class="sql-keyword">AS</span> (\n    <span class="sql-keyword">SELECT</span> 1 <span class="sql-keyword">AS</span> n          <span class="sql-comment">-- Anchor\n    <span class="sql-keyword">UNION</span> <span class="sql-keyword">ALL</span>\n    <span class="sql-keyword">SELECT</span> n + 1\n    <span class="sql-keyword">FROM</span> Numbers\n    <span class="sql-keyword">WHERE</span> n &lt; 5            -- Condition\n)\nSELECT * <span class="sql-keyword">FROM</span> Numbers;</span></code></pre>
+                            <div class="output-box">
+                                <strong>Result (n):</strong><br>
+                                <table border='1'>
+                                    <tr>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="subtopic-card">
+                            <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                            <p class="subtopic-desc">
+                            <div style="margin-bottom: 20px;">
+                                <strong>Q1. Simple CTE – Select students older than 22.</strong><br>
+                                <button class="toggle-btn" data-target="ans-t38-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t38-q1" style="display:none; margin-top:10px;">
+                                    Query:<br>
+                                    <pre class='code-block-minimal'><code>WITH older_students AS (
+    SELECT * FROM students
+    WHERE age > 22
+)
+SELECT * FROM older_students;</code></pre><br>
+                                    Output:<br>
+                                    <pre class='code-block-minimal'><code>+----+-------+-----+---------+
+| id | name  | age | dept_id |
++----+-------+-----+---------+
+| 2  | Priya | 23  | 2       |
+| 3  | Kiran | 23  | 1       |
+| 4  | Meena | 24  | NULL    |
++----+-------+-----+---------+</code></pre>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <strong>Q2. CTE with aggregate – Count students per department.</strong><br>
+                                <button class="toggle-btn" data-target="ans-t38-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t38-q2" style="display:none; margin-top:10px;">
+                                    Query:<br>
+                                    <pre class='code-block-minimal'><code>WITH dept_count AS (
+    SELECT dept_id, COUNT(*) AS total_students
+    FROM students
+    GROUP BY dept_id
+)
+SELECT * FROM dept_count;</code></pre><br>
+                                    Output:<br>
+                                    <pre class='code-block-minimal'><code>+---------+----------------+
+| dept_id | total_students |
++---------+----------------+
+| 1       | 2              |
+| 2       | 1              |
+| NULL    | 1              |
++---------+----------------+</code></pre>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <strong>Q3. CTE with JOIN – Students with department names.</strong><br>
+                                <button class="toggle-btn" data-target="ans-t38-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t38-q3" style="display:none; margin-top:10px;">
+                                    Query:<br>
+                                    <pre class='code-block-minimal'><code>WITH student_dept AS (
+    SELECT s.id, s.name, d.dept_name
+    FROM students s
+    LEFT JOIN department d
+    ON s.dept_id = d.dept_id
+)
+SELECT * FROM student_dept;</code></pre><br>
+                                    Output:<br>
+                                    <pre class='code-block-minimal'><code>+----+-------+------------+
+| id | name  | dept_name  |
++----+-------+------------+
+| 1  | Arun  | IT         |
+| 2  | Priya | HR         |
+| 3  | Kiran | IT         |
+| 4  | Meena | NULL       |
++----+-------+------------+</code></pre>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <strong>Q4. Recursive CTE – Generate numbers from 1 to 5.</strong><br>
+                                <button class="toggle-btn" data-target="ans-t38-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t38-q4" style="display:none; margin-top:10px;">
+                                    Query:<br>
+                                    <pre class='code-block-minimal'><code>WITH RECURSIVE numbers AS (
+    SELECT 1 AS n
+    UNION ALL
+    SELECT n + 1 FROM numbers WHERE n < 5
+)
+SELECT * FROM numbers;</code></pre><br>
+                                    Output:<br>
+                                    <pre class='code-block-minimal'><code>+---+
+| n |
++---+
+| 1 |
+| 2 |
+| 3 |
+| 4 |
+| 5 |
++---+</code></pre>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <strong>Q5. CTE with multiple steps – Students older than 22 and count per
+                                    department.</strong><br>
+                                <button class="toggle-btn" data-target="ans-t38-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t38-q5" style="display:none; margin-top:10px;">
+                                    Query:<br>
+                                    <pre class='code-block-minimal'><code>WITH older_students AS (
+    SELECT * FROM students WHERE age > 22
+),
+dept_count AS (
+    SELECT dept_id, COUNT(*) AS total_students
+    FROM older_students
+    GROUP BY dept_id
+)
+SELECT * FROM dept_count;</code></pre><br>
+                                    Output:<br>
+                                    <pre class='code-block-minimal'><code>+---------+----------------+
+| dept_id | total_students |
++---------+----------------+
+| 1       | 1              |
+| 2       | 1              |
+| NULL    | 1              |
++---------+----------------+</code></pre>
+                                </div>
+                            </div>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="page-navigation">
+
+                        <div class="nav-btn prev" onclick="window.location.href='38_normalization.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Normalization</div>
+                        </div>
+                        <div class="nav-btn next" onclick="window.location.href='40_acid-properties.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">ACID Properties in SQL →</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+
+</html>

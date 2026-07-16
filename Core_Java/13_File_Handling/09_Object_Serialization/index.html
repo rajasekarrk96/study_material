@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serialization - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Serialization</h5>
+        <a href="../../index.html#files">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#concept">Concept</a>
+        <a href="#serialize">Serialize</a>
+        <a href="#deserialize">Deserialize</a>
+    </div>
+    <div class="top-nav">
+        <h2>Object Serialization</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Serialization in Java</h1>
+            <p class="lead text-muted">Convert objects to byte streams for storage or transmission.</p>
+        </div>
+        <div class="section" id="concept">
+            <h4>What is Serialization?</h4>
+            <p>Serialization converts an object into a byte stream. Deserialization recreates the object from bytes.</p>
+            <ul>
+                <li>Implement Serializable interface</li>
+                <li>Save object state to file</li>
+                <li>Restore object from file</li>
+            </ul>
+        </div>
+        <div class="section" id="serialize">
+            <h4>Serialization Example</h4>
+            <pre><code>import java.io.*;
+
+class Student implements Serializable {
+    String name;
+    int age;
+    
+    public Student(String n, int a) {
+        name = n;
+        age = a;
+    }
+}
+
+public class SerializeDemo {
+    public static void main(String[] args) {
+        try {
+            Student s = new Student("Alice", 20);
+            
+            FileOutputStream file = new FileOutputStream("student.ser");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(s);
+            out.close();
+            
+            System.out.println("Object serialized");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+        </div>
+        <div class="section" id="deserialize">
+            <h4>Deserialization Example</h4>
+            <pre><code>import java.io.*;
+
+public class DeserializeDemo {
+    public static void main(String[] args) {
+        try {
+            FileInputStream file = new FileInputStream("student.ser");
+            ObjectInputStream in = new ObjectInputStream(file);
+            
+            Student s = (Student) in.readObject();
+            in.close();
+            
+            System.out.println("Name: " + s.name);
+            System.out.println("Age: " + s.age);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+            <div class="output">
+                Name: Alice<br>
+                Age: 20
+            </div>
+        </div>
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Serialization Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

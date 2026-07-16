@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synchronization - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Synchronization Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>Synchronization - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master thread synchronization, inter-thread communication, and thread pooling in Java.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Synchronized Counter - Thread-Safe Shared Resource</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that creates two threads and demonstrates how to synchronize their access to a
+                shared resource.
+                Both threads will increment a shared counter 1000 times. Without synchronization, the final count would
+                be incorrect
+                due to race conditions.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Counter {
+    int count = 0;
+
+    synchronized void increment() {
+        count++;
+    }
+}
+
+class MyThread extends Thread {
+    Counter c;
+
+    MyThread(Counter c) {
+        this.c = c;
+    }
+
+    public void run() {
+        for (int i = 0; i < 1000; i++)
+            c.increment();
+    }
+}
+
+class _01_ {
+    public static void main(String[] args) throws Exception {
+        Counter c = new Counter();
+
+        MyThread t1 = new MyThread(c);
+        MyThread t2 = new MyThread(c);
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+
+        System.out.println("Count = " + c.count);
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Count = 2000</code></div>
+
+            <h4>Without Synchronization</h4>
+            <div class="code-block"><code>// If increment() is NOT synchronized:
+void increment() {
+    count++;  // NOT thread-safe!
+}
+
+// Possible output (WRONG):
+Count = 1847  // Lost updates due to race condition!
+Count = 1923
+Count = 1999
+// Rarely 2000</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>synchronized Keyword:</strong> Ensures only one thread can execute the method at a time
+                    </li>
+                    <li><strong>Race Condition:</strong> Multiple threads accessing shared data simultaneously</li>
+                    <li><strong>Thread Safety:</strong> Protecting shared resources from concurrent modification</li>
+                    <li><strong>Monitor Lock:</strong> Each object has an intrinsic lock (monitor)</li>
+                </ul>
+                <strong>How it Works:</strong>
+                <ol>
+                    <li>Thread acquires lock on Counter object</li>
+                    <li>Executes increment() method</li>
+                    <li>Releases lock</li>
+                    <li>Other thread can now acquire lock</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: wait() and notify() - Inter-Thread Communication</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that demonstrates how to use the wait() and notify() methods to coordinate the
+                activities
+                of multiple threads. One thread will send a message and wait, while another thread will receive and
+                notify.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>class Message {
+    synchronized void send() throws InterruptedException {
+        System.out.println("Sending message...");
+        wait();
+        System.out.println("Message sent");
+    }
+
+    synchronized void receive() {
+        System.out.println("Receiving message...");
+        notify();
+    }
+}
+
+class _04_ {
+    public static void main(String[] args) {
+        Message m = new Message();
+
+        new Thread(() -> {
+            try { m.send(); } catch (Exception e) {}
+        }).start();
+
+        new Thread(() -> {
+            m.receive();
+        }).start();
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Sending message...
+Receiving message...
+Message sent</code></div>
+
+            <h4>Understanding wait() and notify()</h4>
+            <div class="code-block"><code>// wait() - Releases lock and waits for notification
+synchronized void method1() throws InterruptedException {
+    wait();  // Thread releases lock and waits
+}
+
+// notify() - Wakes up one waiting thread
+synchronized void method2() {
+    notify();  // Wakes up waiting thread
+}
+
+// notifyAll() - Wakes up all waiting threads
+synchronized void method3() {
+    notifyAll();  // Wakes up all waiting threads
+}</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>wait():</strong> Causes current thread to wait until another thread calls notify()</li>
+                    <li><strong>notify():</strong> Wakes up a single thread waiting on the object's monitor</li>
+                    <li><strong>Must be synchronized:</strong> wait() and notify() must be called from synchronized
+                        context</li>
+                    <li><strong>Releases Lock:</strong> wait() releases the lock, allowing other threads to acquire it
+                    </li>
+                </ul>
+                <strong>Common Use Cases:</strong> Producer-Consumer pattern, thread coordination, resource pooling
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: interrupt() Method - Interrupting Running Threads</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that demonstrates how to use the interrupt() method to interrupt a running thread.
+                The thread will be sleeping for 5 seconds, but we'll interrupt it immediately.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>class InterruptThread extends Thread {
+    public void run() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            System.out.println("Thread interrupted");
+        }
+    }
+}
+
+class _09_ {
+    public static void main(String[] args) {
+        InterruptThread t = new InterruptThread();
+        t.start();
+        t.interrupt();
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Thread interrupted</code></div>
+
+            <h4>Interrupt Handling Patterns</h4>
+            <div class="code-block"><code>// Pattern 1: Catch and handle
+public void run() {
+    try {
+        Thread.sleep(5000);
+    } catch (InterruptedException e) {
+        System.out.println("Interrupted!");
+        return;  // Exit gracefully
+    }
+}
+
+// Pattern 2: Check interrupt status
+public void run() {
+    while (!Thread.interrupted()) {
+        // Do work
+        System.out.println("Working...");
+    }
+    System.out.println("Interrupted, cleaning up...");
+}
+
+// Pattern 3: Propagate exception
+public void run() throws InterruptedException {
+    Thread.sleep(5000);  // Let caller handle
+}</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>interrupt():</strong> Sets the interrupt flag on the target thread</li>
+                    <li><strong>InterruptedException:</strong> Thrown when thread is interrupted during blocking
+                        operation</li>
+                    <li><strong>Graceful Shutdown:</strong> Allows threads to clean up resources before terminating</li>
+                    <li><strong>Cooperative:</strong> Thread must check interrupt status or catch exception</li>
+                </ul>
+                <strong>When to Use:</strong> Canceling long-running tasks, shutting down thread pools, timeout handling
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Executor Framework - Thread Pool Management</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that uses the Executor framework to create a thread pool and submit tasks to it.
+                Create a fixed thread pool with 3 threads and submit 5 tasks to demonstrate task queuing and execution.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+class Task implements Runnable {
+    public void run() {
+        System.out.println("Task executed by " + Thread.currentThread().getName());
+    }
+}
+
+class _10_ {
+    public static void main(String[] args) {
+
+        ExecutorService es = Executors.newFixedThreadPool(3);
+
+        for (int i = 1; i <= 5; i++)
+            es.execute(new Task());
+
+        es.shutdown();
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Task executed by pool-1-thread-1
+Task executed by pool-1-thread-2
+Task executed by pool-1-thread-3
+Task executed by pool-1-thread-1
+Task executed by pool-1-thread-2</code></div>
+
+            <h4>Executor Framework Overview</h4>
+            <div class="code-block"><code>// Different types of thread pools:
+
+// 1. Fixed Thread Pool (fixed number of threads)
+ExecutorService fixed = Executors.newFixedThreadPool(3);
+
+// 2. Cached Thread Pool (creates threads as needed)
+ExecutorService cached = Executors.newCachedThreadPool();
+
+// 3. Single Thread Executor (single worker thread)
+ExecutorService single = Executors.newSingleThreadExecutor();
+
+// 4. Scheduled Thread Pool (delayed/periodic tasks)
+ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(2);
+
+// Submitting tasks:
+executor.execute(runnable);           // Fire and forget
+Future<?> future = executor.submit(runnable);  // Get Future
+Future<T> result = executor.submit(callable);  // Get result
+
+// Shutdown:
+executor.shutdown();        // Graceful shutdown
+executor.shutdownNow();     // Immediate shutdown</code></div>
+
+            <h4>Advantages of Executor Framework</h4>
+            <div class="notes-block">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li><strong>Thread Reuse:</strong> Threads are reused, reducing overhead</li>
+                    <li><strong>Resource Management:</strong> Limits number of concurrent threads</li>
+                    <li><strong>Task Queuing:</strong> Automatically queues tasks when all threads are busy</li>
+                    <li><strong>Simplified API:</strong> Easier than manual thread management</li>
+                </ul>
+                <strong>Key Methods:</strong>
+                <ul>
+                    <li><code>execute(Runnable)</code> - Submit task without return value</li>
+                    <li><code>submit(Callable)</code> - Submit task with return value (Future)</li>
+                    <li><code>shutdown()</code> - Gracefully shutdown (waits for tasks to complete)</li>
+                    <li><code>shutdownNow()</code> - Immediate shutdown (interrupts running tasks)</li>
+                </ul>
+                <strong>Real-World Use:</strong> Web servers, background processing, parallel computations
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Synchronization Module - Practice Worksheet</strong></p>
+            <p>Master thread synchronization and concurrent programming</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

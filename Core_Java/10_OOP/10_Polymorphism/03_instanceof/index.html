@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>instanceof Operator - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>instanceof Operator</h5>
+        <a href="../../../index.html#oop">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#intro">Introduction</a>
+        <a href="#basic">Basic Usage</a>
+        <a href="#inheritance">With Inheritance</a>
+        <a href="#downcasting">Safe Downcasting</a>
+        <a href="#examples">Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>instanceof Operator</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>instanceof Operator in Java</h1>
+            <p class="lead text-muted">Test object types and perform safe type casting with the instanceof operator.</p>
+        </div>
+
+        <div class="section" id="intro">
+            <h4>What is instanceof?</h4>
+            <p>The <code>instanceof</code> operator is used to test whether an object is an instance of a specific class
+                or implements a specific interface. It returns <code>true</code> if the object is an instance of the
+                specified type, otherwise <code>false</code>.</p>
+
+            <h5>Syntax:</h5>
+            <pre><code>object instanceof ClassName</code></pre>
+
+            <h5>Key Points:</h5>
+            <ul>
+                <li>Returns <code>boolean</code> value (true or false)</li>
+                <li>Used for type checking before casting</li>
+                <li>Prevents <code>ClassCastException</code></li>
+                <li>Works with classes, interfaces, and inheritance</li>
+                <li>Returns <code>false</code> if object is <code>null</code></li>
+            </ul>
+        </div>
+
+        <div class="section" id="basic">
+            <h4>1. Basic Usage</h4>
+
+            <h5>Example 1: Simple Type Checking</h5>
+            <pre><code>public class InstanceofBasic {
+    public static void main(String[] args) {
+        String str = "Hello";
+        Integer num = 100;
+        Double decimal = 3.14;
+        
+        System.out.println("str instanceof String: " + (str instanceof String));
+        System.out.println("num instanceof Integer: " + (num instanceof Integer));
+        System.out.println("decimal instanceof Double: " + (decimal instanceof Double));
+        System.out.println("str instanceof Integer: " + (str instanceof Integer));
+    }
+}</code></pre>
+            <div class="output">
+                str instanceof String: true<br>
+                num instanceof Integer: true<br>
+                decimal instanceof Double: true<br>
+                str instanceof Integer: false
+            </div>
+
+            <h5>Example 2: instanceof with null</h5>
+            <pre><code>public class InstanceofNull {
+    public static void main(String[] args) {
+        String str = null;
+        
+        System.out.println("null instanceof String: " + (str instanceof String));
+        
+        if (str instanceof String) {
+            System.out.println("This won't print");
+        } else {
+            System.out.println("null is not an instance of any class");
+        }
+    }
+}</code></pre>
+            <div class="output">
+                null instanceof String: false<br>
+                null is not an instance of any class
+            </div>
+
+            <div class="note">
+                <strong>💡 Important:</strong> instanceof always returns false for null, which prevents
+                NullPointerException.
+            </div>
+        </div>
+
+        <div class="section" id="inheritance">
+            <h4>2. instanceof with Inheritance</h4>
+
+            <h5>Example 1: Class Hierarchy</h5>
+            <pre><code>class Animal {
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat extends Animal {
+    void sound() {
+        System.out.println("Cat meows");
+    }
+}
+
+public class InstanceofInheritance {
+    public static void main(String[] args) {
+        Animal animal = new Animal();
+        Dog dog = new Dog();
+        Cat cat = new Cat();
+        Animal animalDog = new Dog();  // Upcasting
+        
+        System.out.println("animal instanceof Animal: " + (animal instanceof Animal));
+        System.out.println("dog instanceof Dog: " + (dog instanceof Dog));
+        System.out.println("dog instanceof Animal: " + (dog instanceof Animal));
+        System.out.println("animalDog instanceof Dog: " + (animalDog instanceof Dog));
+        System.out.println("animalDog instanceof Cat: " + (animalDog instanceof Cat));
+    }
+}</code></pre>
+            <div class="output">
+                animal instanceof Animal: true<br>
+                dog instanceof Dog: true<br>
+                dog instanceof Animal: true<br>
+                animalDog instanceof Dog: true<br>
+                animalDog instanceof Cat: false
+            </div>
+
+            <h5>Example 2: Interface Implementation</h5>
+            <pre><code>interface Flyable {
+    void fly();
+}
+
+class Bird implements Flyable {
+    public void fly() {
+        System.out.println("Bird is flying");
+    }
+}
+
+class Airplane implements Flyable {
+    public void fly() {
+        System.out.println("Airplane is flying");
+    }
+}
+
+public class InstanceofInterface {
+    public static void main(String[] args) {
+        Bird bird = new Bird();
+        Airplane plane = new Airplane();
+        
+        System.out.println("bird instanceof Flyable: " + (bird instanceof Flyable));
+        System.out.println("plane instanceof Flyable: " + (plane instanceof Flyable));
+        System.out.println("bird instanceof Bird: " + (bird instanceof Bird));
+        System.out.println("bird instanceof Airplane: " + (bird instanceof Airplane));
+    }
+}</code></pre>
+            <div class="output">
+                bird instanceof Flyable: true<br>
+                plane instanceof Flyable: true<br>
+                bird instanceof Bird: true<br>
+                bird instanceof Airplane: false
+            </div>
+        </div>
+
+        <div class="section" id="downcasting">
+            <h4>3. Safe Downcasting with instanceof</h4>
+
+            <h5>Example 1: Preventing ClassCastException</h5>
+            <pre><code>class Shape {
+    void draw() {
+        System.out.println("Drawing shape");
+    }
+}
+
+class Circle extends Shape {
+    void draw() {
+        System.out.println("Drawing circle");
+    }
+    
+    void calculateArea() {
+        System.out.println("Calculating circle area");
+    }
+}
+
+class Rectangle extends Shape {
+    void draw() {
+        System.out.println("Drawing rectangle");
+    }
+    
+    void calculatePerimeter() {
+        System.out.println("Calculating rectangle perimeter");
+    }
+}
+
+public class SafeDowncasting {
+    public static void main(String[] args) {
+        Shape shape1 = new Circle();
+        Shape shape2 = new Rectangle();
+        
+        // Safe downcasting with instanceof
+        if (shape1 instanceof Circle) {
+            Circle circle = (Circle) shape1;
+            circle.calculateArea();
+        }
+        
+        if (shape2 instanceof Rectangle) {
+            Rectangle rect = (Rectangle) shape2;
+            rect.calculatePerimeter();
+        }
+        
+        // Unsafe - would cause ClassCastException without instanceof check
+        // Circle c = (Circle) shape2;  // ERROR at runtime
+    }
+}</code></pre>
+            <div class="output">
+                Calculating circle area<br>
+                Calculating rectangle perimeter
+            </div>
+
+            <h5>Example 2: Type-Specific Operations</h5>
+            <pre><code>class Employee {
+    String name;
+    
+    Employee(String name) {
+        this.name = name;
+    }
+}
+
+class Manager extends Employee {
+    int teamSize;
+    
+    Manager(String name, int teamSize) {
+        super(name);
+        this.teamSize = teamSize;
+    }
+    
+    void manageTeam() {
+        System.out.println(name + " manages " + teamSize + " employees");
+    }
+}
+
+class Developer extends Employee {
+    String language;
+    
+    Developer(String name, String language) {
+        super(name);
+        this.language = language;
+    }
+    
+    void code() {
+        System.out.println(name + " codes in " + language);
+    }
+}
+
+public class EmployeeDemo {
+    static void processEmployee(Employee emp) {
+        System.out.println("Processing: " + emp.name);
+        
+        if (emp instanceof Manager) {
+            Manager mgr = (Manager) emp;
+            mgr.manageTeam();
+        } else if (emp instanceof Developer) {
+            Developer dev = (Developer) emp;
+            dev.code();
+        }
+    }
+    
+    public static void main(String[] args) {
+        Employee e1 = new Manager("Alice", 5);
+        Employee e2 = new Developer("Bob", "Java");
+        
+        processEmployee(e1);
+        processEmployee(e2);
+    }
+}</code></pre>
+            <div class="output">
+                Processing: Alice<br>
+                Alice manages 5 employees<br>
+                Processing: Bob<br>
+                Bob codes in Java
+            </div>
+        </div>
+
+        <div class="section" id="examples">
+            <h4>Practical Examples</h4>
+
+            <h5>Example 1: Payment Processing System</h5>
+            <pre><code>interface Payment {
+    void processPayment(double amount);
+}
+
+class CreditCard implements Payment {
+    String cardNumber;
+    
+    CreditCard(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+    
+    public void processPayment(double amount) {
+        System.out.println("Processing $" + amount + " via Credit Card");
+    }
+    
+    void validateCard() {
+        System.out.println("Validating card: " + cardNumber);
+    }
+}
+
+class PayPal implements Payment {
+    String email;
+    
+    PayPal(String email) {
+        this.email = email;
+    }
+    
+    public void processPayment(double amount) {
+        System.out.println("Processing $" + amount + " via PayPal");
+    }
+    
+    void sendReceipt() {
+        System.out.println("Receipt sent to: " + email);
+    }
+}
+
+public class PaymentDemo {
+    static void checkout(Payment payment, double amount) {
+        payment.processPayment(amount);
+        
+        if (payment instanceof CreditCard) {
+            CreditCard cc = (CreditCard) payment;
+            cc.validateCard();
+        } else if (payment instanceof PayPal) {
+            PayPal pp = (PayPal) payment;
+            pp.sendReceipt();
+        }
+    }
+    
+    public static void main(String[] args) {
+        Payment p1 = new CreditCard("1234-5678-9012-3456");
+        Payment p2 = new PayPal("user@example.com");
+        
+        checkout(p1, 100.50);
+        System.out.println();
+        checkout(p2, 75.25);
+    }
+}</code></pre>
+            <div class="output">
+                Processing $100.5 via Credit Card<br>
+                Validating card: 1234-5678-9012-3456<br>
+                <br>
+                Processing $75.25 via PayPal<br>
+                Receipt sent to: user@example.com
+            </div>
+
+            <h5>Example 2: Collection Type Checking</h5>
+            <pre><code>import java.util.*;
+
+public class CollectionTypeCheck {
+    static void printCollection(Object obj) {
+        if (obj instanceof ArrayList) {
+            ArrayList<?> list = (ArrayList<?>) obj;
+            System.out.println("ArrayList with " + list.size() + " elements");
+        } else if (obj instanceof HashSet) {
+            HashSet<?> set = (HashSet<?>) obj;
+            System.out.println("HashSet with " + set.size() + " elements");
+        } else if (obj instanceof HashMap) {
+            HashMap<?, ?> map = (HashMap<?, ?>) obj;
+            System.out.println("HashMap with " + map.size() + " entries");
+        } else {
+            System.out.println("Unknown collection type");
+        }
+    }
+    
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("B");
+        
+        HashSet<Integer> set = new HashSet<>();
+        set.add(1);
+        set.add(2);
+        set.add(3);
+        
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("One", 1);
+        
+        printCollection(list);
+        printCollection(set);
+        printCollection(map);
+    }
+}</code></pre>
+            <div class="output">
+                ArrayList with 2 elements<br>
+                HashSet with 3 elements<br>
+                HashMap with 1 entries
+            </div>
+
+            <h5>Best Practices:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Do</th>
+                        <th>Don't</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>✅ Use instanceof before downcasting</td>
+                        <td>❌ Cast without checking type</td>
+                    </tr>
+                    <tr>
+                        <td>✅ Check for null separately if needed</td>
+                        <td>❌ Rely on instanceof for null checks</td>
+                    </tr>
+                    <tr>
+                        <td>✅ Use polymorphism when possible</td>
+                        <td>❌ Overuse instanceof (code smell)</td>
+                    </tr>
+                    <tr>
+                        <td>✅ Handle all possible types</td>
+                        <td>❌ Assume only one type exists</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>instanceof Operator Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

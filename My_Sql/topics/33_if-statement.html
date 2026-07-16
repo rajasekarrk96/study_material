@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IF (MySQL) - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">IF (MySQL)</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">IF (MySQL)</h2>
+                <p class="topic-desc">The IF() function is used to apply conditional logic within a query, returning one value if a condition is TRUE and another if it is FALSE.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Basic Concept & Syntax</h3>
+                        <p class="subtopic-desc"><strong>🔹 Logic</strong><br>The IF() function works similarly to a ternary operator in programming languages.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">IF</span>(condition, value_if_true, value_if_false)</code></pre>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Table: students</h3>
+                        <p class="subtopic-desc">Sample data used for the IF examples.</p>
+            <div class="output-box">
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>student_id</th><th>name</th><th>marks</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Arun</td><td>85</td></tr>
+                        <tr><td>2</td><td>Ravi</td><td>45</td></tr>
+                        <tr><td>3</td><td>Meena</td><td>72</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Example 1: Pass or Fail</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Determine if a student passed based on a threshold of 50 marks.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name, marks,\nIF(marks &gt;= 50, <span class="sql-string">'Pass'</span>, <span class="sql-string">'Fail'</span>) <span class="sql-keyword">AS</span> result\nFROM students;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>name</th><th>marks</th><th>result</th></tr></thead>
+                    <tbody>
+                        <tr><td>Arun</td><td>85</td><td>Pass</td></tr>
+                        <tr><td>Ravi</td><td>45</td><td>Fail</td></tr>
+                        <tr><td>Meena</td><td>72</td><td>Pass</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Example 2: IF with calculation</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Add 5 grace marks to those who passed, while keeping others the same.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> name,\nIF(marks &gt;= 50, marks + 5, marks) <span class="sql-keyword">AS</span> final_marks\nFROM students;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 50%; font-size: 13px;'>
+                    <thead><tr><th>name</th><th>final_marks</th></tr></thead>
+                    <tbody>
+                        <tr><td>Arun</td><td>90</td></tr>
+                        <tr><td>Ravi</td><td>45</td></tr>
+                        <tr><td>Meena</td><td>77</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Example 3: IF with UPDATE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Update a status column in bulk using conditional logic.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">UPDATE</span> students\nSET status = <span class="sql-keyword">IF</span>(marks &gt;= 50, <span class="sql-string">'Pass'</span>, <span class="sql-string">'Fail'</span>);</code></pre><div class="output-box">✔ Directly updates table records based on the condition.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Display age category using IF.</strong><br>
+    <button class="toggle-btn" data-target="ans-t32-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t32-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, age,
+       IF(age >= 23, 'Adult', 'Young') AS age_category
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+-----+-------------+
+| name   | age | age_category|
++--------+-----+-------------+
+| Arun   | 22  | Young       |
+| Priya  | 23  | Adult       |
+| Kiran  | 23  | Adult       |
+| Meena  | 24  | Adult       |
++--------+-----+-------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Mark scholarship eligibility using IF.</strong><br>
+    <button class="toggle-btn" data-target="ans-t32-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t32-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, age,
+       IF(age < 23, 'Eligible', 'Not Eligible') AS scholarship
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+-----+-------------+
+| name   | age | scholarship |
++--------+-----+-------------+
+| Arun   | 22  | Eligible    |
+| Priya  | 23  | Not Eligible|
+| Kiran  | 23  | Not Eligible|
+| Meena  | 24  | Not Eligible|
++--------+-----+-------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Calculate marks status using IF (Pass/Fail).</strong><br>
+    <button class="toggle-btn" data-target="ans-t32-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t32-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, marks,
+       IF(marks >= 50, 'Pass', 'Fail') AS result
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+-------+--------+
+| name   | marks | result |
++--------+-------+--------+
+| Arun   | 85    | Pass   |
+| Priya  | 45    | Fail   |
+| Kiran  | 90    | Pass   |
+| Meena  | 40    | Fail   |
++--------+-------+--------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Display message based on department using IF.</strong><br>
+    <button class="toggle-btn" data-target="ans-t32-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t32-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, dept_id,
+       IF(dept_id = 1, 'IT Dept', 'Other Dept') AS dept_name
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+---------+------------+
+| name   | dept_id | dept_name  |
++--------+---------+------------+
+| Arun   | 1       | IT Dept    |
+| Priya  | 2       | Other Dept |
+| Kiran  | 1       | IT Dept    |
+| Meena  | NULL    | Other Dept |
++--------+---------+------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Use nested IF to assign grade based on marks.</strong><br>
+    <button class="toggle-btn" data-target="ans-t32-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t32-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT name, marks,
+       IF(marks >= 85, 'A',
+          IF(marks >= 70, 'B', 'C')) AS grade
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+-------+-------+
+| name   | marks | grade |
++--------+-------+-------+
+| Arun   | 85    | A     |
+| Priya  | 45    | C     |
+| Kiran  | 90    | A     |
+| Meena  | 40    | C     |
++--------+-------+-------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='32_show-describe-set-explain.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Show / Describe / Set / Explain</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='34_stored-functions.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Stored Functions →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

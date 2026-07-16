@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Data Types</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Java Data Types</h5>
+        <a href="../../index.html#basics">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#primitive">Primitive Types</a>
+        <a href="#reference">Reference Types</a>
+        <a href="#type-conversion">Type Conversion</a>
+        <a href="#memory">Memory Allocation</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Java Data Types</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Java Data Types</h1>
+            <p class="lead text-muted">Understand primitive and reference data types, type conversion, and how Java
+                allocates memory for different data types.</p>
+        </div>
+
+        <div class="section" id="primitive">
+            <h4>Primitive Data Types</h4>
+            <p>Primitive data types are the fundamental data types built into Java. They represent single values and are
+                stored directly in memory. Java has 8 primitive types divided into four categories.</p>
+            <p><strong>Integer Types:</strong></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Range</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>byte</code></td>
+                        <td>1 byte (8 bits)</td>
+                        <td>-128 to 127</td>
+                        <td><code>byte age = 25;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>short</code></td>
+                        <td>2 bytes (16 bits)</td>
+                        <td>-32,768 to 32,767</td>
+                        <td><code>short year = 2025;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>int</code></td>
+                        <td>4 bytes (32 bits)</td>
+                        <td>-2,147,483,648 to 2,147,483,647</td>
+                        <td><code>int count = 1000;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>long</code></td>
+                        <td>8 bytes (64 bits)</td>
+                        <td>-9.2 quintillion to 9.2 quintillion</td>
+                        <td><code>long distance = 1000000L;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Floating-point Types:</strong></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Precision</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>float</code></td>
+                        <td>4 bytes</td>
+                        <td>~6-7 decimal digits</td>
+                        <td><code>float price = 19.99f;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>double</code></td>
+                        <td>8 bytes</td>
+                        <td>~15 decimal digits</td>
+                        <td><code>double pi = 3.14159;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Character and Boolean Types:</strong></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Range</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>char</code></td>
+                        <td>2 bytes (16 bits)</td>
+                        <td>0 to 65,535 (Unicode)</td>
+                        <td><code>char grade = 'A';</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>boolean</code></td>
+                        <td>1 bit (1 or 0)</td>
+                        <td>true or false</td>
+                        <td><code>boolean isActive = true;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Complete Example:</strong></p>
+            <pre><code>public class PrimitiveDataTypes {
+    public static void main(String[] args) {
+        // Integer types
+        byte b = 100;
+        short s = 5000;
+        int i = 100000;
+        long l = 15000000000L;
+        
+        // Floating-point types
+        float f = 3.14f;
+        double d = 3.14159265;
+        
+        // Character and Boolean
+        char c = 'J';
+        boolean flag = true;
+        
+        System.out.println("Byte: " + b);
+        System.out.println("Short: " + s);
+        System.out.println("Int: " + i);
+        System.out.println("Long: " + l);
+        System.out.println("Float: " + f);
+        System.out.println("Double: " + d);
+        System.out.println("Char: " + c);
+        System.out.println("Boolean: " + flag);
+    }
+}</code></pre>
+            <div class="output">
+                Byte: 100<br>
+                Short: 5000<br>
+                Int: 100000<br>
+                Long: 15000000000<br>
+                Float: 3.14<br>
+                Double: 3.14159265<br>
+                Char: J<br>
+                Boolean: true
+            </div>
+            <div class="note">
+                <strong>💡 Key Points:</strong> Use <code>int</code> by default for integers, <code>double</code> for
+                decimals. Add 'L' suffix for long values and 'f' suffix for float values. Boolean values are not
+                integers in Java (unlike C).
+            </div>
+        </div>
+
+        <div class="section" id="reference">
+            <h4>Reference Data Types</h4>
+            <p>Reference types store references (memory addresses) to objects, not the actual values. They include
+                classes, interfaces, arrays, and enums. The most common reference type is String.</p>
+            <p><strong>Reference Types vs Primitive Types:</strong></p>
+            <ul>
+                <li>Primitive types store actual values; reference types store memory addresses</li>
+                <li>Primitive types have fixed sizes; reference types size depends on object</li>
+                <li>Reference types can be null; primitives cannot (without wrapper classes)</li>
+                <li>Reference types require instantiation with <code>new</code> keyword</li>
+            </ul>
+            <p><strong>String Example:</strong></p>
+            <pre><code>public class ReferenceTypes {
+    public static void main(String[] args) {
+        // Reference type - String
+        String name = "Java";
+        String message = new String("Hello, World!");
+        
+        // Array (reference type)
+        int[] numbers = new int[5];
+        String[] fruits = {"Apple", "Banana", "Orange"};
+        
+        // Custom class reference
+        Student student = new Student("John", 101);
+        
+        System.out.println("Name: " + name);
+        System.out.println("Message: " + message);
+        System.out.println("Numbers array length: " + numbers.length);
+        System.out.println("Fruits: " + java.util.Arrays.toString(fruits));
+    }
+}
+
+class Student {
+    String name;
+    int id;
+    
+    Student(String n, int i) {
+        name = n;
+        id = i;
+    }
+}</code></pre>
+            <div class="output">
+                Name: Java<br>
+                Message: Hello, World!<br>
+                Numbers array length: 5<br>
+                Fruits: [Apple, Banana, Orange]
+            </div>
+        </div>
+
+        <div class="section" id="type-conversion">
+            <h4>Type Conversion and Casting</h4>
+            <p>Type conversion is the process of converting one data type to another. Java supports both implicit
+                (automatic) and explicit (manual) conversions.</p>
+            <p><strong>Widening Conversion (Automatic):</strong></p>
+            <p>Converting a smaller type to a larger type automatically. No data loss occurs.</p>
+            <pre><code>public class WideningConversion {
+    public static void main(String[] args) {
+        byte b = 10;
+        short s = b;        // byte to short
+        int i = s;          // short to int
+        long l = i;         // int to long
+        float f = l;        // long to float
+        double d = f;       // float to double
+        
+        System.out.println("Byte: " + b);
+        System.out.println("Short: " + s);
+        System.out.println("Int: " + i);
+        System.out.println("Long: " + l);
+        System.out.println("Float: " + f);
+        System.out.println("Double: " + d);
+    }
+}</code></pre>
+            <div class="output">
+                Byte: 10<br>
+                Short: 10<br>
+                Int: 10<br>
+                Long: 10<br>
+                Float: 10.0<br>
+                Double: 10.0
+            </div>
+
+            <p><strong>Narrowing Conversion (Manual/Casting):</strong></p>
+            <p>Converting a larger type to a smaller type requires explicit casting. Data loss may occur.</p>
+            <pre><code>public class NarrowingConversion {
+    public static void main(String[] args) {
+        double d = 9.78;
+        float f = (float) d;        // double to float
+        long l = (long) f;          // float to long
+        int i = (int) l;            // long to int
+        short s = (short) i;        // int to short
+        byte b = (byte) s;          // short to byte
+        
+        System.out.println("Original double: " + d);
+        System.out.println("After casting to byte: " + b);
+    }
+}</code></pre>
+            <div class="output">
+                Original double: 9.78<br>
+                After casting to byte: 9
+            </div>
+
+            <p><strong>String to Number Conversion:</strong></p>
+            <pre><code>String str = "123";
+int num = Integer.parseInt(str);        // String to int
+double d = Double.parseDouble("3.14");  // String to double
+
+System.out.println("Number: " + (num + 10));
+System.out.println("Double: " + (d + 0.86));</code></pre>
+            <div class="output">
+                Number: 133<br>
+                Double: 4.0
+            </div>
+        </div>
+
+        <div class="section" id="memory">
+            <h4>Memory Allocation</h4>
+            <p>Understanding how Java allocates memory for different data types helps write efficient code.</p>
+            <ul>
+                <li><strong>Stack:</strong> Stores primitive values and references. Memory is automatically freed when
+                    variables go out of scope.</li>
+                <li><strong>Heap:</strong> Stores objects and arrays. Memory is managed by garbage collector.</li>
+            </ul>
+            <pre><code>public class MemoryAllocation {
+    public static void main(String[] args) {
+        // Primitive type - value stored on stack
+        int age = 25;
+        
+        // Reference type - reference on stack, object on heap
+        String name = "John";
+        
+        // Array - reference on stack, array object on heap
+        int[] numbers = new int[]{1, 2, 3, 4, 5};
+        
+        // Multiple references to same object
+        String str1 = new String("Java");
+        String str2 = str1;  // Both reference same object
+        
+        System.out.println("age: " + age);
+        System.out.println("name: " + name);
+        System.out.println("numbers[0]: " + numbers[0]);
+        System.out.println("str1.equals(str2): " + str1.equals(str2));
+    }
+}</code></pre>
+            <div class="output">
+                age: 25<br>
+                name: John<br>
+                numbers[0]: 1<br>
+                str1.equals(str2): true
+            </div>
+            <div class="note">
+                <strong>💡 Memory Best Practice:</strong> Use primitive types when possible (better memory efficiency).
+                Be aware of null pointer exceptions with reference types. Understand when objects are eligible for
+                garbage collection.
+            </div>
+        </div>
+
+        <div class="section" id="ascii-notes">
+            <h4>ASCII Notes</h4>
+            <p>ASCII is directly related to the char data type. Each char value is actually an ASCII code stored as a
+                numeric value.</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="../ASCII_Reference.html" target="_blank" class="btn btn-info"
+                    style="background-color: #17a2b8; border: none; padding: 10px 20px; border-radius: 5px; color: white; text-decoration: none; font-weight: 600;">
+                    📊 View Interactive ASCII Chart →
+                </a>
+            </div>
+            <pre><code>ASCII as a Data Type Value:
+
+char dataType stores ASCII codes (0-127 and beyond)</code></pre>
+            ┌─────────────────────────────────────────────────────────────┐
+            │ Variable: ch (char) │
+            │ Memory: 2 bytes (16 bits) in Java │
+            │ Value: 'A' (displays as letter A) │
+            │ Actual: 65 (ASCII code in memory) │
+            │ Binary: 0000000001000001 │
+            └─────────────────────────────────────────────────────────────┘</code></pre>
+            <p><strong>ASCII and Char Data Type Relationship:</strong></p>
+            <pre><code>public class ASCIIDataType {
+    public static void main(String[] args) {
+        // char stores ASCII values
+        char a = 65;              // Displays as 'A'
+        char b = 'B';             // ASCII 66
+        
+        // char and int relationship
+        char digit = '5';         // ASCII 53
+        int digitValue = digit;   // Auto-widening to int
+        
+        System.out.println("Character 'A' stores: " + (int)a);
+        System.out.println("Character 'B' stores: " + (int)b);
+        System.out.println("Character '5' stores: " + digitValue);
+        
+        // Arithmetic with ASCII values
+        char start = 'A';
+        System.out.println("\nNext character after 'A': " + (char)(start + 1));
+        System.out.println("Previous character before 'A': " + (char)(start - 1));
+    }
+}</code></pre>
+            <div class="output">
+                Character 'A' stores: 65<br>
+                Character 'B' stores: 66<br>
+                Character '5' stores: 53<br>
+                <br>
+                Next character after 'A': B<br>
+                Previous character before 'A': @
+            </div>
+            <div class="example">
+                <strong>✓ Data Type Insight:</strong> The char data type is essentially storing numeric ASCII values.
+                When you use 'A', Java internally stores 65. The character is just a visual representation.
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">
+                Go to Practice Worksheets →
+            </a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Java Data Types Module | Last Updated: November 2025</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

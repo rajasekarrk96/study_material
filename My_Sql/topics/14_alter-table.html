@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alter Table - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Alter Table</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Alter Table</h2>
+                <p class="topic-desc">The ALTER statement is used to modify the structure of an existing table.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Add a New Column</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Adds a new column to an existing table.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">ALTER</span> <span class="sql-keyword">TABLE</span> table_name\nADD column_name datatype;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">ALTER</span> <span class="sql-keyword">TABLE</span> students\nADD email <span class="sql-keyword">VARCHAR</span>(50);</code></pre><div class="output-box">✔ Column 'email' added to students table.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Add Multiple Columns</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Adds several columns in a single SQL statement.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">ALTER</span> <span class="sql-keyword">TABLE</span> students\nADD phone <span class="sql-keyword">VARCHAR</span>(15),\nADD city <span class="sql-keyword">VARCHAR</span>(30);</code></pre><div class="output-box">✔ Columns 'phone' and 'city' added.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Modify Column Datatype / Size</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Changes the data type or constraints of an existing column.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- MySQL\nALTER <span class="sql-keyword">TABLE</span> students\nMODIFY age <span class="sql-keyword">INT</span>;\n\n-- Change name &amp; type\nALTER <span class="sql-keyword">TABLE</span> students\nCHANGE phone mobile_no <span class="sql-keyword">VARCHAR</span>(15);</span></code></pre><div class="output-box">✔ Column modifications applied.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">Rename a Column</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Changes the name of an existing column.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- MySQL 8+ / PostgreSQL\nALTER <span class="sql-keyword">TABLE</span> students\nRENAME <span class="sql-keyword">COLUMN</span> name TO full_name;</span></code></pre><div class="output-box">✔ Column 'name' renamed to 'full_name'.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Drop a Column</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Permanently removes a column and its data from the table.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">ALTER</span> <span class="sql-keyword">TABLE</span> students\nDROP <span class="sql-keyword">COLUMN</span> city;</code></pre><div class="output-box">✔ Column 'city' deleted.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Add a new column email to the students table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t13-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t13-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>ALTER TABLE students
+ADD email VARCHAR(100);</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Modify the data type of age column to BIGINT.</strong><br>
+    <button class="toggle-btn" data-target="ans-t13-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t13-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>ALTER TABLE students
+MODIFY age BIGINT;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Rename the column email to student_email.</strong><br>
+    <button class="toggle-btn" data-target="ans-t13-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t13-q3" style="display:none; margin-top:10px;">
+        Query (MySQL 8+):<br><pre class='code-block-minimal'><code>ALTER TABLE students
+RENAME COLUMN email TO student_email;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Drop (remove) the column student_email.</strong><br>
+    <button class="toggle-btn" data-target="ans-t13-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t13-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>ALTER TABLE students
+DROP COLUMN student_email;</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Add a UNIQUE constraint to the email column.</strong><br>
+    <button class="toggle-btn" data-target="ans-t13-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t13-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>ALTER TABLE students
+ADD CONSTRAINT uq_email UNIQUE (email);</code></pre><br>
+        Output:<br>
+        Query OK, 0 rows affected
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='13_safe-updates.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Safe Updates</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='15_rollback.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Rollback →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

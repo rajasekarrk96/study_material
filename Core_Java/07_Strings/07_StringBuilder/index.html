@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StringBuilder - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>StringBuilder</h5>
+        <a href="../../index.html#strings">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#concept">Concept</a>
+        <a href="#vs-buffer">vs StringBuffer</a>
+        <a href="#example">Example</a>
+    </div>
+    <div class="top-nav">
+        <h2>StringBuilder</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>StringBuilder in Java</h1>
+            <p class="lead text-muted">Fast, mutable string class for single-threaded string manipulation.</p>
+        </div>
+        <div class="section" id="concept">
+            <h4>What is StringBuilder?</h4>
+            <p>StringBuilder is similar to StringBuffer but NOT thread-safe. It's faster because methods are not
+                synchronized.</p>
+            <ul>
+                <li>Mutable - can be changed</li>
+                <li>NOT thread-safe - no synchronization</li>
+                <li>Faster than StringBuffer</li>
+                <li>Preferred for single-threaded applications</li>
+            </ul>
+            <div class="note">
+                <strong>💡 Use When:</strong> You need fast mutable strings in single-threaded code.
+            </div>
+        </div>
+        <div class="section" id="vs-buffer">
+            <h4>StringBuilder vs StringBuffer</h4>
+            <div class="example">
+                <strong>StringBuilder:</strong><br>
+                • Faster (not synchronized)<br>
+                • NOT thread-safe<br>
+                • Use in single-threaded applications<br><br>
+
+                <strong>StringBuffer:</strong><br>
+                • Slower (synchronized)<br>
+                • Thread-safe<br>
+                • Use in multi-threaded applications
+            </div>
+        </div>
+        <div class="section" id="example">
+            <h4>Example: Efficient String Building</h4>
+            <pre><code>public class StringBuilderDemo {
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("Java");
+        
+        // append()
+        sb.append(" Programming");
+        System.out.println(sb);  // Java Programming
+        
+        // insert()
+        sb.insert(4, " 17");
+        System.out.println(sb);  // Java 17 Programming
+        
+        // replace()
+        sb.replace(5, 7, "21");
+        System.out.println(sb);  // Java 21 Programming
+        
+        // delete()
+        sb.delete(4, 7);
+        System.out.println(sb);  // Java Programming
+        
+        // Convert to String
+        String result = sb.toString();
+        System.out.println("Final: " + result);
+    }
+}</code></pre>
+            <div class="output">
+                Java Programming<br>
+                Java 17 Programming<br>
+                Java 21 Programming<br>
+                Java Programming<br>
+                Final: Java Programming
+            </div>
+        </div>
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn-worksheet">Go to Practice Worksheets →</a>
+        </div>
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>StringBuilder Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

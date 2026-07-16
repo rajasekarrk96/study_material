@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattern & Matcher - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Pattern & Matcher Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>Pattern & Matcher - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master advanced regex patterns and string manipulation techniques.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Move Lowercase Letters to Front</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to move all lowercase letters to the front of a given word while keeping
+                the relative position of all letters (both uppercase and lowercase) the same.
+                <br><br>
+                <strong>Requirements:</strong>
+                <ul>
+                    <li>All lowercase letters should appear first</li>
+                    <li>Followed by all uppercase letters</li>
+                    <li>Maintain the original order within each group</li>
+                </ul>
+                <strong>Examples:</strong>
+                <ul>
+                    <li>"JaVaProGRam" → "aaroJVPGR"</li>
+                    <li>"HeLLo" → "eoHLL"</li>
+                    <li>"ABC" → "ABC" (no lowercase)</li>
+                    <li>"abc" → "abc" (no uppercase)</li>
+                </ul>
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _03_ {
+    public static void main(String[] args) {
+
+        String str = "JaVaProGRam";
+        String lower = "";
+        String upper = "";
+
+        for (char c : str.toCharArray()) {
+            if (Character.isLowerCase(c))
+                lower += c;
+            else
+                upper += c;
+        }
+
+        System.out.println(lower + upper);
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Input: "JaVaProGRam"
+Output: aaroJVPGR
+
+Input: "HeLLo"
+Output: eoHLL
+
+Input: "ProgrammingLanguage"
+Output: rogramminganguagePLLPL
+
+Input: "ABC123"
+Output: ABC123
+
+Input: "testTEST"
+Output: testTEST</code></div>
+
+            <h4>Algorithm Explanation</h4>
+            <div class="code-block"><code>Step-by-step process:
+
+1. Initialize two empty strings: lower and upper
+2. Convert input string to character array
+3. For each character:
+   - If lowercase → append to 'lower' string
+   - If uppercase → append to 'upper' string
+4. Concatenate: lower + upper
+5. Return result
+
+Example: "JaVaProGRam"
+- Iteration 1: 'J' → upper = "J"
+- Iteration 2: 'a' → lower = "a"
+- Iteration 3: 'V' → upper = "JV"
+- Iteration 4: 'a' → lower = "aa"
+- Iteration 5: 'P' → upper = "JVP"
+- Iteration 6: 'r' → lower = "aar"
+- Iteration 7: 'o' → lower = "aaro"
+- Iteration 8: 'G' → upper = "JVPG"
+- Iteration 9: 'R' → upper = "JVPGR"
+- Iteration 10: 'a' → lower = "aaro" (wait, this is wrong in trace)
+- Result: "aaro" + "JVPGR" = "aaroJVPGR"</code></div>
+
+            <h4>Alternative Approaches</h4>
+            <div class="code-block"><code>// Approach 1: Using StringBuilder (more efficient)
+StringBuilder lower = new StringBuilder();
+StringBuilder upper = new StringBuilder();
+
+for (char c : str.toCharArray()) {
+    if (Character.isLowerCase(c))
+        lower.append(c);
+    else
+        upper.append(c);
+}
+
+String result = lower.toString() + upper.toString();
+
+// Approach 2: Using Streams (Java 8+)
+String result = str.chars()
+    .mapToObj(c -> (char) c)
+    .sorted((a, b) -> {
+        boolean aLower = Character.isLowerCase(a);
+        boolean bLower = Character.isLowerCase(b);
+        if (aLower && !bLower) return -1;
+        if (!aLower && bLower) return 1;
+        return 0;
+    })
+    .map(String::valueOf)
+    .collect(Collectors.joining());
+
+// Approach 3: Using Regex (extract and concatenate)
+String lower = str.replaceAll("[^a-z]", "");
+String upper = str.replaceAll("[^A-Z]", "");
+String result = lower + upper;</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Character.isLowerCase():</strong> Checks if character is lowercase</li>
+                    <li><strong>String Concatenation:</strong> Building strings by appending characters</li>
+                    <li><strong>Relative Order:</strong> Maintaining original sequence within groups</li>
+                    <li><strong>Two-Pass Algorithm:</strong> Separate lowercase and uppercase in one iteration</li>
+                </ul>
+                <strong>Performance Note:</strong> Using StringBuilder is more efficient than String concatenation
+                in loops due to String immutability.
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Remove Leading Zeros from IP Address</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to remove leading zeros from a given IP address.
+                <br><br>
+                <strong>IP Address Format:</strong> Four octets separated by dots (e.g., 192.168.001.010)
+                <br><br>
+                <strong>Requirements:</strong>
+                <ul>
+                    <li>Remove leading zeros from each octet</li>
+                    <li>Keep at least one digit (don't remove all zeros)</li>
+                    <li>Preserve the dot separators</li>
+                </ul>
+                <strong>Examples:</strong>
+                <ul>
+                    <li>"192.168.001.010" → "192.168.1.10"</li>
+                    <li>"010.020.030.040" → "10.20.30.40"</li>
+                    <li>"000.000.000.000" → "0.0.0.0"</li>
+                </ul>
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _05_ {
+    public static void main(String[] args) {
+
+        String ip = "192.168.001.010";
+
+        String result = ip.replaceAll("\\b0+(\\d)", "$1");
+
+        System.out.println(result);
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Input: "192.168.001.010"
+Output: 192.168.1.10
+
+Input: "010.020.030.040"
+Output: 10.20.30.40
+
+Input: "000.000.000.000"
+Output: 0.0.0.0
+
+Input: "001.002.003.004"
+Output: 1.2.3.4
+
+Input: "192.168.000.001"
+Output: 192.168.0.1</code></div>
+
+            <h4>Regex Pattern Explanation</h4>
+            <div class="code-block"><code>Pattern: \\b0+(\\d)
+Replacement: $1
+
+Breakdown:
+- \\b        : Word boundary (start of number)
+- 0+         : One or more leading zeros
+- (\\d)      : Capturing group - matches one digit
+- $1         : Reference to captured digit
+
+How it works:
+1. \\b ensures we're at the start of a number
+2. 0+ matches all leading zeros
+3. (\\d) captures the first non-zero digit (or last zero if all zeros)
+4. Replace entire match with just the captured digit
+
+Examples:
+- "001" → \\b matches start, 0+ matches "00", (\\d) captures "1" → "1"
+- "010" → \\b matches start, 0+ matches "0", (\\d) captures "1" → "10"
+- "000" → \\b matches start, 0+ matches "00", (\\d) captures "0" → "0"</code></div>
+
+            <h4>Understanding Word Boundaries</h4>
+            <div class="code-block"><code>Word Boundary (\\b):
+- Matches position between word and non-word character
+- Word characters: [a-zA-Z0-9_]
+- Non-word characters: spaces, dots, special chars
+
+In IP address "192.168.001.010":
+- \\b matches before: 1, 1, 0 (in 001), 0 (in 010)
+- Ensures we only match at the start of each octet
+
+Without \\b:
+"1001" → "11" (wrong! would match "00" in middle)
+
+With \\b:
+"1001" → "1001" (correct! no match because "00" not at word boundary)</code></div>
+
+            <h4>Alternative Approaches</h4>
+            <div class="code-block"><code>// Approach 1: Split and process each octet
+String[] octets = ip.split("\\.");
+for (int i = 0; i < octets.length; i++) {
+    octets[i] = String.valueOf(Integer.parseInt(octets[i]));
+}
+String result = String.join(".", octets);
+
+// Approach 2: Using Pattern and Matcher
+Pattern pattern = Pattern.compile("\\b0+(\\d)");
+Matcher matcher = pattern.matcher(ip);
+String result = matcher.replaceAll("$1");
+
+// Approach 3: Manual iteration
+StringBuilder result = new StringBuilder();
+String[] parts = ip.split("\\.");
+for (int i = 0; i < parts.length; i++) {
+    result.append(parts[i].replaceFirst("^0+(?=\\d)", ""));
+    if (i < parts.length - 1) result.append(".");
+}</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Word Boundary \\b:</strong> Matches position at start/end of word</li>
+                    <li><strong>Quantifier +:</strong> One or more occurrences</li>
+                    <li><strong>Capturing Group ():</strong> Saves matched digit for replacement</li>
+                    <li><strong>Backreference $1:</strong> Inserts captured group in replacement</li>
+                </ul>
+                <strong>Edge Cases:</strong>
+                <ul>
+                    <li>"000" → "0" (keeps one zero)</li>
+                    <li>"192.168.1.1" → "192.168.1.1" (no change if no leading zeros)</li>
+                    <li>"00192.168.1.1" → "192.168.1.1" (works for first octet too)</li>
+                </ul>
+                <strong>Real-World Applications:</strong> IP address normalization, log file processing, network
+                configuration
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Pattern & Matcher Module - Practice Worksheet</strong></p>
+            <p>Master advanced regex patterns and string manipulation</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

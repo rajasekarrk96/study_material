@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Keyword - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Super Keyword</h5>
+        <a href="../../index.html#oop">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#intro">Introduction</a>
+        <a href="#variables">Access Parent Variables</a>
+        <a href="#constructors">Call Parent Constructor</a>
+        <a href="#methods">Call Parent Methods</a>
+        <a href="#examples">Examples</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>Super Keyword</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>Super Keyword in Java</h1>
+            <p class="lead text-muted">Access parent class members and constructors using the super keyword.</p>
+        </div>
+
+        <div class="section" id="intro">
+            <h4>What is the Super Keyword?</h4>
+            <p>The <code>super</code> keyword in Java is a reference variable used to refer to the immediate parent
+                class object. It is used to access parent class members (variables, methods, constructors) from the
+                child class.</p>
+
+            <h5>Uses of Super Keyword:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Use Case</th>
+                        <th>Syntax</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Access Parent Variable</td>
+                        <td><code>super.variableName</code></td>
+                        <td>Access parent class variable when child has same name</td>
+                    </tr>
+                    <tr>
+                        <td>Call Parent Constructor</td>
+                        <td><code>super(arguments)</code></td>
+                        <td>Invoke parent class constructor from child</td>
+                    </tr>
+                    <tr>
+                        <td>Call Parent Method</td>
+                        <td><code>super.methodName()</code></td>
+                        <td>Call parent class method (especially when overridden)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="note">
+                <strong>💡 Important:</strong> super() must be the first statement in a child class constructor.
+            </div>
+        </div>
+
+        <div class="section" id="variables">
+            <h4>1. Access Parent Class Variables</h4>
+            <p>When both parent and child classes have variables with the same name, use <code>super</code> to access
+                the parent class variable.</p>
+
+            <h5>Example 1: Accessing Parent Variable</h5>
+            <pre><code>class Animal {
+    String color = "White";
+}
+
+class Dog extends Animal {
+    String color = "Brown";
+    
+    void displayColors() {
+        System.out.println("Dog color: " + color);           // Child class variable
+        System.out.println("Animal color: " + super.color);  // Parent class variable
+    }
+}
+
+public class SuperVariableDemo {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.displayColors();
+    }
+}</code></pre>
+            <div class="output">
+                Dog color: Brown<br>
+                Animal color: White
+            </div>
+
+            <h5>Example 2: Differentiating Variables</h5>
+            <pre><code>class Vehicle {
+    int speed = 60;
+}
+
+class Car extends Vehicle {
+    int speed = 120;
+    
+    void showSpeed() {
+        System.out.println("Car speed: " + speed);
+        System.out.println("Vehicle speed: " + super.speed);
+        System.out.println("Speed difference: " + (speed - super.speed));
+    }
+}
+
+public class SpeedDemo {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.showSpeed();
+    }
+}</code></pre>
+            <div class="output">
+                Car speed: 120<br>
+                Vehicle speed: 60<br>
+                Speed difference: 60
+            </div>
+        </div>
+
+        <div class="section" id="constructors">
+            <h4>2. Call Parent Class Constructor</h4>
+            <p>Use <code>super()</code> to call the parent class constructor. This is useful for initializing parent
+                class members.</p>
+
+            <h5>Example 1: Basic Constructor Call</h5>
+            <pre><code>class Person {
+    String name;
+    int age;
+    
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+        System.out.println("Person constructor called");
+    }
+}
+
+class Student extends Person {
+    int rollNumber;
+    
+    Student(String name, int age, int roll) {
+        super(name, age);  // Call parent constructor
+        this.rollNumber = roll;
+        System.out.println("Student constructor called");
+    }
+    
+    void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Roll Number: " + rollNumber);
+    }
+}
+
+public class ConstructorDemo {
+    public static void main(String[] args) {
+        Student student = new Student("Alice", 20, 101);
+        student.display();
+    }
+}</code></pre>
+            <div class="output">
+                Person constructor called<br>
+                Student constructor called<br>
+                Name: Alice<br>
+                Age: 20<br>
+                Roll Number: 101
+            </div>
+
+            <h5>Example 2: Constructor Chaining</h5>
+            <pre><code>class Shape {
+    String color;
+    
+    Shape() {
+        color = "Red";
+        System.out.println("Shape() - Default color: " + color);
+    }
+    
+    Shape(String color) {
+        this.color = color;
+        System.out.println("Shape(String) - Color: " + color);
+    }
+}
+
+class Circle extends Shape {
+    double radius;
+    
+    Circle(double radius) {
+        super();  // Calls Shape()
+        this.radius = radius;
+    }
+    
+    Circle(String color, double radius) {
+        super(color);  // Calls Shape(String)
+        this.radius = radius;
+    }
+    
+    void display() {
+        System.out.println("Circle - Color: " + color + ", Radius: " + radius);
+    }
+}
+
+public class ChainDemo {
+    public static void main(String[] args) {
+        System.out.println("Creating Circle 1:");
+        Circle c1 = new Circle(5.0);
+        c1.display();
+        
+        System.out.println("\nCreating Circle 2:");
+        Circle c2 = new Circle("Blue", 7.5);
+        c2.display();
+    }
+}</code></pre>
+            <div class="output">
+                Creating Circle 1:<br>
+                Shape() - Default color: Red<br>
+                Circle - Color: Red, Radius: 5.0<br>
+                <br>
+                Creating Circle 2:<br>
+                Shape(String) - Color: Blue<br>
+                Circle - Color: Blue, Radius: 7.5
+            </div>
+
+            <div class="note">
+                <strong>⚠️ Important:</strong> If super() is not explicitly called, Java automatically inserts super()
+                as the first statement in the child constructor.
+            </div>
+        </div>
+
+        <div class="section" id="methods">
+            <h4>3. Call Parent Class Methods</h4>
+            <p>Use <code>super.methodName()</code> to call parent class methods, especially when they are overridden in
+                the child class.</p>
+
+            <h5>Example 1: Calling Overridden Method</h5>
+            <pre><code>class Animal {
+    void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void eat() {
+        super.eat();  // Call parent method
+        System.out.println("Dog is eating dog food");
+    }
+}
+
+public class MethodDemo {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.eat();
+    }
+}</code></pre>
+            <div class="output">
+                Animal is eating<br>
+                Dog is eating dog food
+            </div>
+
+            <h5>Example 2: Extending Parent Functionality</h5>
+            <pre><code>class Employee {
+    double salary = 50000;
+    
+    void calculateBonus() {
+        System.out.println("Base bonus: " + (salary * 0.1));
+    }
+}
+
+class Manager extends Employee {
+    @Override
+    void calculateBonus() {
+        super.calculateBonus();  // Call parent method
+        double managerBonus = salary * 0.2;
+        System.out.println("Manager bonus: " + managerBonus);
+        System.out.println("Total bonus: " + (salary * 0.3));
+    }
+}
+
+public class BonusDemo {
+    public static void main(String[] args) {
+        Manager manager = new Manager();
+        manager.calculateBonus();
+    }
+}</code></pre>
+            <div class="output">
+                Base bonus: 5000.0<br>
+                Manager bonus: 10000.0<br>
+                Total bonus: 15000.0
+            </div>
+
+            <h5>Example 3: Method Resolution</h5>
+            <pre><code>class Parent {
+    void display() {
+        System.out.println("Parent display()");
+    }
+    
+    void show() {
+        System.out.println("Parent show()");
+    }
+}
+
+class Child extends Parent {
+    @Override
+    void display() {
+        System.out.println("Child display()");
+        super.display();  // Call parent's display()
+    }
+    
+    void callParentShow() {
+        super.show();  // Call parent's show()
+    }
+}
+
+public class ResolutionDemo {
+    public static void main(String[] args) {
+        Child child = new Child();
+        child.display();
+        System.out.println();
+        child.callParentShow();
+    }
+}</code></pre>
+            <div class="output">
+                Child display()<br>
+                Parent display()<br>
+                <br>
+                Parent show()
+            </div>
+        </div>
+
+        <div class="section" id="examples">
+            <h4>Practical Examples</h4>
+
+            <h5>Example 1: Bank Account Hierarchy</h5>
+            <pre><code>class Account {
+    protected String accountNumber;
+    protected double balance;
+    
+    Account(String accNum, double bal) {
+        accountNumber = accNum;
+        balance = bal;
+    }
+    
+    void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount);
+    }
+    
+    void displayBalance() {
+        System.out.println("Balance: " + balance);
+    }
+}
+
+class SavingsAccount extends Account {
+    private double interestRate;
+    
+    SavingsAccount(String accNum, double bal, double rate) {
+        super(accNum, bal);  // Initialize parent class members
+        this.interestRate = rate;
+    }
+    
+    @Override
+    void deposit(double amount) {
+        super.deposit(amount);  // Call parent deposit
+        double interest = amount * interestRate / 100;
+        balance += interest;
+        System.out.println("Interest added: " + interest);
+    }
+    
+    void displayDetails() {
+        System.out.println("Account: " + accountNumber);
+        super.displayBalance();  // Call parent method
+        System.out.println("Interest Rate: " + interestRate + "%");
+    }
+}
+
+public class BankDemo {
+    public static void main(String[] args) {
+        SavingsAccount acc = new SavingsAccount("SA1001", 1000, 5);
+        acc.deposit(500);
+        acc.displayDetails();
+    }
+}</code></pre>
+            <div class="output">
+                Deposited: 500.0<br>
+                Interest added: 25.0<br>
+                Account: SA1001<br>
+                Balance: 1525.0<br>
+                Interest Rate: 5.0%
+            </div>
+
+            <h5>Comparison: this vs super</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>this</th>
+                        <th>super</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Refers to</td>
+                        <td>Current class object</td>
+                        <td>Parent class object</td>
+                    </tr>
+                    <tr>
+                        <td>Variable Access</td>
+                        <td>this.variable</td>
+                        <td>super.variable</td>
+                    </tr>
+                    <tr>
+                        <td>Method Call</td>
+                        <td>this.method()</td>
+                        <td>super.method()</td>
+                    </tr>
+                    <tr>
+                        <td>Constructor Call</td>
+                        <td>this() - same class</td>
+                        <td>super() - parent class</td>
+                    </tr>
+                    <tr>
+                        <td>Must be first?</td>
+                        <td>Yes (in constructor)</td>
+                        <td>Yes (in constructor)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>Super Keyword Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

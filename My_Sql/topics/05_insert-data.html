@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Data - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Insert Data</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Insert Data</h2>
+                <p class="topic-desc">The INSERT statement is used to add new records (rows) into a table.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Insert data into all columns</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Adds a new record providing values for every column in the table.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> table_name\nVALUES (value1, value2, value3);</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> students\nVALUES (1, <span class="sql-string">'Ravi'</span>, 21);</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>id</th><th>name</th><th>age</th></tr></thead><tbody><tr><td>1</td><td>Ravi</td><td>21</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Insert data into specific columns</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Adds a new record providing values only for some columns. Missing columns will be NULL or Use Default.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> table_name (column1, column2)\nVALUES (value1, value2);</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> students (id, name)\nVALUES (2, <span class="sql-string">'Anu'</span>);</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>id</th><th>name</th><th>age</th></tr></thead><tbody><tr><td>1</td><td>Ravi</td><td>21</td></tr><tr><td>2</td><td>Anu</td><td>NULL</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Insert multiple rows at once</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Efficiently adds multiple records in a single SQL statement.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> table_name (column1, column2)\nVALUES\n(value1, value2),\n(value3, value4);</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> students (id, name, age)\nVALUES\n(3, Kumar, 22),\n(4, Divya, 20);</code></pre><div class="output-box">Query OK, 2 rows affected<br>📌 Records for Kumar and Divya added.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Insert one record into the students table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t4-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t4-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>INSERT INTO students VALUES (1, 'Arun', 20);</code></pre><br>
+        Output:<br>
+        Query OK, 1 row affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Insert multiple records into the students table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t4-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t4-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>INSERT INTO students VALUES
+(2, 'Priya', 21),
+(3, 'Kiran', 22);</code></pre><br>
+        Output:<br>
+        Query OK, 2 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Insert values into selected columns only.</strong><br>
+    <button class="toggle-btn" data-target="ans-t4-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t4-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>INSERT INTO students (id, name) VALUES (4, 'Meena');</code></pre><br>
+        Output:<br>
+        Query OK, 1 row affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Insert data into a table from another table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t4-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t4-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>INSERT INTO student_backup
+SELECT * FROM students;</code></pre><br>
+        Output:<br>
+        Query OK, 4 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display all records from the students table.</strong><br>
+    <button class="toggle-btn" data-target="ans-t4-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t4-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 20   |
+| 2  | Priya  | 21   |
+| 3  | Kiran  | 22   |
+| 4  | Meena  | NULL |
++----+--------+------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='04_data-types.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Data Types</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='06_rename-table.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Rename Table →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

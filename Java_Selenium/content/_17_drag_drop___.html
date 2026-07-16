@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  17 drag drop   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>17. Drag & Drop</h1>
+
+<h2>📖 Introduction</h2>
+<p>Modern web apps often allow you to drag elements (like cards in Trello or files in Google Drive). Selenium handles
+    these advanced interactions using the <strong>Actions</strong> class. This class simulates complex user gestures
+    like click-and-hold, move, and release.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The <code>Actions</code> class in Selenium</li>
+    <li>How to drag an element and drop it onto another</li>
+    <li>The difference between <code>build()</code> and <code>perform()</code></li>
+    <li>Drag and Drop by offset (coordinates)</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>The Actions Class Sequence</h3>
+<p>To drag an element, you need to chain multiple commands:</p>
+<ol>
+    <li><strong>Click and Hold:</strong> Grab the source element.</li>
+    <li><strong>Move to Element:</strong> Drag it to the target location.</li>
+    <li><strong>Release:</strong> Let go of the mouse button.</li>
+    <li><strong>Build:</strong> compile the sequence.</li>
+    <li><strong>Perform:</strong> execute it.</li>
+</ol>
+
+<pre><code>Actions act = new Actions(driver);
+act.clickAndHold(source).moveToElement(target).release().build().perform();</code></pre>
+
+<h3>The Shortcut Method</h3>
+<p>Selenium provides a convenience method for this common task:</p>
+<pre><code>act.dragAndDrop(source, target).perform();</code></pre>
+
+<h2>💻 Code Examples</h2>
+
+<h3>Standard Drag and Drop</h3>
+<pre><code>WebElement source = driver.findElement(By.id("box-a"));
+WebElement target = driver.findElement(By.id("box-b"));
+
+Actions actions = new Actions(driver);
+
+// Method 1: Explicit Chain
+actions.clickAndHold(source)
+       .moveToElement(target)
+       .release()
+       .build()
+       .perform();
+
+// Method 2: Shortcut
+actions.dragAndDrop(source, target).perform();
+</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>HTML5 Drag and Drop:</strong> Sometimes the standard Selenium actions fail on modern HTML5 drag-and-drop
+        elements due to browser implementation details. In such cases, you might need a JavaScript Executor workaround.
+    </p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Organize a Todo list.</p>
+    <ol>
+        <li>Drag the "Buy Milk" card (Source) from the "To Do" column.</li>
+        <li>Drop it into the "Done" column (Target).</li>
+        <li>Verify it has moved.</li>
+    </ol>
+</div>
+
+<a href="worksheets/ws_drag_drop.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

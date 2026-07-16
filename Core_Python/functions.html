@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item has-subtopics active">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#definition">Definition</a></li>
+                        <li><a href="#arguments">Arguments</a></li>
+                        <li><a href="#arbitrary-args">Arbitrary Arguments</a></li>
+                        <li><a href="#keyword-args">Keyword Arguments</a></li>
+                        <li><a href="#default-parameter">Default Parameter</a></li>
+                        <li><a href="#return-values">Return Values</a></li>
+                        <li><a href="#recursion">Recursion</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Python Functions</h1>
+
+                <div class="content-description">
+                    <h2 id="definition">Definition</h2>
+                    <p>A function is a block of code which only runs when it is called.</p>
+                    <p>You can pass data, known as parameters, into a function.</p>
+                    <p>A function can return data as a result.</p>
+
+                    <h2 id="define">Defining a Function</h2>
+                    <p>In Python a function is defined using the <code>def</code> keyword.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+def function_name(parameters):
+    # code block
+    return value
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+def my_function():
+    print("Hello from a function")
+</pre>
+
+                    <h3>Creating a Function</h3>
+                    <p>In Python a function is defined using the <code>def</code> keyword:</p>
+                    <pre class="code-block">
+def my_function():
+    print("Hello from a function")
+</pre>
+
+                    <h2 id="call">Calling a Function</h2>
+                    <p>To call a function, use the function name followed by parenthesis.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+function_name(arguments)
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+def my_function():
+    print("Hello from a function")
+
+my_function()
+</pre>
+
+                    <h2 id="arguments">Arguments</h2>
+                    <p>Information can be passed into functions as arguments.</p>
+                    <p>Arguments are specified after the function name, inside the parentheses. You can add as many
+                        arguments as you want, just separate them with a comma.</p>
+                    <pre class="code-block">
+def my_function(fname):
+    print(fname + " Refsnes")
+
+my_function("Emil")
+my_function("Tobias")
+my_function("Linus")
+</pre>
+
+                    <h2 id="arbitrary-args">Arbitrary Arguments, *args</h2>
+                    <p>If you do not know how many arguments that will be passed into your function, add a
+                        <code>*</code> before the parameter name in the function definition.
+                    </p>
+                    <p>This way the function will receive a tuple of arguments, and can access the items accordingly:
+                    </p>
+                    <pre class="code-block">
+def my_function(*kids):
+    print("The youngest child is " + kids[2])
+
+my_function("Emil", "Tobias", "Linus")
+</pre>
+
+                    <h2 id="keyword-args">Keyword Arguments</h2>
+                    <p>You can also send arguments with the <code>key = value</code> syntax.</p>
+                    <p>This way the order of the arguments does not matter.</p>
+                    <pre class="code-block">
+def my_function(child3, child2, child1):
+    print("The youngest child is " + child3)
+
+my_function(child1 = "Emil", child2 = "Tobias", child3 = "Linus")
+</pre>
+
+                    <h3>Arbitrary Keyword Arguments, **kwargs</h3>
+                    <p>If you do not know how many keyword arguments that will be passed into your function, add two
+                        asterisks: <code>**</code> before the parameter name in the function definition.</p>
+                    <pre class="code-block">
+def my_function(**kid):
+    print("His last name is " + kid["lname"])
+
+my_function(fname = "Tobias", lname = "Refsnes")
+</pre>
+
+                    <h2 id="default-parameter">Default Parameter Value</h2>
+                    <p>The following example shows how to use a default parameter value.</p>
+                    <p>If we call the function without argument, it uses the default value:</p>
+                    <pre class="code-block">
+def my_function(country = "Norway"):
+    print("I am from " + country)
+
+my_function("Sweden")
+my_function("India")
+my_function()
+my_function("Brazil")
+</pre>
+
+                    <h3>Passing a List as an Argument</h3>
+                    <p>You can send any data types of argument to a function (string, number, list, dictionary etc.),
+                        and it will be treated as the same data type inside the function.</p>
+                    <pre class="code-block">
+def my_function(food):
+    for x in food:
+        print(x)
+
+fruits = ["apple", "banana", "cherry"]
+
+my_function(fruits)
+</pre>
+
+                    <h2 id="return-values">Return Values</h2>
+                    <p>To let a function return a value, use the <code>return</code> statement:</p>
+                    <pre class="code-block">
+def my_function(x):
+    return 5 * x
+
+print(my_function(3))
+print(my_function(5))
+print(my_function(9))
+</pre>
+
+                    <h3>The pass Statement</h3>
+                    <p>function definitions cannot be empty, but if you for some reason have a function definition with
+                        no content, put in the <code>pass</code> statement to avoid getting an error.</p>
+                    <pre class="code-block">
+def myfunction():
+    pass
+</pre>
+
+                    <h2 id="recursion">Recursion</h2>
+                    <p>Python also accepts function recursion, which means a defined function can call itself.</p>
+                    <pre class="code-block">
+def tri_recursion(k):
+    if(k > 0):
+        result = k + tri_recursion(k - 1)
+        print(result)
+    else:
+        result = 0
+    return result
+
+print("\n\nRecursion Example Results")
+tri_recursion(6)
+</pre>
+                </div>
+
+                <div class="content-example">
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Worksheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a function to calculate the area of a circle.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>import math
+
+def area_of_circle(r):
+    return math.pi * r * r
+
+radius = float(input("Enter radius: "))
+print("Area:", area_of_circle(radius))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a function to check if a number is prime.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+num = int(input("Enter a number: "))
+if is_prime(num):
+    print("Prime Number")
+else:
+    print("Not a Prime Number")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a function to reverse a string.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def reverse_string(s):
+    return s[::-1]
+
+text = input("Enter a string: ")
+print("Reversed:", reverse_string(text))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a function to find the factorial of a number using recursion.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+num = int(input("Enter a number: "))
+print("Factorial:", factorial(num))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a function that accepts variable length arguments and prints their sum.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def sum_all(*args):
+    return sum(args)
+
+print(sum_all(10, 20, 30))
+print(sum_all(1, 2, 3, 4, 5))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a function to check if a string is a palindrome.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def is_palindrome(s):
+    return s == s[::-1]
+
+text = input("Enter a string: ")
+if is_palindrome(text):
+    print("Palindrome")
+else:
+    print("Not a Palindrome")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. Write a function to find the maximum of three numbers.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def max_of_three(a, b, c):
+    if a >= b and a >= c:
+        return a
+    elif b >= a and b >= c:
+        return b
+    else:
+        return c
+
+a, b, c = 10, 20, 5
+print("Maximum:", max_of_three(a, b, c))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a function that takes a list and returns a new list with unique elements of the
+                            first list.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def unique_list(l):
+    return list(set(l))
+
+print(unique_list([1, 2, 2, 3, 3, 4, 5]))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Write a function to count the number of upper case and lower case letters in a string.
+                        </h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def count_case(s):
+    upper = 0
+    lower = 0
+    for c in s:
+        if c.isupper():
+            upper += 1
+        elif c.islower():
+            lower += 1
+    print("Upper case:", upper)
+    print("Lower case:", lower)
+
+count_case("Hello World")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Create a function that calculates the Fibonacci sequence up to n terms.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        print(a, end=" ")
+        a, b = b, a + b
+
+terms = int(input("Enter number of terms: "))
+fibonacci(terms)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

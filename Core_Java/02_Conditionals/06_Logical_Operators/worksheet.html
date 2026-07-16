@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical Operators - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px
+        }
+
+        .explanation ol {
+            line-height: 1.8
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Logical Operators Worksheet</h5><a href="index.html"
+            style="color:#dc3545;text-decoration:none;display:block;margin-bottom:10px">← Back to Module</a>
+        <hr style="border-color:#34495e;margin:15px 0">
+        <nav><a href="#question1" class="nav-link active">Question 1</a><a href="#question2" class="nav-link">Question
+                2</a><a href="#question3" class="nav-link">Question 3</a></nav>
+    </div>
+    <div class="top-nav">
+        <h2>Logical Operators - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of Logical Operators (&&, ||, !) with these practice problems.</p>
+        </div>
+        <div class="section-card" id="question1">
+            <h3>Question 1: Login Validation (AND)</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Check login credentials. Both username must be "admin" AND password must be "1234".
+            </div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input
+                    1:</strong><br><code>admin</code><br><code>1234</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Login successful</code><br><br><strong>Sample Input
+                    2:</strong><br><code>admin</code><br><code>9999</code><br><br><strong>Sample Output
+                    2:</strong><br><code>Login failed</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class LoginValidation {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter username: ");
+        String user = sn.nextLine();
+        System.out.print("Enter password: ");
+        String pass = sn.nextLine();
+        
+        if (user.equals("admin") && pass.equals("1234")) {
+            System.out.println("Login successful");
+        } else {
+            System.out.println("Login failed");
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>AND requires both conditions true:</strong> If either username OR password is
+                                wrong, login fails. The && operator models this "both must be true" logic perfectly,
+                                which is fundamental to security and access control.</li>
+                            <li><strong>Short-circuit evaluation optimizes performance:</strong> If first condition
+                                (username) is false, Java doesn't even check the password. This saves computation and is
+                                crucial when conditions involve expensive operations like database queries.</li>
+                            <li><strong>String comparison uses .equals():</strong> For strings, == checks if they're the
+                                same object in memory, not if they have the same content. Always use .equals() to
+                                compare string values correctly.</li>
+                            <li><strong>Security note:</strong> Real applications hash passwords and never store them as
+                                plain text. They also limit login attempts and use secure authentication protocols. This
+                                demonstrates the logic, not production security.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div class="section-card" id="question2">
+            <h3>Question 2: Weekend Check (OR)</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Input a day number (1-7, where 1=Monday...7=Sunday). Print "Weekend!" if it's
+                Saturday (6) OR Sunday (7), otherwise print "Weekday".</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>6</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Weekend!</code><br><br><strong>Sample Input
+                    2:</strong><br><code>3</code><br><br><strong>Sample Output 2:</strong><br><code>Weekday</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class WeekendCheck {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Enter day (1-7): ");
+        int day = sn.nextInt();
+        
+        if (day == 6 || day == 7) {
+            System.out.println("Weekend!");
+        } else {
+            System.out.println("Weekday");
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>OR requires only one condition true:</strong> If day is 6 OR 7, it's weekend.
+                                Only one needs to match. This "at least one must be true" logic is perfect for checking
+                                multiple acceptable values.</li>
+                            <li><strong>Short-circuit with OR too:</strong> If first condition (day == 6) is true, Java
+                                doesn't check second condition. It already knows the result is true, saving unnecessary
+                                evaluation.</li>
+                            <li><strong>Alternative: use || for same-category checks:</strong> When checking if a value
+                                matches any of several options (like weekend days, vowels, prime numbers under 10), ||
+                                is cleaner than nested if statements.</li>
+                            <li><strong>Readability consideration:</strong> For many values (like checking all
+                                weekdays), a switch statement or arrays might be clearer. || works well for 2-3 options;
+                                beyond that, consider alternatives.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div class="section-card" id="question3">
+            <h3>Question 3: Access Denied (NOT)</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Check if access is denied. If user is NOT an admin (isAdmin = false), print "Access
+                Denied", otherwise print "Access Granted".</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input 1:</strong><br><code>false</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Access Denied</code><br><br><strong>Sample Input
+                    2:</strong><br><code>true</code><br><br><strong>Sample Output
+                    2:</strong><br><code>Access Granted</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class AccessControl {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+        System.out.print("Is admin (true/false): ");
+        boolean isAdmin = sn.nextBoolean();
+        
+        if (!isAdmin) {
+            System.out.println("Access Denied");
+        } else {
+            System.out.println("Access Granted");
+        }
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>NOT operator reverses boolean value:</strong> The ! operator flips true to false
+                                and false to true. If isAdmin is false, !isAdmin becomes true, executing the denial
+                                message.</li>
+                            <li><strong>Improves code readability:</strong> "if not admin then deny" reads more
+                                naturally than "if admin is false". The ! operator makes conditions match natural
+                                language logic.</li>
+                            <li><strong>Avoid double negatives:</strong> Writing if (!isNotAdmin) is confusing. Use
+                                positive variable names (isAdmin, hasPermission) and apply ! when needed for clarity.
+                            </li>
+                            <li><strong>Combining operators:</strong> Can combine ! with && and ||. For example: if
+                                (!isAdmin && isSensitiveData) means "if not admin AND trying to access sensitive data".
+                                Parentheses help clarity in complex expressions.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div style="margin-top:40px"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>Logical Operators - Practice Worksheet</strong></p>
+            <p>Master AND, OR, NOT operators in Java</p>
+            <p>&copy; 2026 Java Learning Platform</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('.sidebar nav a').forEach(link => { link.addEventListener('click', function () { document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active')); this.classList.add('active') }) });</script>
+</body>
+
+</html>

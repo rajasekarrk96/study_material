@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For-Each Loop - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+    <style>
+        .sample-io {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #212529;
+            font-weight: 500
+        }
+
+        .sample-io strong {
+            color: #000;
+            font-weight: 700
+        }
+
+        .sample-io code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: 600
+        }
+
+        details.solution-section {
+            margin: 20px 0;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            padding: 0
+        }
+
+        details.solution-section summary {
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            user-select: none
+        }
+
+        details.solution-section summary:hover {
+            background: #c82333
+        }
+
+        details.solution-section[open] summary {
+            border-radius: 6px 6px 0 0
+        }
+
+        details.solution-section .solution-content {
+            padding: 20px
+        }
+
+        .explanation ol {
+            line-height: 1.8
+        }
+
+        .explanation ol li {
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>For-Each Worksheet</h5><a href="index.html"
+            style="color:#dc3545;text-decoration:none;display:block;margin-bottom:10px">← Back to Module</a>
+        <hr style="border-color:#34495e;margin:15px 0">
+        <nav><a href="#question1" class="nav-link active">Question 1</a><a href="#question2" class="nav-link">Question
+                2</a><a href="#question3" class="nav-link">Question 3</a><a href="#question4" class="nav-link">Question
+                4</a><a href="#question5" class="nav-link">Question 5</a></nav>
+    </div>
+    <div class="top-nav">
+        <h2>For-Each Loop - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Test your understanding of For-Each Loops with these practice problems.</p>
+        </div>
+
+        <div class="section-card" id="question1">
+            <h3>Question 1: Print Array Elements</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Print all elements of an integer array using for-each loop.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input
+                    1:</strong><br><code>Array: {10, 20, 30, 40, 50}</code><br><br><strong>Sample Output
+                    1:</strong><br><code>10<br>20<br>30<br>40<br>50</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class PrintArray {
+    public static void main(String[] args) {
+        int[] numbers = {10, 20, 30, 40, 50};
+        
+        for (int num : numbers) {
+            System.out.println(num);
+        }
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>For-each simplifies array traversal:</strong> No index variable needed. "for
+                                each num in numbers" reads naturally. Compare to for(int i=0; i<numbers.length; i++) -
+                                    much cleaner!</li>
+                            <li><strong>Variable holds current element:</strong> Each iteration, num automatically gets
+                                the next array element. First iteration num=10, second num=20, etc. No manual indexing
+                                like numbers[i].</li>
+                            <li><strong>Cannot modify array through for-each:</strong> num is a copy of the array
+                                element. Changing num doesn't change the array. For-each is read-only iteration.</li>
+                            <li><strong>Perfect for simple traversal:</strong> When you just need to process each
+                                element sequentially without modifying or needing the index, for-each is the cleanest
+                                choice.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question2">
+            <h3>Question 2: Sum of Array Elements</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Calculate sum of all elements in an array using for-each loop.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input
+                    1:</strong><br><code>Array: {5, 10, 15, 20}</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Sum: 50</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class ArraySum {
+    public static void main(String[] args) {
+        int[] numbers = {5, 10, 15, 20};
+        int sum = 0;
+        
+        for (int num : numbers) {
+            sum += num;
+        }
+        
+        System.out.println("Sum: " + sum);
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Accumulator pattern with for-each:</strong> sum starts at 0, then each element
+                                is added to it. For-each makes this pattern simpler since we don't care about position,
+                                just values.</li>
+                            <li><strong>No risk of index errors:</strong> Traditional loops might have i <
+                                    numbers.length-1 (off-by-one error). For-each automatically handles all elements
+                                    correctly - no boundary mistakes possible.</li>
+                            <li><strong>Works with any array size:</strong> Whether array has 4 elements or 4000, code
+                                stays the same. For-each adapts automatically to collection size.</li>
+                            <li><strong>When NOT to use for-each:</strong> If you needed index for something (like "sum
+                                only even positions"), you'd need traditional for loop. For-each trades flexibility for
+                                simplicity.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question3">
+            <h3>Question 3: Find Maximum Element</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Find the largest number in an array using for-each loop.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input
+                    1:</strong><br><code>Array: {23, 67, 12, 89, 45}</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Maximum: 89</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class FindMax {
+    public static void main(String[] args) {
+        int[] numbers = {23, 67, 12, 89, 45};
+        int max = numbers[0];  // Initialize with first element
+        
+        for (int num : numbers) {
+            if (num > max) {
+                max = num;
+            }
+        }
+        
+        System.out.println("Maximum: " + max);
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Initialize max with first element:</strong> Starting with numbers[0] guarantees
+                                max is a valid array value. Starting with 0 or Integer.MIN_VALUE works but is less
+                                elegant.</li>
+                            <li><strong>Comparison pattern:</strong> Each element is compared to current max. If larger,
+                                it becomes new max. This max-tracking pattern is fundamental to many algorithms.</li>
+                            <li><strong>Why for-each works here:</strong> We only need values, not positions. Don't care
+                                WHERE the max is, just WHAT it is. Perfect for-each use case.</li>
+                            <li><strong>Extension to min or other extremes:</strong> Same logic works for minimum (if
+                                num < min), second largest (track two variables), etc. Understanding the pattern lets
+                                    you adapt it.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question4">
+            <h3>Question 4: Count Specific Elements</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Count how many times a specific number appears in an array using for-each.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input
+                    1:</strong><br><code>Array: {5, 3, 5, 7, 5, 9}<br>Search for: 5</code><br><br><strong>Sample Output
+                    1:</strong><br><code>5 appears 3 times</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>import java.util.Scanner;
+
+public class CountOccurrences {
+    public static void main(String[] args) {
+        int[] numbers = {5, 3, 5, 7, 5, 9};
+        Scanner sn = new Scanner(System.in);
+        
+        System.out.print("Search for: ");
+        int target = sn.nextInt();
+        int count = 0;
+        
+        for (int num : numbers) {
+            if (num == target) {
+                count++;
+            }
+        }
+        
+        System.out.println(target + " appears " + count + " times");
+        sn.close();
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Counter pattern with conditionals:</strong> count increments only when condition
+                                matches. Combining for-each with if creates a filtering+counting pattern used
+                                everywhere.</li>
+                            <li><strong>For-each + search is common:</strong> Looking for elements matching criteria
+                                doesn't need index. For-each handles iteration, if handles filtering. Clean separation
+                                of concerns.</li>
+                            <li><strong>Works for any type:</strong> Same logic works for String arrays (use .equals()),
+                                char arrays, object arrays. For-each is type-flexible.</li>
+                            <li><strong>Multiple conditions possible:</strong> Could count numbers >10, or even numbers,
+                                or numbers divisible by 3. The for-each structure stays same, only the condition
+                                changes.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="section-card" id="question5">
+            <h3>Question 5: Average of Array</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Calculate average of numbers in an array using for-each loop.</div>
+            <h4>Sample Input and Output</h4>
+            <div class="sample-io"><strong>Sample Input
+                    1:</strong><br><code>Array: {10, 20, 30, 40, 50}</code><br><br><strong>Sample Output
+                    1:</strong><br><code>Average: 30.0</code></div>
+            <details class="solution-section">
+                <summary>▼ Show Solution</summary>
+                <div class="solution-content">
+                    <h4>Solution (Java Program)</h4>
+                    <div class="code-block"><code>public class ArrayAverage {
+    public static void main(String[] args) {
+        int[] numbers = {10, 20, 30, 40, 50};
+        int sum = 0;
+        
+        for (int num : numbers) {
+            sum += num;
+        }
+        
+        double average = (double) sum / numbers.length;
+        System.out.println("Average: " + average);
+    }
+}</code></div>
+                    <h4>Step-by-Step Explanation</h4>
+                    <div class="explanation">
+                        <ol>
+                            <li><strong>Still need .length for count:</strong> For-each doesn't give us the count
+                                directly. We use numbers.length to get array size for average calculation. This is the
+                                trade-off - simpler iteration, but length is separate.</li>
+                            <li><strong>Cast to double for precision:</strong> (double) sum prevents integer division.
+                                Without it, 50/5 would give 10, not 10.0. For accurate averages, ensure floating-point
+                                division.</li>
+                            <li><strong>Two-step calculation pattern:</strong> First accumulate sum, then divide by
+                                count. Many statistical operations follow this pattern - sum first, then apply final
+                                operation.</li>
+                            <li><strong>When for-each shines:</strong> This problem demonstrates for-each perfectly -
+                                simple element access, no modification, no index needed. When these conditions apply,
+                                for-each is always the best choice.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div style="margin-top:40px"><a href="index.html" class="btn-worksheet">← Back to Module</a></div>
+        <footer>
+            <p><strong>For-Each Loop - Practice Worksheet</strong></p>
+            <p>Master enhanced for loops in Java</p>
+            <p>&copy; 2026 Java Learning Platform</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>document.querySelectorAll('.sidebar nav a').forEach(link => { link.addEventListener('click', function () { document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active')); this.classList.add('active') }) });</script>
+</body>
+
+</html>

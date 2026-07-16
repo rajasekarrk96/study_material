@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CallableStatement - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>CallableStatement</h5><a href="../../index.html#jdbc">← Back to Home</a>
+        <hr style="border-color:#34495e;margin:15px 0"><a href="#concept">Concept</a>
+    </div>
+    <div class="top-nav">
+        <h2>CallableStatement</h2>
+    </div>
+    <div class="main-content">
+        <div class="module-header">
+            <h1>CallableStatement in JDBC</h1>
+            <p class="lead text-muted">Execute stored procedures and functions in databases</p>
+        </div>
+        <div class="section" id="concept">
+            <h4>What is CallableStatement?</h4>
+            <p>CallableStatement is used to execute stored procedures in the database.</p>
+            <pre><code>CallableStatement cstmt = conn.prepareCall("{call getUser(?)}");
+cstmt.setInt(1, 101);
+ResultSet rs = cstmt.executeQuery();</code></pre>
+        </div>
+        <div
+            style="text-align:center;padding:40px 0;color:#999;font-size:14px;border-top:1px solid #e0e0e0;margin-top:40px">
+            <p>CallableStatement Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create / Drop Table - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Create / Drop Table</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Create / Drop Table</h2>
+                <p class="topic-desc">The CREATE TABLE statement is used to create a new table in a database with specified columns and data types.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">CREATE TABLE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to create a new table in a database with specified columns and data types.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> table_name (
+    column1 datatype,
+    column2 datatype,
+    column3 datatype
+);</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> students (
+    student_id <span class="sql-keyword">INT</span>,
+    name <span class="sql-keyword">VARCHAR</span>(50),
+    age <span class="sql-keyword">INT</span>
+);</code></pre><div class="output-box">Query OK, 0 rows affected<br>📌 A new table named students is created.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">CREATE TABLE IF NOT EXISTS</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to create a table only if it does not already exist.<br>If the table exists, no error occurs.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">EXISTS</span> table_name (
+    column1 datatype,
+    column2 datatype,
+    column3 datatype
+);</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">EXISTS</span> students (
+    student_id <span class="sql-keyword">INT</span>,
+    name <span class="sql-keyword">VARCHAR</span>(50),
+    age <span class="sql-keyword">INT</span>
+);</code></pre><div class="output-box">Query OK, 0 rows affected<br>📌 No error is shown.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">DROP TABLE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to permanently delete a table from the database along with all its data and structure.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">TABLE</span> table_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">TABLE</span> students;</code></pre><div class="output-box">Query OK, 0 rows affected<br>✅ Table students is deleted completely.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">DROP TABLE IF EXISTS</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Prevents error if the table does not exist.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">TABLE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">EXISTS</span> table_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">TABLE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">EXISTS</span> students;</code></pre><div class="output-box">Query OK, 0 rows affected (or Warning if not exists)</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Drop Multiple Tables</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to delete multiple tables in a single command.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">TABLE</span> table1, table2, table3;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">TABLE</span> students, employees, departments;</code></pre><div class="output-box">Query OK, 0 rows affected</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Create a table students with id, name, and age.</strong><br>
+    <button class="toggle-btn" data-target="topic2-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="topic2-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE TABLE students (
+    id INT,
+    name VARCHAR(50),
+    age INT
+);</code></pre><br>
+        Output:<br>Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display the structure of the students table.</strong><br>
+    <button class="toggle-btn" data-target="topic2-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="topic2-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DESCRIBE students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Rename the table students to student_details.</strong><br>
+    <button class="toggle-btn" data-target="topic2-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="topic2-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>RENAME TABLE students TO student_details;</code></pre><br>
+        Output:<br>Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Create a table courses only if it does not already exist.</strong><br>
+    <button class="toggle-btn" data-target="topic2-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="topic2-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE TABLE IF NOT EXISTS courses (
+    course_id INT,
+    course_name VARCHAR(50)
+);</code></pre><br>
+        Output:<br>Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Delete (drop) the table courses.</strong><br>
+    <button class="toggle-btn" data-target="topic2-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="topic2-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DROP TABLE courses;</code></pre><br>
+        Output:<br>Query OK, 0 rows affected
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='02_create-drop-database.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Create / Drop Database</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='04_data-types.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Data Types →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

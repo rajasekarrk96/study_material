@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joins - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Joins</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Joins</h2>
+                <p class="topic-desc">JOIN is used to combine rows from two or more tables based on a related column between them.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-bullet="diamond">Example Tables</h3>
+                        <p class="subtopic-desc">Sample data used for the join examples.</p>
+            <div class="output-box">
+                <div style='display: flex; gap: 20px; flex-wrap: wrap;'>
+                    <div style='flex: 1; min-width: 250px;'>
+                        <strong style='color: var(--accent-primary);'>employees</strong>
+                        <table style='border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px;'>
+                            <thead><tr><th>emp_id</th><th>name</th><th>dept_id</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Arun</td><td>101</td></tr>
+                                <tr><td>2</td><td>Ravi</td><td>102</td></tr>
+                                <tr><td>3</td><td>Meena</td><td>101</td></tr>
+                                <tr><td>4</td><td>Sita</td><td>103</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style='flex: 1; min-width: 250px;'>
+                        <strong style='color: var(--accent-secondary);'>departments</strong>
+                        <table style='border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px;'>
+                            <thead><tr><th>dept_id</th><th>dept_name</th></tr></thead>
+                            <tbody>
+                                <tr><td>101</td><td>IT</td></tr>
+                                <tr><td>102</td><td>HR</td></tr>
+                                <tr><td>104</td><td>Finance</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">INNER JOIN</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Returns only the rows where there is a match in both tables.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> columns\nFROM table1\nINNER <span class="sql-keyword">JOIN</span> table2 <span class="sql-keyword">ON</span> table1.<span class="sql-keyword">column</span> = table2.<span class="sql-keyword">column</span>;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> e.emp_id, e.name, d.dept_name\nFROM employees e\nINNER <span class="sql-keyword">JOIN</span> departments d\nON e.dept_id = d.dept_id;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>emp_id</th><th>name</th><th>dept_name</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Arun</td><td>IT</td></tr>
+                        <tr><td>2</td><td>Ravi</td><td>HR</td></tr>
+                        <tr><td>3</td><td>Meena</td><td>IT</td></tr>
+                    </tbody>
+                </table>
+                <br>❌ Sita excluded (no matching department in departments table).</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">LEFT JOIN (LEFT OUTER JOIN)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Returns all rows from the left table, and the matched rows from the right table. If no match, NULL is returned from the right side.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> e.name, d.dept_name\nFROM employees e\nLEFT <span class="sql-keyword">JOIN</span> departments d\nON e.dept_id = d.dept_id;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>name</th><th>dept_name</th></tr></thead>
+                    <tbody>
+                        <tr><td>Arun</td><td>IT</td></tr>
+                        <tr><td>Ravi</td><td>HR</td></tr>
+                        <tr><td>Meena</td><td>IT</td></tr>
+                        <tr><td>Sita</td><td>NULL</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">RIGHT JOIN (RIGHT OUTER JOIN)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Returns all rows from the right table, and the matched rows from the left table. If no match, NULL is returned from the left side.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> e.name, d.dept_name\nFROM employees e\nRIGHT <span class="sql-keyword">JOIN</span> departments d\nON e.dept_id = d.dept_id;</code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>name</th><th>dept_name</th></tr></thead>
+                    <tbody>
+                        <tr><td>Arun</td><td>IT</td></tr>
+                        <tr><td>Ravi</td><td>HR</td></tr>
+                        <tr><td>Meena</td><td>IT</td></tr>
+                        <tr><td>NULL</td><td>Finance</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">FULL JOIN (FULL OUTER JOIN)</h3>
+                        <p class="subtopic-desc"><strong>🔹 Goal</strong><br>Returns all rows when there is a match in either left or right table.<br>⚠️ <strong>Note:</strong> MySQL doesn't support FULL JOIN directly. We use UNION to achieve this.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- MySQL Alternative for FULL <span class="sql-keyword">JOIN</span>\nSELECT e.name, d.dept_name\nFROM employees e\nLEFT <span class="sql-keyword">JOIN</span> departments d <span class="sql-keyword">ON</span> e.dept_id = d.dept_id\nUNION\nSELECT e.name, d.dept_name\nFROM employees e\nRIGHT <span class="sql-keyword">JOIN</span> departments d <span class="sql-keyword">ON</span> e.dept_id = d.dept_id;</span></code></pre><div class="output-box">
+                <strong>Result:</strong><br>
+                <table style='border-collapse: collapse; width: 100%; font-size: 13px;'>
+                    <thead><tr><th>name</th><th>dept_name</th></tr></thead>
+                    <tbody>
+                        <tr><td>Arun</td><td>IT</td></tr>
+                        <tr><td>Ravi</td><td>HR</td></tr>
+                        <tr><td>Meena</td><td>IT</td></tr>
+                        <tr><td>Sita</td><td>NULL</td></tr>
+                        <tr><td>NULL</td><td>Finance</td></tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Inner Join – Display students with their department names.</strong><br>
+    <button class="toggle-btn" data-target="ans-t25-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t25-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT s.id, s.name, d.dept_name
+FROM students s
+INNER JOIN department d
+ON s.dept_id = d.dept_id;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------------+
+| id | name   | dept_name  |
++----+--------+------------+
+| 1  | Arun   | IT         |
+| 2  | Priya  | HR         |
+| 3  | Kiran  | IT         |
++----+--------+------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Left Join – Display all students, including those without a department.</strong><br>
+    <button class="toggle-btn" data-target="ans-t25-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t25-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT s.id, s.name, d.dept_name
+FROM students s
+LEFT JOIN department d
+ON s.dept_id = d.dept_id;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------------+
+| id | name   | dept_name  |
++----+--------+------------+
+| 1  | Arun   | IT         |
+| 2  | Priya  | HR         |
+| 3  | Kiran  | IT         |
+| 4  | Meena  | NULL       |
++----+--------+------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Right Join – Display all departments, including those without students.</strong><br>
+    <button class="toggle-btn" data-target="ans-t25-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t25-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT s.id, s.name, d.dept_name
+FROM students s
+RIGHT JOIN department d
+ON s.dept_id = d.dept_id;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+--------+------------+
+| id   | name   | dept_name  |
++------+--------+------------+
+| 1    | Arun   | IT         |
+| 3    | Kiran  | IT         |
+| 2    | Priya  | HR         |
+| NULL | NULL   | Finance    |
++------+--------+------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Full Outer Join – Display all students and departments (MySQL uses UNION).</strong><br>
+    <button class="toggle-btn" data-target="ans-t25-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t25-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT s.id, s.name, d.dept_name
+FROM students s
+LEFT JOIN department d ON s.dept_id = d.dept_id
+UNION
+SELECT s.id, s.name, d.dept_name
+FROM students s
+RIGHT JOIN department d ON s.dept_id = d.dept_id;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------+--------+------------+
+| id   | name   | dept_name  |
++------+--------+------------+
+| 1    | Arun   | IT         |
+| 2    | Priya  | HR         |
+| 3    | Kiran  | IT         |
+| 4    | Meena  | NULL       |
+| NULL | NULL   | Finance    |
++------+--------+------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Self Join – Display students paired with students in the same department.</strong><br>
+    <button class="toggle-btn" data-target="ans-t25-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t25-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT s1.name AS student1, s2.name AS student2, s1.dept_id
+FROM students s1
+JOIN students s2
+ON s1.dept_id = s2.dept_id AND s1.id <> s2.id;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----------+----------+---------+
+| student1 | student2 | dept_id |
++----------+----------+---------+
+| Arun     | Kiran    | 1       |
+| Kiran    | Arun     | 1       |
++----------+----------+---------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='25_union.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Union / Union All</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='27_subqueries.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Subqueries →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

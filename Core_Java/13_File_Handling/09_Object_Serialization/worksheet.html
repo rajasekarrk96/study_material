@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Serialization - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Serialization Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>Object Serialization - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master Java object serialization for saving and restoring object states.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Basic Object Serialization</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to serialize a Student object to a file. The Student class should have
+                fields for id, name, and marks. Demonstrate how to save an object's state to a file.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.*;
+
+class Student implements Serializable {
+    int id;
+    String name;
+    double marks;
+
+    Student(int id, String name, double marks) {
+        this.id = id;
+        this.name = name;
+        this.marks = marks;
+    }
+}
+
+class SerializeStudent {
+    public static void main(String[] args) {
+        Student s = new Student(101, "Alice", 95.5);
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream("student.ser"))) {
+            oos.writeObject(s);
+            System.out.println("Student object serialized successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Student object serialized successfully
+
+(Creates a file: student.ser containing the serialized object)</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Serializable Interface:</strong> Marker interface (no methods) that enables
+                        serialization</li>
+                    <li><strong>ObjectOutputStream:</strong> Writes objects to an output stream</li>
+                    <li><strong>writeObject():</strong> Serializes the object to the stream</li>
+                    <li><strong>.ser Extension:</strong> Common convention for serialized files</li>
+                </ul>
+                <strong>Requirements:</strong>
+                <ul>
+                    <li>Class must implement Serializable</li>
+                    <li>All non-transient fields must be serializable</li>
+                    <li>Use try-with-resources for automatic stream closing</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Object Deserialization</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to deserialize the Student object from the file created in Question 1.
+                Read the object from the file and display its data to verify successful deserialization.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.*;
+
+class Student implements Serializable {
+    int id;
+    String name;
+    double marks;
+
+    Student(int id, String name, double marks) {
+        this.id = id;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    void display() {
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Marks: " + marks);
+    }
+}
+
+class DeserializeStudent {
+    public static void main(String[] args) {
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("student.ser"))) {
+            Student s = (Student) ois.readObject();
+            System.out.println("Student object deserialized successfully\n");
+            s.display();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Student object deserialized successfully
+
+ID: 101
+Name: Alice
+Marks: 95.5</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>ObjectInputStream:</strong> Reads objects from an input stream</li>
+                    <li><strong>readObject():</strong> Deserializes object from stream (returns Object)</li>
+                    <li><strong>Type Casting:</strong> Must cast to appropriate type after reading</li>
+                    <li><strong>ClassNotFoundException:</strong> Thrown if class definition not found</li>
+                </ul>
+                <strong>Important:</strong> The class definition must be available during deserialization
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Using transient Keyword</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program demonstrating the transient keyword. Create a User class with username, password,
+                and sessionId fields. Mark password and sessionId as transient so they are not serialized.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.*;
+
+class User implements Serializable {
+    String username;
+    transient String password;      // Not serialized
+    transient String sessionId;     // Not serialized
+    int loginCount;
+
+    User(String username, String password, String sessionId, int loginCount) {
+        this.username = username;
+        this.password = password;
+        this.sessionId = sessionId;
+        this.loginCount = loginCount;
+    }
+
+    void display() {
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
+        System.out.println("Session ID: " + sessionId);
+        System.out.println("Login Count: " + loginCount);
+    }
+}
+
+class TransientDemo {
+    public static void main(String[] args) {
+        User user = new User("john_doe", "secret123", "ABC-XYZ-789", 5);
+
+        // Serialize
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream("user.ser"))) {
+            oos.writeObject(user);
+            System.out.println("Before Serialization:");
+            user.display();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Deserialize
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("user.ser"))) {
+            User deserializedUser = (User) ois.readObject();
+            System.out.println("\nAfter Deserialization:");
+            deserializedUser.display();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Before Serialization:
+Username: john_doe
+Password: secret123
+Session ID: ABC-XYZ-789
+Login Count: 5
+
+After Deserialization:
+Username: john_doe
+Password: null
+Session ID: null
+Login Count: 5</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>transient Keyword:</strong> Prevents field from being serialized</li>
+                    <li><strong>Default Values:</strong> Transient fields get default values after deserialization (null
+                        for objects, 0 for numbers)</li>
+                    <li><strong>Security:</strong> Use transient for sensitive data like passwords</li>
+                    <li><strong>Session Data:</strong> Temporary data that shouldn't be persisted</li>
+                </ul>
+                <strong>Common Use Cases:</strong>
+                <ul>
+                    <li>Passwords and sensitive information</li>
+                    <li>Cached or derived values</li>
+                    <li>Thread references</li>
+                    <li>Database connections</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Serializing Collections</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to serialize an ArrayList of Product objects. Create a Product class with
+                id, name, and price fields. Serialize a list of products to a file and then deserialize it back.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.*;
+import java.util.ArrayList;
+
+class Product implements Serializable {
+    int id;
+    String name;
+    double price;
+
+    Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public String toString() {
+        return "Product[ID=" + id + ", Name=" + name + ", Price=$" + price + "]";
+    }
+}
+
+class SerializeCollection {
+    public static void main(String[] args) {
+        ArrayList<Product> products = new ArrayList<>();
+        products.add(new Product(1, "Laptop", 999.99));
+        products.add(new Product(2, "Mouse", 25.50));
+        products.add(new Product(3, "Keyboard", 75.00));
+
+        // Serialize ArrayList
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream("products.ser"))) {
+            oos.writeObject(products);
+            System.out.println("Products serialized successfully\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Deserialize ArrayList
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("products.ser"))) {
+            @SuppressWarnings("unchecked")
+            ArrayList<Product> deserializedProducts = (ArrayList<Product>) ois.readObject();
+            System.out.println("Products deserialized successfully:\n");
+            for (Product p : deserializedProducts) {
+                System.out.println(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Products serialized successfully
+
+Products deserialized successfully:
+
+Product[ID=1, Name=Laptop, Price=$999.99]
+Product[ID=2, Name=Mouse, Price=$25.5]
+Product[ID=3, Name=Keyboard, Price=$75.0]</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Collection Serialization:</strong> ArrayList implements Serializable</li>
+                    <li><strong>Generic Type Casting:</strong> Need to cast to ArrayList&lt;Product&gt;</li>
+                    <li><strong>@SuppressWarnings:</strong> Suppress unchecked cast warning</li>
+                    <li><strong>All Elements Must Be Serializable:</strong> Product class must implement Serializable
+                    </li>
+                </ul>
+                <strong>Serializable Collections:</strong> ArrayList, LinkedList, HashMap, HashSet, TreeMap, TreeSet
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: serialVersionUID and Version Control</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program demonstrating the use of serialVersionUID for version control.
+                Show what happens when you modify a class after serialization and the importance of
+                maintaining a consistent serialVersionUID.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.io.*;
+
+class Employee implements Serializable {
+    // Explicit serialVersionUID for version control
+    private static final long serialVersionUID = 1L;
+
+    int empId;
+    String name;
+    double salary;
+
+    Employee(int empId, String name, double salary) {
+        this.empId = empId;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    void display() {
+        System.out.println("Employee ID: " + empId);
+        System.out.println("Name: " + name);
+        System.out.println("Salary: $" + salary);
+    }
+}
+
+class SerialVersionUIDDemo {
+    public static void main(String[] args) {
+        // Serialize
+        Employee emp = new Employee(101, "Bob Smith", 75000);
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream("employee.ser"))) {
+            oos.writeObject(emp);
+            System.out.println("Employee serialized with serialVersionUID: " + 
+                Employee.serialVersionUID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Deserialize
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("employee.ser"))) {
+            Employee deserializedEmp = (Employee) ois.readObject();
+            System.out.println("\nEmployee deserialized successfully:\n");
+            deserializedEmp.display();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Employee serialized with serialVersionUID: 1
+
+Employee deserialized successfully:
+
+Employee ID: 101
+Name: Bob Smith
+Salary: $75000.0</code></div>
+
+            <h4>Understanding serialVersionUID</h4>
+            <div class="code-block"><code>// Without explicit serialVersionUID (NOT RECOMMENDED)
+class Employee implements Serializable {
+    // JVM generates serialVersionUID automatically
+    // Changes to class structure will change the UID
+    int empId;
+    String name;
+}
+
+// With explicit serialVersionUID (RECOMMENDED)
+class Employee implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
+    int empId;
+    String name;
+    // Can add new fields without breaking compatibility
+    double salary;  // Added later
+}
+
+// What happens without serialVersionUID:
+// 1. Serialize Employee with fields: empId, name
+// 2. Add new field: salary
+// 3. Try to deserialize → InvalidClassException!
+
+// With serialVersionUID:
+// 1. Serialize Employee (serialVersionUID = 1L)
+// 2. Add new field: salary (keep serialVersionUID = 1L)
+// 3. Deserialize → Works! (new field gets default value)</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>serialVersionUID:</strong> Unique identifier for Serializable class version</li>
+                    <li><strong>Version Control:</strong> Ensures compatibility between serialized and deserialized
+                        versions</li>
+                    <li><strong>InvalidClassException:</strong> Thrown when serialVersionUID doesn't match</li>
+                    <li><strong>Best Practice:</strong> Always declare explicit serialVersionUID</li>
+                </ul>
+                <strong>When to Change serialVersionUID:</strong>
+                <ul>
+                    <li>Incompatible changes (removing fields, changing field types)</li>
+                    <li>When you want to break backward compatibility</li>
+                </ul>
+                <strong>When to Keep Same serialVersionUID:</strong>
+                <ul>
+                    <li>Adding new fields (backward compatible)</li>
+                    <li>Adding methods</li>
+                    <li>Changing method implementations</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Object Serialization Module - Practice Worksheet</strong></p>
+            <p>Master Java object persistence and serialization</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methods (WOPWR) - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Methods Worksheet</h5>
+        <a href="index.html" class="nav-link">← Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Methods (WOPWR) - Practice</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master Methods without parameters but with return values (WOPWR).</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Random Number Generator</h3>
+            <div class="explanation">Write a Java method named <code>getRandomNumber</code> that returns a random
+                integer between 1 and 100. Call it from <code>main()</code> and print the result.</div>
+            <div class="code-block"><code>class _01_ {
+
+    static int getRandomNumber() {
+        return (int) (Math.random() * 100) + 1;
+    }
+
+    public static void main(String[] args) {
+        int random = getRandomNumber();
+        System.out.println("Random Number: " + random);
+    }
+}</code></div>
+            <div class="output-block"><code>Random Number: 42 (Example)</code></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Current Date String</h3>
+            <div class="explanation">Write a Java method named <code>getCurrentDate</code> that returns the current date
+                as a <code>String</code> using <code>java.time.LocalDate.now().toString()</code>.</div>
+            <div class="code-block"><code>class _02_ {
+
+    static String getCurrentDate() {
+        return java.time.LocalDate.now().toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Current Date: " + getCurrentDate());
+    }
+}</code></div>
+            <div class="output-block"><code>Current Date: 2026-01-08 (Example)</code></div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Methods (WOPWR) Module - Practice Worksheet</strong></p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

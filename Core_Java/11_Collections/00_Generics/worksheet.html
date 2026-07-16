@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generics - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Generics Worksheet</h5>
+        <a href="01_Generic_Classes/index.html"
+            style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Generics - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master Java Generics with collection operations and generic data structures.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Generic Method to Sort a Collection</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of generics to implement a generic
+                method that sorts a collection of elements.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.*;
+
+class _01_ {
+
+    static &lt;T extends Comparable&lt;T&gt;&gt; void sortList(List&lt;T&gt; list) {
+        Collections.sort(list);
+    }
+
+    public static void main(String[] args) {
+        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+
+        list.add(5);
+        list.add(2);
+        list.add(8);
+        list.add(1);
+
+        sortList(list);
+
+        System.out.println(list);
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>[1, 2, 5, 8]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Bounded Type Parameter:</strong> &lt;T extends Comparable&lt;T&gt;&gt; ensures T can be
+                        compared</li>
+                    <li><strong>Generic Method:</strong> Works with any type that implements Comparable</li>
+                    <li><strong>Collections.sort():</strong> Sorts list in natural order</li>
+                    <li><strong>Type Safety:</strong> Compile-time checking prevents non-comparable types</li>
+                </ul>
+                <strong>Why Comparable?</strong> To sort elements, they must be comparable to each other
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Generic Linked List Class</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of generics to implement a generic
+                class that represents a linked list.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _02_&lt;T&gt; {
+
+    class Node {
+        T data;
+        Node next;
+
+        Node(T d) {
+            data = d;
+        }
+    }
+
+    Node head;
+
+    void add(T data) {
+        Node n = new Node(data);
+        if (head == null)
+            head = n;
+        else {
+            Node temp = head;
+            while (temp.next != null)
+                temp = temp.next;
+            temp.next = n;
+        }
+    }
+
+    void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        _02_&lt;String&gt; list = new _02_&lt;&gt;();
+
+        list.add("A");
+        list.add("B");
+        list.add("C");
+
+        list.display();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>A B C</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Generic Class:</strong> _02_&lt;T&gt; can store any type</li>
+                    <li><strong>Inner Node Class:</strong> Uses outer class's type parameter T</li>
+                    <li><strong>Type Reusability:</strong> Same code works for String, Integer, etc.</li>
+                    <li><strong>Linked List:</strong> Dynamic data structure with nodes</li>
+                </ul>
+                <strong>Advantages:</strong> No casting needed, type-safe operations, code reuse
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Generic Method to Compute Sum of Numbers</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of generics to implement a generic
+                method that computes the sum of a collection of numbers.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.*;
+
+class _03_ {
+
+    static &lt;T extends Number&gt; double sum(Collection&lt;T&gt; c) {
+        double s = 0;
+        for (T n : c)
+            s += n.doubleValue();
+        return s;
+    }
+
+    public static void main(String[] args) {
+        List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 4);
+
+        System.out.println("Sum = " + sum(list));
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Sum = 10.0</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Bounded Type:</strong> &lt;T extends Number&gt; restricts to numeric types</li>
+                    <li><strong>Number Class:</strong> Parent of Integer, Double, Float, etc.</li>
+                    <li><strong>doubleValue():</strong> Converts any Number to double</li>
+                    <li><strong>Collection Interface:</strong> Works with List, Set, etc.</li>
+                </ul>
+                <strong>Works with:</strong> Integer, Double, Float, Long, Short, Byte
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Generic Method to Merge Two Collections</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of generics to implement a generic
+                method that merges two collections of elements.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.*;
+
+class _04_ {
+
+    static &lt;T&gt; List&lt;T&gt; merge(Collection&lt;T&gt; c1, Collection&lt;T&gt; c2) {
+        List&lt;T&gt; result = new ArrayList&lt;&gt;();
+        result.addAll(c1);
+        result.addAll(c2);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        List&lt;String&gt; a = Arrays.asList("A", "B");
+        List&lt;String&gt; b = Arrays.asList("C", "D");
+
+        System.out.println(merge(a, b));
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>[A, B, C, D]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Unbounded Type Parameter:</strong> &lt;T&gt; accepts any type</li>
+                    <li><strong>addAll():</strong> Adds all elements from one collection to another</li>
+                    <li><strong>Type Consistency:</strong> Both collections must have same type</li>
+                    <li><strong>Return Type:</strong> Returns List&lt;T&gt; containing merged elements</li>
+                </ul>
+                <strong>Note:</strong> Creates new list, original collections unchanged
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Generic Method to Find Common Elements</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates the use of generics to implement a generic
+                method that finds the common elements between two collections.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.*;
+
+class _05_ {
+
+    static &lt;T&gt; Set&lt;T&gt; common(Collection&lt;T&gt; c1, Collection&lt;T&gt; c2) {
+        Set&lt;T&gt; set = new HashSet&lt;&gt;(c1);
+        set.retainAll(c2);
+        return set;
+    }
+
+    public static void main(String[] args) {
+        List&lt;Integer&gt; a = Arrays.asList(1, 2, 3, 4);
+        List&lt;Integer&gt; b = Arrays.asList(3, 4, 5);
+
+        System.out.println(common(a, b));
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>[3, 4]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Set Interface:</strong> Automatically removes duplicates</li>
+                    <li><strong>retainAll():</strong> Keeps only elements present in both collections</li>
+                    <li><strong>HashSet Constructor:</strong> Creates set from collection</li>
+                    <li><strong>Intersection Operation:</strong> Mathematical set intersection</li>
+                </ul>
+                <strong>Use Cases:</strong> Finding common items, set operations, data comparison
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="01_Generic_Classes/index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>Generics Module - Practice Worksheet</strong></p>
+            <p>Master type-safe programming with Java Generics</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

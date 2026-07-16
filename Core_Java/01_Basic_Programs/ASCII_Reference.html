@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete ASCII Reference Chart (0-256)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        .chart-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .ascii-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .ascii-cell {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: 2px solid #b0c4de;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-height: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ascii-cell:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .ascii-cell.control {
+            background: linear-gradient(135deg, #ffe0e0 0%, #ffb3b3 100%);
+            border-color: #ff9999;
+        }
+
+        .ascii-cell.control:hover {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            color: white;
+        }
+
+        .ascii-cell.extended {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
+            border-color: #81d4fa;
+        }
+
+        .ascii-cell.extended:hover {
+            background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+            color: white;
+        }
+
+        .ascii-char {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            word-break: break-all;
+        }
+
+        .ascii-value {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .ascii-cell:hover .ascii-value {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .range-info {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .range-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .range-content {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .quick-ref {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .quick-ref-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .quick-ref-title {
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 8px;
+        }
+
+        .quick-ref-content {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .conversion-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .conversion-code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .back-button a {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .back-button a:hover {
+            background: #2980b9;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .ascii-grid {
+                grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+                gap: 8px;
+            }
+
+            .ascii-cell {
+                padding: 8px;
+                min-height: 70px;
+            }
+
+            .ascii-char {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📊 Complete ASCII Reference Chart</h1>
+            <p>All ASCII Values from 0-256 (Standard + Extended)</p>
+        </div>
+
+        <!-- Control Characters Section (0-31 & 127) -->
+        <div class="chart-section">
+            <h2 class="section-title">Control Characters (0-31 & 127)</h2>
+            <div class="range-info">
+                <div class="range-title">Non-Printable Characters</div>
+                <div class="range-content">These are special control characters used for device control, formatting,
+                    and other special purposes. They don't have visible representations.</div>
+            </div>
+            <div class="ascii-grid">
+                <div class="ascii-cell control">
+                    <div class="ascii-char">NUL</div>
+                    <div class="ascii-value">0</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">SOH</div>
+                    <div class="ascii-value">1</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">STX</div>
+                    <div class="ascii-value">2</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">ETX</div>
+                    <div class="ascii-value">3</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">EOT</div>
+                    <div class="ascii-value">4</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">ENQ</div>
+                    <div class="ascii-value">5</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">ACK</div>
+                    <div class="ascii-value">6</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">BEL</div>
+                    <div class="ascii-value">7</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">BS</div>
+                    <div class="ascii-value">8</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">TAB</div>
+                    <div class="ascii-value">9</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">LF</div>
+                    <div class="ascii-value">10</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">VT</div>
+                    <div class="ascii-value">11</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">FF</div>
+                    <div class="ascii-value">12</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">CR</div>
+                    <div class="ascii-value">13</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">SO</div>
+                    <div class="ascii-value">14</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">SI</div>
+                    <div class="ascii-value">15</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">DLE</div>
+                    <div class="ascii-value">16</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">DC1</div>
+                    <div class="ascii-value">17</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">DC2</div>
+                    <div class="ascii-value">18</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">DC3</div>
+                    <div class="ascii-value">19</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">DC4</div>
+                    <div class="ascii-value">20</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">NAK</div>
+                    <div class="ascii-value">21</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">SYN</div>
+                    <div class="ascii-value">22</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">ETB</div>
+                    <div class="ascii-value">23</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">CAN</div>
+                    <div class="ascii-value">24</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">EM</div>
+                    <div class="ascii-value">25</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">SUB</div>
+                    <div class="ascii-value">26</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">ESC</div>
+                    <div class="ascii-value">27</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">FS</div>
+                    <div class="ascii-value">28</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">GS</div>
+                    <div class="ascii-value">29</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">RS</div>
+                    <div class="ascii-value">30</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">US</div>
+                    <div class="ascii-value">31</div>
+                </div>
+                <div class="ascii-cell control">
+                    <div class="ascii-char">DEL</div>
+                    <div class="ascii-value">127</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Digits Section (48-57) -->
+        <div class="chart-section">
+            <h2 class="section-title">Digits (0-9)</h2>
+            <div class="range-info">
+                <div class="range-title">Numeric Characters</div>
+                <div class="range-content">ASCII values 48-57 represent the digit characters 0 through 9.</div>
+            </div>
+            <div class="ascii-grid">
+                <div class="ascii-cell">
+                    <div class="ascii-char">0</div>
+                    <div class="ascii-value">48</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">1</div>
+                    <div class="ascii-value">49</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">2</div>
+                    <div class="ascii-value">50</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">3</div>
+                    <div class="ascii-value">51</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">4</div>
+                    <div class="ascii-value">52</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">5</div>
+                    <div class="ascii-value">53</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">6</div>
+                    <div class="ascii-value">54</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">7</div>
+                    <div class="ascii-value">55</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">8</div>
+                    <div class="ascii-value">56</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">9</div>
+                    <div class="ascii-value">57</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Uppercase Letters Section (65-90) -->
+        <div class="chart-section">
+            <h2 class="section-title">Uppercase Letters (A-Z)</h2>
+            <div class="range-info">
+                <div class="range-title">Capital Letters</div>
+                <div class="range-content">ASCII values 65-90 represent the uppercase letters A through Z.</div>
+            </div>
+            <div class="ascii-grid">
+                <div class="ascii-cell">
+                    <div class="ascii-char">A</div>
+                    <div class="ascii-value">65</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">B</div>
+                    <div class="ascii-value">66</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">C</div>
+                    <div class="ascii-value">67</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">D</div>
+                    <div class="ascii-value">68</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">E</div>
+                    <div class="ascii-value">69</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">F</div>
+                    <div class="ascii-value">70</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">G</div>
+                    <div class="ascii-value">71</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">H</div>
+                    <div class="ascii-value">72</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">I</div>
+                    <div class="ascii-value">73</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">J</div>
+                    <div class="ascii-value">74</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">K</div>
+                    <div class="ascii-value">75</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">L</div>
+                    <div class="ascii-value">76</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">M</div>
+                    <div class="ascii-value">77</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">N</div>
+                    <div class="ascii-value">78</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">O</div>
+                    <div class="ascii-value">79</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">P</div>
+                    <div class="ascii-value">80</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">Q</div>
+                    <div class="ascii-value">81</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">R</div>
+                    <div class="ascii-value">82</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">S</div>
+                    <div class="ascii-value">83</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">T</div>
+                    <div class="ascii-value">84</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">U</div>
+                    <div class="ascii-value">85</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">V</div>
+                    <div class="ascii-value">86</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">W</div>
+                    <div class="ascii-value">87</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">X</div>
+                    <div class="ascii-value">88</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">Y</div>
+                    <div class="ascii-value">89</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">Z</div>
+                    <div class="ascii-value">90</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lowercase Letters Section (97-122) -->
+        <div class="chart-section">
+            <h2 class="section-title">Lowercase Letters (a-z)</h2>
+            <div class="range-info">
+                <div class="range-title">Small Letters</div>
+                <div class="range-content">ASCII values 97-122 represent the lowercase letters a through z.</div>
+            </div>
+            <div class="ascii-grid">
+                <div class="ascii-cell">
+                    <div class="ascii-char">a</div>
+                    <div class="ascii-value">97</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">b</div>
+                    <div class="ascii-value">98</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">c</div>
+                    <div class="ascii-value">99</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">d</div>
+                    <div class="ascii-value">100</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">e</div>
+                    <div class="ascii-value">101</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">f</div>
+                    <div class="ascii-value">102</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">g</div>
+                    <div class="ascii-value">103</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">h</div>
+                    <div class="ascii-value">104</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">i</div>
+                    <div class="ascii-value">105</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">j</div>
+                    <div class="ascii-value">106</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">k</div>
+                    <div class="ascii-value">107</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">l</div>
+                    <div class="ascii-value">108</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">m</div>
+                    <div class="ascii-value">109</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">n</div>
+                    <div class="ascii-value">110</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">o</div>
+                    <div class="ascii-value">111</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">p</div>
+                    <div class="ascii-value">112</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">q</div>
+                    <div class="ascii-value">113</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">r</div>
+                    <div class="ascii-value">114</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">s</div>
+                    <div class="ascii-value">115</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">t</div>
+                    <div class="ascii-value">116</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">u</div>
+                    <div class="ascii-value">117</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">v</div>
+                    <div class="ascii-value">118</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">w</div>
+                    <div class="ascii-value">119</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">x</div>
+                    <div class="ascii-value">120</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">y</div>
+                    <div class="ascii-value">121</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">z</div>
+                    <div class="ascii-value">122</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Special Characters Section (32, 33-47, 58-64, 91-96, 123-126) -->
+        <div class="chart-section">
+            <h2 class="section-title">Special Characters & Symbols</h2>
+            <div class="range-info">
+                <div class="range-title">Printable Symbols</div>
+                <div class="range-content">ASCII values 32-126 include space and special symbols used in programming and
+                    text.</div>
+            </div>
+            <div class="ascii-grid">
+                <div class="ascii-cell">
+                    <div class="ascii-char" style="color: #999; font-size: 14px;">SPACE</div>
+                    <div class="ascii-value">32</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">!</div>
+                    <div class="ascii-value">33</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">"</div>
+                    <div class="ascii-value">34</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">#</div>
+                    <div class="ascii-value">35</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">$</div>
+                    <div class="ascii-value">36</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">%</div>
+                    <div class="ascii-value">37</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">&</div>
+                    <div class="ascii-value">38</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">'</div>
+                    <div class="ascii-value">39</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">(</div>
+                    <div class="ascii-value">40</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">)</div>
+                    <div class="ascii-value">41</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">*</div>
+                    <div class="ascii-value">42</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">+</div>
+                    <div class="ascii-value">43</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">,</div>
+                    <div class="ascii-value">44</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">-</div>
+                    <div class="ascii-value">45</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">.</div>
+                    <div class="ascii-value">46</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">/</div>
+                    <div class="ascii-value">47</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">:</div>
+                    <div class="ascii-value">58</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">;</div>
+                    <div class="ascii-value">59</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">&lt;</div>
+                    <div class="ascii-value">60</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">=</div>
+                    <div class="ascii-value">61</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">&gt;</div>
+                    <div class="ascii-value">62</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">?</div>
+                    <div class="ascii-value">63</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">@</div>
+                    <div class="ascii-value">64</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">[</div>
+                    <div class="ascii-value">91</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">\</div>
+                    <div class="ascii-value">92</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">]</div>
+                    <div class="ascii-value">93</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">^</div>
+                    <div class="ascii-value">94</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">_</div>
+                    <div class="ascii-value">95</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">`</div>
+                    <div class="ascii-value">96</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">{</div>
+                    <div class="ascii-value">123</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">|</div>
+                    <div class="ascii-value">124</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">}</div>
+                    <div class="ascii-value">125</div>
+                </div>
+                <div class="ascii-cell">
+                    <div class="ascii-char">~</div>
+                    <div class="ascii-value">126</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Extended ASCII Section (128-256) -->
+        <div class="chart-section">
+            <h2 class="section-title">Extended ASCII (128-256)</h2>
+            <div class="range-info">
+                <div class="range-title">Extended Character Set</div>
+                <div class="range-content">These characters include accented letters, mathematical symbols, box drawing
+                    characters, and other special symbols. Support varies by system and encoding.</div>
+            </div>
+            <div class="ascii-grid">
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">€</div>
+                    <div class="ascii-value">128</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">‚</div>
+                    <div class="ascii-value">130</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ƒ</div>
+                    <div class="ascii-value">131</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">„</div>
+                    <div class="ascii-value">132</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">…</div>
+                    <div class="ascii-value">133</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">†</div>
+                    <div class="ascii-value">134</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">‡</div>
+                    <div class="ascii-value">135</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ˆ</div>
+                    <div class="ascii-value">136</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">‰</div>
+                    <div class="ascii-value">137</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Š</div>
+                    <div class="ascii-value">138</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">‹</div>
+                    <div class="ascii-value">139</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Œ</div>
+                    <div class="ascii-value">140</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ž</div>
+                    <div class="ascii-value">142</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">'</div>
+                    <div class="ascii-value">145</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">'</div>
+                    <div class="ascii-value">146</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">"</div>
+                    <div class="ascii-value">147</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">"</div>
+                    <div class="ascii-value">148</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">•</div>
+                    <div class="ascii-value">149</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">–</div>
+                    <div class="ascii-value">150</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">—</div>
+                    <div class="ascii-value">151</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">˜</div>
+                    <div class="ascii-value">152</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">™</div>
+                    <div class="ascii-value">153</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">š</div>
+                    <div class="ascii-value">154</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">›</div>
+                    <div class="ascii-value">155</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">œ</div>
+                    <div class="ascii-value">156</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ž</div>
+                    <div class="ascii-value">158</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ÿ</div>
+                    <div class="ascii-value">159</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">À</div>
+                    <div class="ascii-value">192</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Á</div>
+                    <div class="ascii-value">193</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Â</div>
+                    <div class="ascii-value">194</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ã</div>
+                    <div class="ascii-value">195</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ä</div>
+                    <div class="ascii-value">196</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Å</div>
+                    <div class="ascii-value">197</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Æ</div>
+                    <div class="ascii-value">198</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ç</div>
+                    <div class="ascii-value">199</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">È</div>
+                    <div class="ascii-value">200</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">É</div>
+                    <div class="ascii-value">201</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ê</div>
+                    <div class="ascii-value">202</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ë</div>
+                    <div class="ascii-value">203</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ì</div>
+                    <div class="ascii-value">204</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Í</div>
+                    <div class="ascii-value">205</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Î</div>
+                    <div class="ascii-value">206</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ï</div>
+                    <div class="ascii-value">207</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ð</div>
+                    <div class="ascii-value">208</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ñ</div>
+                    <div class="ascii-value">209</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ò</div>
+                    <div class="ascii-value">210</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ó</div>
+                    <div class="ascii-value">211</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ô</div>
+                    <div class="ascii-value">212</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Õ</div>
+                    <div class="ascii-value">213</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ö</div>
+                    <div class="ascii-value">214</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">×</div>
+                    <div class="ascii-value">215</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ø</div>
+                    <div class="ascii-value">216</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ù</div>
+                    <div class="ascii-value">217</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ú</div>
+                    <div class="ascii-value">218</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Û</div>
+                    <div class="ascii-value">219</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ü</div>
+                    <div class="ascii-value">220</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Ý</div>
+                    <div class="ascii-value">221</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">Þ</div>
+                    <div class="ascii-value">222</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ß</div>
+                    <div class="ascii-value">223</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">à</div>
+                    <div class="ascii-value">224</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">á</div>
+                    <div class="ascii-value">225</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">â</div>
+                    <div class="ascii-value">226</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ã</div>
+                    <div class="ascii-value">227</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ä</div>
+                    <div class="ascii-value">228</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">å</div>
+                    <div class="ascii-value">229</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">æ</div>
+                    <div class="ascii-value">230</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ç</div>
+                    <div class="ascii-value">231</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">è</div>
+                    <div class="ascii-value">232</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">é</div>
+                    <div class="ascii-value">233</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ê</div>
+                    <div class="ascii-value">234</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ë</div>
+                    <div class="ascii-value">235</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ì</div>
+                    <div class="ascii-value">236</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">í</div>
+                    <div class="ascii-value">237</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">î</div>
+                    <div class="ascii-value">238</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ï</div>
+                    <div class="ascii-value">239</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ð</div>
+                    <div class="ascii-value">240</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ñ</div>
+                    <div class="ascii-value">241</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ò</div>
+                    <div class="ascii-value">242</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ó</div>
+                    <div class="ascii-value">243</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ô</div>
+                    <div class="ascii-value">244</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">õ</div>
+                    <div class="ascii-value">245</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ö</div>
+                    <div class="ascii-value">246</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">÷</div>
+                    <div class="ascii-value">247</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ø</div>
+                    <div class="ascii-value">248</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ù</div>
+                    <div class="ascii-value">249</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ú</div>
+                    <div class="ascii-value">250</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">û</div>
+                    <div class="ascii-value">251</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ü</div>
+                    <div class="ascii-value">252</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ý</div>
+                    <div class="ascii-value">253</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">þ</div>
+                    <div class="ascii-value">254</div>
+                </div>
+                <div class="ascii-cell extended">
+                    <div class="ascii-char">ÿ</div>
+                    <div class="ascii-value">255</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Reference Section -->
+        <div class="chart-section">
+            <h2 class="section-title">📋 Quick Reference</h2>
+            <div class="quick-ref">
+                <div class="quick-ref-item">
+                    <div class="quick-ref-title">Control Characters</div>
+                    <div class="quick-ref-content">0-31, 127: Non-printable special characters for device control and
+                        formatting</div>
+                </div>
+                <div class="quick-ref-item">
+                    <div class="quick-ref-title">Printable ASCII</div>
+                    <div class="quick-ref-content">32-126: Standard Latin characters, digits, and symbols</div>
+                </div>
+                <div class="quick-ref-item">
+                    <div class="quick-ref-title">Extended ASCII</div>
+                    <div class="quick-ref-content">128-256: Accented letters and special symbols (varies by encoding)
+                    </div>
+                </div>
+                <div class="quick-ref-item">
+                    <div class="quick-ref-title">Common ASCII Values</div>
+                    <div class="quick-ref-content">Space: 32 | '0': 48 | 'A': 65 | 'a': 97</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Java Conversion Section -->
+        <div class="chart-section">
+            <h2 class="section-title">🔄 Java Conversion Examples</h2>
+            <div class="conversion-box">
+                <div style="font-weight: 600; margin-bottom: 10px;">Get ASCII value from character:</div>
+                <div class="conversion-code">char ch = 'A';<br>int ascii = (int) ch; // Result: 65</div>
+            </div>
+            <div class="conversion-box">
+                <div style="font-weight: 600; margin-bottom: 10px;">Get character from ASCII value:</div>
+                <div class="conversion-code">int ascii = 65;<br>char ch = (char) ascii; // Result: 'A'</div>
+            </div>
+            <div class="conversion-box">
+                <div style="font-weight: 600; margin-bottom: 10px;">Loop through ASCII values:</div>
+                <div class="conversion-code">for (int i = 65; i <= 90; i++) {<br>&nbsp;&nbsp;System.out.println((char)
+                        i);<br>}
+                        // Prints: A B C ... Z</div>
+            </div>
+            <div class="conversion-box">
+                <div style="font-weight: 600; margin-bottom: 10px;">Using Character class methods:</div>
+                <div class="conversion-code">int ascii = Character.getNumericValue('5'); // Result: 5<br>boolean isDigit
+                    = Character.isDigit('5'); // Result: true<br>boolean isLetter = Character.isLetter('A'); // Result:
+                    true</div>
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <div class="back-button">
+            <a href="javascript:history.back();">← Back to Previous Page</a>
+        </div>
+    </div>
+</body>
+
+</html>

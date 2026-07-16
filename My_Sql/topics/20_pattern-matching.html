@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattern Matching (LIKE) - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Pattern Matching (LIKE)</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Pattern Matching (LIKE)</h2>
+                <p class="topic-desc">Pattern matching is used to search for values that match a specific pattern. The main operators are LIKE and REGEXP (or RLIKE).</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">LIKE Operator & Wildcards</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to match simple patterns using wildcards.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> *\nFROM table_name\nWHERE <span class="sql-keyword">column</span> LIKE <span class="sql-string">'pattern'</span>;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>%</td><td>Any number of characters (including zero)</td></tr><tr><td>_</td><td>Exactly one character</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Examples of LIKE patterns</h3>
+                        <p class="subtopic-desc"><strong>🔹 Practical Usage</strong></p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- Starts with <span class="sql-string">'A'</span>\nSELECT * <span class="sql-keyword">FROM</span> students <span class="sql-keyword">WHERE</span> name LIKE <span class="sql-string">'A%'</span>;\n\n-- Ends with <span class="sql-string">'n'</span>\nSELECT * <span class="sql-keyword">FROM</span> students <span class="sql-keyword">WHERE</span> name LIKE <span class="sql-string">'%n'</span>;\n\n-- Contains <span class="sql-string">'ra'</span>\nSELECT * <span class="sql-keyword">FROM</span> students <span class="sql-keyword">WHERE</span> name LIKE <span class="sql-string">'%ra%'</span>;\n\n-- Exactly 4 characters\nSELECT * <span class="sql-keyword">FROM</span> students <span class="sql-keyword">WHERE</span> name LIKE <span class="sql-string">'____'</span>;</span></code></pre><div class="output-box">✔ Success: Filters rows matching the character patterns.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">NOT LIKE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to exclude certain patterns from the result set.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> students\nWHERE name <span class="sql-keyword">NOT</span> LIKE <span class="sql-string">'A%'</span>;</code></pre><div class="output-box">✔ Displays names that do NOT start with 'A'.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">REGEXP (MySQL) / RLIKE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used for advanced pattern matching using regular expressions.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> *\nFROM table_name\nWHERE <span class="sql-keyword">column</span> REGEXP <span class="sql-string">'pattern'</span>;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-comment">-- Starts with A <span class="sql-keyword">or</span> R\nSELECT * <span class="sql-keyword">FROM</span> students <span class="sql-keyword">WHERE</span> name REGEXP <span class="sql-string">'^[AR]'</span>;\n\n-- Ends with <span class="sql-string">'n'</span>\nSELECT * <span class="sql-keyword">FROM</span> students <span class="sql-keyword">WHERE</span> name REGEXP <span class="sql-string">'n$'</span>;\n\n-- Contains <span class="sql-string">'ra'</span> <span class="sql-keyword">or</span> <span class="sql-string">'ri'</span>\nSELECT * <span class="sql-keyword">FROM</span> students <span class="sql-keyword">WHERE</span> name REGEXP <span class="sql-string">'ra|ri'</span>;</span></code></pre><div class="output-box">✔ Advanced matching applied using regex.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Display students whose name starts with 'A'.</strong><br>
+    <button class="toggle-btn" data-target="ans-t19-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t19-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE name LIKE 'A%';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Display students whose name ends with 'a'.</strong><br>
+    <button class="toggle-btn" data-target="ans-t19-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t19-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE name LIKE '%a';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Display students whose name contains 'ri'.</strong><br>
+    <button class="toggle-btn" data-target="ans-t19-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t19-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE name LIKE '%ri%';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 2  | Priya  | 23   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Display students whose name does NOT start with 'K'.</strong><br>
+    <button class="toggle-btn" data-target="ans-t19-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t19-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE name NOT LIKE 'K%';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 2  | Priya  | 23   |
+| 4  | Meena  | 24   |
++----+--------+------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Display students whose name has exactly 5 characters.</strong><br>
+    <button class="toggle-btn" data-target="ans-t19-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t19-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT * FROM students
+WHERE name LIKE '_____';</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----+--------+------+
+| id | name   | age  |
++----+--------+------+
+| 1  | Arun   | 22   |
+| 2  | Priya  | 23   |
+| 3  | Kiran  | 23   |
++----+--------+------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='19_between-and-in.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← BETWEEN & IN</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='21_functions.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Functions →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

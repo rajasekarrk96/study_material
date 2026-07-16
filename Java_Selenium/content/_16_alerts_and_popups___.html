@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  16 alerts and popups   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>16. Alerts & Popups</h1>
+
+<h2>📖 Introduction</h2>
+<p>JavaScript Alerts are simple popups that block user interaction until handled. Unlike standard HTML modals (which you
+    can inspect), JS Alerts are part of the browser's native interface. You cannot inspect them with DevTools, and you
+    must use the <code>Alert</code> interface to control them.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>The 3 types of JS Alerts: Simple, Confirm, and Prompt</li>
+    <li>How to Switch to an Alert</li>
+    <li>Methods to Accept, Dismiss, and Type in alerts</li>
+    <li>Handling <code>UnhandledAlertException</code></li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>The Alert Interface</h3>
+<p>Since the alert takes focus away from the DOM, you need to switch context:</p>
+<pre><code>Alert alert = driver.switchTo().alert();</code></pre>
+
+<h3>Core Methods</h3>
+<ul>
+    <li><code>alert.accept()</code>: Simulates clicking "OK".</li>
+    <li><code>alert.dismiss()</code>: Simulates clicking "Cancel".</li>
+    <li><code>alert.getText()</code>: Retrieves the message text on the alert.</li>
+    <li><code>alert.sendKeys("text")</code>: Enters text into a Prompt alert.</li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+
+<h3>Handling a Confirmation Box</h3>
+<pre><code>// 1. Trigger the alert
+driver.findElement(By.id("confirm-btn")).click();
+
+// 2. Switch
+Alert alert = driver.switchTo().alert();
+
+// 3. Verify Text
+System.out.println(alert.getText());
+
+// 4. Click Cancel
+alert.dismiss();
+</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Synchronization:</strong> Sometimes alerts take a moment to appear. Use
+        <code>ExpectedConditions.alertIsPresent()</code> in your Explicit Wait to avoid
+        <code>NoAlertPresentException</code>.
+    </p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Handle a critical delete action.</p>
+    <ol>
+        <li>Click "Delete Account".</li>
+        <li>Wait for the confirmation alert "Are you sure?".</li>
+        <li>Read the text and click OK (Accept).</li>
+        <li>Verify success message.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q: Can you inspect an Alert?</strong></p>
+    <p><strong>A:</strong> No, it is a native browser window, not an HTML element.</p>
+
+    <p><strong>Q: How to handle Authentication Popups (User/Pass)?</strong></p>
+    <p><strong>A:</strong> You can pass credentials in the URL: <code>http://user:pass@example.com</code> or use
+        DevTools Protocol (CDP).</p>
+</blockquote>
+
+<a href="worksheets/ws_alerts.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

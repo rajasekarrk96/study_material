@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Functions</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Functions</h2>
+                <p class="topic-desc">SQL functions are predefined operations used to perform calculations or transformations on data.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">Aggregate Functions</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to calculate a single value from multiple rows.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> <span class="sql-func">COUNT</span>(*) <span class="sql-keyword">AS</span> total_students, <span class="sql-func">AVG</span>(age) <span class="sql-keyword">AS</span> avg_age\nFROM students;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody><tr><td>COUNT()</td><td>Counts rows</td></tr><tr><td>SUM()</td><td>Adds values</td></tr><tr><td>AVG()</td><td>Average</td></tr><tr><td>MIN()</td><td>Minimum</td></tr><tr><td>MAX()</td><td>Maximum</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">Scalar Functions - String</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Operate on each row's string data.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> <span class="sql-func">UPPER</span>(name), <span class="sql-func">CONCAT</span>(name, <span class="sql-string">' (Student)'</span>) <span class="sql-keyword">FROM</span> students;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>Function</th><th>Example</th></tr></thead><tbody><tr><td>UPPER()</td><td>UPPER(name)</td></tr><tr><td>LOWER()</td><td>LOWER(name)</td></tr><tr><td>CONCAT()</td><td>CONCAT(f, ' ', l)</td></tr><tr><td>LENGTH()</td><td>LENGTH(name)</td></tr><tr><td>SUBSTRING()</td><td>SUBSTRING(n,1,3)</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">Scalar Functions - Numeric</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Perform mathematical operations on individual numeric values.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> salary, <span class="sql-func">ROUND</span>(salary, 1) <span class="sql-keyword">FROM</span> employees;</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>Function</th><th>Example</th></tr></thead><tbody><tr><td>ROUND()</td><td>ROUND(s, 2)</td></tr><tr><td>CEIL()</td><td>CEIL(4.2) → 5</td></tr><tr><td>FLOOR()</td><td>FLOOR(4.7) → 4</td></tr><tr><td>ABS()</td><td>ABS(-10) → 10</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">Scalar Functions - Date & Time</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to manipulate date and time values.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> <span class="sql-func">NOW</span>(), DATEDIFF(<span class="sql-string">'2024-12-31'</span>, <span class="sql-string">'2024-01-01'</span>);</code></pre><div class="output-box"><table style='border-collapse: collapse; width: 100%; font-size: 13px;'><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody><tr><td>NOW()</td><td>Current & time</td></tr><tr><td>CURDATE()</td><td>Current date</td></tr><tr><td>DATEDIFF()</td><td>Date difference</td></tr><tr><td>DATE_ADD()</td><td>Add interval</td></tr></tbody></table></div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Conversion Functions</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to convert a value from one data type to another.</p>
+            <div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">SELECT</span> CAST(salary <span class="sql-keyword">AS</span> CHAR) <span class="sql-keyword">FROM</span> employees;\nSELECT CONVERT(salary, CHAR) <span class="sql-keyword">FROM</span> employees;</code></pre><div class="output-box">✔ Success: Data types converted.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Use COUNT() to count total students.</strong><br>
+    <button class="toggle-btn" data-target="ans-t20-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t20-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT COUNT(*) AS total_students
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+----------------+
+| total_students |
++----------------+
+| 4              |
++----------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Use SUM() to find the total of all ages.</strong><br>
+    <button class="toggle-btn" data-target="ans-t20-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t20-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT SUM(age) AS total_age
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+-----------+
+| total_age |
++-----------+
+| 92        |
++-----------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Use AVG() to find the average age of students.</strong><br>
+    <button class="toggle-btn" data-target="ans-t20-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t20-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT AVG(age) AS average_age
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+-------------+
+| average_age |
++-------------+
+| 23.0        |
++-------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Use MAX() and MIN() to find oldest and youngest students.</strong><br>
+    <button class="toggle-btn" data-target="ans-t20-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t20-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT MAX(age) AS oldest, MIN(age) AS youngest
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------+---------+
+| oldest | youngest|
++--------+---------+
+| 24     | 22      |
++--------+---------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Use UPPER() and LOWER() to change case of names.</strong><br>
+    <button class="toggle-btn" data-target="ans-t20-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-t20-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SELECT UPPER(name) AS upper_name, LOWER(name) AS lower_name
+FROM students;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+------------+------------+
+| upper_name | lower_name |
++------------+------------+
+| ARUN       | arun       |
+| PRIYA      | priya      |
+| KIRAN      | kiran      |
+| MEENA      | meena      |
++------------+------------+</code></pre>
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='20_pattern-matching.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Pattern Matching (LIKE)</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='22_group-by.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Group By →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

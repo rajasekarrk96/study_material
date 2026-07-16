@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Classes - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Character Classes Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">←
+            Back to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+        </nav>
+    </div>
+
+    <div class="top-nav">
+        <h2>Character Classes - Practice Worksheet</h2>
+    </div>
+
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master regex character classes with these string validation and pattern matching problems.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Validate String with Specific Characters</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program to check whether a string contains only a certain set of characters.
+                The valid characters are:
+                <ul>
+                    <li>Lowercase letters: a-z</li>
+                    <li>Uppercase letters: A-Z</li>
+                    <li>Digits: 0-9</li>
+                    <li>Underscore: _</li>
+                </ul>
+                This is commonly used for validating usernames, variable names, or identifiers.
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _01_ {
+    public static void main(String[] args) {
+
+        String str = "Java_123";
+
+        if (str.matches("[a-zA-Z0-9_]+"))
+            System.out.println("Valid string");
+        else
+            System.out.println("Invalid string");
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Input: "Java_123"
+Output: Valid string
+
+Input: "Hello World"
+Output: Invalid string (contains space)
+
+Input: "test@123"
+Output: Invalid string (contains @)
+
+Input: "Valid_Variable_Name_123"
+Output: Valid string</code></div>
+
+            <h4>Regex Pattern Explanation</h4>
+            <div class="code-block"><code>[a-zA-Z0-9_]+
+
+Breakdown:
+- [a-zA-Z0-9_]  : Character class matching any single character from the set
+  - a-z         : Any lowercase letter
+  - A-Z         : Any uppercase letter
+  - 0-9         : Any digit
+  - _           : Underscore character
+- +             : Quantifier - one or more occurrences
+
+Alternative: \\w+ (predefined class for word characters)</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Character Class []:</strong> Matches any single character from the set</li>
+                    <li><strong>Range a-z:</strong> Matches any character from 'a' to 'z'</li>
+                    <li><strong>matches() method:</strong> Checks if entire string matches the pattern</li>
+                    <li><strong>Quantifier +:</strong> Requires at least one character</li>
+                </ul>
+                <strong>Common Use Cases:</strong> Username validation, identifier checking, alphanumeric verification
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Find Word with 'g' in Middle</h3>
+
+            <h4>Problem Statement</h4>
+            <div class="explanation">
+                Write a Java program that matches a word containing 'g', but not at the start or end of the word.
+                The letter 'g' must appear somewhere in the middle of the word.
+                <br><br>
+                <strong>Examples:</strong>
+                <ul>
+                    <li>✅ "string" - 'g' is in the middle</li>
+                    <li>✅ "programming" - 'g' appears in the middle</li>
+                    <li>❌ "go" - 'g' is at the start</li>
+                    <li>❌ "big" - 'g' is at the end</li>
+                    <li>❌ "test" - no 'g' present</li>
+                </ul>
+            </div>
+
+            <h4>Solution</h4>
+            <div class="code-block"><code>class _02_ {
+    public static void main(String[] args) {
+
+        String word = "string";
+
+        if (word.matches(".+g.+"))
+            System.out.println("Match found");
+        else
+            System.out.println("No match");
+    }
+}</code></div>
+
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Input: "string"
+Output: Match found
+
+Input: "programming"
+Output: Match found
+
+Input: "go"
+Output: No match
+
+Input: "big"
+Output: No match
+
+Input: "regex"
+Output: No match</code></div>
+
+            <h4>Regex Pattern Explanation</h4>
+            <div class="code-block"><code>.+g.+
+
+Breakdown:
+- .+    : One or more of any character (before 'g')
+- g     : Literal character 'g'
+- .+    : One or more of any character (after 'g')
+
+This ensures:
+1. At least one character before 'g'
+2. The letter 'g' itself
+3. At least one character after 'g'
+
+Therefore, 'g' cannot be at the start or end!</code></div>
+
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Dot (.):</strong> Matches any single character except newline</li>
+                    <li><strong>Quantifier +:</strong> One or more occurrences</li>
+                    <li><strong>Pattern .+g.+:</strong> Ensures 'g' has characters on both sides</li>
+                    <li><strong>Position Matching:</strong> Pattern implicitly enforces position constraints</li>
+                </ul>
+                <strong>Alternative Patterns:</strong>
+                <ul>
+                    <li><code>^.+g.+$</code> - Explicit start (^) and end ($) anchors</li>
+                    <li><code>[^g]+g[^g]+</code> - More specific (non-g characters on both sides)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="btn-worksheet">← Back to Module</a>
+        </div>
+
+        <footer>
+            <p><strong>Character Classes Module - Practice Worksheet</strong></p>
+            <p>Master regex character classes and pattern matching</p>
+            <p>&copy; 2025 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

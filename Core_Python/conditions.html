@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional Statements - EduSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="container">
+            <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>EduSphere</span>
+            </a>
+            <div class="nav-actions">
+                <div class="institute-name">
+                    Software Training and Development Institute
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <div class="search-box">
+                <input type="text" placeholder="Search topics...">
+                <i class="fas fa-search"></i>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="introduction.html">
+                        <i class="fas fa-book"></i>
+                        <span>Introduction</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="basics.html">
+                        <i class="fas fa-code"></i>
+                        <span>Python Basics</span>
+                    </a>
+                </li>
+                <li class="nav-item has-subtopics active">
+                    <a href="conditions.html">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Conditions</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="sub-nav">
+                        <li><a href="#definition">Definition</a></li>
+                        <li><a href="#if-else">if-else</a></li>
+                        <li><a href="#elif">if-elif-else</a></li>
+                        <li><a href="#nested">Nested if</a></li>
+                        <li><a href="#shorthand">Short-hand if</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="loops.html">
+                        <i class="fas fa-redo"></i>
+                        <span>Loops</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pattern.html">
+                        <i class="fas fa-th"></i>
+                        <span>Pattern</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="string.html">
+                        <i class="fas fa-font"></i>
+                        <span>String</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="list.html">
+                        <i class="fas fa-list"></i>
+                        <span>List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tuples.html">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Tuples</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sets.html">
+                        <i class="fas fa-circle-notch"></i>
+                        <span>Sets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dictionaries.html">
+                        <i class="fas fa-book-open"></i>
+                        <span>Dictionaries</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="functions.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Functions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="file_handling.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>File Handling</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="filters.html">
+                        <i class="fas fa-filter"></i>
+                        <span>Filters</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="lambda.html">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Lambda</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="json.html">
+                        <i class="fas fa-file-code"></i>
+                        <span>JSON</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="map.html">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="zip.html">
+                        <i class="fas fa-link"></i>
+                        <span>Zip</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="modules.html">
+                        <i class="fas fa-cubes"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sqlite.html">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="xlsx.html">
+                        <i class="fas fa-file-excel"></i>
+                        <span>XLSX</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="regex.html">
+                        <i class="fas fa-asterisk"></i>
+                        <span>RegEx</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="try_except.html">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Try...Except</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="web_scraping.html">
+                        <i class="fas fa-spider"></i>
+                        <span>Web Scraping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="classes.html">
+                        <i class="fas fa-object-group"></i>
+                        <span>Classes/Objects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="inheritance.html">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Inheritance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="polymorphism.html">
+                        <i class="fas fa-shapes"></i>
+                        <span>Polymorphism</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="numpy.html">
+                        <i class="fas fa-table"></i>
+                        <span>NumPy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pandas.html">
+                        <i class="fas fa-columns"></i>
+                        <span>Pandas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="matplotlib.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Matplotlib</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="content-card">
+                <h1>Conditional Statements</h1>
+                <div class="content-description">
+                    <h2 id="definition">Definition</h2>
+                    <p>Conditional statements allow a program to make decisions based on conditions.</p>
+                    <p>They execute certain blocks of code only if the condition is True.</p>
+                    <p>Python supports three main conditional structures:</p>
+
+                    <h3>1. if Statement</h3>
+                    <p>Used to execute a block only when the condition is True.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+if condition:
+    # code to execute if condition is True
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+age = 18
+
+if age >= 18:
+    print("Eligible to vote")
+</pre>
+
+                    <h3 id="if-else">2. if–else Statement</h3>
+                    <p>Runs one block if the condition is True, otherwise another block.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+if condition:
+    # code if True
+else:
+    # code if False
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+num = 5
+
+if num % 2 == 0:
+    print("Even number")
+else:
+    print("Odd number")
+</pre>
+
+                    <h3 id="elif">3. if–elif–else Statement</h3>
+                    <p>Matches multiple conditions sequentially.</p>
+                    <p><strong>Syntax:</strong></p>
+                    <pre class="code-block">
+if condition1:
+    # code if condition1 is True
+elif condition2:
+    # code if condition2 is True
+else:
+    # code if conditions are False
+</pre>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+marks = 75
+
+if marks >= 90:
+    print("Grade A")
+elif marks >= 75:
+    print("Grade B")
+elif marks >= 50:
+    print("Grade C")
+else:
+    print("Fail")
+</pre>
+
+                    <h3 id="nested">4. Nested if (if inside another if)</h3>
+                    <p><strong>Example:</strong></p>
+                    <pre class="code-block">
+age = 20
+has_id = True
+
+if age >= 18:
+    if has_id:
+        print("Entry allowed")
+    else:
+        print("ID required")
+else:
+    print("Not allowed")
+</pre>
+
+                    <h3 id="shorthand">5. Short-hand if / Ternary Operator</h3>
+                    <p>One-line if:</p>
+                    <pre class="code-block">
+if 10 > 5: print("10 is greater")
+</pre>
+                    <p>Ternary expression:</p>
+                    <pre class="code-block">
+x = 10
+result = "Even" if x % 2 == 0 else "Odd"
+print(result)
+</pre>
+                </div>
+
+                <div class="content-example">
+                    <h2>Example Program</h2>
+                    <div class="code-block">
+                        <pre><code>num = int(input("Enter a number: "))
+
+if num > 0:
+    print("Positive")
+elif num < 0:
+    print("Negative")
+else:
+    print("Zero")</code></pre>
+                    </div>
+                </div>
+
+                <div class="workout-sheet">
+                    <h3>Workout Sheet</h3>
+
+                    <div class="workout-question">
+                        <h4>1. Write a Python program to calculate a dog's age in human's years.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>dogage=(float(input("enter your dog age:")))
+if dogage<=2:
+    humanage=dogage*10.5
+else:
+    humanage=2*10.5+(dogage-2)*4
+
+print("the dog age in human years is:",humanage)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>2. Write a Python program that reads two integers representing a month and prints the season
+                            for that month.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>month = int(input("Enter month number (1-12): "))
+
+if month in (12, 1, 2):
+    season = "Winter"
+elif month in (3, 4, 5):
+    season = "Spring"
+elif month in (6, 7, 8):
+    season = "Summer"
+elif month in (9, 10, 11):
+    season = "Autumn"
+else:
+    season = "Invalid month"
+
+print("The entered month is:", month)
+print("Season:", season)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>3. Write a Python program to check if the given number is one-digit, two-digit, three-digit,
+                            or more than three digits.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>n = int(input("Enter a number: "))
+
+if n < 10:
+    print("It is a one-digit number.")
+elif n < 100:
+    print("It is a two-digit number.")
+elif n < 1000:
+    print("It is a three-digit number.")
+else:
+    print("It has more than three digits.")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>4. Write a Python program to check if a triangle is equilateral, isosceles, or scalene.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>a = float(input("Enter side a: "))
+b = float(input("Enter side b: "))
+c = float(input("Enter side c: "))
+
+if a + b > c and a + c > b and b + c > a:
+    
+    if a == b == c:
+        print("The triangle is Equilateral.")
+    elif a == b or b == c or a == c:
+        print("The triangle is Isosceles.")
+    else:
+        print("The triangle is Scalene.")
+
+else:
+    print("The given sides do not form a valid triangle.")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>5. Write a Python program to check if the given number is multiples of three print as
+                            "fizz", multiples of five print as "buzz", and multiples of both print as "fizzbuzz".</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>num = int(input("Enter a number: "))
+
+if num % 3 == 0 and num % 5 == 0:
+    print("fizzbuzz")
+elif num % 3 == 0:
+    print("fizz")
+elif num % 5 == 0:
+    print("buzz")
+else:
+    print("Not a multiple of 3 or 5")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>6. Write a Python program to find if a given character is an uppercase letter, lowercase
+                            letter, digit, or special character.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>ch = input("Enter a character: ")
+if len(ch) != 1:
+    print("Please enter only one character.")
+else:
+    if ch.isupper():
+        print("Uppercase letter")
+    elif ch.islower():
+        print("Lowercase letter")
+    elif ch.isdigit():
+        print("Digit")
+    else:
+        print("Special character")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>7. A toy vendor supplies three types of toys: battery-based, key-based, and electrical
+                            charging-based. The vendor offers discounts based on the order amount. Write a program that
+                            reads the product code and order amount, then calculates and prints the net amount after
+                            discount.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>code = int(input("Enter product code (1-Battery, 2-Key, 3-Charging): "))
+amount = float(input("Enter order amount: "))
+discount = 0
+if code == 1:
+    discount = 0.10 * amount      
+elif code == 2:
+    discount = 0.05 * amount      
+elif code == 3:
+    discount = 0.15 * amount      
+else:
+    print("Invalid product code!")
+    exit()
+
+netamount = amount - discount
+print("Order Amount:", amount)
+print("Discount Applied:", discount)
+print("Net Amount to Pay:", netamount)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>8. Write a function f(x) that is defined as follows: f(x) = ax – bx + cx – d, if x > k, f(x)
+                            = 0 if x = k, and f(x) = -ax + bx – cx + d, if x < k. The program should read a, b, c, d, k,
+                                and x, and print the value of f(x).</h4>
+                                <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                                <div class="workout-answer">
+                                    <pre><code>a = float(input("Enter value of a: "))
+b = float(input("Enter value of b: "))
+c = float(input("Enter value of c: "))
+d = float(input("Enter value of d: "))
+k = float(input("Enter value of k: "))
+x = float(input("Enter value of x: "))
+
+if x > k:
+    fx = a*x - b*x + c*x - d
+elif x == k:
+    fx = 0
+else:  
+    fx = -a*x + b*x - c*x + d
+
+print("f(x) =", fx)</code></pre>
+                                </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>9. Read any two positive integers (n1 & n2) and a character type operator (opr). Depending
+                            on the operator, perform the appropriate operation and display the result.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>n1 = int(input("Enter first positive integer: "))
+n2 = int(input("Enter second positive integer: "))
+opr = input("Enter operator (+, -, *, /): ")
+
+if opr == '+':
+    result = n1 + n2
+elif opr == '-':
+    result = n1 - n2
+elif opr == '*':
+    result = n1 * n2
+elif opr == '/':
+    if n2 != 0:
+        result = n1 / n2
+    else:
+        result = "Error! Division by zero."
+else:
+    result = "Invalid operator!"
+
+print("Result:", result)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="workout-question">
+                        <h4>10. Write a program to check if you are eligible to watch a football match based on your age
+                            and calculate the ticket cost.</h4>
+                        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                        <div class="workout-answer">
+                            <pre><code>age = int(input("Enter your age: "))
+
+while age <= 0:
+    print("Age must be positive!")
+    age = int(input("Enter your age again: "))
+
+if age < 12:
+    print("You are NOT eligible to watch the football match.")
+else:
+    print("You are eligible to watch the football match.")
+
+    if age <= 18:
+        ticketcost = 150
+    elif age <= 60:
+        ticketcost = 300
+    else:
+        ticketcost = 200
+
+    print("Ticket Cost:", ticketcost)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAnswer(button) {
+                        const answerDiv = button.nextElementSibling;
+                        if (answerDiv.style.display === "block") {
+                            answerDiv.style.display = "none";
+                            button.textContent = "Show Answer";
+                        } else {
+                            answerDiv.style.display = "block";
+                            button.textContent = "Hide Answer";
+                        }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>

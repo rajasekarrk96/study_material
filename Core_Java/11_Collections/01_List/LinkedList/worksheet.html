@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedList - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>LinkedList Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>LinkedList - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master LinkedList operations with efficient insertions, deletions, and bidirectional traversal.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Append Element to the End of a LinkedList</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to append the specified element to the end of a linked list.
+            </div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.LinkedList;
+
+class _01_ {
+    public static void main(String[] args) {
+
+        LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
+
+        list.add("Red");
+        list.add("Green");
+        list.add("Blue");
+
+        list.addLast("Yellow");
+
+        System.out.println(list);
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>[Red, Green, Blue, Yellow]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>addLast():</strong> Adds element to the end of the list</li>
+                    <li><strong>add():</strong> Also adds to end, same as addLast()</li>
+                    <li><strong>Doubly-Linked:</strong> Each node has next and previous pointers</li>
+                    <li><strong>O(1) Performance:</strong> Constant time for adding at end</li>
+                </ul>
+                <strong>Deque Interface:</strong> LinkedList implements Deque, providing addLast()
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: Iterate a LinkedList in Reverse Order</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to iterate a linked list in reverse order.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.LinkedList;
+import java.util.Iterator;
+
+class _02_ {
+    public static void main(String[] args) {
+
+        LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
+
+        list.add("One");
+        list.add("Two");
+        list.add("Three");
+
+        Iterator&lt;String&gt; it = list.descendingIterator();
+
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Three
+Two
+One</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>descendingIterator():</strong> Returns iterator in reverse order</li>
+                    <li><strong>Bidirectional:</strong> Can traverse both forward and backward</li>
+                    <li><strong>Iterator Pattern:</strong> hasNext() and next() methods</li>
+                    <li><strong>Unique to LinkedList:</strong> ArrayList doesn't have this method</li>
+                </ul>
+                <strong>Alternative:</strong> Can use ListIterator with hasPrevious() and previous()
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Insert Elements at First and Last Position</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to insert elements into the linked list at the first and last
+                position.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.LinkedList;
+
+class _03_ {
+    public static void main(String[] args) {
+
+        LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
+
+        list.add("Green");
+        list.add("Blue");
+
+        list.addFirst("Red");
+        list.addLast("Yellow");
+
+        System.out.println(list);
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>[Red, Green, Blue, Yellow]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>addFirst():</strong> Inserts element at the beginning</li>
+                    <li><strong>addLast():</strong> Inserts element at the end</li>
+                    <li><strong>O(1) Performance:</strong> Both operations are constant time</li>
+                    <li><strong>Efficient:</strong> Much faster than ArrayList for these operations</li>
+                </ul>
+                <strong>Use Case:</strong> Ideal for implementing queues and deques
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Insert Elements at a Specified Position</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to insert some elements at the specified position into a
+                linked list.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.LinkedList;
+
+class _04_ {
+    public static void main(String[] args) {
+
+        LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
+
+        list.add("Red");
+        list.add("Blue");
+        list.add("Yellow");
+
+        list.add(1, "Green");
+
+        System.out.println(list);
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>[Red, Green, Blue, Yellow]</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>add(index, element):</strong> Inserts at specified position</li>
+                    <li><strong>Index 1:</strong> Second position (0-based indexing)</li>
+                    <li><strong>Node Linking:</strong> Updates pointers to insert new node</li>
+                    <li><strong>Performance:</strong> O(n) to find position, O(1) to insert</li>
+                </ul>
+                <strong>Note:</strong> Must traverse to position first, then insert
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Get First and Last Occurrence of an Element</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program to get the first and last occurrence of the specified elements
+                in a linked list.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.LinkedList;
+
+class _05_ {
+    public static void main(String[] args) {
+
+        LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
+
+        list.add("Red");
+        list.add("Green");
+        list.add("Blue");
+        list.add("Green");
+        list.add("Yellow");
+
+        System.out.println("First occurrence of Green: " + list.indexOf("Green"));
+        System.out.println("Last occurrence of Green: " + list.lastIndexOf("Green"));
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>First occurrence of Green: 1
+Last occurrence of Green: 3</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>indexOf():</strong> Returns index of first occurrence</li>
+                    <li><strong>lastIndexOf():</strong> Returns index of last occurrence</li>
+                    <li><strong>Returns -1:</strong> If element is not found</li>
+                    <li><strong>Linear Search:</strong> O(n) time complexity for both methods</li>
+                </ul>
+                <strong>Duplicates:</strong> LinkedList allows duplicate elements unlike Set
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>LinkedList Module - Practice Worksheet</strong></p>
+            <p>Master doubly-linked list operations with LinkedList</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

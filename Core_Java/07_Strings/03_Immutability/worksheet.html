@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Immutability - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>String Immutability Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>String Immutability - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Understand string immutability and its implications in Java.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: Demonstrating String Immutability</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates string immutability by:
+                • Creating a string
+                • Applying various string methods (toUpperCase, toLowerCase, replace, concat)
+                • Showing that the original string remains unchanged</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String original = sn.nextLine();
+
+        System.out.println("\nOriginal string: " + original);
+
+        String upper = original.toUpperCase();
+        System.out.println("After toUpperCase(): " + original);
+        System.out.println("New string (upper): " + upper);
+
+        String lower = original.toLowerCase();
+        System.out.println("\nAfter toLowerCase(): " + original);
+        System.out.println("New string (lower): " + lower);
+
+        String replaced = original.replace('a', 'X');
+        System.out.println("\nAfter replace('a', 'X'): " + original);
+        System.out.println("New string (replaced): " + replaced);
+
+        String concatenated = original.concat(" World");
+        System.out.println("\nAfter concat(\" World\"): " + original);
+        System.out.println("New string (concatenated): " + concatenated);
+
+        System.out.println("\n✓ Original string never changed: " + original);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: Java
+
+Original string: Java
+After toUpperCase(): Java
+New string (upper): JAVA
+
+After toLowerCase(): Java
+New string (lower): java
+
+After replace('a', 'X'): Java
+New string (replaced): JXvX
+
+After concat(" World"): Java
+New string (concatenated): Java World
+
+✓ Original string never changed: Java</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Immutability:</strong> Original string object never changes</li>
+                    <li><strong>New Objects:</strong> Each method creates a new String object</li>
+                    <li><strong>Return Values:</strong> Methods return new strings, don't modify original</li>
+                    <li><strong>Memory:</strong> Multiple string objects created in memory</li>
+                </ul>
+                <strong>Important:</strong> str.toUpperCase() doesn't change str, it returns a NEW string
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-card" id="question2">
+            <h3>Question 2: String vs StringBuilder Performance</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that compares string concatenation using:
+                • String (immutable) - creates new objects
+                • StringBuilder (mutable) - modifies same object
+                Show the difference in object creation.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter number of concatenations: ");
+        int n = sn.nextInt();
+
+        // Using String (immutable)
+        String str = "";
+        System.out.println("\nUsing String (immutable):");
+        for (int i = 1; i <= n; i++) {
+            str = str + i + " ";  // Creates new String object each time
+            System.out.println("Step " + i + ": " + str);
+        }
+
+        // Using StringBuilder (mutable)
+        StringBuilder sb = new StringBuilder();
+        System.out.println("\nUsing StringBuilder (mutable):");
+        for (int i = 1; i <= n; i++) {
+            sb.append(i).append(" ");  // Modifies same object
+            System.out.println("Step " + i + ": " + sb.toString());
+        }
+
+        System.out.println("\n✓ String creates " + n + " new objects");
+        System.out.println("✓ StringBuilder modifies 1 object " + n + " times");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter number of concatenations: 3
+
+Using String (immutable):
+Step 1: 1 
+Step 2: 1 2 
+Step 3: 1 2 3 
+
+Using StringBuilder (mutable):
+Step 1: 1 
+Step 2: 1 2 
+Step 3: 1 2 3 
+
+✓ String creates 3 new objects
+✓ StringBuilder modifies 1 object 3 times</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Performance Impact:</strong> String concatenation creates many objects</li>
+                    <li><strong>StringBuilder Advantage:</strong> Mutable, modifies same object</li>
+                    <li><strong>Memory Efficiency:</strong> StringBuilder uses less memory for loops</li>
+                    <li><strong>Best Practice:</strong> Use StringBuilder for repeated concatenations</li>
+                </ul>
+                <strong>Rule:</strong> Use String for simple operations, StringBuilder for loops/heavy manipulation
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-card" id="question3">
+            <h3>Question 3: Reference vs Value in Strings</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates:
+                • Creating two string variables pointing to same object
+                • Modifying one variable creates a new object
+                • The other variable still points to original object
+                Use == and equals() to show the difference.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String str1 = sn.nextLine();
+        String str2 = str1;  // Both point to same object
+
+        System.out.println("\nInitial state:");
+        System.out.println("str1: " + str1);
+        System.out.println("str2: " + str2);
+        System.out.println("str1 == str2: " + (str1 == str2));  // true (same reference)
+        System.out.println("str1.equals(str2): " + str1.equals(str2));  // true (same value)
+
+        // "Modify" str1 (actually creates new object)
+        str1 = str1.toUpperCase();
+
+        System.out.println("\nAfter str1.toUpperCase():");
+        System.out.println("str1: " + str1);
+        System.out.println("str2: " + str2);  // Unchanged!
+        System.out.println("str1 == str2: " + (str1 == str2));  // false (different references)
+        System.out.println("str1.equals(str2): " + str1.equals(str2));  // false (different values)
+
+        System.out.println("\n✓ str2 unchanged because strings are immutable");
+        System.out.println("✓ str1 now points to a NEW string object");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: hello
+
+Initial state:
+str1: hello
+str2: hello
+str1 == str2: true
+str1.equals(str2): true
+
+After str1.toUpperCase():
+str1: HELLO
+str2: hello
+str1 == str2: false
+str1.equals(str2): false
+
+✓ str2 unchanged because strings are immutable
+✓ str1 now points to a NEW string object</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Reference Assignment:</strong> str2 = str1 copies reference, not value</li>
+                    <li><strong>Immutability Protection:</strong> Changing str1 doesn't affect str2</li>
+                    <li><strong>== vs equals():</strong> == checks reference, equals() checks value</li>
+                    <li><strong>New Object Creation:</strong> toUpperCase() creates new object for str1</li>
+                </ul>
+                <strong>Safety:</strong> Immutability prevents unintended modifications through references
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section-card" id="question4">
+            <h3>Question 4: Method Parameter Immutability</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program with a method that attempts to modify a string parameter.
+                Demonstrate that the original string in main() remains unchanged because strings are immutable and Java
+                is pass-by-value.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _04_ {
+    public static void modifyString(String str) {
+        System.out.println("Inside method - before: " + str);
+        str = str.toUpperCase();  // Creates new object, local variable points to it
+        System.out.println("Inside method - after: " + str);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String original = sn.nextLine();
+
+        System.out.println("\nBefore method call: " + original);
+        modifyString(original);
+        System.out.println("After method call: " + original);
+
+        System.out.println("\n✓ Original string unchanged!");
+        System.out.println("✓ Method received a COPY of the reference");
+        System.out.println("✓ Method's modification created NEW object");
+        System.out.println("✓ Original reference still points to original object");
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string: java
+
+Before method call: java
+Inside method - before: java
+Inside method - after: JAVA
+After method call: java
+
+✓ Original string unchanged!
+✓ Method received a COPY of the reference
+✓ Method's modification created NEW object
+✓ Original reference still points to original object</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Pass-by-Value:</strong> Method gets copy of reference, not original reference</li>
+                    <li><strong>Immutability + Pass-by-Value:</strong> Combination prevents external modification</li>
+                    <li><strong>Local Scope:</strong> Method's str variable is local, doesn't affect caller</li>
+                    <li><strong>Security:</strong> Methods can't accidentally modify caller's strings</li>
+                </ul>
+                <strong>Contrast:</strong> If strings were mutable, method could change original string
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section-card" id="question5">
+            <h3>Question 5: Chaining String Methods</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Write a Java program that demonstrates method chaining with strings. Show that:
+                • Each method returns a new string
+                • Methods can be chained together
+                • The original string remains unchanged
+                Apply multiple transformations in one statement.</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _05_ {
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String original = sn.nextLine();
+
+        System.out.println("\nOriginal: " + original);
+
+        // Method chaining - each method returns new String
+        String result = original.trim()
+                                .toLowerCase()
+                                .replace(' ', '_')
+                                .concat("_processed");
+
+        System.out.println("\nAfter chaining:");
+        System.out.println("  .trim()");
+        System.out.println("  .toLowerCase()");
+        System.out.println("  .replace(' ', '_')");
+        System.out.println("  .concat(\"_processed\")");
+        System.out.println("\nResult: " + result);
+        System.out.println("Original: " + original);
+
+        System.out.println("\n✓ Each method created a new String object");
+        System.out.println("✓ Total new objects created: 4");
+        System.out.println("✓ Original string unchanged: " + original);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter a string:   Hello World  
+
+Original:   Hello World  
+
+After chaining:
+  .trim()
+  .toLowerCase()
+  .replace(' ', '_')
+  .concat("_processed")
+
+Result: hello_world_processed
+Original:   Hello World  
+
+✓ Each method created a new String object
+✓ Total new objects created: 4
+✓ Original string unchanged:   Hello World  </code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Method Chaining:</strong> Possible because each method returns a String</li>
+                    <li><strong>Intermediate Objects:</strong> Each chained method creates temporary object</li>
+                    <li><strong>Fluent API:</strong> Chaining makes code more readable</li>
+                    <li><strong>Memory Cost:</strong> Multiple temporary objects created and discarded</li>
+                </ul>
+                <strong>Efficiency:</strong> For heavy chaining, consider StringBuilder for better performance
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                Module</a></div>
+        <footer>
+            <p><strong>String Immutability Module - Practice Worksheet</strong></p>
+            <p>Master the concept of string immutability and its implications</p>
+            <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

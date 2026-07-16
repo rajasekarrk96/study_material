@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create / Drop Database - SQL Master</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <div class="logo-icon">SQL</div>
+                <h1>SQL Master</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="filterNav()">
+            </div>
+            <nav class="nav-list" id="navList"></nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="topic-path"><span id="topicTitleHeader">Create / Drop Database</span></div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+
+            <div class="content-scroll-area" id="contentArea">
+            <article class="topic-card">
+                <h2 class="topic-title">Create / Drop Database</h2>
+                <p class="topic-desc">Commands to manage databases.</p>
+    <div class="subtopics-container">
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="1">CREATE DATABASE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to create a new database in the SQL server.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">DATABASE</span> database_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">DATABASE</span> college;</code></pre><div class="output-box">Query OK, 1 row affected<br>📌 A new database named college is created.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="2">CREATE DATABASE IF NOT EXISTS</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Creates a database only if it does not already exist, preventing errors.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">EXISTS</span> database_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">EXISTS</span> company;</code></pre><div class="output-box">If database does not exist: Query OK, 1 row affected<br>If database already exists: Query OK, 0 rows affected<br>📌 No error is shown.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="3">DROP DATABASE</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Used to permanently delete a database and all its tables.<br>⚠️ Warning: Data cannot be recovered after dropping.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">DATABASE</span> database_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">DATABASE</span> college;</code></pre><div class="output-box">Query OK, 0 rows affected<br>📌 The college database is deleted.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="4">DROP DATABASE IF EXISTS</h3>
+                        <p class="subtopic-desc"><strong>🔹 Definition</strong><br>Deletes a database only if it exists, avoiding errors.</p>
+            <div class="code-label label-syntax">🔹 Syntax</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">EXISTS</span> database_name;</code></pre><div class="code-label label-example">🔹 Example</div><pre class="code-block-minimal"><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">EXISTS</span> school;</code></pre><div class="output-box">Query OK, 0 rows affected<br>📌 No error shown if school didn't exist.</div>
+                    </div>
+            
+                    <div class="subtopic-card">
+                        <h3 class="subtopic-title" data-section-num="5">Practice Worksheet</h3>
+                        <p class="subtopic-desc">
+<div style="margin-bottom: 20px;">
+    <strong>Q1. Create a database named college.</strong><br>
+    <button class="toggle-btn" data-target="ans-q1" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-q1" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE DATABASE college;</code></pre><br>
+        Output:<br>Query OK, 1 row affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q2. Create a database company only if it does not already exist.</strong><br>
+    <button class="toggle-btn" data-target="ans-q2" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-q2" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>CREATE DATABASE IF NOT EXISTS company;</code></pre><br>
+        Output (if database does not exist):<br>Query OK, 1 row affected<br>
+        Output (if database already exists):<br>Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q3. Show all databases available in the server.</strong><br>
+    <button class="toggle-btn" data-target="ans-q3" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-q3" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>SHOW DATABASES;</code></pre><br>
+        Output:<br>
+        <pre class='code-block-minimal'><code>+--------------------+
+| Database           |
++--------------------+
+| college            |
+| company            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+</code></pre>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q4. Delete the database named college.</strong><br>
+    <button class="toggle-btn" data-target="ans-q4" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-q4" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DROP DATABASE college;</code></pre><br>
+        Output:<br>Query OK, 0 rows affected
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <strong>Q5. Drop a database school only if it exists.</strong><br>
+    <button class="toggle-btn" data-target="ans-q5" style="margin-top: 10px; display: block;">Show Answer</button>
+    <div id="ans-q5" style="display:none; margin-top:10px;">
+        Query:<br><pre class='code-block-minimal'><code>DROP DATABASE IF EXISTS school;</code></pre><br>
+        Output:<br>Query OK, 0 rows affected
+    </div>
+</div></p>
+            
+                    </div>
+            </div>
+                <div class="page-navigation">
+    
+                        <div class="nav-btn prev" onclick="window.location.href='01_introduction.html'">
+                            <div class="nav-label">Previous</div>
+                            <div class="nav-title">← Introduction</div>
+                        </div>
+        
+                        <div class="nav-btn next" onclick="window.location.href='03_create-drop-table.html'">
+                            <div class="nav-label">Next</div>
+                            <div class="nav-title">Create / Drop Table →</div>
+                        </div>
+        
+                </div>
+            </article>
+    </div>
+        </main>
+    </div>
+    <script src="../nav.js"></script>
+    <script src="../topics-app.js"></script>
+</body>
+</html>

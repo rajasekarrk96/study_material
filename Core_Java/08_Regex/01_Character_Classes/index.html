@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Character Classes - Java Learning Module</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>Regex Character Classes</h5>
+        <a href="../../index.html#regex">← Back to Home</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#section1">Regex Basics</a>
+        <a href="#section2">Character Classes</a>
+        <a href="#section3">Basic Classes</a>
+        <a href="#section4">Predefined Classes</a>
+        <a href="#section5">Pattern Matching</a>
+    </div>
+
+    <div class="top-nav">
+        <h1>Regex Character Classes</h1>
+    </div>
+
+    <div class="main-content">
+        <!-- Section 1: Regular Expressions Basics -->
+        <div class="section" id="section1">
+            <h2>Section 1: Regular Expressions Basics</h2>
+            <p>
+                <strong>Regular Expressions (Regex)</strong> are powerful patterns used to match, search, and manipulate
+                text.
+                They provide a concise and flexible means to find strings that match a particular pattern. Regular
+                expressions are
+                essential for text processing, validation, and string manipulation.
+            </p>
+
+            <h3>Common Uses of Regex</h3>
+            <ul>
+                <li>Email validation</li>
+                <li>Phone number validation</li>
+                <li>Password strength checking</li>
+                <li>Text search and replace</li>
+                <li>Data extraction and parsing</li>
+            </ul>
+
+            <div class="note-box">
+                <h4>💡 Key Concept</h4>
+                <p>A regular expression is a pattern of characters used to match or find text. In Java, regex patterns
+                    are typically defined as String literals.</p>
+            </div>
+
+            <div class="example-box">
+                <h4>🎯 Real-World Example</h4>
+                <p>Validating email formats: an email must have an @ symbol followed by a domain name - regex can check
+                    this pattern automatically.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Character Classes Overview -->
+        <div class="section" id="section2">
+            <h2>Section 2: Character Classes Overview</h2>
+            <p>A <strong>character class</strong> defines a set of characters that can match at a single position in the
+                text:</p>
+
+            <h3>What is a Character Class?</h3>
+            <div class="code-block"><code>// [abc] - matches any single character a, b, or c
+// [0-9] - matches any single digit 0-9
+// [a-z] - matches any lowercase letter
+// [A-Z] - matches any uppercase letter</code></div>
+
+            <h3>Basic Syntax</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Meaning</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>[abc]</code></td>
+                        <td>Any of a, b, or c</td>
+                        <td><code>[cat]</code> matches c, a, or t</td>
+                    </tr>
+                    <tr>
+                        <td><code>[^abc]</code></td>
+                        <td>NOT a, b, or c</td>
+                        <td><code>[^0-9]</code> matches any non-digit</td>
+                    </tr>
+                    <tr>
+                        <td><code>[a-z]</code></td>
+                        <td>Range a to z</td>
+                        <td>Matches any lowercase letter</td>
+                    </tr>
+                    <tr>
+                        <td><code>[0-9]</code></td>
+                        <td>Range 0 to 9</td>
+                        <td>Matches any digit</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="example-box">
+                <h4>🔍 Understanding Character Classes</h4>
+                <p>Character classes are enclosed in square brackets [ ]. They define a SET of characters, and the regex
+                    matches ANY ONE character from that set.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Basic Character Classes -->
+        <div class="section" id="section3">
+            <h2>Section 3: Standard Character Classes [abc] and [^abc]</h2>
+            <p>The simplest character classes match specific characters or exclude specific characters:</p>
+
+            <h3>Example 1: Matching Specific Characters</h3>
+            <div class="code-block"><code>import java.util.regex.*;
+
+public class BasicCharClasses {
+    public static void main(String[] args) {
+        // Pattern [aeiou] matches any vowel
+        String pattern = "[aeiou]";
+        String text = "Hello World";
+        
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(text);
+        
+        System.out.println("Vowels found:");
+        while (m.find()) {
+            System.out.println(m.group());  // Prints each vowel found
+        }
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Vowels found:<br>e<br>o<br>o</p>
+            </div>
+
+            <h3>Example 2: Excluding Characters with [^]</h3>
+            <div class="code-block"><code>public class ExcludingCharacters {
+    public static void main(String[] args) {
+        // [^0-9] matches any character that is NOT a digit
+        String pattern = "[^0-9]+";
+        String text = "abc123def456";
+        
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(text);
+        
+        System.out.println("Non-digit sequences:");
+        while (m.find()) {
+            System.out.println(m.group());
+        }
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Non-digit sequences:<br>abc<br>def</p>
+            </div>
+
+            <h3>Example 3: Range Patterns</h3>
+            <div class="code-block"><code>public class RangePatterns {
+    public static void main(String[] args) {
+        String text = "The Price is $50 for item #42";
+        
+        // [0-9] matches any digit
+        Pattern digits = Pattern.compile("[0-9]");
+        Matcher m = digits.matcher(text);
+        
+        System.out.println("Digits found: " + m.group());
+        
+        // [a-z] matches lowercase letters
+        Pattern lowercase = Pattern.compile("[a-z]");
+        m = lowercase.matcher(text);
+        
+        System.out.print("Lowercase letters: ");
+        while (m.find()) {
+            System.out.print(m.group() + " ");
+        }
+    }
+}</code></div>
+
+            <div class="note-box">
+                <h4>⚠️ Important</h4>
+                <p>Character classes match ONE character at a time. To match multiple characters, you need quantifiers
+                    (covered later).</p>
+            </div>
+        </div>
+
+        <!-- Section 4: Predefined Classes -->
+        <div class="section" id="section4">
+            <h2>Section 4: Predefined Classes \\d, \\w, \\s</h2>
+            <p>Java provides predefined character classes as shortcuts for common patterns:</p>
+
+            <h3>Predefined Classes Table</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Equivalent</th>
+                        <th>Meaning</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>\\d</code></td>
+                        <td><code>[0-9]</code></td>
+                        <td>Any digit</td>
+                        <td>Matches: 5</td>
+                    </tr>
+                    <tr>
+                        <td><code>\\D</code></td>
+                        <td><code>[^0-9]</code></td>
+                        <td>Non-digit</td>
+                        <td>Matches: a</td>
+                    </tr>
+                    <tr>
+                        <td><code>\\w</code></td>
+                        <td><code>[a-zA-Z0-9_]</code></td>
+                        <td>Word character</td>
+                        <td>Matches: a, 5, _</td>
+                    </tr>
+                    <tr>
+                        <td><code>\\W</code></td>
+                        <td><code>[^a-zA-Z0-9_]</code></td>
+                        <td>Non-word character</td>
+                        <td>Matches: @, #, !</td>
+                    </tr>
+                    <tr>
+                        <td><code>\\s</code></td>
+                        <td>Whitespace</td>
+                        <td>Space, tab, newline</td>
+                        <td>Matches: space</td>
+                    </tr>
+                    <tr>
+                        <td><code>\\S</code></td>
+                        <td>Non-whitespace</td>
+                        <td>Any non-whitespace</td>
+                        <td>Matches: a, 5</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Example 1: Using \\d</h3>
+            <div class="code-block"><code>public class DigitClass {
+    public static void main(String[] args) {
+        String pattern = "\\d\\d\\d-\\d\\d\\d\\d";  // Phone pattern: XXX-XXXX
+        String text = "Call me at 555-1234 for details";
+        
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(text);
+        
+        if (m.find()) {
+            System.out.println("Phone number found: " + m.group());
+        }
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Phone number found: 555-1234</p>
+            </div>
+
+            <h3>Example 2: Using \\w and \\W</h3>
+            <div class="code-block"><code>public class WordCharacters {
+    public static void main(String[] args) {
+        // \\w matches word characters
+        String pattern = "\\w+";  // One or more word characters
+        String text = "Hello_World @123 Java-Script";
+        
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(text);
+        
+        System.out.println("Word sequences:");
+        while (m.find()) {
+            System.out.println(m.group());
+        }
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Word sequences:<br>Hello_World<br>123<br>Java<br>Script</p>
+            </div>
+
+            <h3>Example 3: Using \\s</h3>
+            <div class="code-block"><code>public class WhitespaceClass {
+    public static void main(String[] args) {
+        // \\s matches whitespace
+        String text = "Java  Programming  Language";
+        String[] words = text.split("\\s+");  // Split by whitespace
+        
+        System.out.println("Words:");
+        for (String word : words) {
+            System.out.println(word);
+        }
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Words:<br>Java<br>Programming<br>Language</p>
+            </div>
+
+            <div class="note-box">
+                <h4>💡 Escaping Backslash</h4>
+                <p>In Java strings, backslash is an escape character, so we use <code>\\</code> instead of
+                    <code>\</code> in regex patterns.
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 5: Pattern Matching Examples -->
+        <div class="section" id="section5">
+            <h2>Section 5: Pattern Matching Examples</h2>
+            <p>Practical examples combining character classes for real-world pattern matching:</p>
+
+            <h3>Example 1: Email Validation (Simple)</h3>
+            <div class="code-block"><code>public class EmailValidation {
+    public static void main(String[] args) {
+        // Simple email pattern: word characters @ word characters . letters
+        String pattern = "[\\w]+@[\\w]+\\.[a-z]{2,}";
+        String[] emails = {
+            "john@example.com",
+            "alice.smith@company.co.uk",
+            "invalid@email",
+            "test123@domain.org"
+        };
+        
+        Pattern p = Pattern.compile(pattern);
+        
+        for (String email : emails) {
+            Matcher m = p.matcher(email);
+            System.out.println(email + ": " + (m.find() ? "Valid" : "Invalid"));
+        }
+    }
+}</code></div>
+
+            <h3>Example 2: Extracting Numbers</h3>
+            <div class="code-block"><code>public class ExtractNumbers {
+    public static void main(String[] args) {
+        String text = "Invoice: 12345, Amount: 999.99, Code: 5678";
+        String pattern = "\\d+";  // One or more digits
+        
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(text);
+        
+        System.out.println("Numbers found:");
+        while (m.find()) {
+            System.out.println(m.group());
+        }
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Numbers found:<br>12345<br>999<br>99<br>5678</p>
+            </div>
+
+            <h3>Example 3: Validating Alphanumeric</h3>
+            <div class="code-block"><code>public class AlphanumericValidation {
+    public static void main(String[] args) {
+        String pattern = "[a-zA-Z0-9]+";  // Only letters and digits
+        String[] inputs = {
+            "JavaCode123",
+            "Hello_World",
+            "Test2024",
+            "Valid!",
+            "abc"
+        };
+        
+        Pattern p = Pattern.compile("^" + pattern + "$");  // ^ and $ match start and end
+        
+        for (String input : inputs) {
+            Matcher m = p.matcher(input);
+            System.out.println(input + ": " + (m.matches() ? "Valid" : "Invalid"));
+        }
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>JavaCode123: Valid<br>Hello_World: Invalid<br>Test2024: Valid<br>Valid!: Invalid<br>abc: Valid</p>
+            </div>
+
+            <h3>Example 4: Replacing Non-Digits</h3>
+            <div class="code-block"><code>public class ReplaceNonDigits {
+    public static void main(String[] args) {
+        String phone = "Phone: (555) 123-4567";
+        String digits = phone.replaceAll("\\D", "");  // Replace all non-digits with empty
+        
+        System.out.println("Original: " + phone);
+        System.out.println("Digits only: " + digits);
+    }
+}</code></div>
+
+            <div class="example-box">
+                <h4>Output</h4>
+                <p>Original: Phone: (555) 123-4567<br>Digits only: 5551234567</p>
+            </div>
+
+            <div class="note-box">
+                <h4>💡 Regex Methods in Java</h4>
+                <ul>
+                    <li><code>Pattern.compile()</code> - Creates a Pattern object</li>
+                    <li><code>Pattern.matcher()</code> - Creates a Matcher for the string</li>
+                    <li><code>Matcher.find()</code> - Finds next match</li>
+                    <li><code>Matcher.matches()</code> - Checks if entire string matches</li>
+                    <li><code>String.replaceAll()</code> - Replace using regex</li>
+                    <li><code>String.split()</code> - Split using regex</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Worksheet Button -->
+        <div style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
+            <a href="worksheet.html" class="btn-worksheet">Go to Practice Worksheets →</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  01 demo page </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>01. Demo Page</h1>
+
+<h2>Welcome to Your Learning Journey</h2>
+<p>This website is designed to be your ultimate companion for mastering <strong>Java Selenium Automation</strong>.
+    Whether you are a complete beginner or preparing for an interview, this portal covers everything from the basics to
+    advanced frameworks.</p>
+
+<h3>Features of this Portal:</h3>
+<ul>
+    <li><strong>Structured Learning:</strong> Topics are arranged in a logical sequence.</li>
+    <li><strong>Simple Explanations:</strong> Complex concepts are broken down into easy-to-understand English.</li>
+    <li><strong>Real-time Examples:</strong> Practical scenarios you will face in actual projects.</li>
+    <li><strong>Practice Worksheets:</strong> Every topic comes with a dedicated worksheet to test your skills
+        immediately.</li>
+</ul>
+
+<h2>How to Practice</h2>
+<p>For every topic, read the explanation, study the code, and then click the <strong>"Practice Worksheet"</strong>
+    button. This will open a new tab with exercises. Try to solve them on your local machine.</p>
+
+<h3>Sample Selenium Code Structure</h3>
+<p>Here is a sneak peek at what a simple Selenium script looks like:</p>
+
+<pre><code class="language-java">import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class FirstTest {
+    public static void main(String[] args) {
+        // SQL of Automation: Open Browser
+        WebDriver driver = new ChromeDriver();
+        
+        // Navigate to a website
+        driver.get("https://www.google.com");
+        
+        // Print the title
+        System.out.println("Page Title is: " + driver.getTitle());
+        
+        // Close the browser
+        driver.quit();
+    }
+}</code></pre>
+
+<a href="worksheets/ws_demo_page.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For-Each Loop - Java</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <h5>For-Each Loop</h5>
+        <a href="../../index.html#loops">← Back to Home</a>
+        <a href="worksheet.html" class="btn btn-primary"
+            style="display: block; margin: 10px 0; padding: 10px; text-align: center; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+            📝 Practice Worksheets
+        </a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <a href="#syntax">Syntax</a>
+        <a href="#example">Example</a>
+        <a href="#limitations">Limitations</a>
+    </div>
+
+    <div class="top-nav">
+        <h2>For-Each Loop (Enhanced For Loop)</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1>For-Each Loop in Java</h1>
+            <p class="lead text-muted">Simplified way to iterate through arrays and collections without using index.</p>
+        </div>
+
+        <div class="section" id="syntax">
+            <h4>Syntax</h4>
+            <pre><code>for (dataType variable : arrayOrCollection) {
+    // Code to execute for each element
+}</code></pre>
+            <ul>
+                <li><strong>dataType:</strong> Type of elements in the array/collection</li>
+                <li><strong>variable:</strong> Temporary variable holding current element</li>
+                <li><strong>arrayOrCollection:</strong> The array or collection to iterate</li>
+            </ul>
+            <div class="note">
+                <strong>💡 Also Called:</strong> Enhanced for loop or for-each loop. Introduced in Java 5.
+            </div>
+        </div>
+
+        <div class="section" id="example">
+            <h4>Example: Iterate Arrays</h4>
+            <pre><code>public class ForEachExample {
+    public static void main(String[] args) {
+        // Array of numbers
+        int[] numbers = {10, 20, 30, 40, 50};
+        
+        System.out.println("Using for-each loop:");
+        for (int num : numbers) {
+            System.out.println("Number: " + num);
+        }
+        
+        // Array of strings
+        String[] fruits = {"Apple", "Banana", "Orange", "Mango"};
+        
+        System.out.println("\nFruits:");
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+        
+        // Calculate sum
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
+        System.out.println("\nSum: " + sum);
+    }
+}</code></pre>
+            <div class="output">
+                Using for-each loop:<br>
+                Number: 10<br>
+                Number: 20<br>
+                Number: 30<br>
+                Number: 40<br>
+                Number: 50<br><br>
+                Fruits:<br>
+                Apple<br>
+                Banana<br>
+                Orange<br>
+                Mango<br><br>
+                Sum: 150
+            </div>
+        </div>
+
+        <div class="section" id="limitations">
+            <h4>Advantages & Limitations</h4>
+            <div class="example">
+                <strong>✓ Advantages:</strong><br>
+                • Cleaner and more readable code<br>
+                • No index management needed<br>
+                • Eliminates off-by-one errors<br>
+                • Works with arrays and collections
+            </div>
+            <div class="note">
+                <strong>⚠️ Limitations:</strong><br>
+                • Cannot modify array elements<br>
+                • Cannot access index directly<br>
+                • Only forward iteration<br>
+                • Cannot iterate multiple arrays simultaneously
+            </div>
+        </div>
+
+        <div class="worksheet-container">
+            <a href="worksheet.html" class="btn btn-primary btn-lg px-4">Go to Practice Worksheets →</a>
+        </div>
+
+        <div
+            style="text-align: center; padding: 40px 0; color: #999; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 40px;">
+            <p>For-Each Loop Module | Last Updated: January 2026</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

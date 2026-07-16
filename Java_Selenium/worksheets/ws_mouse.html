@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksheet: Mouse Actions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00e676;
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-light: #e0e0e0;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            height: calc(100vh - 50px);
+        }
+
+        .pane-questions {
+            width: 40%;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pane-header {
+            padding: 15px;
+            background: #252525;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .questions-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .question-card {
+            background: #2d2d2d;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .q-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .q-text {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .pane-practice {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f0f0;
+        }
+
+        .browser-bar {
+            background: #e0e0e0;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .url-box {
+            background: #fff;
+            padding: 5px 12px;
+            border-radius: 12px;
+            flex: 1;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #555;
+            border: 1px solid #ccc;
+        }
+
+        .app-view {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            color: #333;
+        }
+
+        .solutions-panel {
+            background: #1a1a1a;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sol-header {
+            padding: 10px 20px;
+            background: #252525;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .sol-header:hover {
+            color: #fff;
+            background: #333;
+        }
+
+        .sol-content {
+            padding: 15px;
+            display: none;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            color: #dcdcaa;
+            background: #111;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .sol-content.visible {
+            display: block;
+        }
+
+        /* Syntax Highlighting */
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-variable {
+            color: #9cdcfe;
+        }
+
+        .code-method {
+            color: #dcdcaa;
+        }
+
+        .code-class {
+            color: #4ec9b0;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .action-area {
+            background: white;
+            border: 2px dashed #ccc;
+            width: 200px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+            color: #777;
+        }
+
+        .menu-dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .menu-content {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100px;
+        }
+
+        .menu-content div {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-dropdown:hover .menu-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><i class="fas fa-mouse-pointer"></i> Practice: Mouse Actions</h1>
+        <a href="../index.html" style="color:#888; text-decoration:none;"><i class="fas fa-home"></i> Home</a>
+    </header>
+    <div class="workspace">
+        <div class="pane-questions">
+            <div class="pane-header"><i class="fas fa-tasks"></i> Assignments</div>
+            <div class="questions-list">
+                <div class="question-card">
+                    <div class="q-title">Task 01: Right Click (Context Click)</div>
+                    <div class="q-text">
+                        Use <code>Actions.contextClick(element)</code> to perform a right-click
+                        on the box area (id="box"). This opens the context menu. <br><strong>(Instruction: Use the ID
+                            locator 'box' for this task)</strong>
+                    </div>
+                </div>
+                <div class="question-card">
+                    <div class="q-title">Task 02: Mouse Hover</div>
+                    <div class="q-text">
+                        Use <code>Actions.moveToElement(element)</code> to hover over the "Hover Me!" button (id="menu")
+                        and reveal the dropdown menu options. <br><strong>(Instruction: Use the ID locator 'menu' for
+                            this task)</strong>
+                    </div>
+                </div>
+                <div class="question-card">
+                    <div class="q-title">Task 03: Double Click</div>
+                    <div class="q-text">
+                        Use <code>Actions.doubleClick(element)</code> to double-click on the box area.
+                        This typically selects text or triggers double-click events.
+                    </div>
+                </div>
+            </div>
+            <div class="solutions-panel">
+                <div class="sol-header" onclick="toggleSolutions()">
+                    <span><i class="fas fa-code"></i> Solutions</span>
+                    <i class="fas fa-chevron-up" id="sol-icon"></i>
+                </div>
+                <div class="sol-content" id="sol-body">
+                   <pre style="margin:0;">
+<code>
+<span class="code-keyword">package</span> <span class="code-class">Selenium</span>;
+
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.By</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.Keys</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebDriver</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.chrome.ChromeDriver</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.WebElement</span>;
+<span class="code-keyword">import</span> <span class="code-class">org.openqa.selenium.interactions.Actions</span>;
+
+<span class="code-keyword">public class</span> <span class="code-class">_18_KeyboardActions</span> {
+
+    <span class="code-keyword">public static void</span> <span class="code-method">main</span>
+    (<span class="code-class">String</span>[] <span class="code-variable">args</span>) {
+
+        <span class="code-keyword">try</span> {
+
+            <span class="code-comment">// Launch Chrome</span>
+            <span class="code-class">WebDriver</span> <span class="code-variable">driver</span> =
+            <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span>();
+
+            <span class="code-comment">// Open website</span>
+            driver.<span class="code-method">get</span>(
+                <span class="code-string">"http://127.0.0.1:5502/Java_Selinium/worksheets/ws_keyboard.html"</span>
+            );
+
+            <span class="code-class">Actions</span> <span class="code-variable">act</span> =
+            <span class="code-keyword">new</span> <span class="code-class">Actions</span>(driver);
+
+            <span class="code-comment">// Task 01: Keyboard (ID hidden in solution - follow instruction!)</span>
+            <span class="code-class">WebElement</span> <span class="code-variable">box1</span> =
+            driver.<span class="code-method">findElement</span>(
+                <span class="code-class">By</span>.<span class="code-method">xpath</span>(<span class="code-string">"//input[1]"</span>)
+            );
+
+            <span class="code-comment">// Task 01: Type in UPPERCASE</span>
+            act.<span class="code-method">keyDown</span>(<span class="code-class">Keys</span>.SHIFT)
+               .<span class="code-method">sendKeys</span>(box1, <span class="code-string">"selenium"</span>)
+               .<span class="code-method">keyUp</span>(<span class="code-class">Keys</span>.SHIFT)
+               .<span class="code-method">perform</span>();
+
+            <span class="code-class">Thread</span>.<span class="code-method">sleep</span>(<span class="code-number">3000</span>);
+
+            <span class="code-comment">// Task 02: Copy and Paste Text</span>
+            act.<span class="code-method">keyDown</span>(<span class="code-class">Keys</span>.CONTROL)
+               .<span class="code-method">sendKeys</span>(<span class="code-string">"a"</span>)
+               .<span class="code-method">sendKeys</span>(<span class="code-string">"c"</span>)
+               .<span class="code-method">keyUp</span>(<span class="code-class">Keys</span>.CONTROL)
+               .<span class="code-method">perform</span>();
+
+            <span class="code-class">Thread</span>.<span class="code-method">sleep</span>(<span class="code-number">3000</span>);
+
+            <span class="code-comment">// Task 02: Copy/Paste (ID hidden in solution - follow instruction!)</span>
+            <span class="code-class">WebElement</span> <span class="code-variable">box2</span> =
+            driver.<span class="code-method">findElement</span>(
+                <span class="code-class">By</span>.<span class="code-method">xpath</span>(<span class="code-string">"//input[2]"</span>)
+            );
+
+            act.<span class="code-method">click</span>(box2)
+               .<span class="code-method">keyDown</span>(<span class="code-class">Keys</span>.CONTROL)
+               .<span class="code-method">sendKeys</span>(<span class="code-string">"v"</span>)
+               .<span class="code-method">keyUp</span>(<span class="code-class">Keys</span>.CONTROL)
+               .<span class="code-method">perform</span>();
+
+            <span class="code-class">Thread</span>.<span class="code-method">sleep</span>(<span class="code-number">3000</span>);
+
+            <span class="code-comment">// Task 03: Press ENTER Key</span>
+            box1.<span class="code-method">clear</span>();
+            <span class="code-class">Thread</span>.<span class="code-method">sleep</span>(<span class="code-number">3000</span>);
+
+            box1.<span class="code-method">sendKeys</span>(<span class="code-string">"automation"</span>);
+            box1.<span class="code-method">sendKeys</span>(<span class="code-class">Keys</span>.ENTER);
+
+            <span class="code-class">Thread</span>.<span class="code-method">sleep</span>(<span class="code-number">3000</span>);
+            driver.<span class="code-method">quit</span>();
+
+            <span class="code-comment">// Keep browser open for 3 seconds</span>
+            <span class="code-class">Thread</span>.<span class="code-method">sleep</span>(<span class="code-number">3000</span>);
+
+        } <span class="code-keyword">catch</span> (<span class="code-class">Exception</span> <span class="code-variable">e</span>) {
+
+            <span class="code-comment">// Handle any exception</span>
+            <span class="code-comment">// Prints the error details in the Eclipse console for debugging</span>
+            e.<span class="code-method">printStackTrace</span>();
+        }
+    }
+}
+</code>
+</pre>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="pane-practice">
+            <div class="browser-bar"><i class="fas fa-globe" style="color:#666"></i>
+                <div class="url-box">mouse-events.html</div>
+            </div>
+            <div class="app-view">
+                <div style="text-align:center;">
+                    <div class="menu-dropdown">
+                        <button style="padding:8px 20px; cursor:pointer;" id="menu">Hover Me!</button>
+                        <div class="menu-content">
+                            <div>Profile</div>
+                            <div>Settings</div>
+                        </div>
+                    </div>
+
+                    <div class="action-area" id="box">
+                        Right Click Here
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>function toggleSolutions() { const b = document.getElementById('sol-body'); const i = document.getElementById('sol-icon'); b.classList.toggle('visible'); i.className = b.classList.contains('visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-up'; }</script>
+</body>
+
+</html>

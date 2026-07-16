@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  22 find all links   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>22. Find All Links on Page</h1>
+
+<h2>📖 Introduction</h2>
+<p>So far, we've mostly used <code>findElement()</code> to grab a single item. But what if you want to count how many
+    links are on the dashboard? Or verify that all 50 images on a page have a valid <code>src</code> attribute? This is
+    where <code>findElements()</code> (plural) becomes your best friend.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>Difference between <code>findElement</code> and <code>findElements</code></li>
+    <li>How to handle lists of WebElements</li>
+    <li>Iterating through elements to extract data</li>
+    <li>Handling "Empty Results" gracefully</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>The Key Differences</h3>
+<table border="1">
+    <tr>
+        <th>Feature</th>
+        <th>findElement()</th>
+        <th>findElements()</th>
+    </tr>
+    <tr>
+        <td><strong>Return Type</strong></td>
+        <td><code>WebElement</code></td>
+        <td><code>List&lt;WebElement&gt;</code></td>
+    </tr>
+    <tr>
+        <td><strong>If Found</strong></td>
+        <td>Returns first match</td>
+        <td>Returns all matches</td>
+    </tr>
+    <tr>
+        <td><strong>If Not Found</strong></td>
+        <td>Throws <code>NoSuchElementException</code></td>
+        <td>Returns <strong>Empty List</strong> (Size = 0)</td>
+    </tr>
+</table>
+
+<h2>💻 Code Examples</h2>
+<p>Scanning a page for links:</p>
+
+<h3>Find and Verify Links</h3>
+<pre><code>// 1. Find all 'a' tags
+List&lt;WebElement&gt; links = driver.findElements(By.tagName("a"));
+
+// 2. Print Count
+System.out.println("Total links: " + links.size());
+
+// 3. Iterate and Print URLs
+for(WebElement link : links) {
+    String url = link.getAttribute("href");
+    String text = link.getText();
+    
+    // Filter out empty links
+    if(url != null && !url.isEmpty()) {
+        System.out.println(text + " - " + url);
+    }
+}</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>StaleElementReferenceException:</strong> If you find a list of 100 elements, then the page refreshes (or
+        DOM updates) while you are looping through them, the elements in your List become "stale" (dead). You cannot
+        interact with them anymore. You must find the list again.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Validate Footer Links.</p>
+    <ol>
+        <li>Locate the Footer section (e.g., a specific <code>div</code>).</li>
+        <li>Find all links <strong>inside</strong> that footer only.</li>
+        <li>Verify there are at least 5 links.</li>
+        <li>Print the text of each link.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: Does findElements() throw an exception if the element is not found?</strong></p>
+    <p><strong>Answer:</strong> No. It returns an empty list. This is often used to verify that an element does
+        <em>not</em> exist (assert size is 0).
+    </p>
+</blockquote>
+
+<a href="worksheets/ws_find_all_links.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

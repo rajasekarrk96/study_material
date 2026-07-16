@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  11 basic html controls   </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>11. Basic HTML Controls</h1>
+
+<h2>📖 Introduction</h2>
+<p>Interacting with web elements is the daily bread and butter of any automation engineer. Whether it's typing a
+    username, clicking a "Login" button, or selecting a checkbox, 90% of your test scripts will revolve around these
+    basic HTML controls.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>How to type text into Input fields</li>
+    <li>How to clear existing text from fields</li>
+    <li>Clicking buttons and links</li>
+    <li>Handling Checkboxes and Radio buttons</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>1. Input Fields (Text Box)</h3>
+<p>Used for entering data like names, emails, and passwords.</p>
+<ul>
+    <li><code>sendKeys("text")</code>: Simulates typing keys into the element.</li>
+    <li><code>clear()</code>: Erases any text currently in the field.</li>
+</ul>
+
+<h3>2. Buttons & Links</h3>
+<p>Used to trigger an action or navigation.</p>
+<ul>
+    <li><code>click()</code>: The universal method to click anything that is clickable.</li>
+</ul>
+
+<h3>3. Checkboxes & Radio Buttons</h3>
+<p>Used for binary choices (Yes/No, Male/Female) or multiple selections.</p>
+<ul>
+    <li><code>click()</code>: Toggles the state of a checkbox or selects a radio button.</li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+<p>Here is how you control them:</p>
+
+<h3>Handling a Login Form</h3>
+<pre><code>// 1. Enter Text
+WebElement username = driver.findElement(By.id("user"));
+username.clear(); // Good practice to clear first
+username.sendKeys("admin");
+
+// 2. Click Button
+driver.findElement(By.id("loginBtn")).click();
+
+// 3. Select Checkbox
+WebElement rememberMe = driver.findElement(By.id("chkRemember"));
+if(!rememberMe.isSelected()) {
+    rememberMe.click();
+}</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>Not Clearing First:</strong> If an input field has default text (like "Enter Name"), using
+        <code>sendKeys</code> will append to it (e.g., "Enter NameJohn") instead of replacing it. Always
+        <code>clear()</code> first.
+    </p>
+    <p><strong>ElementInterceptedException:</strong> Sometimes you try to click a button but another element (like a
+        cookie banner) is covering it. You might need to close the banner first.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Fill a Registration Form.</p>
+    <ol>
+        <li>Clear and name field and type "John Doe".</li>
+        <li>Select the "I agree to terms" checkbox.</li>
+        <li>Select "Male" radio button.</li>
+        <li>Click "Register".</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: How do you submit a form without clicking the submit button?</strong></p>
+    <p><strong>Answer:</strong> You can use the <code>submit()</code> method on any element inside the form. It mimics
+        pressing "Enter" on the keyboard.</p>
+</blockquote>
+
+<a href="worksheets/ws_basic_html.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

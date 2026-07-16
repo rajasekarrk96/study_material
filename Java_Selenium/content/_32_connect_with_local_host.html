@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content:  32 connect with local host</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-book-open"></i><br>SELENIUM<br>MASTER</h2>
+            <p>Automation Training</p>
+            <button id="home-btn" class="home-btn" onclick="goHome()">ðŸ  Home</button>
+        </div>
+        <ul id="topic-list">
+        </ul>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content">
+        <div id="content-display">
+<h1>32. Connect Localhost</h1>
+
+<h2>📖 Introduction</h2>
+<p>Sometimes you need to test an application that is running on your own machine (localhost) or a dev server behind a
+    corporate firewall. Selenium handles "localhost" URLs just like any other URL, but there are some nuances.</p>
+
+<h2>💡 What You'll Learn</h2>
+<ul>
+    <li>Testing apps running on <code>http://localhost:8080</code></li>
+    <li>Mocking detailed networking conditions</li>
+    <li>Accessing local files directly</li>
+</ul>
+
+<h2>🔍 Detailed Explanation</h2>
+
+<h3>Localhost URLs</h3>
+<p>If your developer runs the app on their laptop, you can access it via:</p>
+<ul>
+    <li><code>http://localhost:3000</code> (React default)</li>
+    <li><code>http://127.0.0.1:8080</code> (Java/Spring default)</li>
+</ul>
+
+<h2>💻 Code Examples</h2>
+<pre><code>// 1. Open Local App
+driver.get("http://localhost:8080/login");
+
+// 2. Open Local File (HTML)
+driver.get("file:///C:/Users/Sedhu/Desktop/test.html");</code></pre>
+
+<h2>⚠️ Common Pitfalls</h2>
+<blockquote>
+    <p><strong>HTTPS Warnings:</strong> Localhost often uses self-signed certificates, causing "Not Private" warnings.
+        Use <code>options.setAcceptInsecureCerts(true)</code> to bypass this.</p>
+</blockquote>
+
+<h2>🎯 Real-World Scenario</h2>
+<div class="scenario-box">
+    <h3>Practice Scenario</h3>
+    <p><strong>Goal:</strong> Test the Website files you are building right now!</p>
+    <ol>
+        <li>Open this very <code>index.html</code> in the browser.</li>
+        <li>Copy the URL (<code>file:///...</code>).</li>
+        <li>Write a Selenium script to open it.</li>
+        <li>Click on the sidebar links and verify they work.</li>
+    </ol>
+</div>
+
+<h2>📝 Interview Questions</h2>
+<blockquote>
+    <p><strong>Q1: Can Selenium test APIs?</strong></p>
+    <p><strong>Answer:</strong> Strictly speaking, no. Selenium is for UI. For APIs, we use RestAssured. However, you
+        can trigger API calls via JS in the browser if needed.</p>
+</blockquote>
+
+<a href="worksheets/ws_localhost.html" class="btn-worksheet" target="_blank">Practice Worksheet</a>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+</body>
+</html>

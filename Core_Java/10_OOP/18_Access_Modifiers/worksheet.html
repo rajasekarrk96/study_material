@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Modifiers - Practice Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/topic-theme.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h5>Access Modifiers Worksheet</h5>
+        <a href="index.html" style="color: #dc3545; text-decoration: none; display: block; margin-bottom: 10px;">← Back
+            to Module</a>
+        <hr style="border-color: #34495e; margin: 15px 0;">
+        <nav>
+            <a href="#question1" class="nav-link active">Question 1</a>
+            <a href="#question2" class="nav-link">Question 2</a>
+            <a href="#question3" class="nav-link">Question 3</a>
+            <a href="#question4" class="nav-link">Question 4</a>
+            <a href="#question5" class="nav-link">Question 5</a>
+        </nav>
+    </div>
+    <div class="top-nav">
+        <h2>Access Modifiers - Practice Worksheet</h2>
+    </div>
+    <main>
+        <div class="module-header">
+            <h1>Practice Questions</h1>
+            <p>Master public, private, protected, and default access modifiers.</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="section-card" id="question1">
+            <h3>Question 1: BankAccount - Private, Protected, Public</h3>
+            <h4>Problem Statement</h4>
+            <div class="explanation">Create a BankAccount class with the following attributes and methods:
+                • A private attribute balance
+                • A protected attribute accountNumber
+                • A public method deposit to add money to the balance
+                • A public method withdraw to subtract money from the balance
+                • A protected method displayAccountNumber to print the account number</div>
+            <h4>Solution</h4>
+            <div class="code-block"><code>import java.util.Scanner;
+
+class _01_ {
+    private double balance;
+    protected String accountNumber;
+
+    public void deposit(double amt) {
+        balance += amt;
+    }
+
+    public void withdraw(double amt) {
+        balance -= amt;
+    }
+
+    protected void displayAccountNumber() {
+        System.out.println("Account Number: " + accountNumber);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        _01_ acc = new _01_();
+
+        System.out.print("Enter account number: ");
+        acc.accountNumber = sn.next();
+
+        System.out.print("Enter deposit amount: ");
+        acc.deposit(sn.nextDouble());
+
+        System.out.print("Enter withdraw amount: ");
+        acc.withdraw(sn.nextDouble());
+
+        acc.displayAccountNumber();
+        System.out.println("Balance = " + acc.balance);
+
+        sn.close();
+    }
+}</code></div>
+            <h4>Sample Output</h4>
+            <div class="output-block"><code>Enter account number: ACC001
+Enter deposit amount: 5000
+Enter withdraw amount: 1000
+Account Number: ACC001
+Balance = 4000.0</code></div>
+            <div class="notes-block">
+                <strong>Key Concepts:</strong>
+                <ul>
+                    <li><strong>Private:</strong> balance is accessible only within the class</li>
+                    <li><strong>Protected:</strong> accountNumber accessible in same package and subclasses</li>
+                    <li><strong>Public Methods:</strong> deposit() and withdraw() provide controlled access</li>
+                    <li><strong>Encapsulation:</strong> Balance protected from direct external modification</li>
+                </ul>
+                <strong>Access Levels:</strong> private < default < protected < public </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="section-card" id="question2">
+                <h3>Question 2: Employee - Private, Package-Private, Public</h3>
+                <h4>Problem Statement</h4>
+                <div class="explanation">Create an Employee class with the following attributes and methods:
+                    • A private attribute salary
+                    • A package-private attribute name
+                    • A public method setSalary to set the salary
+                    • A public method getSalary to get the salary
+                    • A package-private method displayEmployeeDetails to print the employee's name and salary</div>
+                <h4>Solution</h4>
+                <div class="code-block"><code>import java.util.Scanner;
+
+class _02_ {
+    private double salary;
+    String name;   // package-private
+
+    public void setSalary(double s) {
+        salary = s;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    void displayEmployeeDetails() {   // package-private
+        System.out.println("Name: " + name);
+        System.out.println("Salary: " + salary);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        _02_ emp = new _02_();
+
+        System.out.print("Enter name: ");
+        emp.name = sn.next();
+
+        System.out.print("Enter salary: ");
+        emp.setSalary(sn.nextDouble());
+
+        emp.displayEmployeeDetails();
+
+        sn.close();
+    }
+}</code></div>
+                <h4>Sample Output</h4>
+                <div class="output-block"><code>Enter name: Ravi
+Enter salary: 50000
+Name: Ravi
+Salary: 50000.0</code></div>
+                <div class="notes-block">
+                    <strong>Key Concepts:</strong>
+                    <ul>
+                        <li><strong>Private:</strong> salary is hidden from external access</li>
+                        <li><strong>Package-Private (Default):</strong> name accessible within same package only</li>
+                        <li><strong>Public Getters/Setters:</strong> Controlled access to private salary</li>
+                        <li><strong>No Modifier:</strong> displayEmployeeDetails() has default (package-private) access
+                        </li>
+                    </ul>
+                    <strong>Note:</strong> Package-private means no access modifier is specified
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="section-card" id="question3">
+                <h3>Question 3: Student - Private, Protected, Public</h3>
+                <h4>Problem Statement</h4>
+                <div class="explanation">Create a Student class with the following attributes and methods:
+                    • A private attribute grade
+                    • A protected attribute studentID
+                    • A public method setGrade to set the grade
+                    • A public method getGrade to get the grade
+                    • A protected method displayStudentID to print the student ID</div>
+                <h4>Solution</h4>
+                <div class="code-block"><code>import java.util.Scanner;
+
+class _03_ {
+    private char grade;
+    protected int studentID;
+
+    public void setGrade(char g) {
+        grade = g;
+    }
+
+    public char getGrade() {
+        return grade;
+    }
+
+    protected void displayStudentID() {
+        System.out.println("Student ID: " + studentID);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        _03_ s = new _03_();
+
+        System.out.print("Enter student ID: ");
+        s.studentID = sn.nextInt();
+
+        System.out.print("Enter grade: ");
+        s.setGrade(sn.next().charAt(0));
+
+        s.displayStudentID();
+        System.out.println("Grade: " + s.getGrade());
+
+        sn.close();
+    }
+}</code></div>
+                <h4>Sample Output</h4>
+                <div class="output-block"><code>Enter student ID: 101
+Enter grade: A
+Student ID: 101
+Grade: A</code></div>
+                <div class="notes-block">
+                    <strong>Key Concepts:</strong>
+                    <ul>
+                        <li><strong>Private Attribute:</strong> grade cannot be accessed directly</li>
+                        <li><strong>Protected Attribute:</strong> studentID accessible in subclasses</li>
+                        <li><strong>Public Methods:</strong> setGrade() and getGrade() provide controlled access</li>
+                        <li><strong>Protected Method:</strong> displayStudentID() accessible in subclasses</li>
+                    </ul>
+                    <strong>Design:</strong> Sensitive data (grade) is private, ID is protected for inheritance
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="section-card" id="question4">
+                <h3>Question 4: LibraryBook - Private, Public, Protected</h3>
+                <h4>Problem Statement</h4>
+                <div class="explanation">Create a LibraryBook class with the following attributes and methods:
+                    • A private attribute isbn
+                    • A public attribute title
+                    • A protected attribute author
+                    • A public method setIsbn to set the ISBN
+                    • A public method getIsbn to get the ISBN
+                    • A protected method displayAuthor to print the author</div>
+                <h4>Solution</h4>
+                <div class="code-block"><code>import java.util.Scanner;
+
+class _04_ {
+    private String isbn;
+    public String title;
+    protected String author;
+
+    public void setIsbn(String i) {
+        isbn = i;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    protected void displayAuthor() {
+        System.out.println("Author: " + author);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        _04_ book = new _04_();
+
+        System.out.print("Enter title: ");
+        book.title = sn.next();
+
+        System.out.print("Enter author: ");
+        book.author = sn.next();
+
+        System.out.print("Enter ISBN: ");
+        book.setIsbn(sn.next());
+
+        System.out.println("Title: " + book.title);
+        System.out.println("ISBN: " + book.getIsbn());
+        book.displayAuthor();
+
+        sn.close();
+    }
+}</code></div>
+                <h4>Sample Output</h4>
+                <div class="output-block"><code>Enter title: Java
+Enter author: Gosling
+Enter ISBN: 978-0134685991
+Title: Java
+ISBN: 978-0134685991
+Author: Gosling</code></div>
+                <div class="notes-block">
+                    <strong>Key Concepts:</strong>
+                    <ul>
+                        <li><strong>Private:</strong> isbn requires getter/setter for access</li>
+                        <li><strong>Public:</strong> title can be accessed and modified directly</li>
+                        <li><strong>Protected:</strong> author accessible in same package and subclasses</li>
+                        <li><strong>Mixed Access:</strong> Different attributes have different visibility levels</li>
+                    </ul>
+                    <strong>Warning:</strong> Public attributes bypass encapsulation - use with caution
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="section-card" id="question5">
+                <h3>Question 5: BankAccount - Transfer Between Accounts</h3>
+                <h4>Problem Statement</h4>
+                <div class="explanation">Create a BankAccount class with the following attributes and methods:
+                    • A private attribute accountNumber
+                    • A private attribute balance
+                    • A protected attribute accountHolderName
+                    • A public method setAccountNumber to set the account number
+                    • A public method getAccountNumber to get the account number
+                    • A public method setBalance to set the balance
+                    • A public method getBalance to get the balance
+                    • A protected method displayAccountHolderName to print the account holder name
+                    • A public method deposit to add money to the balance
+                    • A public method withdraw to subtract money from the balance
+                    • A public method transfer to transfer money to another BankAccount</div>
+                <h4>Solution</h4>
+                <div class="code-block"><code>import java.util.Scanner;
+
+class _05_ {
+    private String accountNumber;
+    private double balance;
+    protected String accountHolderName;
+
+    public void setAccountNumber(String acc) {
+        accountNumber = acc;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setBalance(double b) {
+        balance = b;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    protected void displayAccountHolderName() {
+        System.out.println("Account Holder: " + accountHolderName);
+    }
+
+    public void deposit(double amt) {
+        balance += amt;
+    }
+
+    public void withdraw(double amt) {
+        balance -= amt;
+    }
+
+    public void transfer(_05_ other, double amt) {
+        this.withdraw(amt);
+        other.deposit(amt);
+    }
+
+    public static void main(String[] args) {
+        Scanner sn = new Scanner(System.in);
+
+        _05_ acc1 = new _05_();
+        _05_ acc2 = new _05_();
+
+        System.out.print("Enter first account holder name: ");
+        acc1.accountHolderName = sn.next();
+
+        System.out.print("Enter first account number: ");
+        acc1.setAccountNumber(sn.next());
+
+        System.out.print("Enter initial balance: ");
+        acc1.setBalance(sn.nextDouble());
+
+        System.out.print("Enter second account holder name: ");
+        acc2.accountHolderName = sn.next();
+
+        System.out.print("Enter second account number: ");
+        acc2.setAccountNumber(sn.next());
+
+        System.out.print("Enter transfer amount: ");
+        double amt = sn.nextDouble();
+
+        acc1.transfer(acc2, amt);
+
+        acc1.displayAccountHolderName();
+        System.out.println("Balance = " + acc1.getBalance());
+
+        acc2.displayAccountHolderName();
+        System.out.println("Balance = " + acc2.getBalance());
+
+        sn.close();
+    }
+}</code></div>
+                <h4>Sample Output</h4>
+                <div class="output-block"><code>Enter first account holder name: Alice
+Enter first account number: ACC001
+Enter initial balance: 10000
+Enter second account holder name: Bob
+Enter second account number: ACC002
+Enter transfer amount: 2000
+Account Holder: Alice
+Balance = 8000.0
+Account Holder: Bob
+Balance = 2000.0</code></div>
+                <div class="notes-block">
+                    <strong>Key Concepts:</strong>
+                    <ul>
+                        <li><strong>Private Attributes:</strong> accountNumber and balance are fully encapsulated</li>
+                        <li><strong>Protected Attribute:</strong> accountHolderName accessible in subclasses</li>
+                        <li><strong>Public Methods:</strong> All transaction methods are publicly accessible</li>
+                        <li><strong>Object Interaction:</strong> transfer() method works with another BankAccount object
+                        </li>
+                    </ul>
+                    <strong>Real-World:</strong> Demonstrates proper encapsulation in banking systems
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;"><a href="index.html" class="btn-worksheet">← Back to
+                    Module</a></div>
+            <footer>
+                <p><strong>Access Modifiers Module - Practice Worksheet</strong></p>
+                <p>Master public, private, protected, and default access control</p>
+                <p>&copy; 2026 Java Learning Platform. All rights reserved.</p>
+            </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
