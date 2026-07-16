@@ -70,6 +70,10 @@ def _import_all_models() -> None:
     """Import all models so SQLAlchemy registers them before db.create_all()."""
     import app.domains.auth.models          # noqa: F401
     import app.domains.content.models       # noqa: F401
+    import app.domains.assessment.models    # noqa: F401
+    import app.domains.sandbox.models       # noqa: F401
+    import app.domains.gamification.models  # noqa: F401
+
 
 
 def _seed_defaults() -> None:
@@ -101,7 +105,13 @@ def _register_blueprints(app: Flask) -> None:
     from app.blueprints.public.routes import public_bp
     from app.blueprints.auth.routes import auth_bp
     from app.blueprints.learn.routes import learn_bp
+    from app.blueprints.assessment.routes import assessment_bp
+    from app.blueprints.sandbox.routes import sandbox_bp
 
     app.register_blueprint(public_bp)
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(learn_bp, url_prefix="/learn")
+    app.register_blueprint(assessment_bp)
+    app.register_blueprint(sandbox_bp)
+
+

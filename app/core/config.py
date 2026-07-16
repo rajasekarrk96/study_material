@@ -26,6 +26,8 @@ class AppConfig:
 
 def _build_database_uri() -> str:
     db_type = os.environ.get("DATABASE_TYPE", "sqlite").lower()
+    if db_type == "sqlite-test":
+        return "sqlite:///:memory:"
     if db_type == "tidb":
         url = os.environ.get("DATABASE_URL", "")
         return url

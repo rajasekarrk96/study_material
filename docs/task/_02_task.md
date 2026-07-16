@@ -5,35 +5,35 @@
 ---
 
 ## 2.1 Quiz Engine Infrastructure
-- [ ] Database Schema:
+- [x] Database Schema:
   - Add models for `Quiz`, `Question`, `Option`, `QuizAttempt`, and `QuizAnswer`.
-- [ ] API Controllers:
+- [x] API Controllers:
   - Code endpoint `/api/v1/quizzes/<id>/attempts` (creates attempt sessions).
   - Code endpoint `/api/v1/quizzes/attempts/<id>/submit` (processes answers, validates time limits, computes scores).
-- [ ] User Interfaces:
+- [x] User Interfaces:
   - Design front-end quiz widget displaying option inputs, timers, and score reports.
 
 ---
 
 ## 2.2 Sandboxed Code Execution Engine (Exercise Sandbox)
-- [ ] Database Schema:
+- [x] Database Schema:
   - Add models for `Exercise`, `ExerciseTestCase`, and `ExerciseSubmission`.
-- [ ] External Sandbox Integration (Judge0 API):
+- [x] External Sandbox Integration (Judge0 API):
   - Code API request client sending source code, input values, and expected outputs.
   - Implement language mapping (e.g. mapping `python` files to Judge0 ID 71).
-- [ ] Submissions Portal:
+- [x] Submissions Portal:
   - Code `/api/v1/exercises/<id>/submit` to process code outputs.
   - Build UI layout containing coding editor (using CodeMirror / Ace Editor integration), input test inputs boxes, and compiler stdout logs view.
 
 ---
 
 ## 2.3 Progress, XP, and Streaks Logging Service
-- [ ] XP Allocator Services:
+- [x] XP Allocator Services:
   - Code transaction service calculating and writing XP to the `user_xp_log` table.
   - Apply logic capping max daily XP points (e.g. max 500 XP per user per day).
-- [ ] Levels Progression Curve:
+- [x] Levels Progression Curve:
   - Code levels utility mapping XP totals to level thresholds ($L = \lfloor 0.1 \times \sqrt{XP} \rfloor + 1$).
-- [ ] Streak Tracking Service:
+- [x] Streak Tracking Service:
   - Code background checking algorithm verifying active daily lessons completions.
   - Increment `current_streak` or reset to 1 if user skips consecutive days.
 

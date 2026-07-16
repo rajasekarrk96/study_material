@@ -68,7 +68,7 @@ SET @sub_git_id = (SELECT id FROM subjects WHERE slug = 'git' LIMIT 1);
 SET @sub_github_id = (SELECT id FROM subjects WHERE slug = 'github' LIMIT 1);
 SET @sub_gitlab_id = (SELECT id FROM subjects WHERE slug = 'gitlab' LIMIT 1);
 
--- 3. Insert Courses
+-- 3. Insert Courses (Adding the new Git Collaboration course)
 INSERT INTO courses (subject_id, title, slug, description, long_description, thumbnail_url, difficulty_level, status, language, estimated_hours, is_free, is_featured, published_at, created_at, updated_at)
 VALUES
 (
@@ -81,6 +81,23 @@ VALUES
     'beginner',
     'published',
     'en',
+    12,
+    1,
+    1,
+    NOW(),
+    NOW(),
+    NOW()
+),
+(
+    @sub_git_id,
+    'Git Collaboration',
+    'git-collaboration',
+    'Learn remote repositories, fetch, pull, push, upstream syncing, and merge conflict resolution.',
+    '<p>Master team-based code sync workflows and collaborative branch merges.</p>',
+    '',
+    'intermediate',
+    'published',
+    'en',
     15,
     1,
     1,
@@ -89,7 +106,7 @@ VALUES
     NOW()
 ),
 (
-    @sub_github_id,
+    @sub_git_id,
     'GitHub Essentials',
     'github-essentials',
     'Manage remote repos, collaborate with Pull Requests, and customize repositories.',
@@ -98,7 +115,7 @@ VALUES
     'intermediate',
     'published',
     'en',
-    10,
+    12,
     1,
     1,
     NOW(),
@@ -115,7 +132,7 @@ VALUES
     'intermediate',
     'published',
     'en',
-    10,
+    12,
     1,
     1,
     NOW(),
