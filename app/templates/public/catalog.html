@@ -5,25 +5,56 @@
 <div class="catalog-page">
     <div class="page-header">
         <h1><i class="fas fa-compass"></i> Course Catalog</h1>
-        <p>Everything you need to master technical and non-technical skills — structured and source-driven.</p>
+        <p>Explore all available subjects and courses. Learn and track your progress layer by layer.</p>
     </div>
-    <div class="card-grid">
-        {% for cat in categories %}
-        <div class="category-card" style="--accent: {{ cat.color or '#6366f1' }}">
-            <div class="cat-icon"><i class="{{ cat.icon or 'fas fa-book' }}"></i></div>
-            <div class="cat-info">
-                <h3>{{ cat.name }}</h3>
-                <p>{{ cat.description or 'No description yet.' }}</p>
-                <span class="cat-type-badge">{{ cat.type | replace('_', ' ') | title }}</span>
+
+    {% for cat in categories %}
+    <div class="category-section" style="margin-bottom: 3.5rem;">
+        <div class="category-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem; border-bottom: 2px solid {{ cat.color or '#4f46e5' }}; padding-bottom: 10px;">
+            <div class="cat-icon" style="font-size: 1.8rem; color: {{ cat.color or '#4f46e5' }};">
+                <i class="{{ cat.icon or 'fas fa-book' }}"></i>
+            </div>
+            <div>
+                <h2 style="margin: 0; color: #f8fafc; font-size: 1.8rem;">{{ cat.name }}</h2>
+                <p style="margin: 3px 0 0 0; color: #94a3b8; font-size: 0.95rem;">{{ cat.description or '' }}</p>
             </div>
         </div>
-        {% else %}
-        <div class="empty-state full-width">
-            <i class="fas fa-box-open fa-3x"></i>
-            <h2>Catalog is empty</h2>
-            <p>Run <code>python scripts/migrate_html.py</code> to populate from existing lessons.</p>
+
+        <div class="card-grid">
+            {% set active_courses = [] %}
+            {% for subject in cat.subjects %}
+                {% for course in subject.courses %}
+                    {% if not course.is_deleted and course.status == 'published' %}
+                        {% set _ = active_courses.append(course) %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+            {% for course in active_courses %}
+            <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}" class="course-card">
+                <div class="course-card-header">
+                    <span class="difficulty-badge difficulty-{{ course.difficulty_level }}">{{ course.difficulty_level | title }}</span>
+                </div>
+                <h3>{{ course.title }}</h3>
+                <p>{{ course.description or '' }}</p>
+                <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> {{ course.estimated_hours }}h</span>
+                    <span><i class="fas fa-eye"></i> {{ course.view_count or 0 }} views</span>
+                </div>
+            </a>
+            {% else %}
+            <div class="empty-state" style="grid-column: 1 / -1; padding: 2rem; text-align: center; background: #1e293b; border-radius: 8px;">
+                <p style="color: #64748b; margin: 0;">No published courses in this category yet.</p>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
+    {% else %}
+    <div class="empty-state full-width">
+        <i class="fas fa-box-open fa-3x"></i>
+        <h2>Catalog is empty</h2>
+        <p>No active categories or courses found. Please ensure the database has been populated.</p>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}

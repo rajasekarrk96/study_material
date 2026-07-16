@@ -40,7 +40,7 @@ def home():
 
 @public_bp.route("/catalog")
 def catalog():
-    categories = _get_cached_categories_data()
+    categories = Category.query.filter_by(is_active=True).order_by(Category.sort_order).all()
     return render_template("public/catalog.html", categories=categories)
 
 
