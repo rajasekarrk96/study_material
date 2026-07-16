@@ -5,7 +5,7 @@
 ---
 
 ## 8.1 Course 1: C Programming Fundamentals
-- [ ] **Lesson 1**: History, Environment Setup & "Hello World" Console Layout.
+- [x] **Lesson 1**: History, Environment Setup & "Hello World" Console Layout (`_06_02_c_fundamentals_lesson1.md`).
 - [ ] **Lesson 2**: C Compilation Lifecycle (Preprocessing, Compiling, Assembling, Linking).
 - [ ] **Lesson 3**: Variables, Constants, and Standard Data Types.
 - [ ] **Lesson 4**: Control Flow: Conditional Branches and Loops.
@@ -19,7 +19,7 @@
 ---
 
 ## 8.2 Course 2: C++ Object-Oriented Programming
-- [ ] **Lesson 1**: Transitioning to C++: Namespaces and I/O Stream Buffers.
+- [x] **Lesson 1**: Transitioning to C++: Namespaces and I/O Stream Buffers (`_07_02_cpp_oop_lesson1.md`).
 - [ ] **Lesson 2**: Classes, Objects, and Constructors (Constructor Overloading).
 - [ ] **Lesson 3**: Memory Management: `new` and `delete` Operators.
 - [ ] **Lesson 4**: Encapsulation and Data Hiding (Access Specifiers).
