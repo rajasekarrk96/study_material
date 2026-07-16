@@ -117,6 +117,7 @@ def _register_blueprints(app: Flask) -> None:
     from app.blueprints.srs.routes import srs_bp
     from app.blueprints.study.routes import study_bp
     from app.blueprints.ai.routes import ai_bp
+    from app.blueprints.admin.routes import admin_bp
 
     app.register_blueprint(public_bp)
     app.register_blueprint(auth_bp, url_prefix="/auth")
@@ -126,6 +127,8 @@ def _register_blueprints(app: Flask) -> None:
     app.register_blueprint(srs_bp)
     app.register_blueprint(study_bp)
     app.register_blueprint(ai_bp)
+    app.register_blueprint(admin_bp)
+
 
 
 

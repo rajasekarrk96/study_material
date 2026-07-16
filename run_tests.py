@@ -452,6 +452,65 @@ class QuizEngineTestCase(unittest.TestCase):
         res = self.client.post("/api/v1/ai/explain", json={})
         self.assertEqual(res.status_code, 400)
 
+    def test_admin_rbac_restrict_student(self):
+        # Student user tries to access /admin/ (should return 403 Forbidden)
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        res = self.client.get("/admin/")
+        self.assertEqual(res.status_code, 403)
+
+    def test_admin_rbac_allow_admin(self):
+        # Create role Admin
+        admin_role = Role.query.filter_by(name="admin").first()
+        if not admin_role:
+            admin_role = Role(name="admin", display_name="Admin", level=6)
+            db.session.add(admin_role)
+            db.session.commit()
+
+        # Create admin user
+        admin_user = User(
+            email="admin@bytesandboards.test",
+            username="adminuser",
+            password_hash="fake-hash",
+            role_id=admin_role.id
+        )
+        db.session.add(admin_user)
+        db.session.commit()
+
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(admin_user.id)
+
+        res = self.client.get("/admin/")
+        self.assertEqual(res.status_code, 200)
+
+    def test_flesch_readability_calculations(self):
+        from app.domains.content.quality import calculate_flesch_reading_ease
+        # Simple textbook sentences
+        text = "The cat sat on the mat. It was a nice day."
+        score = calculate_flesch_reading_ease(text)
+        self.assertGreater(score, 60.0)  # simple sentences have high Flesch Reading Ease scores
+
+    def test_quality_score_trigger_and_check(self):
+        from app.domains.content.quality import run_quality_check
+        from app.domains.content.models import ContentQualityScore
+
+        # Run quality check on the default seeded lesson
+        q_score = run_quality_check(self.lesson.id)
+        self.assertIsNotNone(q_score)
+        
+        # Verify db insert
+        db_score = ContentQualityScore.query.filter_by(lesson_id=self.lesson.id).first()
+        self.assertIsNotNone(db_score)
+        self.assertEqual(db_score.readability_score, q_score.readability_score)
+
+    def test_sitemap_xml_generation(self):
+        from app.domains.content.sitemap import generate_sitemap_xml
+        # Verify sitemap runs and returns xml content string
+        xml_content = generate_sitemap_xml()
+        self.assertIn("<urlset", xml_content)
+        self.assertIn("https://bytesandboards.com", xml_content)
+
 
 if __name__ == "__main__":
     unittest.main()

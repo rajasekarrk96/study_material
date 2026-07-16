@@ -203,3 +203,19 @@ class Source(db.Model, TimestampMixin):
 
     def __repr__(self):
         return f"<Source {self.source_type}: {self.title[:40]}>"
+
+
+class ContentQualityScore(db.Model):
+    __tablename__ = "content_quality_scores"
+
+    id = db.Column(db.Integer, primary_key=True)
+    lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), nullable=False)
+    readability_score = db.Column(db.Float, nullable=False)       # Flesch Reading Ease
+    plagiarism_percentage = db.Column(db.Float, default=0.0, nullable=False)
+    automated_feedback = db.Column(db.Text)
+    checked_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+
+    lesson = db.relationship("Lesson")
+
+    def __repr__(self):
+        return f"<ContentQualityScore lesson={self.lesson_id} readability={self.readability_score}>"

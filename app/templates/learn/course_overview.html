@@ -2,6 +2,11 @@
 {% block title %}{{ course.title }}{% endblock %}
 {% block meta_description %}{{ course.meta_description or course.description }}{% endblock %}
 
+{% import 'components/_seo.html' as seo %}
+{% block extra_css %}
+{{ seo.course_schema(course) }}
+{% endblock %}
+
 {% block content %}
 <div class="course-page">
     <div class="course-hero">

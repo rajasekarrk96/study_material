@@ -1,0 +1,50 @@
+{# app/templates/components/_seo.html #}
+
+{% macro course_schema(course) %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "{{ course.title }}",
+  "description": "{{ course.description }}",
+  "provider": {
+    "@type": "Organization",
+    "name": "BB Solutions",
+    "sameAs": "https://bytesandboards.com"
+  },
+  "educationalLevel": "{{ course.difficulty_level }}",
+  "about": [
+    "Software Development",
+    "Technology"
+  ]
+}
+</script>
+{% endmacro %}
+
+{% macro lesson_schema(lesson, course) %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "{{ lesson.title }}",
+  "description": "{{ lesson.summary or '' }}",
+  "inLanguage": "en",
+  "author": {
+    "@type": "Person",
+    "name": "Rajasekar",
+    "jobTitle": "Lead Instructor"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BB Solutions"
+  },
+  "isPartOf": {
+    "@type": "Course",
+    "name": "{{ course.title }}",
+    "description": "{{ course.description }}"
+  },
+  "timeRequired": "PT{{ lesson.estimated_minutes or 15 }}M",
+  "datePublished": "{{ lesson.published_at.isoformat() if lesson.published_at else '' }}"
+}
+</script>
+{% endmacro %}

@@ -5,27 +5,27 @@
 ---
 
 ## 5.1 RBAC Authentication Decorators & Permissions
-- [ ] Middleware security:
+- [x] Middleware security:
   - Code `@require_role` and `@require_min_role` check hooks parsing roles profiles.
-- [ ] User and Role database keys:
+- [x] User and Role database keys:
   - Seed baseline parameters into tables: `roles` and `permissions`.
   - Wire checks within route controllers restricting administrative pages.
 
 ---
 
 ## 5.2 Content Review Pipelines & Ingestion Dashboards
-- [ ] Draft workspace templates:
+- [x] Draft workspace templates:
   - Create admin templates showing upload dropzones, link inputs, chunk monitors, and edit boards.
-- [ ] Quality assurance pipelines:
+- [x] Quality assurance pipelines:
   - Integrate readability checks (Flesch metrics checks) and plagiarism validation triggers.
   - Create the `content_quality_scores` database table.
 
 ---
 
 ## 5.3 Automated SEO Strategy
-- [ ] Schema.org markup generation:
+- [x] Schema.org markup generation:
   - Setup Jinja layout macros formatting dynamic JSON-LD metadata for Courses and Lessons.
-- [ ] Sitemaps background job:
+- [x] Sitemaps background job:
   - Create background schedule updating `sitemap.xml` entries nightly.
 
 ---

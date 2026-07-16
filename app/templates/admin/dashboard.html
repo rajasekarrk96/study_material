@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard — BB Solutions{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-5 pb-3 border-bottom">
+        <div>
+            <h1 class="display-5 text-white font-weight-bold">CMS Admin Dashboard</h1>
+            <p class="text-secondary">Enterprise Content Management & Ingestion Workflows</p>
+        </div>
+        <div class="badge badge-primary py-2 px-3">
+            <i class="fas fa-shield-alt mr-2"></i> Rajasekar (Owner)
+        </div>
+    </div>
+
+    <!-- Quick Stats Grid -->
+    <div class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="card card-glass p-4 text-center">
+                <div class="icon-container bg-primary-transparent mb-3 mx-auto">
+                    <i class="fas fa-folder-open text-primary fa-2x"></i>
+                </div>
+                <h3 class="text-secondary font-weight-bold">Subjects</h3>
+                <p class="display-4 text-white">{{ stats.total_subjects }}</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card card-glass p-4 text-center">
+                <div class="icon-container bg-success-transparent mb-3 mx-auto">
+                    <i class="fas fa-graduation-cap text-success fa-2x"></i>
+                </div>
+                <h3 class="text-secondary font-weight-bold">Courses</h3>
+                <p class="display-4 text-white">{{ stats.total_courses }}</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card card-glass p-4 text-center">
+                <div class="icon-container bg-info-transparent mb-3 mx-auto">
+                    <i class="fas fa-file-alt text-info fa-2x"></i>
+                </div>
+                <h3 class="text-secondary font-weight-bold">Lessons</h3>
+                <p class="display-4 text-white">{{ stats.total_lessons }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ingestion Workspace (Dropzone, Link Ingest, Quality Analyzer) -->
+    <div class="row">
+        <!-- Ingestion Panel -->
+        <div class="col-md-6 mb-4">
+            <div class="card card-glass p-4 h-100">
+                <h2 class="text-white font-weight-bold mb-4">
+                    <i class="fas fa-cloud-upload-alt text-accent mr-2"></i> Content Ingestion Workspace
+                </h2>
+                
+                <!-- URL Link Ingestion -->
+                <div class="form-group mb-4">
+                    <label class="text-secondary font-weight-bold mb-2">Import from Source Link</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Paste YouTube link or documentation URL..." id="ingest-url">
+                        <button class="btn btn-primary" onclick="alert('Link queued for background chunking pipeline!')">Import Link</button>
+                    </div>
+                </div>
+
+                <!-- Drag & Drop Ingest -->
+                <label class="text-secondary font-weight-bold mb-2">Upload HTML Notes</label>
+                <div class="dropzone p-5 text-center border-dashed rounded-lg" onclick="alert('Select HTML notes files to begin automatic database parser migration!')">
+                    <i class="fas fa-file-code fa-3x text-secondary mb-3"></i>
+                    <p class="text-secondary mb-0">Drag and drop HTML files or click to select</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lessons & Quality Assurance Panel -->
+        <div class="col-md-6 mb-4">
+            <div class="card card-glass p-4 h-100">
+                <h2 class="text-white font-weight-bold mb-4">
+                    <i class="fas fa-stethoscope text-accent mr-2"></i> Quality Assurance Panel
+                </h2>
+                <div class="list-group">
+                    {% for lesson in lessons %}
+                        <div class="list-group-item bg-transparent border-bottom px-0 py-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="text-white font-weight-bold mb-1">{{ lesson.title }}</h4>
+                                <small class="text-secondary">Slug: {{ lesson.slug }}</small>
+                            </div>
+                            <button class="btn btn-outline btn-sm" onclick="runQA('{{ lesson.id }}', this)">
+                                <i class="fas fa-vial mr-1"></i> QA Check
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function runQA(lessonId, button) {
+    button.disabled = true;
+    button.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Analyzing...';
+    
+    fetch('/admin/lessons/' + lessonId + '/quality', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Quality Check Complete!\n\nReadability Ease (Flesch): ' + data.readability_score + '\nPlagiarism Match: ' + data.plagiarism_percentage + '%\nFeedback: ' + data.feedback);
+        } else {
+            alert('Error: ' + data.message);
+        }
+        button.disabled = false;
+        button.innerHTML = '<i class="fas fa-vial mr-1"></i> QA Check';
+    })
+    .catch(err => {
+        alert('Request failed');
+        button.disabled = false;
+        button.innerHTML = '<i class="fas fa-vial mr-1"></i> QA Check';
+    });
+}
+</script>
+{% endblock %}

@@ -2,6 +2,11 @@
 {% block title %}{{ lesson.title }} — {{ course.title }}{% endblock %}
 {% block meta_description %}{{ lesson.meta_description or lesson.summary }}{% endblock %}
 
+{% import 'components/_seo.html' as seo %}
+{% block extra_css %}
+{{ seo.lesson_schema(lesson, course) }}
+{% endblock %}
+
 {% block content %}
 <div class="lesson-page">
     <!-- SIDEBAR -->
