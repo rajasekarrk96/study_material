@@ -212,16 +212,20 @@ def run_markdown_migration():
 
     app = create_app()
     with app.app_context():
-        notes_dir = Path("docs/notes preparing implementation/_01_git")
-        if not notes_dir.exists():
-            print(f"[Error] Notes folder '{notes_dir}' does not exist.")
+        base_dir = Path("docs/notes preparing implementation")
+        if not base_dir.exists():
+            print(f"[Error] Base folder '{base_dir}' does not exist.")
             return
 
-        # Scan all .md files in notes preparing implementation folder (exclude template and curriculum outline)
-        files = sorted(notes_dir.glob("*.md"))
+        # Scan all .md files in all course directories (exclude template and curriculum outlines)
+        files = []
+        for sub in sorted(base_dir.glob("_*")):
+            if sub.is_dir():
+                files.extend(sorted(sub.glob("*.md")))
+
         for file in files:
-            if file.name.startswith("_01_01_") or file.name.startswith("_01_02_"):
-                # Skip outline and template
+            if "curriculum" in file.name.lower() or "placeholder" in file.name.lower() or "template" in file.name.lower():
+                # Skip outlines, templates, and placeholders
                 continue
 
             print(f"Processing: {file.name}...")

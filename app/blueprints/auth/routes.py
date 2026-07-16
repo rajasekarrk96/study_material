@@ -47,7 +47,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        flash("Account created! Welcome to EduSphere.", "success")
+        flash("Account created! Welcome to Bytes & Boards Solutions.", "success")
         return redirect(url_for("public.home"))
     return render_template("auth/register.html")
 
