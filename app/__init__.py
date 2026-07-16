@@ -48,7 +48,7 @@ def create_app() -> Flask:
     @app.context_processor
     def inject_globals():
         return {
-            "platform_name": "EduSphere",
+            "platform_name": "Bytes and Boards Solutions",
             "current_user": current_user,
         }
 

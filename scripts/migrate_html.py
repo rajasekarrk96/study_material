@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EduSphere — HTML → Database Migration Script
+Bytes and Boards Solutions — HTML → Database Migration Script
 =============================================
 Scans existing HTML lesson files in Core_Python/, Core_Java/,
 Java_Selenium/, My_Sql/ and imports them as structured CMS content
@@ -87,8 +87,15 @@ def extract_title(soup: BeautifulSoup, filename: str) -> str:
     title_tag = soup.find("title")
     if title_tag:
         raw = title_tag.get_text(strip=True)
-        # Remove common suffixes like "- EduSphere"
-        for suffix in [" - EduSphere", " — EduSphere", " | EduSphere"]:
+        # Remove common suffixes like "- EduSphere" or "- Bytes and Boards Solutions"
+        suffixes = [
+            " - EduSphere", " — EduSphere", " | EduSphere",
+            " - Bytes and Boards Solutions", " — Bytes and Boards Solutions", " | Bytes and Boards Solutions",
+            " - Bytes & Boards Solutions", " — Bytes & Boards Solutions", " | Bytes & Boards Solutions",
+            " - Bytes and Boards", " — Bytes and Boards", " | Bytes and Boards",
+            " - Bytes & Boards", " — Bytes & Boards", " | Bytes & Boards"
+        ]
+        for suffix in suffixes:
             raw = raw.replace(suffix, "")
         if raw:
             return raw.strip()
@@ -307,7 +314,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     print("=" * 60)
-    print("  EduSphere - HTML to Database Migration")
+    print("  Bytes and Boards Solutions - HTML to Database Migration")
     print(f"  Mode: {'DRY RUN' if args.dry_run else 'LIVE'}")
     print("=" * 60)
 

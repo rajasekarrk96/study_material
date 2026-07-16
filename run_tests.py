@@ -49,7 +49,7 @@ class QuizEngineTestCase(unittest.TestCase):
 
         # Create user
         self.user = User(
-            email="tester@edusphere.test",
+            email="tester@bytesandboards.test",
             username="tester",
             password_hash="fake-hash",
             role_id=role.id,

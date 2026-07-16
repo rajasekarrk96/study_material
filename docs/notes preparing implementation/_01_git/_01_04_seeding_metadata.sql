@@ -1,5 +1,5 @@
 -- =========================================================================
--- EduSphere Learning OS - Development Tools Category & Subject Seeding SQL
+-- Bytes and Boards Solutions Learning OS - Development Tools Seeding SQL
 -- =========================================================================
 
 -- 1. Insert Category: Development Tools
