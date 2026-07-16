@@ -1,0 +1,26 @@
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="{{ url_for('public.home') }}" class="navbar-brand">
+            <i class="fas fa-laptop-code"></i>
+            <span>EduSphere</span>
+        </a>
+
+        <div class="navbar-links">
+            <a href="{{ url_for('public.catalog') }}" class="nav-link">
+                <i class="fas fa-th-large"></i> Catalog
+            </a>
+        </div>
+
+        <div class="navbar-actions">
+            {% if current_user.is_authenticated %}
+                <span class="nav-user">
+                    <i class="fas fa-user-circle"></i> {{ current_user.display_name }}
+                </span>
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-outline btn-sm">Logout</a>
+            {% else %}
+                <a href="{{ url_for('auth.login') }}" class="btn btn-outline btn-sm">Login</a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Register</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>

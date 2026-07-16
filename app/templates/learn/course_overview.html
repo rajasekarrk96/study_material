@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}{{ course.title }}{% endblock %}
+{% block meta_description %}{{ course.meta_description or course.description }}{% endblock %}
+
+{% block content %}
+<div class="course-page">
+    <div class="course-hero">
+        <div class="breadcrumb">
+            <a href="{{ url_for('public.home') }}">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="{{ url_for('public.catalog') }}">Catalog</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>{{ course.title }}</span>
+        </div>
+        <h1>{{ course.title }}</h1>
+        <p class="course-desc">{{ course.description or '' }}</p>
+        <div class="course-meta-row">
+            <span class="difficulty-badge difficulty-{{ course.difficulty_level }}">{{ course.difficulty_level | title }}</span>
+            <span><i class="fas fa-clock"></i> ~{{ course.estimated_hours }}h</span>
+            <span><i class="fas fa-eye"></i> {{ course.view_count }} views</span>
+        </div>
+    </div>
+
+    <div class="course-body">
+        <aside class="module-sidebar">
+            <h3><i class="fas fa-list-ul"></i> Modules</h3>
+            <nav class="module-nav">
+                {% for mod in modules %}
+                <div class="module-item">
+                    <div class="module-title">
+                        <i class="fas fa-folder"></i> {{ mod.title }}
+                    </div>
+                    <ul class="lesson-list">
+                        {% for lesson in mod.lessons.filter_by(is_deleted=False).order_by('sort_order') %}
+                        <li>
+                            <a href="{{ url_for('learn.lesson_view', course_slug=course.slug, module_slug=mod.slug, lesson_slug=lesson.slug) }}"
+                               class="lesson-link">
+                                <i class="fas fa-file-alt"></i> {{ lesson.title }}
+                                <span class="lesson-mins">{{ lesson.estimated_minutes }}m</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="no-lessons"><i class="fas fa-hourglass"></i> Coming soon</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% else %}
+                <p class="empty-msg">No published modules yet.</p>
+                {% endfor %}
+            </nav>
+        </aside>
+
+        <div class="course-main">
+            {% if course.long_description %}
+            <div class="content-card">
+                <h2><i class="fas fa-info-circle"></i> About This Course</h2>
+                <div class="rich-content">{{ course.long_description | safe }}</div>
+            </div>
+            {% endif %}
+
+            <div class="content-card">
+                <h2><i class="fas fa-bullseye"></i> What You'll Learn</h2>
+                <p>This course follows the EduSphere structured learning framework — every lesson includes overview, concepts, syntax, examples, exercises, and interview Q&A.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

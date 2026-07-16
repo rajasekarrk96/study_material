@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}{{ lesson.title }} — {{ course.title }}{% endblock %}
+{% block meta_description %}{{ lesson.meta_description or lesson.summary }}{% endblock %}
+
+{% block content %}
+<div class="lesson-page">
+    <!-- SIDEBAR -->
+    <aside class="lesson-sidebar" id="lesson-sidebar">
+        <div class="sidebar-header">
+            <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}" class="back-link">
+                <i class="fas fa-arrow-left"></i> {{ course.title }}
+            </a>
+        </div>
+        <div class="sidebar-module">{{ module.title }}</div>
+        <nav class="sidebar-nav">
+            {% for l in module.lessons.filter_by(is_deleted=False).order_by('sort_order') %}
+            <a href="{{ url_for('learn.lesson_view', course_slug=course.slug, module_slug=module.slug, lesson_slug=l.slug) }}"
+               class="sidebar-lesson {% if l.id == lesson.id %}active{% endif %}">
+                <i class="fas fa-circle{% if l.id == lesson.id %}-dot{% else %}-notch{% endif %}" style="font-size:0.5rem;margin-right:8px;"></i>
+                {{ l.title }}
+            </a>
+            {% endfor %}
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="lesson-main">
+        <!-- BREADCRUMB -->
+        <div class="breadcrumb">
+            <a href="{{ url_for('public.home') }}">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}">{{ course.title }}</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>{{ lesson.title }}</span>
+        </div>
+
+        <!-- LESSON HEADER -->
+        <div class="lesson-header">
+            <h1>{{ lesson.title }}</h1>
+            <div class="lesson-meta-row">
+                <span class="difficulty-badge difficulty-{{ lesson.difficulty_level }}">{{ lesson.difficulty_level | title }}</span>
+                <span><i class="fas fa-clock"></i> ~{{ lesson.estimated_minutes }} min</span>
+                <span><i class="fas fa-eye"></i> {{ lesson.view_count }} views</span>
+            </div>
+            {% if lesson.summary %}
+            <p class="lesson-summary">{{ lesson.summary }}</p>
+            {% endif %}
+        </div>
+
+        <!-- TABLE OF CONTENTS (auto-generated from sections) -->
+        {% if sections %}
+        <div class="toc-card">
+            <h3><i class="fas fa-list"></i> In This Lesson</h3>
+            <ul class="toc-list">
+                {% for stype, sec in sections.items() %}
+                <li><a href="#section-{{ stype }}"><i class="fas fa-angle-right"></i> {{ sec.title or stype | replace('_',' ') | title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <!-- SECTIONS -->
+        {% for stype, sec in sections.items() %}
+        <section class="lesson-section" id="section-{{ stype }}" data-type="{{ stype }}">
+            <div class="section-title-row">
+                {% set icons = {
+                    'overview': 'fa-info-circle',
+                    'concepts': 'fa-brain',
+                    'syntax': 'fa-code',
+                    'examples': 'fa-flask',
+                    'diagram': 'fa-project-diagram',
+                    'best_practices': 'fa-check-double',
+                    'common_mistakes': 'fa-exclamation-triangle',
+                    'interview_qa': 'fa-comments',
+                    'exercises': 'fa-dumbbell',
+                    'quiz': 'fa-question-circle',
+                    'cheatsheet': 'fa-sticky-note',
+                    'revision_notes': 'fa-book-reader',
+                    'flashcards': 'fa-layer-group',
+                    'references': 'fa-link'
+                } %}
+                <i class="fas {{ icons.get(stype, 'fa-file-alt') }}"></i>
+                <h2>{{ sec.title or stype | replace('_', ' ') | title }}</h2>
+            </div>
+            <div class="section-content rich-content">
+                {{ sec.content_html | safe if sec.content_html else (sec.content_markdown | default('') | safe) }}
+            </div>
+        </section>
+        {% endfor %}
+
+        {% if not sections %}
+        <div class="empty-lesson-state">
+            <i class="fas fa-file-medical fa-3x"></i>
+            <h3>Content coming soon</h3>
+            <p>This lesson is being prepared. Check back shortly.</p>
+        </div>
+        {% endif %}
+
+        <!-- PREV / NEXT NAV -->
+        <div class="lesson-nav-footer">
+            <button onclick="history.back()" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Previous
+            </button>
+        </div>
+    </div>
+
+    <!-- TOGGLE SIDEBAR BUTTON (MOBILE) -->
+    <button class="sidebar-toggle-btn" id="sidebar-toggle" onclick="document.getElementById('lesson-sidebar').classList.toggle('open')">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Course Catalog{% endblock %}
+
+{% block content %}
+<div class="catalog-page">
+    <div class="page-header">
+        <h1><i class="fas fa-compass"></i> Course Catalog</h1>
+        <p>Everything you need to master technical and non-technical skills — structured and source-driven.</p>
+    </div>
+    <div class="card-grid">
+        {% for cat in categories %}
+        <div class="category-card" style="--accent: {{ cat.color or '#6366f1' }}">
+            <div class="cat-icon"><i class="{{ cat.icon or 'fas fa-book' }}"></i></div>
+            <div class="cat-info">
+                <h3>{{ cat.name }}</h3>
+                <p>{{ cat.description or 'No description yet.' }}</p>
+                <span class="cat-type-badge">{{ cat.type | replace('_', ' ') | title }}</span>
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-state full-width">
+            <i class="fas fa-box-open fa-3x"></i>
+            <h2>Catalog is empty</h2>
+            <p>Run <code>python scripts/migrate_html.py</code> to populate from existing lessons.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

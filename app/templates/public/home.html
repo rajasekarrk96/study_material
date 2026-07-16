@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+{% block meta_description %}EduSphere — Your Enterprise Learning Operating System for structured, source-driven knowledge.{% endblock %}
+
+{% block content %}
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge"><i class="fas fa-bolt"></i> Knowledge Platform v2.0</div>
+        <h1 class="hero-title">
+            Learn. Structure.<br>
+            <span class="gradient-text">Master Knowledge.</span>
+        </h1>
+        <p class="hero-subtitle">
+            Convert scattered learning from YouTube, docs, books and notes
+            into a structured, searchable knowledge system — built to last for years.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('public.catalog') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-compass"></i> Explore Catalog
+            </a>
+            {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('auth.register') }}" class="btn btn-outline btn-lg">
+                <i class="fas fa-user-plus"></i> Start Learning
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="hero-card">
+            <i class="fas fa-code"></i>
+            <span>Python</span>
+        </div>
+        <div class="hero-card">
+            <i class="fab fa-java"></i>
+            <span>Java</span>
+        </div>
+        <div class="hero-card">
+            <i class="fas fa-database"></i>
+            <span>SQL</span>
+        </div>
+        <div class="hero-card">
+            <i class="fas fa-robot"></i>
+            <span>Automation</span>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-bar">
+    <div class="stat-item"><span class="stat-num" id="stat-courses">–</span><span class="stat-label">Courses</span></div>
+    <div class="stat-item"><span class="stat-num" id="stat-lessons">–</span><span class="stat-label">Lessons</span></div>
+    <div class="stat-item"><span class="stat-num" id="stat-topics">–</span><span class="stat-label">Topics</span></div>
+    <div class="stat-item"><span class="stat-num" id="stat-sources">–</span><span class="stat-label">Sources Processed</span></div>
+</section>
+
+<!-- CATEGORIES -->
+{% if categories %}
+<section class="section">
+    <div class="section-header">
+        <h2>Browse by Category</h2>
+        <a href="{{ url_for('public.catalog') }}" class="see-all">See all <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="card-grid">
+        {% for cat in categories %}
+        <a href="{{ url_for('public.catalog') }}?category={{ cat.slug }}" class="category-card" style="--accent: {{ cat.color or '#6366f1' }}">
+            <div class="cat-icon"><i class="{{ cat.icon or 'fas fa-book' }}"></i></div>
+            <div class="cat-info">
+                <h3>{{ cat.name }}</h3>
+                <p>{{ cat.description or '' }}</p>
+            </div>
+            <div class="cat-type-badge">{{ cat.type | replace('_', ' ') | title }}</div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% else %}
+<section class="section empty-state">
+    <div class="empty-icon"><i class="fas fa-database"></i></div>
+    <h2>No content yet</h2>
+    <p>Run the migration script to import your existing lesson HTML files into the database.</p>
+    <code class="inline-code">python scripts/migrate_html.py</code>
+</section>
+{% endif %}
+
+<!-- FEATURED COURSES -->
+{% if featured_courses %}
+<section class="section">
+    <div class="section-header">
+        <h2>Featured Courses</h2>
+    </div>
+    <div class="card-grid">
+        {% for course in featured_courses %}
+        <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}" class="course-card">
+            <div class="course-card-header">
+                <span class="difficulty-badge difficulty-{{ course.difficulty_level }}">{{ course.difficulty_level | title }}</span>
+            </div>
+            <h3>{{ course.title }}</h3>
+            <p>{{ course.description or '' }}</p>
+            <div class="course-meta">
+                <span><i class="fas fa-clock"></i> {{ course.estimated_hours }}h</span>
+                <span><i class="fas fa-eye"></i> {{ course.view_count }}</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock %}
