@@ -367,6 +367,91 @@ class QuizEngineTestCase(unittest.TestCase):
         self.assertEqual(res3.status_code, 200)
         self.assertIn("created", res3.get_json()["message"])
 
+    def test_text_chunker_splits_correctly(self):
+        from app.domains.knowledge.chunker import chunk_text
+        text = "A" * 1200  # 1200 chars
+        chunks = chunk_text(text, chunk_size=500, overlap=50)
+        # chunks: [0:500], [450:950], [900:1200] = 3 chunks
+        self.assertEqual(len(chunks), 3)
+        # Each chunk should not exceed 500 chars
+        for chunk in chunks:
+            self.assertLessEqual(len(chunk), 500)
+        # First chunk should start at 0
+        self.assertEqual(chunks[0], "A" * 500)
+
+    def test_text_chunker_document_pipeline(self):
+        from app.domains.knowledge.models import KnowledgeSource, SourceDocument, KnowledgeChunk
+        from app.domains.knowledge.chunker import process_document
+
+        # Create knowledge source
+        source = KnowledgeSource(name="Test Docs", source_type="docs")
+        db.session.add(source)
+        db.session.flush()
+
+        # Create a source document with 600-char text
+        doc = SourceDocument(
+            source_id=source.id,
+            title="Git Introduction",
+            raw_text="Git is a distributed version control system. " * 15  # ~675 chars
+        )
+        db.session.add(doc)
+        db.session.commit()
+
+        # Process chunking (Ollama will return zero-vector fallback in test)
+        count = process_document(doc.id)
+        self.assertGreater(count, 0)
+
+        # Verify chunks were stored
+        chunks = KnowledgeChunk.query.filter_by(document_id=doc.id).all()
+        self.assertEqual(len(chunks), count)
+
+        # Verify document is marked as chunked
+        db.session.refresh(doc)
+        self.assertTrue(doc.is_chunked)
+
+    def test_hybrid_search_returns_results(self):
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        # Search for a term that matches the seeded lesson title
+        res = self.client.get("/api/v1/search/hybrid?q=git")
+        self.assertEqual(res.status_code, 200)
+        data = res.get_json()
+        self.assertEqual(data["status"], "success")
+        self.assertIn("results", data)
+
+    def test_hybrid_search_requires_query(self):
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        res = self.client.get("/api/v1/search/hybrid")
+        self.assertEqual(res.status_code, 400)
+
+    def test_ai_explain_endpoint_with_fallback(self):
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        payload = {
+            "concept": "Git staging area",
+            "context": "Git has three states: working directory, staging area, repository.",
+            "level": "beginner"
+        }
+        res = self.client.post("/api/v1/ai/explain", json=payload)
+        self.assertEqual(res.status_code, 200)
+        data = res.get_json()
+        self.assertEqual(data["status"], "success")
+        # Explanation may be fallback string when Ollama is offline
+        self.assertIn("explanation", data)
+        self.assertIsInstance(data["explanation"], str)
+        self.assertGreater(len(data["explanation"]), 0)
+
+    def test_ai_explain_requires_concept(self):
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        res = self.client.post("/api/v1/ai/explain", json={})
+        self.assertEqual(res.status_code, 400)
+
 
 if __name__ == "__main__":
     unittest.main()

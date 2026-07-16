@@ -68,14 +68,15 @@ def _get_engine_options() -> dict:
 
 def _import_all_models() -> None:
     """Import all models so SQLAlchemy registers them before db.create_all()."""
-    import app.domains.auth.models          # noqa: F401
-    import app.domains.content.models       # noqa: F401
-    import app.domains.assessment.models    # noqa: F401
-    import app.domains.sandbox.models       # noqa: F401
-    import app.domains.gamification.models  # noqa: F401
-    import app.domains.learning_path.models # noqa: F401
-    import app.domains.srs.models           # noqa: F401
-    import app.domains.study.models         # noqa: F401
+    import app.domains.auth.models           # noqa: F401
+    import app.domains.content.models        # noqa: F401
+    import app.domains.assessment.models     # noqa: F401
+    import app.domains.sandbox.models        # noqa: F401
+    import app.domains.gamification.models   # noqa: F401
+    import app.domains.learning_path.models  # noqa: F401
+    import app.domains.srs.models            # noqa: F401
+    import app.domains.study.models          # noqa: F401
+    import app.domains.knowledge.models      # noqa: F401
 
 
 
@@ -115,6 +116,7 @@ def _register_blueprints(app: Flask) -> None:
     from app.blueprints.sandbox.routes import sandbox_bp
     from app.blueprints.srs.routes import srs_bp
     from app.blueprints.study.routes import study_bp
+    from app.blueprints.ai.routes import ai_bp
 
     app.register_blueprint(public_bp)
     app.register_blueprint(auth_bp, url_prefix="/auth")
@@ -123,6 +125,7 @@ def _register_blueprints(app: Flask) -> None:
     app.register_blueprint(sandbox_bp)
     app.register_blueprint(srs_bp)
     app.register_blueprint(study_bp)
+    app.register_blueprint(ai_bp)
 
 
 

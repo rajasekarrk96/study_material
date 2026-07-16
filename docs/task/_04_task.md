@@ -5,29 +5,29 @@
 ---
 
 ## 4.1 Local Ollama Gateway & Provider Abstraction
-- [ ] Provider Plug-ins (`app/providers/plugins/ollama.py`):
+- [x] Provider Plug-ins (`app/providers/plugins/ollama.py`):
   - Setup gateway hooks targeting `http://localhost:11434` to run model configurations (Qwen, Llama, DeepSeek).
   - Code fallbacks parameters switching to cloud platforms if local servers are unavailable.
-- [ ] System Prompts Registries:
+- [x] System Prompts Registries:
   - Add templates for concept explanations, code simplifications, quiz/exercise generators, and technology comparisons.
 
 ---
 
 ## 4.2 Ingestion Chunker & Vector Embeddings Index
-- [ ] Document Chunker Service:
+- [x] Document Chunker Service:
   - Setup parsers splitting documents into 500-character overlaps.
   - Create models `knowledge_sources`, `source_documents`, `knowledge_chunks`, and `chunk_embeddings`.
-- [ ] Vector Database Layer (SQLite-VSS / PGVector):
+- [x] Vector Database Layer (SQLite-VSS / PGVector):
   - Setup sqlite-vss bindings locally.
   - Index chunk text contents by sending float calculations to the embedding service.
 
 ---
 
 ## 4.3 Hybrid Search & Recommendations Engine
-- [ ] Search Integration controllers:
+- [x] Search Integration controllers:
   - Write reciprocal rank fusion (RRF) algorithms merging SQLite FTS5 search ranks with vector distance floats.
   - Implement `/api/v1/search/hybrid` REST api.
-- [ ] Vector Similarity Recommendation Service:
+- [x] Vector Similarity Recommendation Service:
   - Code user interest calculators analyzing tag overlap metrics and cosine similarity matrices.
 
 ---
