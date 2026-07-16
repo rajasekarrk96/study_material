@@ -73,6 +73,12 @@ def _import_all_models() -> None:
     import app.domains.assessment.models    # noqa: F401
     import app.domains.sandbox.models       # noqa: F401
     import app.domains.gamification.models  # noqa: F401
+    import app.domains.learning_path.models # noqa: F401
+    import app.domains.srs.models           # noqa: F401
+    import app.domains.study.models         # noqa: F401
+
+
+
 
 
 
@@ -107,11 +113,17 @@ def _register_blueprints(app: Flask) -> None:
     from app.blueprints.learn.routes import learn_bp
     from app.blueprints.assessment.routes import assessment_bp
     from app.blueprints.sandbox.routes import sandbox_bp
+    from app.blueprints.srs.routes import srs_bp
+    from app.blueprints.study.routes import study_bp
 
     app.register_blueprint(public_bp)
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(learn_bp, url_prefix="/learn")
     app.register_blueprint(assessment_bp)
     app.register_blueprint(sandbox_bp)
+    app.register_blueprint(srs_bp)
+    app.register_blueprint(study_bp)
+
+
 
 

@@ -282,6 +282,91 @@ class QuizEngineTestCase(unittest.TestCase):
         update_streak(self.user.id)
         self.assertEqual(streak.current_streak, 1)
 
+    def test_prerequisite_course_locking(self):
+        from app.domains.learning_path.models import PathPrerequisite, UserCourseProgress
+        from app.domains.content.models import Course
+
+        # Create Course A and Course B
+        course_a = Course(subject_id=self.lesson.module.course.subject_id, title="Course A", slug="course-a")
+        course_b = Course(subject_id=self.lesson.module.course.subject_id, title="Course B", slug="course-b")
+        db.session.add_all([course_a, course_b])
+        db.session.flush()
+
+        # Set Course A as prerequisite for Course B
+        prereq = PathPrerequisite(course_id=course_b.id, prerequisite_course_id=course_a.id)
+        db.session.add(prereq)
+        db.session.commit()
+
+        # Mock session
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        # Access Course B overview (should fail with 403 Forbidden)
+        res = self.client.get(f"/learn/{course_b.slug}/")
+        self.assertEqual(res.status_code, 403)
+
+        # Mark Course A as completed by user
+        progress = UserCourseProgress(user_id=self.user.id, course_id=course_a.id, is_completed=True)
+        db.session.add(progress)
+        db.session.commit()
+
+        # Try accessing Course B again (should now succeed, return 200/404 overview since it has no modules yet)
+        res = self.client.get(f"/learn/{course_b.slug}/")
+        self.assertIn(res.status_code, [200, 404])
+
+    def test_flashcard_spaced_repetition(self):
+        from app.domains.srs.models import FlashcardDeck, Flashcard, UserFlashcardProgress
+
+        # Create Deck and card
+        deck = FlashcardDeck(title="Git Deck")
+        db.session.add(deck)
+        db.session.flush()
+
+        card = Flashcard(deck_id=deck.id, front_side_markdown="What is init?", back_side_markdown="Initializer")
+        db.session.add(card)
+        db.session.commit()
+
+        # Mock session
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        # Review card with grade 4 (should succeed and initialize progress parameters)
+        res = self.client.post(f"/api/v1/flashcards/{card.id}/review", json={"grade": 4})
+        self.assertEqual(res.status_code, 200)
+        data = res.get_json()
+        self.assertEqual(data["status"], "success")
+        self.assertEqual(data["repetitions"], 1)
+        self.assertEqual(data["interval_days"], 1)
+
+        # Review again with grade 5 (should increment repetitions and change interval to 6)
+        res2 = self.client.post(f"/api/v1/flashcards/{card.id}/review", json={"grade": 5})
+        self.assertEqual(res2.status_code, 200)
+        data2 = res2.get_json()
+        self.assertEqual(data2["repetitions"], 2)
+        self.assertEqual(data2["interval_days"], 6)
+
+    def test_bookmarks_and_notes(self):
+        from app.domains.study.models import Bookmark, UserNote
+
+        # Mock session
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        # Toggle bookmark (should add)
+        res = self.client.post("/api/v1/bookmarks", json={"lesson_id": self.lesson.id})
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(res.get_json()["bookmarked"])
+
+        # Toggle bookmark again (should remove)
+        res2 = self.client.post("/api/v1/bookmarks", json={"lesson_id": self.lesson.id})
+        self.assertEqual(res2.status_code, 200)
+        self.assertFalse(res2.get_json()["bookmarked"])
+
+        # Save note
+        res3 = self.client.post("/api/v1/notes", json={"lesson_id": self.lesson.id, "content_markdown": "# My notes"})
+        self.assertEqual(res3.status_code, 200)
+        self.assertIn("created", res3.get_json()["message"])
+
 
 if __name__ == "__main__":
     unittest.main()
