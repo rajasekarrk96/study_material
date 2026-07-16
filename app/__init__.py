@@ -107,6 +107,26 @@ def _seed_defaults() -> None:
 
     db.session.commit()
 
+    # Seed Admin User
+    from app.domains.auth.models import User
+    from werkzeug.security import generate_password_hash
+
+    admin_role = Role.query.filter_by(name=UserRole.ADMIN.value).first()
+    if admin_role:
+        existing_admin = User.query.filter_by(email="rajasekar.rk96@gmail.com").first()
+        if not existing_admin:
+            admin_user = User(
+                email="rajasekar.rk96@gmail.com",
+                username="rajasekar",
+                display_name="Rajasekar",
+                password_hash=generate_password_hash("rajasekarRSK96#"),
+                role_id=admin_role.id,
+                is_active=True,
+                is_verified=True
+            )
+            db.session.add(admin_user)
+            db.session.commit()
+
 
 def _register_blueprints(app: Flask) -> None:
     """Register all Flask blueprints."""
