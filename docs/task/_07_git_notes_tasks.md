@@ -23,10 +23,10 @@
 ---
 
 ## 7.3 Course 3: Advanced Git
-- [ ] **Lesson 11**: Git Internals: Blobs, Trees, Commits, and Refs (hashes, storage formats, refs packfiles).
-- [ ] **Lesson 12**: Rewriting History: Amend, Rebase, and Squash (interactive rebase, squashing commits, reflog recovery).
-- [ ] **Lesson 13**: Advanced Workspace Helpers: Stash, Bisect, and Worktree (caching uncommitted work, debugging by bisect, multiple workspaces).
-- [ ] **Lesson 14**: Customization & Automation: Git Hooks & Aliases (pre-commit client hooks, global alias shortcuts).
+- [x] **Lesson 11**: Git Internals: Blobs, Trees, Commits, and Refs (`_01_15_advanced_git_lesson1_internals.md`).
+- [x] **Lesson 12**: Rewriting History: Amend, Rebase, and Squash (`_01_16_advanced_git_lesson2_history.md`).
+- [x] **Lesson 13**: Advanced Workspace Helpers: Stash, Bisect, and Worktree (`_01_17_advanced_git_lesson3_helpers.md`).
+- [x] **Lesson 14**: Customization & Automation: Git Hooks & Aliases (`_01_18_advanced_git_lesson4_hooks.md`).
 
 ---
 

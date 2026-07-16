@@ -165,7 +165,7 @@ def run_migration(dry_run: bool = False):
         skipped = 0
 
         for folder_name, meta in COURSE_MAP.items():
-            folder_path = project_root / folder_name
+            folder_path = project_root / "old notes" / folder_name
             if meta.get("subpath"):
                 folder_path = folder_path / meta["subpath"]
                 

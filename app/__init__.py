@@ -53,6 +53,14 @@ def create_app() -> Flask:
             "current_user": current_user,
         }
 
+    # ── Jinja Template Filters ─────────────────────────────────────────────
+    import markdown as md_converter
+    @app.template_filter("markdown")
+    def render_markdown(text):
+        if not text:
+            return ""
+        return md_converter.markdown(text, extensions=["extra", "codehilite", "toc"])
+
     logger.info("Learning OS application ready.")
     return app
 
