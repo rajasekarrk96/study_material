@@ -751,6 +751,43 @@ code, pre {
     border-left-color: var(--accent);
 }
 
+/* ── SIDEBAR SECTIONS SUBMENU ───────────────────────────────── */
+.sidebar-sections-submenu {
+    display: flex;
+    flex-direction: column;
+    padding-left: 28px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    gap: 2px;
+}
+
+.sidebar-section-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.sidebar-section-link i {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.sidebar-section-link:hover {
+    background: var(--bg-elevated);
+    color: var(--accent-light);
+}
+
+.sidebar-section-link:hover i {
+    color: var(--accent-light);
+    transform: translateX(2px);
+}
+
 .lesson-main {
     padding: 40px 56px;
     max-width: 880px;

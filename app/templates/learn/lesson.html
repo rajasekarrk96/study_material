@@ -19,31 +19,28 @@
         <div class="sidebar-module">{{ module.title }}</div>
         <nav class="sidebar-nav">
             {% for l in module.lessons.filter_by(is_deleted=False).order_by('sort_order') %}
-            <a href="{{ url_for('learn.lesson_view', course_slug=course.slug, module_slug=module.slug, lesson_slug=l.slug) }}"
-               class="sidebar-lesson {% if l.id == lesson.id %}active{% endif %}">
-                <i class="fas fa-circle{% if l.id == lesson.id %}-dot{% else %}-notch{% endif %}" style="font-size:0.5rem;margin-right:8px;"></i>
-                {{ l.title }}
-            </a>
+            <div class="sidebar-lesson-group">
+                <a href="{{ url_for('learn.lesson_view', course_slug=course.slug, module_slug=module.slug, lesson_slug=l.slug) }}"
+                   class="sidebar-lesson {% if l.id == lesson.id %}active{% endif %}">
+                    <i class="fas fa-circle{% if l.id == lesson.id %}-dot{% else %}-notch{% endif %}" style="font-size:0.5rem;margin-right:8px;"></i>
+                    {{ l.title }}
+                </a>
+                {% if l.id == lesson.id and sections %}
+                <div class="sidebar-sections-submenu" id="sidebar-sections-submenu">
+                    {% for stype, sec in sections.items() %}
+                    <a href="#section-{{ stype }}" class="sidebar-section-link">
+                        <i class="fas fa-caret-right"></i> {{ sec.title or stype | replace('_',' ') | title }}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
             {% endfor %}
         </nav>
     </aside>
 
     <!-- MAIN CONTENT -->
     <div class="lesson-main">
-        <!-- STICKY SUB-NAVBAR FOR LESSON SECTIONS -->
-        {% if sections %}
-        <div class="lesson-sections-subnav">
-            <div class="subnav-title"><i class="fas fa-list"></i> In This Lesson:</div>
-            <div class="subnav-links">
-                {% for stype, sec in sections.items() %}
-                <a href="#section-{{ stype }}" class="subnav-link-item">
-                    {{ sec.title or stype | replace('_',' ') | title }}
-                </a>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
         <!-- BREADCRUMB -->
         <div class="breadcrumb">
             <a href="{{ url_for('public.home') }}">Home</a>
