@@ -1,4 +1,4 @@
-# Lesson 4: Customization and Automation — Git Hooks and Aliases
+# Customization and Automation — Git Hooks and Aliases
 
 ---
 

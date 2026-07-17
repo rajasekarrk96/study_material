@@ -1,4 +1,4 @@
-# Lesson 1: Version Control History — Core Concepts and Evolution
+# Version Control History — Core Concepts and Evolution
 
 ---
 

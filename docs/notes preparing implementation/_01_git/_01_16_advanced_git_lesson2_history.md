@@ -1,4 +1,4 @@
-# Lesson 2: Rewriting History — Amend, Rebase, and Squash
+# Rewriting History — Amend, Rebase, and Squash
 
 ---
 

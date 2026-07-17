@@ -1,4 +1,4 @@
-# Lesson 3: Handling Merge Conflicts in Teams — Visual markers and resolution strategies
+# Handling Merge Conflicts in Teams — Visual markers and resolution strategies
 
 ---
 

@@ -1,4 +1,4 @@
-# Lesson 3: Inspecting History and Comparing Changes — Log and Diff
+# Inspecting History and Comparing Changes — Log and Diff
 
 ---
 

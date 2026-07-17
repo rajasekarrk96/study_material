@@ -1,4 +1,4 @@
-# Lesson 2: Syncing Data — Fetch, Pull, and Push
+# Syncing Data — Fetch, Pull, and Push
 
 ---
 

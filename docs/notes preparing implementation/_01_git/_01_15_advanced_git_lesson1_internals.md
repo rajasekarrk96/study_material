@@ -1,4 +1,4 @@
-# Lesson 1: Git Internals — Blobs, Trees, Commits, and Refs
+# Git Internals — Blobs, Trees, Commits, and Refs
 
 ---
 

@@ -1,4 +1,4 @@
-# Lesson 1: Introduction to C — History, Setup, and Hello World
+# Introduction to C — History, Setup, and Hello World
 
 ---
 

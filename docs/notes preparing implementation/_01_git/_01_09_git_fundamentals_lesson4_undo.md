@@ -1,4 +1,4 @@
-# Lesson 5: Undoing Changes — Reset, Revert, and Restore
+# Undoing Changes — Reset, Revert, and Restore
 
 ---
 

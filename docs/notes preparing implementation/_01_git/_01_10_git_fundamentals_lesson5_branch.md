@@ -1,4 +1,4 @@
-# Lesson 6: Branching and Merging Basics — Creating, Switching, and Merging
+# Branching and Merging Basics — Creating, Switching, and Merging
 
 ---
 

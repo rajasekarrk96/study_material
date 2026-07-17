@@ -1,4 +1,4 @@
-# Lesson 1: Transitioning to C++ — Namespaces and I/O Stream Buffers
+# Transitioning to C++ — Namespaces and I/O Stream Buffers
 
 ---
 

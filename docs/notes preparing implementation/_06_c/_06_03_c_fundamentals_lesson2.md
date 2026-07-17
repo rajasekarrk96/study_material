@@ -1,4 +1,4 @@
-# Lesson 2: C Compilation Lifecycle — Preprocessing, Compiling, Assembling, and Linking
+# C Compilation Lifecycle — Preprocessing, Compiling, Assembling, and Linking
 
 ---
 

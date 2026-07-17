@@ -1,4 +1,4 @@
-# Lesson 3: Basic Local Workflow — Tracking and Recording Changes
+# Basic Local Workflow — Tracking and Recording Changes
 
 ---
 

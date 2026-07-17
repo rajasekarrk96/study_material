@@ -1,4 +1,4 @@
-# Lesson 4: Upstream and Forking Workflows — Managing community contributions
+# Upstream and Forking Workflows — Managing community contributions
 
 ---
 

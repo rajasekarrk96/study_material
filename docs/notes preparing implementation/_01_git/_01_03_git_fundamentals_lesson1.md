@@ -1,4 +1,4 @@
-# Upgraded Lesson 1: Git Architecture and the Three States
+# Git Architecture and the Three States
 
 ---
 

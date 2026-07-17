@@ -1,4 +1,4 @@
-# Lesson 3: Advanced Workspace Helpers — Stash, Bisect, and Worktree
+# Advanced Workspace Helpers — Stash, Bisect, and Worktree
 
 ---
 

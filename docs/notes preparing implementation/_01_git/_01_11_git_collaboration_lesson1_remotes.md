@@ -1,4 +1,4 @@
-# Lesson 1: Remote Repositories and Origin Configuration — Establishing remotes and naming conventions
+# Remote Repositories and Origin Configuration — Establishing remotes and naming conventions
 
 ---
 

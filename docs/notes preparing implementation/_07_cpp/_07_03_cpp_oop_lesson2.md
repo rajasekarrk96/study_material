@@ -1,4 +1,4 @@
-# Lesson 2: Classes, Objects, and Constructors — Constructor Overloading
+# Classes, Objects, and Constructors — Constructor Overloading
 
 ---
 
