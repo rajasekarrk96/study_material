@@ -30,6 +30,20 @@
 
     <!-- MAIN CONTENT -->
     <div class="lesson-main">
+        <!-- STICKY SUB-NAVBAR FOR LESSON SECTIONS -->
+        {% if sections %}
+        <div class="lesson-sections-subnav">
+            <div class="subnav-title"><i class="fas fa-list"></i> In This Lesson:</div>
+            <div class="subnav-links">
+                {% for stype, sec in sections.items() %}
+                <a href="#section-{{ stype }}" class="subnav-link-item">
+                    {{ sec.title or stype | replace('_',' ') | title }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
         <!-- BREADCRUMB -->
         <div class="breadcrumb">
             <a href="{{ url_for('public.home') }}">Home</a>
@@ -51,18 +65,6 @@
             <p class="lesson-summary">{{ lesson.summary }}</p>
             {% endif %}
         </div>
-
-        <!-- TABLE OF CONTENTS (auto-generated from sections) -->
-        {% if sections %}
-        <div class="toc-card">
-            <h3><i class="fas fa-list"></i> In This Lesson</h3>
-            <ul class="toc-list">
-                {% for stype, sec in sections.items() %}
-                <li><a href="#section-{{ stype }}"><i class="fas fa-angle-right"></i> {{ sec.title or stype | replace('_',' ') | title }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
 
         <!-- SECTIONS -->
         {% for stype, sec in sections.items() %}

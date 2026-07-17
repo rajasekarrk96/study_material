@@ -765,6 +765,59 @@ code, pre {
 }
 .lesson-summary { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; }
 
+/* ── STICKY SUB-NAVBAR FOR LESSON SECTIONS ─────────────────── */
+.lesson-sections-subnav {
+    position: sticky;
+    top: var(--navbar-h);
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(17, 19, 24, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 56px;
+    margin: -40px -56px 32px -56px;
+}
+
+.subnav-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.subnav-links {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.subnav-links::-webkit-scrollbar {
+    display: none;
+}
+
+.subnav-link-item {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--bg-elevated);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.subnav-link-item:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border-color: var(--accent-light);
+}
+
 /* ── TABLE OF CONTENTS ───────────────────────────────────────── */
 .toc-card {
     background: var(--bg-surface);
@@ -996,6 +1049,10 @@ code, pre {
     .lesson-sidebar.open { display: block; }
     .sidebar-toggle-btn { display: flex; align-items: center; justify-content: center; }
     .lesson-main { padding: 32px 24px; }
+    .lesson-sections-subnav {
+        margin: -32px -24px 24px -24px;
+        padding: 12px 24px;
+    }
 }
 
 @media (max-width: 640px) {
