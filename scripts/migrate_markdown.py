@@ -178,10 +178,11 @@ def ingest_lesson_metadata(metadata: dict) -> None:
         lesson.difficulty_level = diff_level
         lesson.estimated_minutes = reading_min
 
-    # Update overview or topics section content as the lesson summary
+    # Update overview or topics section content as the lesson summary (first paragraph only)
     for sec in metadata.get("sections", []):
         if sec["section_type"] in ["overview", "topics"]:
-            lesson.summary = sec["content_markdown"]
+            paragraphs = [p.strip() for p in sec["content_markdown"].strip().split("\n\n") if p.strip()]
+            lesson.summary = paragraphs[0] if paragraphs else ""
 
     # Delete existing sections to override fresh content ingestion
     LessonSection.query.filter_by(lesson_id=lesson.id).delete()
