@@ -384,3 +384,33 @@ class AssignmentSubmission(db.Model, TimestampMixin):
 
     def __repr__(self):
         return f"<AssignmentSubmission assignment={self.assignment_id} user={self.user_id}>"
+
+
+class CourseStatistics(db.Model, TimestampMixin):
+    __tablename__ = "course_statistics"
+
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), unique=True, nullable=False)
+    completion_rate = db.Column(db.Float, default=0.0)
+    average_completion_time_seconds = db.Column(db.Integer, default=0)
+    enrollment_count = db.Column(db.Integer, default=0)
+
+    course = db.relationship("Course")
+
+    def __repr__(self):
+        return f"<CourseStatistics course={self.course_id}>"
+
+
+class LessonStatistics(db.Model, TimestampMixin):
+    __tablename__ = "lesson_statistics"
+
+    id = db.Column(db.Integer, primary_key=True)
+    lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), unique=True, nullable=False)
+    average_time_spent_seconds = db.Column(db.Integer, default=0)
+    completion_count = db.Column(db.Integer, default=0)
+    dropout_count = db.Column(db.Integer, default=0)
+
+    lesson = db.relationship("Lesson")
+
+    def __repr__(self):
+        return f"<LessonStatistics lesson={self.lesson_id}>"
