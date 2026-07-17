@@ -414,3 +414,34 @@ class LessonStatistics(db.Model, TimestampMixin):
 
     def __repr__(self):
         return f"<LessonStatistics lesson={self.lesson_id}>"
+
+
+class GlossaryTerm(db.Model, TimestampMixin):
+    __tablename__ = "glossary_terms"
+
+    id = db.Column(db.Integer, primary_key=True)
+    term = db.Column(db.String(255), unique=True, nullable=False)
+    definition = db.Column(db.Text, nullable=False)
+    aliases = db.Column(db.String(500))  # comma-separated list of alternative names
+    category = db.Column(db.String(100))  # e.g., 'git', 'java', 'c'
+    related_terms = db.Column(db.String(500))  # comma-separated list of other glossary terms
+
+    def __repr__(self):
+        return f"<GlossaryTerm {self.term}>"
+
+
+class CommandReference(db.Model, TimestampMixin):
+    __tablename__ = "command_references"
+
+    id = db.Column(db.Integer, primary_key=True)
+    command = db.Column(db.String(100), unique=True, nullable=False)  # e.g., 'git add', 'git commit'
+    syntax = db.Column(db.String(255), nullable=False)  # e.g., 'git add <pathspec>'
+    description = db.Column(db.Text)
+    options = db.Column(db.Text)  # description of common options/flags
+    examples = db.Column(db.Text)  # markdown code snippets of examples
+    common_mistakes = db.Column(db.Text)  # common pitfalls and recovery
+    related_commands = db.Column(db.String(500))  # comma-separated related commands
+    category = db.Column(db.String(100))  # e.g., 'git', 'mysql', 'linux'
+
+    def __repr__(self):
+        return f"<CommandReference {self.command}>"
