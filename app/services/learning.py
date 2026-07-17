@@ -1,6 +1,6 @@
 """
 Learning OS — Learning & Progression Service Layer
-XPService, StreakService, LearningProgressService, DashboardService.
+EventService, XPService, StreakService, LearningProgressService, RecommendationService, DashboardService.
 """
 from datetime import datetime, date, timedelta
 from sqlalchemy import func
@@ -8,6 +8,24 @@ from app.core.extensions import db
 from app.domains.content.models import Course, Module, Lesson, UserCertificate, LabSubmission
 from app.domains.learning_path.models import UserLessonProgress, UserCourseProgress
 from app.domains.gamification.models import UserXPLog, UserStreak
+
+
+class EventService:
+    """Synchronous publish/subscribe event manager."""
+    _listeners = {}
+
+    @classmethod
+    def subscribe(cls, event_type: str, listener_fn):
+        if event_type not in cls._listeners:
+            cls._listeners[event_type] = []
+        cls._listeners[event_type].append(listener_fn)
+
+    @classmethod
+    def publish(cls, event_type: str, *args, **kwargs):
+        if event_type in cls._listeners:
+            for listener in cls._listeners[event_type]:
+                listener(*args, **kwargs)
+
 
 class XPService:
     @staticmethod
@@ -67,7 +85,7 @@ class StreakService:
 class LearningProgressService:
     @staticmethod
     def complete_lesson(user_id: int, lesson_id: int) -> UserLessonProgress:
-        """Mark a lesson completed, award XP, update streak, check course completion."""
+        """Mark a lesson completed and publish completion event."""
         lesson = Lesson.query.get(lesson_id)
         if not lesson:
             return None
@@ -89,17 +107,10 @@ class LearningProgressService:
             progress.is_completed = True
             progress.completed_at = datetime.utcnow()
 
-        # Award XP and log activity
-        XPService.award(user_id, "lesson_completed", 10, reference_id=lesson_id)
+        db.session.flush()
 
-        # Update Streak
-        StreakService.update_streak(user_id)
-
-        # Check course completion
-        if lesson.module:
-            course = lesson.module.course
-            if course:
-                LearningProgressService.update_course_progress(user_id, course.id)
+        # Publish progression event
+        EventService.publish("lesson_completed", user_id=user_id, lesson_id=lesson_id)
 
         return progress
 
@@ -145,6 +156,70 @@ class LearningProgressService:
         return course_progress
 
 
+class RecommendationService:
+    """Core personalization and suggestion engine."""
+    @staticmethod
+    def get_resume_recommendation(user_id: int) -> dict:
+        """Find the next lesson the user should resume."""
+        completed_lessons = UserLessonProgress.query.filter_by(
+            user_id=user_id,
+            is_completed=True
+        ).all()
+        completed_lesson_ids = [lp.lesson_id for lp in completed_lessons]
+
+        # Fetch latest completed lesson's course as active course
+        if completed_lessons:
+            # Get latest completion record
+            latest_completion = sorted(completed_lessons, key=lambda lp: lp.completed_at or datetime.min)[-1]
+            latest_lesson = Lesson.query.get(latest_completion.lesson_id)
+            if latest_lesson and latest_lesson.module:
+                course = latest_lesson.module.course
+                if course and not course.is_deleted:
+                    # Find first uncompleted lesson in this course
+                    total_course_lessons = Lesson.query.join(Module).filter(
+                        Module.course_id == course.id,
+                        Lesson.status == "published",
+                        Lesson.is_deleted == False
+                    ).all()
+                    
+                    uncompleted_lessons = [l for l in total_course_lessons if l.id not in completed_lesson_ids]
+                    if uncompleted_lessons:
+                        uncompleted_lessons_sorted = sorted(
+                            uncompleted_lessons,
+                            key=lambda l: (l.module.sort_order if l.module else 0, l.sort_order)
+                        )
+                        next_lesson = uncompleted_lessons_sorted[0]
+                        return {
+                            "title": course.title,
+                            "slug": course.slug,
+                            "next_lesson": {
+                                "title": next_lesson.title,
+                                "slug": next_lesson.slug,
+                                "module_slug": next_lesson.module.slug
+                            }
+                        }
+
+        # Fallback: Default to Git Fundamentals first lesson
+        git_course = Course.query.filter_by(slug="git-fundamentals", is_deleted=False).first()
+        if git_course:
+            first_lesson = Lesson.query.join(Module).filter(
+                Module.course_id == git_course.id,
+                Lesson.status == "published",
+                Lesson.is_deleted == False
+            ).order_by(Module.sort_order, Lesson.sort_order).first()
+            if first_lesson:
+                return {
+                    "title": git_course.title,
+                    "slug": git_course.slug,
+                    "next_lesson": {
+                        "title": first_lesson.title,
+                        "slug": first_lesson.slug,
+                        "module_slug": first_lesson.module.slug
+                    }
+                }
+        return None
+
+
 class DashboardService:
     @staticmethod
     def get_dashboard_data(user_id: int) -> dict:
@@ -158,7 +233,7 @@ class DashboardService:
         streak_record = UserStreak.query.filter_by(user_id=user_id).first()
         streak = streak_record.current_streak if streak_record else 0
 
-        # 3. Active Courses & Next Resume Lessons
+        # 3. Active Courses
         completed_lessons = UserLessonProgress.query.filter_by(
             user_id=user_id,
             is_completed=True
@@ -167,7 +242,6 @@ class DashboardService:
         completed_lesson_ids = [lp.lesson_id for lp in completed_lessons]
         active_courses = []
 
-        # Find active course enrollments
         if completed_lesson_ids:
             lessons = Lesson.query.filter(Lesson.id.in_(completed_lesson_ids)).all()
             active_course_ids = list(set([l.module.course_id for l in lessons if l.module]))
@@ -254,26 +328,8 @@ class DashboardService:
                 "xp": log.xp_amount
             })
 
-        # Provide a default active course if none started yet
-        default_course = None
-        if not active_courses:
-            git_course = Course.query.filter_by(slug="git-fundamentals", is_deleted=False).first()
-            if git_course:
-                first_lesson = Lesson.query.join(Module).filter(
-                    Module.course_id == git_course.id,
-                    Lesson.status == "published",
-                    Lesson.is_deleted == False
-                ).order_by(Module.sort_order, Lesson.sort_order).first()
-                if first_lesson:
-                    default_course = {
-                        "title": git_course.title,
-                        "slug": git_course.slug,
-                        "next_lesson": {
-                            "title": first_lesson.title,
-                            "slug": first_lesson.slug,
-                            "module_slug": first_lesson.module.slug
-                        }
-                    }
+        # 6. Retrieve Recommendation suggestion
+        default_course = RecommendationService.get_resume_recommendation(user_id)
 
         return {
             "total_xp": total_xp,
@@ -284,3 +340,27 @@ class DashboardService:
             "activity_feed": activity_feed,
             "default_course": default_course
         }
+
+
+# ==========================================
+# EVENT HANDLERS REGISTRATION
+# ==========================================
+def _on_lesson_completed_award_xp(user_id: int, lesson_id: int):
+    XPService.award(user_id, "lesson_completed", 10, reference_id=lesson_id)
+
+
+def _on_lesson_completed_update_streak(user_id: int, lesson_id: int):
+    StreakService.update_streak(user_id)
+
+
+def _on_lesson_completed_course_progress(user_id: int, lesson_id: int):
+    lesson = Lesson.query.get(lesson_id)
+    if lesson and lesson.module:
+        course = lesson.module.course
+        if course:
+            LearningProgressService.update_course_progress(user_id, course.id)
+
+
+EventService.subscribe("lesson_completed", _on_lesson_completed_award_xp)
+EventService.subscribe("lesson_completed", _on_lesson_completed_update_streak)
+EventService.subscribe("lesson_completed", _on_lesson_completed_course_progress)

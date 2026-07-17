@@ -659,11 +659,110 @@ class LearningServiceTestCase(unittest.TestCase):
 
         # Complete lesson and query again
         LearningProgressService.complete_lesson(self.user.id, self.lesson1.id)
+        db.session.commit()
         data_after = DashboardService.get_dashboard_data(self.user.id)
         self.assertEqual(data_after["total_xp"], 10)
         self.assertEqual(len(data_after["active_courses"]), 1)
         self.assertEqual(data_after["active_courses"][0]["progress_percentage"], 50)
         self.assertEqual(len(data_after["activity_feed"]), 1)
+
+
+class EventServiceTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = create_app()
+        self.app.config["TESTING"] = True
+        self.client = self.app.test_client()
+        self.ctx = self.app.app_context()
+        self.ctx.push()
+        db.create_all()
+        self._seed_test_data()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.ctx.pop()
+
+    def _seed_test_data(self):
+        role = Role.query.filter_by(name="student").first()
+        if not role:
+            role = Role(name="student", display_name="Student", level=1)
+            db.session.add(role)
+            db.session.commit()
+
+        self.user = User(
+            email="event_tester@bytesandboards.test",
+            username="event_tester",
+            password_hash="fake-hash",
+            role_id=role.id,
+            display_name="Event Tester"
+        )
+        db.session.add(self.user)
+
+        cat = Category(name="Tech", slug="tech")
+        db.session.add(cat)
+        db.session.flush()
+
+        subj = Subject(category_id=cat.id, name="Git", slug="git")
+        db.session.add(subj)
+        db.session.flush()
+
+        self.course = Course(
+            subject_id=subj.id,
+            title="Git Fundamentals",
+            slug="git-fundamentals",
+            status="published"
+        )
+        db.session.add(self.course)
+        db.session.flush()
+
+        mod = Module(course_id=self.course.id, title="Module 1", slug="module-1", sort_order=1, is_published=True)
+        db.session.add(mod)
+        db.session.flush()
+
+        self.lesson1 = Lesson(module_id=mod.id, title="Lesson 1", slug="lesson-1", status="published", sort_order=1)
+        self.lesson2 = Lesson(module_id=mod.id, title="Lesson 2", slug="lesson-2", status="published", sort_order=2)
+        db.session.add(self.lesson1)
+        db.session.add(self.lesson2)
+        db.session.commit()
+
+    def test_event_service_publish_and_subscribe(self):
+        """Published events should invoke all registered listeners."""
+        from app.services.learning import EventService
+        received = []
+        EventService.subscribe("test_event", lambda **kwargs: received.append(kwargs.get("value")))
+        EventService.publish("test_event", value="hello")
+        self.assertIn("hello", received)
+
+    def test_event_service_no_double_xp_via_complete_lesson(self):
+        """Completing the same lesson twice should only award XP once."""
+        from app.services.learning import LearningProgressService
+        LearningProgressService.complete_lesson(self.user.id, self.lesson1.id)
+        db.session.commit()
+        LearningProgressService.complete_lesson(self.user.id, self.lesson1.id)
+        db.session.commit()
+        xp_logs = UserXPLog.query.filter_by(
+            user_id=self.user.id,
+            activity_type="lesson_completed",
+            reference_id=self.lesson1.id
+        ).all()
+        self.assertEqual(len(xp_logs), 1)
+
+    def test_recommendation_service_returns_first_lesson(self):
+        """Before any progress, RecommendationService should suggest first lesson of git-fundamentals."""
+        from app.services.learning import RecommendationService
+        rec = RecommendationService.get_resume_recommendation(self.user.id)
+        self.assertIsNotNone(rec)
+        self.assertEqual(rec["slug"], "git-fundamentals")
+        self.assertEqual(rec["next_lesson"]["slug"], "lesson-1")
+
+    def test_recommendation_service_advances_after_completion(self):
+        """After completing lesson 1, RecommendationService should suggest lesson 2."""
+        from app.services.learning import LearningProgressService, RecommendationService
+        LearningProgressService.complete_lesson(self.user.id, self.lesson1.id)
+        db.session.commit()
+        rec = RecommendationService.get_resume_recommendation(self.user.id)
+        self.assertIsNotNone(rec)
+        self.assertEqual(rec["next_lesson"]["slug"], "lesson-2")
 
 
 if __name__ == "__main__":
