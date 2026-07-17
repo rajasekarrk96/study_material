@@ -105,10 +105,29 @@
         {% endif %}
 
         <!-- PREV / NEXT NAV -->
-        <div class="lesson-nav-footer">
+        <div class="lesson-nav-footer" style="display: flex; gap: 15px; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 30px;">
             <button onclick="history.back()" class="btn btn-outline">
-                <i class="fas fa-arrow-left"></i> Previous
+                <i class="fas fa-arrow-left"></i> Back
             </button>
+            
+            {% if is_completed %}
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span class="btn btn-outline" style="color: var(--green); border-color: rgba(34,211,161,0.4); background: rgba(34,211,161,0.05); cursor: default;">
+                        <i class="fas fa-check-circle"></i> Lesson Completed (+10 XP)
+                    </span>
+                    {% if next_lesson %}
+                    <a href="{{ url_for('learn.lesson_view', course_slug=course.slug, module_slug=next_lesson.module.slug, lesson_slug=next_lesson.slug) }}" class="btn btn-primary">
+                        Next Lesson <i class="fas fa-chevron-right"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <form action="{{ url_for('learn.complete_lesson', lesson_id=lesson.id) }}" method="POST" style="margin: 0;">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Complete & Continue <i class="fas fa-chevron-right"></i>
+                    </button>
+                </form>
+            {% endif %}
         </div>
     </div>
 

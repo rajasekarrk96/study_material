@@ -25,8 +25,18 @@ def _get_cached_categories_data():
     return cached
 
 
+from flask_login import current_user
+from app.services.learning import DashboardService
+
 @public_bp.route("/")
 def home():
+    if current_user.is_authenticated:
+        data = DashboardService.get_dashboard_data(current_user.id)
+        return render_template(
+            "public/dashboard.html",
+            dashboard=data
+        )
+    
     categories = _get_cached_categories_data()
     featured_courses = Course.query.filter_by(
         is_featured=True, status="published", is_deleted=False

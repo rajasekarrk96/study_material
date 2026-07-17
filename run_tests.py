@@ -15,6 +15,7 @@ from app.domains.auth.models import User, Role
 from app.domains.content.models import Category, Subject, Course, Module, Lesson
 from app.domains.assessment.models import Quiz, Question, Option, QuizAttempt, QuizAnswer
 from app.domains.gamification.models import UserXPLog
+from app.domains.learning_path.models import UserCourseProgress, UserLessonProgress
 
 
 class QuizEngineTestCase(unittest.TestCase):
@@ -534,6 +535,135 @@ class QuizEngineTestCase(unittest.TestCase):
         # Different parameter calculates again
         self.assertEqual(dummy_calc(5), 10)
         self.assertEqual(call_count, 2)
+
+
+class LearningServiceTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = create_app()
+        self.app.config["TESTING"] = True
+        self.app.config["WTF_CSRF_ENABLED"] = False
+        self.client = self.app.test_client()
+        self.ctx = self.app.app_context()
+        self.ctx.push()
+        db.create_all()
+        self._seed_test_data()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.ctx.pop()
+
+    def _seed_test_data(self):
+        # Create student role
+        role = Role.query.filter_by(name="student").first()
+        if not role:
+            role = Role(name="student", display_name="Student", level=1)
+            db.session.add(role)
+            db.session.commit()
+
+        # Create user
+        self.user = User(
+            email="tester@bytesandboards.test",
+            username="tester",
+            password_hash="fake-hash",
+            role_id=role.id,
+            display_name="Tester User"
+        )
+        db.session.add(self.user)
+
+        # Create technical course
+        cat = Category(name="Tech", slug="tech")
+        db.session.add(cat)
+        db.session.flush()
+
+        subj = Subject(category_id=cat.id, name="Git", slug="git")
+        db.session.add(subj)
+        db.session.flush()
+
+        self.course = Course(
+            subject_id=subj.id,
+            title="Git Fundamentals",
+            slug="git-fundamentals",
+            status="published"
+        )
+        db.session.add(self.course)
+        db.session.flush()
+
+        mod = Module(course_id=self.course.id, title="Module 1", slug="module-1", is_published=True)
+        db.session.add(mod)
+        db.session.flush()
+
+        self.lesson1 = Lesson(module_id=mod.id, title="Lesson 1", slug="lesson-1", status="published")
+        self.lesson2 = Lesson(module_id=mod.id, title="Lesson 2", slug="lesson-2", status="published")
+        db.session.add(self.lesson1)
+        db.session.add(self.lesson2)
+        db.session.commit()
+
+    def test_xp_service_award(self):
+        from app.services.learning import XPService
+        # Award initial XP
+        XPService.award(self.user.id, "lesson_completed", 10, reference_id=self.lesson1.id)
+        db.session.commit()
+
+        logs = UserXPLog.query.filter_by(user_id=self.user.id).all()
+        self.assertEqual(len(logs), 1)
+        self.assertEqual(logs[0].xp_amount, 10)
+
+        # Ensure double completions don't reward XP twice
+        XPService.award(self.user.id, "lesson_completed", 10, reference_id=self.lesson1.id)
+        db.session.commit()
+        logs_after = UserXPLog.query.filter_by(user_id=self.user.id).all()
+        self.assertEqual(len(logs_after), 1)
+
+    def test_streak_service(self):
+        from app.services.learning import StreakService
+        # Start streak
+        streak = StreakService.update_streak(self.user.id)
+        db.session.commit()
+        self.assertEqual(streak.current_streak, 1)
+
+        # Update again today (retains same streak day count)
+        streak = StreakService.update_streak(self.user.id)
+        db.session.commit()
+        self.assertEqual(streak.current_streak, 1)
+
+    def test_learning_progress_completes_course(self):
+        from app.services.learning import LearningProgressService
+        
+        # Complete Lesson 1
+        LearningProgressService.complete_lesson(self.user.id, self.lesson1.id)
+        course_prog = UserCourseProgress.query.filter_by(
+            user_id=self.user.id,
+            course_id=self.course.id
+        ).first()
+        self.assertIsNotNone(course_prog)
+        self.assertFalse(course_prog.is_completed)
+
+        # Complete Lesson 2 (all lessons complete)
+        LearningProgressService.complete_lesson(self.user.id, self.lesson2.id)
+        course_prog_after = UserCourseProgress.query.filter_by(
+            user_id=self.user.id,
+            course_id=self.course.id
+        ).first()
+        self.assertTrue(course_prog_after.is_completed)
+
+    def test_dashboard_service_data(self):
+        from app.services.learning import LearningProgressService, DashboardService
+        
+        # Initial empty active course dashboard
+        data = DashboardService.get_dashboard_data(self.user.id)
+        self.assertEqual(data["total_xp"], 0)
+        self.assertEqual(data["streak"], 0)
+        self.assertIsNotNone(data["default_course"])
+        self.assertEqual(data["default_course"]["slug"], "git-fundamentals")
+
+        # Complete lesson and query again
+        LearningProgressService.complete_lesson(self.user.id, self.lesson1.id)
+        data_after = DashboardService.get_dashboard_data(self.user.id)
+        self.assertEqual(data_after["total_xp"], 10)
+        self.assertEqual(len(data_after["active_courses"]), 1)
+        self.assertEqual(data_after["active_courses"][0]["progress_percentage"], 50)
+        self.assertEqual(len(data_after["activity_feed"]), 1)
 
 
 if __name__ == "__main__":
