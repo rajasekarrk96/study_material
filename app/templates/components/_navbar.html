@@ -9,6 +9,20 @@
             <a href="{{ url_for('public.catalog') }}" class="nav-link">
                 <i class="fas fa-th-large"></i> Catalog
             </a>
+            <div class="nav-item-dropdown">
+                <button class="nav-link dropdown-toggle" id="courses-dropdown-btn">
+                    <i class="fas fa-book"></i> Courses <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu-list" id="courses-dropdown-menu">
+                    {% for course in global_courses %}
+                    <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}" class="dropdown-item">
+                        {{ course.title }}
+                    </a>
+                    {% else %}
+                    <span class="dropdown-empty">No courses available</span>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
 
         <div class="navbar-actions">

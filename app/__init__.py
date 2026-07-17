@@ -46,11 +46,18 @@ def create_app() -> Flask:
     _register_blueprints(app)
 
     # ── Context processors ─────────────────────────────────────────────────
+    from app.domains.content.models import Course
     @app.context_processor
     def inject_globals():
+        published_courses = []
+        try:
+            published_courses = Course.query.filter_by(status="published", is_deleted=False).order_by(Course.title).all()
+        except Exception:
+            pass
         return {
             "platform_name": "Bytes and Boards Solutions",
             "current_user": current_user,
+            "global_courses": published_courses,
         }
 
     # ── Jinja Template Filters ─────────────────────────────────────────────

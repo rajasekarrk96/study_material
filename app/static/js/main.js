@@ -55,3 +55,29 @@ document.addEventListener('click', (e) => {
         sidebar.classList.remove('open');
     }
 });
+
+// ── COURSES DROPDOWN INTERACTION ─────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const dropdownBtn = document.getElementById('courses-dropdown-btn');
+    const dropdownMenu = document.getElementById('courses-dropdown-menu');
+    const dropdownContainer = dropdownBtn ? dropdownBtn.parentElement : null;
+
+    if (dropdownBtn && dropdownMenu) {
+        dropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+            if (dropdownContainer) {
+                dropdownContainer.classList.toggle('open');
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (dropdownContainer && !dropdownContainer.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+                dropdownContainer.classList.remove('open');
+            }
+        });
+    }
+});
+
