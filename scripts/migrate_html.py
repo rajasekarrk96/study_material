@@ -173,10 +173,21 @@ def run_migration(dry_run: bool = False):
                 print(f"  [SKIP] Folder not found: {folder_path}")
                 continue
 
-            html_files = sorted([
-                f for f in folder_path.glob("*.html")
-                if f.name.lower() not in SKIP_FILES
-            ])
+            # Scan recursively for all .html files
+            raw_html_files = sorted(folder_path.rglob("*.html"))
+            html_files = []
+            for f in raw_html_files:
+                rel_parts = f.relative_to(folder_path).parts
+                # Skip index.html only at the root of the course (depth == 1)
+                if len(rel_parts) == 1 and f.name.lower() == "index.html":
+                    continue
+                # Skip shared files and templates
+                if "shared" in rel_parts or "_template.html" in f.name.lower():
+                    continue
+                # Skip curriculum summary files
+                if f.name.lower() in ["curriculum.html", "curriculum_status.html", "notes_outline.html"]:
+                    continue
+                html_files.append(f)
 
             if not html_files:
                 print(f"  [SKIP] No HTML files in: {folder_name}")
@@ -234,35 +245,56 @@ def run_migration(dry_run: bool = False):
                     db.session.add(course)
                     db.session.flush()
 
-                # ── Module
-                mod_data = meta["module"]
-                module = Module.query.filter_by(
-                    course_id=course.id, slug=mod_data["slug"]
-                ).first()
-                if not module:
-                    module = Module(
-                        course_id=course.id,
-                        title=mod_data["title"],
-                        slug=mod_data["slug"],
-                        is_published=True,
-                        sort_order=1,
-                    )
-                    db.session.add(module)
-                    db.session.flush()
-
             for sort_idx, html_file in enumerate(html_files, start=1):
                 raw = html_file.read_bytes()
                 soup = BeautifulSoup(raw, "html.parser")
 
-                title = extract_title(soup, html_file.name)
+                rel_parts = html_file.relative_to(folder_path).parts
+                if len(rel_parts) >= 3 and html_file.name == "worksheet.html":
+                    parent_clean = re.sub(r'^\d+_', '', rel_parts[-2]).replace('_', ' ').strip().title()
+                    title = f"{parent_clean} - Worksheet"
+                else:
+                    title = extract_title(soup, html_file.name)
+
                 summary = guess_summary(soup)
                 main_html = extract_main_content(soup)
-                lesson_slug = slugify(html_file.stem)
+                
+                # Make lesson slug unique by prefixing module if nested
+                if len(rel_parts) >= 2:
+                    lesson_slug = slugify(f"{rel_parts[-2]}-{html_file.stem}")
+                else:
+                    lesson_slug = slugify(html_file.stem)
 
                 print(f"  {'[DRY]' if dry_run else '[IMPORT]'} {html_file.name} -> {title}")
 
                 if dry_run:
                     continue
+
+                # Dynamically resolve module
+                if len(rel_parts) >= 2:
+                    raw_module_name = rel_parts[0]
+                    clean_module_name = re.sub(r'^\d+_', '', raw_module_name).replace('_', ' ').strip().title()
+                    module_slug = slugify(raw_module_name)
+                else:
+                    clean_module_name = meta["module"]["title"]
+                    module_slug = meta["module"]["slug"]
+
+                module = Module.query.filter_by(
+                    course_id=course.id, slug=module_slug
+                ).first()
+                if not module:
+                    # Parse module sort order from numerical prefix
+                    prefix_match = re.match(r'^(\d+)_', rel_parts[0]) if len(rel_parts) >= 2 else None
+                    mod_sort = int(prefix_match.group(1)) if prefix_match else 99
+                    module = Module(
+                        course_id=course.id,
+                        title=clean_module_name,
+                        slug=module_slug,
+                        is_published=True,
+                        sort_order=mod_sort,
+                    )
+                    db.session.add(module)
+                    db.session.flush()
 
                 # Skip if already exists
                 existing = Lesson.query.filter_by(

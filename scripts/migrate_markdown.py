@@ -82,32 +82,53 @@ def parse_markdown_lesson(file_path: Path) -> dict:
 
 def ingest_lesson_metadata(metadata: dict) -> None:
     """Ingests parsed lesson metadata and sections into the database tables."""
-    # Ensure Development Tools category exists
-    category = Category.query.filter_by(slug="development-tools").first()
+    # Ensure Subject exists
+    subject_name = metadata.get("subject", "Git")
+    if subject_name == "C++":
+        subject_slug = "cpp"
+    else:
+        subject_slug = slugify(subject_name)
+
+    # Dynamically select category based on subject name
+    if subject_name.upper() in ["C", "C++", "PYTHON", "JAVA"]:
+        cat_slug = "programming-languages"
+        cat_name = "Programming Languages"
+        cat_icon = "fas fa-code"
+        cat_color = "#3b82f6"
+    else:
+        cat_slug = "development-tools"
+        cat_name = "Development Tools"
+        cat_icon = "fas fa-tools"
+        cat_color = "#4f46e5"
+
+    category = Category.query.filter_by(slug=cat_slug).first()
     if not category:
         category = Category(
-            name="Development Tools",
-            slug="development-tools",
+            name=cat_name,
+            slug=cat_slug,
             type="technical",
-            icon="fas fa-tools",
-            color="#4f46e5"
+            icon=cat_icon,
+            color=cat_color
         )
         db.session.add(category)
         db.session.flush()
 
-    # Ensure Subject exists
-    subject_name = metadata.get("subject", "Git")
-    subject_slug = slugify(subject_name)
     subject = Subject.query.filter_by(slug=subject_slug).first()
     if not subject:
+        sub_icon = "fab fa-git-alt"
+        if subject_name.upper() in ["C", "C++"]:
+            sub_icon = "fas fa-code"
         subject = Subject(
             category_id=category.id,
             name=subject_name,
             slug=subject_slug,
-            icon="fab fa-git-alt",
+            icon=sub_icon,
             difficulty_level="beginner"
         )
         db.session.add(subject)
+        db.session.flush()
+    else:
+        subject.category_id = category.id
         db.session.flush()
 
     # Ensure Course exists
