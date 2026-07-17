@@ -1,4 +1,4 @@
-# Branching and Merging Basics — Creating, Switching, and Merging
+# Branching Basics & Conflict Resolution
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: "GIT-FND-005"
 lesson_title: "Branching Basics & Conflict Resolution"
 subject: "Git"
 course: "Git Fundamentals"
-module: "Branching & Merging Basics"
+module: "Branching & Merging"
 difficulty: "⭐⭐"
 time_breakdown:
   reading: "15 min"

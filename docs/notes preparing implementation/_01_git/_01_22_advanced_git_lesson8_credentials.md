@@ -1,13 +1,13 @@
-# Advanced Git: Credential Management and Security
+# Credential Management & Security
 
 ---
 
 ```yaml
 lesson_id: GIT-ADV-008
-lesson_title: "Advanced Git: Credential Management & Security"
+lesson_title: "Credential Management & Security"
 subject: Git
 course: "Git Fundamentals"
-module: "Git Collaboration"
+module: "Automation & Security"
 difficulty: "⭐⭐"
 time_breakdown:
   reading: 12 min

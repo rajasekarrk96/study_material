@@ -1,4 +1,4 @@
-# Git Architecture and the Three States
+# Git Architecture & Three States
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: GIT-FND-001
 lesson_title: "Git Architecture & Three States"
 subject: Git
 course: "Git Fundamentals"
-module: "Git Architecture"
+module: "Git Foundations"
 difficulty: "⭐"
 time_breakdown:
   reading: 15 min

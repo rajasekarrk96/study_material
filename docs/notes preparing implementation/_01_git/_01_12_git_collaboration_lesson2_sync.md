@@ -1,4 +1,4 @@
-# Syncing Data — Fetch, Pull, and Push
+# Syncing Data: Fetch, Pull & Push
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: GIT-COL-002
 lesson_title: "Syncing Data: Fetch, Pull & Push"
 subject: Git
 course: "Git Fundamentals"
-module: "Git Collaboration"
+module: "Remote Collaboration"
 difficulty: "⭐⭐"
 time_breakdown:
   reading: 15 min

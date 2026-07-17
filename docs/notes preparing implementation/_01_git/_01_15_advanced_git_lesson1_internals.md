@@ -1,4 +1,4 @@
-# Git Internals — Blobs, Trees, Commits, and Refs
+# Git Internals: Blobs, Trees & Commits
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: GIT-ADV-001
 lesson_title: "Git Internals: Blobs, Trees & Commits"
 subject: Git
 course: "Git Fundamentals"
-module: "Git Internals Deep-Dive"
+module: "Git Internals"
 difficulty: "⭐⭐⭐⭐"
 time_breakdown:
   reading: 20 min

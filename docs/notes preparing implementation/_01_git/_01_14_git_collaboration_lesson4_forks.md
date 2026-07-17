@@ -1,4 +1,4 @@
-# Upstream and Forking Workflows — Managing community contributions
+# Forking & Upstream Workflows
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: GIT-COL-004
 lesson_title: "Forking & Upstream Workflows"
 subject: Git
 course: "Git Fundamentals"
-module: "Git Collaboration"
+module: "Remote Collaboration"
 difficulty: "⭐⭐⭐"
 time_breakdown:
   reading: 12 min

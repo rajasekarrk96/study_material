@@ -1,4 +1,4 @@
-# Basic Local Workflow — Tracking and Recording Changes
+# Local Workflow: Init, Stage & Commit
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: "GIT-FND-002"
 lesson_title: "Local Workflow: Init, Stage & Commit"
 subject: "Git"
 course: "Git Fundamentals"
-module: "Basic Local Workflow"
+module: "Git Foundations"
 difficulty: "⭐"
 time_breakdown:
   reading: "15 min"

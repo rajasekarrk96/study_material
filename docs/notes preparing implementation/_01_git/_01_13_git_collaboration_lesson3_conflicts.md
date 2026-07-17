@@ -1,4 +1,4 @@
-# Handling Merge Conflicts in Teams — Visual markers and resolution strategies
+# Merge Conflict Handling in Teams
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: GIT-COL-003
 lesson_title: "Merge Conflict Handling in Teams"
 subject: Git
 course: "Git Fundamentals"
-module: "Git Collaboration"
+module: "Branching & Merging"
 difficulty: "⭐⭐⭐"
 time_breakdown:
   reading: 15 min

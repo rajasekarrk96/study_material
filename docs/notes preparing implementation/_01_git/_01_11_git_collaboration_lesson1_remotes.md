@@ -1,4 +1,4 @@
-# Remote Repositories and Origin Configuration — Establishing remotes and naming conventions
+# Remote Repositories & Origin Config
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: GIT-COL-001
 lesson_title: "Remote Repositories & Origin Config"
 subject: Git
 course: "Git Fundamentals"
-module: "Git Collaboration"
+module: "Remote Collaboration"
 difficulty: "⭐⭐"
 time_breakdown:
   reading: 12 min

@@ -1,4 +1,4 @@
-# Inspecting History and Comparing Changes — Log and Diff
+# Inspecting History: Log & Diff
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: GIT-FND-003
 lesson_title: "Inspecting History: Log & Diff"
 subject: Git
 course: "Git Fundamentals"
-module: "Basic Local Workflow"
+module: "History Management"
 difficulty: "⭐"
 time_breakdown:
   reading: 15 min

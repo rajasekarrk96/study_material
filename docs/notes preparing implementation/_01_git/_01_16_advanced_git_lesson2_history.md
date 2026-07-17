@@ -1,4 +1,4 @@
-# Rewriting History — Amend, Rebase, and Squash
+# Rewriting History: Amend, Rebase & Squash
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: GIT-ADV-002
 lesson_title: "Rewriting History: Amend, Rebase & Squash"
 subject: Git
 course: "Git Fundamentals"
-module: "Rewriting History"
+module: "Advanced Workflows"
 difficulty: "⭐⭐⭐⭐"
 time_breakdown:
   reading: 18 min

@@ -1,10 +1,10 @@
-# Advanced Git: Tags and Release Management
+# Tags & Release Management
 
 ---
 
 ```yaml
 lesson_id: GIT-ADV-006
-lesson_title: "Advanced Git: Tags & Release Management"
+lesson_title: "Tags & Release Management"
 subject: Git
 course: "Git Fundamentals"
 module: "Advanced Workflows"

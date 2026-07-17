@@ -1,4 +1,4 @@
-# Version Control History — Core Concepts and Evolution
+# Version Control History & Evolution
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: GIT-FND-001a
 lesson_title: "Version Control History & Evolution"
 subject: Git
 course: "Git Fundamentals"
-module: Introduction to VCS
+module: "Git Foundations"
 difficulty: "⭐"
 time_breakdown:
   reading: 10 min

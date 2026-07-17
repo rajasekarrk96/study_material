@@ -1,10 +1,10 @@
-# Advanced Git: Git Flow and Branching Strategies
+# Branching Strategies for Teams
 
 ---
 
 ```yaml
 lesson_id: GIT-ADV-007
-lesson_title: "Advanced Git: Git Flow & Branching Strategies"
+lesson_title: "Branching Strategies for Teams"
 subject: Git
 course: "Git Fundamentals"
 module: "Advanced Workflows"

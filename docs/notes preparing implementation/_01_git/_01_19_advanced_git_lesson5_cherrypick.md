@@ -1,10 +1,10 @@
-# Advanced Git: Cherry-picking and Backporting
+# Cherry-picking & Backporting
 
 ---
 
 ```yaml
 lesson_id: GIT-ADV-005
-lesson_title: "Advanced Git: Cherry-picking & Backporting"
+lesson_title: "Cherry-picking & Backporting"
 subject: Git
 course: "Git Fundamentals"
 module: "Advanced Workflows"

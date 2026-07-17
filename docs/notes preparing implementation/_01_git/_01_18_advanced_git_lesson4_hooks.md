@@ -1,4 +1,4 @@
-# Customization and Automation — Git Hooks and Aliases
+# Git Customization: Hooks & Aliases
 
 ---
 
@@ -7,7 +7,7 @@ lesson_id: GIT-ADV-004
 lesson_title: "Git Customization: Hooks & Aliases"
 subject: Git
 course: "Git Fundamentals"
-module: "Customization & Hooks"
+module: "Automation & Security"
 difficulty: "⭐⭐⭐⭐"
 time_breakdown:
   reading: 15 min

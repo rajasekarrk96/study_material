@@ -1,4 +1,4 @@
-# Advanced Workspace Helpers — Stash, Bisect, and Worktree
+# Workspace Helpers: Stash, Bisect & Worktree
 
 ---
 

@@ -1,13 +1,13 @@
-# Advanced Git: Diagnostic and Troubleshooting Guide
+# Diagnostic & Troubleshooting Guide
 
 ---
 
 ```yaml
 lesson_id: GIT-ADV-009
-lesson_title: "Advanced Git: Diagnostic & Troubleshooting Guide"
+lesson_title: "Diagnostic & Troubleshooting Guide"
 subject: Git
 course: "Git Fundamentals"
-module: "Advanced Workflows"
+module: "Troubleshooting"
 difficulty: "⭐⭐⭐⭐"
 time_breakdown:
   reading: 20 min

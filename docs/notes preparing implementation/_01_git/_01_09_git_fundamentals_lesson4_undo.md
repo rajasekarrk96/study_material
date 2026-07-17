@@ -1,13 +1,13 @@
-# Undoing Changes — Reset, Revert, and Restore
+# Undoing Changes: Reset, Restore & Revert
 
 ---
 
 ```yaml
 lesson_id: "GIT-FND-004"
-lesson_title: "Undoing Changes: Reset, Revert & Restore"
+lesson_title: "Undoing Changes: Reset, Restore & Revert"
 subject: "Git"
 course: "Git Fundamentals"
-module: "Basic Local Workflow"
+module: "History Management"
 difficulty: "⭐⭐"
 time_breakdown:
   reading: "15 min"
