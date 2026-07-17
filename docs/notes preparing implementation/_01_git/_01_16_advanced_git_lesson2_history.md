@@ -6,7 +6,7 @@
 lesson_id: GIT-ADV-002
 lesson_title: "Rewriting History: Amend, Rebase & Squash"
 subject: Git
-course: Advanced Git
+course: "Git Fundamentals"
 module: Rewriting History
 difficulty: "\u2B50\u2B50\u2B50\u2B50"
 time_breakdown:

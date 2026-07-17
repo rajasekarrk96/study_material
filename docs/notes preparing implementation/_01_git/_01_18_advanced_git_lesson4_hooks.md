@@ -6,7 +6,7 @@
 lesson_id: GIT-ADV-004
 lesson_title: "Git Customization: Hooks & Aliases"
 subject: Git
-course: Advanced Git
+course: "Git Fundamentals"
 module: Customization & Hooks
 difficulty: "\u2B50\u2B50\u2B50\u2B50"
 time_breakdown:

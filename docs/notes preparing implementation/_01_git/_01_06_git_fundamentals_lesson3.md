@@ -6,7 +6,7 @@
 lesson_id: GIT-FND-003
 lesson_title: "Inspecting History: Log & Diff"
 subject: Git
-course: Git Fundamentals
+course: "Git Fundamentals"
 module: Basic Local Workflow
 difficulty: "\u2B50"
 time_breakdown:

@@ -6,7 +6,7 @@
 lesson_id: GIT-COL-004
 lesson_title: "Forking & Upstream Workflows"
 subject: Git
-course: Git Collaboration
+course: "Git Fundamentals"
 module: Upstream & Forking Workflows
 difficulty: "\u2B50\u2B50\u2B50"
 time_breakdown:

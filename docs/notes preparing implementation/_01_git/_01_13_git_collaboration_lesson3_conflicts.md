@@ -6,7 +6,7 @@
 lesson_id: GIT-COL-003
 lesson_title: "Merge Conflict Handling in Teams"
 subject: Git
-course: Git Collaboration
+course: "Git Fundamentals"
 module: Merge Conflicts
 difficulty: "\u2B50\u2B50\u2B50"
 time_breakdown:

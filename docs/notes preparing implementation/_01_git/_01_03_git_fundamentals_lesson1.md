@@ -6,7 +6,7 @@
 lesson_id: GIT-FND-001
 lesson_title: "Git Architecture & Three States"
 subject: Git
-course: Git Fundamentals
+course: "Git Fundamentals"
 module: Git Architecture
 difficulty: "\u2B50"
 time_breakdown:

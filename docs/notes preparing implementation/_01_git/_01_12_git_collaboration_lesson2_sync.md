@@ -6,7 +6,7 @@
 lesson_id: GIT-COL-002
 lesson_title: "Syncing Data: Fetch, Pull & Push"
 subject: Git
-course: Git Collaboration
+course: "Git Fundamentals"
 module: Data Syncing
 difficulty: "\u2B50\u2B50"
 time_breakdown:
