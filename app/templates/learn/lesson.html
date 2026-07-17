@@ -70,7 +70,9 @@
             <div class="section-title-row">
                 {% set icons = {
                     'overview': 'fa-info-circle',
+                    'topics': 'fa-list-ul',
                     'concepts': 'fa-brain',
+                    'definitions': 'fa-book',
                     'syntax': 'fa-code',
                     'examples': 'fa-flask',
                     'diagram': 'fa-project-diagram',
@@ -78,10 +80,12 @@
                     'common_mistakes': 'fa-exclamation-triangle',
                     'interview_qa': 'fa-comments',
                     'exercises': 'fa-dumbbell',
+                    'workouts': 'fa-running',
                     'quiz': 'fa-question-circle',
                     'cheatsheet': 'fa-sticky-note',
                     'revision_notes': 'fa-book-reader',
                     'flashcards': 'fa-layer-group',
+                    'answers': 'fa-key',
                     'references': 'fa-link'
                 } %}
                 <i class="fas {{ icons.get(stype, 'fa-file-alt') }}"></i>

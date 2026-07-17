@@ -178,9 +178,9 @@ def ingest_lesson_metadata(metadata: dict) -> None:
         lesson.difficulty_level = diff_level
         lesson.estimated_minutes = reading_min
 
-    # Update overview section content as the lesson summary
+    # Update overview or topics section content as the lesson summary
     for sec in metadata.get("sections", []):
-        if sec["section_type"] == "overview":
+        if sec["section_type"] in ["overview", "topics"]:
             lesson.summary = sec["content_markdown"]
 
     # Delete existing sections to override fresh content ingestion

@@ -3,43 +3,36 @@
 ---
 
 ```yaml
-lesson_id: "GIT-ADV-001"
-subject: "Git"
-course: "Advanced Git"
-module: "Git Internals Deep-Dive"
-difficulty: "⭐⭐⭐⭐"
+lesson_id: GIT-ADV-001
+subject: Git
+course: Advanced Git
+module: Git Internals Deep-Dive
+difficulty: "\u2B50\u2B50\u2B50\u2B50"
 time_breakdown:
-  reading: "20 min"
-  exercise: "25 min"
-  quiz: "15 min"
-  revision: "5 min"
-version: "1.0"
-last_updated: "2026-07-17"
-status: "Published"
-author: "Rajasekar"
-reviewed_by: "Admin"
+  reading: 20 min
+  exercise: 25 min
+  quiz: 15 min
+  revision: 5 min
+version: '1.0'
+last_updated: '2026-07-17'
+status: Published
+author: Rajasekar
+reviewed_by: Admin
 prerequisites:
-  - "GIT-COL-004 (Upstream Workflows)"
+- GIT-COL-004 (Upstream Workflows)
 tags:
-  - "Git Internals"
-  - "Objects"
-  - "SHA-1"
-  - "Refs"
+- Git Internals
+- Objects
+- SHA-1
+- Refs
 ```
 
 ---
 
-## 1. Overview [id: overview]
+## 1. Topics Covered [id: topics]
 This lesson explores Git's internal storage mechanisms. We inspect the contents of the `.git` directory, analyze Git's content-addressable storage model, and dissect the byte structures of Blobs, Trees, Commits, and References.
 
-## 2. Knowledge Connections [id: connections]
-```mermaid
-graph TD
-    Prev[Collaboration: Upstream Workflows] -->|Move from workflow to database| Curr(Lesson 1: Git Internals)
-    Curr -->|Modify historical objects| Next[Lesson 2: Rewriting History]
-```
-
-## 3. Learning Outcomes [id: outcomes]
+### Learning Outcomes
 - **Knowledge (What you will understand)**:
   - How Git represents code history in a content-addressable object database.
   - The byte-level structure and relationships between Blobs, Trees, Commits, and Tags.
@@ -48,7 +41,7 @@ graph TD
 - **Outcome (Professional application)**:
   - Debug repository corruption errors and analyze Git metadata anomalies directly inside `.git`.
 
-## 4. Concept & Internals Deep-Dive [id: concept]
+## 2. Definitions & Core Concepts [id: definitions]
 At its core, Git is a **content-addressable filesystem** built on a simple key-value store. You insert a piece of content, and Git returns a 40-character SHA-1 checksum key that points to it.
 
 ### The Four Object Types
@@ -58,40 +51,12 @@ Every object in `.git/objects/` is compressed with zlib and begins with a header
 3. **Commit**: Contains metadata pointing to a root Tree hash, list of parent commit hashes, timestamps, author details, and the commit description message.
 4. **Tag**: A permanent commit reference pointing to a specific target commit hash, accompanied by a tagger name and signature.
 
-## 5. Professional Box: Industry Usage [id: industry_usage]
-> [!NOTE]
-> **Monorepos at Google**:
-> Google's massive codebase contains billions of lines of code. Large-scale repository tooling tracks objects mapping and caches trees on virtual file systems. Because tree references are unique content-addressable hashes, Google's tools compare root trees instantly to identify which code sections changed without crawling directories.
-
-## 6. Visual Learning & Architecture [id: visuals]
-```mermaid
-graph TD
-    Commit[Commit Object HEAD] -->|points to| Tree[Root Tree Object]
-    Tree -->|maps filename to| BlobA[Blob: file1.txt]
-    Tree -->|maps foldername to| SubTree[Sub-Tree Object]
-    SubTree -->|maps filename to| BlobB[Blob: file2.txt]
-```
-
-## 7. Terminology [id: terminology]
+### Terminology & Glossary
 - **Plumbing Commands**: Low-level Git utility commands that manipulate internal structures directly (e.g. `hash-object`, `cat-file`).
 - **Porcelain Commands**: High-level user-friendly Git commands (e.g. `add`, `commit`, `status`).
 - **Content-Addressable**: Hashing content to determine its address/location in database.
 
-## 8. Installation & Configuration [id: setup]
-Inspect the internal `.git/` folder architecture:
-```bash
-ls -la .git
-```
-
-## 9. Commands & Command Syntax [id: commands]
-```bash
-git hash-object -w <file>
-git cat-file -p <hash>
-git cat-file -t <hash>
-```
-
-## 10. Practical Code Examples [id: examples]
-
+## 3. Practical Code Examples [id: examples]
 ### Easy
 Generate the SHA-1 hash key of a string without writing it to database:
 ```bash
@@ -122,51 +87,7 @@ git update-index --add --cacheinfo 100644 $BLOB_HASH app.py
 git write-tree
 ```
 
-## 11. Common Errors & Troubleshooting [id: errors]
-
-### Beginner Errors
-- **Error**: `fatal: Not a valid object name`
-  - *Fix*: You passed an incorrect, truncated, or nonexistent SHA-1 hash to a cat-file command.
-
-### Intermediate Errors
-- **Error**: `.git/index.lock` prevents git additions.
-  - *Fix*: Another Git process crashed while writing index. Delete the lock file: `rm .git/index.lock` manually.
-
-### Professional Errors
-- **Error**: Repository corruption reported: `error: object file ... is empty`.
-  - *Fix*: A hardware failure or crash wrote empty file bytes. Locate the corrupt object hash, find it in your reflog, checkout the file, and rebuild it using plumbing.
-
-## 12. Comparison Tables [id: comparisons]
-| Object Type | Stores Filenames? | Stores File Permissions? | Stores Parent Hashes? |
-|---|---|---|---|
-| Blob | No | No | No |
-| Tree | Yes | Yes | No |
-| Commit | No | No | Yes |
-
-## 13. Best Practices & Professional Tips [id: best_practices]
-- **Understand garbage collection**: Git runs `git gc` to compress loose objects into packfiles periodically to optimize disk space.
-- Do not modify files in `.git/objects/` manually to prevent corrupting database tables tracking.
-
-## 14. Interview Preparation [id: interview]
-
-### Fresher Questions
-1. **Question**: Where does Git store all project objects and history logs?
-   * **Ideal Answer**: Git stores all data in the hidden `.git/` directory at the root of the project. Commit objects, trees, and blobs are saved under `.git/objects/`.
-
-### 2 Years Experience Questions
-2. **Question**: What is the difference between a Blob and a Tree in Git's internals?
-   * **Ideal Answer**: A Blob stores only raw file contents. A Tree represents a directory, mapping filenames and file modes (permissions) to their corresponding Blob or Sub-Tree hashes.
-
-### 5 Years Experience Questions
-3. **Question**: What happens at the byte-level when Git creates a commit object?
-   * **Ideal Answer**: Git packages metadata—such as the root tree hash, author name, committer name, timestamp, and message—along with parent hashes into a text block, appends a header defining type and size, hashes it to create the commit's 40-character SHA-1, compresses it with zlib, and writes it to `.git/objects/`.
-
-### Architect Level Questions
-4. **Question**: Explain how Git utilizes packfiles and idx index references to maintain high performance in massive repositories.
-   * **Ideal Answer**: Storing each file version as a separate file ("loose object") becomes inefficient on disk. Git packs multiple loose objects into a single compressed binary **packfile** (`.pack`), using delta compression (storing one file version as a base and others as differences). An accompanying index file (`.idx`) maps object hashes to byte offsets inside the packfile for fast random-access lookups.
-
-## 15. Ingestion Exercises [id: exercises]
-
+## 4. Hands-on Workouts [id: workouts]
 ### MCQ
 - Which plumbing command prints the contents of a Git object?
   - A) `git show-object`
@@ -191,24 +112,8 @@ git write-tree
 ### Hands-on Lab
 - Navigate to `.git/objects/`, locate a subdirectory, and pretty-print an object using `git cat-file -p`.
 
-## 16. Graded Assignments [id: assignments]
-Create a file, write content. Find its SHA-1 hash using `git hash-object`. Inspect the directory path `.git/objects/` to verify where Git stored the zlib compressed representation. Write down the path.
-
-## 17. Mini Projects [id: projects]
-- **Mini Scale**: Script parsing `.git/HEAD` to print current active ref.
-- **Small Scale**: Python script compressing and decompressing loose Git objects using zlib.
-
-## 18. Topic Cheat Sheet [id: cheatsheet]
+## 5. Workout Answers & Solutions [id: answers]
 - **Standard Syntax**: `git cat-file -p <hash>`
 - **Aliases**: None.
 - **Shortcut**: None.
 - **Warning**: Modifying files inside `.git/refs/` manually is highly discouraged.
-
-## 19. AI Generated Content [id: ai_notes]
-- **AI Summary**: Dissect the core Git key-value database mapping blobs, trees, commits, and refs.
-- **AI Flashcards**:
-  - Q: What hashing algorithm does standard Git use?
-  - A: SHA-1 (160-bit hash).
-
-## 20. References [id: references]
-- [Git Documentation - Git Objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects)
