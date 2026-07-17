@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: "C-FND-002"
+lesson_title: "C Compilation Lifecycle & GCC Pipeline"
 subject: "C"
 course: "C Programming Fundamentals"
 module: "Introduction & Basics"

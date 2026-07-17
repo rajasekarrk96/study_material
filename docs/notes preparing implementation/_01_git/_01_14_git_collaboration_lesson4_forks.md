@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: GIT-COL-004
+lesson_title: "Forking & Upstream Workflows"
 subject: Git
 course: Git Collaboration
 module: Upstream & Forking Workflows

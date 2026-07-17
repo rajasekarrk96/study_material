@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: GIT-ADV-004
+lesson_title: "Git Customization: Hooks & Aliases"
 subject: Git
 course: Advanced Git
 module: Customization & Hooks

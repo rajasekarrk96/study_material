@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: GIT-ADV-003
+lesson_title: "Workspace Helpers: Stash, Bisect & Worktree"
 subject: Git
 course: Advanced Git
 module: Advanced Workflows

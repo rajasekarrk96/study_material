@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: GIT-FND-003
+lesson_title: "Inspecting History: Log & Diff"
 subject: Git
 course: Git Fundamentals
 module: Basic Local Workflow

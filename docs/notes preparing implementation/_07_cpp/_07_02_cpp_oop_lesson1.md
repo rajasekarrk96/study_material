@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: "CPP-OOP-001"
+lesson_title: "Transition to C++: Namespaces & Streams"
 subject: "C++"
 course: "C++ Object-Oriented Programming"
 module: "Transitioning from C"

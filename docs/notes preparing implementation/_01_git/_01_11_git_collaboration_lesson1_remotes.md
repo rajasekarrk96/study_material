@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: GIT-COL-001
+lesson_title: "Remote Repositories & Origin Config"
 subject: Git
 course: Git Collaboration
 module: Remotes & Origin

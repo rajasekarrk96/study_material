@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: "GIT-FND-004"
+lesson_title: "Undoing Changes: Reset, Revert & Restore"
 subject: "Git"
 course: "Git Fundamentals"
 module: "Basic Local Workflow"

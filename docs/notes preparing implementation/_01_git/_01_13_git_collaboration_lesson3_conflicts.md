@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: GIT-COL-003
+lesson_title: "Merge Conflict Handling in Teams"
 subject: Git
 course: Git Collaboration
 module: Merge Conflicts

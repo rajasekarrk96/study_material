@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: "C-FND-001"
+lesson_title: "Introduction to C: History, Setup & Hello World"
 subject: "C"
 course: "C Programming Fundamentals"
 module: "Introduction & Basics"

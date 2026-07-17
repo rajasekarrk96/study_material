@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: GIT-FND-001a
+lesson_title: "Version Control History & Evolution"
 subject: Git
 course: Git Fundamentals
 module: Introduction to VCS

@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: "GIT-FND-005"
+lesson_title: "Branching Basics & Conflict Resolution"
 subject: "Git"
 course: "Git Fundamentals"
 module: "Branching & Merging Basics"

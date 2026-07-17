@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: GIT-COL-002
+lesson_title: "Syncing Data: Fetch, Pull & Push"
 subject: Git
 course: Git Collaboration
 module: Data Syncing

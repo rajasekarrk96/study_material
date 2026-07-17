@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: "CPP-OOP-002"
+lesson_title: "Classes, Objects & Constructor Overloading"
 subject: "C++"
 course: "C++ Object-Oriented Programming"
 module: "Object Oriented Basics"

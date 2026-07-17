@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: GIT-ADV-001
+lesson_title: "Git Internals: Blobs, Trees & Commits"
 subject: Git
 course: Advanced Git
 module: Git Internals Deep-Dive

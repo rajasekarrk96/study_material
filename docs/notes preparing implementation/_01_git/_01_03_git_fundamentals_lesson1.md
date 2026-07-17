@@ -4,6 +4,7 @@
 
 ```yaml
 lesson_id: GIT-FND-001
+lesson_title: "Git Architecture & Three States"
 subject: Git
 course: Git Fundamentals
 module: Git Architecture
