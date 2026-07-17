@@ -28,31 +28,47 @@
         </div>
     </div>
     <div class="hero-visual">
-        <div class="hero-card">
+        <a href="{{ url_for('learn.course_overview', course_slug='core-python') }}" class="hero-card">
             <i class="fas fa-code"></i>
             <span>Python</span>
-        </div>
-        <div class="hero-card">
+        </a>
+        <a href="{{ url_for('learn.course_overview', course_slug='core-java') }}" class="hero-card">
             <i class="fab fa-java"></i>
             <span>Java</span>
-        </div>
-        <div class="hero-card">
+        </a>
+        <a href="{{ url_for('learn.course_overview', course_slug='mysql') }}" class="hero-card">
             <i class="fas fa-database"></i>
             <span>SQL</span>
-        </div>
-        <div class="hero-card">
+        </a>
+        <a href="{{ url_for('learn.course_overview', course_slug='java-selenium') }}" class="hero-card">
             <i class="fas fa-robot"></i>
             <span>Automation</span>
-        </div>
+        </a>
+        <a href="{{ url_for('public.catalog') }}" class="hero-card more-card">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>More</span>
+        </a>
     </div>
 </section>
 
 <!-- STATS -->
 <section class="stats-bar">
-    <div class="stat-item"><span class="stat-num" id="stat-courses">–</span><span class="stat-label">Courses</span></div>
-    <div class="stat-item"><span class="stat-num" id="stat-lessons">–</span><span class="stat-label">Lessons</span></div>
-    <div class="stat-item"><span class="stat-num" id="stat-topics">–</span><span class="stat-label">Topics</span></div>
-    <div class="stat-item"><span class="stat-num" id="stat-sources">–</span><span class="stat-label">Sources Processed</span></div>
+    <a href="{{ url_for('public.catalog') }}" class="stat-item">
+        <span class="stat-num" id="stat-courses">–</span>
+        <span class="stat-label">Courses</span>
+    </a>
+    <a href="{{ url_for('public.catalog') }}" class="stat-item">
+        <span class="stat-num" id="stat-lessons">–</span>
+        <span class="stat-label">Lessons</span>
+    </a>
+    <a href="{{ url_for('public.catalog') }}" class="stat-item">
+        <span class="stat-num" id="stat-topics">–</span>
+        <span class="stat-label">Topics</span>
+    </a>
+    <a href="{{ url_for('public.catalog') }}" class="stat-item">
+        <span class="stat-num" id="stat-sources">–</span>
+        <span class="stat-label">Sources Processed</span>
+    </a>
 </section>
 
 <!-- CATEGORIES -->
