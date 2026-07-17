@@ -20,6 +20,7 @@ class DifficultyLevel(str, Enum):
     BEGINNER = "beginner"
     INTERMEDIATE = "intermediate"
     ADVANCED = "advanced"
+    EXPERT = "expert"
 
 
 class SectionType(str, Enum):
@@ -37,6 +38,9 @@ class SectionType(str, Enum):
     REVISION_NOTES = "revision_notes"
     FLASHCARDS = "flashcards"
     REFERENCES = "references"
+    THEORY = "theory"
+    LAB = "lab"
+    SUMMARY = "summary"
 
 
 class UserRole(str, Enum):

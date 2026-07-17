@@ -219,3 +219,168 @@ class ContentQualityScore(db.Model):
 
     def __repr__(self):
         return f"<ContentQualityScore lesson={self.lesson_id} readability={self.readability_score}>"
+
+
+class CourseVersion(db.Model):
+    __tablename__ = "course_versions"
+
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), nullable=False)
+    version_number = db.Column(db.Integer, nullable=False)
+    created_by = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
+    change_summary = db.Column(db.String(500))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    course = db.relationship("Course")
+
+    def __repr__(self):
+        return f"<CourseVersion {self.course_id} v{self.version_number}>"
+
+
+class LessonLearningOutcome(db.Model):
+    __tablename__ = "lesson_learning_outcomes"
+
+    id = db.Column(db.Integer, primary_key=True)
+    lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), nullable=False)
+    outcome_type = db.Column(db.String(50))                              # 'knowledge', 'skill', 'outcome'
+    description = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    lesson = db.relationship("Lesson")
+
+    def __repr__(self):
+        return f"<LessonLearningOutcome lesson={self.lesson_id} type={self.outcome_type}>"
+
+
+class Certificate(db.Model, TimestampMixin):
+    __tablename__ = "certificates"
+
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text)
+
+    course = db.relationship("Course")
+
+    def __repr__(self):
+        return f"<Certificate {self.title}>"
+
+
+class UserCertificate(db.Model, TimestampMixin):
+    __tablename__ = "user_certificates"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    certificate_id = db.Column(db.Integer, db.ForeignKey("certificates.id"), nullable=False)
+    issued_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    certificate = db.relationship("Certificate")
+
+    def __repr__(self):
+        return f"<UserCertificate user={self.user_id} cert={self.certificate_id}>"
+
+
+class Lab(db.Model, TimestampMixin):
+    __tablename__ = "labs"
+
+    id = db.Column(db.Integer, primary_key=True)
+    lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text)
+    estimated_minutes = db.Column(db.Integer, default=30)
+
+    lesson = db.relationship("Lesson")
+
+    def __repr__(self):
+        return f"<Lab {self.title}>"
+
+
+class LabStep(db.Model):
+    __tablename__ = "lab_steps"
+
+    id = db.Column(db.Integer, primary_key=True)
+    lab_id = db.Column(db.Integer, db.ForeignKey("labs.id"), nullable=False)
+    step_number = db.Column(db.Integer, nullable=False)
+    title = db.Column(db.String(255))
+    instruction = db.Column(db.Text, nullable=False)
+
+    lab = db.relationship("Lab")
+
+    def __repr__(self):
+        return f"<LabStep lab={self.lab_id} step={self.step_number}>"
+
+
+class LabSubmission(db.Model, TimestampMixin):
+    __tablename__ = "lab_submissions"
+
+    id = db.Column(db.Integer, primary_key=True)
+    lab_id = db.Column(db.Integer, db.ForeignKey("labs.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    submission_data = db.Column(db.JSON)
+    status = db.Column(db.String(30), default="submitted")                # 'submitted', 'graded', 'failed'
+    feedback = db.Column(db.Text)
+
+    lab = db.relationship("Lab")
+
+    def __repr__(self):
+        return f"<LabSubmission lab={self.lab_id} user={self.user_id} status={self.status}>"
+
+
+class DiscussionThread(db.Model, TimestampMixin):
+    __tablename__ = "discussion_threads"
+
+    id = db.Column(db.Integer, primary_key=True)
+    lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+
+    lesson = db.relationship("Lesson")
+
+    def __repr__(self):
+        return f"<DiscussionThread {self.title}>"
+
+
+class DiscussionPost(db.Model, TimestampMixin):
+    __tablename__ = "discussion_posts"
+
+    id = db.Column(db.Integer, primary_key=True)
+    thread_id = db.Column(db.Integer, db.ForeignKey("discussion_threads.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+
+    thread = db.relationship("DiscussionThread")
+
+    def __repr__(self):
+        return f"<DiscussionPost thread={self.thread_id} user={self.user_id}>"
+
+
+class Assignment(db.Model, TimestampMixin):
+    __tablename__ = "assignments"
+
+    id = db.Column(db.Integer, primary_key=True)
+    lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    due_date = db.Column(db.DateTime)
+
+    lesson = db.relationship("Lesson")
+
+    def __repr__(self):
+        return f"<Assignment {self.title}>"
+
+
+class AssignmentSubmission(db.Model, TimestampMixin):
+    __tablename__ = "assignment_submissions"
+
+    id = db.Column(db.Integer, primary_key=True)
+    assignment_id = db.Column(db.Integer, db.ForeignKey("assignments.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    submission_url = db.Column(db.String(500))
+    grade = db.Column(db.String(10))
+    feedback = db.Column(db.Text)
+
+    assignment = db.relationship("Assignment")
+
+    def __repr__(self):
+        return f"<AssignmentSubmission assignment={self.assignment_id} user={self.user_id}>"

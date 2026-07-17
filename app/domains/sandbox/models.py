@@ -53,6 +53,10 @@ class ExerciseSubmission(db.Model):
     status = db.Column(db.String(50), default="pending")               # 'accepted', 'wrong_answer', 'runtime_error', 'compile_error'
     stdout = db.Column(db.Text)
     stderr = db.Column(db.Text)
+    runtime = db.Column(db.Float)                                      # runtime in seconds
+    memory_usage = db.Column(db.Integer)                               # memory usage in KB
+    language = db.Column(db.String(50))                                # programming language used
+    test_results = db.Column(db.JSON)                                  # detailed breakdown of test case results
     submitted_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
     exercise = db.relationship("Exercise", back_populates="submissions")
