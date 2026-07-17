@@ -36,7 +36,7 @@ The following matrix lists the baseline files, their upgrade status for v2.0, an
 ---
 
 ## 1. Master Plan Evolving Plan (Doc 00)
-- **File Name**: [00_LEARNING_OS_MASTER_PLAN.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/00_LEARNING_OS_MASTER_PLAN.md)
+- **File Name**: [00_LEARNING_OS_MASTER_PLAN.md](./00_LEARNING_OS_MASTER_PLAN.md)
 - **Current Purpose**: Master index, executive summary, baseline technology stack decisions, and open questions.
 - **Enhancement Summary**: Integrate the vector store, hybrid search capabilities, background AI workers, and local LLM runtime (Ollama) into the primary master architecture.
 - **New Sections to Add**:
@@ -62,7 +62,7 @@ The following matrix lists the baseline files, their upgrade status for v2.0, an
 ---
 
 ## 2. Product Vision Evolving Plan (Doc 01)
-- **File Name**: [01_Product_Vision.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/01_Product_Vision.md)
+- **File Name**: [01_Product_Vision.md](./01_Product_Vision.md)
 - **Current Purpose**: Identifies target user value propositions, core metrics, and scope boundaries.
 - **Enhancement Summary**: Evolve the vision from a structured lesson platform into a living **Knowledge Operating System (Learning OS v2.0)** that processes unstructured text into curated learning pathways.
 - **New Sections to Add**:
@@ -87,7 +87,7 @@ The following matrix lists the baseline files, their upgrade status for v2.0, an
 ---
 
 ## 3. Information Architecture Evolving Plan (Doc 02)
-- **File Name**: [02_Information_Architecture.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/02_Information_Architecture.md)
+- **File Name**: [02_Information_Architecture.md](./02_Information_Architecture.md)
 - **Current Purpose**: Sitemap configuration, taxonomy structure, and content hierarchy rules.
 - **Enhancement Summary**: Extend URL paths and taxonomic systems to handle raw imported content, document chunks, and interactive AI tutor chat sessions.
 - **New Sections to Add**:
@@ -113,7 +113,7 @@ The following matrix lists the baseline files, their upgrade status for v2.0, an
 ---
 
 ## 4. User Roles & RBAC Evolving Plan (Doc 03)
-- **File Name**: [03_User_Roles_RBAC.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/03_User_Roles_RBAC.md)
+- **File Name**: [03_User_Roles_RBAC.md](./03_User_Roles_RBAC.md)
 - **Current Purpose**: Permission matrices and role hierarchies for Super Admin, Editor, Reviewer, Student, and Guest roles.
 - **Enhancement Summary**: Introduce fine-grained permissions specifically covering AI operations, vector indexing, source content ingestion, and manual draft approvals.
 - **New Sections to Add**:
@@ -137,7 +137,7 @@ The following matrix lists the baseline files, their upgrade status for v2.0, an
 ---
 
 ## 5. Database ERD Evolving Plan (Doc 04)
-- **File Name**: [04_Database_ERD.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/04_Database_ERD.md)
+- **File Name**: [04_Database_ERD.md](./04_Database_ERD.md)
 - **Current Purpose**: Logical schema tables covering content, users, quizzes, progress, and gamification layers.
 - **Enhancement Summary**: Integrate 12 new tables to support vector search indexes, citation pathways, adaptive knowledge nodes, source ingestion files, and weak topic logs.
 - **New Database Tables to Add**:
@@ -184,7 +184,7 @@ The following matrix lists the baseline files, their upgrade status for v2.0, an
 ---
 
 ## 6. Folder Structure Evolving Plan (Doc 05)
-- **File Name**: [05_Folder_Structure.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/05_Folder_Structure.md)
+- **File Name**: [05_Folder_Structure.md](./05_Folder_Structure.md)
 - **Current Purpose**: Folder blueprints for application code, services, domains, static layers, templates, and scripts.
 - **Enhancement Summary**: Structure new directories to accommodate the ingestion engines, vector interfaces, and background queue workers without altering existing patterns.
 - **New Folder Structures to Add**:
@@ -231,7 +231,7 @@ learning_os/
 ---
 
 ## 7. CMS Design Evolving Plan (Doc 06)
-- **File Name**: [06_CMS_Design.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/06_CMS_Design.md)
+- **File Name**: [06_CMS_Design.md](./06_CMS_Design.md)
 - **Current Purpose**: CMS authoring view, publishing states, manual revisions, and lesson metrics.
 - **Enhancement Summary**: Integrate the AI-drafting workspace, dynamic citations linkage, automated plagiarism checking, and content quality scoring interfaces.
 - **New Sections to Add**:
@@ -256,7 +256,7 @@ learning_os/
 ---
 
 ## 8. Learning Engine Evolving Plan (Doc 07)
-- **File Name**: [07_Learning_Engine.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/07_Learning_Engine.md)
+- **File Name**: [07_Learning_Engine.md](./07_Learning_Engine.md)
 - **Current Purpose**: Prerequisite logic, modules sequence enforcement, Spaced Repetition algorithms.
 - **Enhancement Summary**: Upgrade the learning sequencer into an **Adaptive Learning Engine** utilizing the knowledge graph and prerequisite tracking patterns.
 - **New Sections to Add**:
@@ -281,7 +281,7 @@ learning_os/
 ---
 
 ## 9. Progress Engine Evolving Plan (Doc 08)
-- **File Name**: [08_Progress_Engine.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/08_Progress_Engine.md)
+- **File Name**: [08_Progress_Engine.md](./08_Progress_Engine.md)
 - **Current Purpose**: User level calculators, XP values allocation, streaks trackers.
 - **Enhancement Summary**: Track topic-level skill mastery indexes and weak concepts alongside user progress metrics.
 - **New Sections to Add**:
@@ -305,7 +305,7 @@ learning_os/
 ---
 
 ## 10. Exercise Engine Evolving Plan (Doc 09)
-- **File Name**: [09_Exercise_Engine.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/09_Exercise_Engine.md)
+- **File Name**: [09_Exercise_Engine.md](./09_Exercise_Engine.md)
 - **Current Purpose**: Graded coding sandbox integrations, problem validations, and database specifications.
 - **Enhancement Summary**: Support AI-assisted exercise generation via the AI Gateway using local Ollama model instances.
 - **New Sections to Add**:
@@ -329,7 +329,7 @@ learning_os/
 ---
 
 ## 11. Quiz Engine Evolving Plan (Doc 10)
-- **File Name**: [10_Quiz_Engine.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/10_Quiz_Engine.md)
+- **File Name**: [10_Quiz_Engine.md](./10_Quiz_Engine.md)
 - **Current Purpose**: Question bank structures, MCQs evaluations, attempt trackers.
 - **Enhancement Summary**: Deploy automated AI quiz generation directly linked to ingested lesson sources.
 - **New Sections to Add**:
@@ -353,7 +353,7 @@ learning_os/
 ---
 
 ## 12. Achievement Engine Evolving Plan (Doc 11)
-- **File Name**: [11_Achievement_Engine.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/11_Achievement_Engine.md)
+- **File Name**: [11_Achievement_Engine.md](./11_Achievement_Engine.md)
 - **Current Purpose**: Badges schemas, criteria evaluators, XP assignments.
 - **Enhancement Summary**: Support new badge criteria targeting vector searches, tutoring involvement, and weak topics cleanup.
 - **New Sections to Add**:
@@ -377,7 +377,7 @@ learning_os/
 ---
 
 ## 13. Search Architecture Evolving Plan (Doc 12)
-- **File Name**: [12_Search_Architecture.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/12_Search_Architecture.md)
+- **File Name**: [12_Search_Architecture.md](./12_Search_Architecture.md)
 - **Current Purpose**: SQLite FTS5 configuration, ranking metrics, query autocomplete logic.
 - **Enhancement Summary**: Upgrade search infrastructure to support **Hybrid Search**, merging vector semantic matches with traditional full-text keywords.
 - **New Sections to Add**:
@@ -402,7 +402,7 @@ learning_os/
 ---
 
 ## 14. Recommendation Engine Evolving Plan (Doc 13)
-- **File Name**: [13_Recommendation_Engine.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/13_Recommendation_Engine.md)
+- **File Name**: [13_Recommendation_Engine.md](./13_Recommendation_Engine.md)
 - **Current Purpose**: Dynamic course selection, cosine similarity matching over metadata tags.
 - **Enhancement Summary**: Upgrade the recommender system to evaluate knowledge graphs and user weak topics for highly personalized content pathways.
 - **New Sections to Add**:
@@ -426,7 +426,7 @@ learning_os/
 ---
 
 ## 15. AI Integration Layer Evolving Plan (Doc 14)
-- **File Name**: [14_AI_Integration_Layer.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/14_AI_Integration_Layer.md)
+- **File Name**: [14_AI_Integration_Layer.md](./14_AI_Integration_Layer.md)
 - **Current Purpose**: AI Gateway configurations, prompt templates, API response schemas.
 - **Enhancement Summary**: Introduce a model-agnostic Provider Registry to support local Ollama servers (14B+ models) alongside cloud APIs, with fallback mechanisms.
 - **New Sections to Add**:
@@ -451,7 +451,7 @@ learning_os/
 ---
 
 ## 16. REST API Specification Evolving Plan (Doc 15)
-- **File Name**: [15_REST_API_Specification.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/15_REST_API_Specification.md)
+- **File Name**: [15_REST_API_Specification.md](./15_REST_API_Specification.md)
 - **Current Purpose**: Core JSON APIs references mapping, parameters, responses schemas.
 - **Enhancement Summary**: Introduce new REST routes handling source ingestion, vector hybrid search, and the AI tutor chatbot workspace.
 - **New Sections to Add**:
@@ -479,7 +479,7 @@ learning_os/
 ---
 
 ## 17. Admin Dashboard Evolving Plan (Doc 16)
-- **File Name**: [16_Admin_Dashboard.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/16_Admin_Dashboard.md)
+- **File Name**: [16_Admin_Dashboard.md](./16_Admin_Dashboard.md)
 - **Current Purpose**: Admin interfaces maps, course controls, logs checks.
 - **Enhancement Summary**: Integrate the ingestion control panel, AI draft reviewer workspace, and vector index monitoring tools.
 - **New Sections to Add**:
@@ -504,7 +504,7 @@ learning_os/
 ---
 
 ## 18. Student Dashboard Evolving Plan (Doc 17)
-- **File Name**: [17_Student_Dashboard.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/17_Student_Dashboard.md)
+- **File Name**: [17_Student_Dashboard.md](./17_Student_Dashboard.md)
 - **Current Purpose**: Streaks tracking screens, revision schedules, and personal bookmarks panels.
 - **Enhancement Summary**: Add the AI Tutor overlay interface, weak topics alerts, and recommendations widgets.
 - **New Sections to Add**:
@@ -529,7 +529,7 @@ learning_os/
 ---
 
 ## 19. SEO Strategy Evolving Plan (Doc 18)
-- **File Name**: [18_SEO_Strategy.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/18_SEO_Strategy.md)
+- **File Name**: [18_SEO_Strategy.md](./18_SEO_Strategy.md)
 - **Current Purpose**: Schema.org definitions, dynamic JSON-LD tag maps, XML sitemaps builders.
 - **Enhancement Summary**: Extend structured schema definitions to attribute content to original ingestion sources.
 - **New Sections to Add**:
@@ -553,7 +553,7 @@ learning_os/
 ---
 
 ## 20. Security Architecture Evolving Plan (Doc 19)
-- **File Name**: [19_Security_Architecture.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/19_Security_Architecture.md)
+- **File Name**: [19_Security_Architecture.md](./19_Security_Architecture.md)
 - **Current Purpose**: Auth structures, session verification, cryptographies, rate limit controls.
 - **Enhancement Summary**: Secure systems against prompt injection, safeguard local AI daemon endpoints, and isolate sandbox executions.
 - **New Sections to Add**:
@@ -578,7 +578,7 @@ learning_os/
 ---
 
 ## 21. Deployment Architecture Evolving Plan (Doc 20)
-- **File Name**: [20_Deployment_Architecture.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/20_Deployment_Architecture.md)
+- **File Name**: [20_Deployment_Architecture.md](./20_Deployment_Architecture.md)
 - **Current Purpose**: Production databases connection profiles, deployment scripts, backup routines.
 - **Enhancement Summary**: Define the infrastructure design for running local Ollama servers alongside cloud components, and manage the vector database.
 - **New Sections to Add**:
@@ -603,7 +603,7 @@ learning_os/
 ---
 
 ## 22. Implementation Roadmap Evolving Plan (Doc 21)
-- **File Name**: [21_Implementation_Roadmap.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/21_Implementation_Roadmap.md)
+- **File Name**: [21_Implementation_Roadmap.md](./21_Implementation_Roadmap.md)
 - **Current Purpose**: 6-phase implementation roadmap.
 - **Enhancement Summary**: Integrate v2.0 requirements (Knowledge pipeline, vector stores, hybrid search, adaptive pathing, and Ollama providers) into the existing roadmap.
 - **New Sections to Add**:

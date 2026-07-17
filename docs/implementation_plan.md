@@ -8,8 +8,8 @@ This implementation plan details the setup, code changes, and task checklists fo
 
 > [!IMPORTANT]
 > Please review the newly generated v2.0 blueprint files:
-> - **v2.0 Enhancement Plan**: [00_LEARNING_OS_v2.0_ENHANCEMENT_PLAN.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/00_LEARNING_OS_v2.0_ENHANCEMENT_PLAN.md)
-> - **Main Project README**: [README.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/README.md)
+> - **v2.0 Enhancement Plan**: [00_LEARNING_OS_v2.0_ENHANCEMENT_PLAN.md](./plan/00_LEARNING_OS_v2.0_ENHANCEMENT_PLAN.md)
+> - **Main Project README**: [README.md](../README.md)
 >
 > These files outline the roadmap to integrate the following without breaking compatibility:
 > 1. Local AI model support (Ollama) through a unified gateway router.
@@ -36,16 +36,16 @@ We will introduce a modular Flask app workspace inside the `notes` repository. T
 
 ### [Component Name] Learning OS Application
 
-#### [NEW] [run.py](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/run.py)
+#### [NEW] [run.py](../run.py)
 Entrypoint wrapper starting the webserver.
 
-#### [NEW] [requirements.txt](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/requirements.txt)
+#### [NEW] [requirements.txt](../requirements.txt)
 Python libraries including Flask, SQLAlchemy, Alembic, Bleach, PyJWT, Cryptography, and PyMySQL.
 
-#### [NEW] [app/](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/app/)
+#### [NEW] [app/](../app/)
 Modular Blueprints, Domain Services, Repositories, Templates, and Static CSS/JS files.
 
-#### [NEW] [scripts/migrate_html.py](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/scripts/migrate_html.py)
+#### [NEW] [scripts/migrate_html.py](../scripts/migrate_html.py)
 Automated migration script to parse existing HTML notes into Markdown lesson documents and import them into the Database CMS schema.
 
 ---

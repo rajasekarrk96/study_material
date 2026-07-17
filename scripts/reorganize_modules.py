@@ -1,7 +1,7 @@
 import os
 import re
 
-directory = "docs/notes preparing implementation/_01_git"
+directory = "docs/curriculum/_01_git"
 
 mappings = {
     "GIT-FND-001a": {"module": "Git Foundations", "title": "Version Control History & Evolution"},

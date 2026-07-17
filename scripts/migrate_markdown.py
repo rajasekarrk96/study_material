@@ -234,7 +234,7 @@ def run_markdown_migration():
 
     app = create_app()
     with app.app_context():
-        base_dir = Path("docs/notes preparing implementation")
+        base_dir = Path("docs/curriculum")
         if not base_dir.exists():
             print(f"[Error] Base folder '{base_dir}' does not exist.")
             return

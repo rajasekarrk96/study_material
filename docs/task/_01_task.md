@@ -7,10 +7,10 @@
 ## 1.1 Development Environment & Project Structure
 - [x] Initialize Python environment:
   - Create standard `.venv` (if not done).
-  - Create [requirements.txt](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/requirements.txt) with libraries: Flask, SQLAlchemy, Alembic, Bleach, PyJWT, Cryptography, PyMySQL, Markdown.
+  - Create [requirements.txt](../../requirements.txt) with libraries: Flask, SQLAlchemy, Alembic, Bleach, PyJWT, Cryptography, PyMySQL, Markdown.
 - [x] Bootstrap directory tree:
-  - Create [app/](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/app/) subdirectory folder structure matching [05_Folder_Structure.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/05_Folder_Structure.md).
-  - Setup [run.py](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/run.py) entrypoint script.
+  - Create [app/](../../app/) subdirectory folder structure matching [05_Folder_Structure.md](../plan/05_Folder_Structure.md).
+  - Setup [run.py](../../run.py) entrypoint script.
 - [x] Configure Environment Settings:
   - Create `.env.example` mapping application keys, SQLite database path, and model variables.
 
@@ -20,7 +20,7 @@
 - [x] Setup Alembic configuration mapping:
   - Initialize Alembic environment in the project.
 - [x] Core Database Models:
-  - Code core user/role models: `User`, `Role`, `Permission` (refer to [03_User_Roles_RBAC.md](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/03_User_Roles_RBAC.md)).
+  - Code core user/role models: `User`, `Role`, `Permission` (refer to [03_User_Roles_RBAC.md](../plan/03_User_Roles_RBAC.md)).
   - Code baseline content CMS models: `Category`, `Subject`, `Course`, `Module`, `Lesson`, `LessonSection`, `LessonVersion`, `Tag`, `Source`.
 - [x] Run Initial Schema Migration:
   - Generate migration script: `alembic revision --autogenerate -m "Initial schema setup"`.
