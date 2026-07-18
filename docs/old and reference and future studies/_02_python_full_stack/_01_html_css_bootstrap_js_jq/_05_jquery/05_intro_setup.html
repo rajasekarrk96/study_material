@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 101: Intro & Setup</title>
+    <!-- 
+        STEP 1: INCLUDE JQUERY
+        jQuery is just a regular JavaScript file written by someone else that makes writing your own JS easier.
+        You must include it BEFORE you write any jQuery code. Using a CDN (Content Delivery Network) is best.
+    -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h1>jQuery 101: Introduction & Setup</h1>
+    <p>Check the console for script output.</p>
+
+    <h2 id="greeting">Hello, World!</h2>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: WHAT IS JQUERY & HOW TO START
+        ========================================================
+
+        1. What is jQuery?
+           - A fast, small, and feature-rich JavaScript library.
+           - Its motto: "Write less, do more."
+           - It makes things like HTML document traversal, event handling, animating, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.
+
+        2. The `$` Symbol:
+           - In jQuery, the dollar sign `$` is just an alias (a shortcut name) for `jQuery`.
+           - Every time you see `$()`, it means "Hey jQuery, do something!".
+
+        3. The Document Ready Event:
+           - You should NEVER try to manipulate an HTML element before the browser has finished loading it.
+           - jQuery provides `$(document).ready()` to prevent code from running before the document is finished loading.
+        */
+
+        // Standard way to wait for document to be ready
+        $(document).ready(function() {
+            
+            console.log("1. The DOM is fully loaded and safe to manipulate!");
+            
+            // Basic example: Select the H2 and change its text
+            // Vanilla JS: document.getElementById('greeting').innerText = "Hello, jQuery!";
+            // jQuery:
+            $("#greeting").text("Hello, jQuery! You are awesome.");
+            
+        });
+
+        // SHORTHAND for $(document).ready() - This is what professionals use!
+        $(function() {
+            console.log("2. This is the shorthand version of document.ready. It does the exact same thing.");
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "Why do we use $(document).ready()?"
+          Answer: "To ensure that all HTML elements are loaded and parsed into the DOM before we attempt to manipulate them with JavaScript/jQuery. If we tried to select a div before it loaded, our script would fail."
+        - "What is the $ in jQuery?"
+          Answer: "It's simply a variable name that points to the jQuery function. It's an alias used to keep the code concise."
+        */
+    </script>
+</body>
+</html>

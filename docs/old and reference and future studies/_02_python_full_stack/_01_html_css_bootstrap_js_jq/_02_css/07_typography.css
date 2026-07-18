@@ -1,0 +1,99 @@
+/*
+    ========================================================
+    TOPIC: CSS TYPOGRAPHY & TEXT EFFECTS
+    ========================================================
+
+    1. Font Families:
+       - Font stack (fallbacks): `font-family: 'Helvetica Neue', Arial, sans-serif;`
+       - Serif: Lines at the ends of letters (Times New Roman, Playfair). Good for print/headings.
+       - Sans-Serif: Clean edges (Arial, Helvetica, Roboto). Easiest to read on screens.
+       - Monospace: Every character takes up the same width (Courier, Roboto Mono). Used for code.
+
+    2. Essential Properties:
+       - font-size: px, em, rem, vw.
+         - *Best Practice*: Use `rem` for accessibility (scales with browser root font size). 1rem = usually 16px.
+       - font-weight: normal (400), bold (700), bolder, lighter, or numeric 100-900.
+       - font-style: normal, italic, oblique.
+       - line-height: Spacing between lines. Use unitless numbers (e.g., `1.5` means 1.5x the font-size). Improves readability drastically.
+       - letter-spacing: Space between characters.
+       - type-align: left, right, center, justify.
+
+    3. Text Decoration & Transformation:
+       - text-decoration: underline, line-through, none. (Mostly used to remove underline from links).
+       - text-transform: uppercase, lowercase, capitalize. (Avoid typing capitals in HTML, use CSS instead for screen reader compatibility).
+
+    4. Text Effects:
+       - text-shadow: h-shadow v-shadow blur-radius color;
+       - text-overflow: ellipsis (adds '...' when text overflows). Requires white-space: nowrap and overflow: hidden.
+*/
+
+/* --- EXAMPLES --- */
+
+body {
+    /* Fallback stack */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+}
+
+.body-text {
+    font-size: 1.125rem; /* 18px / 16px */
+    line-height: 1.6; /* Excellent readability */
+    letter-spacing: 0.5px;
+    max-width: 600px;
+}
+
+/* Applying Google Fonts imported in HTML */
+.fancy-serif {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 2.5rem;
+    color: #1a1a1a;
+}
+
+.mono {
+    font-family: 'Roboto Mono', monospace;
+    background-color: #f4f4f4;
+    padding: 10px;
+    display: inline-block;
+}
+
+.text-effects {
+    margin-top: 30px;
+}
+
+.uppercase {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+.shadow {
+    font-size: 2rem;
+    font-weight: bold;
+    /* X Y Blur Color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 
+  The "Truncate" pattern. CRITICAL to memorize. 
+  Used all the time for usernames, long titles in cards, etc.
+*/
+.truncate {
+    width: 250px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    
+    /* The magic 3 lines for truncating text with an ellipsis (...) */
+    white-space: nowrap; /* Forces text onto one line */
+    overflow: hidden;    /* Hides anything outside the box */
+    text-overflow: ellipsis; /* Adds the '...' */
+}
+
+/*
+    INTERVIEW TIP:
+    - "Difference between px, em, and rem?"
+      Answer: `px` is absolute. `em` is relative to its DIRECT parent's font-size. `rem` is relative to the ROOT `<html>` element's font-size. Always prefer `rem` for typography consistency and accessibility scaling.
+    - Write out the 3 lines of CSS needed to truncate a long string of text with an ellipsis.
+*/

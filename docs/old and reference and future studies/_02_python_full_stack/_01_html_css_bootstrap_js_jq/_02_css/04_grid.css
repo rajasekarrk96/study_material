@@ -1,0 +1,85 @@
+/*
+    ========================================================
+    TOPIC: CSS GRID LAYOUT
+    ========================================================
+
+    1. Core Concept:
+       - Flexbox is for 1-dimensional layouts (a row OR a column).
+       - Grid is for 2-dimensional layouts (rows AND columns simultaneously).
+       - Highly powerful for page layouts.
+
+    2. Grid Container (Parent):
+       - display: grid; (or inline-grid).
+       - grid-template-columns: Defines width and number of columns. 
+         (e.g., `200px 1fr 200px` means fixed sidebars, flexible middle).
+       - grid-template-rows: Defines height and number of rows.
+       - grid-template-areas: Allows naming specific layout areas visually.
+       - gap (row-gap, column-gap): Spacing between tracks.
+       - The `fr` Unit: Fractional unit. `1fr 1fr` creates two equal columns based on available free space.
+
+    3. Grid Items (Children):
+       - grid-column: start / end (e.g., `grid-column: 1 / 3;` spans across column line 1 to 3).
+       - grid-row: start / end.
+       - grid-area: Name assigned to the item, referenced by `grid-template-areas` on parent.
+*/
+
+/* --- EXAMPLES --- */
+
+body { font-family: sans-serif; margin: 20px; }
+h2 { margin-top: 40px; }
+
+/* General Item styling */
+.grid-item, .a-header, .a-nav, .a-main, .a-footer {
+    background-color: #2196F3;
+    border: 1px solid white;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+}
+
+/* Example 1: Basic Grid */
+.basic-grid {
+    display: grid;
+    /* 3 columns: 25%, 50%, 25% */
+    grid-template-columns: 1fr 2fr 1fr;
+    /* 2 rows */
+    grid-template-rows: 100px 200px;
+    gap: 10px;
+}
+/* Make header span all columns */
+.basic-grid .grid-item:nth-child(1) { grid-column: 1 / -1; } 
+/* Make footer span all columns */
+.basic-grid .grid-item:nth-child(4) { grid-column: 1 / -1; } 
+
+/* Example 2: Named Grid Areas (Easiest way to build layouts) */
+.area-grid {
+    display: grid;
+    grid-template-areas:
+        "hdr hdr hdr"
+        "nav main main"
+        "ftr ftr ftr";
+    grid-template-columns: 200px 1fr 1fr; 
+    grid-template-rows: auto 200px auto; 
+    gap: 10px;
+}
+.a-header { grid-area: hdr; background-color: #e91e63; }
+.a-nav { grid-area: nav; background-color: #9c27b0; }
+.a-main { grid-area: main; background-color: #ff9800; }
+.a-footer { grid-area: ftr; background-color: #e91e63; }
+
+/* Example 3: The Magic Auto-fit Responsive Grid */
+.auto-grid {
+    display: grid;
+    /* This creates as many minimum 200px columns as will fit before wrapping to a new line! */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+.auto-grid .grid-item { background: #4caf50; }
+
+/* 
+    INTERVIEW TIP:
+    - What is the difference between Grid and Flexbox? 
+      "Flexbox is 1D (rows/cols). Grid is 2D (rows AND cols). Both are needed. Use Grid for macro layouts (overall page), Flexbox for micro layouts (alignment within components)."
+    - Knowing `repeat(auto-fit, minmax(200px, 1fr))` by memory looks REALLY good in interviews.
+*/

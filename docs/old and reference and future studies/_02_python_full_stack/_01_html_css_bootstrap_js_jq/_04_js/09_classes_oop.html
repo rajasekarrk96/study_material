@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Classes & OOP</title>
+</head>
+<body>
+    <h1>JavaScript Classes & Object-Oriented Programming</h1>
+    <p>Check the console for script output.</p>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: CLASSES AND OOP
+        ========================================================
+
+        1. ES6 Class Syntax (Syntactic Sugar for Prototypes):
+           - In older JS, OOP was done using constructor functions `function Person(name) { this.name = name; }`.
+           - ES6 introduced the `class` keyword. It looks like Java/C#, but under the hood, it's still Prototypal Inheritance!
+           - Variables inside a class must be defined in the `constructor()` method.
+           - Methods belong on the prototype automatically.
+
+        2. Key Concepts:
+           - Encapsulation: Grouping related data and functions together.
+           - Inheritance: Using `extends` to create a subclass.
+           - `super()`: Must be called in the constructor of a subclass before using `this`. It calls the parent's constructor.
+           - Polymorphism: Overriding inherited methods.
+           - Static methods: Declared with `static`. Belong to the Class itself, not instances (e.g., `Math.random()`).
+
+        3. Private Fields (Modern JS):
+           - Prefix a property name with `#` to make it strictly private (cannot be accessed from outside the class).
+        */
+
+        console.log("--- Classes and Inheritance ---");
+
+        // 1. Defining a Parent Class
+        class Animal {
+            constructor(name, type) {
+                this.name = name;
+                this.type = type;
+            }
+
+            // Method added to Animal.prototype automatically
+            makeSound() {
+                console.log(`${this.name} makes a generic sound.`);
+            }
+
+            // Static method (Called on Animal, not an instance)
+            static isAnimal(obj) {
+                return obj instanceof Animal;
+            }
+        }
+
+        const genericAnimal = new Animal("Blob", "Unknown");
+        genericAnimal.makeSound();
+
+        // 2. Inheritance using `extends`
+        class Dog extends Animal {
+            // Private field
+            #breed;
+
+            constructor(name, breed) {
+                // Must call super() to initialize 'this'
+                // Pass arguments expected by the parent's constructor
+                super(name, "Canine");
+                this.#breed = breed;
+            }
+
+            // Polymorphism: Overriding the parent method
+            makeSound() {
+                console.log(`${this.name} barks!`);
+            }
+
+            // Getter to access private field
+            getBreed() {
+                return this.#breed;
+            }
+        }
+
+        const buddy = new Dog("Buddy", "Golden Retriever");
+        console.log(`Buddy is a ${buddy.type}`);
+        buddy.makeSound(); // Buddy barks!
+        
+        console.log("Buddy's breed:", buddy.getBreed());
+        // console.log(buddy.#breed); // ERROR! Private field
+
+        // Testing the static method
+        console.log("Is buddy an Animal?", Animal.isAnimal(buddy)); // true
+        // console.log(buddy.isAnimal(buddy)); // ERROR! Not on the instance
+
+        /*
+        INTERVIEW TIP:
+        - "What is `super()` and when do you use it?"
+          Answer: `super()` is used to call the constructor of the parent class. It MUST be called inside the constructor of a child class before you can access `this`.
+        - "Are JavaScript classes like Java classes?"
+          Answer: "No, JS classes are 'syntactic sugar' over prototype-based inheritance. A Class in JS is technically a function, and its methods are placed on the `prototype` object."
+        */
+    </script>
+</body>
+</html>

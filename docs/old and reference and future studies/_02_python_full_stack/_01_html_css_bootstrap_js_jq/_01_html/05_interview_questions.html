@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Interview Questions (LeetCode Style)</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .question { margin-bottom: 2rem; padding: 1rem; border: 1px solid #ccc; border-radius: 5px; }
+        h3 { margin-top: 0; color: #333; }
+        .difficulty { font-weight: bold; }
+        .easy { color: green; }
+        .medium { color: orange; }
+        .hard { color: red; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+    <h1>HTML Interview Challenges</h1>
+    <p>Practice these 5 HTML challenges ranging from Easy to Hard.</p>
+
+    <!-- Question 1 -->
+    <div class="question">
+        <h3>1. Semantic Layout Structure <span class="difficulty easy">(Easy)</span></h3>
+        <p><strong>Problem:</strong> Create a standard web page layout using only semantic HTML5 elements (no <code>div</code> or <code>span</code>). The layout should include a header, navigation, main content area with two articles, a sidebar, and a footer.</p>
+        <p><strong>Goal:</strong> Test understanding of document structure and semantic tags.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+&lt;header&gt;
+  &lt;h1&gt;Logo&lt;/h1&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;...&lt;/article&gt;
+  &lt;article&gt;...&lt;/article&gt;
+  &lt;aside&gt;...&lt;/aside&gt;
+&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;
+</pre>
+        </details>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question">
+        <h3>2. Accessible Form Data Collection <span class="difficulty easy">(Easy)</span></h3>
+        <p><strong>Problem:</strong> Build an accessible login form collecting an email and password. Ensure screen readers can interpret the inputs, and implement basic front-end validation (required fields, email format) using pure HTML attributes.</p>
+        <p><strong>Goal:</strong> Test knowledge of form attributes like <code>for</code>, <code>id</code>, <code>required</code>, <code>type="email"</code>.</p>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question">
+        <h3>3. Complex Data Table Construction <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> Implement an HTML table to display financial data. Requirements: 
+            1. A main header spanning multiple columns. 
+            2. A footer row indicating totals. 
+            3. Use proper accessibility tags (<code>caption</code>, <code>thead</code>, <code>tbody</code>, <code>tfoot</code>, <code>th scope="col"</code>, <code>th scope="row"</code>).
+        </p>
+        <p><strong>Goal:</strong> Validate deeper understanding of table structures beyond basic tr/td combinations.</p>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question">
+        <h3>4. Media Player with Fallbacks & Subtitles <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> Code a native HTML5 video player that plays "demo.mp4". It must provide a fallback format ("demo.ogg"), show a placeholder image before playing, and include an English closed-caption track.</p>
+        <p><strong>Goal:</strong> Test knowledge of multimedia elements (<code>video</code>, <code>source</code>, <code>track</code>) and their attributes (<code>poster</code>, <code>kind</code>, <code>srclang</code>).</p>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question">
+        <h3>5. Custom Data Attributes & ARIA States <span class="difficulty hard">(Hard)</span></h3>
+        <p><strong>Problem:</strong> Create the markup for a custom toggle switch (a button acting as a checkbox). You cannot use an actual <code>&lt;input type="checkbox"&gt;</code>. You must use a <code>button</code> element. Implement the necessary <code>aria-*</code> attributes and <code>data-*</code> attributes to ensure it is fully accessible and maintains state that JS can later read.</p>
+        <p><strong>Goal:</strong> Test advanced accessibility concepts (ARIA roles/states) and HTML5 custom data attributes.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+&lt;button 
+  role="switch" 
+  aria-checked="false" 
+  data-state="off"
+  id="theme-toggler"&gt;
+  Toggle Dark Mode
+&lt;/button&gt;
+</pre>
+        </details>
+    </div>
+
+</body>
+</html>

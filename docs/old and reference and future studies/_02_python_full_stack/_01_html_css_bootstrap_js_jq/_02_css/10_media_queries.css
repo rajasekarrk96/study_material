@@ -1,0 +1,82 @@
+/*
+    ========================================================
+    TOPIC: MEDIA QUERIES & RESPONSIVE DESIGN
+    ========================================================
+
+    1. The Viewport Meta Tag:
+       - Essential in HTML head: `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
+       - Without it, mobile browsers will render a desktop page and scale it down to be tiny.
+
+    2. Media Queries (`@media`):
+       - Allow CSS rules to be applied only when a specific condition (like screen width) is met.
+       - Syntax: `@media (condition) { /* selectors & rules here */ }`
+       - Example: `@media (max-width: 768px) { ... }` applies rules to tablets and phones.
+
+    3. Mobile-First vs Desktop-First Patterns:
+       - **Mobile-First (Recommended pattern):**
+         Write base CSS for mobile phones. Then use `@media (min-width: 768px)` to add complexity for larger screens.
+       - **Desktop-First (Often used for porting old sites to mobile):**
+         Write base CSS for desktop. Then use `@media (max-width: 768px)` to strip down layout for phones.
+
+    4. Common Breakpoints:
+       - 576px (Small devices, portrait phones)
+       - 768px (Medium devices, tablets)
+       - 992px (Large devices, desktops)
+       - 1200px (Extra large devices, large desktops)
+*/
+
+/* --- EXAMPLES (Mobile-First Approach) --- */
+
+/* 1. Base Styles (Applies to ALL screens, starting from Mobile) */
+body {
+    font-family: sans-serif; margin: 0; padding: 15px; background-color: #fdfdfd;
+}
+
+.header {
+    background: #4caf50; color: white; padding: 20px; text-align: center; font-size: 1.5rem;
+}
+
+/* Base column configuration (Mobile layout: Stacked, 100% width) */
+.column {
+    padding: 15px; margin-top: 10px; border: 1px solid #ccc; background: white; width: 100%; box-sizing: border-box;
+}
+
+/* Alerts Defaults */
+.mobile-only-alert { display: block; background: #ffebee; color: #c62828; padding: 10px; margin-top: 20px; text-align: center; font-weight: bold;}
+.desktop-only-alert { display: none; background: #e8f5e9; color: #2e7d32; padding: 10px; margin-top: 20px; text-align: center; font-weight: bold;}
+
+
+/* 2. Media Query for Tablets and Larger (Min-width: 768px) */
+/* When the screen is 768px OR WIDER, apply these rules: */
+@media (min-width: 768px) {
+    
+    body { background-color: #e3f2fd; /* Change body color on desktop */ }
+    
+    /* Turn the row into a Flexbox container to place columns side-by-side */
+    .row {
+        display: flex; gap: 20px;
+    }
+    
+    /* Modify the specific columns to take up appropriate widths */
+    .content-main { flex: 75%; /* Takes 75% of space */ }
+    .sidebar { flex: 25%; /* Takes 25% of space */ }
+    
+    /* Toggle Alerts */
+    .mobile-only-alert { display: none; }
+    .desktop-only-alert { display: block; }
+}
+
+
+/* 
+    Optional: Media Query for very short screens (Landscape phones) 
+*/
+@media (max-height: 400px) {
+    .header { display: none; /* Hide header to save vertical space */ }
+}
+
+/*
+    INTERVIEW TIP:
+    - "What is mobile-first design?"
+      Answer: "Starting your CSS coding by focusing on the smallest screens first (default styles), and then progressively enhancing the layout for larger screens using `min-width` media queries."
+    - Be able to write a basic `@media` syntax block purely from memory.
+*/

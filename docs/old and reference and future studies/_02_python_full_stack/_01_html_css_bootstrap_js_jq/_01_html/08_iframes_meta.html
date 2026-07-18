@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        ========================================================
+        TOPIC: META TAGS & SEO BASICS
+        ========================================================
+
+        1. What are <meta> tags?
+           - They provide metadata about the HTML document. Metadata is not displayed on the page but is machine parsable.
+           - Used by browsers (how to display content), search engines (keywords, description), and other web services.
+
+        2. Crucial Meta Tags:
+           - <meta charset="UTF-8">: Character encoding. ALWAYS include this.
+           - <meta name="viewport" content="width=device-width, initial-scale=1.0">: Essential for mobile responsiveness.
+           - <meta name="description" content="...">: The snippet that appears in Google Search results. Keep it < 160 chars.
+           - <meta name="author" content="...">: Defines the author of the page.
+           - <meta name="robots" content="index, follow">: Tells search engine crawlers what to do (e.g., noindex, nofollow).
+
+        3. Open Graph (og:) Tags (Crucial for Social Media):
+           - Standardized by Facebook, used by Twitter/LinkedIn/Discord to create rich link previews.
+           - <meta property="og:title" content="...">
+           - <meta property="og:description" content="...">
+           - <meta property="og:image" content="https://example.com/thumbnail.jpg">
+           - <meta property="og:url" content="...">
+
+        4. Other Head Elements:
+           - <title>: Critical for SEO and browser tabs.
+           - <link rel="canonical" href="...">: Prevents duplicate content SEO penalties if the same page is accessible via multiple URLs.
+           - <link rel="icon" href="favicon.ico">: Sets the favicon.
+    -->
+    <title>Iframes, Embedding, & Meta Tags</title>
+    
+    <!-- SEO & Social Examples -->
+    <meta name="description" content="A comprehensive guide to HTML embedding and iframes.">
+    <meta property="og:title" content="HTML Expert Guide">
+    <meta property="og:description" content="Learn all about iframes and meta tags.">
+</head>
+<body>
+    <!-- 
+        ========================================================
+        TOPIC: IFRAMES & EMBEDDING
+        ========================================================
+
+        1. <iframe> (Inline Frame):
+           - Embeds another HTML document inside the current one (e.g., YouTube video, Google Map).
+           - Attributes:
+             - src: URL of the embedded document.
+             - width, height: Dimensions.
+             - name: Used to target links to open inside the iframe.
+             - allowfullscreen: Allows the iframe to go full-screen.
+             - loading="lazy": Defers loading the iframe until it reaches a calculated distance from the viewport (great for performance).
+             - sandbox: Enables an extra set of restrictions for the content in the iframe (security feature). Ex: sandbox="allow-scripts".
+
+        2. <embed> and <object>:
+           - Historically used for plugins like Flash. Mostly obsolete now, but <object> is sometimes used to embed PDFs.
+           - `<object data="file.pdf" type="application/pdf"></object>`
+    -->
+
+    <h1>Iframes and Embedding</h1>
+    
+    <h2>1. Basic Iframe Example</h2>
+    <!-- Note: Many major sites block embedding via x-frame-options headers, so we use Wikipedia as an example -->
+    <iframe src="https://en.wikipedia.org/wiki/HTML" width="100%" height="400" title="Wikipedia HTML Page" loading="lazy">
+        Your browser does not support iframes.
+    </iframe>
+
+    <h2>2. Iframe as a Link Target</h2>
+    <iframe src="about:blank" name="my-iframe" width="100%" height="200" style="border:2px dashed red;"></iframe>
+    <p>
+        <!-- The target attribute points to the iframe's name -->
+        <a href="https://example.com" target="my-iframe">Load Example.com into the frame above</a>
+    </p>
+
+    <!-- 
+        INTERVIEW TIP:
+        - "What is the viewport meta tag and why is it important?" -> "It controls the page's width and scaling on mobile devices. Without it, mobile browsers render the page at desktop width and shrink it down, making it unreadable."
+        - "What is a canonical link?" -> "A tag used to tell search engines the 'master' or preferred URL of a page to avoid duplicate content penalties."
+    -->
+</body>
+</html>

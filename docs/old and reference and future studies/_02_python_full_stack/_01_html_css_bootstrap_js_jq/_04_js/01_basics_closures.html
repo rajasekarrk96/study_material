@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Basics, Scope, and Closures</title>
+</head>
+<body>
+    <h1>JavaScript Basics & Closures</h1>
+    <p>Open the console (F12) to see the output.</p>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: JS BASICS, SCOPE & CLOSURES
+        ========================================================
+
+        1. Variables (var, let, const):
+           - var: Function-scoped. Can be re-declared and updated. Hoisted with initialization of `undefined`.
+           - let: Block-scoped. Can be updated but not re-declared in the same scope. Hoisted without initialization (Temporal Dead Zone).
+           - const: Block-scoped. Cannot be updated or re-declared. Must be initialized during declaration. (Note: Objects/Arrays declared with const *can* have their properties mutated).
+
+        2. Data Types:
+           - Primitive: String, Number, BigInt, Boolean, Undefined, Null, Symbol. (Copied by value).
+           - Non-Primitive (Reference): Object, Array, Function. (Copied by reference).
+
+        3. Scope:
+           - Determines the accessibility (visibility) of variables.
+           - Global Scope: Declared outside any function.
+           - Function Scope: Declared inside a function (var, let, const).
+           - Block Scope: Declared inside {} blocks (if, for, while) (only let and const).
+
+        4. Hoisting:
+           - JavaScript's default behavior of moving declarations to the top of the current scope.
+           - Only declarations are hoisted, NOT initializations.
+
+        5. CLOSURES (Extremely Important):
+           - Definition: A closure is a function that remembers its outer variables and can access them. In JS, every function is a closure.
+           - Practically: It allows an inner function to access an outer function's scope even after the outer function has returned.
+        */
+
+        // --- CLOSURE EXAMPLE ---
+        console.log("--- CLOSURES ---");
+        
+        function outerFunction(outerVariable) {
+            // This inner function forms a closure.
+            // It has access to its own scope, outerFunction's scope, and global scope.
+            return function innerFunction(innerVariable) {
+                console.log('Outer Variable: ' + outerVariable);
+                console.log('Inner Variable: ' + innerVariable);
+            }
+        }
+
+        // outerFunction executes and returns the innerFunction.
+        // It finishes executing, but the returned function STILL remembers 'outerVariable'.
+        const newFunction = outerFunction('outside');
+        
+        // Calling the returned function
+        newFunction('inside'); 
+        /* Output:
+           Outer Variable: outside
+           Inner Variable: inside
+        */
+
+        // --- CLOSURE USE CASE: Data Privacy / Encapsulation ---
+        function createCounter() {
+            let count = 0; // Private variable
+            return {
+                increment: function() { count++; return count; },
+                decrement: function() { count--; return count; },
+                getCount: function() { return count; }
+            };
+        }
+
+        const counter = createCounter();
+        console.log("Counter:", counter.increment()); // 1
+        console.log("Counter:", counter.increment()); // 2
+        // console.log(count); // ReferenceError! count is protected.
+
+        /*
+        INTERVIEW TIP:
+        - "What is a closure?" -> "A function bundled together with references to its surrounding state (the lexical environment). It gives you access to an outer function's scope from an inner function."
+        - Be prepared to write code showing how a closure provides data privacy (like the counter example).
+        - Know the output of standard closure for-loop questions (e.g., using `var` vs `let` inside a setTimeout loop).
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+/* --- 1. Global Variables Definition --- */
+/* The :root pseudo-class targets the highest level parent (<html>). These are global variables. */
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --secondary-color: #6c757d;
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --border-radius: 8px;
+}
+
+body {
+    font-family: sans-serif; margin: 20px;
+}
+
+/* --- 2. Using Variables --- */
+.theme-container {
+    padding: var(--spacing-lg);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 2px solid #ccc;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    /* Transition added so switching classes smoothly animates the color changes! */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.primary-btn:hover { background-color: var(--primary-hover); }
+
+.secondary-btn {
+    /* Example of a fallback value. Since --missing-color doesn't exist, it uses gray */
+    background-color: var(--missing-color, gray);
+    color: white;
+    padding: 10px var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+/* --- 3. Overriding Scope for Theming (Dark Mode!) --- */
+/* 
+   When .dark-mode is applied, it overrides the values of those specific variables 
+   for itself and all its children. The layout CSS doesn't need to change at all!
+*/
+.dark-mode {
+    --primary-color: #ff9800; /* Orange */
+    --primary-hover: #e65100;
+    --bg-color: #121212;
+    --text-color: #ffffff;
+}
+
+/*
+    INTERVIEW TIP:
+    - "What is the difference between CSS Variables and SASS Variables ($color)?"
+      Answer: "SASS variables are compiled away into hardcoded values when the CSS is generated. Native CSS variables (`--color`) exist in the browser at runtime, meaning they can cascade, be scoped to specific DOM elements, and crucially, be updated dynamically by JavaScript."
+    - Knowing how to implement a basic Dark Mode using `:root` and a `.dark` class override is a top-tier interview response.
+*/

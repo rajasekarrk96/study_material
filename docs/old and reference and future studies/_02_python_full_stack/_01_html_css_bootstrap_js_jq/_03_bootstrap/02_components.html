@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Components</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 
+        ========================================================
+        TOPIC: BOOTSTRAP COMPONENTS (NAVBAR & CARDS)
+        ========================================================
+
+        1. Theme Colors (Contextual Classes):
+           - primary (blue), secondary (gray), success (green), danger (red), warning (yellow), info (cyan), light (white/gray), dark (black/dark gray).
+           - Used everywhere: text-primary, bg-danger, btn-success.
+
+        2. Navbars (.navbar):
+           - Requires a wrapping .navbar class, plus .navbar-expand{-sm|-md|-lg|-xl} for responsive collapsing.
+           - .navbar-brand for your company, product, or project name.
+           - .navbar-nav for a full-height and lightweight navigation.
+
+        3. Cards (.card):
+           - A flexible and extensible content container.
+           - Built with flexbox for easy alignment.
+           - .card-body: Building block for most cards (adds padding).
+           - .card-title, .card-text: Specific typography styles.
+           - .card-img-top: Places image at the top of the card.
+    -->
+
+    <!-- Navbar Example -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MyBrand</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h1>Bootstrap Components</h1>
+
+        <!-- Buttons Example -->
+        <div class="mb-4">
+            <button class="btn btn-primary">Primary Button</button>
+            <button class="btn btn-outline-success">Outline Success</button>
+            <button class="btn btn-danger btn-lg">Large Danger</button>
+        </div>
+
+        <!-- Cards Example inside a Grid -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Placeholder">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                 <div class="card text-white bg-info mb-3">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Info card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        INTERVIEW TIP:
+        - Interviewers want to know if you can build without referring to the docs every 5 seconds for basics.
+        - Memorize the button classes (`btn btn-primary`).
+        - Understand what classes like `navbar-expand-lg` explicitly do (forces the nav to become horizontal on lg screens, collapsed below that).
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

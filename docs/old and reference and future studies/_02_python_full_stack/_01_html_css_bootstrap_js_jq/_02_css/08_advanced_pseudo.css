@@ -1,0 +1,92 @@
+/*
+    ========================================================
+    TOPIC: ADVANCED PSEUDO-CLASSES & PSEUDO-ELEMENTS
+    ========================================================
+
+    1. Syntax Difference:
+       - Pseudo-classes: `:` (e.g., `:hover`, `:first-child`). Targets the *state* of an element.
+       - Pseudo-elements: `::` (e.g., `::before`, `::after`). Targets a *specific part* of an element (like inserting content). Note: Single colon `:` works for legacy reasons, but double `::` is the modern standard.
+
+    2. Structural Pseudo-classes:
+       - :first-child, :last-child
+       - :nth-child(n): Selects the nth child. Very powerful.
+         - `n` can be a number (3), keyword (even, odd), or formula (3n+1).
+       - :only-child
+
+    3. Negation & Relational:
+       - :not(selector): Selects elements that do NOT match the given selector.
+       - :has(selector) (Modern CSS): Selects a parent element that *contains* the matching child.
+
+    4. State Pseudo-classes:
+       - :focus: When an element (like an input) receives focus.
+       - :focus-within: Applied to a PARENT element when ANY of its children receive focus. (Great for styling custom forms).
+       - :disabled, :checked (for checkboxes/radios).
+
+    5. Pseudo-elements:
+       - ::before: Inserts content BEFORE the element's actual content.
+       - ::after: Inserts content AFTER the element's actual content.
+       - **CRITICAL**: `::before` and `::after` MUST have the `content: ""` property to render anything. Even if it's empty.
+       - ::selection: Styles the text when an end-user highlights it with their mouse.
+*/
+
+/* --- EXAMPLES --- */
+
+body { font-family: sans-serif; padding: 20px; }
+
+/* Structural Demo */
+.advanced-list { list-style: none; padding: 0; }
+.advanced-list li {
+    padding: 10px; border: 1px solid #ccc; margin-bottom: 5px; background: #fff;
+}
+/* Style only the ODD list items (1st, 3rd) */
+.advanced-list li:nth-child(odd) { background-color: #f9f9f9; }
+/* Style the FIRST item */
+.advanced-list li:first-child { font-weight: bold; border-top: 3px solid blue; }
+
+/* Negation Demo */
+/* Style all .special-note EXCEPT the ones with the .disabled class */
+.special-note:not(.disabled) {
+    color: green; font-weight: bold;
+}
+.special-note.disabled {
+    color: gray; text-decoration: line-through;
+}
+
+/* State Demo (:focus-within) */
+.form-container {
+    border: 2px solid transparent; padding: 10px; background: #eee;
+    transition: 0.3s;
+}
+/* The entire container highlights when the input inside it is clicked! */
+.form-container:focus-within {
+    border-color: blue; background: #e3f2fd;
+}
+
+/* Pseudo-elements (::before & ::after) */
+.quote-box {
+    position: relative; padding: 20px 40px; background: #444; color: white;
+    font-size: 1.5rem; display: inline-block; margin-top: 20px;
+    border-radius: 5px;
+}
+.quote-box::before {
+    /* MUST HAVE CONTENT PROPERTY */
+    content: "\201C"; /* Unicode for left double quote */
+    font-size: 4rem; color: #ffeb3b;
+    position: absolute; left: 10px; top: -10px;
+}
+.quote-box::after {
+    content: "\201D"; /* Unicode for right double quote */
+    font-size: 4rem; color: #ffeb3b; margin-left:10px;
+    position: absolute; right: 10px; bottom: -30px;
+}
+
+/* Custom Highlight Color */
+.selection-text::selection {
+    background-color: #ffeb3b; color: black;
+}
+
+/*
+    INTERVIEW TIP:
+    - "Can you style alternating rows in a table without JavaScript?" -> "Yes, using `tr:nth-child(odd)` and `even`."
+    - "Why is my `::before` element not showing up?" -> "You probably forgot the `content` property."
+*/

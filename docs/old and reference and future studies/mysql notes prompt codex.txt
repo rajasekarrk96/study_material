@@ -1,0 +1,408 @@
+# ==========================================================
+# ROLE
+# ==========================================================
+You are a senior MySQL Database Expert + curriculum designer.
+
+You create HIGH-QUALITY structured .sql learning materials
+with COMPLETE coverage from BASIC → ADVANCED MySQL.
+
+You DO NOT skip concepts.
+You DO NOT give partial notes.
+You MUST follow structure strictly.
+
+# ==========================================================
+# TASK
+# ==========================================================
+I already have topics.
+You must generate THREE FILES for EACH topic:
+
+1) Notes File
+2) Questions File
+3) Answers File
+
+Topic Name:
+"<TOPIC_NAME>"
+
+File Naming Format:
+<INDEX>_MySQL_<TOPIC_NAME>_Notes.sql
+<INDEX>_MySQL_<TOPIC_NAME>_Questions.sql
+<INDEX>_MySQL_<TOPIC_NAME>_Answers.sql
+
+Example:
+01_MySQL_SELECT_Basics_Notes.sql
+01_MySQL_SELECT_Basics_Questions.sql
+01_MySQL_SELECT_Basics_Answers.sql
+
+# ==========================================================
+# CRITICAL OUTPUT RULES
+# ==========================================================
+- Output MUST be plain valid .sql file content
+- Use -- single line comments for explanations
+- Use /* ... */ block comments for section headers and long explanations
+- Every section must be clearly separated with comment dividers like:
+  -- ============================================================
+  -- SECTION: <Section Name>
+  -- ============================================================
+- Each concept must be clearly separated with its own comment block
+- NO explanation outside the .sql file content
+- Content must be EXTREMELY DETAILED
+- All SQL examples must use realistic table/column names
+- Always include CREATE TABLE + INSERT sample data before queries
+- Every SQL snippet must be independently runnable
+- Use proper MySQL syntax only
+- All files must be executable in MySQL Workbench or CLI without errors
+
+# ==========================================================
+# FILE 1: NOTES FILE STRUCTURE (_Notes.sql)
+# ==========================================================
+
+Follow this EXACT structure using SQL comments:
+
+/*
+============================================================
+  MySQL <TOPIC_NAME> - Complete Study Notes
+  File: <INDEX>_MySQL_<TOPIC_NAME>_Notes.sql
+============================================================
+  WHAT YOU WILL LEARN:
+  - Sub-topic 1
+  - Sub-topic 2
+  - Sub-topic 3
+  ... (list ALL sub-topics)
+============================================================
+*/
+
+-- ============================================================
+-- SECTION 1: INTRODUCTION
+-- ============================================================
+/*
+  What is <TOPIC_NAME>?
+  ---------------------
+  ...full explanation...
+
+  Why is it used?
+  ---------------
+  ...full explanation...
+
+  Real-world use cases:
+  ---------------------
+  ...examples...
+
+  Where does it fit in SQL?
+  -------------------------
+  DDL / DML / DCL / TCL - explain which category
+*/
+
+-- ============================================================
+-- SECTION 2: SAMPLE DATABASE SETUP
+-- ============================================================
+-- Always create and populate sample tables FIRST
+-- Use these same tables throughout the entire notes file
+
+DROP DATABASE IF EXISTS mysql_learning;
+CREATE DATABASE mysql_learning;
+USE mysql_learning;
+
+-- Create tables with full comments on every line
+-- Insert at least 10-15 realistic rows per table
+
+-- ============================================================
+-- SECTION 3+: ONE SECTION PER CONCEPT
+-- ============================================================
+-- For EACH concept:
+--   1. Block comment explaining the concept deeply
+--   2. Full syntax comment
+--   3. Working SQL example with line-by-line comments
+--   4. Expected output described in comments
+--   5. Common mistakes shown and corrected
+--   6. Edge cases demonstrated
+
+You MUST cover ALL of the following that apply to the topic:
+
+1.  Basic Syntax & Structure
+2.  All Clauses / Keywords / Options
+3.  All Data Types (with size, range, use case)
+4.  All Operators (comparison, logical, arithmetic, bitwise, string)
+5.  All Constraints (PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL, DEFAULT, CHECK)
+6.  NULL Handling (IS NULL, IS NOT NULL, COALESCE, IFNULL, NULLIF)
+7.  Filtering (WHERE, HAVING, BETWEEN, IN, LIKE, REGEXP)
+8.  Sorting & Limiting (ORDER BY ASC/DESC, LIMIT, OFFSET)
+9.  Grouping & Aggregation (GROUP BY, COUNT, SUM, AVG, MIN, MAX, GROUP_CONCAT)
+10. Joins (INNER, LEFT, RIGHT, FULL OUTER, CROSS, SELF JOIN)
+11. Subqueries (scalar, correlated, inline views, EXISTS, NOT EXISTS)
+12. Set Operations (UNION, UNION ALL, INTERSECT, EXCEPT)
+13. String Functions (CONCAT, LENGTH, UPPER, LOWER, SUBSTRING, TRIM, REPLACE, INSTR, LPAD, RPAD, etc.)
+14. Numeric Functions (ROUND, CEIL, FLOOR, MOD, ABS, POWER, TRUNCATE, etc.)
+15. Date & Time Functions (NOW, CURDATE, CURTIME, DATE_FORMAT, DATEDIFF, TIMESTAMPDIFF, DATE_ADD, DATE_SUB, etc.)
+16. Conditional Logic (IF, CASE WHEN, IFNULL, NULLIF, COALESCE)
+17. Indexes (CREATE INDEX, UNIQUE INDEX, FULLTEXT, COMPOSITE, EXPLAIN usage)
+18. Views (CREATE VIEW, updatable views, WITH CHECK OPTION)
+19. Stored Procedures (IN, OUT, INOUT parameters, DELIMITER, IF/ELSE, LOOP, CURSOR)
+20. User-Defined Functions (RETURNS, DETERMINISTIC, BEGIN...END)
+21. Triggers (BEFORE/AFTER INSERT/UPDATE/DELETE, NEW/OLD pseudo-rows)
+22. Transactions (START TRANSACTION, COMMIT, ROLLBACK, SAVEPOINT, RELEASE SAVEPOINT)
+23. Window Functions (ROW_NUMBER, RANK, DENSE_RANK, NTILE, LEAD, LAG, FIRST_VALUE, LAST_VALUE, PARTITION BY, OVER)
+24. CTEs (WITH clause, multiple CTEs, recursive CTEs)
+25. Performance & EXPLAIN (EXPLAIN, EXPLAIN ANALYZE, index usage, query optimization)
+26. Security (CREATE USER, GRANT, REVOKE, SHOW GRANTS, DROP USER)
+27. Edge Cases & Common Mistakes
+28. Interview Tips & Tricky MySQL Behaviors
+29. Real-world Schema Examples (e-commerce, HR, library, hospital, etc.)
+
+Each concept block MUST follow this pattern:
+
+-- ============================================================
+-- CONCEPT: <Concept Name>
+-- ============================================================
+/*
+  Explanation:
+  ------------
+  What it is, why it exists, when to use it.
+
+  Syntax:
+  -------
+  <Full syntax here>
+
+  Common Mistake:
+  ---------------
+  What beginners get wrong and why.
+*/
+
+-- Example: <short description>
+<working SQL>;
+-- Expected Output: <describe columns and sample rows>
+
+-- Edge Case: <description>
+<working SQL>;
+-- Expected Output: <describe result>
+
+# ==========================================================
+# FILE 2: QUESTIONS FILE (_Questions.sql)
+# ==========================================================
+
+/*
+============================================================
+  MySQL <TOPIC_NAME> - Practice Questions
+  File: <INDEX>_MySQL_<TOPIC_NAME>_Questions.sql
+============================================================
+  Instructions:
+  - Run the SETUP section first before attempting questions
+  - Write your answer below each question comment block
+  - Do NOT look at the Answers file until you have tried
+============================================================
+*/
+
+-- ============================================================
+-- SETUP: Create and populate tables for questions
+-- ============================================================
+-- Use the SAME schema as Notes file
+-- Fully recreate all tables and data here so this file
+-- is 100% standalone and self-contained
+
+DROP DATABASE IF EXISTS mysql_questions;
+CREATE DATABASE mysql_questions;
+USE mysql_questions;
+
+-- CREATE TABLE + INSERT statements here (same data as Notes)
+
+-- ============================================================
+-- SECTION 1: BASIC QUESTIONS (10 Questions)
+-- ============================================================
+-- Simple single-table queries
+-- Focus: SELECT, WHERE, ORDER BY, LIMIT, basic functions
+
+/*
+  Q1. <Question Title>
+  --------------------
+  Problem : <Full description of what to find>
+  Table(s) : <which tables to use>
+  Expected Output:
+    <column names>
+    <2-3 sample rows of expected result>
+  Hint: <optional small hint>
+*/
+-- Write your answer here:
+
+
+/*
+  Q2. ...
+*/
+-- Write your answer here:
+
+-- (Continue Q3 to Q10)
+
+-- ============================================================
+-- SECTION 2: INTERMEDIATE QUESTIONS (10 Questions)
+-- ============================================================
+-- Multi-table JOINs, GROUP BY, HAVING, Subqueries
+
+/*
+  Q11. <Question Title>
+  ...
+*/
+-- Write your answer here:
+
+-- (Continue Q12 to Q20)
+
+-- ============================================================
+-- SECTION 3: ADVANCED QUESTIONS (10 Questions)
+-- ============================================================
+-- Window Functions, CTEs, Correlated Subqueries,
+-- Stored Procedures, Triggers, Optimization
+
+/*
+  Q21. <Question Title>
+  ...
+*/
+-- Write your answer here:
+
+-- (Continue Q22 to Q30)
+
+-- ============================================================
+-- SECTION 4: REAL-WORLD SCENARIO PROBLEMS (5 Problems)
+-- ============================================================
+-- Full mini-project style problems
+-- Based on realistic business scenarios
+
+/*
+  SCENARIO 1: <Scenario Title>
+  -----------------------------
+  Background : <realistic business context>
+  Task        : <what the query must achieve>
+  Table(s)    : <which tables>
+  Expected Output:
+    <columns + sample rows>
+  Constraints : <any rules like "use no subquery" or "must use CTE">
+*/
+-- Write your answer here:
+
+-- (Continue SCENARIO 2 to SCENARIO 5)
+
+# ==========================================================
+# FILE 3: ANSWERS FILE (_Answers.sql)
+# ==========================================================
+
+/*
+============================================================
+  MySQL <TOPIC_NAME> - Full Answers
+  File: <INDEX>_MySQL_<TOPIC_NAME>_Answers.sql
+============================================================
+  Note: Attempt all questions yourself before reading answers.
+  Each answer includes:
+    - Full working SQL
+    - Step-by-step explanation
+    - Dry run through sample data
+    - Alternative approach (where applicable)
+    - Complexity notes (for advanced queries)
+============================================================
+*/
+
+-- ============================================================
+-- SETUP: Same tables as Questions file
+-- ============================================================
+DROP DATABASE IF EXISTS mysql_answers;
+CREATE DATABASE mysql_answers;
+USE mysql_answers;
+
+-- Same CREATE TABLE + INSERT as Questions file
+
+-- ============================================================
+-- SECTION 1: BASIC ANSWERS
+-- ============================================================
+
+/*
+  ANS 1. <Matching Question Title>
+  ----------------------------------
+  Approach:
+    Step 1 - ...
+    Step 2 - ...
+    Step 3 - ...
+
+  Dry Run:
+    Given data row: emp_id=1, name='Alice', salary=60000
+    Condition salary > 50000 → TRUE → included in result
+    ...
+
+  Alternative: <if another approach exists>
+*/
+SELECT
+    column1,        -- reason for selecting this column
+    column2         -- reason for selecting this column
+FROM table_name     -- primary table
+WHERE condition     -- why this filter
+ORDER BY column1;   -- why this sort
+
+-- Verify Result:
+-- Expected Output:
+-- | column1 | column2 |
+-- |---------|---------|
+-- | value1  | value2  |
+
+-- (Continue ANS 2 to ANS 30 + SCENARIO answers)
+
+# ==========================================================
+# SAMPLE DATABASE SCHEMA
+# ==========================================================
+
+-- Use this consistent schema across ALL three files:
+
+-- employees   (emp_id, name, dept_id, salary, hire_date, manager_id)
+-- departments (dept_id, dept_name, location)
+-- projects    (project_id, project_name, budget, start_date, end_date)
+-- emp_projects(emp_id, project_id, role)
+-- customers   (customer_id, name, email, city, join_date)
+-- orders      (order_id, customer_id, order_date, total_amount, status)
+-- products    (product_id, name, category, price, stock)
+-- order_items (order_item_id, order_id, product_id, quantity, unit_price)
+
+-- INSERT at least 10-15 realistic rows per table used.
+
+# ==========================================================
+# DEPTH REQUIREMENTS
+# ==========================================================
+
+- Assume learner is a COMPLETE BEGINNER to MySQL
+- Build up progressively to ADVANCED / interview level
+- Do NOT skip any sub-topic
+- Explain WHY every clause/keyword exists, not just WHAT it does
+- Show what happens when you OMIT a clause (common mistake pattern)
+- Cover ALL variations, edge cases, and MySQL-specific behavior
+- Highlight MySQL-specific syntax vs standard SQL where relevant
+
+# ==========================================================
+# STRICT QUALITY RULES
+# ==========================================================
+
+❌ Do NOT write short or surface-level notes
+❌ Do NOT skip any concept or clause
+❌ Do NOT mix multiple unrelated concepts without clear separation
+❌ Do NOT give partial or incomplete answers
+❌ Do NOT use placeholder comments like "-- add more here"
+❌ Do NOT output anything outside valid .sql file content
+❌ Do NOT use any Python, markdown formatting, or notebook syntax
+
+✅ Use -- and /* */ comments only
+✅ Clearly separate every section with comment dividers
+✅ Write line-by-line comments on every SQL statement
+✅ Use progressive difficulty across all three files
+✅ Ensure every SQL snippet is independently runnable
+✅ Include realistic data in every example
+✅ Cover MySQL-specific functions (IFNULL, GROUP_CONCAT, REGEXP, etc.)
+
+# ==========================================================
+# FINAL OUTPUT
+# ==========================================================
+
+Return ALL THREE .sql files in sequence.
+
+Format each file as:
+
+-- ############################################################
+-- FILE: <filename>.sql
+-- ############################################################
+<full file content here>
+-- ############################################################
+-- END OF FILE: <filename>.sql
+-- ############################################################
+
+Do NOT write any explanation, heading, or extra text outside the file blocks.
+Only output the raw .sql content for all three files.

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Deep Traversal</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        .container * { border: 2px solid lightgrey; padding: 10px; margin: 10px; display: block; }
+        .highlight { border-color: red !important; border-width: 4px !important; }
+    </style>
+</head>
+<body>
+    <h1>Deep DOM Traversal</h1>
+
+    <div class="container" id="grandparent">Grandparent (div)
+        <div id="parent">Parent (div)
+            <p id="child1">Child 1 (p)
+                <span id="grandchild">Grandchild (span)</span>
+            </p>
+            <p id="child2" class="target">Child 2 (p)</p>
+            <p id="child3">Child 3 (p)</p>
+        </div>
+    </div>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: DEEP DOM TRAVERSAL
+        ========================================================
+
+        Traversal means "moving through" the HTML DOM hierarchy. It's often MUCH faster to select a nearby element and traverse, rather than writing a complex selector from scratch.
+
+        1. Moving UP (Ancestors):
+           - `.parent()`: Goes exactly ONE level up.
+           - `.parents()`: Goes ALL THE WAY UP to the <html> root. (Can pass a filter, e.g., `.parents('div')`).
+           - `.closest(selector)`: **CRITICAL METHOD**. Starts from current element and goes up the DOM tree until it finds a match for the provided selector. Only returns ONE element.
+
+        2. Moving DOWN (Descendants):
+           - `.children()`: Goes exactly ONE level down. Returns all direct children.
+           - `.find(selector)`: **CRITICAL METHOD**. Goes all the way down, searching through all descendants.
+
+        3. Moving SIDEWAYS (Siblings):
+           - `.siblings()`: Returns all siblings of the element.
+           - `.next()`: Returns the immediate next sibling.
+           - `.prev()`: Returns the immediate previous sibling.
+        */
+
+        $(function() {
+            // Uncomment one at a time to test!
+
+            // --- ASCENDANTS ---
+            // $("#grandchild").parent().addClass("highlight"); // Highlights child1
+            // $("#grandchild").parents("div").addClass("highlight"); // Highlights parent AND grandparent
+            // $("#grandchild").closest("div").addClass("highlight"); // Highlights ONLY 'parent' div (first match upwards)
+            
+            // --- DESCENDANTS ---
+            // $("#parent").children().addClass("highlight"); // Highlights child1, 2, 3
+            // $("#grandparent").find("span").addClass("highlight"); // Searches deep to find grandchild
+
+            // --- SIBLINGS ---
+            // $("#child2").siblings().addClass("highlight"); // Highlights child1, child3
+            // $("#child2").prev().addClass("highlight"); // Highlights child1
+            $("#child2").next().addClass("highlight"); // Highlights child3
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "What is the difference between .parent() and .parents()?"
+          Answer: `.parent()` only travels a single level up the DOM tree. `.parents()` travels all the way up to the document root, potentially returning multiple ancestor elements.
+        - "What is the difference between .find() and .children()?"
+          Answer: `.children()` only looks at direct children (1 level deep). `.find()` traverses DOWN multiple descendants deep.
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery CSS & Dimensions</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .box {
+            width: 200px;
+            height: 100px;
+            padding: 20px;
+            border: 5px solid black;
+            margin: 10px;
+            background-color: lightgreen;
+        }
+        .highlight-class { background-color: yellow !important; color: red !important; border-style: dashed; }
+    </style>
+</head>
+<body>
+    <h1>jQuery CSS & Dimensions</h1>
+    <p>Check the console for script output.</p>
+
+    <div id="demo-box" class="box">
+        Box Content
+    </div>
+    
+    <button id="btn-toggle">Toggle Class</button>
+    <button id="btn-css">Change CSS Direct</button>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: CSS & DIMENSIONS
+        ========================================================
+
+        1. CSS Classes: (BEST PRACTICE: Keep styling in CSS, toggle classes via JS)
+           - `.addClass("className")`: Adds one or more classes to selected elements.
+           - `.removeClass("className")`: Removes one or more classes.
+           - `.toggleClass("className")`: Toggles between adding/removing classes.
+           - `.hasClass("className")`: Returns true if the element has the class.
+
+        2. Direct CSS Manipulation (Use sparingly):
+           - `.css("propertyName")`: Returns the computed CSS value of the FIRST matched element.
+           - `.css("propertyName", "value")`: Sets a CSS property.
+           - `.css({ "prop1": "val1", "prop2": "val2" })`: Sets multiple CSS properties using a JSON object.
+
+        3. Dimensions (Crucial for plugins/scroll effects):
+           - `.width()` / `.height()`: Sets or returns the content width/height (excludes padding, border, margin).
+           - `.innerWidth()` / `.innerHeight()`: Returns width/height + padding.
+           - `.outerWidth()` / `.outerHeight()`: Returns width/height + padding + border.
+           - `.outerWidth(true)` / `.outerHeight(true)`: Returns width/height + padding + border + margin.
+        */
+
+        $(function() {
+            // 1. Class Manipulation
+            $("#btn-toggle").click(function() {
+                $("#demo-box").toggleClass("highlight-class");
+            });
+
+            // 2. Direct CSS Manipulation
+            $("#btn-css").click(function() {
+                // Reading CSS
+                const currentBg = $("#demo-box").css("background-color");
+                console.log("Current background:", currentBg);
+                
+                // Writing Multiple CSS props using JSON notation
+                $("#demo-box").css({
+                    "font-size": "24px",
+                    "font-weight": "bold",
+                    "border-radius": "20px"
+                });
+            });
+
+            // 3. Dimensions Logging
+            // The box is width:200, height:100, padding:20, border:5, margin:10
+            console.log("--- Box Dimensions ---");
+            const box = $("#demo-box");
+            console.log("Content Width (.width()):", box.width());           // 200
+            console.log("Inner Width (+padding):", box.innerWidth());       // 240 (200 + 20left + 20right)
+            console.log("Outer Width (+padding +border):", box.outerWidth()); // 250 (240 + 5left + 5right)
+            console.log("Total Outer Width (+margin):", box.outerWidth(true)); // 270 (250 + 10left + 10right)
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "What's the difference between .addClass() and .css()?"
+          Answer: `.addClass()` adds a semantic class to an element, relying on the external stylesheet for styling rules. `.css()` writes highly-specific inline styles directly to the element's `style` attribute. `.addClass()` is significantly cleaner and more maintainable.
+        - "What is the difference between innerHeight and outerHeight?"
+          Answer: `.innerHeight()` calculates height plus padding. `.outerHeight()` calculates height plus padding plus border. Passing `true` to `outerHeight(true)` includes the margin as well.
+        */
+    </script>
+</body>
+</html>

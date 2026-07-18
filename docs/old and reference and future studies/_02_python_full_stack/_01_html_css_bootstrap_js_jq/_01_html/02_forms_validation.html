@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms and Inputs</title>
+</head>
+<body>
+    <!-- 
+        ========================================================
+        TOPIC: HTML FORMS & INPUT VALIDATION
+        ========================================================
+
+        1. The <form> Element:
+           - Used to collect user input.
+           - 'action' attribute: Defines where the data gets sent upon submission (URL).
+           - 'method' attribute: HTTP method to use (GET or POST).
+             - GET: Appends form data into the URL (not secure, size limits, good for search).
+             - POST: Appends form data inside the body of the HTTP request (more secure, no size limits).
+
+        2. Form Elements:
+           - <input>: The most common form element. 'type' dictates its behavior.
+             - Types: text, password, submit, radio, checkbox, button, color, date, email, file, hidden, number, range, search, tel, time, url.
+           - <label>: Defines a label for several form elements. 
+             - The 'for' attribute should be equal to the 'id' of the related element to bind them together. This improves accessibility (clicking label focuses input).
+           - <select>: Drop-down list. Uses <option> for items.
+           - <textarea>: Multi-line text input field.
+           - <button>: Clickable button. type="submit" will submit the form.
+
+        3. Input Attributes:
+           - value: Specifies the initial value.
+           - readonly: Input field cannot be modified but is sent on submit.
+           - disabled: Input field is unusable and unclickable, and is NOT sent on submit.
+           - placeholder: Short hint describing expected value.
+
+        4. HTML5 Form Validation:
+           - required: Specifies that an input field must be filled out before submitting.
+           - min / max: Specifies minimum and maximum values (e.g., for number or date).
+           - maxlength / minlength: Specifies allowed text length.
+           - pattern: A regular expression that the input's value is checked against.
+           - step: Specifies legal number intervals for an input field.
+    -->
+
+    <h2>User Registration Form</h2>
+    <form action="/submit-data" method="POST">
+        <!-- Text Input with Label -->
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required minlength="3" maxlength="15">
+        </div>
+        <br>
+
+        <!-- Email Input -->
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="example@domain.com">
+        </div>
+        <br>
+
+        <!-- Password Input with Pattern -->
+        <div>
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        </div>
+        <br>
+
+        <!-- Radio Buttons -->
+        <div>
+            <p>Gender:</p>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+        </div>
+        <br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <!-- 
+        INTERVIEW TIP:
+        - Understand the difference between 'disabled' and 'readonly'.
+        - Know how 'for' in <label> maps to 'id' in <input>.
+        - Be able to explain GET vs POST methods clearly.
+    -->
+</body>
+</html>

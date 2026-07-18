@@ -1,0 +1,102 @@
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\.ipynb_checkpoints
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_00_
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_02_classification(categorical or string)
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_03_time_series(financial)
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_04_integration
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_01_linear
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_02_logistic
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_03_polynomiyal
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_04_ridge
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_05_lasso
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_06_elastic
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_07_decision_tree
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_08_random_forest
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_09_gradient_boosting_machines
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_10_support_vector
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_11_linear_discriminant_analysis
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_12_quadratic_discrimininant_analysis
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_13_bayesian
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_14_stochastic_gradient_descent
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_01_linear\Multiple_Linear
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_01_regression(numerical datas)\_01_linear\Simple_Linear
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_02_classification(categorical or string)\_01_logistic
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_02_classification(categorical or string)\_02_knn
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_02_classification(categorical or string)\_03_desicion_tree
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_02_classification(categorical or string)\_04_random_forest
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_02_classification(categorical or string)\_05_naive_bayes
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_02_classification(categorical or string)\_06_support_vector_machines
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_02_classification(categorical or string)\_07_GBM
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_02_classification(categorical or string)\_08_linear_discriminant_analysis
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_02_classification(categorical or string)\_09_quadratic_discrimininant_analysis
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_03_time_series(financial)\_01_ARIMA
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_03_time_series(financial)\_02_SARIMA
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_01_supervised\_03_time_series(financial)\_03_LSTM
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_01_clustering
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_02_dimensionality
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_03_association_rule
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_04_anomaly
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_05_extra
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_06_integration
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_01_clustering\_01_K-means
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_01_clustering\_02_hierarchical
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_01_clustering\_03_DBSCAN
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_01_clustering\_04_Gaussian misture model
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_01_clustering\_05_mean_shift
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_02_dimensionality\_01_PCA
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_02_dimensionality\_02_SVD
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_02_dimensionality\_03_t-SNE
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_02_dimensionality\_04_UMPA
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_02_dimensionality\_05_LDA
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_02_dimensionality\_06_ICA
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_03_association_rule\_01_apriori
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_03_association_rule\_02_eclat
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_03_association_rule\_03_frequent_pattern
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_04_anomaly\_01_isolation_forest
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_04_anomaly\_02_one-class_SVM
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_04_anomaly\_03_local_outleir_factor
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_04_anomaly\_04_autoencoders
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_05_extra\_01_NMF
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_05_extra\_02_LDA_latent_dirichlet_allocation
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_05_extra\_03_LLE
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_05_extra\_04_MDS
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_02_unsupervised\_05_extra\_05_Isomap
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_01_reinforcement
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_02_core_components_of_RL
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_03_dynamic_programming
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_04_monte_carlo_method
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_05_temporal_difference_learning
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_06_Q-learning
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_07_SARSA
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_08_expected_sarsa
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_09_policy_bases_method
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_10_dyna-Q
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_11_MPC
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_12_world_models
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_13_inverse
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_14_meta
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_15_alphaGO(MCTS)
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_03_dynamic_programming\_01_policy_iteration
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_03_dynamic_programming\_02_value_iteration
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_09_policy_bases_method\_01_plociy_gradient_methods
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_09_policy_bases_method\_02_actor-critic
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_09_policy_bases_method\_03_trust_region_policy_optimization
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_09_policy_bases_method\_04_proximal_policy_optimization
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_03_reinforcement\_09_policy_bases_method\_05_soft_actor_critic
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_01_intro
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_02_self_training
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_03_co_training
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_04_label_propagation
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_05_label_spreading
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_06_generative_model
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_07_S3vm
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_08_consistency_regularization
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_09_variational_autoencoders
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_10_pseudo_labeling
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_11_contrastive_learning
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_06_generative_model\_01_gaussian
+C:\Users\rajas\OneDrive\_12_02_data_science\_11_machine_learning\_04_semi_supervised\_06_generative_model\_02_semi_naive_bayes

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced CSS Typography</title>
+    
+    <!-- Importing a web font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="07_typography.css">
+</head>
+<body>
+    <h1>CSS Typography & Text Effects</h1>
+    
+    <p class="body-text">
+        This is standard body text demonstrating <code>line-height</code> and <code>letter-spacing</code>. 
+        Good typography is 90% of web design. It ensures readability and establishes hierarchy.
+    </p>
+
+    <h2 class="fancy-serif">Playfair Display Font (Serif)</h2>
+    <h2 class="mono">Roboto Mono Font (Monospace)</h2>
+
+    <div class="text-effects">
+        <p class="uppercase">This text is transformed to uppercase.</p>
+        <p class="shadow">This text has a drop shadow applied to it.</p>
+        <p class="truncate">This paragraph is way too long to fit inside its container, so we will use the text-overflow property to add an ellipsis at the end.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic HTML</title>
+</head>
+<body>
+    <!-- 
+        ========================================================
+        TOPIC: SEMANTIC HTML & ACCESSIBILITY
+        ========================================================
+
+        1. What is Semantic HTML?
+           - Semantic elements clearly describe their meaning in a human- and machine-readable way.
+           - Non-semantic elements: <div> and <span> (Tell nothing about their content).
+           - Semantic elements: <form>, <table>, <article> (Clearly define their content).
+
+        2. Why use Semantic HTML?
+           - Accessibility: Screen readers can use it as a signpost to help visually impaired users navigate.
+           - SEO: Search engines give more weight to semantic elements when understanding page context.
+           - Maintainability: Easier for developers to read and understand the document structure.
+
+        3. Key Semantic Elements in HTML5:
+           - <header>: A container for introductory content or a set of navigational links.
+           - <nav>: Defines a set of navigation links.
+           - <main>: Specifies the main content of a document (should be unique to the document, exclude sidebars/headers).
+           - <section>: Defines a thematic grouping of content, typically with a heading.
+           - <article>: Specifies independent, self-contained content (e.g., a blog post, news story). It should make sense on its own.
+           - <aside>: Content aside from the content it is placed in (e.g., a sidebar). Should be related to the surrounding content.
+           - <footer>: Defines a footer for a document or section (often contains author info, copyright, links).
+           - <figure> and <figcaption>: Used together to encapsulate an image/illustration/diagram and its caption.
+           - <time>: Defines a specific time or datetime.
+           - <mark>: Used to highlight/mark text.
+
+        4. Accessibility (A11y) Basics:
+           - ARIA (Accessible Rich Internet Applications): Attributes that make web content more accessible.
+             - role: Defines what an element is (e.g., role="button", role="navigation").
+             - aria-hidden="true": Hides elements from screen readers.
+             - aria-label: Provides an accessible name for an element when there's no visible text.
+    -->
+
+    <header>
+        <h1>My Awesome Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Latest Posts</h2>
+            <article>
+                <header>
+                    <h3>Understanding HTML5 Semantics</h3>
+                    <p>Published on <time datetime="2026-03-16">March 16, 2026</time></p>
+                </header>
+                <p>This article explains why semantic HTML is crucial for modern web development...</p>
+                
+                <figure>
+                    <img src="placeholder.jpg" alt="A diagram mapping div tags to semantic HTML5 tags">
+                    <figcaption>Fig 1. Converting divs to semantic tags.</figcaption>
+                </figure>
+            </article>
+        </section>
+
+        <aside>
+            <h3>Author Info</h3>
+            <p>Written by Web Dev Expert.</p>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 My Awesome Blog. All rights reserved.</p>
+    </footer>
+
+    <!-- 
+        INTERVIEW TIP:
+        - "What is Semantic HTML and why is it important?" is an extremely common question.
+        - Be ready to explain the difference between <section> and <article>.
+          - <article> is standalone and re-usable. 
+          - <section> is a thematic grouping of content.
+    -->
+</body>
+</html>

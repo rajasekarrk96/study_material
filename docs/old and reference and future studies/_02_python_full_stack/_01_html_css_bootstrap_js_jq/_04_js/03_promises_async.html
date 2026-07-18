@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises & Async/Await</title>
+</head>
+<body>
+    <h1>Asynchronous JavaScript</h1>
+    <p>Check the console for script output.</p>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: PROMISES & ASYNC/AWAIT
+        ========================================================
+
+        1. The Event Loop:
+           - JS is single-threaded. 
+           - The Event Loop continuously checks the Call Stack and the Queue. If the Call Stack is empty, it takes the first event from the Queue and pushes it to the Call Stack.
+           - Microtask Queue (Promises) has higher priority than Macrotask Queue (setTimeout).
+
+        2. Callbacks (The Old Way):
+           - Passing a function to be executed after another function finishes.
+           - Lead to "Callback Hell" (Pyramid of Doom) when nesting multiple async operations.
+
+        3. Promises (Introduced ES6):
+           - Represents the eventual completion (or failure) of an asynchronous operation.
+           - States: Pending, Fulfilled (Resolved), Rejected.
+           - Methods: .then() runs on success, .catch() runs on failure, .finally() runs regardless.
+           
+        4. Async / Await (Introduced ES8):
+           - Syntactic sugar on top of Promises. Makes asynchronous code look and behave a bit more like synchronous code.
+           - `async` before a function means it always returns a promise.
+           - `await` makes JavaScript wait until that promise settles and returns its result. Can only be used inside async functions.
+        */
+
+        // --- 1. Promise Example ---
+        const myPromise = new Promise((resolve, reject) => {
+            console.log("1. Promise started");
+            let success = true;
+            
+            setTimeout(() => {
+                if(success) resolve("Operation Successful Data!");
+                else reject("Operation Failed Error!");
+            }, 1000);
+        });
+
+        console.log("2. Sync code executing while promise is pending...");
+
+        myPromise
+            .then(data => console.log("3. Promise Resolved:", data))
+            .catch(error => console.error("3. Promise Rejected:", error));
+
+
+        // --- 2. Async/Await Example ---
+        function fetchUserData() {
+            return new Promise(resolve => {
+                setTimeout(() => resolve({ name: 'Bob', age: 25 }), 1500);
+            });
+        }
+
+        async function getUser() {
+            try {
+                console.log("Async Function: Fetching user...");
+                // Code pauses here until fetchUserData resolves
+                const user = await fetchUserData();
+                console.log("Async Function: User fetched:", user.name);
+            } catch (error) {
+                console.error("Async Function Error:", error);
+            }
+        }
+
+        getUser();
+
+        // --- 3. Promise.all ---
+        // Runs multiple promises concurrently and waits for ALL of them to resolve.
+        const p1 = Promise.resolve(3);
+        const p2 = 42;
+        const p3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'foo'));
+
+        Promise.all([p1, p2, p3]).then(values => {
+            console.log("Promise.all completed! Values:", values); // [3, 42, "foo"]
+        });
+
+        /*
+        INTERVIEW TIP:
+        - Event Loop question: `console.log(1); setTimeout(()=>console.log(2), 0); Promise.resolve().then(()=>console.log(3)); console.log(4);`
+          - Output: 1, 4, 3, 2. (Sync goes first: 1, 4. Then Microtasks: 3. Then Macrotasks: 2).
+        - Know how to handle errors in Async/Await (using try...catch block).
+        - Know difference between `Promise.all` (fails fast if one fails) and `Promise.allSettled` (waits for all regardless of success/fail).
+        */
+    </script>
+</body>
+</html>

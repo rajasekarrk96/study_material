@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation & Events</title>
+    <style>
+        .highlight { background-color: yellow; font-weight: bold; }
+        #demo-box { width: 100px; height: 100px; background-color: lightgreen; margin-top: 10px; display: flex; justify-content: center; align-items: center;}
+    </style>
+</head>
+<body>
+    <h1>DOM Manipulation & Events</h1>
+    <p id="first-para" class="text-content">Watch this paragraph change!</p>
+    <p class="text-content">This is another paragraph.</p>
+
+    <!-- Example Elements -->
+    <ul id="item-list">
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+
+    <button id="action-btn">Click to Add Item & Change Box</button>
+    <div id="demo-box">Box</div>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: DOM MANIPULATION & EVENTS
+        ========================================================
+
+        1. Selecting Elements:
+           - getElementById('id'): Fast, returns single element.
+           - getElementsByClassName('class'): Returns HTMLCollection (live collection).
+           - getElementsByTagName('tag'): Returns HTMLCollection.
+           - querySelector('css-selector'): Extremely versatile. Returns first matching element.
+           - querySelectorAll('css-selector'): Returns NodeList (static collection).
+
+        2. Modifying Elements:
+           - element.textContent: Gets/sets text (ignores HTML tags).
+           - element.innerHTML: Gets/sets HTML content (can be vulnerable to XSS).
+           - element.style.property: Sets inline CSS securely.
+           - element.classList.add/remove/toggle/contains: Best way to handle CSS classes.
+
+        3. Creating and Adding Elements:
+           - document.createElement('tag')
+           - element.appendChild(childElement)
+           - element.insertBefore(newElement, referenceElement)
+
+        4. Event Handling:
+           - element.addEventListener('event', callbackFunction)
+           - Event Propagation (Event Bubbling vs Capturing):
+             - Bubbling: Event triggers on innermost target, then bubbles UP to parents. (Default).
+             - Capturing: Event triggers on outermost parent, then trickles DOWN to target.
+             - event.stopPropagation() stops the bubbling/capturing phase.
+           - event.preventDefault(): Stops default browser behavior (like form submission refreshing page).
+        */
+
+        // --- EXAMPLES ---
+
+        // Selection
+        const firstPara = document.getElementById('first-para');
+        const list = document.getElementById('item-list');
+        const btn = document.getElementById('action-btn');
+        const box = document.getElementById('demo-box');
+
+        // Event Listener & Manipulation
+        btn.addEventListener('click', function(event) {
+            console.log("Button clicked!");
+            console.log("Event object:", event);
+
+            // 1. Modify Text & Class
+            firstPara.textContent = "I have been manipulated by JavaScript!";
+            firstPara.classList.toggle('highlight'); // Adds if missing, removes if present
+
+            // 2. Create and Append Node
+            const newLi = document.createElement('li');
+            newLi.textContent = "New Item " + (list.children.length + 1);
+            list.appendChild(newLi);
+
+            // 3. Inline Style modification
+            const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            box.style.backgroundColor = randomColor;
+        });
+
+        // --- Event Delegation (Crucial for Interviews) ---
+        // Instead of adding an event listener to EVERY <li>, add ONE to the <ul>.
+        list.addEventListener('click', function(event) {
+            // Check if the clicked target was an <li>
+            if(event.target.tagName === 'LI') {
+                console.log("You clicked on:", event.target.textContent);
+                event.target.style.textDecoration = "line-through";
+            }
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "What is event delegation?" -> "Attaching a single event listener to a parent element to manage events for all its descendants (even those added dynamically) by utilizing event bubbling."
+        - Know difference between `innerHTML` (HTML parsing) and `textContent` (text parsing, safer).
+        - Know the difference between a NodeList (from querySelectorAll) and an HTMLCollection (from getElementsByClassName). NodeList can be iterated with .forEach(), HTMLCollection cannot natively.
+        */
+    </script>
+</body>
+</html>

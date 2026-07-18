@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Type Coercion & Truthy/Falsy</title>
+</head>
+<body>
+    <h1>JavaScript Type Coercion & Truthy/Falsy Values</h1>
+    <p>Check the console for script output.</p>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: TYPE COERCION AND TRUTHY/FALSY
+        ========================================================
+
+        1. Equality: `==` vs `===`
+           - `==` (Loose Equality): Compares values AFTER attempting to convert them to a common type (Type Coercion).
+           - `===` (Strict Equality): Compares both VALUE and TYPE. No coercion happens.
+           - ALWAYS DO THIS: Use `===` in 99.9% of your code to avoid weird bugs.
+
+        2. Implicit Type Coercion Quirks (The bad parts of JS):
+           - `+` operator with a string concatenates: `5 + "5"` -> `"55"`
+           - `-`, `*`, `/` operators convert strings to numbers: `"5" - 1` -> `4`
+           - Adding arrays: `[] + []` -> `""` (Empty string)
+
+        3. Truthy and Falsy Values:
+           - In JS, every value has an inherent boolean value when evaluated in a logical context (like an `if` statement).
+           - The 6 Falsy Values (MEMORIZE THESE):
+             1. false
+             2. 0 (and -0, 0n)
+             3. "" (empty string)
+             4. null
+             5. undefined
+             6. NaN (Not a Number)
+           - EVERYTHING ELSE IS TRUTHY! (Yes, even empty arrays `[]` and empty objects `{}`).
+        */
+
+        console.log("--- Loose vs Strict Equality ---");
+        console.log("0 == '0':", 0 == '0');   // true (String '0' becomes number 0)
+        console.log("0 === '0':", 0 === '0'); // false (Number !== String)
+        console.log("null == undefined:", null == undefined);   // true! (They equal each other loosely)
+        console.log("null === undefined:", null === undefined); // false
+
+        console.log("--- Coercion Quirks ---");
+        console.log("2 + '2':", 2 + '2'); // '22'
+        console.log("'5' - 1:", '5' - 1); // 4
+
+        console.log("--- Truthy/Falsy Evaluation ---");
+        
+        function checkTruthiness(val) {
+            if (val) {
+                console.log(val, "is TRUTHY");
+            } else {
+                console.log(val, "is FALSY");
+            }
+        }
+
+        checkTruthiness(0);         // FALSY
+        checkTruthiness("");        // FALSY
+        checkTruthiness(null);      // FALSY
+        
+        checkTruthiness([]);        // TRUTHY! (Empty array)
+        checkTruthiness({});        // TRUTHY! (Empty object)
+        checkTruthiness("false");   // TRUTHY! (Non-empty string containing the word false)
+
+        /*
+        INTERVIEW TIP:
+        - "What is the difference between null and undefined?"
+          Answer: `undefined` means a variable has been declared but not assigned a value. `null` is an assignment value representing "no value" intentionally set by the programmer. 
+          Bonus: `typeof undefined` is "undefined", but `typeof null` is "object" (this is a famous ancient JS bug).
+        - "How do you check if an array is empty?"
+          Wrong: `if(arr)` (An empty array is truthy).
+          Right: `if(arr.length > 0)` or `if(arr.length === 0)`.
+        */
+    </script>
+</body>
+</html>

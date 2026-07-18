@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variables (Custom Properties)</title>
+    <link rel="stylesheet" href="11_css_variables.css">
+</head>
+<body>
+    <h1>CSS Variables (Custom Properties)</h1>
+    <p>A powerful feature natively built into CSS.</p>
+
+    <!-- Theme Demo -->
+    <div class="theme-container">
+        <h2>Theme Container</h2>
+        <p>This container and its children use CSS variables defined on the <code>:root</code>.</p>
+        <button class="primary-btn">Primary Action</button>
+        <button class="secondary-btn">Secondary Action</button>
+    </div>
+
+    <!-- Scope overriding demo -->
+    <div class="theme-container dark-mode">
+        <h2>Dark Theme Container</h2>
+        <p>By adding the <code>.dark-mode</code> class, we override the variable values locally!</p>
+        <button class="primary-btn">Primary Action</button>
+        <button class="secondary-btn">Secondary Action</button>
+    </div>
+
+    <!-- 
+        ========================================================
+        TOPIC: CSS VARIABLES (CUSTOM PROPERTIES)
+        ========================================================
+
+        1. Why CSS Variables?
+           - Prevents code duplication (e.g., using a specific hex color 50 times).
+           - Makes theme switching (like Dark Mode) incredibly easy.
+           - Variables can be accessed and modified via JavaScript (unlike SASS/LESS variables).
+
+        2. Definition & Syntax:
+           - Define: Custom properties must start with two dashes `--`. E.g., `--main-color: blue;`
+           - Use: Use the `var()` function to retrieve the value. E.g., `color: var(--main-color);`
+           
+        3. Scope:
+           - Variables are inherited. If defined on the `:root` (which represents the <html> element), they are global.
+           - If defined on a specific class like `.container { --padding: 20px; }`, they are only available inside that container and its children.
+
+        4. Fallbacks:
+           - Provide a fallback if the variable is missing/undefined.
+           - Syntax: `var(--my-var, fallback-value)`. E.g., `padding: var(--card-pad, 15px);`
+
+        5. Changing Variables via JS:
+           - element.style.setProperty('--my-var', 'new_value');
+    -->
+
+</body>
+</html>

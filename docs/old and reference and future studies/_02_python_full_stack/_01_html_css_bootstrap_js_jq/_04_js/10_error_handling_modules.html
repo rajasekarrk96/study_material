@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Error Handling & Modules</title>
+</head>
+<body>
+    <h1>JavaScript Error Handling & ES6 Modules</h1>
+    <p>Check the console for script output.</p>
+
+    <!-- 
+        ========================================================
+        TOPIC: ES6 MODULES
+        ========================================================
+
+        1. Why Modules?
+           - Keeps code organized in separate files.
+           - Prevents global namespace pollution (variables in a module are scoped to that module).
+           - Browsers require `type="module"` on the `<script>` tag to use `import`/`export`. Note: This usually requires running a local server, as fetching modules over `file://` protocol causes CORS errors.
+
+        2. Exporting / Importing:
+           - Named Export: `export const PI = 3.14;` -> `import { PI } from './math.js';`
+           - Default Export (One per file): `export default function doMath(){}` -> `import doMath from './math.js';`
+           - Can rename imports: `import { PI as mathPI } from './math.js';`
+    -->
+
+    <!-- NOTE: Must use type="module" to enable import/export mechanics -->
+    <script type="module">
+        /*
+        ========================================================
+        TOPIC: ERROR HANDLING (try...catch)
+        ========================================================
+
+        1. The mechanics:
+           - `try {}`: Contains code that might throw an error.
+           - `catch(error) {}`: Executes ONLY if an error was thrown in the `try` block. The `error` object contains details.
+           - `finally {}`: Executes ALWAYS, regardless of success or error (e.g., closing a database connection, stopping a loading spinner).
+
+        2. Throwing Custom Errors:
+           - Use the `throw` keyword to manually generate an error.
+           - Always throw an Error object (e.g., `throw new Error("Bad data")`), not just a string (`throw "Bad data"`), because the object contains the stack trace.
+
+        3. Async Error Handling:
+           - In modern JS, `try...catch` is heavily used alongside `async/await` to handle rejected Promises cleanly.
+        */
+
+        console.log("--- Basic Try/Catch ---");
+        try {
+            console.log("1. Starting try block...");
+            
+            // ReferenceError: nonExistentVar is not defined
+            const value = nonExistentVar + 5; 
+            
+            console.log("This line will NEVER execute");
+
+        } catch (err) {
+            console.error("2. Caught an error! Name:", err.name, "- Msg:", err.message);
+            // console.log("Stack Trace:\n", err.stack);
+        } finally {
+            console.log("3. Finally block executed. Cleanup done.");
+        }
+
+        console.log("\n--- Custom Errors (throw) ---");
+
+        function processAge(age) {
+            if (typeof age !== 'number') {
+                // Manually trigger an error
+                throw new TypeError("Age must be a number!"); 
+            }
+            if (age < 0) {
+                // Manually trigger an error
+                throw new Error("Age cannot be negative!");
+            }
+            console.log("Age processed safely:", age);
+        }
+
+        try {
+            processAge("Twenty");
+        } catch (e) {
+            console.warn("Processing failed:", e.message);
+        }
+
+        /*
+        INTERVIEW TIP:
+        - "How do you handle errors in an async function?"
+          Answer: "Wrap the `await` calls inside a `try/catch` block. The `catch` block will capture any rejections from the awaited Promise."
+        */
+    </script>
+</body>
+</html>

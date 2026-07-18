@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Events & Delegation Deep Dive</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        .container { padding: 20px; background: #eee; margin-top:20px;}
+        .dynamic-item { padding: 10px; background: #fff; border: 1px solid #ccc; margin: 5px; cursor: pointer;}
+        .dynamic-item:hover { background: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <h1>Events & Delegation Deep Dive</h1>
+
+    <!-- Basic Events -->
+    <button id="btn-click">Single Click</button>
+    <button id="btn-dblclick">Double Click</button>
+    <p id="hover-target">Hover over this paragraph.</p>
+
+    <!-- Form Events -->
+    <form id="my-form">
+        <input type="text" id="my-input" placeholder="Type something...">
+        <button type="submit">Submit Form</button>
+    </form>
+
+    <!-- Event Delegation (Advanced) -->
+    <div class="container" id="list-container">
+        <h3>Dynamic Task List</h3>
+        <button id="btn-add">Add New Task</button>
+        <ul id="task-list">
+            <li class="dynamic-item">Task 1 (Static)</li>
+            <li class="dynamic-item">Task 2 (Static)</li>
+        </ul>
+    </div>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: EVENTS & DELEGATION DEEP DIVE
+        ========================================================
+
+        1. Basic Events:
+           - `.click(fn)`, `.dblclick(fn)`, `.mouseenter(fn)`, `.mouseleave(fn)`, `.hover(fnIn, fnOut)`.
+           - Form Events: `.submit(fn)`, `.focus(fn)`, `.blur(fn)`, `.change(fn)`.
+           - Keyboard Events: `.keypress(fn)`, `.keydown(fn)`, `.keyup(fn)`.
+           - The Event Object: Passed as `e` or `event` to the callback function. Essential for `e.preventDefault()`.
+
+        2. The Modern `on()` Method:
+           - In modern jQuery, you should use the `.on()` method to attach ALL event handlers.
+           - The shortcuts like `.click()` simply call `.on('click')` under the hood.
+           - Syntax: `$(selector).on(event, childSelector, data, function)`
+
+        3. EVENT DELEGATION (CRITICAL SENIOR CONCEPT):
+           - Problem: If you attach a click handler to every `<li>`, and then generate a NEW `<li>` via AJAX or JS, that new `<li>` will NOT have a click handler.
+           - Solution: Event Delegation. Attach the click listener to a STATIC PARENT element (like the `<ul>` or the `<body>`). When a click happens, the event "bubbles up" to the parent. The parent checks if the target matches a specific child selector, and if so, runs the function.
+           - Syntax for Delegation: `$("#parent").on("click", ".dynamic-child", function() {})`
+        */
+
+        $(document).ready(function() {
+
+            // 1. Basic Events
+            // e = the event object containing information about the user's action
+            $("#btn-click").on("click", function(e) {
+                console.log("Clicked! X Coordinate:", e.pageX);
+            });
+
+            // Form Submit Interception (Very common)
+            $("#my-form").on("submit", function(e) {
+                // Prevent the browser's default form submission (which reloads the page)
+                e.preventDefault(); 
+                console.log("Form submitted. Input value:", $("#my-input").val());
+            });
+
+            // 2. Keyboard Events
+            $("#my-input").on("keyup", function() {
+                console.log("User Typed:", $(this).val());
+            });
+
+            // =========================================================
+            // 3. EVENT DELEGATION
+            // =========================================================
+            
+            // Generate a fresh DOM element dynamically when the user clicks Add
+            let counter = 3;
+            $("#btn-add").on("click", function() {
+                $("#task-list").append(`<li class="dynamic-item">Task ${counter} (Dynamic!)</li>`);
+                counter++;
+            });
+
+            // BAD WAY: (This logic will only work for Task 1 and 2, not Task 3+)
+            // $(".dynamic-item").on("click", function() {
+            //     alert($(this).text());
+            // });
+
+            // GOOD WAY: (Event Delegation)
+            // Attach listener to the static parent (#task-list).
+            // Tell it to listen for clicks originating from items with class '.dynamic-item'.
+            $("#task-list").on("click", ".dynamic-item", function() {
+                console.log("You clicked on:", $(this).text());
+                $(this).css("text-decoration", "line-through").css("color", "grey");
+            });
+            
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "What is event delegation in jQuery?"
+          Answer: "Event delegation is a mechanism to attach event handlers to DOM elements that are added to the page dynamically. Instead of binding the event to the element directly, you bind it to a static parent element using `.on()`, and pass the dynamic element's selector as the second argument. It exploits 'event bubbling' to handle the event efficiently."
+        - "How do you stop a form from submitting and reloading the page via jQuery?"
+          Answer: "Pass the event object `(e)` into the submit handler function and call `e.preventDefault()`;".
+        */
+    </script>
+</body>
+</html>

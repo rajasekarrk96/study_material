@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Interview Questions (LeetCode Style)</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: auto; padding: 20px;}
+        .question { margin-bottom: 2rem; padding: 1rem; border: 1px solid #ccc; border-radius: 5px; }
+        h3 { margin-top: 0; color: #333; }
+        .difficulty { font-weight: bold; }
+        .easy { color: green; }
+        .medium { color: orange; }
+        .hard { color: red; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+    <h1>Bootstrap Interview Challenges</h1>
+    <p>Practice these 5 Bootstrap challenges ranging from Easy to Hard.</p>
+
+    <!-- Question 1 -->
+    <div class="question">
+        <h3>1. Mobile-First Grid Translation <span class="difficulty easy">(Easy)</span></h3>
+        <p><strong>Problem:</strong> Write the HTML markup for a <code>div.row</code> containing three <code>div</code> children. Requirements:
+            <br>1. On mobile devices (extra small), the children should stack vertically (1 per row).
+            <br>2. On medium devices (tablets), the children should be 50% width each (2 per row, 3rd wraps to next line).
+            <br>3. On large devices (desktops), the children should be 33.33% width each (3 per row).
+        </p>
+        <p><strong>Goal:</strong> Test fundamental understanding of Bootstrap breakpoints (sm/md/lg) and 12-column math.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+&lt;div class="row"&gt;
+  &lt;div class="col-12 col-md-6 col-lg-4"&gt;Column 1&lt;/div&gt;
+  &lt;div class="col-12 col-md-6 col-lg-4"&gt;Column 2&lt;/div&gt;
+  &lt;div class="col-12 col-md-6 col-lg-4"&gt;Column 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+        </details>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question">
+        <h3>2. Margin and Padding Aliases <span class="difficulty easy">(Easy)</span></h3>
+        <p><strong>Problem:</strong> Without writing custom CSS, use Bootstrap utility classes to create a red button that has text reading "Delete". Ensure the button has <code>3rem</code> of padding on the left and right, <code>0.5rem</code> of padding on top and bottom, and <code>2rem</code> of margin added exclusively to its bottom.</p>
+        <p><strong>Goal:</strong> Verify fluency with Bootstrap's spacing utility conventions (<code>pt, pb, px, py, mt, mb...</code>).</p>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question">
+        <h3>3. Visibility Management <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> Provide the Bootstrap utility classes necessary to apply to an image so that it is completely hidden on mobile screens, visible on Medium screens, hidden again on Large screens, and visible again on Extra Large (xl) screens.</p>
+        <p><strong>Goal:</strong> Validate deeper understanding of `display` utilities overriding each other up through responsive tiers (e.g., `d-none d-md-block d-lg-none d-xl-block`).</p>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question">
+        <h3>4. Complex Nested Layouts <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> Implement a hero section. It requires a container. Inside the container, a row spanning 8 columns out of 12 by default, horizontally centered (using grid techniques, not <code>auto</code> margins). Within that centered column, establish another nested grid system that holds an image on the left (4 cols) and text on the right (8 cols).</p>
+        <p><strong>Goal:</strong> Ensure knowledge of nested grids and `.justify-content-center` or `.offset-*` classes.</p>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question">
+        <h3>5. Customizing Bootstrap Variables via SASS <span class="difficulty hard">(Hard)</span></h3>
+        <p><strong>Problem:</strong> You are tasked with integrating Bootstrap via Node/SASS (not CDN). The design team requires the primary color to be changed from default blue to deep purple (<code>#6f42c1</code>). What is the exact sequence of SASS imports and variable declarations required in your <code>main.scss</code> file to achieve this safely without directly modifying Bootstrap's source files?</p>
+        <p><strong>Goal:</strong> Test advanced framework customization knowledge. Validating that variables must be overridden *before* importing Bootstrap.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+// 1. Define custom variable overrides
+$primary: #6f42c1;
+
+// 2. ONLY THEN import bootstrap source
+@import "node_modules/bootstrap/scss/bootstrap";
+</pre>
+        </details>
+    </div>
+
+</body>
+</html>

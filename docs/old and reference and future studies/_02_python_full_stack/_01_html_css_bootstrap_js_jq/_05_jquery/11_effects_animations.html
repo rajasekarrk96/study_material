@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Effects & Custom Animations</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        .box { width: 150px; height: 150px; background-color: purple; color: white; text-align: center; line-height: 150px; font-weight: bold; position: relative; display: inline-block; margin: 20px;}
+        #anim-box { background-color: darkorange; }
+    </style>
+</head>
+<body>
+    <h1>Effects & Custom Animations</h1>
+    
+    <div>
+        <button id="btn-fade">Fade Toggle</button>
+        <button id="btn-slide">Slide Toggle</button>
+        <button id="btn-custom">Custom Animation</button>
+    </div>
+
+    <div id="target-box" class="box">Basic Box</div>
+    <div id="anim-box" class="box">Anim Box</div>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: EFFECTS AND CUSTOM ANIMATIONS
+        ========================================================
+
+        1. Basic Effects (Takes duration: "slow", "fast", or ms e.g. 1000):
+           - `.hide()` / `.show()` / `.toggle()`: Instantly hides/shows by changing display property, unless duration provided (animates width/height/opacity).
+           - `.fadeIn()` / `.fadeOut()` / `.fadeToggle()`: Animates opacity.
+           - `.slideDown()` / `.slideUp()` / `.slideToggle()`: Animates height.
+
+        2. Custom Animations (.animate()):
+           - Syntax: `$(selector).animate({params}, speed, callback);`
+           - The `params` parameter defines the CSS properties to be animated.
+           - CRITICAL: To animate elements moving around the screen left/right/top/down, their CSS `position` property MUST be set to `relative`, `fixed`, or `absolute`.
+           - Colors cannot be animated with standard jQuery! (Requires a separate UI plugin or CSS transitions).
+
+        3. Chaining & Queues:
+           - You can chain multiple animations together. They get placed into an "Animation Queue" and run one after another.
+           - `.stop(clearQueue, jumpToEnd)`: Used to stop an animation before it finishes (crucial to prevent "animation buildup" if a user hovers rapidly).
+        */
+
+        $(function() {
+            // 1. Basic Effects
+            $("#btn-fade").click(function() {
+                // fadeToggle(duration, complete_callback_function)
+                $("#target-box").fadeToggle("slow", function() {
+                    console.log("Fading sequence completed.");
+                });
+            });
+
+            $("#btn-slide").click(function() {
+                // slideToggle(duration)
+                $("#target-box").slideToggle(500);
+            });
+
+            // 2. Custom Animation (animate)
+            $("#btn-custom").click(function() {
+                const box = $("#anim-box");
+                
+                // Prevent animation buildup by stopping current animations first
+                box.stop(true, true).animate(
+                    {
+                        left: '250px',
+                        opacity: '0.5',
+                        height: '200px',
+                        width: '200px'
+                    }, 
+                    1000 // duration 1 second
+                ).animate(
+                    {
+                        // Chained animation that runs AFTER the first one finishes
+                        left: '0px',
+                        opacity: '1',
+                        height: '150px',
+                        width: '150px'
+                    },
+                    1000 // duration 1 second
+                );
+            });
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "Why is my .animate() call to change the 'left' property not working?"
+          Answer: "Because you didn't set the CSS `position` property on the element. Elements default to `position: static`, meaning `left/right/top/bottom` properties are ignored."
+        - "What is animation buildup and how do you fix it?"
+          Answer: "When a user triggers an animation rapidly (like hovering over a menu multiple times quickly), the animations stack up in the queue and keep playing long after the user stops hovering. Fix this by placing `.stop()` before your animation method, e.g., `$(this).stop().slideDown();`."
+        */
+    </script>
+</body>
+</html>

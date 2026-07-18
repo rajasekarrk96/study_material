@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Interview Questions</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: auto; padding: 20px;}
+        .question { margin-bottom: 2rem; padding: 1rem; border: 1px solid #ccc; border-radius: 5px; }
+        h3 { margin-top: 0; color: #333; }
+        .difficulty { font-weight: bold; }
+        .easy { color: green; }
+        .medium { color: orange; }
+        .hard { color: red; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+    <h1>jQuery Interview Challenges</h1>
+    <p>Practice these 5 jQuery challenges ranging from Easy to Hard.</p>
+
+    <!-- Question 1 -->
+    <div class="question">
+        <h3>1. Selecting and Modifying Multiple Elements <span class="difficulty easy">(Easy)</span></h3>
+        <p><strong>Problem:</strong> Given a list <code>&lt;ul id="tasks"&gt;</code> containing several <code>&lt;li class="todo"&gt;</code> elements, write a single line of jQuery to select all elements with the class "todo", add a class "completed" to them, and change their text color to gray.</p>
+        <p><strong>Goal:</strong> Test knowledge of basic selector syntax and method chaining.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+// jQuery implicitly loops over all matched elements, 
+// so no explicit `each()` loop is needed for this.
+$('.todo').addClass('completed').css('color', 'gray');
+</pre>
+        </details>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question">
+        <h3>2. Event Delegation in jQuery <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> You have a button that dynamically adds new <code>&lt;li class="dynamic-item"&gt;</code> elements to an existing <code>&lt;ul id="list"&gt;</code>. Explain why <code>$('.dynamic-item').click(function() {...})</code> will not work for these newly added elements. Then, write the correct jQuery implementation using Event Delegation so that clicks on both existing and new list items are detected.</p>
+        <p><strong>Goal:</strong> Testing modern jQuery event attachment using the <code>.on()</code> method to solve bubbling issues with dynamically injected nodes.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+            <p>Direct binding binds handlers only to elements that currently exist in the DOM. To handle dynamically added elements, you must bind to a static parent and use the selector parameter in <code>.on()</code>:</p>
+<pre>
+$('#list').on('click', '.dynamic-item', function() {
+    console.log("Item clicked:", $(this).text());
+});
+</pre>
+        </details>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question">
+        <h3>3. document.ready() vs window.onload() <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> Explain the key difference between jQuery's <code>$(document).ready()</code> and native JavaScript's <code>window.onload</code> event. If a page has many large images, which one fires first and why does it matter?</p>
+        <p><strong>Goal:</strong> Validate deeper understanding of browser rendering life cycle and resource loading.</p>
+        <details>
+            <summary>View Answer</summary>
+            <p><code>$(document).ready()</code> fires as soon as the DOM hierarchy has been fully constructed (HTML parsed). It does NOT wait for images, iframes, or async scripts to finish downloading.</p>
+            <p><code>window.onload</code> waits until the DOM structure AND all external resources (images, stylesheets, frames) are completely loaded.</p>
+            <p><strong>Conclusion:</strong> <code>ready()</code> almost always fires first. It matters because waiting for `onload` on a media-heavy page will make your interactive scripts unresponsive for several seconds while giant images download.</p>
+        </details>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question">
+        <h3>4. Basic AJAX Data Fetching <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> Write a jQuery AJAX request that performs a <code>GET</code> operation to the hypothetical endpoint <code>/api/metrics</code>. If the request succeeds, it should inject the returned JSON's "total" property into a <code>div</code> with ID "score". If it fails, it should alert "Error".</p>
+        <p><strong>Goal:</strong> Test memory of the $.ajax (or $.get) configuration object and syntax.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+$.ajax({
+    url: '/api/metrics',
+    type: 'GET',
+    dataType: 'json',
+    success: function(response) {
+        $('#score').text(response.total);
+    },
+    error: function(xhr, status, error) {
+        alert("Error: " + error);
+    }
+});
+</pre>
+        </details>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question">
+        <h3>5. jQuery `this` Context and $.each() <span class="difficulty hard">(Hard)</span></h3>
+        <p><strong>Problem:</strong> You have an array of strings: <code>var fruits = ['apple', 'banana', 'cherry'];</code>. Write a jQuery <code>$.each()</code> loop that iterates over this array. For each fruit, it should create an <code>&lt;li&gt;</code> element, append it to an <code>&lt;ul&gt;</code>, and immediately attach a click listener to that specific newly created <code>&lt;li&gt;</code> that alerts its text when clicked, referencing <code>$(this)</code>.</p>
+        <p><strong>Goal:</strong> Tests combining array iteration, DOM element creation on the fly, and understanding the context of `this` within a newly created jQuery node.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+var fruits = ['apple', 'banana', 'cherry'];
+var $ul = $('&lt;ul&gt;&lt;/ul&gt;');
+
+$.each(fruits, function(index, fruitName) {
+    // Create the node in memory
+    var $li = $('&lt;li&gt;&lt;/li&gt;').text(fruitName);
+    
+    // Attach listener to the node directly before appending it
+    $li.click(function() {
+        alert("You clicked: " + $(this).text());
+    });
+    
+    $ul.append($li);
+});
+
+$('body').append($ul);
+</pre>
+        </details>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Objects & Prototypes</title>
+</head>
+<body>
+    <h1>JavaScript Objects & Prototypes</h1>
+    <p>Check the console for script output.</p>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: OBJECTS, PROTOTYPES & 'THIS' Context
+        ========================================================
+
+        1. Object Basics & Iteration:
+           - Object.keys(obj) : Returns array of keys.
+           - Object.values(obj) : Returns array of values.
+           - Object.entries(obj) : Returns array of [key, value] pairs. Very useful for React/Data processing.
+
+        2. The 'this' Keyword Context:
+           - 'this' refers to the object that is executing the current function.
+           - In a method (function inside object): `this` refers to the owner object.
+           - In a regular standalone function: `this` refers to the global object (window), or `undefined` in strict mode.
+           - Arrow functions do NOT have their own `this`. They inherit it from where they are defined.
+
+        3. Binding context (call, apply, bind):
+           - Function methods used to explicitly set the `this` context for a function.
+           - `.call(thisArg, arg1, arg2)`: Executes immediately.
+           - `.apply(thisArg, [argsArray])`: Executes immediately, takes args as an array.
+           - `.bind(thisArg)`: Returns a NEW function with 'this' permanently bound. Doesn't execute.
+
+        4. Prototypal Inheritance:
+           - JS is a prototype-based language, not a true class-based one.
+           - Objects have a hidden hidden property `[[Prototype]]` (accessible via `__proto__` or `Object.getPrototypeOf()`).
+           - If a property is not found on an object, JS looks up the prototype chain to find it.
+        */
+
+        console.log("--- Object Iteration ---");
+        const user = { name: "Alice", age: 28, role: "Dev" };
+        
+        console.log("Keys:", Object.keys(user));
+        console.log("Values:", Object.values(user));
+        
+        // Looping over entries
+        for (const [key, value] of Object.entries(user)) {
+            console.log(`${key}: ${value}`);
+        }
+
+        console.log("\n--- 'this' Keyword & Function Binding ---");
+        const person1 = {
+            name: "John",
+            greet: function(greeting) {
+                console.log(greeting + ", my name is " + this.name);
+            }
+        };
+
+        const person2 = { name: "Sarah" };
+
+        person1.greet("Hello"); // Output: Hello, my name is John
+
+        // Use 'call' to borrow the function and set 'this' to person2
+        person1.greet.call(person2, "Hi"); // Output: Hi, my name is Sarah
+
+        // Use 'bind' to permanently lock 'this'
+        const sarahsGreeting = person1.greet.bind(person2);
+        sarahsGreeting("Yo"); // Output: Yo, my name is Sarah
+
+        console.log("\n--- Prototypal Inheritance ---");
+        const animal = {
+            isAlive: true,
+            eat: function() { console.log("Eating..."); }
+        };
+
+        // Create 'dog' with 'animal' as its prototype
+        const dog = Object.create(animal);
+        dog.barks = true;
+
+        console.log("Does dog have isAlive?", dog.isAlive); // true (Inherited from prototype)
+        console.log("Does dog have its OWN isAlive?", dog.hasOwnProperty('isAlive')); // false
+
+        /*
+        INTERVIEW TIP:
+        - "What is the difference between call, apply, and bind?"
+          Answer: `call` and `apply` execute the function immediately, but `apply` takes an array of arguments while `call` takes them comma-separated. `bind` does not execute the function, it returns a new bound function to be called later.
+        - "Explain prototypal inheritance."
+          Answer: Every object has a link to a prototype object. When trying to access a property, JS first checks the object, then its prototype, then the prototype's prototype, forming a 'prototype chain', ending when it hits `null`.
+        */
+    </script>
+</body>
+</html>

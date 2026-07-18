@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid Layout</title>
+    <link rel="stylesheet" href="04_grid.css">
+</head>
+<body>
+    <h1>CSS Grid Layout</h1>
+    <p>Two-dimensional layout system. Open the <code>04_grid.css</code> file to see how these grids are built.</p>
+
+    <!-- Example 1: Basic Grid Template Columns -->
+    <h2>1. Basic Grid (Columns & Rows)</h2>
+    <div class="grid-container basic-grid">
+        <div class="grid-item">Header</div>
+        <div class="grid-item">Sidebar</div>
+        <div class="grid-item">Main Content</div>
+        <div class="grid-item">Footer</div>
+    </div>
+
+    <!-- Example 2: Grid Template Areas -->
+    <h2>2. Grid Areas (Named Layouts)</h2>
+    <div class="area-grid">
+        <header class="a-header">Site Header</header>
+        <nav class="a-nav">Navigation Sidebar</nav>
+        <main class="a-main">Main Content Area</main>
+        <footer class="a-footer">Site Footer</footer>
+    </div>
+
+    <!-- Example 3: Auto-fit & minmax (Responsive without media queries) -->
+    <h2>3. Responsive Grid (Auto-fit & minmax)</h2>
+    <div class="auto-grid">
+        <div class="grid-item">Card 1</div>
+        <div class="grid-item">Card 2</div>
+        <div class="grid-item">Card 3</div>
+        <div class="grid-item">Card 4</div>
+        <div class="grid-item">Card 5</div>
+        <div class="grid-item">Card 6</div>
+    </div>
+</body>
+</html>

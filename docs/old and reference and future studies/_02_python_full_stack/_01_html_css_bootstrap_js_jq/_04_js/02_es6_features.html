@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern JS (ES6+)</title>
+</head>
+<body>
+    <h1>ES6+ Features</h1>
+    <p>Check the console for script output.</p>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: ES6 & MODERN JAVASCRIPT
+        ========================================================
+
+        1. Arrow Functions:
+           - Shorter syntax. 
+           - Do NOT have their own `this`, `arguments`, or `super`. They inherit `this` from the enclosing lexical context.
+
+        2. Template Literals:
+           - Use backticks (``). Allow multi-line strings and string interpolation (${expression}).
+
+        3. Destructuring Assignment:
+           - Unpack values from arrays, or properties from objects, into distinct variables.
+
+        4. Spread and Rest Operators (...):
+           - Spread: Expands an iterable into individual elements (used in function calls or array/object literals).
+           - Rest: Collects multiple elements and condenses them into a single array (used in function parameters).
+
+        5. Classes:
+           - Syntactic sugar over JS's existing prototype-based inheritance. Makes OOP cleaner to write.
+
+        6. Array Methods (Map, Filter, Reduce) - Extremely common in React/Interviews.
+        */
+
+        // --- 1. Arrow Functions & Lexical `this` ---
+        const obj = {
+            value: 10,
+            regularFunction: function() {
+                // `this` refers to `obj`
+                setTimeout(function() {
+                    // `this` inside standard setTimeout refers to the global window object
+                    console.log("Regular Func this.value:", this.value); // undefined
+                }, 100);
+            },
+            arrowFunction: function() {
+                // Arrow function inherits `this` from the surrounding context (`arrowFunction` method)
+                setTimeout(() => {
+                    console.log("Arrow Func this.value:", this.value); // 10
+                }, 100);
+            }
+        };
+        obj.regularFunction();
+        obj.arrowFunction();
+
+        // --- 2. Template Literals ---
+        const name = "Alice";
+        console.log(`Hello, my name is ${name}.`);
+
+        // --- 3. Destructuring ---
+        const person = { first: 'John', last: 'Doe', age: 30 };
+        const { first, last } = person; // Extracts matching keys
+        console.log("Destructured:", first, last);
+
+        const arr = [1, 2, 3];
+        const [a, b] = arr;
+        console.log("Array Destructured:", a, b);
+
+        // --- 4. Spread & Rest ---
+        // Spread (expanding)
+        const arr1 = [1, 2];
+        const arr2 = [...arr1, 3, 4]; // [1, 2, 3, 4]
+        console.log("Spread Array:", arr2);
+        
+        const obj1 = { a: 1, b: 2 };
+        const obj2 = { ...obj1, c: 3 }; // {a: 1, b: 2, c: 3} Note: Shallow copy!
+
+        // Rest (condensing parameters)
+        function sumAll(...numbers) {
+            return numbers.reduce((acc, curr) => acc + curr, 0);
+        }
+        console.log("Rest Sum:", sumAll(5, 10, 15)); // 30
+
+        // --- 5. High-Order Array Methods ---
+        const nums = [1, 2, 3, 4, 5];
+        
+        // Map: Transforms every element, returns new array.
+        const doubled = nums.map(n => n * 2); // [2, 4, 6, 8, 10]
+        
+        // Filter: Keeps only elements that pass a test, returns new array.
+        const evens = nums.filter(n => n % 2 === 0); // [2, 4]
+
+        // Reduce: Accumulates elements into a single value.
+        const sum = nums.reduce((total, n) => total + n, 0); // 15
+
+        /*
+        INTERVIEW TIP:
+        - "Difference between regular functions and arrow functions?" -> Mention the `this` binding behavior explicitly.
+        - "What does the spread operator do with nested objects?" -> "It performs a SHALLOW copy. Nested objects are still passed by reference."
+        - Be able to chain `.filter().map().reduce()` fluidly.
+        */
+    </script>
+</body>
+</html>

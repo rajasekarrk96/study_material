@@ -1,0 +1,116 @@
+/*
+    ========================================================
+    TOPIC: CSS BOX MODEL, DISPLAY, & POSITIONING
+    ========================================================
+
+    1. The Box Model:
+       - Every element is essentially a rectangular box.
+       - Box consists of (from inside out):
+         - Content: The actual text/image.
+         - Padding: Transparent space around content.
+         - Border: A border going around the padding and content.
+         - Margin: Transparent space outside the border.
+    
+    2. Box-Sizing:
+       - This is a CRITICAL interview topic. You almost always want `box-sizing: border-box`.
+       - content-box (Default): Width = content width. Adding padding/border increases total width.
+         Total Width = width + padding (L+R) + border (L+R).
+       - border-box: Width = content + padding + border. Adding padding/border shrinks content inside to maintain total width.
+
+    3. Display Types:
+       - block: Starts on new line, takes 100% width. Can have width/height (div, p, h1).
+       - inline: Stays inline with text. Ignores width/height, top/bottom margin. Works with L/R margin/padding (span, a).
+       - inline-block: Inline flow but accepts width/height/margins like a block element.
+       - none: Removes the element completely from the document flow (differs from visibility: hidden).
+
+    4. Positioning Contexts:
+       - static (default): Flows naturally in the document.
+       - relative: Positioned relative to its normal position. Elements still take up original space.
+         Used often to create an "anchor" for absolute children.
+       - absolute: Removed from document flow. Postioned relative to the nearest *positioned* ancestor.
+       - fixed: Removed from document flow. Positioned relative to the viewport (screen).
+       - sticky: Acts like relative until a scroll threshold is met, then acts like fixed.
+*/
+
+/* --- EXAMPLES --- */
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+h2 { margin-top: 40px; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
+
+/* Box Model Demo */
+.box {
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+    border: 5px solid black;
+    margin-bottom: 20px;
+    background-color: lightblue;
+}
+
+.standard-box {
+    box-sizing: content-box; 
+    /* Total width = 200 + 40 (padding) + 10 (border) = 250px */
+}
+
+.border-box {
+    box-sizing: border-box;
+    /* Total width = 200px. Content shrinks to 150px. */
+    background-color: lightgreen;
+}
+
+/* Display Demo */
+.inline-el, .block-el, .inline-block-el {
+    border: 2px dashed #666;
+    padding: 10px;
+    background: #f9f9f9;
+}
+
+.inline-el {
+    display: inline;
+    /* Width, Height, Margin Top/Bottom are ignored */
+    width: 500px; 
+}
+
+.block-el {
+    display: block;
+    width: 300px;
+    margin-top: 10px;
+}
+
+.inline-block-el {
+    display: inline-block;
+    width: 150px;
+    margin-top: 10px;
+}
+
+/* Positioning Demo */
+.relative-parent {
+    position: relative; /* establishes containing block for absolute child */
+    width: 300px;
+    height: 200px;
+    border: 2px solid purple;
+    background-color: #f3e5f5;
+    padding: 10px;
+}
+
+.absolute-child {
+    position: absolute;
+    bottom: -20px; /* positioned outside bottom */
+    right: 10px; /* positioned 10px from right */
+    background-color: purple;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* 
+    INTERVIEW TIP:
+    - Master absolute within relative. This comes up all the time.
+    - Be able to confidently explain the math behind `box-sizing: border-box`.
+    - Know difference: `display: none` vs `visibility: hidden` vs `opacity: 0`.
+      (1: gone, 2: invisible but takes space, 3: takes space & triggers events).
+*/

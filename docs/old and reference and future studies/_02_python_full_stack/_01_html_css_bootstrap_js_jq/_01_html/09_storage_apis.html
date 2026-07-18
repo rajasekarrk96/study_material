@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Storage & APIs</title>
+</head>
+<body>
+    <h1>HTML5 Web Storage & APIs</h1>
+
+    <!-- 
+        ========================================================
+        TOPIC: WEB STORAGE & BROWSER APIs
+        ========================================================
+
+        1. Web Storage API (Modern alternative to Cookies):
+           - Stores key/value pairs (Strings only!). To store objects, use JSON.stringify() and JSON.parse().
+           - Size limit: ~5MB to 10MB per domain (Cookies are only 4KB).
+           - Not sent to the server with every HTTP request (Cookies are).
+
+           A. LocalStorage:
+              - Persists even when the browser is closed and reopened.
+              - Methods: 
+                - setItem(key, value)
+                - getItem(key)
+                - removeItem(key)
+                - clear()
+
+           B. SessionStorage:
+              - Persists only for the duration of the page session (until the tab/window is closed).
+              - Methods are identical to LocalStorage.
+
+        2. IndexedDB (Advanced Storage):
+           - A low-level API for client-side storage of significant amounts of structured data (including files/blobs).
+           - Asynchronous, transactional database system. (Too complex for simple key/value storage, use only when necessary).
+
+        3. Geolocation API:
+           - Used to locate the user's geographical position. Requires user permission.
+
+        4. Drag and Drop API:
+           - Core HTML5 feature where you can drag and drop elements. Uses attributes like `draggable="true"` and events like `ondragstart`, `ondrop`, `ondragover`.
+    -->
+
+    <div style="margin-bottom: 20px;">
+        <h3>Storage Demo</h3>
+        <input type="text" id="username" placeholder="Enter your name">
+        <button onclick="saveName()">Save to LocalStorage</button>
+        <button onclick="greet()">Load & Greet</button>
+        <p id="greeting"></p>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <h3>Geolocation Demo</h3>
+        <button onclick="getLocation()">Get My Location</button>
+        <p id="geo-result"></p>
+    </div>
+
+    <script>
+        // --- STORAGE LOGIC ---
+        function saveName() {
+            const name = document.getElementById('username').value;
+            // Save data
+            localStorage.setItem('user_name', name);
+            alert("Name saved successfully across browser sessions!");
+        }
+
+        function greet() {
+            // Retrieve data
+            const storedName = localStorage.getItem('user_name');
+            if (storedName) {
+                document.getElementById('greeting').innerText = "Welcome back, " + storedName + "!";
+            } else {
+                document.getElementById('greeting').innerText = "No name found in storage.";
+            }
+        }
+
+        // --- GEOLOCATION LOGIC ---
+        function getLocation() {
+            const resultMsg = document.getElementById('geo-result');
+            
+            if (navigator.geolocation) {
+                // navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    resultMsg.innerText = "Latitude: " + position.coords.latitude + 
+                    "\nLongitude: " + position.coords.longitude;
+                }, function(error) {
+                    resultMsg.innerText = "Error getting location. Permission denied or unavailable.";
+                });
+            } else {
+                resultMsg.innerText = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        /*
+        INTERVIEW TIP:
+        - "Compare Cookies, LocalStorage, and SessionStorage."
+          Answer: 
+          - Cookies: 4KB, sent with every server request, can set expiration dates.
+          - LocalStorage: 5MB+, NOT sent to server, persists indefinitely until cleared.
+          - SessionStorage: 5MB+, NOT sent to server, wiped when tab/browser is closed.
+        - "How do you store a JavaScript Object in LocalStorage?"
+          Answer: `localStorage.setItem('data', JSON.stringify({a:1}))` and retrieve with `JSON.parse(localStorage.getItem('data'))`.
+        */
+    </script>
+</body>
+</html>

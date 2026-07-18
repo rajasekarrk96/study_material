@@ -1,0 +1,86 @@
+/*
+    ========================================================
+    TOPIC: CSS FLEXBOX
+    ========================================================
+
+    1. Core Concept:
+       - Displays elements in a single dimension (Row or Column).
+       - Solves difficult layout problems (like vertical centering) trivially.
+       - Needs a container (Flex Container) and items inside (Flex Items).
+
+    2. Container Properties (Parent):
+       - display: flex; (Turns children into flex items).
+       - flex-direction: row (default) | row-reverse | column | column-reverse.
+         - Main Axis: the primary axis items are laid out along.
+         - Cross Axis: the axis perpendicular to Main Axis.
+       - justify-content: aligns items along Main Axis.
+         - flex-start, flex-end, center, space-between, space-around, space-evenly.
+       - align-items: aligns items along Cross Axis.
+         - stretch (default), flex-start, flex-end, center, baseline.
+       - flex-wrap: nowrap (default) | wrap | wrap-reverse (Allows items to wrap to next line).
+       - gap: Creates space between items natively without margins.
+
+    3. Item Properties (Children):
+       - flex-grow: Defines ability for an item to grow if necessary (0 default). Number represents proportion.
+       - flex-shrink: Defines ability for an item to shrink if necessary (1 default).
+       - flex-basis: Defines default size of an element before remaining space is distributed (auto default).
+       - SHORTHAND: flex: [flex-grow] [flex-shrink] [flex-basis]. E.g., `flex: 1 0 auto;` or `flex: 1;`
+       - align-self: Allows default align-items to be overridden for individual items.
+       - order: Changes visual order without changing HTML DOM order (0 default).
+*/
+
+/* --- EXAMPLES --- */
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+.item {
+    background-color: coral;
+    color: white;
+    padding: 20px;
+    border: 2px solid white;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Base Container */
+.flex-container {
+    display: flex;
+    background-color: #eee;
+    padding: 10px;
+    gap: 10px; /* Modern way to add space between flex items! */
+}
+
+/* Example 1 */
+.row-container {
+    flex-direction: row; 
+    justify-content: space-between; /* pushes items to edges */
+}
+
+/* Example 2 */
+.align-container {
+    height: 150px;
+    align-items: center; /* Vertically centers items if row direction */
+}
+
+/* Example 3 */
+.flex-1 {
+    flex: 1; /* flex-grow: 1, flex-shrink: 1, flex-basis: 0. Distributes remaining space equally */
+}
+
+.flex-2 {
+    flex: 2; /* takes up twice as much available free space as flex-1 */
+}
+
+.flex-none {
+    /* implicitly flex: 0 1 auto. Stays size of contents */
+}
+
+/* 
+    INTERVIEW TIP:
+    - Interviewers love asking how to center a div both horizontally and vertically.
+      Answer: "Parent needs: display: flex; justify-content: center; align-items: center;"
+    - Understand that if flex-direction is column, justify-content does vertical spacing and align-items does horizontal spacing! (Axes swap).
+*/

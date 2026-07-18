@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media and HTML5 APIs</title>
+</head>
+<body>
+    <!-- 
+        ========================================================
+        TOPIC: MULTIMEDIA & HTML5 APIs
+        ========================================================
+
+        1. Multimedia Tags (Audio & Video):
+           - <video>: Embeds a video player without external plugins.
+             - Attributes: src, width, height, controls, autoplay, loop, muted, poster.
+           - <audio>: Embeds audio content.
+             - Attributes: src, controls, autoplay, loop, muted.
+           - <source>: Used within <audio> or <video> to define multiple media resources (browsers choose the first one they support).
+           - <track>: Specifies text tracks (like subtitles or captions) for media elements.
+
+        2. Canvas vs SVG (Graphics):
+           - <canvas>: Used to draw graphics on the fly via JavaScript.
+             - Raster-based (pixelated when scaled).
+             - Good for games, complex animations, dynamic rendering.
+             - Element is just a container, script is needed to actually draw.
+           - <svg>: Scalable Vector Graphics. Defines vector-based graphics in XML format.
+             - Vector-based (does not lose quality when zoomed or resized).
+             - Good for logos, icons, high-quality illustrations.
+             - Every element is available in the DOM (can be manipulated by CSS/JS).
+
+        3. Key HTML5 Web APIs (Usually combined with JS):
+           - Geolocation API: Used to get the geographical position of a user. (Requires user permission).
+             - navigator.geolocation.getCurrentPosition()
+           - Web Storage API: Stores data locally within the user's browser.
+             - Local Storage: Stores data with no expiration date (survives browser restart).
+             - Session Storage: Stores data for one session (data is lost when tab is closed).
+           - Web Workers API: Allows scripts to run in the background (preventing the UI from freezing during heavy processing).
+           - Fetch API: Modern, promised-based alternative to XMLHttpRequest (AJAX) for making network requests.
+    -->
+
+    <h2>HTML5 Video Player</h2>
+    <!-- Example of a native video player with fallback sources and subtitles -->
+    <video controls width="500" poster="thumbnail.jpg">
+        <source src="movie.mp4" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg">
+        <track src="subtitles_en.vtt" kind="subtitles" srclang="en" label="English">
+        Your browser does not support the video tag.
+    </video>
+
+    <h2>SVG Drawing</h2>
+    <!-- Interactive vector graphic -->
+    <svg width="100" height="100">
+        <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+    </svg>
+
+    <!-- 
+        INTERVIEW TIP:
+        - Understand the differences between LocalStorage, SessionStorage, and Cookies.
+          - Size limits (Storage ~5MB, Cookies ~4KB).
+          - Cookies are sent to the server with every HTTP request.
+        - Know when to choose <canvas> over <svg>.
+          - 10k objects? Canvas. Small highly interactive graph? SVG.
+    -->
+</body>
+</html>

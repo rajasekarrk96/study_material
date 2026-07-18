@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Basics & Document Structure</title>
+</head>
+<body>
+    <!-- 
+        ========================================================
+        TOPIC: HTML BASICS & DOCUMENT STRUCTURE
+        ========================================================
+
+        1. What is HTML?
+           - HyperText Markup Language. It is the standard language for creating web pages.
+           - Describes the structure of a Web page semantically.
+
+        2. Document Structure (Boilerplate):
+           - <!DOCTYPE html>: Declaration defines that this document is an HTML5 document. It helps the browser render the page correctly.
+           - <html>: The root element of an HTML page. 
+             - 'lang' attribute specifies the language of the document (important for accessibility and SEO).
+           - <head>: Contains meta information about the HTML page (title, charset, styles, scripts, links).
+           - <meta charset="UTF-8">: Specifies the character encoding for the HTML document. UTF-8 covers almost all characters and symbols.
+           - <meta name="viewport" content="...">: Gives the browser instructions on how to control the page's dimensions and scaling (Responsive Design).
+           - <title>: Specifies a title for the HTML page (shown in the browser's title bar or page tab).
+           - <body>: Defines the document's body, and is a container for all the visible contents, such as headings, paragraphs, images, hyperlinks, tables, lists, etc.
+
+        3. Global Attributes:
+           - id: Specifies a unique id for an element.
+           - class: Specifies one or more class names for an element (used by CSS and JS).
+           - style: Specifies an inline CSS style for an element.
+           - title: Specifies extra information about an element (displayed as a tooltip).
+           - data-*: Used to store custom data private to the page or application.
+
+        4. Basic Elements:
+           - Headings: <h1> to <h6>. <h1> is the most important, <h6> is the least. Search engines use headings to index structural content.
+           - Paragraphs: <p>.
+           - Links: <a>. 'href' attribute indicates the link's destination.
+           - Images: <img>. 'src' (source path) and 'alt' (alternative text for screen readers/fallback) are essential.
+           - Lists:
+             - Unordered: <ul> containing <li>.
+             - Ordered: <ol> containing <li>.
+             - Description: <dl> containing <dt> (term) and <dd> (description).
+    -->
+
+    <h1>Welcome to HTML Basics</h1>
+    <p title="This is a tooltip">Hover over this paragraph to see a tooltip.</p>
+    
+    <h2>Lists Example</h2>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+
+    <!-- 
+        INTERVIEW TIP:
+        - Always mention semantic meaning when explaining tags.
+        - Emphasize the importance of the 'alt' attribute for images (Accessibility).
+        - Know the difference between <head> and <header>. (<head> is for metadata, <header> is a semantic element for introductory content).
+    -->
+</body>
+</html>

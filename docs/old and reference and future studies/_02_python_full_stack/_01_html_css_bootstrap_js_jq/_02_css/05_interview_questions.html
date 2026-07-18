@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Interview Questions (LeetCode Style)</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: auto; padding: 20px;}
+        .question { margin-bottom: 2rem; padding: 1rem; border: 1px solid #ccc; border-radius: 5px; }
+        h3 { margin-top: 0; color: #333; }
+        .difficulty { font-weight: bold; }
+        .easy { color: green; }
+        .medium { color: orange; }
+        .hard { color: red; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+    <h1>CSS Interview Challenges</h1>
+    <p>Practice these 5 CSS challenges ranging from Easy to Hard.</p>
+
+    <!-- Question 1 -->
+    <div class="question">
+        <h3>1. The Holy Grail Centering <span class="difficulty easy">(Easy)</span></h3>
+        <p><strong>Problem:</strong> Create a container <code>div</code> taking up the full screen height and width. Inside it, place a smaller child box (e.g., 200x200px). Write the CSS to perfectly center the child box horizontally and vertically on the screen. Provide two different solutions (Flexbox and Absolute Positioning).</p>
+        <p><strong>Goal:</strong> Test absolute fundamentals of modern alignment.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+/* Solution 1: Flexbox */
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Solution 2: Absolute Positioning */
+.parent {
+  position: relative;
+  height: 100vh;
+}
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</pre>
+        </details>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question">
+        <h3>2. Nav Bar using Flexbox <span class="difficulty easy">(Easy)</span></h3>
+        <p><strong>Problem:</strong> Build a navigation bar. The logo should sit on the far left. A group of list items (Home, About, Contact) should be grouped together on the far right. Use Flexbox to separate them without explicitly assigning widths or hardcoded margins.</p>
+        <p><strong>Goal:</strong> Test understanding of `justify-content` and typical flexbox patterns.</p>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question">
+        <h3>3. Specificity Calculator <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> Given the following HTML: <code>&lt;div id="main" class="container"&gt;&lt;p class="text"&gt;Hello&lt;/p&gt;&lt;/div&gt;</code>.<br>
+        And the following CSS rules, what color will the text be, and why?
+        <ul>
+            <li><code>div p { color: blue; }</code></li>
+            <li><code>#main p { color: green; }</code></li>
+            <li><code>.container .text { color: red; }</code></li>
+            <li><code>div p.text { color: purple; }</code></li>
+        </ul>
+        </p>
+        <p><strong>Goal:</strong> Validate profound understanding of the cascade and specificity rules.</p>
+        <details>
+            <summary>View Answer</summary>
+            <p><strong>Green.</strong> Specificity values:<br>
+                1. div p = (0, 0, 0, 2)<br>
+                2. #main p = (0, 1, 0, 1) -> WINS (1 ID)<br>
+                3. .container .text = (0, 0, 2, 0)<br>
+                4. div p.text = (0, 0, 1, 2)
+            </p>
+        </details>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question">
+        <h3>4. The Responsive Auto Grid <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> Write CSS for a product card container. It should display cards in columns. The cards should never be smaller than <code>250px</code> wide, but should expand to take up remaining space. As the browser resizes, the columns should automatically wrap. <strong>Constraint: Do not use any @media queries.</strong></p>
+        <p><strong>Goal:</strong> Ensure knowledge of CSS Grid's powerful native responsive features (<code>repeat</code>, <code>auto-fit</code>, <code>minmax</code>).</p>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question">
+        <h3>5. CSS Triangle / Shapes <span class="difficulty hard">(Hard)</span></h3>
+        <p><strong>Problem:</strong> Using only a single empty <code>&lt;div&gt;</code> element, write the CSS to render an upward-pointing triangle. Do not use border-radius, SVG, or background images. Rely entirely on the border property behavior.</p>
+        <p><strong>Goal:</strong> Test knowledge of how CSS draws thick borders where colors meet at an angle. Often asked to see if a candidate builds tooltips/carets cleanly.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+.triangle-up {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid red; 
+  /* Top border is 0, so bottom border expands upwards into the transparent space */
+}
+</pre>
+        </details>
+    </div>
+
+</body>
+</html>

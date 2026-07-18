@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Advanced Selectors & Filters</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        .highlight { background-color: yellow; }
+        .red-text { color: red; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <h1>Advanced Selectors & Filters</h1>
+
+    <ul id="myList">
+        <li>Apple (Index 0)</li>
+        <li class="special">Banana (Index 1)</li>
+        <li>Cherry (Index 2)</li>
+        <li class="special" style="display:none;">Dragonfruit (Hidden)</li>
+        <li>Elderberry (Index 4)</li>
+    </ul>
+
+    <table border="1">
+        <tr><td>Row 1</td></tr>
+        <tr><td>Row 2</td></tr>
+        <tr><td>Row 3</td></tr>
+        <tr><td>Row 4</td></tr>
+    </table>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: ADVANCED SELECTORS & FILTERS
+        ========================================================
+
+        1. Standard CSS Selectors:
+           - jQuery uses CSS selectors exactly.
+           - `$("p")` (tag), `$(".class")` (class), `$("#id")` (ID).
+
+        2. jQuery Built-in Filters (Very Powerful!):
+           - `:first` / `:last` - Selects the first or last matched element.
+           - `:even` / `:odd` - Selects even or odd elements (0-indexed!).
+           - `:eq(index)` - Selects the element at the index (0-based).
+           - `:gt(idx)` / `:lt(idx)` - Selects elements greater than or less than an index.
+
+        3. Content & Visibility Filters:
+           - `:contains('text')` - Selects elements containing specific text.
+           - `:visible` - Selects currently visible elements.
+           - `:hidden` - Selects hidden elements (display:none, type="hidden", etc).
+           - `:empty` - Selects elements that have no children (including text nodes).
+           - `:parent` - Selects elements that HAVE at least one child (opposite of :empty).
+        */
+
+        $(function() {
+            // 1. Position Filters
+            $("li:first").addClass("red-text"); // Highlights 'Apple'
+            $("li:eq(2)").addClass("red-text"); // Highlights 'Cherry' (Index 2)
+            
+            // 2. Odd/Even Filters (Great for striped tables!)
+            // Note: index starts at 0, so Row 1 is index 0 (even), Row 2 is index 1 (odd).
+            $("tr:even").css("background-color", "#e0e0e0"); // Highlights rows 1, 3
+
+            // 3. Visibility Filters
+            // Find the hidden li, make it visible, and change its text
+            $("li:hidden").show().text("Dragonfruit (Revealed!)").css("color", "blue");
+
+            // 4. Content Filter
+            // Find any li that contains "Elder" and highlight it
+            $("li:contains('Elder')").addClass("highlight");
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "How do you select the third list item inside a ul?"
+          Answer: `$("ul li:eq(2)")` because `eq` is 0-indexed.
+        - "How do you apply zebra striping to a table using jQuery?"
+          Answer: `$("tr:odd").css("background-color", "#ccc");`
+        */
+    </script>
+</body>
+</html>

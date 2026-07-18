@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery DOM Manipulation</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style> .box { border: 1px solid black; padding: 10px; margin-bottom: 10px; } </style>
+</head>
+<body>
+    <h1>Deep DOM Manipulation</h1>
+
+    <div id="target-box" class="box">
+        <p>Original Content.</p>
+    </div>
+
+    <button id="btn-append">Append</button>
+    <button id="btn-prepend">Prepend</button>
+    <button id="btn-after">After</button>
+    <button id="btn-empty">Empty Box</button>
+    <button id="btn-remove">Remove Box Entirely</button>
+    <hr>
+    <input type="text" id="myInput" value="Default Text">
+    <button id="btn-val">Change Input Value</button>
+
+    <script>
+        /*
+        ========================================================
+        TOPIC: DOM MANIPULATION
+        ========================================================
+
+        1. Getting/Setting Content:
+           - `.text()`: Sets/returns the TEXT content (strips out HTML).
+           - `.html()`: Sets/returns the inner HTML content (parses HTML tags).
+           - `.val()`: Sets/returns the VALUE attribute of form fields (inputs, dropdowns).
+
+        2. Adding Elements:
+           - `.append(content)`: Inserts content INSIDE, at the END of the selected element(s).
+           - `.prepend(content)`: Inserts content INSIDE, at the BEGINNING of the selected element(s).
+           - `.after(content)`: Inserts content OUTSIDE, immediately AFTER the selected element(s).
+           - `.before(content)`: Inserts content OUTSIDE, immediately BEFORE the selected element(s).
+
+        3. Removing Elements:
+           - `.remove()`: Removes the selected element AND its child elements from the DOM.
+           - `.empty()`: Removes the CHILD elements from the selected element (but keeps the parent element intact).
+        */
+
+        $(function() {
+            // GET/SET Demo
+            // $("#target-box").html("<h2>Replaced all content with this HTML!</h2>");
+            
+            $("#btn-append").click(function() {
+                // INSIDE, at the end
+                $("#target-box").append("<p style='color:green;'>Appended text!</p>");
+            });
+
+            $("#btn-prepend").click(function() {
+                // INSIDE, at the beginning
+                $("#target-box").prepend("<p style='color:blue;'>Prepended text!</p>");
+            });
+
+            $("#btn-after").click(function() {
+                // OUTSIDE the box, below it
+                $("#target-box").after("<div>Placed explicitly after the box.</div>");
+            });
+
+            $("#btn-empty").click(function() {
+                // Clears inner contents, but the #target-box div remains
+                $("#target-box").empty();
+            });
+
+            $("#btn-remove").click(function() {
+                // Deletes #target-box completely from the DOM
+                $("#target-box").remove();
+            });
+
+            $("#btn-val").click(function() {
+                // Getting the value, altering it, and setting it
+                let currentVal = $("#myInput").val();
+                $("#myInput").val(currentVal + " UPDATED");
+            });
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "Difference between .empty() and .remove()?"
+          Answer: `.empty()` erases the *contents* (children) inside an element. `.remove()` deletes the *actual element itself* from the DOM.
+        - "Difference between .html() and .text()?"
+          Answer: `.html()` will parse and render HTML tags. `.text()` will escape HTML tags and literally print `<p>` to the screen as text. Using `.text()` is crucial when displaying user input to prevent XSS (Cross-Site Scripting) attacks.
+        */
+    </script>
+</body>
+</html>

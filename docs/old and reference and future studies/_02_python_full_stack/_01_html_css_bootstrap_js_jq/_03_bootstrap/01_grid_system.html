@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Grid System</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .demo-col {
+            background-color: rgba(86, 61, 124, 0.15);
+            border: 1px solid rgba(86, 61, 124, 0.2);
+            padding: .75rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h1>Bootstrap 5 Grid System</h1>
+        
+        <!-- 
+            ========================================================
+            TOPIC: BOOTSTRAP GRID SYSTEM
+            ========================================================
+
+            1. Core Concepts:
+               - Bootstrap's grid system uses a series of containers, rows, and columns to layout and align content.
+               - It's built with Flexbox and is fully responsive.
+               - It uses a 12-column system.
+
+            2. Containers:
+               - .container: Fixed-width container (max-width changes at each breakpoint).
+               - .container-fluid: Full-width container, spanning the entire width of the viewport.
+
+            3. Rows & Columns:
+               - .row: Wraps columns. Must be placed within a .container or .container-fluid.
+               - .col-[breakpoint]-[width]: Column classes.
+                 - Breakpoints: (xs - hidden), sm (>=576px), md (>=768px), lg (>=992px), xl (>=1200px), xxl (>=1400px).
+                 - Width: 1 through 12. E.g., .col-6 means 50% width. .col-md-4 means 33% width on md screens and up.
+
+            4. Auto-layout Columns (<div class="col">):
+               - Utilizing .col without numbers creates equal-width columns.
+               - .col-md-auto: Column width based on natural width of its content.
+
+            5. Offsetting Columns:
+               - .offset-[breakpoint]-[width]: e.g., .offset-md-4 moves the column 4 spots to the right.
+        -->
+
+        <h2 class="mt-4">1. Equal Width Columns</h2>
+        <div class="row">
+            <div class="col demo-col">1 of 3</div>
+            <div class="col demo-col">2 of 3</div>
+            <div class="col demo-col">3 of 3</div>
+        </div>
+
+        <h2 class="mt-4">2. Responsive Columns (Stacked to Horizontal)</h2>
+        <!-- 100% wide until medium sizes, then 50% each -->
+        <div class="row">
+            <div class="col-12 col-md-6 demo-col">col-12 col-md-6</div>
+            <div class="col-12 col-md-6 demo-col">col-12 col-md-6</div>
+        </div>
+
+        <h2 class="mt-4">3. Offsets</h2>
+        <div class="row">
+            <div class="col-md-4 demo-col">col-md-4</div>
+            <div class="col-md-4 offset-md-4 demo-col">col-md-4 offset-md-4</div>
+        </div>
+    </div>
+
+    <!-- 
+        INTERVIEW TIP:
+        - Knowing the breakpoint prefixes is crucial (sm, md, lg, xl, xxl).
+        - "How many columns does Bootstrap have?" (Answer: 12)
+        - Understand that .col-md-6 means "6/12 or 50% ON MEDIUM screens AND LARGER". On smaller screens, it defaults to 100% width unless explicitly stated otherwise (like .col-6 col-md-6).
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

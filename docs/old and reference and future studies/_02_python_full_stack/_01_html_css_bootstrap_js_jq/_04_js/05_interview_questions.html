@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Coding Questions (LeetCode Style)</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: auto; padding: 20px;}
+        .question { margin-bottom: 2rem; padding: 1rem; border: 1px solid #ccc; border-radius: 5px; }
+        h3 { margin-top: 0; color: #333; }
+        .difficulty { font-weight: bold; }
+        .easy { color: green; }
+        .medium { color: orange; }
+        .hard { color: red; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+    <h1>JavaScript Interview Challenges</h1>
+    <p>Practice these 5 JS coding challenges ranging from Easy to Hard. These are typical "Leetcode-style" algorithmic and JS-specific questions.</p>
+
+    <!-- Question 1 -->
+    <div class="question">
+        <h3>1. Two Sum (Leetcode #1) <span class="difficulty easy">(Easy)</span></h3>
+        <p><strong>Problem:</strong> Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. Time complexity goal: O(N).</p>
+        <p><strong>Goal:</strong> Test algorithmic thinking and usage of Maps/HashMaps in JS.</p>
+        <details>
+            <summary>View Solution</summary>
+<pre>
+function twoSum(nums, target) {
+    const map = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        if (map.has(complement)) {
+            return [map.get(complement), i];
+        }
+        map.set(nums[i], i);
+    }
+    return [];
+}
+</pre>
+        </details>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question">
+        <h3>2. Valid Palindrome <span class="difficulty easy">(Easy)</span></h3>
+        <p><strong>Problem:</strong> A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Write a function <code>isPalindrome(s)</code> returning true or false.</p>
+        <p><strong>Goal:</strong> Test string manipulation and regular expressions.</p>
+        <details>
+            <summary>View Solution</summary>
+<pre>
+function isPalindrome(s) {
+    // Remove non-alphanumeric and lowercase
+    const cleanStr = s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    
+    // Two pointers
+    let left = 0;
+    let right = cleanStr.length - 1;
+    
+    while(left < right) {
+        if(cleanStr[left] !== cleanStr[right]) return false;
+        left++;
+        right--;
+    }
+    return true;
+}
+</pre>
+        </details>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question">
+        <h3>3. Currying in JavaScript <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> Write a function <code>sum(a)(b)(c)</code> that returns the sum of a, b, and c. It should only be callable like <code>sum(1)(2)(3) // returns 6</code>.</p>
+        <p><strong>Goal:</strong> Validate profound understanding of closures and returning functions from functions.</p>
+        <details>
+            <summary>View Solution</summary>
+<pre>
+function sum(a) {
+    return function(b) {
+        return function(c) {
+            return a + b + c;
+        }
+    }
+}
+// ES6 syntax:
+// const sum = a => b => c => a + b + c;
+</pre>
+        </details>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question">
+        <h3>4. Deep Clone an Object <span class="difficulty medium">(Medium)</span></h3>
+        <p><strong>Problem:</strong> Write a function <code>deepClone(obj)</code> that creates a deep copy of a nested JavaScript object (copies values, not just references). Do not use <code>JSON.parse(JSON.stringify(obj))</code>.</p>
+        <p><strong>Goal:</strong> Test recursion and understanding of primitives vs references in JS.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+function deepClone(obj) {
+    if (obj === null || typeof obj !== 'object') {
+        return obj; // Return primitives immediately
+    }
+    // Handle Array or Object
+    let copy = Array.isArray(obj) ? [] : {};
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            copy[key] = deepClone(obj[key]); // Recursive call
+        }
+    }
+    return copy;
+}
+</pre>
+        </details>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question">
+        <h3>5. Implement a Debounce Function <span class="difficulty hard">(Hard)</span></h3>
+        <p><strong>Problem:</strong> Implement a <code>debounce(func, wait)</code> function. It should return a new version of the function that delays its execution until after <code>wait</code> milliseconds have elapsed since the last time it was invoked. (Often used for search bars to prevent firing API calls on every keystroke).</p>
+        <p><strong>Goal:</strong> Highly common FAANG interview question. Tests closures, <code>setTimeout</code>, and the <code>this</code> / arguments context binding.</p>
+        <details>
+            <summary>View Solution Sketch</summary>
+<pre>
+function debounce(func, wait) {
+    let timeoutId;
+    
+    return function(...args) {
+        // Clear the previous timer
+        clearTimeout(timeoutId);
+        
+        // Start a new timer
+        timeoutId = setTimeout(() => {
+            // Call the original function with right context/args
+            func.apply(this, args); 
+        }, wait);
+    };
+}
+</pre>
+        </details>
+    </div>
+
+</body>
+</html>

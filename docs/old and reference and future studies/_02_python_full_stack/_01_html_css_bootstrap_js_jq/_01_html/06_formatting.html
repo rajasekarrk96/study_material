@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Formatting & Inline Elements</title>
+</head>
+<body>
+    <!-- 
+        ========================================================
+        TOPIC: HTML FORMATTING & INLINE ELEMENTS
+        ========================================================
+
+        1. Structural Formatting (Semantic vs Presentation):
+           - In modern HTML, we prefer tags that give *meaning* (semantics) over tags that just change *appearance*.
+           
+        2. Important Inline Formatting Tags:
+           - <strong>: Defines important text (usually bold). Screen readers emphasize it.
+           - <b>: Draws attention without adding semantic importance (just makes it bold).
+           - <em>: Defines emphasized text (usually italic). Screen readers emphasize it softly.
+           - <i>: Defines a part of text in an alternate voice or mood (e.g., technical terms, foreign words). Just makes it italic.
+           - <mark>: Defines marked/highlighted text.
+           - <small>: Defines smaller text (e.g., copyright info, legal fine print).
+           - <del>: Defines text that has been deleted from a document (strikethrough).
+           - <ins>: Defines text that has been inserted into a document (usually underlined).
+           - <sub>: Subscript text (appears half a character below the line, e.g., H₂O).
+           - <sup>: Superscript text (appears half a character above the line, e.g., X²).
+           - <u>: Unarticulated annotation (underlined text, but should be used sparingly so it's not confused with a link).
+           - <q>: Defines a short inline quotation. Browsers usually insert quotation marks automatically.
+           - <blockquote>: Defines a section quoted from another source (usually indented and block-level).
+           - <abbr>: Defines an abbreviation or acronym. Use the 'title' attribute for the full version.
+           - <dfn>: Specifies the defining instance of a term.
+           - <cite>: Defines the title of a creative work (e.g., a book, painting, movie).
+           - <code>: Defines a piece of computer code.
+           - <kbd>: Defines keyboard input (e.g., "Press <kbd>Ctrl</kbd> + <kbd>C</kbd>").
+           - <samp>: Defines sample output from a computer program.
+           - <var>: Defines a variable in programming or a mathematical expression.
+           - <bdo>: Bi-Directional Override. Used to override current text direction (ltr vs rtl).
+    -->
+
+    <h1>Text Formatting Examples</h1>
+    <p>This is standard text.</p>
+    <p>This is <strong>strongly important</strong> text, compared to just <b>bold</b> text.</p>
+    <p>This is <em>emphasized</em> text, compared to just <i>italicized</i> text.</p>
+    
+    <h2>Specialty Tags</h2>
+    <p>Do not forget to buy <mark>milk</mark>.</p>
+    <p>My favorite color is <del>blue</del> <ins>red</ins>.</p>
+    <p>Water is H<sub>2</sub>O and E=MC<sup>2</sup>.</p>
+
+    <h2>Quotations and Citations</h2>
+    <p>He said, <q>I am learning HTML very deeply.</q></p>
+    <blockquote cite="https://www.w3.org/">
+        This is a block quotation from a trustworthy source. It usually gets indented by the browser.
+    </blockquote>
+    <p>The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.</p>
+    <p><cite>The Scream</cite> by Edvard Munch.</p>
+
+    <h2>Computer and Code</h2>
+    <p>If you want to copy, press <kbd>Ctrl</kbd> + <kbd>C</kbd>.</p>
+    <p>The <code>alert("Hello")</code> function will show a popup.</p>
+    <p>Output: <samp>File not found.</samp></p>
+
+    <!-- 
+        INTERVIEW TIP:
+        - "What is the difference between <b> and <strong>, or <i> and <em>?"
+          Answer: `<b>` and `<i>` are presentational (how it looks). `<strong>` and `<em>` are semantic (what it means), which is crucial for screen readers and accessibility.
+    -->
+</body>
+</html>

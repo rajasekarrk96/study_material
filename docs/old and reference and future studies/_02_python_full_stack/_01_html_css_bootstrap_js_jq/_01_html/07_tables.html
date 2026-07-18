@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tables Deep Dive</title>
+    <style>
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <!-- 
+        ========================================================
+        TOPIC: HTML TABLES DEEP DIVE
+        ========================================================
+
+        1. Core Table Elements:
+           - <table>: The container for the entire table.
+           - <tr>: Table Row.
+           - <th>: Table Header cell (typically bold and centered by default).
+           - <td>: Table Data cell (standard cell).
+           
+        2. Semantic Grouping (Highly Recommended for large tables):
+           - <thead>: Groups the header content.
+           - <tbody>: Groups the body content.
+           - <tfoot>: Groups the footer content (e.g., totals).
+           Note: Browsers can use these to enable scrolling of the tbody independently of the header/footer.
+
+        3. Attributes for Spanning:
+           - colspan: Specifies the number of columns a cell should span.
+           - rowspan: Specifies the number of rows a cell should span.
+
+        4. Additional Tags:
+           - <caption>: Defines a table caption. Must be immediately after the <table> tag.
+           - <colgroup>: Specifies a group of one or more columns in a table for formatting.
+           - <col>: Specifies column properties for each column within a <colgroup>.
+
+        5. Accessibility:
+           - The 'scope' attribute on <th> tells screen readers if the header is for a row or a col. (scope="col" or scope="row").
+    -->
+
+    <h1>Comprehensive Table Example</h1>
+    
+    <table>
+        <caption>Monthly Savings Report with Totals</caption>
+        
+        <!-- colgroup allows us to style whole columns at once without targeting every td -->
+        <colgroup>
+            <col span="1" style="background-color: #e6f7ff;"> <!-- Month col -->
+            <col span="2" style="background-color: #ffffff;"> <!-- Savings/Expenses col -->
+        </colgroup>
+
+        <thead>
+            <tr>
+                <th scope="col">Month</th>
+                <th scope="col">Savings</th>
+                <th scope="col">Expenses</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td scope="row">January</td>
+                <td>$100</td>
+                <td>$50</td>
+            </tr>
+            <tr>
+                <td scope="row">February</td>
+                <td>$80</td>
+                <td>$30</td>
+            </tr>
+            <tr>
+                <!-- Rowspan example: This cell spans 2 rows down -->
+                <td scope="row" rowspan="2">March & April</td>
+                <td>$150 (Mar)</td>
+                <td>$40 (Mar)</td>
+            </tr>
+            <tr>
+                <td>$200 (Apr)</td>
+                <td>$60 (Apr)</td>
+            </tr>
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <th scope="row">Total</th>
+                <!-- Colspan example: This cell spans 2 columns across -->
+                <td colspan="2" style="text-align: center; font-weight:bold;">Net: $350 Saved</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <!-- 
+        INTERVIEW TIP:
+        - Candidates often forget `<thead>`, `<tbody>`, and `<tfoot>`. Using them shows professional experience.
+        - Be able to construct a table with `rowspan` and `colspan` mentally. If a cell has colspan="2", the next <td> in that row is pushed over.
+    -->
+</body>
+</html>

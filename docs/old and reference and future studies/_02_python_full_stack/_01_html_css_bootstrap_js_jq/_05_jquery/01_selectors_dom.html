@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Selectors & DOM Traversal</title>
+    <!-- Include jQuery via CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .highlight { background-color: yellow; }
+        .hidden { display: none; }
+        .box { width: 100px; height: 100px; border: 1px solid black; margin: 5px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <h1>jQuery Selectors & DOM Traversal</h1>
+    <p>Check the source code for detailed notes.</p>
+
+    <!-- 
+        ========================================================
+        TOPIC: JQUERY SELECTORS & DOM TRAVERSAL
+        ========================================================
+
+        1. What is jQuery?
+           - A fast, small, and feature-rich JavaScript library.
+           - Simplifies HTML document traversal/manipulation, event handling, animations, and AJAX.
+           - Motto: "Write less, do more."
+
+        2. The Document Ready Event:
+           - Wait for the DOM to be fully loaded before running code.
+           - Standard: $(document).ready(function() { ... });
+           - Shorthand: $(function() { ... });
+
+        3. Selectors:
+           - jQuery uses CSS syntax to select elements. The function is $().
+           - $('p') : Selects all <p> elements.
+           - $('#demo') : Selects element with id="demo".
+           - $('.test') : Selects elements with class="test".
+           - $('input[type="text"]') : Selects specific inputs.
+
+        4. DOM Traversal (Moving through the DOM tree):
+           - parent(), parents(), parentsUntil() : Moving Up
+           - children(), find() : Moving Down
+           - siblings(), next(), prev() : Sideways
+
+        5. Modifying Elements:
+           - .html() : gets/sets inner HTML.
+           - .text() : gets/sets text content.
+           - .val() : gets/sets value of forms fields.
+           - .attr('name', 'value') : gets/sets attributes.
+           - .addClass(), .removeClass(), .toggleClass() : Manage CSS classes.
+    -->
+
+    <div id="container">
+        <h2>List Example</h2>
+        <ul class="my-list">
+            <li>Item 1</li>
+            <li class="special">Item 2 (Special)</li>
+            <li>Item 3</li>
+        </ul>
+        <button id="manipulate-btn">Highlight Special & Remove Item 3</button>
+    </div>
+
+    <script>
+        // The Document Ready Shorthand
+        $(function() {
+            
+            // On Click
+            $('#manipulate-btn').click(function() {
+                
+                // 1. Selector + Class Manipulation
+                // Find '.special' inside '.my-list' and add highlight
+                $('.my-list .special').addClass('highlight');
+                
+                // 2. Traversal + Action
+                // Find all siblings of '.special'
+                var siblings = $('.special').siblings();
+                console.log("Siblings of .special:", siblings.length); // 2
+                
+                // 3. Modifying Specific Elements
+                // Remove the last child of the list
+                $('.my-list li:last').remove(); 
+                
+            });
+
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "Why use $(document).ready()?" -> "To ensure DOM is fully constructed before script interacts with it, avoiding null reference errors."
+        - Know the difference between `.empty()` (removes children but keeps element) and `.remove()` (removes element entirely from DOM).
+        - Remember that jQuery returns a "jQuery Object" containing an array of matched elements, not a raw DOM node. You manipulate them in bulk without needing explicit loops.
+        */
+    </script>
+</body>
+</html>

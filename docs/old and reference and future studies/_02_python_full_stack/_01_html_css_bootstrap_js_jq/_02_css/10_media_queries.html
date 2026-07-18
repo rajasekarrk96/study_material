@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Queries & Responsive Design</title>
+    <link rel="stylesheet" href="10_media_queries.css">
+</head>
+<body>
+    <h1>Responsive Web Design</h1>
+    <p>Resize your browser window to see the layout and colors change based on viewport width!</p>
+    <p>Read <code>10_media_queries.css</code> to see how breakpoints are defined.</p>
+
+    <div class="header">
+        Responsive Header
+    </div>
+
+    <!-- The classic holy-grail-lite responsive layout -->
+    <div class="row">
+        <div class="column content-main">
+            <h2>Main Content Area</h2>
+            <p>On desktop, this takes up 75% of the screen. On mobile, it drops below the sidebar and takes up 100%.</p>
+        </div>
+        <div class="column sidebar">
+            <h2>Sidebar</h2>
+            <p>Desktop: 25% width. Mobile: 100% width.</p>
+        </div>
+    </div>
+    
+    <!-- Hide/Show on Desktop vs Mobile -->
+    <div class="mobile-only-alert">
+        🚨 You are currently viewing this on a MOBILE device (width < 768px). 🚨
+    </div>
+    <div class="desktop-only-alert">
+        🖥️ You are currently viewing this on a DESKTOP device (width >= 768px). 🖥️
+    </div>
+
+</body>
+</html>

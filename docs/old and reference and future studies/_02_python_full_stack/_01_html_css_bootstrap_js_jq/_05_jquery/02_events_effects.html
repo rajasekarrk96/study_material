@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Events & Effects</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #panel { padding: 50px; text-align: center; background-color: #e5eecc; border: solid 1px #c3c3c3; }
+        #flip { padding: 5px; text-align: center; background-color: #e5eecc; border: solid 1px #c3c3c3; cursor: pointer;}
+        .animate-box { width: 50px; height: 50px; background-color: red; position: relative; margin-top:20px;}
+    </style>
+</head>
+<body>
+    <h1>jQuery Events & Effects</h1>
+
+    <!-- 
+        ========================================================
+        TOPIC: JQUERY EVENTS & EFFECTS
+        ========================================================
+
+        1. Mouse & Keyboard Events:
+           - click(), dblclick(), mouseenter(), mouseleave(), hover() (Takes 2 functions: enter and leave).
+           - keypress(), keydown(), keyup().
+
+        2. Form Events:
+           - submit(), change(), focus(), blur().
+
+        3. Basic Effects:
+           - .hide(), .show(), .toggle(): Instantly or with speed param (e.g., .hide("slow")).
+           - .fadeIn(), .fadeOut(), .fadeToggle(), .fadeTo(): Animates opacity.
+           - .slideDown(), .slideUp(), .slideToggle(): Animates height.
+
+        4. Custom Animations:
+           - .animate({params}, speed, callback): Allows animation of custom CSS properties. 
+             - Note: You must define 'position: relative', 'fixed', or 'absolute' for positional animations.
+        
+        5. Method Chaining:
+           - jQuery allows you to chain actions/methods together on the same element within a single statement.
+           - E.g., $("#p1").css("color", "red").slideUp(2000).slideDown(2000);
+    -->
+
+    <!-- Slide Effect Demo -->
+    <div id="flip">Click to SlideToggle Panel</div>
+    <div id="panel">Hello world! (Slide panel)</div>
+
+    <!-- Animate Demo -->
+    <button id="btn-animate">Animate Box</button>
+    <div class="animate-box"></div>
+
+    <script>
+        $(document).ready(function(){
+            
+            // 1. Hover Event (Takes 2 functions, mouseenter and mouseleave)
+            $("#flip").hover(function(){
+                $(this).css("background-color", "yellow");
+            }, function(){
+                $(this).css("background-color", "#e5eecc");
+            });
+
+            // 2. Click + SlideToggle Effect
+            $("#flip").click(function(){
+                $("#panel").slideToggle("fast");
+            });
+
+            // 3. Custom Animation + Chaining
+            $("#btn-animate").click(function(){
+                var div = $(".animate-box");
+                
+                // Chain 3 animations sequentially!
+                div.animate({left: '200px', opacity: '0.5'}, "slow")
+                   .animate({width: '100px', height: '100px', opacity: '1'}, "slow")
+                   .animate({left: '0px', width: '50px', height: '50px'}, "fast");
+            });
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "What is chaining in jQuery?" -> "Calling multiple methods on the same jQuery selection in a single line. It improves performance because the browser doesn't have to find the same element(s) multiple times."
+        - Know which CSS properties CANNOT be animated via `.animate()` (like colors! You need jQuery UI or a plugin for color animation, or use CSS transitions instead).
+        */
+    </script>
+</body>
+</html>

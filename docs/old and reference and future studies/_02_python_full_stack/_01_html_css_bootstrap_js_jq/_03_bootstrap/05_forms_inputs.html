@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Forms & Input Groups</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container my-5">
+        <h1 class="mb-4">Bootstrap Forms Deep Dive</h1>
+
+        <!-- 
+            ========================================================
+            TOPIC: BOOTSTRAP FORMS, INPUT GROUPS & FLOATING LABELS
+            ========================================================
+
+            1. Basic Forms:
+               - Wrap inputs and labels in `.mb-3` (margin-bottom) for spacing.
+               - Inputs need `.form-control`.
+               - Select menus need `.form-select`.
+               - Checkboxes/Radios need `.form-check-input`.
+
+            2. Input Groups:
+               - `.input-group`: Wraps an input and an add-on (text or button) to sit seamlessly next to each other.
+               - `.input-group-text`: The actual add-on span (e.g., an '@' symbol or a '$' sign).
+
+            3. Floating Labels:
+               - Modern UI pattern where the label floats inside the input field and shrinks when focused.
+               - Wrap input and label in `.form-floating`.
+               - VERY IMPORTANT: The `<input>` must come FIRST, and the `<label>` must come SECOND.
+
+            4. Validation States:
+               - Add `.is-valid` or `.is-invalid` to the input.
+               - Followed by a `.valid-feedback` or `.invalid-feedback` div to show the success/error message.
+        -->
+
+        <div class="card shadow-sm p-4 mb-5">
+            <h3>1. Standard Validation Form</h3>
+            <form class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <!-- is-invalid class triggers the red border and shows the invalid-feedback div below -->
+                    <input type="text" class="form-control is-invalid" id="username" required>
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control is-valid" id="email" value="mark@example.com" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="card shadow-sm p-4 mb-5">
+            <h3>2. Input Groups</h3>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-text">.00</span>
+            </div>
+            
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Recipient's username">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Subscribe</button>
+            </div>
+        </div>
+
+        <div class="card shadow-sm p-4">
+            <h3>3. Floating Labels (Modern UI)</h3>
+            <!-- Remember: Input FIRST, Label SECOND! -->
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 
+        INTERVIEW TIP:
+        - "How do you create a floating label in Bootstrap 5?" -> "Use the `.form-floating` wrapper, and ensure the `<input>` element immediately precedes the `<label>` element."
+        - Know the difference between `.form-control` (text inputs) and `.form-check-input` (radio/checkbox).
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

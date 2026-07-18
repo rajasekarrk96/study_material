@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Interactive Components</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container my-5">
+        <h1 class="mb-5">Modals, Tooltips, and Popovers</h1>
+
+        <!-- 
+            ========================================================
+            TOPIC: INTERACTIVE COMPONENTS (REQUIRES JS)
+            ========================================================
+
+            Unlike simple CSS components (like buttons or cards), Modals, Tooltips, and Popovers require JavaScript to function. 
+            Bootstrap provides a bundled JS file (bootstrap.bundle.min.js) which includes Popper.js for positioning tooltips/popovers.
+
+            1. Modals:
+               - A dialog box/popup window that is displayed on top of the current page.
+               - Requires a trigger button with `data-bs-toggle="modal"` and `data-bs-target="#ModalID"`.
+
+            2. Tooltips:
+               - Small popup hints when hovering over an element.
+               - Needs `data-bs-toggle="tooltip"` and `title="Tooltip text"`.
+               - **MUST BE INITIALIZED WITH JAVASCRIPT manually!** (They are opt-in for performance).
+
+            3. Popovers:
+               - Similar to tooltips, but larger and can contain more content (title + body text).
+               - Triggered by click (default) instead of hover.
+               - Needs `data-bs-toggle="popover"`.
+               - **MUST BE INITIALIZED WITH JAVASCRIPT manually!**
+        -->
+
+        <!-- Modal section -->
+        <h3 class="mb-3">1. Modals</h3>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+        </button>
+
+        <!-- The Modal Markup (Usually placed at the bottom of the body tag for styling reasons) -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <!-- Close button 'X' -->
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        This is the complex internal content of the modal. You can place forms, grids, imagery, or text here.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <!-- Tooltips and Popovers -->
+        <h3 class="mb-3">2. Tooltips & Popovers (Requires JS Initialization)</h3>
+        
+        <p class="mb-4">
+            Hover over this <a href="#" data-bs-toggle="tooltip" title="This is a very helpful tooltip on hover!">link</a> to see a tooltip.
+        </p>
+        
+        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+            Click to toggle popover
+        </button>
+
+    </div>
+
+    <!-- Include Bootstrap Bundle JS (includes Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Script to Initialize Tooltips and Popovers -->
+    <script>
+        // Initialize all Tooltips on the page
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+
+        // Initialize all Popovers on the page
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+    </script>
+    
+    <!-- 
+        INTERVIEW TIP:
+        - "Why is my Bootstrap tooltip not showing up?" -> "Because Tooltips and Popovers are opt-in for performance reasons. You must initialize them using a small JavaScript snippet."
+        - Know the data attributes: `data-bs-toggle` and `data-bs-target`. (The `-bs-` namespace was added in Bootstrap 5 to prevent conflicts).
+    -->
+</body>
+</html>

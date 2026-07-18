@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Carousels & Accordions</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container my-5">
+        <h1 class="mb-5">Carousels & Accordions</h1>
+
+        <!-- 
+            ========================================================
+            TOPIC: CAROUSELS (SLIDERS) & ACCORDIONS
+            ========================================================
+
+            1. Carousels:
+               - A slideshow component for cycling through elements (images or slides of text), like a carousel.
+               - `data-bs-ride="carousel"` auto-plays the carousel on load.
+               - Inner components: `.carousel-indicators` (the little dots at bottom), `.carousel-inner` (holds the slides), `.carousel-control-prev/next` (the side arrows).
+
+            2. Accordions:
+               - Vertically collapsing content panels. Ideal for FAQs.
+               - Uses the Collapse JavaScript plugin internally.
+               - `data-bs-parent="#AccordionID"` ensures that opening one panel automatically closes the others (accordion behavior). Otherwise, they act as independent collapse panels.
+        -->
+
+        <h3 class="mb-3">1. The Accordion (FAQ Style)</h3>
+        <div class="accordion mb-5" id="accordionExample">
+            <!-- Item 1 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Accordion Item #1
+                    </button>
+                </h2>
+                <!-- 'show' class makes it open by default -->
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>This is the first item's accordion body.</strong> It is shown by default.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Accordion Item #2
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>This is the second item's accordion body.</strong> It is hidden by default. Notice `data-bs-parent` makes sure Item #1 closes when this opens.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mb-3">2. The Carousel</h3>
+        <!-- Carousel Container -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 600px; margin: auto;">
+            <!-- Indicators (Dots) -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            </div>
+            
+            <!-- Slides -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://source.unsplash.com/random/600x400?nature" class="d-block w-100" alt="Nature Slide 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://source.unsplash.com/random/600x400?city" class="d-block w-100" alt="City Slide 2">
+                </div>
+            </div>
+            
+            <!-- Controls (Arrows) -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Include Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

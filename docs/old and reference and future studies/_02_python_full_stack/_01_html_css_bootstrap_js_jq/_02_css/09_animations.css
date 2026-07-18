@@ -1,0 +1,96 @@
+/*
+    ========================================================
+    TOPIC: CSS TRANSITIONS & ANIMATIONS
+    ========================================================
+
+    1. Transitions:
+       - Smoothly changes a property from State A to State B (e.g., normally blue, red on hover).
+       - Requires a trigger (like :hover, :focus, or a JS class change).
+       - Syntax: `transition: property duration timing-function delay;`
+       - Example: `transition: background-color 0.3s ease-in-out;` (Only transition specific properties, avoid `all` for performance).
+       - `timing-function`: ease (default), linear, ease-in, ease-out, ease-in-out, cubic-bezier.
+
+    2. Keyframe Animations (@keyframes):
+       - For complex animations that have multiple steps or run automatically without a trigger.
+       - You define the stages (0% to 100%, or from/to).
+       - Syntax to apply: `animation: name duration timing-function delay iteration-count direction fill-mode;`
+       - `iteration-count`: infinite, or a number.
+       - `direction`: alternate (goes back and forth).
+       - `fill-mode`: forwards (keeps the final state of the 100% keyframe when it ends).
+
+    3. Transform Property (Essential for good performance):
+       - ALWAYS use `transform: translate()` instead of changing `top`/`left` properties. `transform` uses GPU hardware acceleration (cheap). Changing `top` causes layout recalculations (expensive/janky).
+       - Methods: translate(x, y), scale(x, y), rotate(deg), skew(deg).
+*/
+
+/* --- EXAMPLES --- */
+
+body { font-family: sans-serif; padding: 20px; }
+
+/* 1. Basic Transition */
+.transition-btn {
+    background-color: #007bff; color: white; padding: 10px 20px; border: none; font-size: 1rem; cursor: pointer; border-radius: 5px;
+    
+    /* Defines HOW properties will change when state changes */
+    transition: background-color 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.transition-btn:hover {
+    background-color: #0056b3;
+    /* Scale gives a slight "pop" effect */
+    transform: scale(1.05);
+}
+
+/* Advanced Transition (Cards) */
+.card-container { margin: 20px 0; perspective: 1000px; /* 3D effect container */ }
+.card {
+    width: 250px; height: 150px; background: white; border: 1px solid #ddd; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    
+    /* Transition applied to base state */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    /* TranslateY moves card UP visually without affecting doc flow */
+    transform: translateY(-10px);
+    /* Increase shadow size for depth */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* 2. Keyframe Animations */
+
+/* The Spinner Loader */
+.loader {
+    width: 50px; height: 50px;
+    border: 5px solid #f3f3f3; /* Light gray */
+    border-top: 5px solid #3498db; /* Blue */
+    border-radius: 50%; /* Makes it a circle */
+    
+    /* Applies the 'spin' keyframes */
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* The Bouncing Ball */
+.bouncing-ball {
+    width: 40px; height: 40px; background-color: #e74c3c; border-radius: 50%;
+    margin-top: 50px;
+    
+    /* 'alternate' makes it go 0% -> 100% -> 0% */
+    animation: bounce 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-80px); /* Move UP 80px */ }
+}
+
+/*
+    INTERVIEW TIP:
+    - "Why should you animate `transform` and `opacity` instead of `margin`, `width`, or `left`?"
+      Answer: "Performance. Animating width/margin triggers a 'repaint' and 'reflow' on the CPU, which is recalculating layout for the whole page (laggy). Animating `transform` happens in the 'composite' layer on the GPU, making it buttery smooth at 60fps."
+*/

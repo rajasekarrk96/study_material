@@ -1,0 +1,80 @@
+/*
+    ========================================================
+    TOPIC: COLORS, BACKGROUNDS & GRADIENTS
+    ========================================================
+
+    1. Color Formats:
+       - Keywords: red, blue, transparent, currentcolor.
+       - HEX: #RRGGBB (e.g., #ff0000 -> pure red). Can also include alpha: #RRGGBBAA.
+       - RGB(A): rgb(red, green, blue). Values 0-255. `rgba` adds an alpha channel (opacity) from 0 to 1.
+       - HSL(A): hsl(hue, saturation, lightness). Hue 0-360 (0=red, 120=green, 240=blue). Saturation/Lightness are percentages. Easiest for creating color palettes mentally.
+
+    2. Background Properties:
+       - background-color: Sets the solid background color.
+       - background-image: url('path/to/img.jpg').
+       - background-repeat: repeat (default), no-repeat, repeat-x, repeat-y.
+       - background-position: center, top right, 50px 100px.
+       - background-size: cover (scales to fill element without stretching, may crop), contain (scales to fit entirely within element).
+       - background-attachment: scroll (default, scrolls with page), fixed (stays fixed relative to viewport for parallax effects).
+       - SHORTHAND: background: color image position/size repeat attachment;
+
+    3. Gradients:
+       - linear-gradient(direction, color-stop1, color-stop2, ...)
+       - radial-gradient(shape size at position, start-color, ..., last-color)
+       - Treated as a `background-image`, not a `background-color`.
+*/
+
+body { font-family: sans-serif; padding: 20px; }
+
+.color-demo {
+    padding: 20px; margin: 10px 0; color: white; font-weight: bold; width: 300px;
+    border-radius: 5px; /* Adds rounded corners */
+}
+
+/* Color Formats */
+.hex { background-color: #ff5733; }
+.rgb { background-color: rgb(50, 205, 50); }
+.rgba { background-color: rgba(50, 205, 50, 0.5); /* 50% opacity green */ }
+.hsl { background-color: hsl(240, 100%, 50%); /* Pure Blue */ }
+
+.bg-demo {
+    width: 300px; height: 150px; margin: 10px 0; color: white; display: flex;
+    align-items: center; justify-content: center; text-align: center;
+    border: 2px solid #ccc;
+}
+
+/* Background Image Shorthand */
+.image-bg {
+    /* 
+      Adding a linear gradient overlay on top of an image to darken it so text is readable!
+      Gradients stack: First one is on top.
+    */
+    background: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('https://source.unsplash.com/random/300x150') center/cover no-repeat;
+}
+
+/* Gradients */
+.linear-grad {
+    background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+}
+
+.radial-grad {
+    background-image: radial-gradient(circle, #00C9FF 0%, #92FE9D 100%);
+}
+
+.repeating-grad {
+    background-image: repeating-linear-gradient(
+        45deg,
+        #f3f3f3,
+        #f3f3f3 10px,
+        #ccc 10px,
+        #ccc 20px
+    );
+}
+
+/*
+    INTERVIEW TIP:
+    - "How do you make an image cover the whole div without stretching?" -> "background-size: cover"
+    - "How do you add a semi-transparent dark overlay to a background image?" -> "Use multiple backgrounds. A linear-gradient with rgba(0,0,0,0.5) on top of the url()."
+*/

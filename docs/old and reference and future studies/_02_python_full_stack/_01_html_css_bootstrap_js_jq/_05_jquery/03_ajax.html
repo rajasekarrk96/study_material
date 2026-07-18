@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery AJAX</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>jQuery AJAX</h1>
+
+    <!-- 
+        ========================================================
+        TOPIC: JQUERY AJAX
+        ========================================================
+
+        1. What is AJAX?
+           - Asynchronous JavaScript And XML.
+           - Loading data in the background and updating parts of a webpage without reloading the whole page.
+
+        2. Core jQuery AJAX Methods:
+           - $.ajax(): The most configurable, base level method used to perform async HTTP requests.
+           - $.get(): Load data from a server using a GET HTTP request. Returns data.
+           - $.post(): Load data using a POST HTTP request. Used for sending/submitting data.
+           - .load(): Loads raw HTML data from a server and places it inside the selected element. (E.g., $('#div').load('test.html'))
+
+        3. $.ajax Setup:
+           $.ajax({
+               url: 'url...',
+               type: 'GET/POST/PUT/DELETE',
+               data: { // data to send },
+               dataType: 'json', // Expected return type
+               success: function(response) { ... },
+               error: function(xhr, status, error) { ... }
+           });
+    -->
+
+    <button id="fetch-users">Fetch Users (AJAX GET)</button>
+    <div id="result">
+        <ul id="user-list"></ul>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            
+            $("#fetch-users").click(function(){
+                var $btn = $(this);
+                $btn.prop('disabled', true).text('Loading...');
+                
+                // Using $.ajax (More options)
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/users', // Fake REST API
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        // Data is already parsed as a JS array of objects because dataType was 'json'
+                        $("#user-list").empty(); // Clear old list
+                        
+                        // jQuery loop over array: $.each()
+                        $.each(data, function(index, user) {
+                            var liItem = $("<li>").text(user.name + " (" + user.email + ")");
+                            $("#user-list").append(liItem);
+                        });
+                        
+                        $btn.prop('disabled', false).text('Fetch Users (AJAX GET)');
+                    },
+                    error: function(error) {
+                        alert("Error fetching data!");
+                        console.log(error);
+                        $btn.prop('disabled', false).text('Fetch Users (AJAX GET)');
+                    }
+                });
+
+                /* 
+                // Alternatively, the simpler $.get shorthand:
+                $.get("https://jsonplaceholder.typicode.com/users", function(data, status){
+                    console.log("Status:", status);
+                    // Do something with data...
+                });
+                */
+
+            });
+        });
+
+        /*
+        INTERVIEW TIP:
+        - "What is the difference between GET and POST in AJAX?" -> "GET retrieves information from the server and is appended to the URL. POST sends data to the server for processing/saving and goes in the request body (more secure/larger payload limit)."
+        - Be able to write the standard `$.ajax` scaffolding block from memory.
+        */
+    </script>
+</body>
+</html>

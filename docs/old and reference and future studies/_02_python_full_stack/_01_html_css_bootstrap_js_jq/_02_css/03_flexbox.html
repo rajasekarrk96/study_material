@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Flexbox</title>
+    <link rel="stylesheet" href="03_flexbox.css">
+</head>
+<body>
+    <h1>CSS Flexbox</h1>
+    <p>Flexible Box Module. Read the <code>03_flexbox.css</code> file carefully.</p>
+
+    <!-- Example 1: Basic Row Layout with Spacing -->
+    <h2>1. Flex Direction & Justify Content</h2>
+    <div class="flex-container row-container">
+        <div class="item">Item 1</div>
+        <div class="item">Item 2</div>
+        <div class="item">Item 3</div>
+    </div>
+
+    <!-- Example 2: Alignment (Cross-Axis) -->
+    <h2>2. Align Items (Cross-axis alignment)</h2>
+    <div class="flex-container align-container">
+        <div class="item">Short</div>
+        <div class="item" style="height: 100px;">Tall Item</div>
+        <div class="item">Short</div>
+    </div>
+
+    <!-- Example 3: Flex Grow, Shrink, Basis -->
+    <h2>3. Flex Item Properties</h2>
+    <div class="flex-container">
+        <div class="item flex-1">Flex 1 (Grows)</div>
+        <div class="item flex-none">Auto (Fixed content width)</div>
+        <div class="item flex-2">Flex 2 (Grows 2x faster)</div>
+    </div>
+
+</body>
+</html>

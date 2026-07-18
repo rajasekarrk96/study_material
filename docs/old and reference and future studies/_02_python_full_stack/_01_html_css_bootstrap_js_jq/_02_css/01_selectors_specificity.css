@@ -1,0 +1,70 @@
+/* 
+    ========================================================
+    TOPIC: CSS SELECTORS & SPECIFICITY
+    ========================================================
+
+    1. CSS Selectors:
+       - Univarsal (*): Selects all elements.
+       - Type/Tag (p, h1, div): Selects all elements with the given node name.
+       - Class (.className): Selects all elements with the given class attribute.
+       - ID (#idName): Selects an element based on the value of its id attribute (ids should be unique).
+       - Attribute ([type="text"]): Selects elements based on the presence or value of a given attribute.
+
+    2. Combinators:
+       - Descendant (space) `div p`: Selects all <p> inside <div>.
+       - Child (>) `div > p`: Selects <p> that are direct children of <div>.
+       - Adjacent Sibling (+) `div + p`: Selects the first <p> immediately after a <div>.
+       - General Sibling (~) `div ~ p`: Selects all <p> that are siblings after a <div>.
+
+    3. Pseudo-classes & Pseudo-elements:
+       - :hover, :focus, :active, :nth-child(), :first-child
+       - ::before, ::after (Requires content: ""; property to work)
+
+    4. Specificity (The Cascade Rules):
+       Importance is calculated as (Inline, ID, Class, Tag).
+       - Universal (*), combinators (+, >, ~) have no effect on specificity.
+       - !important rule overrides EVERYTHING (use sparingly).
+
+       Example Calculations:
+       - p                             --> (0, 0, 0, 1) = 1
+       - .text-primary                 --> (0, 0, 1, 0) = 10
+       - #container p.text-primary     --> (0, 1, 1, 1) = 111 (Wins!)
+*/
+
+/* --- EXAMPLES --- */
+
+/* Element Selector */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+/* ID Selector (High Specificity) */
+#container {
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+/* Class Selector */
+.text-primary {
+    color: blue;
+    font-weight: bold;
+}
+
+/* Attribute Selector */
+a[target="_blank"] {
+    color: green;
+    text-decoration: none;
+}
+a[target="_blank"]::after {
+    content: " (opens in new tab)";
+    font-size: 0.8em;
+    color: gray;
+}
+
+/* 
+    INTERVIEW TIP:
+    - Always be able to calculate specificity on the spot. E.g., which wins: "div.header p.active" or "#main p"?
+    - (#main p -> 101, div.header p.active -> 022. ID wins!).
+    - Explain CSS Box Model deeply.
+*/
