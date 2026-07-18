@@ -28,7 +28,71 @@ def course_overview(course_slug: str):
     _verify_course_prerequisites(course.id)
 
     modules = course.modules.filter_by(is_published=True).order_by(Module.sort_order).all()
-    return render_template("learn/course_overview.html", course=course, modules=modules)
+
+    # Calculate progress for current user
+    completed_lesson_ids = set()
+    next_lesson = None
+    progress_percentage = 0
+    total_lessons_count = 0
+    completed_lessons_count = 0
+    
+    # Query all published, non-deleted lessons in this course
+    all_lessons = Lesson.query.join(Module).filter(
+        Module.course_id == course.id,
+        Lesson.status == "published",
+        Lesson.is_deleted == False
+    ).order_by(Module.sort_order, Lesson.sort_order).all()
+    
+    total_lessons_count = len(all_lessons)
+    
+    from app.domains.learning_path.models import UserLessonProgress
+    from app.domains.assessment.models import Quiz
+    
+    if current_user.is_authenticated:
+        completed_lessons = UserLessonProgress.query.filter(
+            UserLessonProgress.user_id == current_user.id,
+            UserLessonProgress.is_completed == True,
+            UserLessonProgress.lesson_id.in_([l.id for l in all_lessons])
+        ).all() if all_lessons else []
+        completed_lesson_ids = {lp.lesson_id for lp in completed_lessons}
+        completed_lessons_count = len(completed_lesson_ids)
+        if total_lessons_count > 0:
+            progress_percentage = int((completed_lessons_count / total_lessons_count) * 100)
+            
+        # Find next lesson (first lesson that is not completed)
+        for l in all_lessons:
+            if l.id not in completed_lesson_ids:
+                next_lesson = l
+                break
+    else:
+        if all_lessons:
+            next_lesson = all_lessons[0]
+            
+    # Calculate additional metrics
+    labs_count = Lab.query.join(Lesson).join(Module).filter(
+        Module.course_id == course.id,
+        Lesson.status == "published",
+        Lesson.is_deleted == False
+    ).count()
+    
+    quizzes_count = Quiz.query.join(Lesson).join(Module).filter(
+        Module.course_id == course.id,
+        Lesson.status == "published",
+        Lesson.is_deleted == False
+    ).count()
+
+    return render_template(
+        "learn/course_overview.html",
+        course=course,
+        modules=modules,
+        completed_lesson_ids=completed_lesson_ids,
+        next_lesson=next_lesson,
+        progress_percentage=progress_percentage,
+        total_lessons_count=total_lessons_count,
+        completed_lessons_count=completed_lessons_count,
+        labs_count=labs_count,
+        quizzes_count=quizzes_count
+    )
 
 
 @learn_bp.route("/<course_slug>/<module_slug>/<lesson_slug>/")

@@ -5,69 +5,349 @@
 {% import 'components/_seo.html' as seo %}
 {% block extra_css %}
 {{ seo.course_schema(course) }}
+<style>
+.course-page-new {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+.course-hero-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(99,102,241,0.05) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.course-hero-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+.hero-metadata-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 20px 0 30px 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+.hero-meta-item {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.lesson-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 4px;
+    transition: var(--transition);
+    text-decoration: none;
+}
+.lesson-list-item:hover {
+    background: var(--bg-hover);
+}
+.lesson-list-item.active-lesson {
+    background: rgba(99,102,241,0.08);
+    border-left: 2px solid var(--accent);
+}
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    font-size: 0.75rem;
+    margin-right: 8px;
+}
+.status-completed {
+    color: var(--success);
+}
+.status-active {
+    color: var(--accent-light);
+}
+.status-pending {
+    color: var(--text-muted);
+}
+.stats-grid-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    text-align: center;
+    transition: var(--transition);
+}
+.stats-grid-card:hover {
+    border-color: var(--accent);
+}
+.checklist-item {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+.checklist-icon {
+    color: var(--success);
+    margin-top: 3px;
+}
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="course-page">
-    <div class="course-hero">
-        <div class="breadcrumb">
-            <a href="{{ url_for('public.home') }}">Home</a>
-            <i class="fas fa-chevron-right"></i>
-            <a href="{{ url_for('public.catalog') }}">Catalog</a>
-            <i class="fas fa-chevron-right"></i>
-            <span>{{ course.title }}</span>
-        </div>
-        <h1>{{ course.title }}</h1>
-        <p class="course-desc">{{ course.description or '' }}</p>
-        <div class="course-meta-row">
-            <span class="difficulty-badge difficulty-{{ course.difficulty_level }}">{{ course.difficulty_level | title }}</span>
-            <span><i class="fas fa-clock"></i> ~{{ course.estimated_hours }}h</span>
-            <span><i class="fas fa-eye"></i> {{ course.view_count }} views</span>
+<div class="course-page-new">
+    
+    <!-- Breadcrumbs -->
+    <div style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-muted);">
+        <a href="{{ url_for('public.home') }}" style="color: var(--text-secondary); text-decoration: none;">Home</a>
+        <i class="fas fa-chevron-right" style="font-size: 0.75rem; margin: 0 8px;"></i>
+        <a href="{{ url_for('public.catalog') }}" style="color: var(--text-secondary); text-decoration: none;">Catalog</a>
+        <i class="fas fa-chevron-right" style="font-size: 0.75rem; margin: 0 8px;"></i>
+        <span style="color: #fff;">{{ course.title }}</span>
+    </div>
+
+    <!-- Course Hero Card -->
+    <div class="course-hero-card">
+        <div style="position: relative; z-index: 2;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                <span class="difficulty-badge difficulty-{{ course.difficulty_level }}">{{ course.difficulty_level | title }}</span>
+                <span style="color: #ffbd2e; font-size: 0.9rem;">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span style="color: var(--text-muted); font-size: 0.8rem; margin-left: 4px;">(5.0)</span>
+                </span>
+            </div>
+            
+            <h1 style="font-size: 2.5rem; color: #fff; font-weight: 800; margin: 0 0 10px 0;">{{ course.title }}</h1>
+            <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 800px; margin: 0 0 20px 0; line-height: 1.6;">
+                {{ course.description or 'Learn ' ~ course.title ~ ' from scratch with guided exercises, quiz validation, and certificate credentials.' }}
+            </p>
+
+            <!-- Metadata Row -->
+            <div class="hero-metadata-grid">
+                <div class="hero-meta-item">
+                    <i class="fas fa-book"></i> {{ total_lessons_count }} Lessons
+                </div>
+                <div class="hero-meta-item">
+                    <i class="fas fa-cubes"></i> {{ modules | length }} Modules
+                </div>
+                <div class="hero-meta-item">
+                    <i class="fas fa-flask"></i> {{ labs_count }} Practical Labs
+                </div>
+                <div class="hero-meta-item">
+                    <i class="fas fa-clipboard-list"></i> {{ quizzes_count }} Quizzes
+                </div>
+                <div class="hero-meta-item">
+                    <i class="fas fa-clock"></i> ~{{ course.estimated_hours }} Hours
+                </div>
+                <div class="hero-meta-item" style="border-color: rgba(34,211,161,0.3); color: #22d3a1;">
+                    <i class="fas fa-award"></i> Certificate Included
+                </div>
+            </div>
+
+            <!-- Start / Resume Button -->
+            {% if next_lesson %}
+                <a href="{{ url_for('learn.lesson_view', course_slug=course.slug, module_slug=next_lesson.module.slug, lesson_slug=next_lesson.slug) }}" class="btn btn-primary" style="padding: 14px 28px; font-weight: 700; font-size: 1rem; border-radius: var(--radius-sm); display: inline-flex; align-items: center; gap: 8px;">
+                    {% if progress_percentage > 0 %}Resume Learning{% else %}Start Learning{% endif %} <i class="fas fa-arrow-right"></i>
+                </a>
+            {% endif %}
         </div>
     </div>
 
-    <div class="course-body">
-        <aside class="module-sidebar">
-            <h3><i class="fas fa-list-ul"></i> Modules</h3>
-            <nav class="module-nav">
-                {% for mod in modules %}
-                <div class="module-item">
-                    <div class="module-title">
-                        <i class="fas fa-folder"></i> {{ mod.title }}
-                    </div>
-                    <ul class="lesson-list">
-                        {% for lesson in mod.lessons.filter_by(is_deleted=False).order_by('sort_order') %}
-                        <li>
-                            <a href="{{ url_for('learn.lesson_view', course_slug=course.slug, module_slug=mod.slug, lesson_slug=lesson.slug) }}"
-                               class="lesson-link">
-                                <i class="fas fa-file-alt"></i> {{ lesson.title }}
-                                <span class="lesson-mins">{{ lesson.estimated_minutes }}m</span>
-                            </a>
-                        </li>
-                        {% else %}
-                        <li class="no-lessons"><i class="fas fa-hourglass"></i> Coming soon</li>
-                        {% endfor %}
-                    </ul>
+    <!-- Main Workspace columns -->
+    <div style="display: grid; grid-template-columns: 320px 1fr; gap: 30px; align-items: start;">
+        
+        <!-- Left Sidebar: Modules & Lessons -->
+        <aside style="display: flex; flex-direction: column; gap: 24px;">
+            
+            <!-- Progress Tracker Card -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="color: #fff; font-weight: 700; font-size: 0.95rem;">Overall Progress</span>
+                    <span style="color: var(--accent-light); font-weight: 700; font-size: 0.95rem;">{{ progress_percentage }}%</span>
                 </div>
-                {% else %}
-                <p class="empty-msg">No published modules yet.</p>
-                {% endfor %}
-            </nav>
+                <div style="width: 100%; height: 6px; background: var(--bg-elevated); border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+                    <div style="width: {{ progress_percentage }}%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); transition: width 0.4s ease;"></div>
+                </div>
+                <div style="font-size: 0.78rem; color: var(--text-muted);">
+                    {{ completed_lessons_count }} of {{ total_lessons_count }} lessons completed
+                </div>
+            </div>
+
+            <!-- Modules Navigation -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">
+                <h3 style="font-size: 1rem; color: #fff; font-weight: 700; margin: 0 0 16px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                    <i class="fas fa-list-ul" style="margin-right: 8px; color: var(--accent);"></i> Modules
+                </h3>
+                
+                <nav style="display: flex; flex-direction: column; gap: 20px;">
+                    {% for mod in modules %}
+                        {% set mod_lessons = mod.lessons.filter_by(is_deleted=False).order_by('sort_order').all() %}
+                        <div>
+                            <div style="font-size: 0.9rem; color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                <span><i class="fas fa-folder-open" style="color: var(--text-muted); margin-right: 6px;"></i> {{ mod.title }}</span>
+                                <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">({{ mod_lessons | length }})</span>
+                            </div>
+                            
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                {% for lesson in mod_lessons %}
+                                    {% set is_active = next_lesson and next_lesson.id == lesson.id %}
+                                    {% set is_completed = lesson.id in completed_lesson_ids %}
+                                    
+                                    <!-- Sidebar Icon Selection -->
+                                    {% set type_icon = '📄' %}
+                                    {% if lesson.lab %}
+                                        {% set type_icon = '🧪' %}
+                                    {% elif lesson.quiz %}
+                                        {% set type_icon = '📝' %}
+                                    {% elif 'Architecture' in lesson.title or 'Theory' in lesson.title %}
+                                        {% set type_icon = '📘' %}
+                                    {% elif 'Video' in lesson.title %}
+                                        {% set type_icon = '🎥' %}
+                                    {% endif %}
+
+                                    <li>
+                                        <a href="{{ url_for('learn.lesson_view', course_slug=course.slug, module_slug=mod.slug, lesson_slug=lesson.slug) }}"
+                                           class="lesson-list-item {% if is_active %}active-lesson{% endif %}">
+                                            <div style="display: flex; align-items: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                                <span class="status-indicator">
+                                                    {% if is_completed %}
+                                                        <i class="fas fa-check-circle status-completed"></i>
+                                                    {% elif is_active %}
+                                                        <i class="fas fa-play-circle status-active"></i>
+                                                    {% else %}
+                                                        <i class="far fa-circle status-pending"></i>
+                                                    {% endif %}
+                                                </span>
+                                                <span style="font-size: 0.85rem; color: {% if is_active %}#fff{% else %}var(--text-secondary){% endif %}; overflow: hidden; text-overflow: ellipsis;">
+                                                    {{ type_icon }} {{ lesson.title }}
+                                                </span>
+                                            </div>
+                                            <span style="font-size: 0.72rem; color: var(--text-muted); font-family: monospace; margin-left: 8px;">
+                                                {{ lesson.estimated_minutes }}m
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li style="padding: 6px 12px; font-size: 0.8rem; color: var(--text-muted); font-style: italic;">
+                                        Coming soon
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">No published modules yet.</p>
+                    {% endfor %}
+                </nav>
+            </div>
         </aside>
 
-        <div class="course-main">
-            {% if course.long_description %}
-            <div class="content-card">
-                <h2><i class="fas fa-info-circle"></i> About This Course</h2>
-                <div class="rich-content">{{ course.long_description | safe }}</div>
-            </div>
+        <!-- Right Side: Course Details & Syllabus Statistics -->
+        <div style="display: flex; flex-direction: column; gap: 30px;">
+            
+            <!-- Resume CTA Banner -->
+            {% if next_lesson %}
+                <div style="background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(167,139,250,0.1) 100%); border: 1px solid rgba(99,102,241,0.25); border-radius: var(--radius-md); padding: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                    <div>
+                        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-light); font-weight: 700;">Continue Learning</span>
+                        <h3 style="color: #fff; margin: 6px 0 0 0; font-size: 1.2rem; font-weight: 700;">
+                            {% if next_lesson.lab %}🧪{% elif next_lesson.quiz %}📝{% else %}📘{% endif %} {{ next_lesson.title }}
+                        </h3>
+                    </div>
+                    <a href="{{ url_for('learn.lesson_view', course_slug=course.slug, module_slug=next_lesson.module.slug, lesson_slug=next_lesson.slug) }}" class="btn btn-primary" style="padding: 10px 20px; font-weight: 700; border-radius: var(--radius-sm); font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px;">
+                        Resume <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             {% endif %}
 
-            <div class="content-card">
-                <h2><i class="fas fa-bullseye"></i> What You'll Learn</h2>
-                <p>This course follows the BB Solutions structured learning framework — every lesson includes overview, concepts, syntax, examples, exercises, and interview Q&A.</p>
+            <!-- Syllabus Statistics Grid -->
+            <div>
+                <h2 style="font-size: 1.25rem; color: #fff; font-weight: 700; margin: 0 0 16px 0;">Course Statistics</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 16px;">
+                    <div class="stats-grid-card">
+                        <i class="fas fa-cubes text-primary" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
+                        <span style="display: block; font-size: 0.8rem; color: var(--text-secondary);">Modules</span>
+                        <span style="display: block; font-size: 1.5rem; color: #fff; font-weight: 700; margin-top: 4px;">{{ modules | length }}</span>
+                    </div>
+                    <div class="stats-grid-card">
+                        <i class="fas fa-book-open text-success" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
+                        <span style="display: block; font-size: 0.8rem; color: var(--text-secondary);">Lessons</span>
+                        <span style="display: block; font-size: 1.5rem; color: #fff; font-weight: 700; margin-top: 4px;">{{ total_lessons_count }}</span>
+                    </div>
+                    <div class="stats-grid-card">
+                        <i class="fas fa-flask text-info" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
+                        <span style="display: block; font-size: 0.8rem; color: var(--text-secondary);">Labs</span>
+                        <span style="display: block; font-size: 1.5rem; color: #fff; font-weight: 700; margin-top: 4px;">{{ labs_count }}</span>
+                    </div>
+                    <div class="stats-grid-card">
+                        <i class="fas fa-clipboard-list text-warning" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
+                        <span style="display: block; font-size: 0.8rem; color: var(--text-secondary);">Quizzes</span>
+                        <span style="display: block; font-size: 1.5rem; color: #fff; font-weight: 700; margin-top: 4px;">{{ quizzes_count }}</span>
+                    </div>
+                </div>
             </div>
+
+            <!-- What You'll Learn Checklist -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px;">
+                <h2 style="font-size: 1.25rem; color: #fff; font-weight: 700; margin: 0 0 20px 0;"><i class="fas fa-bullseye" style="color: var(--accent); margin-right: 8px;"></i> What You'll Learn</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle checklist-icon"></i>
+                        <span><strong>Git Architecture:</strong> Understand the object database, hashing, and 3 states (working, index, commit).</span>
+                    </div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle checklist-icon"></i>
+                        <span><strong>Local Workflows:</strong> Master initializing, staging, committing, and inspecting repository state.</span>
+                    </div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle checklist-icon"></i>
+                        <span><strong>Branching & Merging:</strong> Create pointers, fast-forward, and handle merge conflicts gracefully.</span>
+                    </div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle checklist-icon"></i>
+                        <span><strong>Remote Collaboration:</strong> Hook up origins, fetch, pull, push, and collaborate with upstream forks.</span>
+                    </div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle checklist-icon"></i>
+                        <span><strong>History Management:</strong> Clean log analysis, interactive staging patches, resets, and reverts.</span>
+                    </div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle checklist-icon"></i>
+                        <span><strong>Git Internals:</strong> Demystify refs, commit DAGs, plumbing commands, and git rebase mechanisms.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About/Description Card -->
+            {% if course.long_description %}
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px;">
+                    <h2 style="font-size: 1.25rem; color: #fff; font-weight: 700; margin: 0 0 16px 0;"><i class="fas fa-info-circle" style="color: var(--accent); margin-right: 8px;"></i> About This Course</h2>
+                    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+                        {{ course.long_description | safe }}
+                    </div>
+                </div>
+            {% endif %}
+
         </div>
     </div>
+
 </div>
 {% endblock %}
