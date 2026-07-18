@@ -15,7 +15,7 @@ time_breakdown:
   quiz: 10 min
   revision: 5 min
 version: '1.2'
-last_updated: '2026-07-17'
+last_updated: '2026-07-18'
 status: Published
 author: Learning OS Author
 reviewed_by: Admin
@@ -46,193 +46,243 @@ This lesson introduces the core version control model of Git. Rather than just m
 
 ## 2. Definitions & Core Concepts [id: definitions]
 
-### The Visual Flow Diagram
-```text
-                          Git Three States
-
-       Working Directory
-     (Files you are editing)
-               │
-               │ git add
-               ▼
-        Staging Area (Index)
-    (Files selected for commit)
-               │
-               │ git commit
-               ▼
-        Local Repository (.git)
-    (Permanent snapshot history)
-               │
-               │ git push
-               ▼
-       Remote Repository (GitHub/GitLab)
-```
-
 ### Git File States & Environments
-- **Working Directory**: The actual folder directory on your computer where you write and edit code.
-- **Staging Area (Index)**: A binary cached index file registering changes slated for the next commit snapshot.
-- **Local Repository**: The localized historical database stored inside your `.git/` folder containing permanent, immutable commit records.
-- **Remote Repository**: External hosting platforms (GitHub, GitLab, Bitbucket) storing and sharing your repository commits over the network.
+Git does not track files continuously; instead, it observes files across three local environments:
+* **Working Directory**: The actual folder directory on your computer where you write and edit code.
+* **Staging Area (Index)**: A binary cached index file registering changes slated for the next commit snapshot.
+* **Local Repository**: The localized historical database stored inside your `.git/` folder containing permanent, immutable commit records.
 
-| File State | Meaning |
-|---|---|
-| **Untracked** | The file is in the working directory but has never been tracked by Git. |
-| **Modified** | The file contains changes made since the last commit snapshot. |
-| **Staged** | The changes have been added to the index and are prepared for the next commit. |
-| **Committed** | The file has been safely and permanently stored inside the local repository history. |
+### The Lifecycle of a File
+As you work, your files transition between four distinct states:
+1. **Untracked**: The file exists in your working directory, but Git has never recorded it. It is ignored by Git's snapshots.
+2. **Modified**: The file is tracked, and you have edited it since the last commit, but the new edits are not yet staged.
+3. **Staged**: You have marked the file changes to be included in the next snapshot.
+4. **Committed**: Git has safely and permanently stored the snapshot in the `.git/` database.
+
+### The State Transition Flow Connected to `git status`
+
+```text
+  Create File [app.py]
+          │
+          ▼
+   Working Directory  ──────► State: Untracked
+          │
+          │ git add app.py
+          ▼
+   Staging Area (Index) ─────► State: Staged (Changes to be committed)
+          │
+          │ git commit -m "..."
+          ▼
+   Local Repository ─────────► State: Committed (working tree clean)
+```
 
 > [!NOTE]
-> Git itself manages three local states (Working Directory, Staging Area, and Local Repository). GitHub, GitLab, and Bitbucket provide a **Remote Repository**, which stores commits outside your computer. Remote repositories are introduced in detail in a later lesson.
-
-### WHY the Staging Area Exists
-The staging area allows developers to **build commits intentionally**. Instead of committing all local changes at once, you can modify ten files but stage only two related files, creating small, meaningful commits that are easier to review, test, and revert.
-
-### Git's Snapshot Model
-Unlike traditional version control systems (like SVN) that record only differences (deltas), Git records a **complete snapshot** of the project for every commit. Files that have not changed are efficiently reused through internal object references (pointing to existing blobs), minimizing storage requirements and preventing redundant file copies.
-
-### Real .git Folder Structure
-When you run `git init`, Git creates a hidden directory named `.git/` containing the following core elements:
-```text
-project/
-│
-├── app.py
-├── README.md
-└── .git/
-    ├── HEAD      # Reference pointer to the currently active branch
-    ├── config    # Repository-specific configuration options
-    ├── index     # Binary file staging area cache database
-    ├── objects/  # Content database containing Blobs, Trees, Commits, and Tags
-    ├── refs/     # References pointing to local and remote branches and tags
-    └── logs/     # Historical logs tracking HEAD revisions (Reflog database)
-```
-
-> [!WARNING]
-> The `.git` folder contains the entire repository database. Deleting it permanently removes the entire Git history from the project.
-
-### Internal Architecture
-Historically, Git used SHA-1 cryptographic hashes (40-character hexadecimal strings) for object identification. Modern Git versions also support SHA-256 repositories, although SHA-1 remains the most common in existing projects.
+> **Why the Staging Area Exists:** The staging area acts as a draft room. Instead of saving all changed files at once, you can choose exactly which files go into which commit, making history clean and easy to revert.
 
 ---
 
 ## 3. Practical Code Examples [id: examples]
 
-### Example A: Basic File Lifecycle Simulation
-- **Code**:
-  ```bash
-  # Initialize repository
-  git init
-  
-  # Create a file (State: Untracked)
-  echo "import math" > app.py
-  
-  # Stage the file (State: Staged)
-  git add app.py
-  
-  # Commit the file (State: Committed)
-  git commit -m "Add core math script"
-  ```
-- **Output (o/p)**:
-  ```text
-  ┌────────────────────────────────────────────────────────┐
-  │                        CONSOLE                         │
-  ├────────────────────────────────────────────────────────┤
-  │ $ git status -s                                        │
-  │  (Clean status, file is successfully committed)        │
-  └────────────────────────────────────────────────────────┘
-  ```
+### Step-by-Step Lab 1: First-Time Git Setup (Run Only Once)
+Before creating your first commit, you must configure your Git identity. Git stores your name and email in every commit to identify the author.
 
-### Example B: Staging Re-edits & Selective Checks
-- **Code**:
-  ```bash
-  echo "print('App running')" >> app.py
-  git status
-  ```
-- **Output (o/p)**:
-  ```text
-  ┌────────────────────────────────────────────────────────┐
-  │                        CONSOLE                         │
-  ├────────────────────────────────────────────────────────┤
-  │ $ git status                                           │
-  │ On branch main                                         │
-  │ Changes not staged for commit:                         │
-  │   modified:   app.py                                   │
-  └────────────────────────────────────────────────────────┘
-  ```
+* **Learning Objective**: Configure Git global user identity variables.
+* **Prerequisites**: Git installed on your computer.
 
-### Example C: Useful Companion Commands
-- **Code**:
-  ```bash
-  # Verify staged files comparison
-  git diff --cached
-  
-  # Print simplified history logs
-  git log --oneline
-  ```
-- **Output (o/p)**:
+#### Command
+```bash
+git config --global user.name "John Doe"
+git config --global user.email "john@example.com"
+```
+*(Replace "John Doe" and "john@example.com" with your actual name and email)*
+
+#### Verification
+To confirm Git saved your identity variables correctly:
+```bash
+git config --global --list
+```
+
+#### Expected Output
+```text
+user.name=John Doe
+user.email=john@example.com
+```
+
+#### Explanation & Resulting State
+* **What Happened**: Git wrote these settings to a global configuration file on your computer.
+* **Resulting State**: Identity registered globally. You will not need to run these commands again on this computer.
+
+> [!WARNING]
+> **Common Error (Author identity unknown):** If you skip this configuration step and try to run `git commit`, Git will throw a fatal error. If this happens, run the two configuration commands above to resolve the error.
+
+---
+
+### Step-by-Step Lab 2: Initializing and First Staging
+We will create a brand new local repository and track our first file.
+
+* **Learning Objective**: Initialize a repository and stage a new file.
+* **Prerequisites**: Global configuration complete (Lab 1).
+
+#### Step 1: Initialize a repository
+To turn any local directory into a Git repository:
+```bash
+git init
+```
+* **Expected Output**:
   ```text
-  ┌────────────────────────────────────────────────────────┐
-  │                        CONSOLE                         │
-  ├────────────────────────────────────────────────────────┤
-  │ $ git log --oneline                                    │
-  │ a1b2c3d Add core math script                           │
-  └────────────────────────────────────────────────────────┘
+  Initialized empty Git repository in /path/to/project/.git/
   ```
+* **Explanation**: Git created a hidden folder named `.git` inside your folder. This hidden folder acts as the repository database.
+* **Resulting State**: Empty Local Repository initialized.
+
+#### Step 2: Create a file
+Now we will create a file. In your terminal, run:
+```bash
+echo "import math" > app.py
+```
+* **Explanation**: The `echo "content" > filename` syntax means: *Create a file named app.py and write "import math" inside it*.
+* **Resulting State**: File `app.py` created in the **Working Directory**.
+* **File State**: **Untracked**.
+
+#### Step 3: Check repository status
+Let's see what Git detects:
+```bash
+git status
+```
+* **Expected Output**:
+  ```text
+  No commits yet
+  
+  Untracked files:
+    (use "git add <file>..." to include in what will be committed)
+          app.py
+  
+  nothing added to commit but untracked files present (use "git add" to track)
+  ```
+* **Explanation**: Git tells us it detects `app.py` in the Working Directory, but is not tracking it yet.
+
+#### Step 4: Stage the file
+To select `app.py` for our next snapshot, run:
+```bash
+git add app.py
+```
+* **Expected Output**: *(None - success is silent)*
+* **Explanation**: Git copied `app.py` to the binary Staging Area (Index) cache.
+* **File State**: **Staged**.
+
+#### Step 5: Check repository status again
+Let's verify that the file was staged:
+```bash
+git status
+```
+* **Expected Output**:
+  ```text
+  No commits yet
+  
+  Changes to be committed:
+    (use "git rm --cached <file>..." to unstage)
+          new file:   app.py
+  ```
+* **Explanation**: The file has moved from Untracked to Staged (listed under "Changes to be committed").
+
+---
+
+### Step-by-Step Lab 3: Creating Your First Commit
+We will now seal the staged changes into a permanent snapshot.
+
+* **Learning Objective**: Commit staged files and examine repository history.
+* **Prerequisites**: Lab 2 complete (`app.py` staged).
+
+#### Step 1: Commit changes
+To commit the staged file:
+```bash
+git commit -m "Initial commit with math script"
+```
+* **Expected Output**:
+  ```text
+  [main (root-commit) a1b2c3d] Initial commit with math script
+   1 file changed, 1 insertion(+)
+   create mode 100644 app.py
+  ```
+* **Explanation**: Git created a tree object snapshot containing `app.py` and wrapped it in a commit object containing your author details and commit message.
+* **File State**: **Committed**.
+
+#### Step 2: Check repository status
+```bash
+git status
+```
+* **Expected Output**:
+  ```text
+  On branch main
+  nothing to commit, working tree clean
+  ```
+* **Explanation**: Since all changes in the Working Directory are committed and match the Local Repository, Git reports a clean working tree.
+
+#### Step 3: View history log
+To print a history list of commits:
+```bash
+git log --oneline
+```
+* **Expected Output**:
+  ```text
+  a1b2c3d Initial commit with math script
+  ```
+* **Explanation**: Git lists the 7-character commit ID hash and the message.
 
 ---
 
 ## 4. Hands-on Workouts [id: workouts]
 
-### MCQ
-- What state represents a file that Git has never seen before?
-  - A) Modified
-  - B) Untracked (Correct)
-  - C) Staged
+### Checkpoint Questions
+1. Which command moves changes from the Working Directory to the Staging Area?
+2. What hidden folder does Git create to store its snapshot database?
+3. If you run `git add app.py`, then make a new edit to `app.py`, what status will the file show when running `git status`?
 
-### Coding Challenge
-- Initialize a local git repository. Create a file `notes.txt`. Modify `notes.txt` to contain `"Hello"`. Check `git status` output.
+---
 
-### Scenario Exercise: Selective Staging
-- Create two files in a repository: `app.py` and `notes.txt`. Modify both files. Stage only `app.py` and commit it. Verify that `notes.txt` remains unstaged in your working directory.
-
-### Solutions to Scenario Exercise:
-- **Commands**:
-  ```bash
-  git init
-  echo "import os" > app.py
-  echo "ideas" > notes.txt
-  git add app.py
-  git commit -m "Stage only app.py"
-  git status -s
-  ```
-- **Console Output**:
-  ```text
-  ┌────────────────────────────────────────────────────────┐
-  │                        CONSOLE                         │
-  ├────────────────────────────────────────────────────────┤
-  │ ?? notes.txt                                           │
-  └────────────────────────────────────────────────────────┘
-  ```
-  *(Notice that `notes.txt` remains untracked/unstaged, while `app.py` is safely committed)*
+### Try It Yourself Exercise: Selective Staging
+* **Goal**: Modify two files, but stage and commit only one of them.
+* **Steps**:
+  1. Create `README.md` containing `Documentation`.
+  2. Create `settings.json` containing `{"theme": "dark"}`.
+  3. Stage only `README.md`.
+  4. Commit with message `"Add README documentation"`.
+  5. Check `git status` to verify `settings.json` remains untracked.
 
 ---
 
 ## 5. Workout Answers & Solutions [id: answers]
 
+### Checkpoint Answers
+1. `git add <filename>`
+2. The `.git` folder.
+3. The file will be in **two states simultaneously**: Staged (containing the changes made before the `git add` command) and Modified (containing the new edits made *after* the `git add` command). You must run `git add app.py` again to stage the new edits!
+
+---
+
+### Solution to Try It Yourself Exercise
+Run these commands in order:
+```bash
+echo "Documentation" > README.md
+echo '{"theme": "dark"}' > settings.json
+git add README.md
+git commit -m "Add README documentation"
+git status
+```
+* **Expected Verification Output**:
+  ```text
+  Untracked files:
+    (use "git add <file>..." to include in what will be committed)
+          settings.json
+  
+  nothing added to commit but untracked files present (use "git add" to track)
+  ```
+*(Notice that `README.md` is committed, while `settings.json` remains untracked/unstaged)*
+
+---
+
 ### Common Beginner Mistakes
-- **Mistake**: Editing a file after running `git add` and committing directly.
-  - *Fix*: You must run `git add` again to stage the new edits, or else they will not be committed!
-- **Mistake**: Running `git init` inside an existing Git project.
-  - *Fix*: `git init` should be run only once at the root of a project.
-
-### Enterprise Best Practice
-- **Atomic Commits**: Stage only related changes. Avoid large "everything" commits.
-- **Review Status**: Run `git status` and `git diff --cached` before every commit to review what is staged.
-
-### Memory Tip
-- Remember the sequence: **Edit $\rightarrow$ Stage $\rightarrow$ Commit $\rightarrow$ Push** (**ESCP**).
-
-### Key Takeaways
-1. Git manages file transitions across the **Working Directory**, **Staging Area**, and **Local Repository**.
-2. **`git add`** copies changes to the staging index; **`git commit`** seals them into a snapshot object.
-3. Cryptographic hashes index immutable repository content databases.
-4. Small, modular commits make codebase histories easier to debug and revert.
+* **Mistake: Editing a file after `git add` and committing directly.**
+  * *Fix*: Always run `git add` *after* your final file edits. Committing only saves what was staged at the moment of the commit.
+* **Mistake: Initializing a repo inside a repo.**
+  * *Fix*: Avoid running `git init` inside subfolders. Run it only once at the root directory of your project. If you accidentally initialize in a subfolder, remove the hidden `.git` folder by running `rm -rf .git`.

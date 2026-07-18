@@ -104,6 +104,107 @@
         </div>
         {% endif %}
 
+        <!-- Before You Continue Checklist -->
+        {% if lesson.slug == 'git-architecture-three-states' or lesson.title == 'Git Architecture & Three States' %}
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin-top: 40px; margin-bottom: 20px;">
+            <h3 style="color: #fff; font-size: 1.15rem; font-weight: 700; margin: 0 0 16px 0; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-tasks" style="color: var(--accent);"></i> Before You Continue Checklist
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin: 0 0 20px 0;">
+                Make sure you understand and can explain these core concepts before moving to the next lesson:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>Initialize a Git repository (<code>git init</code>)</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>Explain the Working Directory</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>Explain the Staging Area</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>Explain the Local Repository</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>Stage a file using <code>git add</code></span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>Commit using <code>git commit</code></span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>Read <code>git status</code> outputs</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>Explain why the Staging Area exists</span>
+                </label>
+            </div>
+        </div>
+        {% else %}
+        <!-- Dynamic Fallback Checklist -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin-top: 40px; margin-bottom: 20px;">
+            <h3 style="color: #fff; font-size: 1.15rem; font-weight: 700; margin: 0 0 16px 0; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-tasks" style="color: var(--accent);"></i> Before You Continue Checklist
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin: 0 0 20px 0;">
+                Review and confirm the learning checkpoints for this lesson:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>I have read the explanations and completed all step-by-step workouts.</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>I can identify common errors associated with this topic and how to resolve them.</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" class="checklist-box" style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <span>I am ready to proceed to the next module.</span>
+                </label>
+            </div>
+        </div>
+        {% endif %}
+
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const checkboxes = document.querySelectorAll(".checklist-box");
+            const submitBtn = document.querySelector(".lesson-nav-footer form button[type='submit']");
+            
+            if (checkboxes.length > 0 && submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = "0.5";
+                submitBtn.style.cursor = "not-allowed";
+                submitBtn.title = "Please verify all checklist items before continuing";
+                
+                checkboxes.forEach(box => {
+                    box.addEventListener("change", () => {
+                        const allChecked = Array.from(checkboxes).every(b => b.checked);
+                        if (allChecked) {
+                            submitBtn.disabled = false;
+                            submitBtn.style.opacity = "1";
+                            submitBtn.style.cursor = "pointer";
+                            submitBtn.removeAttribute("title");
+                        } else {
+                            submitBtn.disabled = true;
+                            submitBtn.style.opacity = "0.5";
+                            submitBtn.style.cursor = "not-allowed";
+                            submitBtn.title = "Please verify all checklist items before continuing";
+                        }
+                    });
+                });
+            }
+        });
+        </script>
+
         <!-- PREV / NEXT NAV -->
         <div class="lesson-nav-footer" style="display: flex; gap: 15px; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 30px;">
             <button onclick="history.back()" class="btn btn-outline">
