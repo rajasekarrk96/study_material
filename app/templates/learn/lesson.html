@@ -5,18 +5,371 @@
 {% import 'components/_seo.html' as seo %}
 {% block extra_css %}
 {{ seo.lesson_schema(lesson, course) }}
+<style>
+/* ── PREVENT HORIZONTAL SCROLL ON BODY ────────────────── */
+body {
+    overflow-x: hidden;
+}
+
+/* ── OVERWRITE DEFAULT LESSON WRAPPERS ────────────────── */
+.lesson-page {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: calc(100vh - var(--navbar-h));
+}
+
+@media (min-width: 1200px) {
+    .lesson-page {
+        grid-template-columns: var(--sidebar-w) 1fr 280px;
+    }
+}
+
+.lesson-main {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 48px;
+    box-sizing: border-box;
+}
+
+/* ── STICKY RIGHT TABLE OF CONTENTS ───────────────────── */
+.lesson-right-toc {
+    display: none;
+    position: sticky;
+    top: calc(var(--navbar-h) + 30px);
+    height: calc(100vh - var(--navbar-h) - 60px);
+    overflow-y: auto;
+    padding: 0 20px;
+    border-left: 1px solid var(--border);
+    font-size: 0.85rem;
+}
+
+@media (min-width: 1200px) {
+    .lesson-right-toc {
+        display: block;
+    }
+}
+
+.toc-header {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toc-list-sticky {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ── LEARNING MODE CONTROLS ───────────────────────────── */
+.learning-mode-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.toggle-switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.switch-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--bg-elevated);
+    transition: .3s;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-secondary);
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent);
+    border-color: var(--accent-light);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+    background-color: #fff;
+}
+
+/* ── DYNAMIC TERMINAL MOCKUPS FOR CODE ────────────────── */
+.terminal-container {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.terminal-header {
+    background: #161b22;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.terminal-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.terminal-copy-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.terminal-copy-btn:hover {
+    background: var(--bg-elevated);
+    color: #fff;
+}
+
+.terminal-container pre {
+    border: none !important;
+    margin: 0 !important;
+    background: transparent !important;
+    padding: 16px 20px !important;
+}
+
+/* ── PREMIUM COLOR ALERTS ────────────────────────────── */
+.alert-panel {
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 24px 0;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    line-height: 1.6;
+    font-size: 0.94rem;
+}
+
+.alert-panel strong {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.alert-note {
+    background: rgba(59, 130, 246, 0.05);
+    border-left-color: #3b82f6;
+    color: #f0f7ff;
+}
+
+.alert-note strong {
+    color: #60a5fa;
+}
+
+.alert-warning {
+    background: rgba(245, 158, 11, 0.05);
+    border-left-color: #f59e0b;
+    color: #fffbeb;
+}
+
+.alert-warning strong {
+    color: #fbbf24;
+}
+
+.alert-tip {
+    background: rgba(16, 185, 129, 0.05);
+    border-left-color: #10b981;
+    color: #ecfdf5;
+}
+
+.alert-tip strong {
+    color: #34d399;
+}
+
+.alert-important {
+    background: rgba(139, 92, 246, 0.05);
+    border-left-color: #8b5cf6;
+    color: #f5f3ff;
+}
+
+.alert-important strong {
+    color: #a78bfa;
+}
+
+.alert-caution {
+    background: rgba(239, 68, 68, 0.05);
+    border-left-color: #ef4444;
+    color: #fef2f2;
+}
+
+.alert-caution strong {
+    color: #f87171;
+}
+
+/* ── INTERACTIVE WORKSPACE HIDE LAOUT FOR SOLUTIONS ───── */
+.solution-collapsed {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    padding: 16px 20px;
+    margin-top: 16px;
+}
+
+.solution-toggle-trigger {
+    background: var(--bg-elevated);
+    color: #fff;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.solution-toggle-trigger:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent);
+}
+
+.solution-body {
+    display: block;
+    margin-top: 14px;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+}
+
+.learning-mode-active .solution-body {
+    display: none;
+}
+
+/* ── RESPONSIVE MOBILE ADJUSTMENTS ────────────────────── */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 299;
+}
+
+@media (max-width: 1024px) {
+    .lesson-page {
+        grid-template-columns: 1fr;
+    }
+    
+    .lesson-sidebar {
+        display: block !important;
+        position: fixed;
+        top: 0; left: 0;
+        height: 100vh;
+        width: var(--sidebar-w);
+        z-index: 300;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .lesson-sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .sidebar-overlay.active {
+        display: block;
+    }
+    
+    .lesson-main {
+        padding: 32px 20px;
+    }
+}
+</style>
 {% endblock %}
 
 {% block content %}
+<!-- Mobile Sidebar Drawer Overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeMobileSidebar()"></div>
+
 <div class="lesson-page">
-    <!-- SIDEBAR -->
+    
+    <!-- LEFT SIDEBAR -->
     <aside class="lesson-sidebar" id="lesson-sidebar">
         <div class="sidebar-header">
             <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}" class="back-link">
                 <i class="fas fa-arrow-left"></i> {{ course.title }}
             </a>
         </div>
-        <div class="sidebar-module">{{ module.title }}</div>
+        
+        <!-- Module Header Badge -->
+        <div class="sidebar-module">
+            <i class="fas fa-cubes" style="color: var(--accent); margin-right: 6px;"></i> {{ module.title }}
+        </div>
+        
         <nav class="sidebar-nav">
             {% for l in module.lessons.filter_by(is_deleted=False).order_by('sort_order') %}
             <div class="sidebar-lesson-group">
@@ -39,8 +392,9 @@
         </nav>
     </aside>
 
-    <!-- MAIN CONTENT -->
+    <!-- CENTER LESSON CONTENT -->
     <div class="lesson-main">
+        
         <!-- BREADCRUMB -->
         <div class="breadcrumb">
             <a href="{{ url_for('public.home') }}">Home</a>
@@ -50,51 +404,69 @@
             <span>{{ lesson.title }}</span>
         </div>
 
+        <!-- Sticky Lesson Course Progress Bar on Top -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-light);">Lesson Progress</span>
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">Lesson {{ lesson.sort_order }} of {{ module.lessons.filter_by(is_deleted=False).count() }}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; flex-grow: 1; max-width: 300px; width: 100%;">
+                {% set total_count = module.lessons.filter_by(is_deleted=False).count() or 1 %}
+                {% set pct = ((lesson.sort_order / total_count) * 100) | int %}
+                <div style="flex-grow: 1; height: 6px; background: var(--bg-elevated); border-radius: 3px; overflow: hidden;">
+                    <div style="width: {{ pct }}%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light));"></div>
+                </div>
+                <span style="font-size: 0.8rem; font-weight: 700; color: #fff;">{{ pct }}%</span>
+            </div>
+        </div>
+
         <!-- LESSON HEADER -->
         <div class="lesson-header">
-            <h1>{{ lesson.title }}</h1>
+            <h1 style="font-size: 2.5rem; color: #fff; font-weight: 800; margin-bottom: 12px;">{{ lesson.title }}</h1>
             <div class="lesson-meta-row">
                 <span class="difficulty-badge difficulty-{{ lesson.difficulty_level }}">{{ lesson.difficulty_level | title }}</span>
                 <span><i class="fas fa-clock"></i> ~{{ lesson.estimated_minutes }} min</span>
                 <span><i class="fas fa-eye"></i> {{ lesson.view_count }} views</span>
             </div>
             {% if lesson.summary %}
-            <p class="lesson-summary">{{ lesson.summary }}</p>
+            <p class="lesson-summary" style="font-size: 1.05rem; color: var(--text-secondary); margin-top: 16px; border-left: 2px solid var(--border); padding-left: 16px;">{{ lesson.summary }}</p>
             {% endif %}
         </div>
 
-        <!-- SECTIONS -->
-        {% for stype, sec in sections.items() %}
-        <section class="lesson-section" id="section-{{ stype }}" data-type="{{ stype }}">
-            <div class="section-title-row">
-                {% set icons = {
-                    'overview': 'fa-info-circle',
-                    'topics': 'fa-list-ul',
-                    'concepts': 'fa-brain',
-                    'definitions': 'fa-book',
-                    'syntax': 'fa-code',
-                    'examples': 'fa-flask',
-                    'diagram': 'fa-project-diagram',
-                    'best_practices': 'fa-check-double',
-                    'common_mistakes': 'fa-exclamation-triangle',
-                    'interview_qa': 'fa-comments',
-                    'exercises': 'fa-dumbbell',
-                    'workouts': 'fa-running',
-                    'quiz': 'fa-question-circle',
-                    'cheatsheet': 'fa-sticky-note',
-                    'revision_notes': 'fa-book-reader',
-                    'flashcards': 'fa-layer-group',
-                    'answers': 'fa-key',
-                    'references': 'fa-link'
-                } %}
-                <i class="fas {{ icons.get(stype, 'fa-file-alt') }}"></i>
-                <h2>{{ sec.title or stype | replace('_', ' ') | title }}</h2>
-            </div>
-            <div class="section-content rich-content">
-                {{ sec.content_html | safe if sec.content_html else (sec.content_markdown | markdown | safe) }}
-            </div>
-        </section>
-        {% endfor %}
+        <!-- SECTIONS WRAPPER -->
+        <div class="lesson-sections-container">
+            {% for stype, sec in sections.items() %}
+            <section class="lesson-section" id="section-{{ stype }}" data-type="{{ stype }}">
+                <div class="section-title-row">
+                    {% set icons = {
+                        'overview': 'fa-info-circle',
+                        'topics': 'fa-list-ul',
+                        'concepts': 'fa-brain',
+                        'definitions': 'fa-book',
+                        'syntax': 'fa-code',
+                        'examples': 'fa-flask',
+                        'diagram': 'fa-project-diagram',
+                        'best_practices': 'fa-check-double',
+                        'common_mistakes': 'fa-exclamation-triangle',
+                        'interview_qa': 'fa-comments',
+                        'exercises': 'fa-dumbbell',
+                        'workouts': 'fa-running',
+                        'quiz': 'fa-question-circle',
+                        'cheatsheet': 'fa-sticky-note',
+                        'revision_notes': 'fa-book-reader',
+                        'flashcards': 'fa-layer-group',
+                        'answers': 'fa-key',
+                        'references': 'fa-link'
+                    } %}
+                    <i class="fas {{ icons.get(stype, 'fa-file-alt') }}"></i>
+                    <h2>{{ sec.title or stype | replace('_', ' ') | title }}</h2>
+                </div>
+                <div class="section-content rich-content">
+                    {{ sec.content_html | safe if sec.content_html else (sec.content_markdown | markdown | safe) }}
+                </div>
+            </section>
+            {% endfor %}
+        </div>
 
         {% if not sections %}
         <div class="empty-lesson-state">
@@ -174,39 +546,8 @@
         </div>
         {% endif %}
 
-        <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const checkboxes = document.querySelectorAll(".checklist-box");
-            const submitBtn = document.querySelector(".lesson-nav-footer form button[type='submit']");
-            
-            if (checkboxes.length > 0 && submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.style.opacity = "0.5";
-                submitBtn.style.cursor = "not-allowed";
-                submitBtn.title = "Please verify all checklist items before continuing";
-                
-                checkboxes.forEach(box => {
-                    box.addEventListener("change", () => {
-                        const allChecked = Array.from(checkboxes).every(b => b.checked);
-                        if (allChecked) {
-                            submitBtn.disabled = false;
-                            submitBtn.style.opacity = "1";
-                            submitBtn.style.cursor = "pointer";
-                            submitBtn.removeAttribute("title");
-                        } else {
-                            submitBtn.disabled = true;
-                            submitBtn.style.opacity = "0.5";
-                            submitBtn.style.cursor = "not-allowed";
-                            submitBtn.title = "Please verify all checklist items before continuing";
-                        }
-                    });
-                });
-            }
-        });
-        </script>
-
-        <!-- PREV / NEXT NAV -->
-        <div class="lesson-nav-footer" style="display: flex; gap: 15px; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 30px;">
+        <!-- PREV / NEXT NAV FOOTER -->
+        <div class="lesson-nav-footer">
             <button onclick="history.back()" class="btn btn-outline">
                 <i class="fas fa-arrow-left"></i> Back
             </button>
@@ -232,11 +573,253 @@
         </div>
     </div>
 
-    <!-- TOGGLE SIDEBAR BUTTON (MOBILE) -->
-    <button class="sidebar-toggle-btn" id="sidebar-toggle" onclick="document.getElementById('lesson-sidebar').classList.toggle('open')">
+    <!-- RIGHT SIDEBAR (STICKY TOC & CONTROLS) -->
+    <aside class="lesson-right-toc">
+        
+        <!-- Learning Mode Controller Card -->
+        <div class="learning-mode-card">
+            <label class="toggle-switch-container">
+                <span class="switch-label"><i class="fas fa-graduation-cap"></i> Learning Mode</span>
+                <span class="switch">
+                    <input type="checkbox" id="learning-mode-checkbox" onchange="toggleLearningMode(this.checked)">
+                    <span class="slider"></span>
+                </span>
+            </label>
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin: 8px 0 0 0; line-height: 1.4;">
+                Hides solutions and workouts dynamically to test your knowledge.
+            </p>
+        </div>
+
+        <div class="toc-header">
+            <i class="fas fa-compass"></i> Navigation Index
+        </div>
+        <ul class="toc-list-sticky" id="sticky-toc-list">
+            <!-- Dynamically populated via JS -->
+        </ul>
+    </aside>
+
+    <!-- MOBILE SIDEBAR DRAWER BUTTON -->
+    <button class="sidebar-toggle-btn" id="sidebar-toggle" onclick="openMobileSidebar()">
         <i class="fas fa-bars"></i>
     </button>
 </div>
 
 {% include 'learn/_tutor_overlay.html' %}
+
+<script>
+// Mobile Drawer Controllers
+function openMobileSidebar() {
+    document.getElementById('lesson-sidebar').classList.add('open');
+    document.getElementById('sidebar-overlay').classList.add('active');
+}
+
+function closeMobileSidebar() {
+    document.getElementById('lesson-sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('active');
+}
+
+// Learning Mode Handlers
+function toggleLearningMode(isActive) {
+    const container = document.querySelector(".lesson-page");
+    if (isActive) {
+        container.classList.add("learning-mode-active");
+        localStorage.setItem("learning_mode_active", "true");
+    } else {
+        container.classList.remove("learning-mode-active");
+        localStorage.setItem("learning_mode_active", "false");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Restore Learning Mode State
+    const savedState = localStorage.getItem("learning_mode_active");
+    const checkbox = document.getElementById("learning-mode-checkbox");
+    if (savedState === "true") {
+        checkbox.checked = true;
+        toggleLearningMode(true);
+    }
+
+    // Checklist Enforcer
+    const checkboxes = document.querySelectorAll(".checklist-box");
+    const submitBtn = document.querySelector(".lesson-nav-footer form button[type='submit']");
+    
+    if (checkboxes.length > 0 && submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.5";
+        submitBtn.style.cursor = "not-allowed";
+        submitBtn.title = "Please verify all checklist items before continuing";
+        
+        checkboxes.forEach(box => {
+            box.addEventListener("change", () => {
+                const allChecked = Array.from(checkboxes).every(b => b.checked);
+                if (allChecked) {
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = "1";
+                    submitBtn.style.cursor = "pointer";
+                    submitBtn.removeAttribute("title");
+                } else {
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = "0.5";
+                    submitBtn.style.cursor = "not-allowed";
+                    submitBtn.title = "Please verify all checklist items before continuing";
+                }
+            });
+        });
+    }
+
+    // Dynamic Sticky TOC Generator
+    const tocContainer = document.getElementById("sticky-toc-list");
+    const headings = document.querySelectorAll(".rich-content h2, .rich-content h3");
+    
+    if (tocContainer) {
+        if (headings.length > 0) {
+            headings.forEach((heading, idx) => {
+                if (!heading.id) {
+                    heading.id = "heading-ref-" + idx;
+                }
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = "#" + heading.id;
+                
+                // Clean the ID tags out from text if present
+                a.innerText = heading.innerText.replace(/\[id:\s*[\w_]+\]/g, "").trim();
+                a.style.color = "var(--text-secondary)";
+                a.style.textDecoration = "none";
+                a.style.fontSize = heading.tagName === "H3" ? "0.78rem" : "0.85rem";
+                a.style.paddingLeft = heading.tagName === "H3" ? "12px" : "0";
+                a.style.display = "block";
+                a.style.transition = "color 0.2s ease";
+                
+                a.addEventListener("mouseover", () => a.style.color = "var(--accent-light)");
+                a.addEventListener("mouseout", () => a.style.color = "var(--text-secondary)");
+                
+                li.appendChild(a);
+                tocContainer.appendChild(li);
+            });
+        } else {
+            // Fallback: If no inline headers inside markdown render, read main section nodes
+            const sections = document.querySelectorAll(".lesson-section");
+            sections.forEach(sec => {
+                const headingNode = sec.querySelector("h2");
+                if (headingNode) {
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+                    a.href = "#" + sec.id;
+                    a.innerText = headingNode.innerText.trim();
+                    a.style.color = "var(--text-secondary)";
+                    a.style.textDecoration = "none";
+                    a.style.fontSize = "0.85rem";
+                    a.style.display = "block";
+                    
+                    a.addEventListener("mouseover", () => a.style.color = "var(--accent-light)");
+                    a.addEventListener("mouseout", () => a.style.color = "var(--text-secondary)");
+                    
+                    li.appendChild(a);
+                    tocContainer.appendChild(li);
+                }
+            });
+        }
+    }
+
+    // Dynamic Alert Quotes Formatter
+    const quotes = document.querySelectorAll(".rich-content blockquote");
+    quotes.forEach(quote => {
+        const html = quote.innerHTML;
+        if (html.includes("[!NOTE]")) {
+            quote.className = "alert-panel alert-note";
+            quote.innerHTML = html.replace(/\[!NOTE\]\s*:?/g, "<strong><i class='fas fa-info-circle'></i> Note</strong>");
+        } else if (html.includes("[!WARNING]")) {
+            quote.className = "alert-panel alert-warning";
+            quote.innerHTML = html.replace(/\[!WARNING\]\s*:?/g, "<strong><i class='fas fa-exclamation-triangle'></i> Warning</strong>");
+        } else if (html.includes("[!TIP]")) {
+            quote.className = "alert-panel alert-tip";
+            quote.innerHTML = html.replace(/\[!TIP\]\s*:?/g, "<strong><i class='fas fa-lightbulb'></i> Pro Tip</strong>");
+        } else if (html.includes("[!IMPORTANT]")) {
+            quote.className = "alert-panel alert-important";
+            quote.innerHTML = html.replace(/\[!IMPORTANT\]\s*:?/g, "<strong><i class='fas fa-exclamation-circle'></i> Important</strong>");
+        } else if (html.includes("[!CAUTION]")) {
+            quote.className = "alert-panel alert-caution";
+            quote.innerHTML = html.replace(/\[!CAUTION\]\s*:?/g, "<strong><i class='fas fa-fire'></i> Caution</strong>");
+        }
+    });
+
+    // Dynamic Terminal Wrapper for Pre-Code blocks
+    document.querySelectorAll(".rich-content pre").forEach(pre => {
+        const container = document.createElement("div");
+        container.className = "terminal-container";
+        
+        const header = document.createElement("div");
+        header.className = "terminal-header";
+        
+        const dots = document.createElement("div");
+        dots.className = "terminal-dots";
+        dots.innerHTML = `
+            <span style="background:#ff5f56"></span>
+            <span style="background:#ffbd2e"></span>
+            <span style="background:#27c93f"></span>
+        `;
+        header.appendChild(dots);
+        
+        const label = document.createElement("div");
+        label.className = "terminal-label";
+        label.innerText = "Bash / Terminal";
+        header.appendChild(label);
+        
+        const copyBtn = document.createElement("button");
+        copyBtn.className = "terminal-copy-btn";
+        copyBtn.innerHTML = `<i class="far fa-copy"></i> Copy`;
+        copyBtn.onclick = () => {
+            const codeText = pre.innerText.trim();
+            navigator.clipboard.writeText(codeText).then(() => {
+                copyBtn.innerHTML = `<i class="fas fa-check"></i> Copied!`;
+                copyBtn.style.color = "#10b981";
+                setTimeout(() => {
+                    copyBtn.innerHTML = `<i class="far fa-copy"></i> Copy`;
+                    copyBtn.style.color = "";
+                }, 2000);
+            });
+        };
+        header.appendChild(copyBtn);
+        
+        pre.parentNode.insertBefore(container, pre);
+        container.appendChild(header);
+        container.appendChild(pre);
+    });
+
+    // Interactive Expandable Solution blocks wrapper
+    const answersSection = document.querySelector("#section-answers");
+    if (answersSection) {
+        const contentNode = answersSection.querySelector(".section-content");
+        if (contentNode) {
+            const rawHTML = contentNode.innerHTML;
+            contentNode.innerHTML = "";
+            
+            const collapsedCard = document.createElement("div");
+            collapsedCard.className = "solution-collapsed";
+            
+            const btn = document.createElement("button");
+            btn.className = "solution-toggle-trigger";
+            btn.innerHTML = `<i class="fas fa-key"></i> Reveal Workout Solutions`;
+            
+            const body = document.createElement("div");
+            body.className = "solution-body";
+            body.innerHTML = rawHTML;
+            
+            btn.onclick = () => {
+                if (body.style.display === "block") {
+                    body.style.display = "none";
+                    btn.innerHTML = `<i class="fas fa-key"></i> Reveal Workout Solutions`;
+                } else {
+                    body.style.display = "block";
+                    btn.innerHTML = `<i class="fas fa-eye-slash"></i> Hide Workout Solutions`;
+                }
+            };
+            
+            collapsedCard.appendChild(btn);
+            collapsedCard.appendChild(body);
+            contentNode.appendChild(collapsedCard);
+        }
+    }
+});
+</script>
 {% endblock %}
