@@ -93,6 +93,44 @@ As you work, your files transition between four distinct states:
 > [!NOTE]
 > **Why the Staging Area Exists:** The staging area acts as a draft room. Instead of saving all changed files at once, you can choose exactly which files go into which commit, making history clean and easy to revert.
 
+### Repository Creation Workflows
+When working with Git, there are two distinct ways to establish your codebase repository. They serve different entry cases and should not be confused.
+
+#### Workflow 1: Local-First (Start Locally, Connect Later)
+Used when starting a brand-new project from scratch on your own machine.
+```text
+  Create Local Folder ──► git init ──► git add & commit ──► Create GitHub Repo ──► git remote add ──► git push
+```
+* **Step 1:** Create folder: `mkdir MyProject && cd MyProject`
+* **Step 2:** Initialize Git: `git init` (creates local `.git` directory *only* on your computer)
+* **Step 3:** Stage & commit: `git add .` and `git commit -m "Initial commit"`
+* **Step 4:** Connect to Remote: `git remote add origin <github-repo-url>`
+* **Step 5:** Upload: `git push -u origin main`
+
+#### Workflow 2: Remote-First (Repository Already Exists on GitHub)
+Used when cloning an existing codebase or working in collaborative company environments.
+```text
+  Create GitHub Repo (or use existing) ──► git clone <url> ──► Edit Files ──► git add & commit ──► git push
+```
+* **Step 1:** Copy URL: Copy the clone URL of the repository on GitHub.
+* **Step 2:** Download: Run `git clone <url>`. (Downloads the project folder with a pre-configured `.git` directory)
+* **Step 3:** Edit, Stage & commit: Make modifications, run `git add` and `git commit`.
+* **Step 4:** Upload changes: Run `git push`. (Git already knows where to push because the clone command linked the origin automatically!)
+
+#### Comparing Workflows Side-by-Side
+
+| Feature | Starting from Local (`git init`) | Starting from GitHub (`git clone`) |
+|---|---|---|
+| **Primary Use Case** | Starting a brand-new personal project. | Joining an existing project or team. |
+| **Initial Command** | `git init` | `git clone <url>` |
+| **Local `.git` Folder** | Created blank from scratch locally. | Downloaded pre-configured from remote. |
+| **Remote Link Config** | None (must add with `git remote add origin`). | Automatically configured during clone. |
+| **First Push Command** | `git push -u origin main` | `git push` |
+
+> [!IMPORTANT]
+> **Where does my code go on git push?**
+> The `git push` command uploads commits from your **Local Repository** (on your computer) to a **Remote Repository** (hosted on GitHub or GitLab). Git cannot push until a remote address is configured. This connection is covered in detail in the **Remote Collaboration** module.
+
 ---
 
 ## 3. Practical Code Examples [id: examples]
