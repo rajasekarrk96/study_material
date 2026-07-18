@@ -96,25 +96,33 @@ As you work, your files transition between four distinct states:
 ### Repository Creation Workflows
 When working with Git, there are two distinct ways to establish your codebase repository. They serve different entry cases and should not be confused.
 
+> [!NOTE]
+> **One Command at a Time:** Unless explicitly noted, all shell and Git commands should be run one line at a time. Do not type symbols like `&` or run chained syntax (like `&&`) unless your terminal environment supports it.
+
 #### Workflow 1: Local-First (Start Locally, Connect Later)
 Used when starting a brand-new project from scratch on your own machine.
 ```text
-  Create Local Folder ──► git init ──► git add & commit ──► Create GitHub Repo ──► git remote add ──► git push
+  Create Local Folder ──► git init ──► git add . ──► git commit -m "Initial commit" ──► Create GitHub Repo ──► git remote add origin <url> ──► git push
 ```
-* **Step 1:** Create folder: `mkdir MyProject && cd MyProject`
+* **Step 1:** Create folder and navigate into it:
+  ```bash
+  mkdir MyProject
+  cd MyProject
+  ```
 * **Step 2:** Initialize Git: `git init` (creates local `.git` directory *only* on your computer)
-* **Step 3:** Stage & commit: `git add .` and `git commit -m "Initial commit"`
-* **Step 4:** Connect to Remote: `git remote add origin <github-repo-url>`
-* **Step 5:** Upload: `git push -u origin main`
+* **Step 3:** Stage your files: `git add .` (stages all files in the current folder)
+* **Step 4:** Create a commit: `git commit -m "Initial commit"` (records the snapshot locally)
+* **Step 5:** Connect to Remote: `git remote add origin <github-repo-url>` (links local to GitHub)
+* **Step 6:** Upload: `git push -u origin main`
 
 #### Workflow 2: Remote-First (Repository Already Exists on GitHub)
 Used when cloning an existing codebase or working in collaborative company environments.
 ```text
-  Create GitHub Repo (or use existing) ──► git clone <url> ──► Edit Files ──► git add & commit ──► git push
+  Create GitHub Repo ──► git clone <url> ──► Edit Files ──► git add . ──► git commit -m "message" ──► git push
 ```
 * **Step 1:** Copy URL: Copy the clone URL of the repository on GitHub.
 * **Step 2:** Download: Run `git clone <url>`. (Downloads the project folder with a pre-configured `.git` directory)
-* **Step 3:** Edit, Stage & commit: Make modifications, run `git add` and `git commit`.
+* **Step 3:** Edit, Stage & commit: Make modifications, run `git add .` and then `git commit -m "message"`.
 * **Step 4:** Upload changes: Run `git push`. (Git already knows where to push because the clone command linked the origin automatically!)
 
 #### Comparing Workflows Side-by-Side
