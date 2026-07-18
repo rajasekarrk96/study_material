@@ -23,7 +23,17 @@
                     {% endfor %}
                 </div>
             </div>
+        {% if current_user.is_authenticated %}
+        <div class="navbar-search-container" style="position: relative; max-width: 260px; width: 100%; margin: 0 16px;">
+            <form action="{{ url_for('public.search_view') }}" method="GET" style="margin: 0; width: 100%;">
+                <div style="position: relative; display: flex; align-items: center;">
+                    <i class="fas fa-search" style="position: absolute; left: 12px; color: var(--text-muted); font-size: 0.85rem;"></i>
+                    <input type="text" name="q" id="nav-search-input" placeholder="Search lessons..." autocomplete="off" style="width: 100%; padding: 8px 12px 8px 32px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-full); color: #fff; font-size: 0.85rem; outline: none; transition: var(--transition);">
+                </div>
+            </form>
+            <div id="nav-search-autocomplete" style="position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-top: 8px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.5); z-index: 1001;"></div>
         </div>
+        {% endif %}
 
         <div class="navbar-actions">
             {% if current_user.is_authenticated %}
@@ -38,3 +48,65 @@
         </div>
     </div>
 </nav>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("nav-search-input");
+    const autocomplete = document.getElementById("nav-search-autocomplete");
+    if (!input || !autocomplete) return;
+
+    let timeout = null;
+
+    input.addEventListener("input", () => {
+        clearTimeout(timeout);
+        const query = input.value.trim();
+        if (!query) {
+            autocomplete.style.display = "none";
+            autocomplete.innerHTML = "";
+            return;
+        }
+
+        timeout = setTimeout(async () => {
+            try {
+                const res = await fetch(`/api/v1/search/autocomplete?q=${encodeURIComponent(query)}`);
+                const data = await res.json();
+                if (data.status === "success" && data.results && data.results.length > 0) {
+                    autocomplete.innerHTML = "";
+                    data.results.forEach(item => {
+                        const link = document.createElement("a");
+                        link.href = `/learn/courses/${item.course_slug}/${item.slug}`;
+                        link.style.display = "block";
+                        link.style.padding = "8px 12px";
+                        link.style.color = "var(--text-secondary)";
+                        link.style.fontSize = "0.85rem";
+                        link.style.textDecoration = "none";
+                        link.style.borderBottom = "1px solid rgba(255,255,255,0.04)";
+                        link.innerText = item.title;
+                        
+                        link.onmouseover = () => {
+                            link.style.background = "var(--bg-hover)";
+                            link.style.color = "#fff";
+                        };
+                        link.onmouseout = () => {
+                            link.style.background = "transparent";
+                            link.style.color = "var(--text-secondary)";
+                        };
+                        autocomplete.appendChild(link);
+                    });
+                    autocomplete.style.display = "flex";
+                } else {
+                    autocomplete.style.display = "none";
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }, 250);
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!input.contains(e.target) && !autocomplete.contains(e.target)) {
+            autocomplete.style.display = "none";
+        }
+    });
+});
+</script>

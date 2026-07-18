@@ -49,15 +49,15 @@
             </div>
         </div>
 
-        <div class="stat-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; position: relative; overflow: hidden; display: flex; align-items: center; gap: 16px;">
-            <div style="background: rgba(167,139,250,0.15); border: 1px solid var(--purple); color: var(--purple); width: 50px; height: 50px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+        <a href="{{ url_for('learn.certificate_list') }}" class="stat-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; position: relative; overflow: hidden; display: flex; align-items: center; gap: 16px; text-decoration: none; transition: var(--transition); color: inherit;">
+            <div style="background: rgba(167,139,250,0.15); border: 1px solid var(--purple); color: var(--purple); width: 50px; height: 50px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">
                 <i class="fas fa-award"></i>
             </div>
             <div>
-                <span style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Certificates</span>
+                <span style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; display: block;">Certificates</span>
                 <h3 style="font-size: 1.8rem; margin: 2px 0 0 0; color: #fff;">{{ dashboard.certificates_count }}</h3>
             </div>
-        </div>
+        </a>
     </div>
 
     <!-- Main Dashboard Grid -->
@@ -84,6 +84,21 @@
                 <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;">Resume your course where you last left off. Complete this lesson to earn points and secure your streak!</p>
                 <a href="{{ url_for('learn.lesson_view', course_slug=resume_course.slug, module_slug=resume_course.next_lesson.module_slug, lesson_slug=resume_course.next_lesson.slug) }}" class="btn btn-primary">
                     Resume Lesson <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            {% endif %}
+            
+            <!-- Suggested Lab Card -->
+            {% if dashboard.suggested_lab %}
+            <div class="lab-suggestion-card" style="background: linear-gradient(135deg, rgba(16,37,30,0.85) 0%, rgba(11,18,20,0.9) 100%); border: 1px solid var(--green); border-radius: var(--radius-lg); padding: 28px; box-shadow: 0 0 15px rgba(34,211,161,0.15); transition: var(--transition);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="color: var(--green); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;"><i class="fas fa-flask"></i> Recommended Lab</span>
+                    <span style="color: var(--text-secondary); font-size: 0.85rem;"><i class="far fa-clock"></i> ~{{ dashboard.suggested_lab.estimated_minutes }} mins</span>
+                </div>
+                <h2 style="font-size: 1.6rem; color: #fff; margin-bottom: 8px;">{{ dashboard.suggested_lab.title }}</h2>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;">{{ dashboard.suggested_lab.description or "Apply your skills with a hands-on lab environment verification." }}</p>
+                <a href="/learn/labs/{{ dashboard.suggested_lab.id }}/" class="btn" style="background: var(--green); color: #000; font-weight: 700; border: none; padding: 10px 20px; border-radius: var(--radius-sm); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; cursor: pointer; transition: all 0.2s ease;">
+                    Start Lab <i class="fas fa-play"></i>
                 </a>
             </div>
             {% endif %}
@@ -131,6 +146,21 @@
                     </div>
                 {% endif %}
             </div>
+
+            <!-- Recommended Next Course Card -->
+            {% if dashboard.recommended_next_course %}
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm); transition: var(--transition);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <h3 style="font-size: 1.1rem; color: #fff; margin: 0;"><i class="fas fa-graduation-cap"></i> Recommended Next Course</h3>
+                    <span style="background: rgba(99,102,241,0.2); color: var(--accent-light); font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: 600;">Up Next</span>
+                </div>
+                <h4 style="font-size: 1rem; color: #fff; margin: 8px 0 6px 0;">{{ dashboard.recommended_next_course.title }}</h4>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px;">{{ dashboard.recommended_next_course.description or "Advance your learning journey with the next core curriculum track." }}</p>
+                <a href="{{ url_for('learn.course_overview', course_slug=dashboard.recommended_next_course.slug) }}" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                    Explore Course <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+            {% endif %}
         </div>
 
         <!-- Right Side: Activity & Tools -->
@@ -154,6 +184,37 @@
                     </a>
                 </div>
             </div>
+
+            <!-- Suggested Review Card -->
+            {% if dashboard.suggested_review %}
+            <div style="background: rgba(167,139,250,0.08); border: 1px solid var(--purple); border-radius: var(--radius-md); padding: 20px; box-shadow: 0 0 10px rgba(167,139,250,0.05);">
+                <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 8px;"><i class="fas fa-redo"></i> Suggested Review</h3>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px;">{{ dashboard.suggested_review.reason }}</p>
+                <a href="{{ url_for('learn.lesson_view', course_slug=dashboard.suggested_review.course_slug, module_slug=dashboard.suggested_review.module_slug, lesson_slug=dashboard.suggested_review.lesson_slug) }}" class="btn" style="background: transparent; color: var(--purple); border: 1px solid var(--purple); padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: var(--radius-sm); display: inline-flex; align-items: center; gap: 6px; text-decoration: none; cursor: pointer; transition: all 0.2s ease;">
+                    Review Topic <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- Earned Credentials Card -->
+            {% if dashboard.earned_certificates %}
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">
+                <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 12px;"><i class="fas fa-award" style="color: #c5a880;"></i> Earned Credentials</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    {% for uc in dashboard.earned_certificates %}
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 8px;">
+                        <div>
+                            <span style="font-size: 0.9rem; color: #fff; font-weight: 600; display: block;">{{ uc.certificate.title }}</span>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Issued: {{ uc.issued_at.strftime("%b %d, %Y") }}</span>
+                        </div>
+                        <a href="{{ url_for('learn.certificate_detail', user_cert_id=uc.id) }}" style="color: var(--accent-light); font-size: 0.8rem; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+                            View <i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
 
             <!-- Recent Activity timeline -->
             <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px;">

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Peer Review Queue — Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 1000px; margin: 0 auto; min-height: 80vh;">
+    <!-- Breadcrumbs -->
+    <div style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-muted);">
+        <a href="{{ url_for('admin.dashboard') }}" style="color: var(--text-secondary); text-decoration: none;">Admin Dashboard</a>
+        <i class="fas fa-chevron-right" style="font-size: 0.75rem; margin: 0 8px;"></i>
+        <span style="color: #fff;">Review Queue</span>
+    </div>
+
+    <!-- Header -->
+    <div style="margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
+        <div>
+            <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;"><span class="gradient-text">Peer Review Queue</span> 📝</h1>
+            <p style="color: var(--text-secondary); margin: 0;">Validate submitted course content drafts, readability indicators, and publish them to production.</p>
+        </div>
+        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline btn-sm">
+            <i class="fas fa-arrow-left"></i> Admin Dashboard
+        </a>
+    </div>
+
+    <!-- Review items list -->
+    {% if lessons %}
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+            {% for lesson in lessons %}
+                <div class="review-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; transition: var(--transition);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                        <div>
+                            <span class="badge" style="background: rgba(245,158,11,0.15); color: #f59e0b; font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: 600; margin-bottom: 8px; display: inline-block;">
+                                Pending Review
+                            </span>
+                            <h3 style="font-size: 1.25rem; color: #fff; margin: 0; font-weight: 700;">{{ lesson.title }}</h3>
+                            <span style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-top: 4px;">
+                                Course: {{ lesson.module.course.title if lesson.module and lesson.module.course else "Unlinked" }}
+                            </span>
+                        </div>
+                        
+                        <!-- Approve/Reject buttons -->
+                        <div style="display: flex; gap: 10px;">
+                            <form action="{{ url_for('admin.process_review', lesson_id=lesson.id) }}" method="POST" style="margin: 0;">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" name="action" value="approve" class="btn btn-primary btn-sm" style="font-weight: 600; padding: 8px 16px;">
+                                    <i class="fas fa-check mr-1"></i> Approve & Publish
+                                </button>
+                            </form>
+                            <form action="{{ url_for('admin.process_review', lesson_id=lesson.id) }}" method="POST" style="margin: 0;">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" name="action" value="reject" class="btn btn-outline btn-sm" style="color: #ff5f56; border-color: #ff5f56; font-weight: 600; padding: 8px 16px;" onmouseover="this.style.background='rgba(255,95,86,0.1)'" onmouseout="this.style.background='transparent'">
+                                    <i class="fas fa-times mr-1"></i> Reject Draft
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Quality / Readability scores info -->
+                    <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 12px; font-size: 0.88rem;">
+                        <span style="color: #fff; font-weight: 600; display: block; margin-bottom: 10px;">Automated Quality Checks:</span>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                            <div>
+                                <span style="color: var(--text-muted); display: block;">Readability Score (Flesch)</span>
+                                <span style="font-size: 1.1rem; color: #fff; font-weight: 600; margin-top: 4px; display: block;">
+                                    {{ lesson.readability_score or "Not Checked" }}
+                                </span>
+                            </div>
+                            <div>
+                                <span style="color: var(--text-muted); display: block;">Plagiarism Index</span>
+                                <span style="font-size: 1.1rem; color: #fff; font-weight: 600; margin-top: 4px; display: block;">
+                                    {% if lesson.plagiarism_percentage is not none %}
+                                        {{ lesson.plagiarism_percentage }}%
+                                    {% else %}
+                                        Not Checked
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">
+                        Submitted for review. Approve will trigger index rebuild and sync update.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Empty Queue State -->
+        <div style="background: var(--bg-card); border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 60px 40px; text-align: center; max-width: 550px; margin: 40px auto;">
+            <div style="font-size: 3.5rem; margin-bottom: 20px;">🎉</div>
+            <h3 style="color: #fff; font-size: 1.4rem; margin-bottom: 10px; font-weight: 700;">Review Queue is Clear!</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+                All submitted lesson drafts have been processed. Excellent work keeping the catalog up to date!
+            </p>
+        </div>
+    {% endif %}
+
+</div>
+
+<style>
+.review-card:hover {
+    border-color: var(--accent) !important;
+    background: var(--bg-hover) !important;
+}
+</style>
+{% endblock %}

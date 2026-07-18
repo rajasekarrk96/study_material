@@ -61,6 +61,42 @@ class OllamaProvider(AIProvider):
             logger.error("Ollama chat error: %s", exc)
             return self._fallback_response(prompt)
 
+    def chat_stream(self, prompt: str, system: Optional[str] = None, **kwargs):
+        """Yield response chunks from Ollama REST API in real-time."""
+        if not self._is_available():
+            logger.warning("Ollama server unreachable — streaming fallback stub.")
+            # Yield in chunks to simulate streaming for fallback/testing
+            stub_response = self._fallback_response(prompt)
+            # Yield words to simulate active streaming
+            for word in stub_response.split(" "):
+                yield word + " "
+            return
+
+        payload = {
+            "model": self._model,
+            "prompt": prompt,
+            "stream": True,
+        }
+        if system:
+            payload["system"] = system
+
+        try:
+            r = requests.post(
+                f"{OLLAMA_BASE_URL}/api/generate",
+                json=payload,
+                stream=True,
+                timeout=OLLAMA_TIMEOUT
+            )
+            r.raise_for_status()
+            for line in r.iter_lines():
+                if line:
+                    import json
+                    chunk = json.loads(line.decode("utf-8"))
+                    yield chunk.get("response", "")
+        except Exception as exc:
+            logger.error("Ollama streaming chat error: %s", exc)
+            yield "[Error during streaming generation]"
+
     def embeddings(self, text: str) -> list[float]:
         """Return embedding vector from Ollama embed endpoint."""
         if not self._is_available():

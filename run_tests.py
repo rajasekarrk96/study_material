@@ -671,6 +671,7 @@ class EventServiceTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
         self.app.config["TESTING"] = True
+        self.app.config["WTF_CSRF_ENABLED"] = False
         self.client = self.app.test_client()
         self.ctx = self.app.app_context()
         self.ctx.push()
@@ -763,6 +764,418 @@ class EventServiceTestCase(unittest.TestCase):
         rec = RecommendationService.get_resume_recommendation(self.user.id)
         self.assertIsNotNone(rec)
         self.assertEqual(rec["next_lesson"]["slug"], "lesson-2")
+
+    def test_recommendation_service_generalized(self):
+        """Test suggested labs, reviews, and next course recommendations."""
+        from app.services.learning import RecommendationService
+        from app.domains.content.models import Lab, LabStep
+        from app.domains.assessment.models import Quiz, QuizAttempt
+        
+        # 1. Create a lab for lesson 1
+        lab = Lab(lesson_id=self.lesson1.id, title="Init Lab", description="Learn git init")
+        db.session.add(lab)
+        db.session.flush()
+        
+        # Check suggested lab
+        sugg_lab = RecommendationService.get_suggested_lab(self.user.id)
+        self.assertIsNotNone(sugg_lab)
+        self.assertEqual(sugg_lab["id"], lab.id)
+        self.assertEqual(sugg_lab["title"], "Init Lab")
+        
+        # 2. Check suggested review - initially None
+        sugg_review = RecommendationService.get_suggested_review(self.user.id)
+        self.assertIsNone(sugg_review)
+        
+        # Create a quiz and failed quiz attempt to test review suggestion
+        quiz = Quiz(lesson_id=self.lesson1.id, title="Quiz 1", slug="quiz-1", passing_score=70)
+        db.session.add(quiz)
+        db.session.flush()
+        
+        attempt = QuizAttempt(user_id=self.user.id, quiz_id=quiz.id, score=50, is_passed=False, started_at=datetime.utcnow(), completed_at=datetime.utcnow())
+        db.session.add(attempt)
+        db.session.commit()
+        
+        sugg_review = RecommendationService.get_suggested_review(self.user.id)
+        self.assertIsNotNone(sugg_review)
+        self.assertIn("Quiz Score: 50%", sugg_review["reason"])
+        self.assertEqual(sugg_review["lesson_slug"], "lesson-1")
+
+        # 3. Check recommended next course
+        next_course = RecommendationService.get_recommended_next_course(self.user.id)
+        self.assertIsNotNone(next_course)
+        self.assertEqual(next_course["slug"], "git-fundamentals")
+
+    def test_lab_service_and_event_integration(self):
+        """Test lab progress saving and auto-grading via local Git validator mock."""
+        from app.services.lab import LabService
+        from app.domains.content.models import Lab, LabStep
+        
+        # Create lab and step with a rule
+        lab = Lab(lesson_id=self.lesson1.id, title="Git Branch Lab", description="Create a branch")
+        db.session.add(lab)
+        db.session.flush()
+        
+        step = LabStep(lab_id=lab.id, step_number=1, title="Create branch", instruction="Run git branch <!-- rule:git_branch expected:feature -->")
+        db.session.add(step)
+        db.session.commit()
+        
+        # 1. Save step checkpoints manually
+        sub = LabService.submit_step_progress(self.user.id, lab.id, 1, True)
+        self.assertIn(1, sub.submission_data["completed_steps"])
+        
+        # 2. Mocking validation command output inside the engine
+        sub_fail = LabService.verify_and_grade_lab(self.user.id, lab.id, repo_path="invalid_path_abc")
+        self.assertEqual(sub_fail.status, "failed")
+        self.assertIn("does not exist", sub_fail.feedback)
+        
+        from unittest.mock import patch
+        from subprocess import CompletedProcess
+        
+        with patch("subprocess.run") as mock_run:
+            mock_run.returncode = 0
+            mock_run.return_value = CompletedProcess(args=["git", "branch"], returncode=0, stdout="* main\n  feature\n")
+            
+            with patch("os.path.exists", return_value=True), patch("os.path.isdir", return_value=True):
+                sub_pass = LabService.verify_and_grade_lab(self.user.id, lab.id, repo_path="/some/fake/repo")
+                self.assertEqual(sub_pass.status, "passed")
+                
+                # Check that XP log was created for lab completion
+                xp_log = UserXPLog.query.filter_by(user_id=self.user.id, activity_type="lab_completed").first()
+                self.assertIsNotNone(xp_log)
+                self.assertEqual(xp_log.xp_amount, 50)
+
+    def test_certificate_auto_award(self):
+        """Completing all lessons in a course should trigger course_completed and award a Certificate if configured."""
+        from app.services.learning import LearningProgressService
+        from app.domains.content.models import Certificate, UserCertificate
+        
+        # Configure certificate for the course
+        cert = Certificate(course_id=self.course.id, title="Git Master Cert", description="Successfully completed Git Fundamentals")
+        db.session.add(cert)
+        db.session.commit()
+        
+        # Complete lesson 1
+        LearningProgressService.complete_lesson(self.user.id, self.lesson1.id)
+        db.session.commit()
+        
+        # Verify no certificate awarded yet
+        user_cert = UserCertificate.query.filter_by(user_id=self.user.id, certificate_id=cert.id).first()
+        self.assertIsNone(user_cert)
+        
+        # Complete lesson 2 (finishing course)
+        LearningProgressService.complete_lesson(self.user.id, self.lesson2.id)
+        db.session.commit()
+        
+        # Verify certificate is awarded automatically
+        user_cert = UserCertificate.query.filter_by(user_id=self.user.id, certificate_id=cert.id).first()
+        self.assertIsNotNone(user_cert)
+        self.assertEqual(user_cert.certificate.title, "Git Master Cert")
+
+    def test_certificate_secure_hash_and_verification(self):
+        """Test secure verification hash generation, decoding, and public verification endpoints."""
+        from app.services.learning import CertificateService, LearningProgressService
+        from app.domains.content.models import Certificate, UserCertificate
+        
+        # 1. Setup course certificate
+        cert = Certificate(course_id=self.course.id, title="Git Master Cert", description="Successfully completed Git Fundamentals")
+        db.session.add(cert)
+        db.session.commit()
+        
+        # Complete all lessons
+        LearningProgressService.complete_lesson(self.user.id, self.lesson1.id)
+        LearningProgressService.complete_lesson(self.user.id, self.lesson2.id)
+        db.session.commit()
+        
+        # Retrieve user certificate
+        user_cert = UserCertificate.query.filter_by(user_id=self.user.id, certificate_id=cert.id).first()
+        self.assertIsNotNone(user_cert)
+        
+        # 2. Test generation & validation service helpers
+        sec_hash = CertificateService.generate_verification_hash(user_cert.id)
+        self.assertIsNotNone(sec_hash)
+        
+        verified_cert = CertificateService.verify_certificate_hash(sec_hash)
+        self.assertIsNotNone(verified_cert)
+        self.assertEqual(verified_cert.id, user_cert.id)
+        
+        # Ensure invalid hash returns None
+        self.assertIsNone(CertificateService.verify_certificate_hash("invalid-token-xyz"))
+        
+        # 3. Test HTTP routes
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+            
+        # Get certificate list
+        res_list = self.client.get("/learn/certificates/")
+        self.assertEqual(res_list.status_code, 200)
+        self.assertIn(b"Git Master Cert", res_list.data)
+        
+        # Get certificate detail
+        res_detail = self.client.get(f"/learn/certificates/{user_cert.id}/")
+        self.assertEqual(res_detail.status_code, 200)
+        self.assertIn(b"Certificate of Completion", res_detail.data)
+        
+        # Get public verification route (no session required!)
+        with self.client.session_transaction() as sess:
+            sess.clear()
+            
+        res_pub_verify = self.client.get(f"/learn/verify/certificate/{sec_hash}")
+        self.assertEqual(res_pub_verify.status_code, 200)
+        self.assertIn(b"Verification Verified", res_pub_verify.data)
+        self.assertIn(b"Certificate of Completion", res_pub_verify.data)
+        
+        # Test public verification with invalid hash
+        res_pub_fail = self.client.get("/learn/verify/certificate/invalid-hash-abc")
+        self.assertEqual(res_pub_fail.status_code, 404)
+        self.assertIn(b"Invalid Certificate Token", res_pub_fail.data)
+
+    def test_ai_tutor_integration(self):
+        """Test AI Tutor session creation, listing, details retrieval, and SSE message response streaming."""
+        from app.domains.tutor.models import AITutorSession, AITutorMessage
+        
+        # Authenticate user session
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+            
+        # 1. Create a general tutor session
+        res_create = self.client.post("/api/v1/tutor/sessions", json={})
+        self.assertEqual(res_create.status_code, 200)
+        data_create = res_create.get_json()
+        self.assertEqual(data_create["status"], "success")
+        session_id = data_create["session_id"]
+        self.assertEqual(data_create["title"], "General Tutoring Session")
+        
+        # Verify in DB
+        session = db.session.get(AITutorSession, session_id)
+        self.assertIsNotNone(session)
+        self.assertEqual(session.user_id, self.user.id)
+        self.assertIsNone(session.lesson_id)
+        
+        # 2. Create a lesson-specific tutor session
+        res_create_lesson = self.client.post("/api/v1/tutor/sessions", json={"lesson_id": self.lesson1.id})
+        self.assertEqual(res_create_lesson.status_code, 200)
+        data_create_lesson = res_create_lesson.get_json()
+        session_lesson_id = data_create_lesson["session_id"]
+        self.assertEqual(data_create_lesson["title"], f"Tutor Session: {self.lesson1.title}")
+        
+        session_lesson = db.session.get(AITutorSession, session_lesson_id)
+        self.assertEqual(session_lesson.lesson_id, self.lesson1.id)
+        
+        # 3. List tutor sessions
+        res_list = self.client.get("/api/v1/tutor/sessions")
+        self.assertEqual(res_list.status_code, 200)
+        data_list = res_list.get_json()
+        self.assertEqual(data_list["status"], "success")
+        self.assertEqual(len(data_list["sessions"]), 2)
+        
+        # 4. Get session details (empty message list initially)
+        res_details = self.client.get(f"/api/v1/tutor/sessions/{session_id}")
+        self.assertEqual(res_details.status_code, 200)
+        data_details = res_details.get_json()
+        self.assertEqual(data_details["status"], "success")
+        self.assertEqual(len(data_details["messages"]), 0)
+        
+        # 5. Post message and stream tutor response (SSE)
+        res_msg = self.client.post(
+            f"/api/v1/tutor/sessions/{session_id}/messages",
+            json={"message": "Explain git rebase"}
+        )
+        self.assertEqual(res_msg.status_code, 200)
+        self.assertEqual(res_msg.mimetype, "text/event-stream")
+        
+        # Read the stream content
+        stream_data = res_msg.data.decode("utf-8")
+        self.assertIn("data: ", stream_data)
+        self.assertIn("chunk", stream_data)
+        
+        # Verify messages are saved in database
+        user_msg = AITutorMessage.query.filter_by(session_id=session_id, sender="user").first()
+        self.assertIsNotNone(user_msg)
+        self.assertEqual(user_msg.content, "Explain git rebase")
+        
+        tutor_msg = AITutorMessage.query.filter_by(session_id=session_id, sender="tutor").first()
+        self.assertIsNotNone(tutor_msg)
+        self.assertIn("AI Unavailable", tutor_msg.content)
+        
+        # 6. Retrieve details again (should now have 2 messages)
+        res_details2 = self.client.get(f"/api/v1/tutor/sessions/{session_id}")
+        self.assertEqual(res_details2.status_code, 200)
+        data_details2 = res_details2.get_json()
+        self.assertEqual(len(data_details2["messages"]), 2)
+        self.assertEqual(data_details2["messages"][0]["sender"], "user")
+        self.assertEqual(data_details2["messages"][1]["sender"], "tutor")
+        
+        # 7. Render front-end page
+        res_ui = self.client.get("/learn/tutor/")
+        self.assertEqual(res_ui.status_code, 200)
+        self.assertIn(b"AI Programming Tutor", res_ui.data)
+
+    def test_hybrid_search_and_autocomplete(self):
+        """Test FTS5 search index building, hybrid search query results, and autocomplete filtering."""
+        from app.services.search_service import SearchIndexService
+        from app.domains.knowledge.search import hybrid_search
+        from app.domains.knowledge.models import SourceDocument, KnowledgeChunk, ChunkEmbedding
+        
+        # 1. Verify index rebuild is functional
+        SearchIndexService.rebuild_search_index()
+        
+        # 2. Add an external source document & chunk to test semantic chunk hits
+        from app.domains.knowledge.models import KnowledgeSource
+        source = KnowledgeSource(name="Git Docs", source_type="docs", base_url="https://git-scm.com")
+        db.session.add(source)
+        db.session.flush()
+        
+        doc = SourceDocument(source_id=source.id, title="Git Branching Guide", url="https://git-scm.com/branches", raw_text="Git rebase allows rewriting commit history on a branch.")
+        db.session.add(doc)
+        db.session.flush()
+        
+        chunk = KnowledgeChunk(document_id=doc.id, chunk_index=0, chunk_text="Git rebase allows rewriting commit history on a branch.")
+        db.session.add(chunk)
+        db.session.flush()
+        
+        # Add embedding vector
+        emb = ChunkEmbedding(chunk_id=chunk.id)
+        emb.set_vector([0.0] * 384)
+        db.session.add(emb)
+        db.session.commit()
+        
+        # 3. Test Service helper functions
+        fts_hits = SearchIndexService.search_query("Lesson")
+        self.assertGreater(len(fts_hits), 0)
+        self.assertEqual(fts_hits[0]["lesson_id"], self.lesson1.id)
+        
+        # 4. Test Autocomplete Route
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+            
+        res_auto = self.client.get("/api/v1/search/autocomplete?q=Less")
+        self.assertEqual(res_auto.status_code, 200)
+        data_auto = res_auto.get_json()
+        self.assertEqual(data_auto["status"], "success")
+        self.assertGreater(len(data_auto["results"]), 0)
+        self.assertEqual(data_auto["results"][0]["title"], "Lesson 1")
+        
+        # 5. Test Search UI View page
+        res_view = self.client.get("/search?q=Lesson")
+        self.assertEqual(res_view.status_code, 200)
+        self.assertIn(b"Search Results", res_view.data)
+        self.assertIn(b"Lesson 1", res_view.data)
+        
+        # 6. Test REST API hybrid search endpoint
+        res_hybrid = self.client.get("/api/v1/search/hybrid?q=Lesson")
+        self.assertEqual(res_hybrid.status_code, 200)
+        data_hybrid = res_hybrid.get_json()
+        self.assertEqual(data_hybrid["status"], "success")
+        self.assertGreater(data_hybrid["count"], 0)
+
+    def test_enterprise_dashboard_and_rbac(self):
+        """Test user role listings, updates, peer review queue transitions, sitemap xml builder, and role protections."""
+        from app.domains.auth.models import User, Role
+        from app.domains.content.models import Lesson
+        
+        # Create user roles for testing (e.g. editor, reviewer, student)
+        reviewer_role = Role.query.filter_by(name="reviewer").first()
+        if not reviewer_role:
+            reviewer_role = Role(name="reviewer", display_name="Reviewer", level=10)
+            db.session.add(reviewer_role)
+            db.session.commit()
+            
+        admin_role = Role.query.filter_by(name="admin").first()
+        if not admin_role:
+            admin_role = Role(name="admin", display_name="Admin", level=20)
+            db.session.add(admin_role)
+            db.session.commit()
+            
+        # Create a test reviewer user
+        reviewer_user = User(
+            email="reviewer@bytesandboards.test",
+            username="reviewer",
+            password_hash="fake-hash",
+            role_id=reviewer_role.id,
+            display_name="Reviewer User"
+        )
+        db.session.add(reviewer_user)
+        db.session.commit()
+        
+        # 1. Test role permissions restrict (Student role user has level=1, cannot access admin dashboard)
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id) # student role
+        res_denied = self.client.get("/admin/")
+        self.assertEqual(res_denied.status_code, 403)
+        
+        # Promote our user to admin
+        self.user.role_id = admin_role.id
+        db.session.commit()
+        
+        # Get admin dashboard (should pass now)
+        res_dashboard = self.client.get("/admin/")
+        self.assertEqual(res_dashboard.status_code, 200)
+        self.assertIn(b"CMS Admin Dashboard", res_dashboard.data)
+        self.assertIn(b"System Analytics", res_dashboard.data)
+        
+        # 2. Test user roles listing view
+        res_users = self.client.get("/admin/users")
+        self.assertEqual(res_users.status_code, 200)
+        self.assertIn(b"User Role Management", res_users.data)
+        
+        # Promote reviewer_user to admin via POST
+        res_promo = self.client.post(
+            f"/admin/users/{reviewer_user.id}/role",
+            data={"role_id": str(admin_role.id)}
+        )
+        self.assertEqual(res_promo.status_code, 302) # Redirect to users list
+        db.session.refresh(reviewer_user)
+        self.assertEqual(reviewer_user.role_id, admin_role.id)
+        
+        # Demote back to reviewer
+        reviewer_user.role_id = reviewer_role.id
+        db.session.commit()
+        
+        # 3. Test review queue transitions
+        # Set lesson1 status to "review"
+        self.lesson1.status = "review"
+        db.session.commit()
+        
+        # Reviewer session login
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(reviewer_user.id) # reviewer role
+            
+        res_queue = self.client.get("/admin/review-queue")
+        self.assertEqual(res_queue.status_code, 200)
+        self.assertIn(b"Peer Review Queue", res_queue.data)
+        self.assertIn(self.lesson1.title.encode("utf-8"), res_queue.data)
+        
+        # Approve the draft (publishes it)
+        res_approve = self.client.post(
+            f"/admin/review-queue/{self.lesson1.id}/status",
+            data={"action": "approve"}
+        )
+        self.assertEqual(res_approve.status_code, 302)
+        db.session.refresh(self.lesson1)
+        self.assertEqual(self.lesson1.status, "published")
+        
+        # Reject lesson2 draft (set status to review first)
+        self.lesson2.status = "review"
+        db.session.commit()
+        
+        res_reject = self.client.post(
+            f"/admin/review-queue/{self.lesson2.id}/status",
+            data={"action": "reject"}
+        )
+        self.assertEqual(res_reject.status_code, 302)
+        db.session.refresh(self.lesson2)
+        self.assertEqual(self.lesson2.status, "draft")
+        
+        # 4. Test SEO dynamic Sitemap XML View (public endpoint, no session required)
+        with self.client.session_transaction() as sess:
+            sess.clear()
+            
+        res_sitemap = self.client.get("/sitemap.xml")
+        self.assertEqual(res_sitemap.status_code, 200)
+        self.assertEqual(res_sitemap.mimetype, "application/xml")
+        sitemap_data = res_sitemap.data
+        self.assertIn(b"<loc>", sitemap_data)
+        self.assertIn(b"git-fundamentals", sitemap_data)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,6 @@
-"""Learning OS — Learn Blueprint: Course, Module, Lesson viewer routes."""
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, jsonify, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from app.domains.content.models import Course, Module, Lesson, LessonSection
+from app.domains.content.models import Course, Module, Lesson, LessonSection, Lab, LabStep, LabSubmission, UserCertificate
 from app.domains.learning_path.models import PathPrerequisite, UserCourseProgress
 
 learn_bp = Blueprint("learn", __name__, template_folder="templates")
@@ -87,13 +86,16 @@ def lesson_view(course_slug: str, module_slug: str, lesson_slug: str):
     )
 
 
-from flask import redirect, url_for, flash
+from app.core.extensions import db
 from app.services.learning import LearningProgressService
+from app.services.lab import LabService
 
 @learn_bp.route("/lessons/<int:lesson_id>/complete", methods=["POST"])
 @login_required
 def complete_lesson(lesson_id: int):
-    lesson = Lesson.query.get_or_404(lesson_id)
+    lesson = db.session.get(Lesson, lesson_id)
+    if not lesson:
+        abort(404)
     LearningProgressService.complete_lesson(current_user.id, lesson.id)
 
     course = lesson.module.course
@@ -122,4 +124,133 @@ def complete_lesson(lesson_id: int):
                                lesson_slug=next_lesson.slug))
     else:
         return redirect(url_for("learn.course_overview", course_slug=course.slug))
+
+
+@learn_bp.route("/labs/<int:lab_id>/")
+@login_required
+def lab_view(lab_id: int):
+    lab = LabService.get_lab(lab_id)
+    if not lab:
+        abort(404, "Lab not found")
+        
+    steps = LabStep.query.filter_by(lab_id=lab_id).order_by(LabStep.step_number).all()
+    sub = LabService.get_submission(current_user.id, lab_id)
+    
+    completed_steps = []
+    repo_path = ""
+    if sub:
+        completed_steps = sub.submission_data.get("completed_steps", [])
+        repo_path = sub.submission_data.get("repo_path", "")
+
+    course = None
+    if lab.lesson and lab.lesson.module:
+        course = lab.lesson.module.course
+
+    return render_template(
+        "learn/lab.html",
+        lab=lab,
+        steps=steps,
+        completed_steps=completed_steps,
+        repo_path=repo_path,
+        submission=sub,
+        course=course
+    )
+
+
+@learn_bp.route("/labs/<int:lab_id>/steps/<int:step_number>", methods=["POST"])
+@login_required
+def save_lab_step_progress(lab_id: int, step_number: int):
+    data = request.get_json() or {}
+    is_completed = data.get("completed", False)
+    
+    sub = LabService.submit_step_progress(
+        user_id=current_user.id,
+        lab_id=lab_id,
+        step_number=step_number,
+        is_completed=is_completed
+    )
+    
+    return jsonify({
+        "status": "success",
+        "completed_steps": sub.submission_data.get("completed_steps", [])
+    })
+
+
+@learn_bp.route("/labs/<int:lab_id>/verify", methods=["POST"])
+@login_required
+def verify_lab(lab_id: int):
+    data = request.get_json() or {}
+    repo_path = data.get("repo_path", "").strip() or None
+    
+    sub = LabService.verify_and_grade_lab(
+        user_id=current_user.id,
+        lab_id=lab_id,
+        repo_path=repo_path
+    )
+    
+    if not sub:
+        return jsonify({"status": "error", "message": "Lab or submission error"}), 400
+        
+    return jsonify({
+        "status": sub.status,
+        "feedback": sub.feedback,
+        "completed_steps": sub.submission_data.get("completed_steps", [])
+    })
+
+
+from app.services.learning import CertificateService
+
+@learn_bp.route("/certificates/")
+@login_required
+def certificate_list():
+    user_certs = CertificateService.get_user_certificates(current_user.id)
+    certs_data = []
+    for uc in user_certs:
+        certs_data.append({
+            "record": uc,
+            "hash": CertificateService.generate_verification_hash(uc.id)
+        })
+    return render_template(
+        "learn/certificate_list.html",
+        certificates=certs_data
+    )
+
+
+@learn_bp.route("/certificates/<int:user_cert_id>/")
+@login_required
+def certificate_detail(user_cert_id: int):
+    user_cert = db.session.get(UserCertificate, user_cert_id)
+    if not user_cert:
+        abort(404, "Certificate not found")
+    if user_cert.user_id != current_user.id:
+        abort(403, "You do not have access to this certificate")
+        
+    verification_hash = CertificateService.generate_verification_hash(user_cert.id)
+    return render_template(
+        "learn/certificate_detail.html",
+        user_cert=user_cert,
+        verification_hash=verification_hash,
+        public_view=False
+    )
+
+
+@learn_bp.route("/verify/certificate/<string:hash_str>")
+def public_certificate_verify(hash_str: str):
+    user_cert = CertificateService.verify_certificate_hash(hash_str)
+    if not user_cert:
+        return render_template("learn/certificate_verification_failed.html"), 404
+        
+    return render_template(
+        "learn/certificate_detail.html",
+        user_cert=user_cert,
+        verification_hash=hash_str,
+        public_view=True
+    )
+
+
+@learn_bp.route("/tutor/")
+@login_required
+def ai_tutor():
+    """Renders the standalone AI Tutor workspace page."""
+    return render_template("learn/tutor.html")
 

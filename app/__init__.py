@@ -93,6 +93,7 @@ def _import_all_models() -> None:
     import app.domains.srs.models            # noqa: F401
     import app.domains.study.models          # noqa: F401
     import app.domains.knowledge.models      # noqa: F401
+    import app.domains.tutor.models          # noqa: F401
 
 
 
@@ -141,6 +142,23 @@ def _seed_defaults() -> None:
             )
             db.session.add(admin_user)
             db.session.commit()
+
+    # Seed default certificates for existing courses
+    from app.domains.content.models import Course, Certificate
+    courses = Course.query.all()
+    for course in courses:
+        existing_cert = Certificate.query.filter_by(course_id=course.id).first()
+        if not existing_cert:
+            new_cert = Certificate(
+                course_id=course.id,
+                title=f"{course.title} Certification",
+                description=f"Demonstrates mastery of the concepts and practices in {course.title}."
+            )
+            db.session.add(new_cert)
+    db.session.commit()
+
+    from app.services.search_service import SearchIndexService
+    SearchIndexService.rebuild_search_index()
 
 
 def _register_blueprints(app: Flask) -> None:

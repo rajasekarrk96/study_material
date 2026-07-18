@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block title %}Search Results for "{{ query }}"{% endblock %}
+
+{% block content %}
+<div class="search-page-container" style="max-width: 900px; margin: 0 auto; padding: 40px 24px; min-height: 80vh;">
+
+    <!-- Search Header -->
+    <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
+        <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;"><span class="gradient-text">Search Results</span> 🔍</h1>
+        <p style="color: var(--text-secondary); margin: 0;">
+            {% if query %}
+                Found {{ results | length }} relevant results for "<strong>{{ query }}</strong>" sorted by Reciprocal Rank Fusion relevance.
+            {% else %}
+                Search across all courses, lesson contents, and ingested knowledge chunks.
+            {% endif %}
+        </p>
+    </div>
+
+    <!-- Search Box again -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 30px;">
+        <form action="{{ url_for('public.search_view') }}" method="GET" style="display: flex; gap: 12px; margin: 0;">
+            <div style="position: relative; flex: 1; display: flex; align-items: center;">
+                <i class="fas fa-search" style="position: absolute; left: 16px; color: var(--text-muted); font-size: 1.1rem;"></i>
+                <input type="text" name="q" value="{{ query }}" placeholder="Type keywords (e.g. git rebase, checkout, certificates)..." style="width: 100%; padding: 14px 16px 14px 44px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-sm); color: #fff; font-size: 1rem; outline: none; transition: var(--transition);" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="padding: 0 24px; border-radius: var(--radius-sm); font-weight: 600;">
+                Search
+            </button>
+        </form>
+    </div>
+
+    <!-- Results Feed -->
+    {% if results %}
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+            {% for item in results %}
+                {% if item.result_type == 'lesson' %}
+                    <!-- Lesson Result Card -->
+                    <div class="search-result-card lesson-match" style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: var(--radius-md); padding: 24px; display: flex; flex-direction: column; gap: 12px; transition: var(--transition);">
+                        <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-size: 1.4rem;">📖</span>
+                                <h3 style="font-size: 1.2rem; color: #fff; margin: 0; font-weight: 700;">
+                                    <a href="{{ url_for('learn.lesson_view', course_slug=item.course_slug, module_slug=item.module_slug, lesson_slug=item.slug) }}" style="color: #fff; text-decoration: none;" onmouseover="this.style.color='var(--accent-light)'" onmouseout="this.style.color='#fff'">
+                                        {{ item.title }}
+                                    </a>
+                                </h3>
+                            </div>
+                            <span class="badge" style="background: rgba(99,102,241,0.15); color: var(--accent-light); font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: 600;">
+                                Lesson Match
+                            </span>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin: 0;">
+                            {{ item.description or "No lesson description available. Click to read full lesson contents." }}
+                        </p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 12px; margin-top: 4px; font-size: 0.75rem; color: var(--text-muted);">
+                            <span>Course: {{ item.course_slug | replace('-', ' ') | title }}</span>
+                            <span>Relevance: <code>{{ (item.rrf_score * 100) | round(2) }}%</code></span>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- Knowledge Chunk / Source Result Card -->
+                    <div class="search-result-card chunk-match" style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: var(--radius-md); padding: 24px; display: flex; flex-direction: column; gap: 12px; transition: var(--transition);">
+                        <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-size: 1.4rem;">🔗</span>
+                                <h3 style="font-size: 1.25rem; color: #fff; margin: 0; font-weight: 700;">
+                                    <a href="{{ item.document_url }}" target="_blank" style="color: #fff; text-decoration: none;" onmouseover="this.style.color='var(--purple)'" onmouseout="this.style.color='#fff'">
+                                        {{ item.document_title }}
+                                    </a>
+                                </h3>
+                            </div>
+                            <span class="badge" style="background: rgba(167,139,250,0.15); color: var(--purple); font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: 600;">
+                                Semantic Doc Match
+                            </span>
+                        </div>
+                        <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; font-family: 'Inter', sans-serif; font-size: 0.88rem; line-height: 1.6; color: var(--text-secondary); white-space: pre-wrap; font-style: italic;">
+                            "...{{ item.excerpt }}..."
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 12px; margin-top: 4px; font-size: 0.75rem; color: var(--text-muted);">
+                            <span>Source Doc: <a href="{{ item.document_url }}" target="_blank" style="color: var(--text-muted); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Open External Link <i class="fas fa-external-link-alt" style="font-size: 0.65rem;"></i></a></span>
+                            <span>Relevance: <code>{{ (item.rrf_score * 100) | round(2) }}%</code></span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% elif query %}
+        <div style="background: var(--bg-card); border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 50px 30px; text-align: center; max-width: 550px; margin: 40px auto;">
+            <div style="font-size: 3rem; margin-bottom: 16px;">🔍</div>
+            <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 8px; font-weight: 700;">No Search Matches Found</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+                We couldn't find any documents or lessons matching "<strong>{{ query }}</strong>".
+            </p>
+            <div style="text-align: left; background: var(--bg-elevated); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 0.85rem; color: var(--text-secondary);">
+                <span style="font-weight: 600; color: #fff; display: block; margin-bottom: 6px;">Suggestions:</span>
+                <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px;">
+                    <li>Verify spelling of terms.</li>
+                    <li>Try more general keywords (e.g. "git" instead of "rebase interactively").</li>
+                    <li>Ensure related source documents have been processed and chunked.</li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+
+<style>
+.search-result-card:hover {
+    border-color: var(--accent) !important;
+    background: var(--bg-hover) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99,102,241,0.1);
+}
+.chunk-match:hover {
+    border-color: var(--purple) !important;
+    box-shadow: 0 4px 12px rgba(167,139,250,0.1);
+}
+</style>
+{% endblock %}

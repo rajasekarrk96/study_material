@@ -5,13 +5,21 @@
 {% block content %}
 <div class="container py-5">
     <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-5 pb-3 border-bottom">
+    <div class="d-flex justify-content-between align-items-center mb-5 pb-3 border-bottom flex-wrap" style="gap: 16px;">
         <div>
             <h1 class="display-5 text-white font-weight-bold">CMS Admin Dashboard</h1>
             <p class="text-secondary">Enterprise Content Management & Ingestion Workflows</p>
         </div>
-        <div class="badge badge-primary py-2 px-3">
-            <i class="fas fa-shield-alt mr-2"></i> Rajasekar (Owner)
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+            <a href="{{ url_for('admin.users_list') }}" class="btn btn-outline btn-sm" style="font-weight: 600;">
+                <i class="fas fa-users mr-1"></i> Manage Users
+            </a>
+            <a href="{{ url_for('admin.review_queue') }}" class="btn btn-outline btn-sm" style="font-weight: 600;">
+                <i class="fas fa-clipboard-list mr-1"></i> Review Queue
+            </a>
+            <div class="badge badge-primary py-2 px-3" style="font-weight: 600;">
+                <i class="fas fa-shield-alt mr-2"></i> Rajasekar (Owner)
+            </div>
         </div>
     </div>
 
@@ -92,12 +100,102 @@
                         </div>
                     {% endfor %}
                 </div>
+        </div>
+    </div>
+
+    <!-- Analytics Section -->
+    <div style="margin-top: 40px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+        <h2 class="text-white font-weight-bold"><i class="fas fa-chart-bar text-accent mr-2"></i> System Analytics & Metrics</h2>
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-6 mb-4">
+            <div class="card card-glass p-4" style="min-height: 380px;">
+                <h3 class="text-white font-weight-bold mb-4"><i class="fas fa-book-open text-primary mr-2"></i> Lessons per Course</h3>
+                <div style="position: relative; height: 260px; width: 100%;">
+                    <canvas id="lessonsChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card card-glass p-4" style="min-height: 380px;">
+                <h3 class="text-white font-weight-bold mb-4"><i class="fas fa-users-cog text-success mr-2"></i> User Role Distribution</h3>
+                <div style="position: relative; height: 260px; width: 100%;">
+                    <canvas id="rolesChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Lessons per Course chart
+    const ctxLessons = document.getElementById('lessonsChart').getContext('2d');
+    new Chart(ctxLessons, {
+        type: 'bar',
+        data: {
+            labels: {{ course_labels | tojson }},
+            datasets: [{
+                label: 'Lessons',
+                data: {{ course_lesson_counts | tojson }},
+                backgroundColor: 'rgba(99, 102, 241, 0.4)',
+                borderColor: '#6366f1',
+                borderWidth: 2,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: 'rgba(255,255,255,0.6)' },
+                    grid: { color: 'rgba(255,255,255,0.06)' }
+                },
+                x: {
+                    ticks: { color: 'rgba(255,255,255,0.6)' },
+                    grid: { color: 'rgba(255,255,255,0.06)' }
+                }
+            }
+        }
+    });
+
+    // 2. Roles Distribution chart
+    const ctxRoles = document.getElementById('rolesChart').getContext('2d');
+    new Chart(ctxRoles, {
+        type: 'doughnut',
+        data: {
+            labels: {{ role_labels | tojson }},
+            datasets: [{
+                data: {{ role_counts | tojson }},
+                backgroundColor: [
+                    '#22d3a1', // student
+                    '#6366f1', // reviewer
+                    '#a78bfa', // author
+                    '#ffbd2e', // admin
+                    '#ff5f56'  // super admin
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: { color: 'rgba(255,255,255,0.8)' }
+                }
+            }
+        }
+    });
+});
+
 function runQA(lessonId, button) {
     button.disabled = true;
     button.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Analyzing...';

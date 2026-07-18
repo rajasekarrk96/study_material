@@ -105,15 +105,9 @@ def submit_attempt(attempt_id: int):
     attempt.is_passed = is_passed
     attempt.xp_earned = xp_earned
 
-    # Award XP if any earned
-    if xp_earned > 0:
-        xp_log = UserXPLog(
-            user_id=current_user.id,
-            xp_amount=xp_earned,
-            activity_type="quiz_completed",
-            reference_id=quiz.id
-        )
-        db.session.add(xp_log)
+    # Trigger Central Event Service
+    from app.services.learning import EventService
+    EventService.publish("quiz_completed", user_id=current_user.id, quiz_id=quiz.id, xp_reward=xp_earned, score=score_percentage)
 
     db.session.commit()
 

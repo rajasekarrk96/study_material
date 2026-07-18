@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}User Management — Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 1000px; margin: 0 auto; min-height: 80vh;">
+    <!-- Breadcrumbs -->
+    <div style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-muted);">
+        <a href="{{ url_for('admin.dashboard') }}" style="color: var(--text-secondary); text-decoration: none;">Admin Dashboard</a>
+        <i class="fas fa-chevron-right" style="font-size: 0.75rem; margin: 0 8px;"></i>
+        <span style="color: #fff;">User Management</span>
+    </div>
+
+    <!-- Header -->
+    <div style="margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
+        <div>
+            <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;"><span class="gradient-text">User Role Management</span> 👥</h1>
+            <p style="color: var(--text-secondary); margin: 0;">Promote or demote users to manage platform permissions and content access levels.</p>
+        </div>
+        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline btn-sm">
+            <i class="fas fa-arrow-left"></i> Admin Dashboard
+        </a>
+    </div>
+
+    <!-- Users Grid/Table -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+            <thead>
+                <tr style="background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); color: #fff; font-weight: 600;">
+                    <th style="padding: 16px 20px;">ID</th>
+                    <th style="padding: 16px 20px;">User</th>
+                    <th style="padding: 16px 20px;">Email</th>
+                    <th style="padding: 16px 20px;">Current Role</th>
+                    <th style="padding: 16px 20px; text-align: right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-secondary); transition: var(--transition);" class="table-row">
+                    <td style="padding: 16px 20px; font-family: 'JetBrains Mono', monospace;">{{ u.id }}</td>
+                    <td style="padding: 16px 20px;">
+                        <span style="color: #fff; font-weight: 600; display: block;">{{ u.display_name or u.username }}</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">@{{ u.username }}</span>
+                    </td>
+                    <td style="padding: 16px 20px;">{{ u.email }}</td>
+                    <td style="padding: 16px 20px;">
+                        {% set role_color = {
+                            'super_admin': '#ff5f56',
+                            'admin': '#ffbd2e',
+                            'editor': '#27c93f',
+                            'reviewer': '#6366f1',
+                            'author': '#a78bfa',
+                            'moderator': '#f59e0b',
+                            'student': '#22d3a1'
+                        } %}
+                        <span class="badge" style="background: rgba(255,255,255,0.05); color: {{ role_color.get(u.role.name, '#fff') }}; font-weight: 600; padding: 4px 8px; border-radius: 4px; border: 1px solid {{ role_color.get(u.role.name, 'rgba(255,255,255,0.1)') }};">
+                            {{ u.role.display_name }}
+                        </span>
+                    </td>
+                    <td style="padding: 16px 20px; text-align: right;">
+                        <form action="{{ url_for('admin.update_user_role', user_id=u.id) }}" method="POST" style="display: inline-flex; gap: 8px; align-items: center; margin: 0;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <select name="role_id" style="background: var(--bg-elevated); border: 1px solid var(--border); color: #fff; padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.85rem; outline: none; cursor: pointer;">
+                                {% for r in roles %}
+                                <option value="{{ r.id }}" {% if u.role_id == r.id %}selected{% endif %}>{{ r.display_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm" style="padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 600;">
+                                Update
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<style>
+.table-row:hover {
+    background: rgba(255,255,255,0.01);
+}
+</style>
+{% endblock %}

@@ -18,24 +18,25 @@ RRF_K = 60
 def _fts_search(query: str, limit: int = 20) -> list[dict]:
     """
     Full-text search across lesson titles, descriptions, and content body.
-    Uses LIKE matching as a portable fallback (works on SQLite and TiDB/MySQL).
+    Uses SQLite FTS5 matching, falling back to LIKE matches.
     """
-    pattern = f"%{query}%"
-    results = Lesson.query.filter(
-        (Lesson.title.ilike(pattern)) |
-        (Lesson.summary.ilike(pattern))
-    ).limit(limit).all()
-
+    from app.services.search_service import SearchIndexService
+    hits = SearchIndexService.search_query(query, limit=limit)
+    
     ranked = []
-    for rank, lesson in enumerate(results):
-        ranked.append({
-            "type": "lesson",
-            "id": lesson.id,
-            "title": lesson.title,
-            "slug": lesson.slug,
-            "description": lesson.summary or "",
-            "fts_rank": rank + 1
-        })
+    for idx, hit in enumerate(hits):
+        lesson = db.session.get(Lesson, hit["lesson_id"])
+        if lesson:
+            ranked.append({
+                "type": "lesson",
+                "id": lesson.id,
+                "title": lesson.title,
+                "slug": lesson.slug,
+                "course_slug": lesson.module.course.slug if lesson.module and lesson.module.course else "",
+                "module_slug": lesson.module.slug if lesson.module else "",
+                "description": lesson.summary or "",
+                "fts_rank": idx + 1
+            })
     return ranked
 
 
@@ -75,16 +76,22 @@ def hybrid_search(query: str, top_k: int = 10) -> list[dict]:
                 "id": data["id"],
                 "title": data["title"],
                 "slug": data["slug"],
+                "course_slug": data["course_slug"],
+                "module_slug": data["module_slug"],
                 "description": data["description"],
                 "rrf_score": rrf_score,
             }
         else:
+            from app.domains.knowledge.models import SourceDocument
             chunk = vec_map[key]["chunk"]
+            doc = db.session.get(SourceDocument, chunk["document_id"])
             result = {
                 "result_type": "chunk",
                 "chunk_id": chunk["chunk_id"],
                 "document_id": chunk["document_id"],
-                "excerpt": chunk["chunk_text"][:200],
+                "document_title": doc.title if doc else "External Source Document",
+                "document_url": doc.url if doc else "#",
+                "excerpt": chunk["chunk_text"][:300],
                 "rrf_score": rrf_score,
             }
 

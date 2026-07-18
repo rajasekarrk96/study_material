@@ -1,0 +1,232 @@
+<!-- AI Tutor Floating Overlay Component -->
+<div id="tutor-trigger-btn" onclick="toggleTutorOverlay()" style="position: fixed; bottom: 24px; right: 24px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; cursor: pointer; box-shadow: 0 4px 20px rgba(99,102,241,0.4); z-index: 1000; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+    <i class="fas fa-robot"></i>
+    <!-- Red notification pulse if new lesson loaded -->
+    <span style="position: absolute; top: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; background: #ef4444; border: 2px solid var(--bg-main);"></span>
+</div>
+
+<div id="tutor-sidebar-drawer" style="position: fixed; top: 80px; right: -420px; bottom: 24px; width: 380px; background: rgba(17, 20, 32, 0.95); border: 1px solid var(--border); border-radius: var(--radius-lg); backdrop-filter: blur(12px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 999; transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; opacity: 0; pointer-events: none;">
+    
+    <!-- Drawer Header -->
+    <div style="background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.4rem;">🤖</span>
+            <div>
+                <h4 style="font-size: 0.95rem; color: #fff; margin: 0; font-weight: 700;">AI Tutor Assistant</h4>
+                <span style="font-size: 0.75rem; color: var(--accent-light);">Context-Aware Mode</span>
+            </div>
+        </div>
+        <button onclick="toggleTutorOverlay()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.1rem; padding: 4px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Message Stream Feed -->
+    <div id="tutor-overlay-feed" style="flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: rgba(0,0,0,0.1);">
+        <div style="text-align: center; color: var(--text-muted); margin: auto 0; padding: 20px;">
+            <p style="font-size: 0.9rem; margin-bottom: 4px; color: #fff; font-weight: 600;">How can I help with this lesson?</p>
+            <p style="font-size: 0.8rem; line-height: 1.5;">Ask for definitions, code explanations, or assistance with labs. The tutor has access to the current lesson content.</p>
+        </div>
+    </div>
+
+    <!-- Mini Input Area -->
+    <div style="border-top: 1px solid var(--border); padding: 16px; background: rgba(255,255,255,0.01);">
+        <form id="tutor-overlay-form" onsubmit="sendOverlayMessage(event)" style="display: flex; gap: 10px; align-items: center;">
+            <input type="text" id="tutor-overlay-input" placeholder="Ask a question..." style="flex: 1; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; color: #fff; font-size: 0.88rem;" autocomplete="off" disabled>
+            <button type="submit" id="tutor-overlay-send" class="btn btn-primary" style="padding: 10px 16px; border-radius: var(--radius-sm); min-height: 38px;" disabled>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+let overlaySessionId = null;
+let isTutorOpen = false;
+const currentLessonId = "{{ lesson.id if lesson else '' }}";
+const overlayCsrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+async function toggleTutorOverlay() {
+    const drawer = document.getElementById("tutor-sidebar-drawer");
+    isTutorOpen = !isTutorOpen;
+    
+    if (isTutorOpen) {
+        drawer.style.right = "24px";
+        drawer.style.opacity = "1";
+        drawer.style.pointerEvents = "auto";
+        
+        // Lazy-bootstrap session if none exists
+        if (!overlaySessionId) {
+            await bootstrapOverlaySession();
+        }
+    } else {
+        drawer.style.right = "-420px";
+        drawer.style.opacity = "0";
+        drawer.style.pointerEvents = "none";
+    }
+}
+
+async function bootstrapOverlaySession() {
+    try {
+        const payload = {};
+        if (currentLessonId) {
+            payload.lesson_id = parseInt(currentLessonId);
+        }
+        
+        const res = await fetch("/api/v1/tutor/sessions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": overlayCsrfToken
+            },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status === "success") {
+            overlaySessionId = data.session_id;
+            
+            // Enable inputs
+            document.getElementById("tutor-overlay-input").removeAttribute("disabled");
+            document.getElementById("tutor-overlay-send").removeAttribute("disabled");
+            
+            // If there's lesson context, load previous messages if any (should be empty for new session)
+            const feed = document.getElementById("tutor-overlay-feed");
+            feed.innerHTML = `
+                <div style="background: rgba(99,102,241,0.08); border: 1px solid var(--accent); border-radius: var(--radius-sm); padding: 12px; font-size: 0.8rem; line-height: 1.4; color: #fff;">
+                    <i class="fas fa-graduation-cap"></i> Context initialized for lesson: <strong>${data.title.replace('Tutor Session: ', '')}</strong>. Ask your tutor a question about this topic below.
+                </div>
+            `;
+        }
+    } catch (err) {
+        console.error("Failed to bootstrap overlay session:", err);
+    }
+}
+
+function appendOverlayMessage(sender, content) {
+    const feed = document.getElementById("tutor-overlay-feed");
+    const isUser = sender === "user";
+    
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "flex";
+    wrapper.style.flexDirection = "column";
+    wrapper.style.alignItems = isUser ? "flex-end" : "flex-start";
+    wrapper.style.width = "100%";
+    
+    const inner = document.createElement("div");
+    inner.style.maxWidth = "85%";
+    inner.style.padding = "10px 14px";
+    inner.style.borderRadius = "var(--radius-sm)";
+    inner.style.fontSize = "0.85rem";
+    inner.style.lineHeight = "1.5";
+    inner.style.whiteSpace = "pre-wrap";
+    inner.style.color = "#fff";
+    
+    if (isUser) {
+        inner.style.background = "var(--accent)";
+        inner.style.borderTopRightRadius = "2px";
+    } else {
+        inner.style.background = "var(--bg-elevated)";
+        inner.style.border = "1px solid var(--border)";
+        inner.style.borderTopLeftRadius = "2px";
+    }
+    
+    inner.innerText = content;
+    wrapper.appendChild(inner);
+    feed.appendChild(wrapper);
+    feed.scrollTop = feed.scrollHeight;
+}
+
+async function sendOverlayMessage(event) {
+    event.preventDefault();
+    if (!overlaySessionId) return;
+    
+    const input = document.getElementById("tutor-overlay-input");
+    const text = input.value.trim();
+    if (!text) return;
+    
+    appendOverlayMessage("user", text);
+    input.value = "";
+    
+    // Add loading block
+    const feed = document.getElementById("tutor-overlay-feed");
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "flex";
+    wrapper.style.flexDirection = "column";
+    wrapper.style.alignItems = "flex-start";
+    wrapper.style.width = "100%";
+    
+    const inner = document.createElement("div");
+    inner.style.maxWidth = "85%";
+    inner.style.padding = "10px 14px";
+    inner.style.borderRadius = "var(--radius-sm)";
+    inner.style.fontSize = "0.85rem";
+    inner.style.lineHeight = "1.5";
+    inner.style.whiteSpace = "pre-wrap";
+    inner.style.color = "#fff";
+    inner.style.background = "var(--bg-elevated)";
+    inner.style.border = "1px solid var(--border)";
+    inner.style.borderTopLeftRadius = "2px";
+    inner.innerText = "▍";
+    
+    wrapper.appendChild(inner);
+    feed.appendChild(wrapper);
+    feed.scrollTop = feed.scrollHeight;
+    
+    try {
+        const response = await fetch(`/api/v1/tutor/sessions/${overlaySessionId}/messages`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": overlayCsrfToken
+            },
+            body: JSON.stringify({ message: text })
+        });
+        
+        if (!response.ok) {
+            inner.innerText = "[Error generating response]";
+            return;
+        }
+        
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        let fullText = "";
+        
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split("\n\n");
+            buffer = lines.pop();
+            
+            for (const line of lines) {
+                if (line.startsWith("data: ")) {
+                    try {
+                        const parsed = JSON.parse(line.slice(6));
+                        fullText += parsed.chunk;
+                        inner.innerText = fullText + "▍";
+                        feed.scrollTop = feed.scrollHeight;
+                    } catch(e){}
+                }
+            }
+        }
+        
+        // Finalize chunk
+        if (buffer && buffer.startsWith("data: ")) {
+            try {
+                const parsed = JSON.parse(buffer.slice(6));
+                fullText += parsed.chunk;
+            } catch(e){}
+        }
+        
+        inner.innerText = fullText;
+        feed.scrollTop = feed.scrollHeight;
+        
+    } catch (err) {
+        console.error("Overlay streaming error:", err);
+        inner.innerText = "[Error generating response]";
+    }
+}
+</script>

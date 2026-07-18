@@ -275,6 +275,7 @@ class UserCertificate(db.Model, TimestampMixin):
     issued_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     certificate = db.relationship("Certificate")
+    user = db.relationship("User")
 
     def __repr__(self):
         return f"<UserCertificate user={self.user_id} cert={self.certificate_id}>"

@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+{% block title %}Lab: {{ lab.title }} — {{ course.title if course else 'Learning OS' }}{% endblock %}
+
+{% block content %}
+<div class="lab-workbench-container" style="display: flex; height: calc(100vh - 70px); overflow: hidden; background: #0b0c10; font-family: 'Inter', sans-serif;">
+    <!-- LEFT PANEL: Lab Steps & Instructions -->
+    <div class="lab-steps-pane" style="width: 50%; padding: 40px; overflow-y: auto; border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; gap: 30px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 20px;">
+            <div>
+                <a href="{{ url_for('learn.course_overview', course_slug=course.slug) if course else '#' }}" style="color: var(--accent-light); font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+                    <i class="fas fa-arrow-left"></i> Back to Course
+                </a>
+                <h1 style="font-size: 1.8rem; color: #fff; margin: 0;">{{ lab.title }}</h1>
+            </div>
+            <span class="difficulty-badge" style="background: rgba(34,211,161,0.12); color: #22d3a1; border: 1px solid rgba(34,211,161,0.2); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fas fa-flask"></i> {{ lab.estimated_minutes }} Mins
+            </span>
+        </div>
+
+        <div style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 10px;">
+            {{ lab.description or "Follow the steps below to complete the hands-on exercise." }}
+        </div>
+
+        <!-- Steps List -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+            <h2 style="font-size: 1.25rem; color: #fff; margin: 0;"><i class="fas fa-list-ol"></i> Step-by-Step Instructions</h2>
+            
+            {% for step in steps %}
+            <div class="step-card" id="step-card-{{ step.step_number }}" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 20px; display: flex; gap: 16px; transition: all 0.3s ease;">
+                <div style="margin-top: 4px;">
+                    <label class="custom-checkbox" style="position: relative; display: inline-block; width: 22px; height: 22px; cursor: pointer;">
+                        <input type="checkbox" class="step-checkbox" data-step="{{ step.step_number }}" {% if step.step_number in completed_steps %}checked{% endif %} style="opacity: 0; width: 0; height: 0;">
+                        <span class="checkmark" style="position: absolute; top: 0; left: 0; height: 22px; width: 22px; background-color: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.2); border-radius: 4px; transition: all 0.2s ease;"></span>
+                    </label>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="font-size: 1.1rem; color: #fff; margin: 0; font-weight: 600;">Step {{ step.step_number }}: {{ step.title or "Interactive Checkpoint" }}</h3>
+                        <span class="step-badge" id="step-badge-{{ step.step_number }}" style="font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; font-weight: 600; 
+                            {% if step.step_number in completed_steps %}background: rgba(34,211,161,0.15); color: #22d3a1;{% else %}background: rgba(255,255,255,0.05); color: var(--text-muted);{% endif %}">
+                            {{ 'Verified' if step.step_number in completed_steps else 'Pending' }}
+                        </span>
+                    </div>
+                    <div class="step-instruction rich-content" style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+                        {{ step.instruction | markdown | safe }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL: Workspace & Validation Console -->
+    <div class="lab-workspace-pane" style="width: 50%; padding: 40px; display: flex; flex-direction: column; gap: 24px; background: #0f1016;">
+        <h2 style="font-size: 1.25rem; color: #fff; margin: 0;"><i class="fas fa-terminal"></i> Lab Verification Workbench</h2>
+        
+        <!-- Local Workspace Directory Input -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+            <label for="workspace-path" style="color: #fff; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-folder-open" style="color: var(--yellow);"></i> Local Repository Workspace Path
+            </label>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">Specify the directory where you are performing your Git commands (e.g. <code>C:\Users\YourName\git-practice</code>).</p>
+            <div style="display: flex; gap: 12px;">
+                <input type="text" id="workspace-path" value="{{ repo_path or '' }}" placeholder="e.g. C:\Users\rajas\workspace\git-lab" style="flex: 1; padding: 12px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
+            </div>
+        </div>
+
+        <!-- Console / Feedback Screen -->
+        <div style="flex: 1; display: flex; flex-direction: column; background: #050608; border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); overflow: hidden; position: relative;">
+            <div style="background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;"><i class="fas fa-scroll"></i> Validation Terminal Output</span>
+                <div style="display: flex; gap: 6px;">
+                    <span style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+                    <span style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+                    <span style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+                </div>
+            </div>
+            
+            <div id="console-logs" style="flex: 1; padding: 20px; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 1.6; color: #a6accd; white-space: pre-wrap;">Welcome to the Lab Verification Console. Click 'Check My Work' to run local repo validation checks.</div>
+        </div>
+
+        <!-- Action Panel -->
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div id="status-spinner" class="spinner" style="display: none; border: 3px solid rgba(255,255,255,0.1); border-radius: 50%; border-top: 3px solid var(--accent); width: 24px; height: 24px; animation: spin 1s linear infinite;"></div>
+                <span id="workbench-status" style="font-size: 0.9rem; font-weight: 600; color: var(--text-secondary);">Workbench Ready</span>
+            </div>
+            
+            <div style="display: flex; gap: 12px;">
+                <button id="btn-verify" class="btn" style="background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: #fff; font-weight: 700; border: none; padding: 12px 24px; border-radius: var(--radius-sm); font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-sm); transition: all 0.2s ease;">
+                    <i class="fas fa-check-double"></i> Check My Work
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Overlay for Successful Completion -->
+<div id="success-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+    <div style="background: linear-gradient(135deg, #111e18 0%, #0c1210 100%); border: 1px solid #22d3a1; border-radius: var(--radius-lg); padding: 48px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 0 40px rgba(34,211,161,0.25); display: flex; flex-direction: column; gap: 24px; transform: scale(0.9); transition: transform 0.3s ease;">
+        <div style="background: rgba(34,211,161,0.15); border: 2px solid #22d3a1; color: #22d3a1; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto; box-shadow: 0 0 20px rgba(34,211,161,0.2);">
+            <i class="fas fa-check"></i>
+        </div>
+        <div>
+            <h2 style="font-size: 1.8rem; color: #fff; margin-bottom: 8px;">Lab Completed!</h2>
+            <p style="color: var(--text-secondary); margin: 0; font-size: 1rem;">Awesome work! You have successfully completed the tasks and verified your local repository states.</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.03); border: 1px dashed rgba(34,211,161,0.4); border-radius: var(--radius-sm); padding: 16px; display: flex; justify-content: center; align-items: center; gap: 12px;">
+            <i class="fas fa-star" style="color: var(--yellow); font-size: 1.3rem;"></i>
+            <span style="font-size: 1.1rem; color: #fff; font-weight: 700;">+50 XP Earned</span>
+        </div>
+        <a href="{{ url_for('public.home') }}" class="btn" style="background: #22d3a1; color: #000; font-weight: 700; border: none; padding: 14px; border-radius: var(--radius-sm); text-decoration: none; font-size: 1rem;">
+            Return to Dashboard <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+</div>
+
+<style>
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Custom Checkbox Design */
+.step-checkbox:checked + .checkmark {
+    background-color: #22d3a1 !important;
+    border-color: #22d3a1 !important;
+}
+.step-checkbox:checked + .checkmark:after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 11px;
+    border: solid #000;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+}
+
+.step-card:hover {
+    border-color: rgba(255,255,255,0.15) !important;
+    background: rgba(255,255,255,0.04) !important;
+}
+
+#btn-verify:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(99,102,241,0.4) !important;
+}
+
+/* Scrollbar tweaks */
+.lab-steps-pane::-webkit-scrollbar {
+    width: 6px;
+}
+.lab-steps-pane::-webkit-scrollbar-track {
+    background: transparent;
+}
+.lab-steps-pane::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const labId = {{ lab.id }};
+    const checkBoxes = document.querySelectorAll(".step-checkbox");
+    const verifyBtn = document.getElementById("btn-verify");
+    const pathInput = document.getElementById("workspace-path");
+    const consoleLogs = document.getElementById("console-logs");
+    const spinner = document.getElementById("status-spinner");
+    const statusText = document.getElementById("workbench-status");
+    const successModal = document.getElementById("success-modal");
+    const modalInner = successModal.querySelector("div");
+
+    // 1. Handle Step Checked State Persistent Save
+    checkBoxes.forEach(box => {
+        box.addEventListener("change", function() {
+            const stepNum = this.getAttribute("data-step");
+            const completed = this.checked;
+            
+            // Highlight step card border
+            const stepCard = document.getElementById(`step-card-${stepNum}`);
+            const badge = document.getElementById(`step-badge-${stepNum}`);
+            
+            if (completed) {
+                badge.style.background = "rgba(34,211,161,0.15)";
+                badge.style.color = "#22d3a1";
+                badge.innerText = "Verified";
+            } else {
+                badge.style.background = "rgba(255,255,255,0.05)";
+                badge.style.color = "var(--text-muted)";
+                badge.innerText = "Pending";
+            }
+
+            fetch(`/learn/labs/${labId}/steps/${stepNum}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token() if csrf_token else '' }}"
+                },
+                body: JSON.stringify({ completed: completed })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Step progress updated", data);
+            })
+            .catch(err => console.error("Error updating step progress", err));
+        });
+    });
+
+    // 2. Handle Laboratory Verification Checks
+    verifyBtn.addEventListener("click", function() {
+        const repoPath = pathInput.value.trim();
+        
+        // Show spinner loading status
+        spinner.style.display = "block";
+        statusText.innerText = "Running validation checks...";
+        statusText.style.color = "var(--text-muted)";
+        consoleLogs.innerText = "$ checking local repository status...\n";
+        consoleLogs.style.color = "#a6accd";
+
+        fetch(`/learn/labs/${labId}/verify`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token() if csrf_token else '' }}"
+            },
+            body: JSON.stringify({ repo_path: repoPath })
+        })
+        .then(res => res.json())
+        .then(data => {
+            spinner.style.display = "none";
+            
+            if (data.status === "passed") {
+                statusText.innerText = "Verification Succeeded!";
+                statusText.style.color = "#22d3a1";
+                consoleLogs.innerText = data.feedback + "\n\n$ ALL CHECKS PASSED. LAB COMPLETED SUCCESSFULLY!";
+                consoleLogs.style.color = "#22d3a1";
+                
+                // Check all checkboxes in the UI
+                checkBoxes.forEach(box => {
+                    box.checked = true;
+                    const stepNum = box.getAttribute("data-step");
+                    const badge = document.getElementById(`step-badge-${stepNum}`);
+                    badge.style.background = "rgba(34,211,161,0.15)";
+                    badge.style.color = "#22d3a1";
+                    badge.innerText = "Verified";
+                });
+
+                // Trigger success modal show after a short delay
+                setTimeout(() => {
+                    successModal.style.display = "flex";
+                    setTimeout(() => {
+                        successModal.style.opacity = "1";
+                        modalInner.style.transform = "scale(1)";
+                    }, 50);
+                }, 1000);
+                
+            } else {
+                statusText.innerText = "Verification Failed";
+                statusText.style.color = "#ff5f56";
+                consoleLogs.innerText = data.feedback + "\n\n$ SOME CHECKS FAILED. PLEASE FOLLOW SUGGESTIONS AND TRY AGAIN.";
+                consoleLogs.style.color = "#ff5f56";
+                
+                // Update checkbox checked state if validation engine updated completed steps
+                if (data.completed_steps) {
+                    checkBoxes.forEach(box => {
+                        const stepNum = parseInt(box.getAttribute("data-step"));
+                        const completed = data.completed_steps.includes(stepNum);
+                        box.checked = completed;
+                        const badge = document.getElementById(`step-badge-${stepNum}`);
+                        if (completed) {
+                            badge.style.background = "rgba(34,211,161,0.15)";
+                            badge.style.color = "#22d3a1";
+                            badge.innerText = "Verified";
+                        } else {
+                            badge.style.background = "rgba(255,255,255,0.05)";
+                            badge.style.color = "var(--text-muted)";
+                            badge.innerText = "Pending";
+                        }
+                    });
+                }
+            }
+        })
+        .catch(err => {
+            spinner.style.display = "none";
+            statusText.innerText = "Error Running Checks";
+            statusText.style.color = "#ff5f56";
+            consoleLogs.innerText = "An error occurred connecting to the validation service:\n" + err;
+            consoleLogs.style.color = "#ff5f56";
+            console.error(err);
+        });
+    });
+});
+</script>
+
+{% include 'learn/_tutor_overlay.html' %}
+{% endblock %}

@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+{% block title %}AI Programming Tutor{% endblock %}
+
+{% block content %}
+<div class="tutor-workspace" style="max-width: 1200px; margin: 0 auto; padding: 24px; min-height: 85vh; display: grid; grid-template-columns: 300px 1fr; gap: 24px;">
+
+    <!-- Left Column: Sessions List Sidebar -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; max-height: 80vh;">
+        <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="font-size: 1.1rem; color: #fff; margin: 0;"><i class="fas fa-comments"></i> Chat History</h3>
+                <button onclick="createNewSession()" class="btn btn-primary btn-sm" style="padding: 6px 10px; font-size: 0.8rem; border-radius: var(--radius-sm);">
+                    <i class="fas fa-plus"></i> New
+                </button>
+            </div>
+            
+            <div id="sessions-container" style="display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 60vh; padding-right: 4px;">
+                <!-- Loaded dynamically -->
+                <p style="color: var(--text-muted); font-size: 0.85rem; text-align: center; margin-top: 20px;">Loading chat sessions...</p>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px;">
+            <p style="color: var(--text-muted); font-size: 0.75rem; margin: 0; line-height: 1.4;">
+                <i class="fas fa-info-circle"></i> Asking context-specific questions inside lesson pages automatically loads the lesson materials for the Tutor.
+            </p>
+        </div>
+    </div>
+
+    <!-- Right Column: Active Chat Feed Workspace -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); display: flex; flex-direction: column; justify-content: space-between; max-height: 80vh; overflow: hidden; position: relative;">
+        
+        <!-- Header -->
+        <div id="chat-header" style="background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <h2 id="active-session-title" style="font-size: 1.2rem; color: #fff; margin: 0; font-weight: 700;">Select or Create a Chat</h2>
+                <span id="active-session-meta" style="color: var(--text-muted); font-size: 0.8rem; display: block; margin-top: 2px;">No active thread</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="badge" style="background: rgba(99,102,241,0.15); color: var(--accent-light); font-size: 0.75rem; padding: 4px 8px; font-weight: 600;">AI Copilot Online</span>
+            </div>
+        </div>
+
+        <!-- Chat Feed Message List -->
+        <div id="chat-feed" style="flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; background: rgba(0,0,0,0.15);">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; color: var(--text-secondary); max-width: 450px; margin: auto;">
+                <span style="font-size: 3rem; margin-bottom: 16px;">🤖</span>
+                <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 8px;">Your Programming Assistant</h3>
+                <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-muted);">
+                    Ask general coding questions, requests explanations of patterns, or debug logic. Start by clicking **"New"** or selecting an existing log from the sidebar history.
+                </p>
+            </div>
+        </div>
+
+        <!-- Input Box -->
+        <div style="border-top: 1px solid var(--border); padding: 20px; background: rgba(255,255,255,0.01);">
+            <form id="chat-form" onsubmit="sendMessage(event)" style="display: flex; gap: 12px; align-items: end;">
+                <textarea id="message-input" rows="1" placeholder="Type your message here... (Shift + Enter for multiline)" style="flex: 1; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 16px; color: #fff; font-size: 0.95rem; line-height: 1.5; resize: none; overflow-y: auto; max-height: 120px;" disabled></textarea>
+                <button type="submit" id="send-btn" class="btn btn-primary" style="padding: 12px 24px; border-radius: var(--radius-md); font-weight: 600; display: inline-flex; align-items: center; gap: 8px; justify-content: center; min-height: 48px;" disabled>
+                    <span>Send</span> <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+let activeSessionId = null;
+const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadSessions();
+    
+    // Auto-adjust height of textarea
+    const textarea = document.getElementById("message-input");
+    textarea.addEventListener("input", function() {
+        this.style.height = "auto";
+        this.style.height = (this.scrollHeight) + "px";
+    });
+    
+    // Submit on Enter, multiline on Shift + Enter
+    textarea.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            document.getElementById("chat-form").requestSubmit();
+        }
+    });
+});
+
+async function loadSessions(selectSessionId = null) {
+    try {
+        const res = await fetch("/api/v1/tutor/sessions");
+        const data = await res.json();
+        if (data.status === "success") {
+            const container = document.getElementById("sessions-container");
+            container.innerHTML = "";
+            
+            if (data.sessions.length === 0) {
+                container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem; text-align: center; margin-top: 20px;">No previous sessions.</p>`;
+                return;
+            }
+            
+            data.sessions.forEach(s => {
+                const isSelected = activeSessionId === s.id;
+                const date = new Date(s.created_at).toLocaleDateString(undefined, {month: 'short', day: 'numeric'});
+                
+                const item = document.createElement("div");
+                item.className = `session-item ${isSelected ? 'active' : ''}`;
+                item.style.padding = "10px 12px";
+                item.style.borderRadius = "var(--radius-sm)";
+                item.style.cursor = "pointer";
+                item.style.background = isSelected ? "var(--bg-hover)" : "transparent";
+                item.style.border = isSelected ? "1px solid var(--accent)" : "1px solid transparent";
+                item.style.transition = "var(--transition)";
+                item.style.display = "flex";
+                item.style.flexDirection = "column";
+                item.style.gap = "4px";
+                
+                item.innerHTML = `
+                    <span style="font-size: 0.9rem; color: ${isSelected ? '#fff' : 'var(--text-secondary)'}; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${s.title}</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">${date}</span>
+                `;
+                
+                item.onclick = () => selectSession(s.id);
+                
+                // Hover actions
+                item.onmouseover = () => {
+                    if (!isSelected) {
+                        item.style.background = "var(--bg-elevated)";
+                    }
+                };
+                item.onmouseout = () => {
+                    if (!isSelected) {
+                        item.style.background = "transparent";
+                    }
+                };
+                
+                container.appendChild(item);
+            });
+            
+            if (selectSessionId) {
+                selectSession(selectSessionId);
+            }
+        }
+    } catch (err) {
+        console.error("Failed to load sessions:", err);
+    }
+}
+
+async function createNewSession() {
+    try {
+        const res = await fetch("/api/v1/tutor/sessions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken
+            },
+            body: JSON.stringify({})
+        });
+        const data = await res.json();
+        if (data.status === "success") {
+            activeSessionId = data.session_id;
+            loadSessions(data.session_id);
+        }
+    } catch (err) {
+        console.error("Failed to create session:", err);
+    }
+}
+
+async function selectSession(sessionId) {
+    activeSessionId = sessionId;
+    
+    // Highlight correct list item
+    loadSessions();
+    
+    // Enable inputs
+    document.getElementById("message-input").removeAttribute("disabled");
+    document.getElementById("send-btn").removeAttribute("disabled");
+    
+    const feed = document.getElementById("chat-feed");
+    feed.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem; text-align: center; margin: auto;">Loading messages...</p>`;
+    
+    try {
+        const res = await fetch(`/api/v1/tutor/sessions/${sessionId}`);
+        const data = await res.json();
+        if (data.status === "success") {
+            document.getElementById("active-session-title").innerText = data.session.title;
+            document.getElementById("active-session-meta").innerText = `Session ID: ${data.session.id}`;
+            
+            feed.innerHTML = "";
+            if (data.messages.length === 0) {
+                feed.innerHTML = `
+                    <div style="text-align: center; color: var(--text-muted); margin: auto;">
+                        <p style="font-size: 1rem; margin-bottom: 4px;">Beginning of chat history.</p>
+                        <p style="font-size: 0.85rem;">Ask the AI Tutor anything to get started.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            data.messages.forEach(m => {
+                appendMessageToFeed(m.sender, m.content);
+            });
+            
+            scrollToBottom();
+        }
+    } catch (err) {
+        console.error("Failed to load session details:", err);
+        feed.innerHTML = `<p style="color: #ef4444; font-size: 0.9rem; text-align: center; margin: auto;">Error loading conversation history.</p>`;
+    }
+}
+
+function appendMessageToFeed(sender, content) {
+    const feed = document.getElementById("chat-feed");
+    
+    const isUser = sender === "user";
+    const bubble = document.createElement("div");
+    bubble.style.display = "flex";
+    bubble.style.flexDirection = "column";
+    bubble.style.alignItems = isUser ? "flex-end" : "flex-start";
+    bubble.style.width = "100%";
+    
+    const inner = document.createElement("div");
+    inner.className = isUser ? "user-bubble" : "tutor-bubble";
+    inner.style.maxWidth = "80%";
+    inner.style.padding = "14px 18px";
+    inner.style.borderRadius = "var(--radius-md)";
+    inner.style.fontSize = "0.95rem";
+    inner.style.lineHeight = "1.6";
+    inner.style.color = "#fff";
+    inner.style.whiteSpace = "pre-wrap";
+    
+    if (isUser) {
+        inner.style.background = "var(--accent)";
+        inner.style.borderTopRightRadius = "2px";
+    } else {
+        inner.style.background = "var(--bg-elevated)";
+        inner.style.border = "1px solid var(--border)";
+        inner.style.borderTopLeftRadius = "2px";
+    }
+    
+    // Simple sanitization and label
+    const label = document.createElement("span");
+    label.style.fontSize = "0.75rem";
+    label.style.color = "var(--text-muted)";
+    label.style.marginBottom = "4px";
+    label.style.fontWeight = "600";
+    label.innerText = isUser ? "You" : "AI Tutor";
+    
+    inner.innerText = content;
+    
+    bubble.appendChild(label);
+    bubble.appendChild(inner);
+    feed.appendChild(bubble);
+}
+
+async function sendMessage(event) {
+    event.preventDefault();
+    if (!activeSessionId) return;
+    
+    const input = document.getElementById("message-input");
+    const text = input.value.trim();
+    if (!text) return;
+    
+    // Append user message immediately
+    appendMessageToFeed("user", text);
+    input.value = "";
+    input.style.height = "auto";
+    scrollToBottom();
+    
+    // Append empty tutor message bubble for streaming
+    const feed = document.getElementById("chat-feed");
+    const bubble = document.createElement("div");
+    bubble.style.display = "flex";
+    bubble.style.flexDirection = "column";
+    bubble.style.alignItems = "flex-start";
+    bubble.style.width = "100%";
+    
+    const label = document.createElement("span");
+    label.style.fontSize = "0.75rem";
+    label.style.color = "var(--text-muted)";
+    label.style.marginBottom = "4px";
+    label.style.fontWeight = "600";
+    label.innerText = "AI Tutor";
+    
+    const inner = document.createElement("div");
+    inner.className = "tutor-bubble streaming";
+    inner.style.maxWidth = "80%";
+    inner.style.padding = "14px 18px";
+    inner.style.borderRadius = "var(--radius-md)";
+    inner.style.fontSize = "0.95rem";
+    inner.style.lineHeight = "1.6";
+    inner.style.color = "#fff";
+    inner.style.whiteSpace = "pre-wrap";
+    inner.style.background = "var(--bg-elevated)";
+    inner.style.border = "1px solid var(--border)";
+    inner.style.borderTopLeftRadius = "2px";
+    inner.innerText = "▍"; // cursor placeholder
+    
+    bubble.appendChild(label);
+    bubble.appendChild(inner);
+    feed.appendChild(bubble);
+    scrollToBottom();
+    
+    try {
+        const response = await fetch(`/api/v1/tutor/sessions/${activeSessionId}/messages`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken
+            },
+            body: JSON.stringify({ message: text })
+        });
+        
+        if (!response.ok) {
+            inner.innerText = "[Network Error generating response]";
+            return;
+        }
+        
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        let fullText = "";
+        
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split("\n\n");
+            buffer = lines.pop(); // keep last partial line
+            
+            for (const line of lines) {
+                if (line.startsWith("data: ")) {
+                    try {
+                        const parsed = JSON.parse(line.slice(6));
+                        fullText += parsed.chunk;
+                        inner.innerText = fullText + "▍";
+                        scrollToBottom();
+                    } catch (e) {
+                        console.error("Error parsing JSON chunk:", e);
+                    }
+                }
+            }
+        }
+        
+        // Finalize chunk
+        if (buffer && buffer.startsWith("data: ")) {
+            try {
+                const parsed = JSON.parse(buffer.slice(6));
+                fullText += parsed.chunk;
+            } catch(e){}
+        }
+        
+        inner.innerText = fullText;
+        scrollToBottom();
+        
+    } catch (err) {
+        console.error("Streaming error:", err);
+        inner.innerText = "[Connection Error generating response]";
+    }
+}
+
+function scrollToBottom() {
+    const feed = document.getElementById("chat-feed");
+    feed.scrollTop = feed.scrollHeight;
+}
+</script>
+{% endblock %}
