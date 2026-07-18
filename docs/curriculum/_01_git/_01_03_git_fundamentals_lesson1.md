@@ -62,19 +62,33 @@ As you work, your files transition between four distinct states:
 ### The State Transition Flow Connected to `git status`
 
 ```text
-  Create File [app.py]
-          │
-          ▼
-   Working Directory  ──────► State: Untracked
-          │
-          │ git add app.py
-          ▼
-   Staging Area (Index) ─────► State: Staged (Changes to be committed)
-          │
-          │ git commit -m "..."
-          ▼
-   Local Repository ─────────► State: Committed (working tree clean)
+  Create app.py
+        │
+        ▼
+  Working Directory
+  State: Untracked
+  git status ──► Tells you: "Untracked files: app.py"
+        │
+        │ git add app.py
+        ▼
+  Staging Area (Index)
+  State: Staged
+  git status ──► Tells you: "Changes to be committed: app.py"
+        │
+        │ git commit -m "Initial commit"
+        ▼
+  Local Repository
+  State: Committed
+  git status ──► Tells you: "nothing to commit, working tree clean"
 ```
+
+> [!TIP]
+> **Pro Tip:** If you're ever unsure what's happening in your repository, run `git status`. It is a developer's primary diagnostic tool, telling you:
+> - Which branch you are currently on
+> - Which files are untracked (never checked by Git)
+> - Which files are modified (edited since last commit)
+> - Which changes are staged (ready to commit)
+> - Whether your working tree is clean
 
 > [!NOTE]
 > **Why the Staging Area Exists:** The staging area acts as a draft room. Instead of saving all changed files at once, you can choose exactly which files go into which commit, making history clean and easy to revert.
