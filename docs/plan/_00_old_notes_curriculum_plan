@@ -1,0 +1,420 @@
+# Old Notes → Curriculum Migration Plan
+## Learning OS Enterprise Standard | Source Audit & Curriculum Plan
+
+**Purpose**: Full audit of `docs/old and reference and future studies/` folder.  
+Plan all courses found. Generate stubs later. Delete old folder after plan is confirmed.  
+**Date**: 2026-07-28
+
+---
+
+## Audit Summary
+
+| Folder | Files | Size | Status |
+|---|---|---|---|
+| `_01_data_analyst_&_science` | 1,991 | 64 MB | Rich content — Jupyter notebooks, Python, MySQL, NumPy, Pandas, ML |
+| `_02_python_full_stack` | 87 | 0.3 MB | HTML notes — HTML, CSS, JS, Bootstrap, jQuery, SQL Server, MongoDB |
+| `_03_iot` | 0 | — | Empty folder |
+| `_04_prompt_engineering` | 73 | 0.7 MB | Jupyter notebooks — full prompt engineering course |
+| `_05_backend_concepts` | 40 | 0.3 MB | MD files — FastAPI, REST, Auth, DB — already migrated ✅ |
+| `sri_notes/ML` | 146 | 6.2 MB | Jupyter notebooks — advanced ML course (12 modules) |
+
+**Total**: ~2,337 files | ~72 MB
+
+---
+
+## COURSES DISCOVERED
+
+---
+
+## COURSE A: Data Science Foundations
+**Source**: `_01_data_analyst_&_science/study material/` (17 MD files — topic roadmaps)  
+**Also**: `_01_data_analyst_&_science/_01_python/` (88 .ipynb files)  
+**Target Curriculum Folder**: `docs/curriculum/_09_python_data_science/` (partially exists)
+
+### What's There
+- `01_python.md` — 18KB topic list for 26 Python modules
+- `02_mysql.md` — MySQL roadmap (already migrated)
+- `04_numpy.md` — NumPy syllabus stub
+- `05_pandas.md` — Pandas syllabus stub
+- `06_data_visualization.md` — Matplotlib/Seaborn stub
+- `08_data_structures.md` — Data structures for DS stub
+- `09_data_preprocessing.md` — Preprocessing pipeline stub
+- `10_machine_learning.md` — ML overview stub
+- `11_deep_learning.md` — DL overview stub
+- `12_artificial_intelligence.md` — AI overview stub
+- `13_linux.md` — Linux for DS stub
+- `14_git_and_github.md` — Git for DS stub
+- `15_projects_and_portfolio.md` — Projects stub
+
+### Planned Modules for `_09_python_data_science/`
+
+| # | Module | Lessons Needed | Source Notebooks |
+|---|---|---|---|
+| 01 | NumPy Core | 5 | `_04_numpy___/` (24 files) |
+| 02 | Pandas Fundamentals | 5 | `_05_pandas___/` (7 files) — already in curriculum |
+| 03 | Data Visualization | 6 | `_06_matplot___/` (6 files) |
+| 04 | Data Structures for DS | 4 | `_06_data_structure___/` (10 files) |
+| 05 | Data Preprocessing Pipelines | 6 | `_08_preprocessing/` (33 files) |
+| 06 | Exploratory Data Analysis | 4 | `sri_notes ML / 3 - Statistics` (partial) |
+| 07 | Feature Engineering | 4 | `_01_data_analyst/` notebooks |
+| **TOTAL** | | **34 lessons** | |
+
+---
+
+## COURSE B: Power BI & Business Intelligence
+**Source**: `_01_data_analyst_&_science/_15_power_bi/` (78 files)  
+**Target Curriculum Folder**: `docs/curriculum/_18_power_bi/` (NEW)
+
+### What's There
+- `Power_BI/` — 41 files
+- `_01_basics/` — 10 files
+- `_02_basic_charts/` — 4 files
+- `student_charts/` — 5 files
+- `datasets/` — 13 CSV/Excel files
+
+### Planned Modules for `_18_power_bi/`
+
+| # | Module | Lessons Needed |
+|---|---|---|
+| 01 | Power BI Desktop Setup & Interface | 4 |
+| 02 | Data Import & Power Query (ETL) | 5 |
+| 03 | Data Modeling & Relationships | 5 |
+| 04 | DAX Fundamentals | 6 |
+| 05 | Visualizations & Chart Types | 6 |
+| 06 | Reports, Dashboards & Publishing | 4 |
+| 07 | Power BI Service & Collaboration | 3 |
+| 08 | Industry Projects & Capstone | 3 |
+| **TOTAL** | | **36 lessons** |
+
+---
+
+## COURSE C: HTML / CSS / Bootstrap / jQuery (Legacy Web Stack)
+**Source**: `_02_python_full_stack/_01_html_css_bootstrap_js_jq/` (60 HTML files)
+
+```
+_01_html/     9 files  — HTML basics, forms, semantic, media, tables, storage
+_02_css/     21 files  — CSS complete
+_03_bootstrap/ 8 files — Bootstrap 4/5 components
+_04_js/      10 files  — JS closures, ES6, type coercion, arrays, OOP, error handling
+_05_jquery/  12 files  — jQuery full course
+```
+
+**These already exist in curriculum**:
+- `_01_html5/` (25 files ✅), `_02_css3/` (26 files ✅), `_03_javascript/` (52 files ✅)
+
+### Gaps Only — Need New Folders
+
+#### Bootstrap 5 — `docs/curriculum/_18_bootstrap/` (NEW)
+
+| # | Module | Lessons |
+|---|---|---|
+| 01 | Bootstrap Grid & Layout System | 4 |
+| 02 | Typography, Colors & Utilities | 3 |
+| 03 | Components (Nav, Cards, Modal, Accordion) | 6 |
+| 04 | Forms & Validation | 3 |
+| 05 | Responsive Patterns & Customization | 3 |
+| **TOTAL** | | **19 lessons** |
+
+#### jQuery — `docs/curriculum/_19_jquery/` (NEW)
+
+| # | Module | Lessons |
+|---|---|---|
+| 01 | jQuery Core & DOM Selection | 4 |
+| 02 | Events & Effects | 4 |
+| 03 | AJAX & API Calls | 4 |
+| 04 | jQuery Plugins & Patterns | 3 |
+| **TOTAL** | | **15 lessons** |
+
+---
+
+## COURSE D: SQL Server (Microsoft SQL Server)
+**Source**: `_02_python_full_stack/_02_sqlserver/` (14 SQL files)
+
+```
+00_Setup_Database.sql
+01_Basics_DDL_DML.sql
+02_Retrieval_Filtering.sql
+03_Functions_Aggregation.sql
+04_Joins_Set_Operations.sql
+05_Subqueries_CTEs.sql
+06_Window_Functions.sql
+07_Advanced_DB_Objects.sql
+08_Transactions_Performance.sql
+09_Temp_Tables_And_Table_Vars.sql
+10_Error_Handling_Dynamic_SQL.sql
+11_Pivot_Unpivot_Merge.sql
+12_JSON_XML_Support.sql
+13_Security_Administration.sql
+```
+
+**Target**: `docs/curriculum/_20_sql_server/` (NEW)
+
+| # | Module | Lessons | Source File |
+|---|---|---|---|
+| 01 | Setup & DDL Fundamentals | 3 | `00_`, `01_` |
+| 02 | Retrieval & Filtering | 4 | `02_` |
+| 03 | Functions & Aggregation | 4 | `03_` |
+| 04 | Joins & Set Operations | 4 | `04_` |
+| 05 | Subqueries & CTEs | 3 | `05_` |
+| 06 | Window Functions | 4 | `06_` |
+| 07 | Advanced DB Objects (Views, SP, Triggers) | 4 | `07_` |
+| 08 | Transactions & Performance | 4 | `08_` |
+| 09 | Temp Tables & Table Variables | 3 | `09_` |
+| 10 | Error Handling & Dynamic SQL | 3 | `10_` |
+| 11 | Pivot, Unpivot & Merge | 3 | `11_` |
+| 12 | JSON & XML Support | 3 | `12_` |
+| 13 | Security & Administration | 3 | `13_` |
+| **TOTAL** | | **45 lessons** | |
+
+---
+
+## COURSE E: MongoDB
+**Source**: `_02_python_full_stack/_04_01_mongo_db/` (13 files — mix of .js, .py, .md)
+
+```
+00_installation_and_setup.md
+01_basic_crud.js
+02_querying_and_filtering.js
+03_advanced_querying.js
+04_indexing.js
+05_aggregation.js
+06_data_modeling_and_validation.js
+07_transactions.js
+08_replication_and_sharding.md
+09_python_integration.py
+10_java_integration.java
+11_security_and_backup.md
+12_expert_interview_qna.md
+```
+
+**Target**: `docs/curriculum/_21_mongodb/` (NEW)
+
+| # | Module | Lessons | Source |
+|---|---|---|---|
+| 01 | Setup & Core Concepts | 3 | `00_`, `01_` |
+| 02 | Querying & Filtering | 4 | `02_`, `03_` |
+| 03 | Indexing & Performance | 3 | `04_` |
+| 04 | Aggregation Pipeline | 4 | `05_` |
+| 05 | Data Modeling & Validation | 3 | `06_` |
+| 06 | Transactions & ACID | 3 | `07_` |
+| 07 | Replication & Sharding | 3 | `08_` |
+| 08 | Python Integration (PyMongo) | 3 | `09_` |
+| 09 | Security, Backup & Administration | 3 | `11_`, `12_` |
+| **TOTAL** | | **29 lessons** | |
+
+---
+
+## COURSE F: Prompt Engineering
+**Source**: `_04_prompt_engineering/` (71 Jupyter notebooks — full course!)
+
+### Module Structure (from folder names):
+
+```
+00_course_map              (3 files)
+01_foundations             (6 files) — What is PE, tokens, context, limits
+02_prompt_anatomy          (4 files) — Structure, delimiters, format, output control
+03_core_prompting_patterns (3 files) — Zero-shot, few-shot, one-shot
+04_reasoning_workflows     (3 files) — Decomposition, planning, self-critique
+05_task_families           (3 files) — Summarization, extraction, classification
+06_structured_outputs      (3 files) — JSON mode, function calling, schemas
+07_retrieval_and_context   (2 files) — RAG prompting, chunking
+08_evaluation_and_iter     (2 files) — Eval fundamentals, failure analysis
+09_safety_security         (2 files) — Hallucinations, injection
+10_system_and_app_design   (2 files) — Architecture, HITL workflows
+11_expert_systems_thinking (2 files) — N/A
+12_reference_and_playbooks (1 file)
+13_message_hierarchy       (3 files) — Roles, priority, conflict
+14_model_controls          (3 files) — Temperature, stop seqs, determinism
+15_developer_workflows     (3 files) — Templates, versioning
+16_structured_outputs_json (2 files) — JSON, tool calling
+17_memory_chaining_state   (2 files) — Memory, chaining
+18_multimodal_domain       (2 files) — Multimodal, domain playbooks
+19_production_evals        (2 files) — Tracing, observability
+20_security_privacy        (2 files) — PII, governance
+21_rag_deep_dive           (3 files) — RAG failures, grounding, citations
+22_agent_reliability       (3 files) — Tool failures, escalation, handoff
+23_developer_case_studies  (3 files) — End-to-end case studies
+24_evals_rubrics_ab        (3 files) — Rubrics, A/B testing, LLM judge
+25_exercises_capstones     (3 files) — Exercises, capstones
+```
+
+**Target**: `docs/curriculum/_22_prompt_engineering/` (NEW)
+
+| # | Module | Lessons | Source Notebooks |
+|---|---|---|---|
+| 01 | Foundations | 6 | `01_foundations/` |
+| 02 | Prompt Anatomy & Structure | 4 | `02_prompt_anatomy/` |
+| 03 | Core Prompting Patterns | 4 | `03_core_prompting_patterns/` |
+| 04 | Reasoning Workflows | 3 | `04_reasoning_workflows/` |
+| 05 | Task Families | 3 | `05_task_families/` |
+| 06 | Structured Outputs & Tool Calling | 4 | `06_`, `16_` |
+| 07 | Retrieval & Context Systems | 3 | `07_`, `21_` |
+| 08 | Evaluation & Iteration | 4 | `08_`, `24_` |
+| 09 | Safety, Security & Ethics | 4 | `09_`, `20_` |
+| 10 | System & Application Design | 3 | `10_`, `11_` |
+| 11 | Message Hierarchy & Model Controls | 4 | `13_`, `14_` |
+| 12 | Developer Workflows & Tooling | 4 | `15_`, `19_` |
+| 13 | Memory, Chaining & State | 3 | `17_` |
+| 14 | Agent Reliability & Tool Failure | 3 | `22_` |
+| 15 | Production Evals & Case Studies | 4 | `23_`, `24_`, `25_` |
+| **TOTAL** | | **56 lessons** | |
+
+---
+
+## COURSE G: Advanced Machine Learning (Sri Notes)
+**Source**: `sri_notes/ML/` (146 Jupyter notebooks — professional ML course)
+
+### Module Structure:
+
+```
+1 - Linear Algebra for ML           (12 notebooks)
+2 - Calculus, Optimization & Prob   (12 notebooks)
+3 - Statistics for ML & Python      (12 notebooks)
+4 - Data Fundamentals & Preprocessing(13 notebooks)
+5 - ML Fundamentals & Linear Reg    (11 notebooks)
+6 - Classification & Log Regression (11 notebooks)
+7 - Model Evaluation & Metrics      (12 notebooks)
+8 - Regularization & HPO            (12 notebooks)
+9 - Tree-Based Methods & GBM        (13 notebooks)
+10 - SVM & Kernel Methods           (12 notebooks)
+11 - Unsupervised Learning          (12 notebooks)
+12 - Feature Engineering & Full Pipeline (13 notebooks)
+```
+
+**Target**: `docs/curriculum/_23_advanced_ml/` (NEW — separate from `_10_machine_learning/`)  
+This is a companion advanced track with notebooks already authored.
+
+| # | Module | Lessons | Notebooks |
+|---|---|---|---|
+| 01 | Linear Algebra for ML | 12 | `1 - Linear Algebra/` |
+| 02 | Calculus, Optimization & Probability | 12 | `2 - Calculus/` |
+| 03 | Statistics for ML & Python Data Stack | 12 | `3 - Statistics/` |
+| 04 | Data Fundamentals & Preprocessing | 13 | `4 - Data Fundamentals/` |
+| 05 | ML Fundamentals & Linear Regression | 11 | `5 - ML Fundamentals/` |
+| 06 | Classification & Logistic Regression | 11 | `6 - Classification/` |
+| 07 | Model Evaluation, Validation & Metrics | 12 | `7 - Evaluation/` |
+| 08 | Regularization & Hyperparameter Tuning | 12 | `8 - Regularization/` |
+| 09 | Tree-Based Methods & Gradient Boosting | 13 | `9 - Tree-Based/` |
+| 10 | Support Vector Machines & Kernel Methods | 12 | `10 - SVM/` |
+| 11 | Unsupervised Learning | 12 | `11 - Unsupervised/` |
+| 12 | Feature Engineering & Full ML Pipeline | 13 | `12 - Feature Engineering/` |
+| **TOTAL** | | **145 lessons** | |
+
+> **Note**: These notebooks are FULLY AUTHORED. Highest priority for migration — just need `.md` wrappers with YAML frontmatter.
+
+---
+
+## COURSE H: Machine Learning Techniques (Old Structure)
+**Source**: `_01_data_analyst_&_science/_09_machine_learning/` (10 files)
+
+```
+_00_intro/   (1 file)
+_01_supervised/ (5 files — logistic, KNN, random forest, etc.)
+_02_unsupervised/ (empty — folders only, no files)
+_03_reinforcement/ (empty)
+_04_semi_supervised/ (empty)
+```
+
+**Decision**: Merge usable files into existing `_10_machine_learning/` curriculum.  
+The supervised learning notebooks (logistic, KNN, RF) should supplement Phase 1 ML stubs.
+
+---
+
+## SUMMARY — ALL NEW COURSES TO SCAFFOLD
+
+| Course | Target Folder | Lessons | Priority |
+|---|---|---|---|
+| A. Data Science Foundations | `_09_python_data_science/` (extend) | +34 | HIGH |
+| B. Power BI | `_18_power_bi/` (NEW) | 36 | MEDIUM |
+| C. Bootstrap 5 | `_18_bootstrap/` → `_19_bootstrap/` (NEW) | 19 | MEDIUM |
+| D. jQuery | `_19_jquery/` → `_20_jquery/` (NEW) | 15 | LOW |
+| E. SQL Server | `_20_sql_server/` → `_21_sql_server/` (NEW) | 45 | HIGH |
+| F. MongoDB | `_21_mongodb/` → `_22_mongodb/` (NEW) | 29 | HIGH |
+| G. Prompt Engineering | `_22_prompt_engineering/` (NEW) | 56 | HIGH |
+| H. Advanced ML (Sri) | `_23_advanced_ml/` (NEW) | 145 | HIGH ⭐ |
+| **GRAND TOTAL NEW** | | **379 lessons** | |
+
+---
+
+## FOLDER NUMBERING (Updated)
+
+```
+docs/curriculum/
+  ...existing...
+  _17_mlops_ai_deployment/     (59 lessons) ✅
+  _18_power_bi/                (36 lessons) — NEW
+  _19_bootstrap/               (19 lessons) — NEW
+  _20_jquery/                  (15 lessons) — NEW
+  _21_sql_server/              (45 lessons) — NEW
+  _22_mongodb/                 (29 lessons) — NEW
+  _23_prompt_engineering/      (56 lessons) — NEW
+  _24_advanced_ml/             (145 lessons) — NEW ⭐
+```
+
+---
+
+## MIGRATION NOTES
+
+### Course G (Prompt Engineering) — HIGH VALUE
+- All 71 notebooks are authored and structured
+- Just need YAML frontmatter wrappers added as `.md` curriculum files
+- Notebooks stay in place; `.md` files link to them
+
+### Course H (Advanced ML — Sri Notes) — HIGHEST VALUE  
+- 146 notebooks are fully authored with code and explanations
+- These are professional-grade notes
+- Should be migrated as a **separate advanced ML track** (not replacing Phase 1 ML)
+- Notebook content → convert to MD with frontmatter
+
+### Course A (Data Science)
+- NumPy, Pandas, Matplotlib notebooks already in `_04_numpy___/`, `_05_pandas___/`, `_06_matplot___/`
+- `_08_preprocessing/` (33 files) is the richest source
+
+### Courses C/D (Bootstrap, jQuery)
+- Notes are in `.html` format — will need HTML-to-MD conversion using existing `migrate_html.py`
+- Source: `_02_python_full_stack/_01_html_css_bootstrap_js_jq/`
+
+### Course E (SQL Server)
+- Notes are `.sql` files with comments — embed as code blocks in MD lessons
+
+### Course F (MongoDB)
+- Notes are `.js`, `.py`, `.md` mix — embed code blocks in MD lessons
+
+---
+
+## ACTION PLAN
+
+### Phase 1 — Scaffold Stubs (do first)
+1. Create `_18_power_bi/` folder + 36 stubs
+2. Create `_19_bootstrap/` folder + 19 stubs
+3. Create `_20_jquery/` folder + 15 stubs
+4. Create `_21_sql_server/` folder + 45 stubs
+5. Create `_22_mongodb/` folder + 29 stubs
+6. Create `_23_prompt_engineering/` folder + 56 stubs
+7. Create `_24_advanced_ml/` folder + 145 stubs
+8. Extend `_09_python_data_science/` + 34 stubs
+
+### Phase 2 — Content Migration (after stubs)
+1. Migrate Advanced ML notebooks → `_24_advanced_ml/` (highest ROI)
+2. Migrate Prompt Engineering notebooks → `_23_prompt_engineering/`
+3. Convert SQL files → SQL Server MD lessons
+4. Convert HTML files → Bootstrap/jQuery MD (use `migrate_html.py`)
+5. Convert MongoDB JS files → MongoDB MD lessons
+
+### Phase 3 — Delete old folder
+- After all stubs created and content migrated
+- **Do NOT delete `_05_backend_concepts/` content** (already ingested into FastAPI curriculum)
+
+---
+
+## ⚠️ Files to Preserve Before Deletion
+
+| File/Folder | Why | Where to Move |
+|---|---|---|
+| `sri_notes/ML/` | 146 fully authored notebooks | Keep as-is — link from `_24_advanced_ml/` |
+| `_04_prompt_engineering/` | 71 authored notebooks | Keep as-is — link from `_23_prompt_engineering/` |
+| `_01_data_analyst/study material/*.md` | Topic roadmaps | Already partially migrated |
+| `_02_python_full_stack/_02_sqlserver/` | 14 SQL reference files | Copy to `docs/reference/sql_server/` |
+| `_02_python_full_stack/_04_01_mongo_db/` | 13 MongoDB files | Copy to `docs/reference/mongodb/` |
+| `_02_python_full_stack/_01_html_css_bootstrap_js_jq/` | 60 HTML notes | Keep until Bootstrap/jQuery migrated |
+

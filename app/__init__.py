@@ -157,8 +157,12 @@ def _seed_defaults() -> None:
             db.session.add(new_cert)
     db.session.commit()
 
-    from app.services.search_service import SearchIndexService
-    SearchIndexService.rebuild_search_index()
+    if not os.environ.get("SKIP_SEARCH_REBUILD"):
+        from app.services.search_service import SearchIndexService
+        try:
+            SearchIndexService.rebuild_search_index()
+        except Exception:
+            pass
 
 
 def _register_blueprints(app: Flask) -> None:

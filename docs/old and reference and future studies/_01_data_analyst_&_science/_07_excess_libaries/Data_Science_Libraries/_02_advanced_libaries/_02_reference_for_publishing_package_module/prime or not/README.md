@@ -1,1 +1,0 @@
-this program will give you prime number or not

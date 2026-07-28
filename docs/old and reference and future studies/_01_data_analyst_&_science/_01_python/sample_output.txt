@@ -1,2 +1,0 @@
-Python file handling demo
-Second line

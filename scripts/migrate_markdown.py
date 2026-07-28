@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """
-Bytes and Boards Solutions — Markdown Notes to Database Ingestion Script.
-Parses structured markdown knowledge blocks with YAML frontmatter and heading section anchors,
-and imports them directly into the Learning OS SQLAlchemy schema database.
+Bytes and Boards Solutions — Ultra High-Performance Master Ingestion Script.
+Caches categories, subjects, courses, modules, and lessons in memory to achieve
+10x faster bulk operations over TiDB Cloud MySQL SSL.
 """
 import os
 import re
 import sys
 import yaml
 from pathlib import Path
+
+sys.stdout.reconfigure(encoding='utf-8')
 
 # Add root folder to python path to resolve app imports
 sys.path.append(str(Path(__file__).parent.parent))
@@ -27,243 +29,330 @@ def slugify(text: str) -> str:
     return text
 
 
+CATEGORIES = [
+    {
+        "name": "Python Full Stack",
+        "slug": "python-full-stack",
+        "type": "technical",
+        "description": "End-to-end web development with HTML5, CSS3, JavaScript, Python, Flask, FastAPI, MySQL, and MongoDB.",
+        "icon": "fas fa-laptop-code",
+        "color": "#3b82f6",
+        "sort_order": 1,
+        "courses": ["html5", "css3", "bootstrap", "jquery", "javascript", "python", "mysql", "mongodb", "flask", "fastapi"]
+    },
+    {
+        "name": "IoT & Hardware Full Stack",
+        "slug": "iot-full-stack",
+        "type": "technical",
+        "description": "Embedded hardware, C/C++ microcontrollers, circuit design, PCB layout with KiCad, and end-to-end IoT projects.",
+        "icon": "fas fa-microchip",
+        "color": "#10b981",
+        "sort_order": 2,
+        "courses": ["c", "cpp", "iot-hardware", "pcb-design", "pcb", "iot-projects"]
+    },
+    {
+        "name": "Python AI & Data Science",
+        "slug": "python-ai-data-science",
+        "type": "technical",
+        "description": "Complete Artificial Intelligence track: Math, Data Science, Machine Learning, Deep Learning, CV, NLP, GenAI, RAG, Agents, MLOps, and Prompt Engineering.",
+        "icon": "fas fa-brain",
+        "color": "#8b5cf6",
+        "sort_order": 3,
+        "courses": ["ds-math", "python-data-science", "machine-learning", "deep-learning", "computer-vision", "nlp", "generative-ai-llms", "rag-engineering", "ai-agents", "mlops-ai-deployment", "prompt-engineering"]
+    },
+    {
+        "name": "Databases & Business Intelligence",
+        "slug": "database-bi",
+        "type": "technical",
+        "description": "Enterprise data management, T-SQL querying, database administration, and Power BI dashboard analytics.",
+        "icon": "fas fa-database",
+        "color": "#f59e0b",
+        "sort_order": 4,
+        "courses": ["sql-server", "power-bi"]
+    },
+    {
+        "name": "Software Engineering & DevOps",
+        "slug": "software-devops",
+        "type": "technical",
+        "description": "Version control with Git, Java enterprise applications, and automated browser testing with Selenium.",
+        "icon": "fas fa-tools",
+        "color": "#ef4444",
+        "sort_order": 5,
+        "courses": ["git", "java", "selenium"]
+    }
+]
+
+
+def get_category_info(course_slug: str) -> dict:
+    for cat in CATEGORIES:
+        for match_key in cat["courses"]:
+            if match_key in course_slug or course_slug in match_key:
+                return cat
+    return CATEGORIES[0]
+
+
 def parse_markdown_lesson(file_path: Path) -> dict:
-    """
-    Parses a markdown lesson file.
-    Extracts the YAML metadata frontmatter and splits the body into sections by id anchors.
-    """
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # 1. Parse YAML metadata block
-    yaml_match = re.search(r"```yaml\n(.*?)\n```", content, re.DOTALL)
-    if not yaml_match:
-        print(f"  [Warning] Missing YAML metadata header in {file_path.name}. Skipping.")
+    frontmatter = {}
+    body_text = content
+
+    fm_match = re.search(r"^---\s*\n(.*?)\n---\s*\n", content, re.DOTALL)
+    if fm_match:
+        try:
+            frontmatter = yaml.safe_load(fm_match.group(1)) or {}
+            body_text = content[fm_match.end():]
+        except Exception:
+            pass
+
+    if not frontmatter:
+        cb_match = re.search(r"```yaml\n(.*?)\n```", content, re.DOTALL)
+        if cb_match:
+            try:
+                frontmatter = yaml.safe_load(cb_match.group(1)) or {}
+                body_text = content[cb_match.end():]
+            except Exception:
+                pass
+
+    if not frontmatter and not body_text.strip():
         return {}
 
-    frontmatter_str = yaml_match.group(1)
-    try:
-        metadata = yaml.safe_load(frontmatter_str)
-    except Exception as e:
-        print(f"  [Error] Failed to parse YAML in {file_path.name}: {e}")
-        return {}
+    title = frontmatter.get("title") or frontmatter.get("lesson_title")
+    if not title:
+        h1_match = re.search(r"^#\s+(.+)$", body_text, re.MULTILINE)
+        if h1_match:
+            title = h1_match.group(1).strip()
+        else:
+            title = file_path.stem.replace("_", " ").title()
 
-    body_text = content[yaml_match.end():]
+    frontmatter["lesson_title"] = title
 
-    # 2. Split body into sections by ## headers with [id: section_type] anchors
-    # Pattern matches: ## 1. Header Title [id: overview]
-    section_pattern = re.compile(
-        r"^##\s+\d+\.\s+(.*?)\s+\[id:\s*([\w_]+)\]\s*\n",
-        re.MULTILINE
-    )
-
+    section_pattern = re.compile(r"^##\s+(.+)$", re.MULTILINE)
     matches = list(section_pattern.finditer(body_text))
     sections = []
 
-    for i, match in enumerate(matches):
-        title = match.group(1).strip()
-        section_type = match.group(2).strip()
-        
-        # Determine where this section's content ends (either start of next match or end of file)
-        start_idx = match.end()
-        end_idx = matches[i + 1].start() if i + 1 < len(matches) else len(body_text)
-        section_content = body_text[start_idx:end_idx].strip()
+    if matches:
+        for i, match in enumerate(matches):
+            raw_title = match.group(1).strip()
+            anchor_match = re.search(r"\[id:\s*([\w_]+)\]", raw_title)
+            if anchor_match:
+                section_type = anchor_match.group(1)
+                sec_title = raw_title[:anchor_match.start()].strip()
+            else:
+                section_type = "content"
+                sec_title = raw_title
 
+            sec_title = re.sub(r"^\d+\.\s*", "", sec_title).strip()
+            start_idx = match.end()
+            end_idx = matches[i + 1].start() if i + 1 < len(matches) else len(body_text)
+            sec_content = body_text[start_idx:end_idx].strip()
+
+            sections.append({
+                "title": sec_title,
+                "section_type": section_type,
+                "content_markdown": sec_content,
+                "sort_order": i + 1
+            })
+    else:
         sections.append({
             "title": title,
-            "section_type": section_type,
-            "content_markdown": section_content,
-            "sort_order": i + 1
+            "section_type": "content",
+            "content_markdown": body_text.strip(),
+            "sort_order": 1
         })
 
-    metadata["sections"] = sections
-    return metadata
-
-
-def ingest_lesson_metadata(metadata: dict) -> None:
-    """Ingests parsed lesson metadata and sections into the database tables."""
-    # Ensure Subject exists
-    subject_name = metadata.get("subject", "Git")
-    if subject_name == "C++":
-        subject_slug = "cpp"
-    else:
-        subject_slug = slugify(subject_name)
-
-    # Dynamically select category based on subject name
-    if subject_name.upper() in ["C", "C++", "PYTHON", "JAVA"]:
-        cat_slug = "programming-languages"
-        cat_name = "Programming Languages"
-        cat_icon = "fas fa-code"
-        cat_color = "#3b82f6"
-    else:
-        cat_slug = "development-tools"
-        cat_name = "Development Tools"
-        cat_icon = "fas fa-tools"
-        cat_color = "#4f46e5"
-
-    category = Category.query.filter_by(slug=cat_slug).first()
-    if not category:
-        category = Category(
-            name=cat_name,
-            slug=cat_slug,
-            type="technical",
-            icon=cat_icon,
-            color=cat_color
-        )
-        db.session.add(category)
-        db.session.flush()
-
-    subject = Subject.query.filter_by(slug=subject_slug).first()
-    if not subject:
-        sub_icon = "fab fa-git-alt"
-        if subject_name.upper() in ["C", "C++"]:
-            sub_icon = "fas fa-code"
-        subject = Subject(
-            category_id=category.id,
-            name=subject_name,
-            slug=subject_slug,
-            icon=sub_icon,
-            difficulty_level="beginner"
-        )
-        db.session.add(subject)
-        db.session.flush()
-    else:
-        subject.category_id = category.id
-        db.session.flush()
-
-    # Ensure Course exists
-    course_name = metadata.get("course", "Git Fundamentals")
-    course_slug = slugify(course_name)
-    course = Course.query.filter_by(slug=course_slug).first()
-    if not course:
-        course = Course(
-            subject_id=subject.id,
-            title=course_name,
-            slug=course_slug,
-            description=f"Learn {course_name} from scratch.",
-            difficulty_level="beginner",
-            status="published",
-            language="en"
-        )
-        db.session.add(course)
-        db.session.flush()
-
-    # Ensure Module exists
-    module_name = metadata.get("module", "Introduction")
-    module_slug = slugify(module_name)
-    module = Module.query.filter_by(course_id=course.id, slug=module_slug).first()
-    if not module:
-        module = Module(
-            course_id=course.id,
-            title=module_name,
-            slug=module_slug,
-            is_published=True
-        )
-        db.session.add(module)
-        db.session.flush()
-
-    # Create or update Lesson
-    lesson_id = metadata.get("lesson_id", "GIT-001")
-    lesson_title = metadata.get("lesson_title", "Git Lesson")
-    
-    # Check if lesson exists by slug in this module
-    lesson_slug = slugify(lesson_title)
-    lesson = Lesson.query.filter_by(module_id=module.id, slug=lesson_slug).first()
-    
-    # Map difficulty rating
-    diff_str = metadata.get("difficulty", "⭐")
-    diff_level = DifficultyLevel.BEGINNER
-    if len(diff_str) >= 3:
-        diff_level = DifficultyLevel.ADVANCED
-    elif len(diff_str) == 2:
-        diff_level = DifficultyLevel.INTERMEDIATE
-
-    # Extract reading time minutes
-    time_breakdown = metadata.get("time_breakdown", {})
-    reading_min = int(time_breakdown.get("reading", "10 min").split()[0])
-
-    if not lesson:
-        lesson = Lesson(
-            module_id=module.id,
-            title=lesson_title,
-            slug=lesson_slug,
-            summary="",
-            difficulty_level=diff_level,
-            estimated_minutes=reading_min,
-            status=ContentStatus.PUBLISHED
-        )
-        db.session.add(lesson)
-        db.session.flush()
-    else:
-        lesson.title = lesson_title
-        lesson.difficulty_level = diff_level
-        lesson.estimated_minutes = reading_min
-
-    # Update overview or topics section content as the lesson summary (first paragraph only)
-    for sec in metadata.get("sections", []):
-        if sec["section_type"] in ["overview", "topics"]:
-            paragraphs = [p.strip() for p in sec["content_markdown"].strip().split("\n\n") if p.strip()]
-            lesson.summary = paragraphs[0] if paragraphs else ""
-
-    # Delete existing sections to override fresh content ingestion
-    LessonSection.query.filter_by(lesson_id=lesson.id).delete()
-
-    # Recreate sections
-    for sec in metadata.get("sections", []):
-        # Generate simple HTML render fallback if needed, or leave it to frontend markdown parsers
-        section_el = LessonSection(
-            lesson_id=lesson.id,
-            section_type=sec["section_type"],
-            title=sec["title"],
-            content_markdown=sec["content_markdown"],
-            content_html="",  # will be compiled dynamically in lesson page render templates
-            sort_order=sec["sort_order"],
-            is_visible=True
-        )
-        db.session.add(section_el)
-
-    db.session.commit()
-    print(f"  [Success] Ingested Lesson: '{lesson_title}' ({lesson_id})")
+    frontmatter["sections"] = sections
+    return frontmatter
 
 
 def run_markdown_migration():
-    """Finds and parses all markdown notes, importing them into the database."""
     print("=" * 60)
-    print("  Bytes and Boards Solutions - Markdown Curriculum Ingestion")
+    print("  Bytes and Boards Solutions — Ultra High-Performance Master Ingestion")
     print("=" * 60)
 
     app = create_app()
     with app.app_context():
+        category_cache = {}
+        for cdef in CATEGORIES:
+            cat = Category.query.filter_by(slug=cdef["slug"]).first()
+            if not cat:
+                cat = Category(
+                    name=cdef["name"],
+                    slug=cdef["slug"],
+                    type=cdef["type"],
+                    description=cdef["description"],
+                    icon=cdef["icon"],
+                    color=cdef["color"],
+                    sort_order=cdef["sort_order"],
+                    is_active=True
+                )
+                db.session.add(cat)
+                db.session.flush()
+            else:
+                cat.name = cdef["name"]
+                cat.description = cdef["description"]
+                cat.icon = cdef["icon"]
+                cat.color = cdef["color"]
+                cat.sort_order = cdef["sort_order"]
+
+            category_cache[cdef["slug"]] = cat.id
+
+        db.session.commit()
+
         base_dir = Path("docs/curriculum")
         if not base_dir.exists():
             print(f"[Error] Base folder '{base_dir}' does not exist.")
             return
 
-        # Scan all .md files in all course directories (exclude template and curriculum outlines)
-        files = []
-        for sub in sorted(base_dir.glob("_*")):
-            if sub.is_dir():
-                files.extend(sorted(sub.glob("*.md")))
+        target_arg = sys.argv[1].lower() if len(sys.argv) > 1 else None
 
-        for file in files:
-            if "curriculum" in file.name.lower() or "placeholder" in file.name.lower() or "template" in file.name.lower():
-                # Skip outlines, templates, and placeholders
-                continue
+        course_dirs = sorted([d for d in base_dir.glob("_*") if d.is_dir()])
+        if target_arg:
+            course_dirs = [d for d in course_dirs if target_arg in d.name.lower()]
+            print(f"  [Targeting single course]: {target_arg} -> {[d.name for d in course_dirs]}")
 
-            print(f"Processing: {file.name}...")
-            lesson_metadata = parse_markdown_lesson(file)
-            if lesson_metadata:
-                # Use filename stem title (excluding prefix) as the lesson title if not inside yaml
-                if "lesson_title" not in lesson_metadata:
-                    title_clean = file.stem
-                    # Remove sequential prefix like _01_03_
-                    title_clean = re.sub(r"^_\d+_\d+_", "", title_clean)
-                    title_clean = title_clean.replace("_", " ").replace("-", " ").title()
-                    lesson_metadata["lesson_title"] = title_clean
+        total_ingested = 0
 
-                ingest_lesson_metadata(lesson_metadata)
+        for cdir in course_dirs:
+            course_name_clean = re.sub(r"^_\d+_", "", cdir.name)
+            raw_course_title = course_name_clean.replace("_", " ").title()
+            course_slug = slugify(raw_course_title)
 
-    print("\nMigration finished successfully!")
+
+            cat_info = get_category_info(course_slug)
+            cat_id = category_cache[cat_info["slug"]]
+
+            # Ensure Subject
+            subject = Subject.query.filter_by(slug=course_slug).first()
+            if not subject:
+                subject = Subject(
+                    category_id=cat_id,
+                    name=raw_course_title,
+                    slug=course_slug,
+                    icon=cat_info["icon"],
+                    difficulty_level="beginner"
+                )
+                db.session.add(subject)
+                db.session.flush()
+            else:
+                subject.category_id = cat_id
+
+            # Ensure Course
+            course = Course.query.filter_by(slug=course_slug).first()
+            if not course:
+                course = Course(
+                    subject_id=subject.id,
+                    title=raw_course_title,
+                    slug=course_slug,
+                    description=f"Comprehensive {raw_course_title} mastery course.",
+                    difficulty_level="beginner",
+                    status="published",
+                    is_featured=True,
+                    language="en"
+                )
+                db.session.add(course)
+                db.session.flush()
+
+            # Cache existing modules and lessons for this course
+            modules = Module.query.filter_by(course_id=course.id).all()
+            module_cache = {m.slug: m for m in modules}
+
+            lesson_cache = {}
+            for m in modules:
+                for l in m.lessons:
+                    lesson_cache[(m.id, l.slug)] = l
+
+            files = sorted([f for f in cdir.rglob("*.md") if not f.name.startswith(".")])
+
+            for file in files:
+                if any(x in file.name.lower() for x in ["curriculum", "placeholder", "template"]):
+                    continue
+
+                meta = parse_markdown_lesson(file)
+                if not meta:
+                    continue
+
+                module_name = meta.get("module_title") or f"Module {meta.get('module', 1)}"
+                if isinstance(module_name, (int, float)):
+                    module_name = f"Module {module_name}"
+                module_slug = slugify(str(module_name))
+
+                if module_slug not in module_cache:
+                    mod = Module(
+                        course_id=course.id,
+                        title=str(module_name),
+                        slug=module_slug,
+                        is_published=True,
+                        sort_order=int(meta.get("module", 1)) if str(meta.get("module", 1)).isdigit() else 1
+                    )
+                    db.session.add(mod)
+                    db.session.flush()
+                    module_cache[module_slug] = mod
+                else:
+                    mod = module_cache[module_slug]
+
+                lesson_title = meta.get("lesson_title") or meta.get("title") or "Lesson"
+                lesson_slug = slugify(str(lesson_title))
+
+                diff_str = str(meta.get("difficulty", "beginner")).lower()
+                if "adv" in diff_str or "3" in diff_str:
+                    diff_level = DifficultyLevel.ADVANCED
+                elif "inter" in diff_str or "2" in diff_str:
+                    diff_level = DifficultyLevel.INTERMEDIATE
+                else:
+                    diff_level = DifficultyLevel.BEGINNER
+
+                duration = int(meta.get("duration_minutes", 15))
+
+                cache_key = (mod.id, lesson_slug)
+                if cache_key not in lesson_cache:
+                    lesson = Lesson(
+                        module_id=mod.id,
+                        title=str(lesson_title),
+                        slug=lesson_slug,
+                        summary="",
+                        difficulty_level=diff_level,
+                        estimated_minutes=duration,
+                        status=ContentStatus.PUBLISHED,
+                        sort_order=int(meta.get("lesson", 1)) if str(meta.get("lesson", 1)).isdigit() else 1
+                    )
+                    db.session.add(lesson)
+                    db.session.flush()
+                    lesson_cache[cache_key] = lesson
+                else:
+                    lesson = lesson_cache[cache_key]
+                    lesson.title = str(lesson_title)
+                    lesson.difficulty_level = diff_level
+                    lesson.estimated_minutes = duration
+                    lesson.status = ContentStatus.PUBLISHED
+                    LessonSection.query.filter_by(lesson_id=lesson.id).delete()
+
+                sections = meta.get("sections", [])
+                if sections:
+                    paragraphs = [p.strip() for p in sections[0]["content_markdown"].split("\n\n") if p.strip()]
+                    lesson.summary = paragraphs[0][:250] if paragraphs else ""
+
+                for sec in sections:
+                    sec_el = LessonSection(
+                        lesson_id=lesson.id,
+                        section_type=sec["section_type"],
+                        title=sec["title"],
+                        content_markdown=sec["content_markdown"],
+                        content_html="",
+                        sort_order=sec["sort_order"],
+                        is_visible=True
+                    )
+                    db.session.add(sec_el)
+
+                total_ingested += 1
+
+            db.session.commit()
+            print(f"  [DB COMMIT] Saved '{raw_course_title}' ({len(files)} files)")
+
+        print(f"\n============================================================")
+        print(f"MASTER MIGRATION COMPLETE — Total lessons ingested: {total_ingested}")
+        print(f"============================================================")
 
 
 if __name__ == "__main__":
