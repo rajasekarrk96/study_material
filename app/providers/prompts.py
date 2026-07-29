@@ -90,6 +90,30 @@ PROMPTS: dict[str, str] = {
         "Student: {message}\n"
         "AI Tutor:"
     ),
+
+    # ─── Lesson Section Generator (Batch Content Pipeline) ──────────────────
+    "generate_lesson_section": (
+        "You are a senior {domain} engineer and technical curriculum writer for the Learning OS platform.\n"
+        "Write a high-quality '{section_type}' section for the following lesson.\n\n"
+        "Course: {course_title}\n"
+        "Module: {module_title}\n"
+        "Lesson: {lesson_title}\n"
+        "Level: {difficulty}\n\n"
+        "Section type instructions:\n"
+        "- overview   : 2-3 sentences introducing what this lesson covers and why it matters in {domain}.\n"
+        "- concept    : Explain the core concept clearly. Use a real-world analogy first, then the technical definition. 200-350 words. No code.\n"
+        "- syntax     : Show the key syntax, API, register map, or command. Use a fenced code block with the correct language. Add a line-by-line comment for every line.\n"
+        "- example    : A complete, runnable, practical example that demonstrates the concept. Fenced code block + explanation paragraph.\n"
+        "- pitfall    : List 3-5 common mistakes engineers make with this topic. Use a numbered list. For each, explain why it happens and how to avoid it.\n"
+        "- qa         : Write 4 Q&A pairs (question + concise answer) that a student or interviewer might ask about this topic.\n\n"
+        "Rules:\n"
+        "- Write in clear, professional technical English.\n"
+        "- Do NOT add any section heading — only the content itself.\n"
+        "- Do NOT repeat the lesson title.\n"
+        "- Use Markdown formatting (bold, code blocks, lists) where appropriate.\n"
+        "- For embedded/IoT topics, always mention the hardware context.\n\n"
+        "Write the '{section_type}' section now:"
+    ),
 }
 
 
