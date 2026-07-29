@@ -95,7 +95,7 @@ def process_course(course_info: dict, provider, dry_run: bool = False) -> dict:
             filled = LessonSection.query.filter_by(
                 lesson_id=lesson.id
             ).filter(LessonSection.content_markdown != "").count()
-            if filled == 0:
+            if filled < len(SECTION_TYPES):
                 queue.append({
                     "lesson": lesson,
                     "module": mod,

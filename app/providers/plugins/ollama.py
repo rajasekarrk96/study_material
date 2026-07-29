@@ -43,7 +43,11 @@ class OllamaProvider(AIProvider):
             return False
 
     def chat(self, prompt: str, system: Optional[str] = None, **kwargs) -> str:
-        """Send a generate request to Ollama REST API."""
+        """Send request to Ollama, collecting streamed tokens to avoid read timeouts.
+
+        Uses stream=True internally so each token keeps the connection alive.
+        This prevents read timeouts that occur with large non-streamed responses.
+        """
         if not self._is_available():
             logger.warning("Ollama server unreachable — using fallback stub.")
             return self._fallback_response(prompt)
@@ -51,20 +55,30 @@ class OllamaProvider(AIProvider):
         payload = {
             "model": self._model,
             "prompt": prompt,
-            "stream": False,
-            "options": {"think": False},  # Disable qwen3 reasoning for speed
+            "stream": True,           # Stream tokens to avoid read timeout
+            "think": False,           # qwen3: skip reasoning tokens
+            "options": {"num_predict": 1024},
         }
         if system:
             payload["system"] = system
 
         try:
+            import json as _json
             r = requests.post(
                 f"{OLLAMA_BASE_URL}/api/generate",
                 json=payload,
-                timeout=OLLAMA_TIMEOUT
+                stream=True,
+                timeout=OLLAMA_TIMEOUT,
             )
             r.raise_for_status()
-            raw = r.json().get("response", "").strip()
+            chunks = []
+            for line in r.iter_lines():
+                if line:
+                    chunk = _json.loads(line.decode("utf-8"))
+                    chunks.append(chunk.get("response", ""))
+                    if chunk.get("done"):
+                        break
+            raw = "".join(chunks).strip()
             return self._strip_think_tags(raw)
         except Exception as exc:
             logger.error("Ollama chat error: %s", exc)
