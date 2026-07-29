@@ -163,8 +163,13 @@
                 </div>
             </div>
 
-            <!-- Start / Resume Button -->
-            {% if next_lesson %}
+            <!-- Start / Resume Button OR Coming Soon -->
+            {% if total_lessons_count == 0 %}
+                <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: var(--radius-sm); padding: 12px 20px;">
+                    <i class="fas fa-hammer" style="color: #fbbf24;"></i>
+                    <span style="color: #fbbf24; font-weight: 600;">Course notes coming soon — check back later!</span>
+                </div>
+            {% elif next_lesson %}
                 <a href="{{ url_for('learn.lesson_view', course_slug=course.slug, module_slug=next_lesson.module.slug, lesson_slug=next_lesson.slug) }}" class="btn btn-primary" style="padding: 14px 28px; font-weight: 700; font-size: 1rem; border-radius: var(--radius-sm); display: inline-flex; align-items: center; gap: 8px;">
                     {% if progress_percentage > 0 %}Resume Learning{% else %}Start Learning{% endif %} <i class="fas fa-arrow-right"></i>
                 </a>
@@ -254,7 +259,11 @@
                             </ul>
                         </div>
                     {% else %}
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">No published modules yet.</p>
+                        <div style="text-align: center; padding: 2rem 1rem;">
+                            <i class="fas fa-hammer" style="font-size: 2rem; color: #fbbf24; margin-bottom: 0.75rem; display: block;"></i>
+                            <p style="font-size: 0.85rem; color: #fbbf24; font-weight: 600; margin: 0 0 0.25rem;">Notes coming soon!</p>
+                            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">We're working on the content for this course.</p>
+                        </div>
                     {% endfor %}
                 </nav>
             </div>
