@@ -211,9 +211,6 @@ Learning OS is an enterprise-grade, multi-agent AI learning operating system des
         with open(os.path.join(ROADMAP_DIR, "02_COURSE_STATUS.md"), "w", encoding="utf-8") as f:
             f.write(doc2)
 
-        # =========================================================================
-        # 03_LEARNING_PATH_STATUS.md
-        # =========================================================================
         doc3 = f"""# 03 — Learning Path Status & Certificate Readiness
 
 > Status of the **{len(paths)} Official Learning Paths** in Learning OS.  
@@ -235,6 +232,7 @@ Learning OS is an enterprise-grade, multi-agent AI learning operating system des
             cert = "🟢 YES" if p_pct == 100.0 else "🔴 Pending"
 
             doc3 += f"| **{p.title}** | `{p.slug}` | {p.target_role} | {p.estimated_hours}h | {p_tot} | {p_pub} | {p_pct:.1f}% | {p_icon} | {cert} |\n"
+
 
         with open(os.path.join(ROADMAP_DIR, "03_LEARNING_PATH_STATUS.md"), "w", encoding="utf-8") as f:
             f.write(doc3)
