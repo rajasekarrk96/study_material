@@ -1,7 +1,11 @@
-"""Learning OS — Public Blueprint: Home & Catalog routes."""
+"""Learning OS — Public Blueprint: Home, Catalog & Learning Path routes."""
 from types import SimpleNamespace
-from flask import Blueprint, render_template, jsonify
+from flask import Blueprint, render_template, jsonify, abort, redirect, url_for, flash
+from flask_login import current_user, login_required
 from app.domains.content.models import Category, Course, Lesson, LessonSection, Source
+from app.domains.learning_path.models import (
+    LearningPath, UserLearningPathProgress, UserCourseProgress
+)
 from app.core.cache import cache_memoize
 
 public_bp = Blueprint("public", __name__, template_folder="templates")
@@ -51,7 +55,22 @@ def home():
 @public_bp.route("/catalog")
 def catalog():
     categories = Category.query.filter_by(is_active=True).order_by(Category.sort_order).all()
-    return render_template("public/catalog.html", categories=categories)
+    learning_paths = LearningPath.query.filter_by(is_active=True).order_by(
+        LearningPath.is_featured.desc(), LearningPath.sort_order
+    ).all()
+
+    user_path_progress = {}
+    if current_user.is_authenticated:
+        for prog in UserLearningPathProgress.query.filter_by(user_id=current_user.id).all():
+            user_path_progress[prog.path_id] = prog
+
+    return render_template(
+        "public/catalog.html",
+        categories=categories,
+        learning_paths=learning_paths,
+        user_path_progress=user_path_progress,
+        path_count=len(learning_paths),
+    )
 
 
 from flask_login import login_required
@@ -123,3 +142,87 @@ def sitemap():
     xml_declaration = b'<?xml version="1.0" encoding="UTF-8"?>\n'
     return Response(xml_declaration + xml_str, mimetype="application/xml")
 
+
+# ─────────────────────────────────────────────────────────────
+# Learning Path Routes
+# ─────────────────────────────────────────────────────────────
+
+@public_bp.route("/paths/")
+def learning_paths():
+    """List all active learning paths."""
+    paths = LearningPath.query.filter_by(is_active=True).order_by(
+        LearningPath.is_featured.desc(), LearningPath.sort_order
+    ).all()
+
+    # Attach user progress if logged in
+    user_progress = {}
+    if current_user.is_authenticated:
+        for prog in UserLearningPathProgress.query.filter_by(user_id=current_user.id).all():
+            user_progress[prog.path_id] = prog
+
+    return render_template(
+        "public/learning_paths.html",
+        paths=paths,
+        user_progress=user_progress,
+    )
+
+
+@public_bp.route("/paths/<path_slug>/")
+def learning_path_detail(path_slug: str):
+    """Detail view for a single learning path."""
+    path = LearningPath.query.filter_by(slug=path_slug, is_active=True).first_or_404()
+
+    # Build section-grouped course list
+    sections = {}
+    for pc in path.courses:
+        label = pc.section_label or "Core"
+        sections.setdefault(label, [])
+        sections[label].append(pc)
+
+    # User progress
+    user_prog = None
+    completed_course_ids = set()
+    if current_user.is_authenticated:
+        user_prog = UserLearningPathProgress.query.filter_by(
+            user_id=current_user.id, path_id=path.id
+        ).first()
+        for cp in UserCourseProgress.query.filter_by(
+            user_id=current_user.id, is_completed=True
+        ).all():
+            completed_course_ids.add(cp.course_id)
+
+    return render_template(
+        "public/learning_path_detail.html",
+        path=path,
+        sections=sections,
+        user_prog=user_prog,
+        completed_course_ids=completed_course_ids,
+    )
+
+
+@public_bp.route("/paths/<path_slug>/enroll", methods=["POST"])
+@login_required
+def enroll_learning_path(path_slug: str):
+    """Enroll current user into a learning path."""
+    from app.core.extensions import db
+    path = LearningPath.query.filter_by(slug=path_slug, is_active=True).first_or_404()
+
+    existing = UserLearningPathProgress.query.filter_by(
+        user_id=current_user.id, path_id=path.id
+    ).first()
+
+    if not existing:
+        total = len([pc for pc in path.courses if pc.is_required])
+        prog = UserLearningPathProgress(
+            user_id=current_user.id,
+            path_id=path.id,
+            total_courses=total,
+            completed_courses=0,
+        )
+        db.session.add(prog)
+        db.session.commit()
+        flash(f"Enrolled in '{path.title}'! Start your first course below.", "success")
+    else:
+        flash(f"You are already enrolled in '{path.title}'.", "info")
+
+    return redirect(url_for("public.learning_path_detail", path_slug=path.slug))

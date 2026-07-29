@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% block title %}{{ path.title }} Learning Path — Bytes and Boards Solutions{% endblock %}
+
+{% block content %}
+<div class="lp-detail-page">
+
+  <!-- Hero -->
+  <div class="lp-hero" style="border-left: 5px solid {{ path.color or '#4f46e5' }};">
+    <div class="lp-hero-icon" style="color: {{ path.color or '#4f46e5' }}; background: {{ path.color or '#4f46e5' }}22;">
+      <i class="{{ path.icon or 'fas fa-graduation-cap' }}"></i>
+    </div>
+    <div class="lp-hero-text">
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.4rem;">
+        {% if path.is_featured %}
+        <span class="featured-badge"><i class="fas fa-star"></i> Featured</span>
+        {% endif %}
+        <span class="difficulty-badge difficulty-{{ path.difficulty_level }}">{{ path.difficulty_level | title }}</span>
+      </div>
+      <h1 style="margin: 0 0 0.25rem; color: #f8fafc;">{{ path.title }}</h1>
+      <p style="color: #94a3b8; margin: 0 0 0.5rem;">
+        <i class="fas fa-briefcase" style="color: {{ path.color or '#4f46e5' }};"></i>
+        Target Role: <strong>{{ path.target_role or 'Software Developer' }}</strong>
+      </p>
+      <p style="color: #cbd5e1; font-size: 0.95rem;">{{ path.description or '' }}</p>
+    </div>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="lp-stats-bar">
+    <div class="lp-stat">
+      <i class="fas fa-book-open"></i>
+      <span><strong>{{ path.total_courses_count }}</strong> Courses</span>
+    </div>
+    <div class="lp-stat">
+      <i class="fas fa-clock"></i>
+      <span><strong>{{ path.estimated_hours }}h</strong> Total</span>
+    </div>
+    <div class="lp-stat">
+      <i class="fas fa-file-alt"></i>
+      <span><strong>{{ path.total_lessons }}</strong> Lessons</span>
+    </div>
+    <div class="lp-stat">
+      <i class="fas fa-certificate"></i>
+      <span>Path Certificate</span>
+    </div>
+
+    <!-- Enrollment / Progress -->
+    <div class="lp-stat lp-enroll-area">
+      {% if user_prog %}
+        <div class="path-progress-bar" style="width: 160px;">
+          <div class="path-progress-fill" style="width: {{ user_prog.progress_percentage }}%; background: {{ path.color or '#4f46e5' }};"></div>
+        </div>
+        <span style="font-size: 0.8rem; color: #94a3b8; margin-left: 0.5rem;">{{ user_prog.progress_percentage }}% complete</span>
+      {% else %}
+        <form method="POST" action="{{ url_for('public.enroll_learning_path', path_slug=path.slug) }}" style="margin: 0;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="enroll-btn" style="background: {{ path.color or '#4f46e5' }};">
+            <i class="fas fa-plus-circle"></i> Enroll in Path
+          </button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Curriculum Sections -->
+  <div class="lp-curriculum">
+    <h2 style="color: #f8fafc; margin-bottom: 1.25rem;">
+      <i class="fas fa-list-check" style="color: {{ path.color or '#4f46e5' }};"></i> Curriculum
+    </h2>
+
+    {% for section_label, path_courses in sections.items() %}
+    <div class="lp-section">
+      <div class="lp-section-header">
+        <span class="lp-section-pill" style="background: {{ path.color or '#4f46e5' }}22; color: {{ path.color or '#4f46e5' }}; border: 1px solid {{ path.color or '#4f46e5' }}44;">
+          {{ section_label }}
+        </span>
+        <span style="font-size: 0.8rem; color: #64748b;">{{ path_courses | length }} course{% if path_courses | length != 1 %}s{% endif %}</span>
+      </div>
+
+      <div class="lp-course-list">
+        {% for pc in path_courses %}
+        {% set course = pc.course %}
+        {% set is_done = course.id in completed_course_ids %}
+        <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}" class="lp-course-row {{ 'completed' if is_done else '' }}">
+          <div class="lp-course-status">
+            {% if is_done %}
+              <i class="fas fa-check-circle" style="color: #10b981;"></i>
+            {% elif not pc.is_required %}
+              <i class="far fa-circle" style="color: #475569;"></i>
+            {% else %}
+              <i class="far fa-circle" style="color: #64748b;"></i>
+            {% endif %}
+          </div>
+          <div class="lp-course-info">
+            <span class="lp-course-title">{{ course.title }}</span>
+            <span class="lp-course-meta">
+              <i class="fas fa-clock"></i> {{ course.estimated_hours }}h
+              &nbsp;·&nbsp;
+              <span class="difficulty-badge difficulty-{{ course.difficulty_level }}" style="font-size: 0.65rem; padding: 1px 6px;">{{ course.difficulty_level | title }}</span>
+              {% if not pc.is_required %}
+              &nbsp;·&nbsp; <span style="color: #64748b; font-size: 0.75rem;">Optional</span>
+              {% endif %}
+            </span>
+          </div>
+          <i class="fas fa-chevron-right" style="color: #475569; margin-left: auto;"></i>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Back link -->
+  <div style="margin-top: 2rem;">
+    <a href="{{ url_for('public.catalog') }}#paths" style="color: #64748b; font-size: 0.9rem;">
+      <i class="fas fa-arrow-left"></i> Back to Learning Paths
+    </a>
+  </div>
+
+</div>
+
+<style>
+.lp-detail-page { max-width: 860px; margin: 0 auto; }
+
+.lp-hero {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  background: #0f172a;
+  border-radius: 14px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+.lp-hero-icon {
+  width: 64px; height: 64px; flex-shrink: 0;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+}
+.featured-badge {
+  background: #fbbf2422; color: #fbbf24;
+  font-size: 0.7rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 20px;
+  border: 1px solid #fbbf2444;
+}
+.lp-stats-bar {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  align-items: center;
+  background: #0f172a; border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.lp-stat {
+  display: flex; align-items: center; gap: 0.4rem;
+  color: #94a3b8; font-size: 0.85rem;
+}
+.lp-stat i { color: #6366f1; }
+.lp-enroll-area { margin-left: auto; display: flex; align-items: center; }
+.enroll-btn {
+  border: none; color: white; padding: 0.5rem 1.1rem;
+  border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+  cursor: pointer; transition: opacity 0.2s;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.enroll-btn:hover { opacity: 0.85; }
+.path-progress-bar { height: 8px; background: #1e293b; border-radius: 4px; overflow: hidden; }
+.path-progress-fill { height: 100%; border-radius: 4px; }
+
+.lp-curriculum { margin-top: 0.5rem; }
+.lp-section { margin-bottom: 1.75rem; }
+.lp-section-header {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.lp-section-pill {
+  font-size: 0.78rem; font-weight: 700;
+  padding: 3px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.lp-course-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.lp-course-row {
+  display: flex; align-items: center; gap: 1rem;
+  background: #0f172a; border: 1px solid #1e293b;
+  border-radius: 10px; padding: 0.85rem 1rem;
+  text-decoration: none; transition: border-color 0.2s, background 0.2s;
+}
+.lp-course-row:hover { border-color: #4f46e5; background: #1e293b; }
+.lp-course-row.completed { border-color: #10b98133; }
+.lp-course-status { width: 20px; flex-shrink: 0; }
+.lp-course-info { display: flex; flex-direction: column; gap: 0.2rem; flex: 1; }
+.lp-course-title { color: #f8fafc; font-weight: 600; font-size: 0.95rem; }
+.lp-course-meta { color: #64748b; font-size: 0.8rem; display: flex; align-items: center; gap: 0.25rem; }
+</style>
+{% endblock %}

@@ -1,6 +1,6 @@
-# Learning OS — Bytes and Boards Solutions
+# Learning OS v3.0 — Bytes and Boards Solutions
 
-> A modular, production-ready Knowledge Operating System that transforms scattered learning resources into a structured, interactive education platform with AI assistance, adaptive learning paths, and gamification.
+> A modular, production-ready Knowledge Operating System built on a **reusable module-based catalog** architecture. Courses exist once as a single source of truth; Learning Paths reference them without duplicating any content — similar to Microsoft Learn and Coursera Learning Paths.
 
 **Live Stack:** Flask 3 · TiDB Cloud (MySQL) · Gunicorn · Render · Ollama (local AI)
 
@@ -9,37 +9,40 @@
 ## Table of Contents
 
 1. [Project Overview](#1-project-overview)
-2. [Current Catalog](#2-current-catalog)
-3. [Architecture](#3-architecture)
-4. [Domain Model](#4-domain-model)
-5. [Blueprint Routes](#5-blueprint-routes)
-6. [Feature Modules](#6-feature-modules)
-7. [AI & Search Layer](#7-ai--search-layer)
-8. [Technology Stack](#8-technology-stack)
-9. [Directory Structure](#9-directory-structure)
-10. [Data Flow](#10-data-flow)
-11. [Setup & Local Development](#11-setup--local-development)
-12. [Configuration Variables](#12-configuration-variables)
-13. [Deployment](#13-deployment)
-14. [Scripts Reference](#14-scripts-reference)
-15. [Coding Standards](#15-coding-standards)
-16. [Changelog](#16-changelog)
-17. [Documentation Index](#17-documentation-index)
+2. [Catalog Architecture (v3.0)](#2-catalog-architecture-v30)
+3. [Current Skill Modules](#3-current-skill-modules)
+4. [Learning Paths](#4-learning-paths)
+5. [Architecture](#5-architecture)
+6. [Domain Model](#6-domain-model)
+7. [Blueprint Routes](#7-blueprint-routes)
+8. [Feature Modules](#8-feature-modules)
+9. [AI & Search Layer](#9-ai--search-layer)
+10. [Technology Stack](#10-technology-stack)
+11. [Directory Structure](#11-directory-structure)
+12. [Data Flow](#12-data-flow)
+13. [Setup & Local Development](#13-setup--local-development)
+14. [Configuration Variables](#14-configuration-variables)
+15. [Deployment](#15-deployment)
+16. [Scripts Reference](#16-scripts-reference)
+17. [Coding Standards](#17-coding-standards)
+18. [Changelog](#18-changelog)
+19. [Documentation Index](#19-documentation-index)
 
 ---
 
 ## 1. Project Overview
 
-**Learning OS** is a database-driven knowledge processing platform built for **Bytes and Boards Solutions**. Rather than serving static tutorials, it organizes all learning content into a structured relational database, then exposes it through:
+**Learning OS** is a database-driven knowledge processing platform built for **Bytes and Boards Solutions**. It organizes all learning content into a structured relational database, then exposes it through:
 
-- A **course catalog** with category → subject → course → module → lesson hierarchy
-- An **interactive lesson reader** with progress tracking and section-based content
+- A **modular skill catalog** — 10 flat skill categories (Programming, Frontend, Backend, Database, DevOps, Testing, AI, IoT, Cloud, Soft Skills)
+- **Learning Paths** — curated multi-course programs (Python Full Stack, AI Engineer, IoT Full Stack, etc.) that *reference* existing courses without duplicating content
+- An **interactive lesson reader** with section-based content and progress tracking
 - An **assessment engine** (MCQ quizzes with XP rewards)
 - A **spaced repetition system** (SRS/SM-2 flashcards)
 - A **sandboxed code executor** (Judge0 API integration)
 - A **hybrid semantic search** (keyword FTS + vector cosine similarity)
 - A **local AI tutor** (Ollama) for on-demand lesson Q&A and content drafting
-- A **gamification layer** (XP points, daily streaks, certificates)
+- A **gamification layer** (XP points, daily streaks, two certificate types)
 
 ```
   Raw Sources (PDF · YouTube · Markdown · HTML · Docs)
@@ -50,61 +53,173 @@
                         │
                         ▼
           [TiDB Cloud — MySQL-compatible DB]
-          48+ tables across 10 domain modules
+          55+ tables across 10 domain modules
                         │
-              ┌─────────┴──────────┐
-              ▼                    ▼
-    [Lesson CMS / Admin]   [AI Tutor / Search]
-    Author → Review → Pub  Hybrid FTS + Vectors
-              │
-              ▼
-    [Student Learning Flow]
-    Catalog → Course → Lesson → Quiz → SRS → XP → Certificate
+            ┌───────────┴───────────┐
+            ▼                       ▼
+  [Skill Catalog]           [Learning Paths]
+  10 flat categories        Python Full Stack
+  browse by skill           Java Full Stack
+  no duplicates             AI Engineer ...
+            │
+            ▼
+  [Student Learning Flow]
+  Browse → Enroll Path → Course → Lesson → Quiz → SRS → XP → Certificate
 ```
 
 ---
 
-## 2. Current Catalog
+## 2. Catalog Architecture (v3.0)
 
-### Python Full Stack *(10 courses)*
-End-to-end web development with HTML5, CSS3, JavaScript, Python, Flask, FastAPI, MySQL, and MongoDB.
+### The Core Principle
 
-| Course | Hours | Modules | Lessons |
-|--------|------:|--------:|--------:|
-| Core Python | 40h | 15 | 44 |
-| MySQL | 25h | 6 | 53 |
-| Flask | 12h | 3 | 32 |
-| FastAPI | 18h | 4 | 33 |
-| JavaScript | 13h | 1 | 52 |
-| CSS3 | 11h | 1 | 45 |
-| HTML5 | 6h | 1 | 24 |
-| Bootstrap | 18h | 4 | 18 |
-| jQuery | 12h | 4 | 12 |
-| MongoDB | 13h | 4 | 13 |
+> Each course exists **exactly once** in the database. Learning Paths reference courses — they never copy lessons.
 
-### Programming Languages *(3 courses)*
+```
+v2.x (OLD — deprecated)           v3.0 (CURRENT)
+─────────────────────────          ──────────────────────────────────────
+Python Full Stack                  Programming Languages  ← Skill Module
+  ├── Python (lessons)               └── Python Course (single source)
+  ├── HTML  (lessons)
+  ├── Flask (lessons)               Frontend Development  ← Skill Module
+                                      ├── HTML Course
+IoT Full Stack                        ├── CSS Course
+  ├── Python (lessons) ← DUPE!        ├── Bootstrap Course
+  ├── Flask  (lessons) ← DUPE!        └── JavaScript Course
+  └── Arduino (lessons)
+                                    Learning Path: Python Full Stack
+                                      references → Python, HTML, CSS,
+                                                   Bootstrap, JS, Flask,
+                                                   MySQL, Git
+                                    Learning Path: IoT Full Stack
+                                      references → Python, Flask,
+                                                   HTML, CSS, Arduino
+                                                   (Python is NOT copied)
+```
 
-| Course | Hours | Modules | Lessons |
-|--------|------:|--------:|--------:|
-| Core Java | 40h | 16 | 160 |
-| Java | 22h | 7 | 26 |
-| C Programming | 16h | 6 | 18 |
+### Content Hierarchy
 
-### Software Engineering & DevOps *(4 courses)*
-Git Masterclass, Jenkins CI/CD, DevOps fundamentals, and more.
+```
+Category  (10 flat skill groups)
+  └── Subject  (topic within a category)
+        └── Course  (single reusable unit, soft-delete, versioned)
+              └── Module
+                    └── Lesson
+                          └── LessonSection (concept|syntax|example|pitfall|qa)
 
-### Python AI & Data Science *(8 courses)*
-Machine Learning, Deep Learning, NLP, Computer Vision, MLOps, RAG, AI Agents, Prompt Engineering, and Python Data Science.
-
-### Databases & Business Intelligence *(2 courses)*
-SQL Server, Power BI.
-
-### IoT & Hardware Full Stack *(7 courses)*
-Arduino, Raspberry Pi, sensors, protocols, and embedded systems.
+LearningPath  (curated program)
+  └── PathCourse  (JOIN: path ↔ course, with section_label + is_required)
+        └── references → Course (no data copied)
+```
 
 ---
 
-## 3. Architecture
+## 3. Current Skill Modules
+
+### Programming Languages
+| Course | Hours |
+|--------|------:|
+| Core Python | 40h |
+| Java (Core Java + Advanced) | 62h |
+| C Programming | 16h |
+
+### Frontend Development
+| Course | Hours |
+|--------|------:|
+| HTML5 | 6h |
+| CSS3 | 11h |
+| Bootstrap | 18h |
+| jQuery | 12h |
+| JavaScript | 13h |
+
+### Backend Development
+| Course | Hours |
+|--------|------:|
+| Python Flask | 12h |
+| FastAPI | 18h |
+
+### Database
+| Course | Hours |
+|--------|------:|
+| MySQL | 25h |
+| MongoDB | 13h |
+
+### Git & DevOps
+| Course | Hours |
+|--------|------:|
+| Git Masterclass | 5h |
+| Jenkins CI/CD | — |
+
+### Testing & QA
+| Course | Hours |
+|--------|------:|
+| Selenium Java (Automation Testing) | — |
+| Manual Testing | — |
+
+### AI & Data Science *(7 courses)*
+Machine Learning, Deep Learning, NLP, Computer Vision, AI Agents, Prompt Engineering, Python Data Science
+
+### IoT & Embedded Systems *(in progress)*
+Arduino, ESP32, Raspberry Pi, Sensors, MQTT, Embedded C, IoT Cloud
+
+### Cloud Computing *(planned)*
+AWS, Azure, Google Cloud, Firebase
+
+### Soft Skills *(planned)*
+Aptitude, Interview Prep, Resume Building, Communication
+
+---
+
+## 4. Learning Paths
+
+Learning Paths are curated sequences that guide a student from beginner to job-ready. Each path references existing courses — **zero duplication**.
+
+| Path | Courses | Hours | Featured |
+|------|--------:|------:|:--------:|
+| Python Full Stack | 11 | 208h | ⭐ |
+| Java Full Stack | 7 | 135h | ⭐ |
+| IoT Full Stack | 8 | 141h | ⭐ |
+| AI Engineer | 4 | 95h | ⭐ |
+| Data Scientist | 2 | 65h | — |
+| ML Engineer | 1 | 40h | — |
+| DevOps Engineer | 1 | 40h | — |
+| QA Automation Engineer | 3 | 105h | — |
+
+### Example: Python Full Stack Path
+
+```
+Section          Course
+────────────     ─────────────────────────────
+Programming  →   Core Python          (required)
+Frontend     →   HTML5                (required)
+Frontend     →   CSS3                 (required)
+Frontend     →   Bootstrap            (required)
+Frontend     →   JavaScript           (required)
+Frontend     →   jQuery               (optional)
+Database     →   MySQL                (required)
+Backend      →   Flask                (required)
+Backend      →   FastAPI              (optional)
+Database     →   MongoDB              (optional)
+```
+
+### Example: IoT Full Stack Path *(shares courses with Python Full Stack)*
+
+```
+Section          Course
+────────────     ─────────────────────────────
+Programming  →   Core Python          (required) ← same course, no duplicate
+Programming  →   C Programming        (required)
+Frontend     →   HTML5                (required) ← same course, no duplicate
+Frontend     →   CSS3                 (required)
+Frontend     →   Bootstrap            (required)
+Frontend     →   JavaScript           (required)
+Backend      →   Flask                (required) ← same course, no duplicate
+Database     →   MySQL                (required)
+```
+
+---
+
+## 5. Architecture
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
@@ -113,14 +228,14 @@ Arduino, Raspberry Pi, sensors, protocols, and embedded systems.
 │  ┌─────────┐  ┌──────────┐  ┌──────────┐  ┌───────────────┐    │
 │  │  public │  │   auth   │  │  learn   │  │     admin     │    │
 │  │  /      │  │  /auth   │  │  /learn  │  │  /admin       │    │
+│  │ /catalog│  │          │  │          │  │               │    │
+│  │ /paths  │  │          │  │          │  │               │    │
 │  └─────────┘  └──────────┘  └──────────┘  └───────────────┘    │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌───────────────┐   │
 │  │assessment│  │ sandbox  │  │   srs    │  │    study      │   │
-│  │  /quiz   │  │ /sandbox │  │  /srs    │  │  /study       │   │
 │  └──────────┘  └──────────┘  └──────────┘  └───────────────┘   │
 │                            ┌─────────┐                          │
 │                            │   ai    │                          │
-│                            │  /ai    │                          │
 │                            └─────────┘                          │
 │                                                                  │
 │  ┌───────────────── Domain Services ────────────────────────┐   │
@@ -133,134 +248,139 @@ Arduino, Raspberry Pi, sensors, protocols, and embedded systems.
 │  └──────────────────────────────────────────────────────────┘   │
 │                                                                  │
 │  ┌──────────────── TiDB Cloud (MySQL) ──────────────────────┐   │
-│  │  48+ tables · SSL/TLS connection · connection pooling     │   │
+│  │  55+ tables · SSL/TLS · connection pooling               │   │
 │  └──────────────────────────────────────────────────────────┘   │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-### Security Middleware Stack
-
-```
-Request → Rate Limiter (Flask-Limiter)
-        → CSRF Protection (Flask-WTF)
-        → Login Required (Flask-Login)
-        → Role-Level Authorization (RBAC decorator)
-        → Route Handler
-```
-
 ---
 
-## 4. Domain Model
-
-The application is organized into **10 domain modules**, each owning its own models, services, and logic.
+## 6. Domain Model
 
 ### Content Domain
-The core content hierarchy:
 
 ```
-Category
-  └── Subject
-        └── Course  (soft-delete, versioning, certificates)
-              └── Module
-                    └── Lesson  (soft-delete, versioning)
-                          └── LessonSection  (concept | syntax | example | pitfall | qa)
+Category  (10 flat skill groups, sort_order, icon, color)
+  └── Subject  (topic area within category)
+        └── Course  (SoftDeleteMixin, Certificate auto-seeded)
+              └── Module  (is_published, sort_order)
+                    └── Lesson  (SoftDeleteMixin, view_count)
+                          └── LessonSection  (section_type, is_visible)
 ```
 
 Supporting models: `Tag`, `Source`, `ContentQualityScore`, `CourseStatistics`, `LessonStatistics`, `GlossaryTerm`, `CommandReference`, `Lab`, `LabStep`, `Assignment`, `DiscussionThread`
+
+### Learning Path Domain *(v3.0 extended)*
+
+| Model | Purpose |
+|-------|---------|
+| `LearningPath` | A curated program (title, slug, target_role, difficulty, estimated_hours, icon, color, is_featured) |
+| `PathCourse` | JOIN: path ↔ course — adds `section_label` (e.g. "Frontend") and `is_required` flag |
+| `PathPrerequisite` | Per-course prerequisite graph |
+| `UserCourseProgress` | Per-user, per-course completion record |
+| `UserLessonProgress` | Per-user, per-lesson completion record |
+| `UserLearningPathProgress` | Per-user, per-path enrollment + completed_courses count + percentage |
+| `LearningPathCertificate` | Certificate definition for completing a full path |
+| `UserLearningPathCertificate` | Issued path-level certificate to a specific user |
 
 ### Auth Domain
 `User`, `Role` — 7 RBAC levels: `super_admin → admin → editor → reviewer → author → moderator → student`
 
 ### Assessment Domain
-`Quiz`, `Question`, `Option`, `QuizAttempt`, `QuizAnswer`
-- Multiple choice, true/false, and free-text question types
-- Configurable time limits, passing scores, and XP rewards
+`Quiz`, `Question`, `Option`, `QuizAttempt`, `QuizAnswer` — MCQ, true/false, free-text, timed sessions, XP rewards
 
 ### SRS Domain (Spaced Repetition)
 `FlashcardDeck`, `Flashcard`, `UserFlashcardProgress`
-- SM-2 algorithm: tracks `ease_factor`, `interval_days`, `repetitions`, `next_review_at`
+- SM-2 algorithm: `ease_factor`, `interval_days`, `repetitions`, `next_review_at`
 
 ### Gamification Domain
-`UserXPLog`, `UserStreak`
-- XP earned per activity type: `lesson_read`, `quiz_completed`, `exercise_solved`
-- Daily streak tracking with `current_streak` and `longest_streak`
+`UserXPLog`, `UserStreak` — XP per activity, daily streaks
 
 ### Knowledge Domain (Vector Search)
 `KnowledgeSource`, `SourceDocument`, `KnowledgeChunk`, `ChunkEmbedding`
-- Sources: `youtube | docs | book | blog | github`
-- Chunks: 500-character segments with JSON-encoded float embeddings
-- Model: `nomic-embed-text` (via Ollama)
-
-### Learning Path Domain
-Prerequisite graphs and adaptive sequencing.
-
-### Sandbox Domain
-Code execution submissions and results via Judge0 API.
-
-### Study Domain
-Note-taking and study session tracking.
-
-### Tutor Domain
-AI conversation sessions tied to lessons.
+- 500-char chunks, `nomic-embed-text` embeddings stored as JSON in TiDB
 
 ---
 
-## 5. Blueprint Routes
+## 7. Blueprint Routes
 
 | Blueprint | Prefix | Key Routes |
 |-----------|--------|-----------|
-| `public` | `/` | Home dashboard, `/catalog`, `/search`, `/sitemap.xml`, `/api/v1/stats` |
+| `public` | `/` | Home dashboard, `/catalog` (two-tab UI), `/paths/`, `/paths/<slug>/`, `/paths/<slug>/enroll`, `/search`, `/sitemap.xml` |
 | `auth` | `/auth` | `/login`, `/register`, `/logout`, `/profile` |
-| `learn` | `/learn` | `/courses/<slug>`, `/courses/<slug>/<mod>/<lesson>`, progress tracking |
+| `learn` | `/learn` | `/<slug>/` course overview, `/<slug>/<mod>/<lesson>/`, progress, labs, certificates |
 | `assessment` | — | Quiz start, submit, results |
 | `sandbox` | `/sandbox` | Code editor, run, submit |
 | `srs` | `/srs` | Flashcard review, SM-2 scheduling |
 | `study` | `/study` | Notes, study sessions |
 | `ai` | `/ai` | Tutor chat, lesson Q&A, AI draft generation |
-| `admin` | `/admin` | Content CMS, user management, ingestion dashboard |
+| `admin` | `/admin` | Content CMS, path management, user management, ingestion dashboard |
 
 ---
 
-## 6. Feature Modules
+## 8. Feature Modules
+
+### Two-Tab Catalog UI (`/catalog`)
+
+**Tab 1 — Browse Skills:**
+- Horizontally scrollable category filter pills (one per skill category, color-coded)
+- Clicking a pill filters the course grid to that category
+- Each course card shows title, difficulty, hours, views
+
+**Tab 2 — Learning Paths:**
+- Path cards with icon, title, target role, difficulty badge, hours, course count, lesson count
+- Per-user progress bar if enrolled
+- "View Path" / "Continue Path" CTA button
+- URL hash routing (`/catalog#paths`)
+
+### Learning Path Detail (`/paths/<slug>/`)
+- Hero section: icon, title, target role, description
+- Stats bar: courses, hours, lessons, certificate badge
+- Enroll button (POST `/paths/<slug>/enroll`)
+- Curriculum grouped by section (Programming / Frontend / Backend / Database)
+- Per-course completion checkmarks for enrolled users
+
+### Progress Tracking (Multi-Level)
+```
+Lesson completed
+    ↓ UserLessonProgress (is_completed=True)
+    ↓ XPService.award(+10 XP)
+    ↓ StreakService.update_streak()
+Course completed
+    ↓ UserCourseProgress (is_completed=True)
+    ↓ Course Certificate issued
+    ↓ UserLearningPathProgress.completed_courses += 1 (for all paths referencing it)
+Path completed
+    ↓ UserLearningPathProgress (is_completed=True)
+    ↓ LearningPath Certificate issued
+```
+
+### Two Certificate Types
+1. **Course Certificate** — issued after completing all lessons in an individual course
+2. **Learning Path Certificate** — issued after completing all required courses in a path
 
 ### Lesson Reader
-- Section-based rendering: `concept → syntax → example → pitfall → qa`
-- Syntax-highlighted code blocks (Highlight.js)
-- Mermaid diagram rendering
-- Markdown-to-HTML via Python `markdown` library with `extra`, `codehilite`, `toc` extensions
-- View count tracking, progress persistence
+- Section-based: `concept → syntax → example → pitfall → qa`
+- Syntax highlighting (Highlight.js), Mermaid diagrams, Markdown rendering
+- View count tracking, next-lesson navigation
 
 ### Quiz Engine
-- Timed or untimed MCQ sessions
-- Automatic grading with pass/fail
-- XP awarded on completion
-- Attempt history per user
+- Timed/untimed MCQ with auto-grading, pass/fail, XP reward
 
 ### Flashcard SRS (SM-2)
-- Per-card ease factor and interval scheduling
-- Review queue sorted by `next_review_at`
-- Front/back markdown rendering
-- Progress persisted in `user_flashcard_progress`
+- Per-card ease factor, interval scheduling, `next_review_at` queue
 
 ### Code Sandbox
-- Multi-language code execution via Judge0 API
-- Submission stored in `sandbox_submissions`
-- Lab-step validation via `lab_validation.py`
-
-### Gamification
-- XP logged for every learning action
-- Daily streak auto-incremented on activity
-- Completion certificates auto-generated per course on `_seed_defaults()`
+- Multi-language execution via Judge0 API, lab-step validation
 
 ### Admin CMS
 - Category / Subject / Course / Module / Lesson CRUD
-- Content quality scoring
-- Knowledge source ingestion dashboard
-- User and role management
+- Learning Path builder: assign courses, set section labels, mark required/optional, reorder
+- Knowledge source ingestion dashboard, user and role management
 
 ---
 
-## 7. AI & Search Layer
+## 9. AI & Search Layer
 
 ### Hybrid Search Pipeline
 
@@ -268,13 +388,11 @@ AI conversation sessions tied to lessons.
 User Query
     │
     ├──► FTS Keyword Scan  (SQLAlchemy LIKE / full-text)
-    │         │
+    │
     └──► Vector Cosine Similarity  (ChunkEmbedding JSON dot product)
               │
               └──► Ranked merged results → /search page
 ```
-
-Implemented in `app/domains/knowledge/search.py` (`hybrid_search(query, top_k)`).
 
 ### AI Provider Abstraction
 
@@ -285,43 +403,41 @@ AI_PROVIDER env var
     └── "gemini"  → Google Gemini API
 ```
 
-Switching providers requires only an `.env` change — no application code changes.
+Switching providers requires only an `.env` change — no code changes.
 
 ### Knowledge Ingestion Flow
 
 ```
-1. Admin uploads source (PDF / YouTube URL / Markdown)
-2. chunker.py splits raw_text into 500-char KnowledgeChunks
-3. Ollama nomic-embed-text generates float vectors
+1. Admin adds source (PDF / YouTube / Markdown)
+2. chunker.py → 500-char KnowledgeChunks
+3. Ollama nomic-embed-text → float vectors
 4. ChunkEmbedding stored as JSON in TiDB
-5. SearchIndexService.rebuild_search_index() called on startup
-6. AI Tutor uses hybrid_search() to retrieve context for RAG responses
+5. SearchIndexService.rebuild_search_index() on startup
+6. AI Tutor uses hybrid_search() for RAG responses
 ```
 
 ---
 
-## 8. Technology Stack
+## 10. Technology Stack
 
 | Layer | Technology |
 |-------|-----------|
 | **Web Framework** | Flask 3.0 + Gunicorn 22 |
 | **ORM** | SQLAlchemy 2.0 + Flask-SQLAlchemy 3.1 |
 | **Database** | TiDB Cloud (MySQL-compatible) via PyMySQL · SSL/TLS |
-| **Auth** | Flask-Login 0.6 · Werkzeug password hashing · PyJWT |
-| **Security** | Flask-WTF (CSRF) · Flask-Limiter (rate limiting) · Bleach (XSS) |
+| **Auth** | Flask-Login 0.6 · Werkzeug · PyJWT |
+| **Security** | Flask-WTF (CSRF) · Flask-Limiter · Bleach (XSS) |
 | **AI / LLM** | Ollama (local) · OpenAI API · Google Gemini API |
 | **Embeddings** | `nomic-embed-text` via Ollama |
 | **Code Execution** | Judge0 API · Piston API |
 | **Frontend** | Vanilla JS · Bootstrap 5 · Highlight.js · Mermaid · EasyMDE |
-| **Templating** | Jinja2 3.1 + Python `markdown` library |
-| **HTTP** | `requests` 2.31 · BeautifulSoup4 (scraping) |
-| **Schema Migrations** | Alembic 1.13 |
+| **Templating** | Jinja2 3.1 + Python `markdown` |
+| **Schema Migrations** | Alembic 1.13 + raw ALTER TABLE scripts |
 | **Deployment** | Render (Web Service) · TiDB Cloud (DB) |
-| **Config** | `python-dotenv` · PyYAML · `cryptography` (Fernet) |
 
 ---
 
-## 9. Directory Structure
+## 11. Directory Structure
 
 ```
 notes/  (Learning OS root)
@@ -329,122 +445,142 @@ notes/  (Learning OS root)
 ├── app/
 │   ├── __init__.py                 # App factory: extensions, blueprints, context processors
 │   ├── blueprints/
-│   │   ├── admin/routes.py         # CMS, ingestion dashboard, user management
+│   │   ├── admin/routes.py         # CMS, path builder, user management
 │   │   ├── ai/routes.py            # AI tutor chat, draft generation
 │   │   ├── assessment/routes.py    # Quiz flow: start → submit → results
 │   │   ├── auth/routes.py          # Login, register, logout, profile
-│   │   ├── learn/routes.py         # Course overview, lesson reader, progress
-│   │   ├── public/routes.py        # Home, catalog, search, sitemap, stats API
+│   │   ├── learn/routes.py         # Course overview, lesson reader, labs, certificates
+│   │   ├── public/routes.py        # Home, /catalog, /paths/, /paths/<slug>/, enroll, sitemap
 │   │   ├── sandbox/routes.py       # Code editor and execution
 │   │   ├── srs/routes.py           # Flashcard review sessions
 │   │   └── study/routes.py         # Notes and study sessions
 │   │
 │   ├── core/
-│   │   ├── base_model.py           # TimestampMixin, SoftDeleteMixin
+│   │   ├── base_model.py           # TimestampMixin, SoftDeleteMixin (is_deleted + deleted_at)
 │   │   ├── cache.py                # cache_memoize decorator
 │   │   ├── config.py               # Config dataclass (DATABASE_TYPE, TiDB, AI)
 │   │   ├── constants.py            # Enums: UserRole, ContentStatus, DifficultyLevel, SectionType
 │   │   └── extensions.py           # db, login_manager, csrf, limiter singletons
 │   │
 │   ├── domains/
-│   │   ├── auth/models.py          # User, Role
-│   │   ├── content/
-│   │   │   ├── models.py           # Category, Subject, Course, Module, Lesson, LessonSection, ...
-│   │   │   ├── quality.py          # ContentQualityScore helpers
-│   │   │   └── sitemap.py          # Sitemap XML generator helpers
+│   │   ├── auth/models.py          # User, Role, Permission, RolePermission
+│   │   ├── content/models.py       # Category, Subject, Course, Module, Lesson, LessonSection, ...
 │   │   ├── assessment/models.py    # Quiz, Question, Option, QuizAttempt, QuizAnswer
 │   │   ├── gamification/
 │   │   │   ├── models.py           # UserXPLog, UserStreak
-│   │   │   └── service.py          # XP award and streak update logic
+│   │   │   └── service.py          # XP award + streak update logic
 │   │   ├── knowledge/
 │   │   │   ├── models.py           # KnowledgeSource, SourceDocument, KnowledgeChunk, ChunkEmbedding
-│   │   │   ├── chunker.py          # Text splitting into 500-char segments
+│   │   │   ├── chunker.py          # Text → 500-char segments
 │   │   │   └── search.py           # hybrid_search(): FTS + vector cosine
-│   │   ├── learning_path/models.py # Prerequisite graph models
+│   │   ├── learning_path/
+│   │   │   └── models.py           # LearningPath, PathCourse, PathPrerequisite
+│   │   │                           # UserCourseProgress, UserLessonProgress
+│   │   │                           # UserLearningPathProgress       ← v3.0 NEW
+│   │   │                           # LearningPathCertificate        ← v3.0 NEW
+│   │   │                           # UserLearningPathCertificate    ← v3.0 NEW
 │   │   ├── sandbox/models.py       # Code submission and result models
 │   │   ├── srs/models.py           # FlashcardDeck, Flashcard, UserFlashcardProgress (SM-2)
 │   │   ├── study/models.py         # Study session and notes models
 │   │   └── tutor/models.py         # AI tutor conversation models
 │   │
 │   ├── services/
-│   │   ├── learning.py             # DashboardService, progress tracking, enrollment
+│   │   ├── learning.py             # DashboardService, LearningProgressService, CertificateService
 │   │   ├── search_service.py       # SearchIndexService.rebuild_search_index()
 │   │   ├── lab.py                  # Lab execution helpers
 │   │   └── lab_validation.py       # Judge0 result validation
 │   │
 │   ├── templates/
-│   │   ├── base.html               # Master layout with navbar, sidebar, footer
-│   │   ├── public/                 # home.html, catalog.html, search.html, dashboard.html
-│   │   ├── learn/                  # course_overview.html, lesson.html
-│   │   ├── admin/                  # CMS dashboards, editor forms
-│   │   ├── auth/                   # login.html, register.html, profile.html
-│   │   └── components/             # _navbar.html, _sidebar.html, _breadcrumb.html
+│   │   ├── base.html
+│   │   ├── public/
+│   │   │   ├── catalog.html              # Two-tab: Browse Skills + Learning Paths
+│   │   │   ├── learning_path_detail.html # Path hero, curriculum sections, enroll
+│   │   │   ├── home.html
+│   │   │   ├── dashboard.html
+│   │   │   └── search.html
+│   │   ├── learn/                  # course_overview.html, lesson.html, certificate_*.html
+│   │   ├── admin/                  # CMS dashboards
+│   │   ├── auth/
+│   │   └── components/             # _navbar.html, _sidebar.html
 │   │
 │   └── static/
-│       ├── css/                    # Custom stylesheets
-│       ├── js/                     # Vanilla JS: quiz engine, code editor, SRS UI
-│       └── images/                 # Logos, icons, course thumbnails
+│       ├── css/
+│       ├── js/
+│       └── images/
 │
-├── scripts/                        # One-off DB migration, seeding, and audit scripts
-│   ├── audit_catalog.py            # Catalog health audit (duplicates, empty courses)
-│   ├── fix_catalog_issues.py       # Fix wrong categories, duplicates, recalc hours
+├── scripts/
+│   ├── schema_migration_v3.py      # ALTER TABLE + CREATE TABLE for v3 new columns/tables
+│   ├── migrate_catalog_v3.py       # v3 catalog migration: new categories, subject moves, paths
 │   ├── fix_is_deleted_flag.py      # Sync deleted_at → is_deleted boolean
-│   ├── scaffold_new_courses.py     # Bulk-create lesson stub markdown files
-│   ├── phase2_upgrade.py           # Phase 2 DB content migration
+│   ├── audit_catalog.py            # Catalog health audit
+│   ├── fix_catalog_issues.py       # Fix category misplacements, merge duplicates
+│   ├── scaffold_new_courses.py     # Bulk-create lesson stub files
+│   ├── phase2_upgrade.py           # Phase 2 content migration
 │   ├── phase3_python_content.py    # Python course content seeder
 │   ├── phase4_content.py           # Multi-course content seeder
-│   ├── phase5_content_p1/p2.py     # Advanced content seeders
-│   └── ...                         # Additional course seeders and fixers
+│   ├── phase5_content_p1.py        # AI/ML course content seeder part 1
+│   └── phase5_content_p2.py        # AI/ML course content seeder part 2
 │
-├── docs/plan/                      # Full technical architecture documentation (21 docs)
-│
+├── docs/plan/                      # 21 full technical architecture docs
 ├── .env                            # Local secrets (never committed)
 ├── .env.example                    # Environment variable template
-├── render.yaml                     # Render.com deployment config (2 workers, Gunicorn)
+├── render.yaml                     # Render.com deployment (Gunicorn, 2 workers)
 ├── requirements.txt                # Python dependencies
 ├── run.py                          # WSGI entrypoint
-├── run_tests.py                    # Test suite runner
 └── isrgrootx1.pem                  # TiDB Cloud SSL CA certificate
 ```
 
 ---
 
-## 10. Data Flow
+## 12. Data Flow
 
 ### Student Learning Flow
 
 ```
-1. /catalog          → Browse categories → subjects → courses
-2. /learn/courses/<slug>
-                     → Course overview: modules list, progress bar
-3. /learn/courses/<slug>/<module>/<lesson>
-                     → Lesson reader: sections, code blocks, diagrams
-                     → Progress saved: UserLessonProgress
-                     → XP awarded: UserXPLog (+10 per lesson read)
-                     → Streak updated: UserStreak.last_activity_date
-4. /quiz/<lesson>    → Quiz attempt: timed MCQ
-                     → Auto-graded → XP awarded (+50 on pass)
-5. /srs              → Flashcard review queue (SM-2 scheduled)
-                     → ease_factor / interval_days updated per response
-6. /sandbox          → Write & run code → Judge0 execution → result
-7. Certificate       → Auto-issued on course completion
+1. /catalog  Tab: Browse Skills
+             → Filter by category pill → Course grid → click course
+
+   /catalog  Tab: Learning Paths
+             → View path card → /paths/<slug>/
+             → POST /paths/<slug>/enroll → UserLearningPathProgress created
+
+2. /learn/<slug>/
+             → Course overview: modules, progress bar, next lesson
+
+3. /learn/<slug>/<module>/<lesson>/
+             → Lesson reader: concept, syntax, example, pitfall, Q&A
+             → POST /learn/lessons/<id>/complete
+               → UserLessonProgress(is_completed=True)
+               → XPService.award(+10 XP, "lesson_completed")
+               → StreakService.update_streak()
+               → if all lessons done: UserCourseProgress(is_completed=True)
+                                      Course Certificate issued
+                                      UserLearningPathProgress.completed_courses += 1
+                                      if path complete: Path Certificate issued
+
+4. /quiz/<id>       → MCQ quiz → auto-grade → XP awarded
+5. /srs             → Flashcard SM-2 review queue
+6. /sandbox         → Code execution via Judge0
+7. /learn/certificates/  → Course + Path certificates
 ```
 
-### Content Authoring Flow (Admin)
+### Admin Content Authoring Flow
 
 ```
-1. /admin/sources    → Add KnowledgeSource (YouTube / PDF / URL)
-2. chunker.py        → Split into KnowledgeChunks (500 chars each)
-3. Ollama embed      → Generate ChunkEmbedding vectors
-4. /admin/lessons    → Create Lesson → add LessonSections
-5. AI Draft          → /ai/draft → RAG: hybrid_search() → Ollama completion
-6. Review            → ContentQualityScore (readability, plagiarism %)
-7. Publish           → lesson.status = "published", published_at = now()
+1. /admin/sources      → Add KnowledgeSource
+2. chunker.py          → KnowledgeChunks (500 chars)
+3. Ollama embed        → ChunkEmbedding vectors
+4. /admin/lessons      → Create Lesson + LessonSections
+5. /ai/draft           → RAG: hybrid_search() + Ollama completion
+6. Review              → ContentQualityScore
+7. Publish             → lesson.status = "published"
+8. /admin/paths        → Create/edit LearningPath, assign courses,
+                         set section_label, mark required/optional, reorder
 ```
 
 ---
 
-## 11. Setup & Local Development
+## 13. Setup & Local Development
 
 ### Prerequisites
 - Python 3.11+
@@ -460,26 +596,24 @@ python -m venv .venv
 .venv\Scripts\activate        # Windows
 # source .venv/bin/activate   # macOS / Linux
 pip install -r requirements.txt
-copy .env.example .env        # Then fill in your values
+copy .env.example .env        # Fill in your values
 ```
 
 ### Database Initialization
 
-The app uses **TiDB Cloud** (MySQL-compatible) in production.  
-Tables are auto-created on first run via `db.create_all()` in the app factory.
+Tables are auto-created on first run. For v3.0, run the schema migration first:
 
 ```bash
+python scripts/schema_migration_v3.py   # Add v3 columns + new tables
+python scripts/migrate_catalog_v3.py    # Seed new categories + learning paths
 python run.py
-# Tables created + default roles + admin user seeded automatically
 ```
 
 ### Local AI Setup
 
 ```bash
-# Install Ollama from https://ollama.com
-ollama pull qwen2.5-coder:7b    # Main chat/code model
-ollama pull nomic-embed-text    # Embedding model for vector search
-# Ollama runs at http://localhost:11434 by default
+ollama pull qwen2.5-coder:7b    # Chat/code model
+ollama pull nomic-embed-text    # Embedding model
 ```
 
 ### Run Development Server
@@ -491,20 +625,18 @@ python run.py
 
 ---
 
-## 12. Configuration Variables
+## 14. Configuration Variables
 
 ```env
 # ── Application ──────────────────────────────────────────────
 FLASK_APP=run.py
 FLASK_ENV=development
 SECRET_KEY=your-flask-secret-key
-ENCRYPTION_KEY=your-fernet-key  # 32-byte base64 key
+ENCRYPTION_KEY=your-fernet-key
 
 # ── Database ─────────────────────────────────────────────────
-DATABASE_TYPE=tidb              # "sqlite" for local dev | "tidb" for production
+DATABASE_TYPE=tidb
 DATABASE_URL=mysql+pymysql://user:pass@host:4000/db?ssl_ca=isrgrootx1.pem&ssl_verify_cert=true
-
-# TiDB Cloud individual settings (used alongside DATABASE_URL)
 TIDB_HOST=gateway01.us-east-1.prod.aws.tidbcloud.com
 TIDB_PORT=4000
 TIDB_USER=your-tidb-user
@@ -513,25 +645,23 @@ TIDB_DATABASE=test
 TIDB_CA_PATH=isrgrootx1.pem
 
 # ── AI Provider ───────────────────────────────────────────────
-AI_PROVIDER=ollama              # "ollama" | "openai" | "gemini"
+AI_PROVIDER=ollama
 OLLAMA_API_BASE_URL=http://localhost:11434
 OLLAMA_MODEL_NAME=qwen2.5-coder:7b
-OPENAI_API_KEY=                 # Optional
-GEMINI_API_KEY=                 # Optional
+OPENAI_API_KEY=
+GEMINI_API_KEY=
 
 # ── Code Execution ────────────────────────────────────────────
 JUDGE0_API_URL=https://api.judge0.com
 JUDGE0_API_KEY=your-judge0-key
 
 # ── Performance ───────────────────────────────────────────────
-SKIP_SEARCH_REBUILD=1           # Skip vector index rebuild on startup (dev speed)
+SKIP_SEARCH_REBUILD=1
 ```
 
 ---
 
-## 13. Deployment
-
-Deployed on **Render** (Web Service) with **TiDB Cloud** as the managed database.
+## 15. Deployment
 
 ```yaml
 # render.yaml summary
@@ -541,62 +671,59 @@ buildCommand: pip install -r requirements.txt
 startCommand: gunicorn run:app --workers 2 --threads 2 --timeout 120 --bind 0.0.0.0:$PORT
 healthCheckPath: /
 region: oregon
-plan: free
 ```
 
-### Production Database
-- **TiDB Cloud** (MySQL 8.0-compatible, serverless tier)
-- Connection via SSL/TLS using `isrgrootx1.pem` CA certificate
-- Connection pooling with `pool_pre_ping=True` (detects stale connections)
+**Database:** TiDB Cloud (MySQL 8.0-compatible, serverless) via SSL/TLS (`isrgrootx1.pem`)
 
 ---
 
-## 14. Scripts Reference
+## 16. Scripts Reference
 
 | Script | Purpose |
 |--------|---------|
-| `audit_catalog.py` | Audit all categories for duplicates, wrong placements, empty courses |
-| `fix_catalog_issues.py` | Fix category misplacements, merge duplicates, recalculate hours |
-| `fix_is_deleted_flag.py` | Sync `deleted_at` → `is_deleted` boolean for soft-deleted records |
-| `scaffold_new_courses.py` | Bulk-create markdown lesson stub files (Bootstrap, jQuery, SQL Server, MongoDB, Prompt Engineering) |
-| `phase2_upgrade.py` | Phase 2 content DB migration (quiz banks, XP, streaks) |
+| `schema_migration_v3.py` | **v3.0** ALTER TABLE + CREATE TABLE for new columns and tables |
+| `migrate_catalog_v3.py` | **v3.0** Create 10 skill categories, remap subjects, deactivate old categories, seed 8 learning paths |
+| `audit_catalog.py` | Audit categories for duplicates, wrong placements, empty courses |
+| `fix_catalog_issues.py` | Fix misplacements, merge duplicates, recalculate hours |
+| `fix_is_deleted_flag.py` | Sync `deleted_at` → `is_deleted` boolean |
+| `scaffold_new_courses.py` | Bulk-create markdown lesson stub files |
+| `phase2_upgrade.py` | Phase 2 DB content migration |
 | `phase3_python_content.py` | Python course full content seeder |
-| `phase4_content.py` | Multi-course content seeder (DevOps, Java, IoT, etc.) |
-| `phase5_content_p1.py` | Advanced AI/ML course content seeder part 1 |
-| `phase5_content_p2.py` | Advanced AI/ML course content seeder part 2 |
+| `phase4_content.py` | Multi-course content seeder |
+| `phase5_content_p1/p2.py` | AI/ML course content seeders |
 | `db_backup.py` | Database backup utility |
-| `migrate_html.py` | Import existing HTML note files into the DB |
-| `migrate_markdown.py` | Import existing Markdown note files into the DB |
-| `rename_curriculum.py` | Bulk rename courses/modules in the DB |
-| `reorganize_modules.py` | Reorder modules across courses |
+| `migrate_html.py` | Import HTML notes into DB |
+| `migrate_markdown.py` | Import Markdown notes into DB |
 
 ---
 
-## 15. Coding Standards
+## 17. Coding Standards
 
-1. **Repository Pattern** — Keep DB queries decoupled from Flask views. Use `services/` for business logic.
-2. **Always Soft-Delete** — Set **both** `is_deleted = True` AND `deleted_at = datetime.utcnow()` when removing records.
-3. **ORM Only** — Never write raw SQL. Use SQLAlchemy ORM to stay DB-agnostic (SQLite ↔ TiDB/MySQL).
-4. **Audit Trails** — All new models must inherit `TimestampMixin` (`created_at`, `updated_at`).
-5. **RBAC** — Use role-check decorators on any admin or editor route.
-6. **No Hardcoded Secrets** — All credentials via `.env`. Never commit `.env`.
-7. **Slug Uniqueness** — When renaming a record's slug, free the old slug with `db.session.flush()` before assigning the new one to avoid unique-constraint conflicts.
+1. **Courses are the single source of truth** — never copy lesson data between paths. Use `PathCourse` references.
+2. **Always soft-delete correctly** — set **both** `is_deleted = True` AND `deleted_at = datetime.utcnow()`.
+3. **ORM only** — never raw SQL in application code. Raw SQL only in one-off migration scripts.
+4. **Audit trails** — all new models must inherit `TimestampMixin`.
+5. **RBAC** — use role-check decorators on all admin/editor routes.
+6. **Slug uniqueness** — free old slug with `db.session.flush()` before assigning a new one.
+7. **No secrets in code** — all credentials via `.env`.
+8. **Schema changes** — add new columns via `schema_migration_*.py` scripts (ALTER TABLE), not just model changes.
 
 ---
 
-## 16. Changelog
+## 18. Changelog
 
 | Version | Date | Summary |
 |---------|------|---------|
-| v1.0.0 | 2025 | Initial CMS design: courses, quizzes, streak engines, code execution |
+| v1.0.0 | 2025 | Initial CMS: courses, quizzes, streak engines, code execution |
 | v2.0.0 | 2025 | Vector search (TiDB), Ollama LLM, multi-source ingestion, SRS SM-2 |
 | v2.1.0 | 2026-01 | IoT & Hardware Full Stack catalog (7 courses, 150+ lessons) |
 | v2.2.0 | 2026-04 | Python AI & Data Science catalog (ML, DL, NLP, CV, MLOps, RAG, Agents) |
-| v2.3.0 | 2026-07 | Catalog clean-up: fix category misplacements (Java/C in Python Full Stack), merge duplicate Python courses, recalc estimated hours for all courses |
+| v2.3.0 | 2026-07-29 | Catalog cleanup: fix Java/C in Python Full Stack, merge duplicate Python, recalc hours |
+| **v3.0.0** | **2026-07-29** | **Modular catalog redesign: 10 flat skill categories, 8 learning paths (no duplication), extended LearningPath model (target_role, difficulty, icon, color, is_featured), new UserLearningPathProgress + LearningPathCertificate tables, two-tab catalog UI (Browse Skills / Learning Paths), new /paths/ routes** |
 
 ---
 
-## 17. Documentation Index
+## 19. Documentation Index
 
 | Document | Purpose |
 |----------|---------|
@@ -605,11 +732,11 @@ plan: free
 | [Product Vision](docs/plan/01_Product_Vision.md) | Value proposition & universal schema |
 | [Information Architecture](docs/plan/02_Information_Architecture.md) | Site map, taxonomy & slugs |
 | [User Roles (RBAC)](docs/plan/03_User_Roles_RBAC.md) | Role permissions & CMS state rules |
-| [Database ERD](docs/plan/04_Database_ERD.md) | 48-table schema definitions |
+| [Database ERD](docs/plan/04_Database_ERD.md) | 55+ table schema definitions |
 | [Folder Structure](docs/plan/05_Folder_Structure.md) | Project directories blueprint |
 | [CMS Design](docs/plan/06_CMS_Design.md) | Editor workflow & source attributions |
 | [Learning Engine](docs/plan/07_Learning_Engine.md) | Prerequisites & spaced repetition SM-2 |
-| [Progress Engine](docs/plan/08_Progress_Engine.md) | XP levels & user streak calculations |
+| [Progress Engine](docs/plan/08_Progress_Engine.md) | XP levels & streak calculations |
 | [Exercise Engine](docs/plan/09_Exercise_Engine.md) | Auto-grading & sandboxes |
 | [Quiz Engine](docs/plan/10_Quiz_Engine.md) | Question banks & validations |
 | [Achievement Engine](docs/plan/11_Achievement_Engine.md) | Badge allocation & criteria |

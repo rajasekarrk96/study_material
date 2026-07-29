@@ -1,60 +1,337 @@
 {% extends 'base.html' %}
-{% block title %}Course Catalog{% endblock %}
+{% block title %}Course Catalog — Bytes and Boards Solutions{% endblock %}
 
 {% block content %}
 <div class="catalog-page">
-    <div class="page-header">
-        <h1><i class="fas fa-compass"></i> Course Catalog</h1>
-        <p>Explore all available subjects and courses. Learn and track your progress layer by layer.</p>
+
+  <!-- Page Header -->
+  <div class="page-header" style="margin-bottom: 2rem;">
+    <h1><i class="fas fa-compass"></i> Catalog</h1>
+    <p>Browse individual skill modules or follow a guided learning path to your target role.</p>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="catalog-tabs" style="display: flex; gap: 0.5rem; margin-bottom: 2rem; border-bottom: 2px solid #1e293b; padding-bottom: 0;">
+    <button id="tab-skills" class="cat-tab-btn active" onclick="switchTab('skills')">
+      <i class="fas fa-layer-group"></i> Browse Skills
+    </button>
+    <button id="tab-paths" class="cat-tab-btn" onclick="switchTab('paths')">
+      <i class="fas fa-route"></i> Learning Paths
+      <span class="badge-count">{{ path_count }}</span>
+    </button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- TAB 1: Browse Skills                                    -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="panel-skills" class="catalog-panel">
+
+    <!-- Category Filter Pills -->
+    <div class="cat-pills" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+      <button class="cat-pill active" data-cat="all" onclick="filterCategory('all', this)">
+        <i class="fas fa-th"></i> All Courses
+      </button>
+      {% for cat in categories %}
+      <button class="cat-pill" data-cat="cat-{{ cat.id }}" onclick="filterCategory('cat-{{ cat.id }}', this)"
+              style="--pill-color: {{ cat.color or '#4f46e5' }};">
+        <i class="{{ cat.icon or 'fas fa-book' }}"></i> {{ cat.name }}
+      </button>
+      {% endfor %}
     </div>
 
+    <!-- Course Grid -->
     {% for cat in categories %}
-    <div class="category-section" style="margin-bottom: 3.5rem;">
-        <div class="category-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem; border-bottom: 2px solid {{ cat.color or '#4f46e5' }}; padding-bottom: 10px;">
-            <div class="cat-icon" style="font-size: 1.8rem; color: {{ cat.color or '#4f46e5' }};">
-                <i class="{{ cat.icon or 'fas fa-book' }}"></i>
-            </div>
-            <div>
-                <h2 style="margin: 0; color: #f8fafc; font-size: 1.8rem;">{{ cat.name }}</h2>
-                <p style="margin: 3px 0 0 0; color: #94a3b8; font-size: 0.95rem;">{{ cat.description or '' }}</p>
-            </div>
+      {% set active_courses = [] %}
+      {% for subject in cat.subjects %}
+        {% for course in subject.courses %}
+          {% if not course.is_deleted and course.status == 'published' %}
+            {% set _ = active_courses.append(course) %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+
+      {% if active_courses %}
+      <div class="category-section cat-{{ cat.id }}" data-cat="cat-{{ cat.id }}" style="margin-bottom: 3rem;">
+        <div class="category-header" style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem; border-left: 4px solid {{ cat.color or '#4f46e5' }}; padding-left: 12px;">
+          <i class="{{ cat.icon or 'fas fa-book' }}" style="color: {{ cat.color or '#4f46e5' }}; font-size: 1.3rem;"></i>
+          <div>
+            <h2 style="margin: 0; color: #f8fafc; font-size: 1.3rem;">{{ cat.name }}</h2>
+            <p style="margin: 2px 0 0 0; color: #94a3b8; font-size: 0.85rem;">{{ cat.description or '' }}</p>
+          </div>
+          <span style="margin-left: auto; font-size: 0.8rem; color: #64748b; background: #1e293b; padding: 2px 10px; border-radius: 20px;">
+            {{ active_courses | length }} course{% if active_courses | length != 1 %}s{% endif %}
+          </span>
         </div>
 
         <div class="card-grid">
-            {% set active_courses = [] %}
-            {% for subject in cat.subjects %}
-                {% for course in subject.courses %}
-                    {% if not course.is_deleted and course.status == 'published' %}
-                        {% set _ = active_courses.append(course) %}
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-
-            {% for course in active_courses %}
-            <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}" class="course-card">
-                <div class="course-card-header">
-                    <span class="difficulty-badge difficulty-{{ course.difficulty_level }}">{{ course.difficulty_level | title }}</span>
-                </div>
-                <h3>{{ course.title }}</h3>
-                <p>{{ course.description or '' }}</p>
-                <div class="course-meta">
-                    <span><i class="fas fa-clock"></i> {{ course.estimated_hours }}h</span>
-                    <span><i class="fas fa-eye"></i> {{ course.view_count or 0 }} views</span>
-                </div>
-            </a>
-            {% else %}
-            <div class="empty-state" style="grid-column: 1 / -1; padding: 2rem; text-align: center; background: #1e293b; border-radius: 8px;">
-                <p style="color: #64748b; margin: 0;">No published courses in this category yet.</p>
+          {% for course in active_courses %}
+          <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}" class="course-card">
+            <div class="course-card-header">
+              <span class="difficulty-badge difficulty-{{ course.difficulty_level }}">{{ course.difficulty_level | title }}</span>
             </div>
-            {% endfor %}
+            <h3>{{ course.title }}</h3>
+            <p>{{ course.description or '' }}</p>
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> {{ course.estimated_hours }}h</span>
+              <span><i class="fas fa-eye"></i> {{ course.view_count or 0 }} views</span>
+            </div>
+          </a>
+          {% endfor %}
         </div>
-    </div>
+      </div>
+      {% endif %}
     {% else %}
     <div class="empty-state full-width">
-        <i class="fas fa-box-open fa-3x"></i>
-        <h2>Catalog is empty</h2>
-        <p>No active categories or courses found. Please ensure the database has been populated.</p>
+      <i class="fas fa-box-open fa-3x"></i>
+      <h2>Catalog is empty</h2>
+      <p>No active categories found. Please ensure the database has been populated.</p>
     </div>
     {% endfor %}
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- TAB 2: Learning Paths                                   -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="panel-paths" class="catalog-panel" style="display: none;">
+    <p style="color: #94a3b8; margin-bottom: 2rem;">
+      Structured programs that guide you from beginner to job-ready across multiple skills.
+      Each path references real courses — no duplicated content.
+    </p>
+
+    <div class="path-grid">
+      {% for path in learning_paths %}
+      {% set user_prog = user_path_progress.get(path.id) %}
+      <div class="path-card" style="--path-color: {{ path.color or '#4f46e5' }};">
+        <div class="path-card-top">
+          <div class="path-icon" style="background: {{ path.color or '#4f46e5' }}22; color: {{ path.color or '#4f46e5' }};">
+            <i class="{{ path.icon or 'fas fa-graduation-cap' }}"></i>
+          </div>
+          {% if path.is_featured %}
+          <span class="featured-badge">Featured</span>
+          {% endif %}
+          <span class="difficulty-badge difficulty-{{ path.difficulty_level }}">{{ path.difficulty_level | title }}</span>
+        </div>
+
+        <h3 class="path-title">{{ path.title }}</h3>
+        <p class="path-role"><i class="fas fa-briefcase"></i> {{ path.target_role or '' }}</p>
+        <p class="path-desc">{{ path.description or '' }}</p>
+
+        <div class="path-stats">
+          <div class="path-stat">
+            <i class="fas fa-book-open"></i>
+            <span>{{ path.total_courses_count }} courses</span>
+          </div>
+          <div class="path-stat">
+            <i class="fas fa-clock"></i>
+            <span>{{ path.estimated_hours }}h</span>
+          </div>
+          <div class="path-stat">
+            <i class="fas fa-file-alt"></i>
+            <span>{{ path.total_lessons }} lessons</span>
+          </div>
+        </div>
+
+        {% if user_prog %}
+        <div class="path-progress-bar">
+          <div class="path-progress-fill" style="width: {{ user_prog.progress_percentage }}%; background: {{ path.color or '#4f46e5' }};"></div>
+        </div>
+        <p class="path-progress-label">{{ user_prog.progress_percentage }}% complete</p>
+        {% endif %}
+
+        <a href="{{ url_for('public.learning_path_detail', path_slug=path.slug) }}" class="path-btn"
+           style="background: {{ path.color or '#4f46e5' }};">
+          {% if user_prog %}
+            <i class="fas fa-play"></i> Continue Path
+          {% else %}
+            <i class="fas fa-route"></i> View Path
+          {% endif %}
+        </a>
+      </div>
+      {% else %}
+      <div class="empty-state full-width">
+        <i class="fas fa-route fa-3x"></i>
+        <h2>No learning paths yet</h2>
+        <p>Learning paths are being set up. Check back soon.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
 </div>
+
+<style>
+/* ── Tab buttons ── */
+.cat-tab-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.cat-tab-btn.active {
+  color: #6366f1;
+  border-bottom-color: #6366f1;
+}
+.cat-tab-btn:hover { color: #a5b4fc; }
+.badge-count {
+  background: #4f46e5;
+  color: white;
+  font-size: 0.7rem;
+  padding: 1px 7px;
+  border-radius: 20px;
+  margin-left: 4px;
+}
+
+/* ── Category pills ── */
+.cat-pill {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.cat-pill:hover {
+  border-color: var(--pill-color, #6366f1);
+  color: var(--pill-color, #6366f1);
+}
+.cat-pill.active {
+  background: var(--pill-color, #6366f1)22;
+  border-color: var(--pill-color, #6366f1);
+  color: var(--pill-color, #6366f1);
+}
+
+/* ── Category section fade ── */
+.category-section { transition: opacity 0.25s; }
+.category-section.hidden { display: none; }
+
+/* ── Learning Path Grid ── */
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.path-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.path-card:hover {
+  border-color: var(--path-color, #4f46e5);
+  transform: translateY(-3px);
+}
+.path-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.path-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.featured-badge {
+  margin-left: auto;
+  background: #fbbf2422;
+  color: #fbbf24;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid #fbbf2444;
+}
+.path-title { color: #f8fafc; font-size: 1.15rem; font-weight: 700; margin: 0; }
+.path-role  { color: #64748b; font-size: 0.8rem; margin: 0; }
+.path-desc  { color: #94a3b8; font-size: 0.85rem; margin: 0; flex: 1; }
+.path-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+.path-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #64748b;
+  font-size: 0.8rem;
+}
+.path-stat i { color: #4f46e5; }
+.path-progress-bar {
+  height: 6px;
+  background: #1e293b;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+.path-progress-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+.path-progress-label { font-size: 0.75rem; color: #64748b; margin: 0; }
+.path-btn {
+  display: block;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  padding: 0.6rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  transition: opacity 0.2s;
+}
+.path-btn:hover { opacity: 0.85; color: white; }
+</style>
+
+<script>
+function switchTab(tab) {
+  document.getElementById('panel-skills').style.display = tab === 'skills' ? '' : 'none';
+  document.getElementById('panel-paths').style.display  = tab === 'paths'  ? '' : 'none';
+  document.getElementById('tab-skills').classList.toggle('active', tab === 'skills');
+  document.getElementById('tab-paths').classList.toggle('active',  tab === 'paths');
+
+  // Restore tab from URL hash
+  if (history.pushState) {
+    history.pushState(null, null, tab === 'paths' ? '#paths' : '#skills');
+  }
+}
+
+function filterCategory(catKey, btn) {
+  document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.category-section').forEach(sec => {
+    if (catKey === 'all') {
+      sec.classList.remove('hidden');
+    } else {
+      sec.classList.toggle('hidden', !sec.classList.contains(catKey));
+    }
+  });
+}
+
+// Auto-switch to paths tab if URL hash is #paths
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.hash === '#paths') {
+    switchTab('paths');
+  }
+});
+</script>
 {% endblock %}
