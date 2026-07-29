@@ -1,14 +1,14 @@
 # 02 — Master Course Inventory & Audit Status
 
 > Complete audit breakdown of all **74 Master Courses** in Learning OS.  
-> **Last Updated**: `2026-07-29 20:42:36`
+> **Last Updated**: `2026-07-29 21:26:14`
 
 ---
 
 | Status Icon | Meaning | Course Count |
 |-------------|---------|-------------:|
-| 🟢 Completed | Fully published in DB with complete markdown sections | 46 |
-| 🟡 In Progress | Structure ready in DB (modules/lessons created) | 21 |
+| 🟢 Completed | Fully published in DB with complete markdown sections | 53 |
+| 🟡 In Progress | Structure ready in DB (modules/lessons created) | 14 |
 | 🔴 Pending | Placeholder stub in DB (needs structure seed) | 7 |
 
 ---
@@ -19,10 +19,10 @@
 |---|--------------|------|-------------------|------------|--------:|--------|-------------:|
 | 1 | **AWS** | `aws` | Amazon Web Services core servi... | Intermediate | 0/25 | 🟡 In Progress / Structure Ready | 0.0% |
 | 2 | **Advanced Components** | `advanced-components` | Work with advanced IoT compone... | intermediate | 0/0 | 🔴 Pending / Stub | 0.0% |
-| 3 | **Advanced Python** | `advanced-python` | Deep-dive into Python: decorat... | Intermediate | 0/30 | 🟡 In Progress / Structure Ready | 0.0% |
+| 3 | **Advanced Python & Professional Practices** | `advanced-python` | Deep-dive into Python: decorat... | Intermediate | 90/90 | 🟢 Completed & Published | 100.0% |
 | 4 | **Ai Agents** | `ai-agents` | Comprehensive Ai Agents master... | beginner | 58/58 | 🟢 Completed & Published | 100.0% |
 | 5 | **Arduino** | `arduino` | Get started with Arduino — GPI... | beginner | 50/50 | 🟢 Completed & Published | 100.0% |
-| 6 | **Authentication & JWT** | `auth-jwt` | Implement secure authenticatio... | Intermediate | 0/15 | 🟡 In Progress / Structure Ready | 0.0% |
+| 6 | **Authentication, Authorization & JWT** | `auth-jwt` | Implement secure authenticatio... | Intermediate | 45/45 | 🟢 Completed & Published | 100.0% |
 | 7 | **Bash Scripting** | `bash` | Automate system tasks with Bas... | Beginner | 0/15 | 🟡 In Progress / Structure Ready | 0.0% |
 | 8 | **Basic MATLAB** | `basic-matlab` | Introduction to MATLAB for eng... | beginner | 0/0 | 🔴 Pending / Stub | 0.0% |
 | 9 | **Basic ML for IoT** | `basic-ml-iot` | Deploy machine learning at the... | advanced | 0/0 | 🔴 Pending / Stub | 0.0% |
@@ -35,9 +35,9 @@
 | 16 | **Core Python** | `core-python` | Comprehensive Python mastery c... | beginner | 44/44 | 🟢 Completed & Published | 100.0% |
 | 17 | **Cpp** | `cpp` | Comprehensive Cpp mastery cour... | beginner | 14/14 | 🟢 Completed & Published | 100.0% |
 | 18 | **Css3** | `css3` | Comprehensive Css3 mastery cou... | beginner | 45/45 | 🟢 Completed & Published | 100.0% |
-| 19 | **Data Structures & Algorithms** | `python-dsa` | Core DSA in Python — arrays, l... | Intermediate | 0/25 | 🟡 In Progress / Structure Ready | 0.0% |
+| 19 | **Data Structures & Algorithms in Python** | `python-dsa` | Core DSA in Python — arrays, l... | Intermediate | 75/75 | 🟢 Completed & Published | 100.0% |
 | 20 | **Deep Learning** | `deep-learning` | Comprehensive Deep Learning ma... | beginner | 94/94 | 🟢 Completed & Published | 100.0% |
-| 21 | **Docker** | `docker` | Containerize applications with... | Intermediate | 0/25 | 🟡 In Progress / Structure Ready | 0.0% |
+| 21 | **Docker & Containerization** | `docker` | Containerize applications with... | Intermediate | 55/55 | 🟢 Completed & Published | 100.0% |
 | 22 | **Ds Math** | `ds-math` | Comprehensive Ds Math mastery ... | beginner | 11/11 | 🟢 Completed & Published | 100.0% |
 | 23 | **ESP32** | `esp32` | Build WiFi and BLE IoT devices... | intermediate | 55/55 | 🟢 Completed & Published | 100.0% |
 | 24 | **Electrical Fundamentals** | `electrical-fundamentals` | Essential electrical theory fo... | Beginner | 15/15 | 🟢 Completed & Published | 100.0% |
@@ -61,7 +61,7 @@
 | 42 | **Jenkins** | `jenkins` | Enterprise CI/CD with Jenkins ... | Intermediate | 0/15 | 🟡 In Progress / Structure Ready | 0.0% |
 | 43 | **Jquery** | `jquery` | Comprehensive Jquery mastery c... | beginner | 12/12 | 🟢 Completed & Published | 100.0% |
 | 44 | **Kubernetes** | `kubernetes` | Container orchestration with K... | Advanced | 0/20 | 🟡 In Progress / Structure Ready | 0.0% |
-| 45 | **Linux Administration** | `linux` | Master the Linux command line ... | Beginner | 0/25 | 🟡 In Progress / Structure Ready | 0.0% |
+| 45 | **Linux Systems & Administration** | `linux` | Master the Linux command line ... | Beginner | 75/75 | 🟢 Completed & Published | 100.0% |
 | 46 | **MQTT Protocol** | `mqtt` | Implement lightweight IoT mess... | intermediate | 30/30 | 🟢 Completed & Published | 100.0% |
 | 47 | **Machine Learning** | `machine-learning` | Comprehensive Machine Learning... | beginner | 107/107 | 🟢 Completed & Published | 100.0% |
 | 48 | **Manual Testing** | `manual-testing` | Software QA fundamentals — SDL... | Beginner | 0/15 | 🟡 In Progress / Structure Ready | 0.0% |
@@ -76,10 +76,10 @@
 | 57 | **Power Bi** | `power-bi` | Comprehensive Power Bi mastery... | beginner | 35/35 | 🟢 Completed & Published | 100.0% |
 | 58 | **Prompt Engineering** | `prompt-engineering` | Comprehensive Prompt Engineeri... | beginner | 39/39 | 🟢 Completed & Published | 100.0% |
 | 59 | **Python Data Science** | `python-data-science` | Comprehensive Python Data Scie... | beginner | 5/5 | 🟢 Completed & Published | 100.0% |
-| 60 | **REST API Development** | `rest-api` | Design and build professional ... | Intermediate | 0/15 | 🟡 In Progress / Structure Ready | 0.0% |
+| 60 | **RESTful API Architecture & Design** | `rest-api` | Design and build professional ... | Intermediate | 45/45 | 🟢 Completed & Published | 100.0% |
 | 61 | **Rag Engineering** | `rag-engineering` | Comprehensive Rag Engineering ... | beginner | 58/58 | 🟢 Completed & Published | 100.0% |
 | 62 | **Raspberry Pi** | `raspberry-pi` | Use Raspberry Pi as a Linux-ba... | intermediate | 15/15 | 🟢 Completed & Published | 100.0% |
-| 63 | **React.js** | `react` | Build modern single-page appli... | Intermediate | 0/30 | 🟡 In Progress / Structure Ready | 0.0% |
+| 63 | **React.js Modern Frontend Development** | `react` | Build modern single-page appli... | Intermediate | 95/95 | 🟢 Completed & Published | 100.0% |
 | 64 | **STM32** | `stm32` | Professional embedded developm... | Advanced | 25/25 | 🟢 Completed & Published | 100.0% |
 | 65 | **Selenium** | `selenium` | Comprehensive Selenium mastery... | beginner | 25/25 | 🟢 Completed & Published | 100.0% |
 | 66 | **Sensors & Actuators** | `sensors-actuators` | Interface real-world sensors (... | beginner | 35/35 | 🟢 Completed & Published | 100.0% |

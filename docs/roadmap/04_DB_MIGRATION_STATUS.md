@@ -1,7 +1,7 @@
 # 04 — Database Migration & Content Pipeline Status
 
 > Tracks database sync, section Markdown generation, and indexing.  
-> **Last Updated**: `2026-07-29 20:42:36`
+> **Last Updated**: `2026-07-29 21:26:14`
 
 ---
 
@@ -19,10 +19,10 @@ Course Created ➔ Structure Ready ➔ Markdown Drafted ➔ DB Migrated ➔ Publ
 |-------------|-------------|--------:|--------:|---------------:|-----------|------------------|
 | `aws` | **AWS** | 5 | 25 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
 | `advanced-components` | **Advanced Components** | 0 | 0 | 0 | 🔴 Pending / Stub | `Pending` |
-| `advanced-python` | **Advanced Python** | 6 | 30 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
+| `advanced-python` | **Advanced Python & Professional Practices** | 18 | 90 | 540 | 🟢 Completed & Published | `generate_advanced_python_content_direct.py` |
 | `ai-agents` | **Ai Agents** | 9 | 58 | 116 | 🟢 Completed & Published | `generate_ai_agents_content_direct.py` |
-| `arduino` | **Arduino** | 10 | 50 | 0 | 🟢 Completed & Published | `generate_arduino_content_direct.py` |
-| `auth-jwt` | **Authentication & JWT** | 3 | 15 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
+| `arduino` | **Arduino** | 10 | 50 | 300 | 🟢 Completed & Published | `generate_arduino_content_direct.py` |
+| `auth-jwt` | **Authentication, Authorization & JWT** | 9 | 45 | 180 | 🟢 Completed & Published | `generate_auth_jwt_content_direct.py` |
 | `bash` | **Bash Scripting** | 3 | 15 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
 | `basic-matlab` | **Basic MATLAB** | 0 | 0 | 0 | 🔴 Pending / Stub | `Pending` |
 | `basic-ml-iot` | **Basic ML for IoT** | 0 | 0 | 0 | 🔴 Pending / Stub | `Pending` |
@@ -35,14 +35,14 @@ Course Created ➔ Structure Ready ➔ Markdown Drafted ➔ DB Migrated ➔ Publ
 | `core-python` | **Core Python** | 15 | 44 | 304 | 🟢 Completed & Published | `generate_core_python_content_direct.py` |
 | `cpp` | **Cpp** | 7 | 14 | 76 | 🟢 Completed & Published | `generate_cpp_content_direct.py` |
 | `css3` | **Css3** | 1 | 45 | 630 | 🟢 Completed & Published | `generate_css3_content_direct.py` |
-| `python-dsa` | **Data Structures & Algorithms** | 5 | 25 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
+| `python-dsa` | **Data Structures & Algorithms in Python** | 15 | 75 | 354 | 🟢 Completed & Published | `generate_python_dsa_content_direct.py` |
 | `deep-learning` | **Deep Learning** | 12 | 94 | 188 | 🟢 Completed & Published | `generate_deep_learning_content_direct.py` |
-| `docker` | **Docker** | 5 | 25 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
+| `docker` | **Docker & Containerization** | 11 | 55 | 186 | 🟢 Completed & Published | `generate_docker_content_direct.py` |
 | `ds-math` | **Ds Math** | 1 | 11 | 154 | 🟢 Completed & Published | `generate_ds_math_content_direct.py` |
-| `esp32` | **ESP32** | 11 | 55 | 0 | 🟢 Completed & Published | `generate_esp32_content_direct.py` |
+| `esp32` | **ESP32** | 11 | 55 | 660 | 🟢 Completed & Published | `generate_esp32_content_direct.py` |
 | `electrical-fundamentals` | **Electrical Fundamentals** | 3 | 15 | 102 | 🟢 Completed & Published | `generate_electrical_fundamentals_content_direct.py` |
 | `electronics-basics` | **Electronics Basics** | 4 | 20 | 120 | 🟢 Completed & Published | `generate_electronics_basics_content_direct.py` |
-| `embedded-c` | **Embedded C** | 12 | 60 | 0 | 🟢 Completed & Published | `generate_embedded_c_content_direct.py` |
+| `embedded-c` | **Embedded C** | 12 | 60 | 360 | 🟢 Completed & Published | `generate_embedded_c_content_direct.py` |
 | `fastapi` | **Fastapi** | 4 | 33 | 330 | 🟢 Completed & Published | `generate_fastapi_content_direct.py` |
 | `firebase` | **Firebase** | 3 | 15 | 90 | 🟢 Completed & Published | `generate_firebase_content_direct.py` |
 | `flask` | **Flask** | 3 | 32 | 376 | 🟢 Completed & Published | `generate_flask_content_direct.py` |
@@ -61,8 +61,8 @@ Course Created ➔ Structure Ready ➔ Markdown Drafted ➔ DB Migrated ➔ Publ
 | `jenkins` | **Jenkins** | 3 | 15 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
 | `jquery` | **Jquery** | 4 | 12 | 24 | 🟢 Completed & Published | `generate_jquery_content_direct.py` |
 | `kubernetes` | **Kubernetes** | 4 | 20 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
-| `linux` | **Linux Administration** | 5 | 25 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
-| `mqtt` | **MQTT Protocol** | 6 | 30 | 0 | 🟢 Completed & Published | `generate_mqtt_content_direct.py` |
+| `linux` | **Linux Systems & Administration** | 14 | 75 | 384 | 🟢 Completed & Published | `generate_linux_content_direct.py` |
+| `mqtt` | **MQTT Protocol** | 6 | 30 | 180 | 🟢 Completed & Published | `generate_mqtt_content_direct.py` |
 | `machine-learning` | **Machine Learning** | 15 | 107 | 214 | 🟢 Completed & Published | `generate_machine_learning_content_direct.py` |
 | `manual-testing` | **Manual Testing** | 3 | 15 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
 | `maven` | **Maven** | 2 | 10 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
@@ -76,13 +76,13 @@ Course Created ➔ Structure Ready ➔ Markdown Drafted ➔ DB Migrated ➔ Publ
 | `power-bi` | **Power Bi** | 7 | 35 | 70 | 🟢 Completed & Published | `generate_power_bi_content_direct.py` |
 | `prompt-engineering` | **Prompt Engineering** | 7 | 39 | 78 | 🟢 Completed & Published | `generate_prompt_engineering_content_direct.py` |
 | `python-data-science` | **Python Data Science** | 1 | 5 | 70 | 🟢 Completed & Published | `generate_python_data_science_content_direct.py` |
-| `rest-api` | **REST API Development** | 3 | 15 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
+| `rest-api` | **RESTful API Architecture & Design** | 9 | 45 | 180 | 🟢 Completed & Published | `generate_rest_api_content_direct.py` |
 | `rag-engineering` | **Rag Engineering** | 9 | 58 | 116 | 🟢 Completed & Published | `generate_rag_engineering_content_direct.py` |
 | `raspberry-pi` | **Raspberry Pi** | 3 | 15 | 90 | 🟢 Completed & Published | `generate_raspberry_pi_content_direct.py` |
-| `react` | **React.js** | 6 | 30 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
+| `react` | **React.js Modern Frontend Development** | 19 | 95 | 540 | 🟢 Completed & Published | `generate_react_content_direct.py` |
 | `stm32` | **STM32** | 5 | 25 | 150 | 🟢 Completed & Published | `generate_stm32_content_direct.py` |
 | `selenium` | **Selenium** | 7 | 25 | 131 | 🟢 Completed & Published | `generate_selenium_content_direct.py` |
-| `sensors-actuators` | **Sensors & Actuators** | 7 | 35 | 0 | 🟢 Completed & Published | `generate_sensors_actuators_content_direct.py` |
+| `sensors-actuators` | **Sensors & Actuators** | 7 | 35 | 210 | 🟢 Completed & Published | `generate_sensors_actuators_content_direct.py` |
 | `servlet-jsp` | **Servlet & JSP** | 3 | 15 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
 | `simulation` | **Simulation (Proteus / Wokwi)** | 0 | 0 | 0 | 🔴 Pending / Stub | `Pending` |
 | `spring-boot` | **Spring Boot** | 4 | 20 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
