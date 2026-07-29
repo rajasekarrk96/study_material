@@ -126,11 +126,11 @@ LEARNING_PATHS = [
             ("css3",           "Frontend",        3,  True),
             ("bootstrap",      "Frontend",        4,  True),
             ("javascript",     "Frontend",        5,  True),
-            ("jquery",         "Frontend",        6,  False),
+            ("jquery",         "Frontend",        6,  False),  # optional
             ("mysql",          "Database",        7,  True),
             ("flask",          "Backend",         8,  True),
-            ("fastapi",        "Backend",         9,  False),
-            ("mongodb",        "Database",        10, False),
+            ("fastapi",        "Backend",         9,  False),  # optional
+            ("mongodb",        "Database",        10, False),  # optional
             ("git",            "Version Control", 11, True),
         ],
     },
