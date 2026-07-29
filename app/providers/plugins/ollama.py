@@ -11,17 +11,24 @@ from app.providers.base import AIProvider
 logger = logging.getLogger(__name__)
 
 OLLAMA_BASE_URL = "http://localhost:11434"
-OLLAMA_TIMEOUT = 90  # seconds
+OLLAMA_TIMEOUT = 300  # seconds — qwen3 thinking mode needs extra time
 
 
 class OllamaProvider(AIProvider):
     """
     Local Ollama provider.
-    Supported models: qwen2.5:14b, deepseek-r1:14b, llama3.1:8b, gemma3:12b
+    Supported models: qwen3:14b, qwen3-coder:30b, qwen2.5:14b, llama3.1:8b
     """
 
-    def __init__(self, model: str = "qwen2.5:14b"):
+    def __init__(self, model: str = "qwen3:14b"):
         self._model = model
+
+    @staticmethod
+    def _strip_think_tags(text: str) -> str:
+        """Remove <think>...</think> blocks emitted by qwen3 reasoning models."""
+        import re
+        text = re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL)
+        return text.strip()
 
     @property
     def name(self) -> str:
@@ -45,6 +52,7 @@ class OllamaProvider(AIProvider):
             "model": self._model,
             "prompt": prompt,
             "stream": False,
+            "options": {"think": False},  # Disable qwen3 reasoning for speed
         }
         if system:
             payload["system"] = system
@@ -56,7 +64,8 @@ class OllamaProvider(AIProvider):
                 timeout=OLLAMA_TIMEOUT
             )
             r.raise_for_status()
-            return r.json().get("response", "").strip()
+            raw = r.json().get("response", "").strip()
+            return self._strip_think_tags(raw)
         except Exception as exc:
             logger.error("Ollama chat error: %s", exc)
             return self._fallback_response(prompt)

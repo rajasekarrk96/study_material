@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 _active_provider: AIProvider | None = None
 
 
-def get_provider(model: str = "qwen2.5:14b") -> AIProvider:
+def get_provider(model: str = "qwen3:14b") -> AIProvider:
     """
     Return the best-available AI provider.
     Attempts Ollama first; logs a warning if unavailable (fallback is built into OllamaProvider).
