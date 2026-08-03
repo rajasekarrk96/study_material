@@ -565,6 +565,7 @@ input:checked + .slider:before {
                 </div>
             {% else %}
                 <form action="{{ url_for('learn.complete_lesson', lesson_id=lesson.id) }}" method="POST" style="margin: 0;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-check"></i> Complete & Continue <i class="fas fa-chevron-right"></i>
                     </button>

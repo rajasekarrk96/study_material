@@ -7,6 +7,7 @@ and correct XP reward checks.
 import os
 os.environ["DATABASE_TYPE"] = "sqlite-test"
 
+import re
 import unittest
 from datetime import datetime
 from app import create_app
@@ -646,6 +647,29 @@ class LearningServiceTestCase(unittest.TestCase):
             course_id=self.course.id
         ).first()
         self.assertTrue(course_prog_after.is_completed)
+
+    def test_lesson_completion_form_submits_csrf_token(self):
+        self.app.config["WTF_CSRF_ENABLED"] = True
+        with self.client.session_transaction() as session:
+            session["_user_id"] = str(self.user.id)
+            session["_fresh"] = True
+
+        lesson_url = (
+            f"/learn/{self.course.slug}/{self.lesson1.module.slug}/"
+            f"{self.lesson1.slug}/"
+        )
+        response = self.client.get(lesson_url)
+        self.assertEqual(response.status_code, 200)
+
+        html = response.get_data(as_text=True)
+        csrf_match = re.search(r'name="csrf_token" value="([^"]+)"', html)
+        self.assertIsNotNone(csrf_match)
+
+        response = self.client.post(
+            f"/learn/lessons/{self.lesson1.id}/complete",
+            data={"csrf_token": csrf_match.group(1)},
+        )
+        self.assertEqual(response.status_code, 302)
 
     def test_dashboard_service_data(self):
         from app.services.learning import LearningProgressService, DashboardService
