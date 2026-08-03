@@ -7,13 +7,14 @@
   <!-- Page Header -->
   <div class="page-header" style="margin-bottom: 2rem;">
     <h1><i class="fas fa-compass"></i> Catalog</h1>
-    <p>Browse individual skill modules or follow a guided learning path to your target role.</p>
+    <p>Choose a standalone modular course or follow a guided learning path to your target role.</p>
   </div>
 
   <!-- Tab Navigation -->
   <div class="catalog-tabs" style="display: flex; gap: 0.5rem; margin-bottom: 2rem; border-bottom: 2px solid #1e293b; padding-bottom: 0;">
     <button id="tab-skills" class="cat-tab-btn active" onclick="switchTab('skills')">
-      <i class="fas fa-layer-group"></i> Browse Skills
+      <i class="fas fa-cubes"></i> Modular Courses
+      <span class="badge-count">{{ course_count }}</span>
     </button>
     <button id="tab-paths" class="cat-tab-btn" onclick="switchTab('paths')">
       <i class="fas fa-route"></i> Learning Paths
@@ -25,6 +26,14 @@
   <!-- TAB 1: Browse Skills                                    -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div id="panel-skills" class="catalog-panel">
+
+    <div class="catalog-panel-intro">
+      <div class="catalog-panel-icon"><i class="fas fa-cubes"></i></div>
+      <div>
+        <h2>Standalone Modular Courses</h2>
+        <p>Build one skill at a time. Each course is reusable across multiple learning paths.</p>
+      </div>
+    </div>
 
     <!-- Category Filter Pills -->
     <div class="cat-pills" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
@@ -61,6 +70,7 @@
         <div class="card-grid">
           {% for course in active_courses %}
           {% set ns.card_idx = ns.card_idx + 1 %}
+          {% set structure = course_structure_counts.get(course.id, {}) %}
           <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}"
              class="course-card{{ ' course-card-pending' if ns.card_idx > 10 else '' }}">
             <div class="course-card-header">
@@ -70,7 +80,10 @@
             <p>{{ course.description or '' }}</p>
             <div class="course-meta">
               <span><i class="fas fa-clock"></i> {{ course.estimated_hours }}h</span>
-              <span><i class="fas fa-eye"></i> {{ course.view_count or 0 }} views</span>
+              {% set module_count = structure.get('modules', 0) %}
+              {% set lesson_count = structure.get('lessons', 0) %}
+              <span><i class="fas fa-layer-group"></i> {{ module_count }} module{% if module_count != 1 %}s{% endif %}</span>
+              <span><i class="fas fa-book-open"></i> {{ lesson_count }} lesson{% if lesson_count != 1 %}s{% endif %}</span>
             </div>
           </a>
           {% endfor %}
@@ -189,6 +202,30 @@
   border-radius: 20px;
   margin-left: 4px;
 }
+
+.catalog-panel-intro {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+}
+.catalog-panel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  color: #a5b4fc;
+  background: rgba(99, 102, 241, 0.18);
+  border-radius: 10px;
+}
+.catalog-panel-intro h2 { margin: 0 0 0.2rem; font-size: 1.05rem; }
+.catalog-panel-intro p { margin: 0; color: #94a3b8; font-size: 0.85rem; }
 
 /* ── Category pills ── */
 .cat-pill {

@@ -80,6 +80,33 @@ def _get_cached_path_lesson_counts():
     return dict(rows)
 
 
+@cache_memoize(timeout_seconds=300)
+def _get_cached_course_structure_counts():
+    """Return published module and lesson totals for every catalog course."""
+    rows = (
+        db.session.query(
+            Course.id,
+            func.count(func.distinct(Module.id)).label("module_count"),
+            func.count(func.distinct(Lesson.id)).label("lesson_count"),
+        )
+        .outerjoin(
+            Module,
+            (Module.course_id == Course.id) & (Module.is_published == True),
+        )
+        .outerjoin(
+            Lesson,
+            (Lesson.module_id == Module.id) & (Lesson.is_deleted == False),
+        )
+        .filter(Course.is_deleted == False, Course.status == "published")
+        .group_by(Course.id)
+        .all()
+    )
+    return {
+        course_id: {"modules": module_count, "lessons": lesson_count}
+        for course_id, module_count, lesson_count in rows
+    }
+
+
 from flask_login import current_user
 from app.services.learning import DashboardService
 
@@ -107,6 +134,7 @@ def home():
 def catalog():
     categories = Category.query.filter_by(is_active=True).order_by(Category.sort_order).all()
     courses_by_category = _get_cached_courses_by_category()
+    course_structure_counts = _get_cached_course_structure_counts()
     learning_paths = LearningPath.query.filter_by(is_active=True).order_by(
         LearningPath.is_featured.desc(), LearningPath.sort_order
     ).all()
@@ -121,6 +149,8 @@ def catalog():
         "public/catalog.html",
         categories=categories,
         courses_by_category=courses_by_category,
+        course_structure_counts=course_structure_counts,
+        course_count=sum(len(courses) for courses in courses_by_category.values()),
         learning_paths=learning_paths,
         path_lesson_counts=path_lesson_counts,
         user_path_progress=user_path_progress,

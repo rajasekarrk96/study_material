@@ -14,19 +14,22 @@ body {
 /* ── OVERWRITE DEFAULT LESSON WRAPPERS ────────────────── */
 .lesson-page {
     display: grid;
-    grid-template-columns: var(--sidebar-w) 1fr;
+    grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+    width: 100%;
+    min-width: 0;
     min-height: calc(100vh - var(--navbar-h));
 }
 
 @media (min-width: 1200px) {
     .lesson-page {
-        grid-template-columns: var(--sidebar-w) 1fr 280px;
+        grid-template-columns: var(--sidebar-w) minmax(0, 1fr) minmax(240px, 280px);
     }
 }
 
 .lesson-main {
     max-width: 1100px;
     width: 100%;
+    min-width: 0;
     margin: 0 auto;
     padding: 40px 48px;
     box-sizing: border-box;
@@ -35,10 +38,12 @@ body {
 /* ── STICKY RIGHT TABLE OF CONTENTS ───────────────────── */
 .lesson-right-toc {
     display: none;
+    min-width: 0;
     position: sticky;
     top: calc(var(--navbar-h) + 30px);
     height: calc(100vh - var(--navbar-h) - 60px);
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 0 20px;
     border-left: 1px solid var(--border);
     font-size: 0.85rem;
@@ -69,6 +74,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.toc-list-sticky a {
+    display: block;
+    overflow-wrap: anywhere;
 }
 
 /* ── LEARNING MODE CONTROLS ───────────────────────────── */

@@ -690,6 +690,19 @@ class LearningServiceTestCase(unittest.TestCase):
         self.assertEqual(data_after["active_courses"][0]["progress_percentage"], 50)
         self.assertEqual(len(data_after["activity_feed"]), 1)
 
+    def test_catalog_lists_modular_courses_with_structure_counts(self):
+        from app.core.cache import clear_cache
+
+        clear_cache()
+        response = self.client.get("/catalog")
+
+        self.assertEqual(response.status_code, 200)
+        html = response.get_data(as_text=True)
+        self.assertIn("Modular Courses", html)
+        self.assertIn("Standalone Modular Courses", html)
+        self.assertIn("1 module", html)
+        self.assertIn("2 lessons", html)
+
 
 class EventServiceTestCase(unittest.TestCase):
     def setUp(self):
