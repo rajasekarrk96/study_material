@@ -118,7 +118,31 @@ def parse_markdown_lesson(file_path: Path) -> dict:
     if not frontmatter and not body_text.strip():
         return {}
 
-    title = frontmatter.get("title") or frontmatter.get("lesson_title")
+    # Schema v2.0 curriculum files nest module/lesson/pedagogy info under
+    # "metadata" and "pedagogy" instead of the flat keys below. Promote them
+    # so the rest of this script (and the ingestion loop) can keep reading
+    # flat keys without knowing which schema a given file uses.
+    metadata_block = frontmatter.get("metadata") or {}
+    pedagogy_block = frontmatter.get("pedagogy") or {}
+
+    if "module_title" not in frontmatter and metadata_block.get("module_title"):
+        frontmatter["module_title"] = metadata_block["module_title"]
+
+    nested_sort_order = metadata_block.get("sort_order")
+    if isinstance(nested_sort_order, int):
+        if "module" not in frontmatter:
+            frontmatter["module"] = nested_sort_order // 100
+        if "lesson" not in frontmatter:
+            frontmatter["lesson"] = nested_sort_order % 100
+
+    if "difficulty" not in frontmatter and pedagogy_block.get("difficulty"):
+        frontmatter["difficulty"] = pedagogy_block["difficulty"]
+
+    total_minutes = (pedagogy_block.get("estimated_time") or {}).get("total_minutes")
+    if "duration_minutes" not in frontmatter and total_minutes:
+        frontmatter["duration_minutes"] = total_minutes
+
+    title = frontmatter.get("title") or frontmatter.get("lesson_title") or metadata_block.get("lesson_title")
     if not title:
         h1_match = re.search(r"^#\s+(.+)$", body_text, re.MULTILINE)
         if h1_match:
@@ -261,7 +285,7 @@ def run_markdown_migration():
             lesson_cache = {}
             for m in modules:
                 for l in m.lessons:
-                    lesson_cache[(m.id, l.slug)] = l
+                    lesson_cache[l.slug] = l
 
             files = sorted([f for f in cdir.rglob("*.md") if not f.name.startswith(".")])
 
@@ -305,8 +329,7 @@ def run_markdown_migration():
 
                 duration = int(meta.get("duration_minutes", 15))
 
-                cache_key = (mod.id, lesson_slug)
-                if cache_key not in lesson_cache:
+                if lesson_slug not in lesson_cache:
                     lesson = Lesson(
                         module_id=mod.id,
                         title=str(lesson_title),
@@ -319,13 +342,15 @@ def run_markdown_migration():
                     )
                     db.session.add(lesson)
                     db.session.flush()
-                    lesson_cache[cache_key] = lesson
+                    lesson_cache[lesson_slug] = lesson
                 else:
-                    lesson = lesson_cache[cache_key]
+                    lesson = lesson_cache[lesson_slug]
+                    lesson.module_id = mod.id
                     lesson.title = str(lesson_title)
                     lesson.difficulty_level = diff_level
                     lesson.estimated_minutes = duration
                     lesson.status = ContentStatus.PUBLISHED
+                    lesson.sort_order = int(meta.get("lesson", 1)) if str(meta.get("lesson", 1)).isdigit() else 1
                     LessonSection.query.filter_by(lesson_id=lesson.id).delete()
 
                 sections = meta.get("sections", [])
@@ -346,6 +371,12 @@ def run_markdown_migration():
                     db.session.add(sec_el)
 
                 total_ingested += 1
+
+            # Remove placeholder modules left empty after their lessons were
+            # reassigned to the correctly-split module above.
+            for m in module_cache.values():
+                if m.lessons.count() == 0:
+                    db.session.delete(m)
 
             db.session.commit()
             print(f"  [DB COMMIT] Saved '{raw_course_title}' ({len(files)} files)")

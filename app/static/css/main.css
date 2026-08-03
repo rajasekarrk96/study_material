@@ -171,12 +171,74 @@ code, pre {
     top: calc(100% + 8px);
     left: 0;
     min-width: 240px;
+    max-height: min(70vh, 480px);
+    overflow-y: auto;
     background: var(--bg-surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
     padding: 8px;
     z-index: 1000;
+}
+
+/* ── Courses dropdown: Domain -> Subdomain -> Course accordion ── */
+.nav-catalog-tree { min-width: 280px; }
+
+.nav-domain-toggle,
+.nav-subdomain-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: inherit;
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.nav-domain-toggle:hover,
+.nav-subdomain-toggle:hover {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+.nav-domain-toggle span,
+.nav-subdomain-toggle span { flex: 1; }
+
+.nav-toggle-caret {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+}
+
+.nav-domain.expanded > .nav-domain-toggle .nav-toggle-caret,
+.nav-subdomain.expanded > .nav-subdomain-toggle .nav-toggle-caret {
+    transform: rotate(90deg);
+}
+
+.nav-subdomain-list,
+.nav-course-list {
+    display: none;
+    padding-left: 14px;
+    border-left: 1px solid var(--border);
+    margin-left: 18px;
+}
+
+.nav-domain.expanded > .nav-subdomain-list,
+.nav-subdomain.expanded > .nav-course-list {
+    display: block;
+}
+
+.nav-course-list .dropdown-item {
+    font-size: 0.85rem;
+    padding: 8px 14px;
 }
 
 .dropdown-menu-list.show {

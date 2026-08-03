@@ -55,15 +55,6 @@ class LearningPath(db.Model, TimestampMixin):
         return [pc for pc in self.courses if pc.is_required]
 
     @property
-    def total_lessons(self):
-        total = 0
-        for pc in self.courses:
-            if pc.course:
-                for mod in pc.course.modules.all():
-                    total += mod.lessons.count()
-        return total
-
-    @property
     def total_courses_count(self):
         return len(self.courses)
 

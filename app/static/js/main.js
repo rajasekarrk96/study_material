@@ -78,6 +78,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 dropdownContainer.classList.remove('open');
             }
         });
+
+        // Domain -> Subdomain accordion: expand/collapse in place, don't close the dropdown
+        dropdownMenu.addEventListener('click', (e) => {
+            const domainToggle = e.target.closest('.nav-domain-toggle');
+            if (domainToggle) {
+                e.stopPropagation();
+                domainToggle.parentElement.classList.toggle('expanded');
+                return;
+            }
+            const subdomainToggle = e.target.closest('.nav-subdomain-toggle');
+            if (subdomainToggle) {
+                e.stopPropagation();
+                subdomainToggle.parentElement.classList.toggle('expanded');
+            }
+        });
     }
 });
 

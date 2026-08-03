@@ -18,6 +18,7 @@ env/
 data/*.db
 data/logs/
 *.sqlite
+backups/
 
 # OS specific files
 .DS_Store

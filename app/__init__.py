@@ -46,26 +46,29 @@ def create_app() -> Flask:
     _register_blueprints(app)
 
     # ── Context processors ─────────────────────────────────────────────────
-    from app.domains.content.models import Course
+    from app.services.navigation import get_nav_catalog_tree
     @app.context_processor
     def inject_globals():
-        published_courses = []
+        nav_catalog_tree = []
         try:
-            published_courses = Course.query.filter_by(status="published", is_deleted=False).order_by(Course.title).all()
+            nav_catalog_tree = get_nav_catalog_tree()
         except Exception:
             pass
         return {
             "platform_name": "Bytes and Boards Solutions",
             "current_user": current_user,
-            "global_courses": published_courses,
+            "nav_catalog_tree": nav_catalog_tree,
         }
 
     # ── Jinja Template Filters ─────────────────────────────────────────────
     import markdown as md_converter
+    from app.core.markdown_utils import insert_blank_lines_before_lists
+
     @app.template_filter("markdown")
     def render_markdown(text):
         if not text:
             return ""
+        text = insert_blank_lines_before_lists(text)
         return md_converter.markdown(text, extensions=["extra", "codehilite", "toc"])
 
     logger.info("Learning OS application ready.")

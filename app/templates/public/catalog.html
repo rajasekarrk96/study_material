@@ -40,17 +40,12 @@
     </div>
 
     <!-- Course Grid -->
+    {% set ns = namespace(card_idx = 0, any_courses = false) %}
     {% for cat in categories %}
-      {% set active_courses = [] %}
-      {% for subject in cat.subjects %}
-        {% for course in subject.courses %}
-          {% if not course.is_deleted and course.status == 'published' %}
-            {% set _ = active_courses.append(course) %}
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
+      {% set active_courses = courses_by_category.get(cat.id, []) %}
 
       {% if active_courses %}
+      {% set ns.any_courses = true %}
       <div class="category-section cat-{{ cat.id }}" data-cat="cat-{{ cat.id }}" style="margin-bottom: 3rem;">
         <div class="category-header" style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem; border-left: 4px solid {{ cat.color or '#4f46e5' }}; padding-left: 12px;">
           <i class="{{ cat.icon or 'fas fa-book' }}" style="color: {{ cat.color or '#4f46e5' }}; font-size: 1.3rem;"></i>
@@ -65,7 +60,9 @@
 
         <div class="card-grid">
           {% for course in active_courses %}
-          <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}" class="course-card">
+          {% set ns.card_idx = ns.card_idx + 1 %}
+          <a href="{{ url_for('learn.course_overview', course_slug=course.slug) }}"
+             class="course-card{{ ' course-card-pending' if ns.card_idx > 10 else '' }}">
             <div class="course-card-header">
               <span class="difficulty-badge difficulty-{{ course.difficulty_level }}">{{ course.difficulty_level | title }}</span>
             </div>
@@ -80,13 +77,17 @@
         </div>
       </div>
       {% endif %}
-    {% else %}
+    {% endfor %}
+
+    {% if not ns.any_courses %}
     <div class="empty-state full-width">
       <i class="fas fa-box-open fa-3x"></i>
       <h2>Catalog is empty</h2>
       <p>No active categories found. Please ensure the database has been populated.</p>
     </div>
-    {% endfor %}
+    {% endif %}
+
+    <div id="catalog-scroll-sentinel" style="height: 1px;"></div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════ -->
@@ -127,7 +128,7 @@
           </div>
           <div class="path-stat">
             <i class="fas fa-file-alt"></i>
-            <span>{{ path.total_lessons }} lessons</span>
+            <span>{{ path_lesson_counts.get(path.id, 0) }} lessons</span>
           </div>
         </div>
 
@@ -217,6 +218,17 @@
 /* ── Category section fade ── */
 .category-section { transition: opacity 0.25s; }
 .category-section.hidden { display: none; }
+
+/* ── Progressive scroll reveal ── */
+.course-card-pending { display: none; }
+.course-card-revealed {
+  display: flex;
+  animation: cc-fade-in 0.3s ease;
+}
+@keyframes cc-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 /* ── Learning Path Grid ── */
 .path-grid {
@@ -333,5 +345,45 @@ document.addEventListener('DOMContentLoaded', () => {
     switchTab('paths');
   }
 });
+
+// ── Progressive scroll reveal: unhide 10 more course cards at a time ──
+(function () {
+  const BATCH_SIZE = 10;
+
+  function revealNextBatch() {
+    const pending = document.querySelectorAll('.course-card-pending');
+    if (!pending.length) return false;
+    for (let i = 0; i < Math.min(BATCH_SIZE, pending.length); i++) {
+      pending[i].classList.remove('course-card-pending');
+      pending[i].classList.add('course-card-revealed');
+    }
+    return true;
+  }
+
+  const sentinel = document.getElementById('catalog-scroll-sentinel');
+  if (!sentinel) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      revealNextBatch();
+    }
+  }, { rootMargin: '400px' });
+
+  observer.observe(sentinel);
+
+  // When a specific category is filtered, reveal all of its cards immediately
+  // rather than leaving some hidden behind the scroll batching.
+  const originalFilterCategory = window.filterCategory;
+  window.filterCategory = function (catKey, btn) {
+    originalFilterCategory(catKey, btn);
+    if (catKey !== 'all') {
+      document.querySelectorAll('.cat-' + catKey.replace('cat-', '') + ' .course-card-pending')
+        .forEach(card => {
+          card.classList.remove('course-card-pending');
+          card.classList.add('course-card-revealed');
+        });
+    }
+  };
+})();
 </script>
 {% endblock %}

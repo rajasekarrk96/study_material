@@ -1,10 +1,14 @@
 """Learning OS — Public Blueprint: Home, Catalog & Learning Path routes."""
+from collections import defaultdict
 from types import SimpleNamespace
 from flask import Blueprint, render_template, jsonify, abort, redirect, url_for, flash
 from flask_login import current_user, login_required
-from app.domains.content.models import Category, Course, Lesson, LessonSection, Source
+from sqlalchemy import func
+from sqlalchemy.orm import joinedload
+from app.core.extensions import db
+from app.domains.content.models import Category, Subject, Course, Module, Lesson, LessonSection, Source
 from app.domains.learning_path.models import (
-    LearningPath, UserLearningPathProgress, UserCourseProgress
+    LearningPath, PathCourse, UserLearningPathProgress, UserCourseProgress
 )
 from app.core.cache import cache_memoize
 
@@ -27,6 +31,53 @@ def _get_cached_categories_data():
             type=cat.type
         ))
     return cached
+
+
+@cache_memoize(timeout_seconds=300)
+def _get_cached_courses_by_category():
+    """
+    Single-query fetch of every published course, grouped by category id.
+    Replaces the old cat.subjects -> subject.courses template traversal, which
+    fired one lazy-loaded query per category and per subject (N+1).
+    """
+    courses = (
+        Course.query
+        .join(Subject, Course.subject_id == Subject.id)
+        .join(Category, Subject.category_id == Category.id)
+        .filter(
+            Course.is_deleted == False,
+            Course.status == "published",
+            Category.is_active == True,
+        )
+        .options(joinedload(Course.subject))
+        .order_by(Category.sort_order, Course.title)
+        .add_columns(Category.id.label("category_id"))
+        .all()
+    )
+
+    by_category = defaultdict(list)
+    for course, category_id in courses:
+        by_category[category_id].append(course)
+    return by_category
+
+
+@cache_memoize(timeout_seconds=300)
+def _get_cached_path_lesson_counts():
+    """
+    Aggregate lesson count per learning path in one query.
+    Replaces LearningPath.total_lessons, which did course.modules.all() +
+    mod.lessons.count() per course per path (hundreds of round-trips).
+    """
+    rows = (
+        db.session.query(PathCourse.path_id, func.count(Lesson.id))
+        .join(Course, PathCourse.course_id == Course.id)
+        .join(Module, Module.course_id == Course.id)
+        .join(Lesson, Lesson.module_id == Module.id)
+        .filter(Module.is_published == True, Lesson.is_deleted == False)
+        .group_by(PathCourse.path_id)
+        .all()
+    )
+    return dict(rows)
 
 
 from flask_login import current_user
@@ -55,9 +106,11 @@ def home():
 @public_bp.route("/catalog")
 def catalog():
     categories = Category.query.filter_by(is_active=True).order_by(Category.sort_order).all()
+    courses_by_category = _get_cached_courses_by_category()
     learning_paths = LearningPath.query.filter_by(is_active=True).order_by(
         LearningPath.is_featured.desc(), LearningPath.sort_order
     ).all()
+    path_lesson_counts = _get_cached_path_lesson_counts()
 
     user_path_progress = {}
     if current_user.is_authenticated:
@@ -67,7 +120,9 @@ def catalog():
     return render_template(
         "public/catalog.html",
         categories=categories,
+        courses_by_category=courses_by_category,
         learning_paths=learning_paths,
+        path_lesson_counts=path_lesson_counts,
         user_path_progress=user_path_progress,
         path_count=len(learning_paths),
     )
@@ -191,12 +246,15 @@ def learning_path_detail(path_slug: str):
         ).all():
             completed_course_ids.add(cp.course_id)
 
+    path_lesson_counts = _get_cached_path_lesson_counts()
+
     return render_template(
         "public/learning_path_detail.html",
         path=path,
         sections=sections,
         user_prog=user_prog,
         completed_course_ids=completed_course_ids,
+        total_lessons=path_lesson_counts.get(path.id, 0),
     )
 
 
