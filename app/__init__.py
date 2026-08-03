@@ -62,12 +62,13 @@ def create_app() -> Flask:
 
     # ── Jinja Template Filters ─────────────────────────────────────────────
     import markdown as md_converter
-    from app.core.markdown_utils import insert_blank_lines_before_lists
+    from app.core.markdown_utils import insert_blank_lines_before_lists, render_mermaid_blocks
 
     @app.template_filter("markdown")
     def render_markdown(text):
         if not text:
             return ""
+        text = render_mermaid_blocks(text)
         text = insert_blank_lines_before_lists(text)
         return md_converter.markdown(text, extensions=["extra", "codehilite", "toc"])
 

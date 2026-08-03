@@ -81,6 +81,29 @@ body {
     overflow-wrap: anywhere;
 }
 
+/* ── RESPONSIVE MERMAID DIAGRAMS ──────────────────────── */
+.rich-content pre.mermaid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    padding: 24px;
+    overflow-x: auto;
+    color: var(--text-primary);
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    white-space: pre;
+}
+
+.rich-content pre.mermaid svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
 /* ── LEARNING MODE CONTROLS ───────────────────────────── */
 .learning-mode-card {
     background: var(--bg-card);
@@ -755,7 +778,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Dynamic Terminal Wrapper for Pre-Code blocks
-    document.querySelectorAll(".rich-content pre").forEach(pre => {
+    document.querySelectorAll(".rich-content pre:not(.mermaid)").forEach(pre => {
         const container = document.createElement("div");
         container.className = "terminal-container";
         
@@ -832,5 +855,36 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+</script>
+
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+// Support any pre-rendered HTML sections that still contain language-mermaid code blocks.
+document.querySelectorAll(".rich-content pre > code.language-mermaid").forEach(code => {
+    const diagram = document.createElement("pre");
+    diagram.className = "mermaid";
+    diagram.textContent = code.textContent;
+    const highlightedWrapper = code.closest(".codehilite");
+    (highlightedWrapper || code.parentElement).replaceWith(diagram);
+});
+
+mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: "strict",
+    theme: "dark",
+    flowchart: { useMaxWidth: true, htmlLabels: true },
+    themeVariables: {
+        background: "#111318",
+        primaryColor: "#1e2130",
+        primaryTextColor: "#f1f5f9",
+        primaryBorderColor: "#6366f1",
+        lineColor: "#94a3b8",
+        secondaryColor: "#252940",
+        tertiaryColor: "#1a1d27"
+    }
+});
+
+await mermaid.run({ querySelector: ".mermaid", suppressErrors: true });
 </script>
 {% endblock %}

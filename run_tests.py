@@ -703,6 +703,23 @@ class LearningServiceTestCase(unittest.TestCase):
         self.assertIn("1 module", html)
         self.assertIn("2 lessons", html)
 
+    def test_markdown_renders_mermaid_without_changing_normal_code(self):
+        render_markdown = self.app.jinja_env.filters["markdown"]
+
+        diagram_html = render_markdown(
+            "```mermaid\ngraph TD\n A[Browser] --> B[DOM]\n```"
+        )
+        code_html = render_markdown("```python\nprint('hello')\n```")
+        escaped_html = render_markdown(
+            "```mermaid\ngraph TD\n A[<script>alert(1)</script>] --> B\n```"
+        )
+
+        self.assertIn('<pre class="mermaid">', diagram_html)
+        self.assertIn("A[Browser] --&gt; B[DOM]", diagram_html)
+        self.assertIn("codehilite", code_html)
+        self.assertNotIn("<script>", escaped_html)
+        self.assertIn("&lt;script&gt;", escaped_html)
+
 
 class EventServiceTestCase(unittest.TestCase):
     def setUp(self):
