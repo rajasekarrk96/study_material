@@ -1,7 +1,7 @@
 # 03 — Learning Path Status & Certificate Readiness
 
 > Status of the **9 Official Learning Paths** in Learning OS.  
-> **Last Updated**: `2026-07-29 21:26:14`
+> **Last Updated**: `2026-07-29 21:30:23`
 
 ---
 

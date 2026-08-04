@@ -1,0 +1,15 @@
+# DBSCAN and Density-Based Clustering
+
+> **Course**: Machine Learning | **Module**: Unsupervised Learning | **Difficulty**: intermediate
+
+---
+
+*(See Phase 1 ML Syllabus for full topic and subtopic breakdown)*
+
+---
+
+---
+
+- To be defined during content authoring.
+
+---

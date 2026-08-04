@@ -1,7 +1,7 @@
 # 01 — Pending Content Master Checklist
 
 > **Single Source of Truth** for Content Pipeline Backlog and Progress.  
-> **Last Updated**: `2026-07-29 21:26:14`
+> **Last Updated**: `2026-07-29 21:30:23`
 
 ---
 
@@ -10,27 +10,27 @@
 ### 🟢 Python Full Stack Developer (`python-full-stack`)
 - **Target Role**: Python Full Stack Developer
 - **Progress**: 18 / 18 Courses Published (**100.0%**)
-- **Required**: 12 | **Optional**: 6
+- **Required**: 18 | **Optional**: 0
 - **Status**: 🟢 Completed
 
-- [x] 🟢 `core-python` — **Core Python** (44/44 lessons) [Required - Programming]
-- [x] 🟢 `advanced-python` — **Advanced Python & Professional Practices** (90/90 lessons) [Required - Programming]
-- [x] 🟢 `python-dsa` — **Data Structures & Algorithms in Python** (75/75 lessons) [Required - Programming]
-- [x] 🟢 `git-fundamentals` — **Git Fundamentals** (238/238 lessons) [Required - Programming]
-- [x] 🟢 `html5` — **Html5** (24/24 lessons) [Required - Frontend]
-- [x] 🟢 `css3` — **Css3** (45/45 lessons) [Required - Frontend]
-- [x] 🟢 `bootstrap` — **Bootstrap** (18/18 lessons) [Required - Frontend]
-- [x] 🟢 `javascript` — **Javascript** (52/52 lessons) [Required - Frontend]
-- [x] 🟢 `jquery` — **Jquery** (12/12 lessons) [Optional - Frontend]
-- [x] 🟢 `react` — **React.js Modern Frontend Development** (95/95 lessons) [Optional - Frontend]
-- [x] 🟢 `mysql` — **MySQL** (53/53 lessons) [Required - Database]
-- [x] 🟢 `mongodb` — **Mongodb** (13/13 lessons) [Optional - Database]
-- [x] 🟢 `flask` — **Flask** (32/32 lessons) [Required - Backend]
-- [x] 🟢 `rest-api` — **RESTful API Architecture & Design** (45/45 lessons) [Required - Backend]
-- [x] 🟢 `auth-jwt` — **Authentication, Authorization & JWT** (45/45 lessons) [Required - Backend]
-- [x] 🟢 `fastapi` — **Fastapi** (33/33 lessons) [Optional - Backend]
-- [x] 🟢 `linux` — **Linux Systems & Administration** (75/75 lessons) [Optional - Deployment]
-- [x] 🟢 `docker` — **Docker & Containerization** (55/55 lessons) [Optional - Deployment]
+- [x] 🟢 `core-python` — **Core Python** (44/44 lessons) [Required - None]
+- [x] 🟢 `advanced-python` — **Advanced Python & Professional Practices** (90/90 lessons) [Required - None]
+- [x] 🟢 `python-dsa` — **Data Structures & Algorithms in Python** (75/75 lessons) [Required - None]
+- [x] 🟢 `git-fundamentals` — **Git Fundamentals** (238/238 lessons) [Required - None]
+- [x] 🟢 `html5` — **Html5** (24/24 lessons) [Required - None]
+- [x] 🟢 `css3` — **Css3** (45/45 lessons) [Required - None]
+- [x] 🟢 `bootstrap` — **Bootstrap** (18/18 lessons) [Required - None]
+- [x] 🟢 `javascript` — **Javascript** (52/52 lessons) [Required - None]
+- [x] 🟢 `jquery` — **Jquery** (12/12 lessons) [Required - None]
+- [x] 🟢 `react` — **React.js Modern Frontend Development** (95/95 lessons) [Required - None]
+- [x] 🟢 `mysql` — **MySQL** (53/53 lessons) [Required - None]
+- [x] 🟢 `mongodb` — **Mongodb** (13/13 lessons) [Required - None]
+- [x] 🟢 `flask` — **Flask** (32/32 lessons) [Required - None]
+- [x] 🟢 `rest-api` — **RESTful API Architecture & Design** (45/45 lessons) [Required - None]
+- [x] 🟢 `auth-jwt` — **Authentication, Authorization & JWT** (45/45 lessons) [Required - None]
+- [x] 🟢 `fastapi` — **Fastapi** (33/33 lessons) [Required - None]
+- [x] 🟢 `linux` — **Linux Systems & Administration** (75/75 lessons) [Required - None]
+- [x] 🟢 `docker` — **Docker & Containerization** (55/55 lessons) [Required - None]
 
 ---
 
