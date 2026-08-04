@@ -1,4 +1,13 @@
-# Computer Vision — Syllabus
+# Computer Vision & Visual Intelligence — Master Syllabus
+
+**Target Role:** Computer Vision Engineer / Perception Developer  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 80 Hours  
+**Prerequisites:** core-python, engineering-math  
+**Required Courses:** core-python, engineering-math  
+**Optional Courses:** deep-learning  
+
+---
 
 ## Study Flow
 

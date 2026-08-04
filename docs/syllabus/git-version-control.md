@@ -1,4 +1,13 @@
-# Git & Version Control — Syllabus
+# Git Version Control & Enterprise Workflow — Master Syllabus
+
+**Target Role:** Software Developer / Systems Architect / DevOps Specialist  
+**Difficulty Level:** Beginner  
+**Estimated Duration:** 40 Hours  
+**Prerequisites:** None  
+**Required Courses:** None  
+**Optional Courses:** github-actions  
+
+---
 
 ## Study Flow
 

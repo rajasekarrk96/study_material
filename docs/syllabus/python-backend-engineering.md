@@ -1,4 +1,13 @@
-# Python Backend Engineering — Syllabus
+# Python Backend Systems & REST API Engineering — Master Syllabus
+
+**Target Role:** Python Backend Engineer / API Developer  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 130 Hours  
+**Prerequisites:** core-python, database-technologies  
+**Required Courses:** core-python, fast-api, flask, mysql  
+**Optional Courses:** docker, auth-jwt  
+
+---
 
 ## Study Flow
 

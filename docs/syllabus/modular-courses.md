@@ -1,4 +1,13 @@
-# Modular Courses — Syllabus
+# Modular Electives & Micro-Courses Catalog — Master Syllabus
+
+**Target Role:** Specialized Technical Specialist  
+**Difficulty Level:** Varies  
+**Estimated Duration:** Varies  
+**Prerequisites:** Varies  
+**Required Courses:** Varies  
+**Optional Courses:** Varies  
+
+---
 
 ## Study Flow
 

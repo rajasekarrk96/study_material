@@ -1,4 +1,13 @@
-# React Frontend — Syllabus
+# React Modern Frontend Web Development — Master Syllabus
+
+**Target Role:** Frontend Web Developer / UI Engineer  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 110 Hours  
+**Prerequisites:** html5, css3, javascript  
+**Required Courses:** html5, css3, javascript, react  
+**Optional Courses:** tailwind, bootstrap  
+
+---
 
 ## Study Flow
 

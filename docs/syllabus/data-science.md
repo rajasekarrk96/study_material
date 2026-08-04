@@ -1,4 +1,13 @@
-# Data Science — Syllabus
+# Data Science & Predictive Analytics — Master Syllabus
+
+**Target Role:** Data Scientist / Machine Learning Researcher / Quantitative Analyst  
+**Difficulty Level:** Advanced  
+**Estimated Duration:** 280 Hours  
+**Prerequisites:** engineering-math, core-python  
+**Required Courses:** engineering-math, core-python, machine-learning  
+**Optional Courses:** deep-learning, nlp-generative-ai  
+
+---
 
 ## 1. Term 1
 

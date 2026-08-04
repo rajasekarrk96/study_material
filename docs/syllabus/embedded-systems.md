@@ -1,4 +1,13 @@
-# Embedded Systems — Syllabus
+# Embedded Systems & Firmware Engineering — Master Syllabus
+
+**Target Role:** Embedded Firmware Engineer / Microcontroller Developer  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 130 Hours  
+**Prerequisites:** c-programming, computer-fundamentals  
+**Required Courses:** embedded-c, arduino  
+**Optional Courses:** stm32, freertos  
+
+---
 
 ## Study Flow
 

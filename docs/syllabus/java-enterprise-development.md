@@ -1,4 +1,13 @@
-# Java Enterprise Development — Syllabus
+# Java Enterprise & Spring Microservices — Master Syllabus
+
+**Target Role:** Enterprise Java Engineer / Backend Microservices Architect  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 160 Hours  
+**Prerequisites:** core-java, computer-fundamentals  
+**Required Courses:** core-java, spring-boot, mysql  
+**Optional Courses:** hibernate, spring-security  
+
+---
 
 ## Study Flow
 

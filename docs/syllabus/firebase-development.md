@@ -1,4 +1,13 @@
-# Firebase Development — Syllabus
+# Firebase & Cloud Backend Services — Master Syllabus
+
+**Target Role:** Mobile Developer / Serverless Developer / IoT Dashboard Engineer  
+**Difficulty Level:** Beginner  
+**Estimated Duration:** 35 Hours  
+**Prerequisites:** javascript  
+**Required Courses:** javascript  
+**Optional Courses:** react  
+
+---
 
 ## Study Flow
 

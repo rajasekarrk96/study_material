@@ -1,4 +1,13 @@
-# Database Technologies — Syllabus
+# Database Systems & Data Architecture — Master Syllabus
+
+**Target Role:** Database Administrator / Data Engineer / Backend Developer  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 60 Hours  
+**Prerequisites:** computer-fundamentals  
+**Required Courses:** mysql  
+**Optional Courses:** mongodb, sql-server  
+
+---
 
 ## Study Flow
 

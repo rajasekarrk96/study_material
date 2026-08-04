@@ -1,4 +1,13 @@
-# MLOps Engineering — Syllabus
+# MLOps & Machine Learning Infrastructure — Master Syllabus
+
+**Target Role:** MLOps Engineer / Machine Learning Infrastructure Specialist  
+**Difficulty Level:** Advanced  
+**Estimated Duration:** 160 Hours  
+**Prerequisites:** machine-learning, devops, docker  
+**Required Courses:** machine-learning, docker, kubernetes  
+**Optional Courses:** aws  
+
+---
 
 ## Study Flow
 

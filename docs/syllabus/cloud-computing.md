@@ -1,4 +1,13 @@
-# Cloud Computing — Syllabus
+# Cloud Infrastructure & Native Architecture — Master Syllabus
+
+**Target Role:** Cloud Architect / DevOps Engineer / Infrastructure Engineer  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 150 Hours  
+**Prerequisites:** linux-administration, networking-fundamentals  
+**Required Courses:** linux-administration, networking-fundamentals  
+**Optional Courses:** docker, kubernetes, aws  
+
+---
 
 ## Study Flow
 

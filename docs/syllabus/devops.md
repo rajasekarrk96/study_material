@@ -1,4 +1,13 @@
-# DevOps — Syllabus
+# DevOps & Site Reliability Engineering — Master Syllabus
+
+**Target Role:** DevOps Engineer / SRE / CI-CD Specialist  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 180 Hours  
+**Prerequisites:** linux-administration, git-version-control  
+**Required Courses:** linux-administration, git-version-control, docker  
+**Optional Courses:** kubernetes, jenkins, github-actions  
+
+---
 
 ## Study Flow
 

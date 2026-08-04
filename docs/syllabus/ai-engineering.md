@@ -1,4 +1,13 @@
-# AI Engineering — Syllabus
+# AI Engineering & Applied Machine Learning — Master Syllabus
+
+**Target Role:** AI Engineer / LLM Application Developer / ML Engineer  
+**Difficulty Level:** Advanced  
+**Estimated Duration:** 250 Hours  
+**Prerequisites:** engineering-math, core-python, python-dsa  
+**Required Courses:** engineering-math, core-python  
+**Optional Courses:** mlops-engineering, nlp-generative-ai  
+
+---
 
 ## Study Flow
 

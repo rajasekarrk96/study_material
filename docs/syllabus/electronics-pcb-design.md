@@ -1,4 +1,13 @@
-# Electronics & PCB Design — Syllabus
+# Electronics & PCB Layout Engineering — Master Syllabus
+
+**Target Role:** Hardware Engineer / PCB Designer / Embedded Hardware Specialist  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 95 Hours  
+**Prerequisites:** electrical-fundamentals  
+**Required Courses:** electronics-basics  
+**Optional Courses:** pcb  
+
+---
 
 ## Study Flow
 

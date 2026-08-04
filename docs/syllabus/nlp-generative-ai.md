@@ -1,4 +1,13 @@
-# NLP & Generative AI — Syllabus
+# NLP & Generative AI Systems — Master Syllabus
+
+**Target Role:** Generative AI Specialist / NLP Architect / LLM Engineer  
+**Difficulty Level:** Advanced  
+**Estimated Duration:** 110 Hours  
+**Prerequisites:** deep-learning, core-python  
+**Required Courses:** deep-learning, generative-ai-llms  
+**Optional Courses:** rag-engineering, ai-agents  
+
+---
 
 ## Study Flow
 

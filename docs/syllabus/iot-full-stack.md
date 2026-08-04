@@ -1,4 +1,13 @@
-# IoT Full Stack — Syllabus
+# IoT Full Stack Engineering — Master Syllabus
+
+**Target Role:** IoT Solutions Architect / Full Stack Embedded Developer  
+**Difficulty Level:** Advanced  
+**Estimated Duration:** 350 Hours  
+**Prerequisites:** electronics-basics, c-programming, networking-fundamentals  
+**Required Courses:** embedded-c, esp32, mqtt, react, python-backend-engineering  
+**Optional Courses:** tinyml, cloud-computing  
+
+---
 
 ## 1. Term 1
 

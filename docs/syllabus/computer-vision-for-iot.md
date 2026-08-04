@@ -1,4 +1,13 @@
-# Computer Vision for IoT — Syllabus
+# Computer Vision for Edge & IoT Devices — Master Syllabus
+
+**Target Role:** Edge AI Engineer / Vision Systems Developer  
+**Difficulty Level:** Advanced  
+**Estimated Duration:** 90 Hours  
+**Prerequisites:** computer-vision, esp32, raspberry-pi  
+**Required Courses:** computer-vision  
+**Optional Courses:** tinyml  
+
+---
 
 ## Study Flow
 

@@ -1,4 +1,13 @@
-# Java Full Stack — Syllabus
+# Java Full Stack Web Engineering — Master Syllabus
+
+**Target Role:** Java Full Stack Developer / Enterprise Web Developer  
+**Difficulty Level:** Advanced  
+**Estimated Duration:** 320 Hours  
+**Prerequisites:** core-java, html5, css3, javascript  
+**Required Courses:** core-java, spring-boot, react, mysql  
+**Optional Courses:** docker, aws  
+
+---
 
 ## 1. Term 1
 

@@ -1,4 +1,13 @@
-# Advanced IoT — Syllabus
+# Advanced IoT Architecture & Systems — Master Syllabus
+
+**Target Role:** IoT Architect / Principal Embedded Systems Engineer  
+**Difficulty Level:** Advanced  
+**Estimated Duration:** 120 Hours  
+**Prerequisites:** embedded-systems, esp32, networking-fundamentals  
+**Required Courses:** embedded-systems, esp32  
+**Optional Courses:** tinyml, computer-vision-for-iot  
+
+---
 
 ## Study Flow
 

@@ -1,4 +1,13 @@
-# Python Full Stack — Syllabus
+# Python Full Stack Web Engineering — Master Syllabus
+
+**Target Role:** Python Full Stack Developer / Web Solutions Architect  
+**Difficulty Level:** Advanced  
+**Estimated Duration:** 330 Hours  
+**Prerequisites:** core-python, html5, css3, javascript  
+**Required Courses:** core-python, fast-api, react, mysql  
+**Optional Courses:** docker, aws  
+
+---
 
 ## 1. Term 1
 

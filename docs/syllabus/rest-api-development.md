@@ -1,4 +1,13 @@
-# REST API Development — Syllabus
+# REST API Design & Architecture — Master Syllabus
+
+**Target Role:** API Architect / Backend Software Engineer  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 60 Hours  
+**Prerequisites:** networking-fundamentals  
+**Required Courses:** networking-fundamentals  
+**Optional Courses:** auth-jwt  
+
+---
 
 ## Study Flow
 

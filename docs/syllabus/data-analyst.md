@@ -1,4 +1,13 @@
-# Data Analyst — Syllabus
+# Data Analytics & Business Intelligence — Master Syllabus
+
+**Target Role:** Data Analyst / BI Developer / Data Operations Specialist  
+**Difficulty Level:** Intermediate  
+**Estimated Duration:** 140 Hours  
+**Prerequisites:** excel, sql, basic-statistics  
+**Required Courses:** mysql, power-bi  
+**Optional Courses:** python-data-science  
+
+---
 
 ## Study Flow
 

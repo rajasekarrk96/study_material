@@ -1,4 +1,13 @@
-# Linux Administration — Syllabus
+# Linux Systems Administration & Shell Operations — Master Syllabus
+
+**Target Role:** Systems Administrator / Linux Systems Engineer  
+**Difficulty Level:** Beginner  
+**Estimated Duration:** 50 Hours  
+**Prerequisites:** computer-fundamentals  
+**Required Courses:** bash  
+**Optional Courses:** devops  
+
+---
 
 ## Study Flow
 
