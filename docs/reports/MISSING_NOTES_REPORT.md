@@ -5,24 +5,33 @@ Learning OS Version: 2.0
 
 ---
 
-## Missing Notes Inventory (Syllabus vs Curriculum)
+## Missing Notes Inventory (Syllabus vs Curriculum Alignment)
 
-This document tracks all missing notes required by master syllabus definitions in `docs/syllabus/`. Content generation tasks should target these priority items.
+This report lists all missing courses, modules, and notes in `docs/curriculum/` relative to `docs/syllabus/`.
 
-### High Priority (Entire Course Missing - 0 Notes)
-1. **.NET Full Stack Engineering** (`51-dotnet-full-stack`) — 19 Modules missing
-2. **MATLAB & Hardware Simulation** (`52-matlab-simulation`) — 10 Modules missing
-3. **Cloud Infrastructure & Native AWS** (`53-cloud-computing`) — 48 Modules missing
-4. **Software Testing & QA Automation** (`54-software-testing`) — 17 Modules missing
-5. **Database Technologies** (`55-database-technologies`) — 20 Modules missing
+### Priority 1: Entirely Missing Courses (0 Notes in Curriculum)
 
-### Medium Priority (Partial Course Notes Missing)
-1. **DevOps & Site Reliability** — Missing CI/CD pipelines, Kubernetes, Terraform notes
-2. **Java Full Stack & Enterprise** — Missing Spring Cloud Gateway & JPA advanced mapping notes
-3. **Data Analytics & BI** — Missing Power BI DAX & ETL pipeline notes
-4. **Advanced IoT Architecture** — Missing industrial protocol & cloud gateway notes
+1. **.NET Full Stack Engineering** (`_11_dotnet_full_stack.md` -> `51-dotnet-full-stack`)
+   - 19 Modules missing (C#, ASP.NET Core Web API, Entity Framework Core, Blazor, SignalR)
 
-### Low Priority (Note Template Completion across existing 3,557 notes)
-- Add missing `Examples` section
-- Add missing `Interview Questions` section
-- Add missing `Summary` & `References` sections
+2. **MATLAB & Hardware Simulation** (`_23_matlab_simulation.md` -> `52-matlab-simulation`)
+   - 10 Modules missing (Simulink, Stateflow, Control System Toolbox, Proteus/Wokwi Integration)
+
+3. **Cloud Infrastructure & Native AWS/GCP** (`_19_cloud_computing.md` -> `53-cloud-computing`)
+   - 48 Modules missing (AWS IAM, EC2, S3, Lambda, CloudFormation, Terraform, Kubernetes)
+
+4. **Software Testing & QA Automation** (`_20_software_testing.md` -> `54-software-testing`)
+   - 17 Modules missing (STLC, Test Planning, JUnit, TestNG, Cypress, Playwright)
+
+5. **Database Technologies** (`_15_database_technologies.md` -> `55-database-technologies`)
+   - 20 Modules missing (Enterprise NoSQL, Cassandra, Redis Caching, Distributed Transactions)
+
+---
+
+### Priority 2: Missing Note Sections in Existing Notes
+
+Across the **3531 existing notes** in `docs/curriculum/`:
+- **Examples Section:** Missing in 3531 notes (100.0%)
+- **Interview Questions Section:** Missing in 3531 notes (100.0%)
+- **Summary Section:** Missing in 3523 notes (99.8%)
+- **Theory Section:** Missing in 3450 notes (97.7%)
