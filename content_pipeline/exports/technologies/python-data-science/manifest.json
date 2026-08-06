@@ -1,0 +1,14 @@
+{
+  "package_id": "python-data-science-course-001",
+  "package_type": "technologies",
+  "course_name": "Python Data Science",
+  "version": "1.0",
+  "source_syllabus": "modular_sources",
+  "source_curriculum": "docs\\curriculum\\foundations\\programming\\39-python-data-science",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "contributor_name",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

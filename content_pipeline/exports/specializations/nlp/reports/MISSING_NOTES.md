@@ -1,4 +1,4 @@
 # Missing Notes in Nlp
 
-The following lessons need content:
+Lessons with empty content stubs:
 

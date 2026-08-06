@@ -1,3 +1,3 @@
-# Work Package: TinyML
+# Contributor Package: TinyML
 
-Isolated workspace for TinyML course notes writing.
+This is an isolated course content development package.

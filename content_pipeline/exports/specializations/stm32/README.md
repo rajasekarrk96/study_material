@@ -1,3 +1,3 @@
-# Work Package: STM32
+# Contributor Package: STM32
 
-Isolated workspace for STM32 course notes writing.
+This is an isolated course content development package.

@@ -1,3 +1,3 @@
-# Work Package: Pcb
+# Contributor Package: Pcb
 
-Isolated workspace for Pcb course notes writing.
+This is an isolated course content development package.

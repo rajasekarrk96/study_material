@@ -1,3 +1,3 @@
-# Work Package: Deep Learning
+# Contributor Package: Deep Learning
 
-Isolated workspace for Deep Learning course notes writing.
+This is an isolated course content development package.

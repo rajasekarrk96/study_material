@@ -1,0 +1,14 @@
+{
+  "package_id": "python-full-stack-path-001",
+  "package_type": "learning_path",
+  "course_name": "Python Full Stack Developer",
+  "version": "1.0",
+  "source_syllabus": "docs/syllabus/learning_paths/python-full-stack.md",
+  "source_curriculum": "none",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "contributor_name",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

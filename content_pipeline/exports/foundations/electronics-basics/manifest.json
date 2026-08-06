@@ -1,0 +1,14 @@
+{
+  "package_id": "electronics-basics-course-001",
+  "package_type": "foundations",
+  "course_name": "Electronics Basics",
+  "version": "1.0",
+  "source_syllabus": "modular_sources",
+  "source_curriculum": "docs\\curriculum\\foundations\\core\\25-electronics-basics",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "contributor_name",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

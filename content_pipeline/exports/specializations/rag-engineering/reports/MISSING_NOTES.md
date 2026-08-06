@@ -1,6 +1,6 @@
 # Missing Notes in Rag Engineering
 
-The following lessons need content:
+Lessons with empty content stubs:
 
 - [ ] _01_01_what_is_rag_and_why_it_matters
 - [ ] _01_02_naive_rag_architecture

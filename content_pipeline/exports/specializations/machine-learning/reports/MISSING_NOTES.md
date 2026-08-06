@@ -1,6 +1,6 @@
 # Missing Notes in Machine Learning
 
-The following lessons need content:
+Lessons with empty content stubs:
 
 - [ ] _01_01_what_is_machine_learning
 - [ ] _01_02_the_scikit_learn_ecosystem

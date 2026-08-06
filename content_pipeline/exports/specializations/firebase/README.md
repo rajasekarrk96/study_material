@@ -1,3 +1,3 @@
-# Work Package: Firebase
+# Contributor Package: Firebase
 
-Isolated workspace for Firebase course notes writing.
+This is an isolated course content development package.

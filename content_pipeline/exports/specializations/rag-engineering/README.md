@@ -1,3 +1,3 @@
-# Work Package: Rag Engineering
+# Contributor Package: Rag Engineering
 
-Isolated workspace for Rag Engineering course notes writing.
+This is an isolated course content development package.

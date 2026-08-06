@@ -1,3 +1,3 @@
-# Work Package: Ai Agents
+# Contributor Package: Ai Agents
 
-Isolated workspace for Ai Agents course notes writing.
+This is an isolated course content development package.

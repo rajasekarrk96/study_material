@@ -1,3 +1,3 @@
-# Work Package: Mlops Ai Deployment
+# Contributor Package: Mlops Ai Deployment
 
-Isolated workspace for Mlops Ai Deployment course notes writing.
+This is an isolated course content development package.

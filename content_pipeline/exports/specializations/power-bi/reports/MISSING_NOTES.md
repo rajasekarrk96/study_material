@@ -1,4 +1,4 @@
 # Missing Notes in Power Bi
 
-The following lessons need content:
+Lessons with empty content stubs:
 

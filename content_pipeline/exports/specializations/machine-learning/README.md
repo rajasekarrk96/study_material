@@ -1,3 +1,3 @@
-# Work Package: Machine Learning
+# Contributor Package: Machine Learning
 
-Isolated workspace for Machine Learning course notes writing.
+This is an isolated course content development package.

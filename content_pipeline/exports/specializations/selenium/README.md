@@ -1,3 +1,3 @@
-# Work Package: Selenium
+# Contributor Package: Selenium
 
-Isolated workspace for Selenium course notes writing.
+This is an isolated course content development package.

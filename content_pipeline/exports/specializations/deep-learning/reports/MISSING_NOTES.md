@@ -1,6 +1,6 @@
 # Missing Notes in Deep Learning
 
-The following lessons need content:
+Lessons with empty content stubs:
 
 - [ ] _01_01_the_artificial_neuron_and_perceptron
 - [ ] _01_02_feedforward_neural_networks_mlp

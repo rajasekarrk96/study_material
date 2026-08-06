@@ -1,6 +1,6 @@
 # Missing Notes in Computer Vision
 
-The following lessons need content:
+Lessons with empty content stubs:
 
 - [ ] _01_01_digital_image_fundamentals
 - [ ] _01_02_image_transformations_and_filtering

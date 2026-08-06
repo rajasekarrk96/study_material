@@ -1,5 +1,3 @@
 # Contributor Report: Prompt Engineering
 
-Assigned to: contributor_name
-
-Stubs completed: 79 / 79
+Stubs completed: 79/79

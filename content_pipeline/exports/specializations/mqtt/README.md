@@ -1,3 +1,3 @@
-# Work Package: MQTT Protocol
+# Contributor Package: MQTT Protocol
 
-Isolated workspace for MQTT Protocol course notes writing.
+This is an isolated course content development package.

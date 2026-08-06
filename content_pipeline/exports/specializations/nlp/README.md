@@ -1,3 +1,3 @@
-# Work Package: Nlp
+# Contributor Package: Nlp
 
-Isolated workspace for Nlp course notes writing.
+This is an isolated course content development package.

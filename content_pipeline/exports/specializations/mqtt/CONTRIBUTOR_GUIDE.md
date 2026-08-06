@@ -1,4 +1,3 @@
-# Contributor Guide -- MQTT Protocol
+# Contributor Guide: MQTT Protocol
 
-1. Write stubs in CURRICULUM/
-2. Verify files using templates
+Follow style guide and note template.

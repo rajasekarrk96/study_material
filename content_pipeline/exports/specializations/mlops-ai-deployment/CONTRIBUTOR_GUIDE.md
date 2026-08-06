@@ -1,4 +1,3 @@
-# Contributor Guide -- Mlops Ai Deployment
+# Contributor Guide: Mlops Ai Deployment
 
-1. Write stubs in CURRICULUM/
-2. Verify files using templates
+Follow style guide and note template.

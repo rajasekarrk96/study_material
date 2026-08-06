@@ -1,3 +1,3 @@
-# Work Package: Generative Ai Llms
+# Contributor Package: Generative Ai Llms
 
-Isolated workspace for Generative Ai Llms course notes writing.
+This is an isolated course content development package.

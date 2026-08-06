@@ -1,6 +1,6 @@
 # Missing Notes in Generative Ai Llms
 
-The following lessons need content:
+Lessons with empty content stubs:
 
 - [ ] _01_01_transformer_scaling_laws
 - [ ] _01_02_advanced_positional_encodings

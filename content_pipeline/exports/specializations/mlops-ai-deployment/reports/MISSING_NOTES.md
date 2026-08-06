@@ -1,6 +1,6 @@
 # Missing Notes in Mlops Ai Deployment
 
-The following lessons need content:
+Lessons with empty content stubs:
 
 - [ ] _01_01_mlflow_fundamentals
 - [ ] _01_02_mlflow_advanced_features

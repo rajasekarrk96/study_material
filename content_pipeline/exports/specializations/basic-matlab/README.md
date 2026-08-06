@@ -1,3 +1,3 @@
-# Work Package: Basic MATLAB
+# Contributor Package: Basic MATLAB
 
-Isolated workspace for Basic MATLAB course notes writing.
+This is an isolated course content development package.

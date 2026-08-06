@@ -1,3 +1,3 @@
-# Work Package: Prompt Engineering
+# Contributor Package: Prompt Engineering
 
-Isolated workspace for Prompt Engineering course notes writing.
+This is an isolated course content development package.

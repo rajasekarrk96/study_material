@@ -1,0 +1,27 @@
+# Learning Path Sequence: IoT Full Stack Engineer
+
+References the reusable sequence:
+
+1. **C Programming** (`c-programming`) -- CORE (Programming)
+2. **Embedded C** (`embedded-c`) -- CORE (Programming)
+3. **Core Python** (`core-python`) -- CORE (Programming)
+4. **Git Fundamentals** (`git-fundamentals`) -- CORE (Programming)
+5. **Electrical Fundamentals** (`electrical-fundamentals`) -- CORE (Electronics)
+6. **Electronics Basics** (`electronics-basics`) -- CORE (Electronics)
+7. **Pcb** (`pcb`) -- CORE (Electronics)
+8. **Arduino** (`arduino`) -- CORE (Hardware)
+9. **ESP32** (`esp32`) -- CORE (Hardware)
+10. **Sensors & Actuators** (`sensors-actuators`) -- CORE (Hardware)
+11. **Iot Hardware** (`iot-hardware`) -- CORE (Hardware)
+12. **STM32** (`stm32`) -- CORE (Hardware)
+13. **Raspberry Pi** (`raspberry-pi`) -- CORE (Hardware)
+14. **Html5** (`html5`) -- CORE (Web Stack)
+15. **Css3** (`css3`) -- CORE (Web Stack)
+16. **Bootstrap** (`bootstrap`) -- CORE (Web Stack)
+17. **Javascript** (`javascript`) -- CORE (Web Stack)
+18. **MySQL** (`mysql`) -- CORE (Web Stack)
+19. **Flask** (`flask`) -- CORE (Web Stack)
+20. **MQTT Protocol** (`mqtt`) -- CORE (Connectivity)
+21. **Firebase** (`firebase`) -- CORE (Connectivity)
+22. **Computer Vision** (`computer-vision`) -- CORE (AI for IoT)
+23. **TinyML** (`tinyml`) -- CORE (AI for IoT)

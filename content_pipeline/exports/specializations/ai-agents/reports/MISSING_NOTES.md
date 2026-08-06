@@ -1,6 +1,6 @@
 # Missing Notes in Ai Agents
 
-The following lessons need content:
+Lessons with empty content stubs:
 
 - [ ] _01_01_what_is_an_ai_agent
 - [ ] _01_02_react_agent_pattern

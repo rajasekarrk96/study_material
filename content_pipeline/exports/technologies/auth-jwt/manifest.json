@@ -1,0 +1,14 @@
+{
+  "package_id": "auth-jwt-course-001",
+  "package_type": "technologies",
+  "course_name": "Authentication, Authorization & JWT",
+  "version": "1.0",
+  "source_syllabus": "modular_sources",
+  "source_curriculum": "none",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "contributor_name",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

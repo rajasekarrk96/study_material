@@ -1,3 +1,3 @@
-# Work Package: Computer Vision for IoT
+# Contributor Package: Computer Vision for IoT
 
-Isolated workspace for Computer Vision for IoT course notes writing.
+This is an isolated course content development package.

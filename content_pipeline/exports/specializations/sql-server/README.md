@@ -1,3 +1,3 @@
-# Work Package: Sql Server
+# Contributor Package: Sql Server
 
-Isolated workspace for Sql Server course notes writing.
+This is an isolated course content development package.
