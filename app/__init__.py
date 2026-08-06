@@ -148,18 +148,24 @@ def _seed_defaults() -> None:
             db.session.commit()
 
     # Seed default certificates for existing courses
-    from app.domains.content.models import Course, Certificate
-    courses = Course.query.all()
-    for course in courses:
-        existing_cert = Certificate.query.filter_by(course_id=course.id).first()
-        if not existing_cert:
-            new_cert = Certificate(
-                course_id=course.id,
-                title=f"{course.title} Certification",
-                description=f"Demonstrates mastery of the concepts and practices in {course.title}."
-            )
-            db.session.add(new_cert)
-    db.session.commit()
+    # Wrapped in try/except to handle the migration window where new columns
+    # (course_type, is_standalone, subtitle) may not yet exist in the DB.
+    try:
+        from app.domains.content.models import Course, Certificate
+        courses = Course.query.all()
+        for course in courses:
+            existing_cert = Certificate.query.filter_by(course_id=course.id).first()
+            if not existing_cert:
+                new_cert = Certificate(
+                    course_id=course.id,
+                    title=f"{course.title} Certification",
+                    description=f"Demonstrates mastery of the concepts and practices in {course.title}."
+                )
+                db.session.add(new_cert)
+        db.session.commit()
+    except Exception:
+        # Schema migration pending — skip certificate seed until DB is up to date.
+        db.session.rollback()
 
     if not os.environ.get("SKIP_SEARCH_REBUILD"):
         from app.services.search_service import SearchIndexService

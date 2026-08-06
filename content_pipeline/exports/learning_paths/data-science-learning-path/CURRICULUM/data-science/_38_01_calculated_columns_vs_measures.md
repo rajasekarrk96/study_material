@@ -1,0 +1,5 @@
+# Calculated Columns vs Measures
+
+> **Course:** Data Science | **Module:** Module 38 | **Difficulty:** intermediate
+
+<!-- Placeholder — Write notes following NOTE_TEMPLATE.md -->

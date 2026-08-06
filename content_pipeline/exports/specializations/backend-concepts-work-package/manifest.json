@@ -1,0 +1,14 @@
+{
+  "package_id": "backend-concepts-spec-001",
+  "package_type": "specializations",
+  "course_name": "Backend Concepts",
+  "version": "1.0",
+  "source_syllabus": "docs/syllabus/specializations/backend-systems.md",
+  "source_curriculum": "docs/curriculum/specializations/",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "backend_contributor",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

@@ -1,0 +1,14 @@
+{
+  "package_id": "python-shared-001",
+  "package_type": "shared",
+  "course_name": "Python Programming",
+  "version": "1.0",
+  "source_syllabus": "docs/syllabus/foundations/programming/_source_python_full_stack.md",
+  "source_curriculum": "docs/curriculum/foundations/programming/09-python-core",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "python_contributor",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

@@ -5,7 +5,7 @@ Category, Subject, Course, Module, Lesson, LessonSection, LessonVersion, Tag, So
 from datetime import datetime
 from app.core.extensions import db
 from app.core.base_model import TimestampMixin, SoftDeleteMixin
-from app.core.constants import ContentStatus, DifficultyLevel, SectionType
+from app.core.constants import ContentStatus, DifficultyLevel, SectionType, CourseCoverage, COURSE_COVERAGE_LABELS, CourseType
 
 
 class Category(db.Model, TimestampMixin):
@@ -75,6 +75,28 @@ class Course(db.Model, TimestampMixin, SoftDeleteMixin):
     modules = db.relationship("Module", back_populates="course",
                                order_by="Module.sort_order", lazy="dynamic")
 
+    # ── 4-tier architecture fields ────────────────────────────────────────────
+    # Classifies this course in the Learning OS catalog hierarchy.
+    course_type = db.Column(
+        db.String(30),
+        default=CourseType.FOUNDATION,
+        nullable=False,
+        server_default="foundation",
+        index=True,
+    )
+
+    # True = course appears independently in catalog.
+    # False = only visible when browsing a learning path.
+    is_standalone = db.Column(
+        db.Boolean,
+        default=True,
+        nullable=False,
+        server_default="1",
+    )
+
+    # Short subtitle shown on catalog cards (e.g. "Core language fundamentals").
+    subtitle = db.Column(db.String(255), nullable=True)
+
     def __repr__(self):
         return f"<Course {self.slug}>"
 
@@ -117,6 +139,13 @@ class Lesson(db.Model, TimestampMixin, SoftDeleteMixin):
     canonical_url = db.Column(db.String(500))
     view_count = db.Column(db.Integer, default=0)
     published_at = db.Column(db.DateTime)
+    # Course Coverage: controls classroom/self-study classification per lesson
+    course_coverage = db.Column(
+        db.String(30),
+        default=CourseCoverage.COVERED_IN_CLASS,
+        nullable=False,
+        server_default="covered_in_class",
+    )
 
     module = db.relationship("Module", back_populates="lessons")
     sections = db.relationship("LessonSection", back_populates="lesson",
@@ -124,6 +153,18 @@ class Lesson(db.Model, TimestampMixin, SoftDeleteMixin):
     versions = db.relationship("LessonVersion", back_populates="lesson",
                                 order_by="LessonVersion.version_number.desc()")
     tags = db.relationship("Tag", secondary="lesson_tags", backref="lessons")
+
+    @property
+    def coverage_emoji(self) -> str:
+        """Returns the emoji for this lesson's course_coverage value."""
+        label = COURSE_COVERAGE_LABELS.get(self.course_coverage)
+        return label[0] if label else "🟢"
+
+    @property
+    def coverage_label(self) -> str:
+        """Returns the human-readable label for this lesson's course_coverage value."""
+        label = COURSE_COVERAGE_LABELS.get(self.course_coverage)
+        return label[1] if label else "Covered in Class"
 
     def __repr__(self):
         return f"<Lesson {self.slug}>"

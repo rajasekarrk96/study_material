@@ -1,0 +1,5 @@
+# Statistical NLP Fundamentals
+
+> **Course:** Data Science | **Module:** Module 69 | **Difficulty:** intermediate
+
+<!-- Placeholder — Write notes following NOTE_TEMPLATE.md -->

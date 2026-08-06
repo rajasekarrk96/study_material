@@ -8,7 +8,7 @@ from sqlalchemy.orm import joinedload
 from app.core.extensions import db
 from app.domains.content.models import Category, Subject, Course, Module, Lesson, LessonSection, Source
 from app.domains.learning_path.models import (
-    LearningPath, PathCourse, UserLearningPathProgress, UserCourseProgress
+    LearningPath, PathCourse, UserLearningPathProgress, UserCourseProgress, LearningPathCategory
 )
 from app.core.cache import cache_memoize
 
@@ -145,8 +145,58 @@ def catalog():
         for prog in UserLearningPathProgress.query.filter_by(user_id=current_user.id).all():
             user_path_progress[prog.path_id] = prog
 
+    # ── 4-tier architecture data ──────────────────────────────────────────────
+    # Build foundation sub-groups from course_type + Category.type
+    foundation_groups = {
+        "programming": {"label": "Programming Languages", "icon": "fa-code",    "color": "#4f46e5", "courses": []},
+        "frontend":    {"label": "Frontend Development",  "icon": "fa-desktop",  "color": "#0891b2", "courses": []},
+        "backend":     {"label": "Backend & Databases",   "icon": "fa-server",   "color": "#059669", "courses": []},
+        "core":        {"label": "Core Engineering",      "icon": "fa-microchip","color": "#d97706", "courses": []},
+    }
+    specializations = []
+    electives = []
+
+    all_published = (
+        Course.query
+        .join(Subject, Course.subject_id == Subject.id)
+        .join(Category, Subject.category_id == Category.id)
+        .filter(Course.is_deleted == False, Course.status == "published")
+        .options(joinedload(Course.subject))
+        .all()
+    )
+
+    for course in all_published:
+        ct = getattr(course, "course_type", "foundation")
+        cat_type = (course.subject.category.type or "") if course.subject and course.subject.category else ""
+
+        if ct == "specialization":
+            specializations.append(course)
+        elif ct == "elective":
+            electives.append(course)
+        else:
+            # foundation — route to sub-group by Category.type
+            if "frontend" in cat_type:
+                foundation_groups["frontend"]["courses"].append(course)
+            elif "backend" in cat_type:
+                foundation_groups["backend"]["courses"].append(course)
+            elif "core" in cat_type:
+                foundation_groups["core"]["courses"].append(course)
+            else:
+                foundation_groups["programming"]["courses"].append(course)
+
+    # Group learning paths by domain
+    lp_domain_groups = defaultdict(list)
+    for lp in learning_paths:
+        domain = getattr(lp, "domain", None) or "web"
+        lp_domain_groups[domain].append(lp)
+
+    lp_category_obj = LearningPathCategory.query.filter_by(is_active=True).order_by(
+        LearningPathCategory.sort_order
+    ).all()
+
     return render_template(
         "public/catalog.html",
+        # Existing variables (unchanged — backward compat)
         categories=categories,
         courses_by_category=courses_by_category,
         course_structure_counts=course_structure_counts,
@@ -155,6 +205,12 @@ def catalog():
         path_lesson_counts=path_lesson_counts,
         user_path_progress=user_path_progress,
         path_count=len(learning_paths),
+        # 4-tier architecture variables (new)
+        foundation_groups=foundation_groups,
+        specializations=specializations,
+        electives=electives,
+        lp_domain_groups=lp_domain_groups,
+        lp_categories=lp_category_obj,
     )
 
 
@@ -314,3 +370,233 @@ def enroll_learning_path(path_slug: str):
         flash(f"You are already enrolled in '{path.title}'.", "info")
 
     return redirect(url_for("public.learning_path_detail", path_slug=path.slug))
+
+
+# ─────────────────────────────────────────────────────────────
+# 4-Tier Architecture Browse Routes
+# ─────────────────────────────────────────────────────────────
+
+# Sub-category labels for foundations tab
+FOUNDATION_SUBCATEGORIES = {
+    "programming": {
+        "label": "Programming Languages",
+        "icon": "fa-code",
+        "color": "#4f46e5",
+        "description": "Core programming languages and DSA",
+    },
+    "frontend": {
+        "label": "Frontend Development",
+        "icon": "fa-desktop",
+        "color": "#0891b2",
+        "description": "HTML, CSS, JavaScript, React and UI frameworks",
+    },
+    "backend": {
+        "label": "Backend & Databases",
+        "icon": "fa-server",
+        "color": "#059669",
+        "description": "Server frameworks, APIs, and database technologies",
+    },
+    "core": {
+        "label": "Core Engineering",
+        "icon": "fa-microchip",
+        "color": "#d97706",
+        "description": "Mathematics, networking, Linux, Docker, and embedded systems",
+    },
+}
+
+
+@cache_memoize(timeout_seconds=300)
+def _get_courses_by_type_and_category():
+    """
+    Single-query fetch of all published courses grouped by:
+      (course_type, category.type or subject.name)
+    Powers the foundations tab sub-groups.
+    """
+    courses = (
+        Course.query
+        .join(Subject, Course.subject_id == Subject.id)
+        .join(Category, Subject.category_id == Category.id)
+        .filter(
+            Course.is_deleted == False,
+            Course.status == "published",
+            Course.is_standalone == True,
+        )
+        .options(joinedload(Course.subject))
+        .order_by(Category.sort_order, Course.title)
+        .all()
+    )
+
+    by_type = {
+        "foundation_programming": [],
+        "foundation_frontend": [],
+        "foundation_backend": [],
+        "foundation_core": [],
+        "specialization": [],
+        "elective": [],
+    }
+
+    for course in courses:
+        cat_type = course.subject.category.type if course.subject and course.subject.category else ""
+        ctype = course.course_type  # foundation|specialization|elective
+
+        if ctype == "foundation":
+            if cat_type in ("foundation_programming", "foundation_frontend",
+                            "foundation_backend", "foundation_core"):
+                by_type[cat_type].append(course)
+            else:
+                # Fallback — put uncategorized foundations in programming
+                by_type["foundation_programming"].append(course)
+        elif ctype == "specialization":
+            by_type["specialization"].append(course)
+        elif ctype == "elective":
+            by_type["elective"].append(course)
+
+    return by_type
+
+
+@public_bp.route("/browse/")
+def browse_index():
+    """Redirect to the enhanced catalog as the main browse entry point."""
+    return redirect(url_for("public.catalog"))
+
+
+@public_bp.route("/browse/foundations/")
+def browse_foundations():
+    """Browse all foundation courses, grouped by sub-category."""
+    course_groups = _get_courses_by_type_and_category()
+    foundation_data = {
+        sub: {
+            "meta": meta,
+            "courses": course_groups.get(f"foundation_{sub}", []),
+        }
+        for sub, meta in FOUNDATION_SUBCATEGORIES.items()
+    }
+    total = sum(len(g["courses"]) for g in foundation_data.values())
+    return render_template(
+        "public/browse_foundations.html",
+        foundation_data=foundation_data,
+        total_courses=total,
+        active_sub="all",
+    )
+
+
+@public_bp.route("/browse/foundations/<sub_category>/")
+def browse_foundations_sub(sub_category: str):
+    """Browse a specific foundation sub-category: programming|frontend|backend|core."""
+    if sub_category not in FOUNDATION_SUBCATEGORIES:
+        abort(404)
+    course_groups = _get_courses_by_type_and_category()
+    courses = course_groups.get(f"foundation_{sub_category}", [])
+    meta = FOUNDATION_SUBCATEGORIES[sub_category]
+    return render_template(
+        "public/browse_foundations.html",
+        foundation_data={sub_category: {"meta": meta, "courses": courses}},
+        total_courses=len(courses),
+        active_sub=sub_category,
+    )
+
+
+@public_bp.route("/browse/specializations/")
+def browse_specializations():
+    """Browse all specialization courses."""
+    course_groups = _get_courses_by_type_and_category()
+    courses = course_groups.get("specialization", [])
+    return render_template(
+        "public/browse_specializations.html",
+        courses=courses,
+        total_courses=len(courses),
+    )
+
+
+@public_bp.route("/browse/electives/")
+def browse_electives():
+    """Browse all elective courses."""
+    course_groups = _get_courses_by_type_and_category()
+    courses = course_groups.get("elective", [])
+    return render_template(
+        "public/browse_electives.html",
+        courses=courses,
+        total_courses=len(courses),
+    )
+
+
+@public_bp.route("/browse/paths/")
+def browse_paths():
+    """Browse all learning paths grouped by domain category."""
+    lp_categories = LearningPathCategory.query.filter_by(is_active=True).order_by(
+        LearningPathCategory.sort_order
+    ).all()
+
+    paths_by_category = {}
+    for lpc in lp_categories:
+        paths = LearningPath.query.filter_by(
+            is_active=True, category_id=lpc.id
+        ).order_by(LearningPath.is_featured.desc(), LearningPath.sort_order).all()
+        if paths:
+            paths_by_category[lpc] = paths
+
+    # Uncategorized paths
+    uncategorized = LearningPath.query.filter_by(
+        is_active=True, category_id=None
+    ).order_by(LearningPath.sort_order).all()
+
+    path_lesson_counts = _get_cached_path_lesson_counts()
+
+    return render_template(
+        "public/browse_paths.html",
+        paths_by_category=paths_by_category,
+        uncategorized_paths=uncategorized,
+        path_lesson_counts=path_lesson_counts,
+    )
+
+
+@public_bp.route("/browse/paths/<domain>/")
+def browse_paths_domain(domain: str):
+    """Browse learning paths filtered by domain: web|data|iot|cloud|devops|qa."""
+    VALID_DOMAINS = {"web", "data", "iot", "cloud", "devops", "qa"}
+    if domain not in VALID_DOMAINS:
+        abort(404)
+
+    paths = LearningPath.query.filter_by(
+        is_active=True, domain=domain
+    ).order_by(LearningPath.is_featured.desc(), LearningPath.sort_order).all()
+
+    path_lesson_counts = _get_cached_path_lesson_counts()
+
+    return render_template(
+        "public/browse_paths.html",
+        paths_by_category={},
+        uncategorized_paths=paths,
+        path_lesson_counts=path_lesson_counts,
+        active_domain=domain,
+    )
+
+
+@public_bp.route("/api/v1/courses/type/<course_type>")
+def api_courses_by_type(course_type: str):
+    """JSON API: list courses by type (foundation|specialization|elective)."""
+    VALID_TYPES = {"foundation", "specialization", "elective"}
+    if course_type not in VALID_TYPES:
+        return jsonify({"error": "Invalid course type"}), 400
+
+    courses = (
+        Course.query
+        .filter_by(course_type=course_type, is_deleted=False, status="published")
+        .order_by(Course.title)
+        .all()
+    )
+    return jsonify({
+        "course_type": course_type,
+        "count": len(courses),
+        "courses": [
+            {
+                "id": c.id,
+                "slug": c.slug,
+                "title": c.title,
+                "subtitle": c.subtitle,
+                "difficulty_level": c.difficulty_level,
+                "estimated_hours": c.estimated_hours,
+            }
+            for c in courses
+        ],
+    })

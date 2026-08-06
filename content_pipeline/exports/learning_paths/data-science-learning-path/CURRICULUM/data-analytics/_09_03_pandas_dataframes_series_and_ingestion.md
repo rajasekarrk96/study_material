@@ -1,0 +1,238 @@
+```yaml
+schema_version: "2.0"
+metadata:
+  lesson_id: "DS-MOD02-LES01"
+  course_slug: "course-09-python-data-science"
+  course_title: "Course 2: Python Data Science Ecosystem (NumPy, Pandas, & Visualization)"
+  module_slug: "mod-02-pandas-data-wrangling"
+  module_title: "Module 2 - High-Performance Data Wrangling with Pandas"
+  lesson_slug: "pandas-dataframes-series-and-ingestion"
+  lesson_title: "Lesson 2.1 DataFrames, Series, & High-Speed Data Ingestion"
+  sort_order: 201
+
+pedagogy:
+  difficulty: "beginner"
+  estimated_time:
+    reading_minutes: 15
+    practice_minutes: 20
+    quiz_minutes: 10
+    total_minutes: 45
+  bloom_taxonomy_level: "Apply"
+  xp_reward: 50
+
+prerequisites:
+  required_lesson_ids:
+    - "DS-MOD01-LES02"
+  required_skills:
+    - "NumPy ndarray & Vectorization Fundamentals"
+
+skills_acquired:
+  - "Understanding Pandas Data Architecture (`Series` vs `DataFrame`)"
+  - "High-Speed Data Ingestion (`pd.read_csv()`, `pd.read_parquet()`, `pd.read_sql()`)"
+  - "Inspecting Dataset Structure (`head()`, `info()`, `describe()`, `memory_usage()`)"
+  - "Optimizing Data Types & Memory Usage (`category`, `float32`)"
+
+dependencies:
+  software:
+    - "VS Code / Jupyter Notebook"
+    - "Python 3.12+"
+    - "pandas"
+    - "pyarrow"
+  hardware: []
+
+seo_and_social:
+  meta_title: "Pandas Ingestion: DataFrames, Series, read_csv & Parquet Memory Optimization"
+  meta_description: "Master Pandas Data Wrangling: Series vs DataFrames, high-speed CSV and Apache Parquet ingestion, info()/describe() inspection, and memory optimization."
+  keywords: ["Pandas DataFrame", "Pandas Series", "read_csv", "read_parquet", "Pandas Memory Optimization", "Data Wrangling Python"]
+
+assessment_config:
+  has_quiz: true
+  has_lab: true
+  has_flashcards: true
+  pass_score_percentage: 80
+```
+
+# Lesson 2.1 DataFrames, Series, & High-Speed Data Ingestion
+
+## 1. Overview & Learning Objectives [id: overview]
+
+- **Estimated Time**: 45 Minutes (15m Reading | 20m Practice | 10m Quiz)
+- **Difficulty Level**: ⭐ Beginner
+- **Prerequisites**: [Lesson 1.2 Vectorization & Broadcasting](file:///d:/My%20Drive/all%20files/PROJECT%20FILES/notes/docs/curriculum/_09_python_data_science/_09_02_vectorization_slicing_and_broadcasting.md)
+- **XP Reward**: +50 XP
+
+### Learning Objectives
+By the end of this lesson, you will be able to:
+1. Explain the relational data architecture of Pandas **`Series`** and **`DataFrame`** objects.
+2. Ingest structured datasets efficiently using **`pd.read_csv()`** and **`pd.read_parquet()`**.
+3. Inspect DataFrame schema metadata using `info()`, `describe()`, and `memory_usage()`.
+4. Reduce memory consumption by casting object columns to **`category`** data types.
+
+---
+
+## 2. Environment & Prerequisites [id: prerequisites]
+
+Install `pandas` and `pyarrow`:
+
+```bash
+pip install pandas pyarrow
+```
+
+---
+
+## 3. Theoretical Foundations [id: theory]
+
+### 3.1 Pandas Data Structures Architecture
+Built directly on top of NumPy, Pandas provides two primary data structures:
+- **`Series`**: A 1-dimensional array with labeled indices and homogeneous data types.
+- **`DataFrame`**: A 2-dimensional tabular structure with labeled axes (rows and columns), where each column is an independent Pandas `Series`.
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          PANDAS DATAFRAME ARCHITECTURE                      │
+├─────────────┬──────────────────┬──────────────────┬─────────────────────────┤
+│ Index       │ Column: 'age'    │ Column: 'dept'   │ Column: 'salary'        │
+│             │ (Series: int64)  │ (Series: category│ (Series: float64)       │
+├─────────────┼──────────────────┼──────────────────┼─────────────────────────┤
+│ 0           │ 29               │ Engineering      │ 85000.0                 │
+│ 1           │ 34               │ Marketing        │ 62000.0                 │
+│ 2           │ 41               │ Engineering      │ 110000.0                │
+└─────────────┴──────────────────┴──────────────────┴─────────────────────────┘
+```
+
+> [!TIP]
+> **Parquet vs CSV**: Apache Parquet is a columnar binary file format. Reading Parquet files via `pd.read_parquet()` is up to 10x faster and consumes 80% less disk space than reading raw CSV files!
+
+---
+
+## 4. Architecture & Diagram Visualizations [id: diagram]
+
+```mermaid
+flowchart TD
+    Disk[CSV / Apache Parquet File on Disk] --> Read["pd.read_parquet() / pd.read_csv()"]
+    Read --> DF["Pandas DataFrame Object in RAM"]
+    DF --> Struct["Index + Column Series (NumPy ndarrays in C-Memory)"]
+    DF --> Inspect["Inspect via df.info() & df.memory_usage(deep=True)"]
+```
+
+---
+
+## 5. Code & Hardware Implementation [id: syntax]
+
+```python
+# Pandas Ingestion & Memory Optimization (pandas_ingestion.py)
+import pandas as pd
+import numpy as np
+
+# 1. Create Sample Synthetic Dataset
+data = {
+    "employee_id": range(1000, 1005),
+    "name": ["Alice", "Bob", "Charlie", "David", "Eve"],
+    "department": ["Engineering", "Marketing", "Engineering", "Finance", "Marketing"],
+    "salary": [95000.50, 62000.00, 115000.75, 88000.00, 64000.25],
+    "join_date": pd.date_range(start="2022-01-01", periods=5, freq="D")
+}
+
+df = pd.DataFrame(data)
+
+print("==================================================")
+print("             PANDAS DATAFRAME REPORT               ")
+print("==================================================")
+print(f"DataFrame Shape: {df.shape}")
+print(f"\nFirst 3 Rows:\n{df.head(3)}\n")
+
+# 2. Inspect Memory Footprint
+print("--- Initial Memory Usage ---")
+print(df.info(memory_usage="deep"))
+
+# 3. Optimize Memory: Cast 'department' from object to category!
+df["department"] = df["department"].astype("category")
+
+print("\n--- Optimized Memory Usage (After Categorical Cast) ---")
+print(f"Department Column Dtype: {df['department'].dtype}")
+print(f"Total Deep Memory: {df.memory_usage(deep=True).sum()} Bytes")
+
+# 4. Ingest and Export Data
+df.to_parquet("employees.parquet", index=False)
+reloaded_df = pd.read_parquet("employees.parquet")
+print(f"\nSuccessfully reloaded {len(reloaded_df)} rows from Parquet file!")
+```
+
+---
+
+## 6. Enterprise Real-World Applications [id: examples]
+
+- **ETL Data Engineering Pipelines**: Enterprise analytics engines load gigabyte-scale transaction datasets using `pd.read_parquet()`, casting string status columns to `category` to reduce RAM usage from 16 GB to under 3 GB during batch processing.
+
+---
+
+## 7. Guided Step-by-Step Hands-On Exercise [id: exercises]
+
+1. Save code as `pandas_ingestion.py`.
+2. Run `python pandas_ingestion.py`.
+3. Inspect deep memory usage before and after casting `department` to `category`!
+
+---
+
+## 8. Common Pitfalls & Troubleshooting [id: common_mistakes]
+
+| Bug / Error | Root Cause | Engineering Solution |
+| :--- | :--- | :--- |
+| **High RAM Memory Crashes (OOM)** | Ingesting massive CSV files with default `object` dtypes for repeated string columns. | Specify `dtype={'col': 'category'}` inside `pd.read_csv()` or use `chunksize` batching. |
+
+---
+
+## 9. Best Practices & Optimization [id: best_practices]
+
+- **Use Apache Parquet Format**: Store analytical datasets in `.parquet` format for fast columnar reads and compression.
+
+---
+
+## 10. Industry Interview Q&A [id: interview_qa]
+
+### Q1: Why does converting string columns with low cardinality to the `category` dtype in Pandas significantly reduce memory usage?
+**Answer**: By default, string columns store Python string object pointers for every row. The `category` dtype uses dictionary encoding: unique strings are stored once in an integer lookup table, and each row stores only a small integer index (e.g. 8-bit `int8`), dramatically reducing memory consumption for columns with repeated values.
+
+---
+
+## 11. Self-Assessment Quiz [id: quiz]
+
+```json
+{
+  "quiz_title": "Lesson 2.1 Pandas Ingestion Assessment",
+  "questions": [
+    {
+      "question_id": "Q1",
+      "type": "multiple_choice",
+      "question_text": "Which columnar file format offers up to 10x faster ingestion speed than CSV in Pandas?",
+      "options": ["Apache Parquet", "JSON", "XML", "HTML"],
+      "correct_answer_index": 0,
+      "explanation": "Apache Parquet is a binary columnar format optimized for fast reads."
+    }
+  ]
+}
+```
+
+---
+
+## 12. Portfolio Assignment & Challenge [id: lab]
+
+Load a dataset, inspect deep memory usage with `info()`, and convert string columns to `category`.
+
+---
+
+## 13. Spaced Repetition Flashcards [id: flashcards]
+
+**Front**: What Pandas method returns summary statistics (mean, std, min, max, quartiles) for numeric columns?
+**Back**: `df.describe()`.
+<!-- flashcard:end -->
+
+---
+
+## 14. Summary & Cheat Sheet [id: summary]
+
+```python
+df = pd.read_parquet("data.parquet")
+df["dept"] = df["dept"].astype("category")
+print(df.info(memory_usage="deep"))
+```

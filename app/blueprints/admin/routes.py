@@ -144,3 +144,120 @@ def process_review(lesson_id: int):
         flash("Invalid review action.", "error")
         
     return redirect(url_for("admin.review_queue"))
+
+
+# ── Course Coverage ──────────────────────────────────────────────────────────
+
+from app.core.constants import CourseCoverage, COURSE_COVERAGE_LABELS
+
+
+@admin_bp.route("/lessons/<int:lesson_id>/coverage", methods=["GET"])
+@login_required
+@require_min_role("admin")
+def get_lesson_coverage(lesson_id: int):
+    """Return the current course_coverage value for a lesson (JSON)."""
+    lesson = db.session.get(Lesson, lesson_id)
+    if not lesson:
+        return jsonify({"status": "error", "message": "Lesson not found"}), 404
+    return jsonify({
+        "status": "ok",
+        "lesson_id": lesson.id,
+        "lesson_title": lesson.title,
+        "course_coverage": lesson.course_coverage,
+        "coverage_label": lesson.coverage_label,
+        "coverage_emoji": lesson.coverage_emoji,
+    })
+
+
+@admin_bp.route("/lessons/<int:lesson_id>/coverage", methods=["POST"])
+@login_required
+@require_min_role("admin")
+def update_lesson_coverage(lesson_id: int):
+    """
+    Update the course_coverage value for a lesson.
+    Accepts JSON body: {"course_coverage": "covered_in_class"}
+    or form body with the same field name.
+    """
+    lesson = db.session.get(Lesson, lesson_id)
+    if not lesson:
+        return jsonify({"status": "error", "message": "Lesson not found"}), 404
+
+    # Support both JSON and form submissions
+    if request.is_json:
+        data = request.get_json() or {}
+    else:
+        data = request.form
+
+    new_value = data.get("course_coverage", "").strip()
+
+    # Validate against allowed enum values
+    allowed = {c.value for c in CourseCoverage}
+    if new_value not in allowed:
+        return jsonify({
+            "status": "error",
+            "message": f"Invalid value '{new_value}'. Allowed: {sorted(allowed)}"
+        }), 400
+
+    lesson.course_coverage = new_value
+    db.session.commit()
+
+    return jsonify({
+        "status": "ok",
+        "lesson_id": lesson.id,
+        "lesson_title": lesson.title,
+        "course_coverage": lesson.course_coverage,
+        "coverage_label": lesson.coverage_label,
+        "coverage_emoji": lesson.coverage_emoji,
+    })
+
+
+@admin_bp.route("/coverage-overview")
+@login_required
+@require_min_role("admin")
+def coverage_overview():
+    """
+    Dashboard showing coverage distribution across all lessons.
+    Renders a summary of how many lessons are in each coverage category.
+    """
+    from sqlalchemy import func
+    from app.domains.content.models import Module
+
+    coverage_counts = (
+        db.session.query(Lesson.course_coverage, func.count(Lesson.id))
+        .filter(Lesson.is_deleted == False)
+        .group_by(Lesson.course_coverage)
+        .all()
+    )
+
+    # Build display-friendly summary
+    summary = []
+    for value, count in coverage_counts:
+        label_data = COURSE_COVERAGE_LABELS.get(value, ("❓", value))
+        summary.append({
+            "value": value,
+            "emoji": label_data[0],
+            "label": label_data[1],
+            "count": count,
+        })
+
+    # All lessons list with their coverage
+    lessons = (
+        Lesson.query
+        .join(Module)
+        .filter(Lesson.is_deleted == False)
+        .order_by(Module.course_id, Module.sort_order, Lesson.sort_order)
+        .all()
+    )
+
+    coverage_values = [
+        {"value": c.value, "label": COURSE_COVERAGE_LABELS[c][1], "emoji": COURSE_COVERAGE_LABELS[c][0]}
+        for c in CourseCoverage
+    ]
+
+    return render_template(
+        "admin/coverage_overview.html",
+        summary=summary,
+        lessons=lessons,
+        coverage_values=coverage_values,
+    )
+

@@ -1,0 +1,5 @@
+# Pruning and Sparsity in LLMs
+
+> **Course:** Data Science | **Module:** Module 97 | **Difficulty:** intermediate
+
+<!-- Placeholder — Write notes following NOTE_TEMPLATE.md -->

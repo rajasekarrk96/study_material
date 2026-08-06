@@ -1,0 +1,14 @@
+{
+  "package_id": "frontend-development-lp-001",
+  "package_type": "learning_paths",
+  "course_name": "Frontend Development",
+  "version": "1.0",
+  "source_syllabus": "docs/syllabus/learning_paths/frontend-engineering.md",
+  "source_curriculum": "docs/curriculum/foundations/frontend/",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "frontend_contributor",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

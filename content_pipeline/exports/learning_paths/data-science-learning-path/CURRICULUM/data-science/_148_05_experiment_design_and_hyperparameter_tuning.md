@@ -1,0 +1,5 @@
+# Experiment Design and Hyperparameter Tuning
+
+> **Course:** Data Science | **Module:** Module 148 | **Difficulty:** intermediate
+
+<!-- Placeholder — Write notes following NOTE_TEMPLATE.md -->

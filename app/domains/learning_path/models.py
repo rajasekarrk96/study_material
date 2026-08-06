@@ -1,11 +1,12 @@
 """
-Learning OS — Learning Paths Domain Models  (v3.0 Modular Catalog)
+Learning OS — Learning Paths Domain Models  (v4.0 Four-Tier Architecture)
 ==================================================================
-LearningPath          — a curated sequence of courses (Python Full Stack, AI Engineer, etc.)
-PathCourse            — join table: path ↔ course, with section label + required flag
-PathPrerequisite      — per-course prerequisite graph
-UserCourseProgress    — user progress per individual course
-UserLessonProgress    — user progress per individual lesson
+LearningPathCategory      — browse groupings (Web, Data & AI, IoT, Cloud)
+LearningPath              — a curated sequence of courses (Python Full Stack, AI Engineer, etc.)
+PathCourse                — join table: path ↔ course, with section label + required flag
+PathPrerequisite          — per-course prerequisite graph
+UserCourseProgress        — user progress per individual course
+UserLessonProgress        — user progress per individual lesson
 UserLearningPathProgress  — user progress across an entire learning path
 LearningPathCertificate   — certificate definition for completing a path
 UserLearningPathCertificate — issued path-level certificates
@@ -13,6 +14,41 @@ UserLearningPathCertificate — issued path-level certificates
 from datetime import datetime
 from app.core.extensions import db
 from app.core.base_model import TimestampMixin
+
+
+# ────────────────────────────────────────────────────────────
+# Learning Path Category  (browse groupings for the 4-tier catalog)
+# ────────────────────────────────────────────────────────────
+
+class LearningPathCategory(db.Model, TimestampMixin):
+    """
+    Groups learning paths into high-level browse categories.
+
+    Examples: "Web Development", "Data & AI", "IoT & Embedded", "Cloud & DevOps"
+
+    This is a pure UI-grouping model. It does not affect course content or
+    student progress in any way.
+    """
+    __tablename__ = "learning_path_categories"
+
+    id          = db.Column(db.Integer, primary_key=True)
+    name        = db.Column(db.String(100), unique=True, nullable=False)
+    slug        = db.Column(db.String(120), unique=True, nullable=False)  # e.g. "web-development"
+    description = db.Column(db.Text)
+    icon        = db.Column(db.String(100))   # FontAwesome class or emoji
+    color       = db.Column(db.String(20))    # hex color for UI cards
+    sort_order  = db.Column(db.Integer, default=0)
+    is_active   = db.Column(db.Boolean, default=True)
+
+    paths = db.relationship(
+        "LearningPath",
+        backref="lp_category",
+        lazy="dynamic",
+        foreign_keys="[LearningPath.category_id]",
+    )
+
+    def __repr__(self):
+        return f"<LearningPathCategory {self.name}>"
 
 
 # ─────────────────────────────────────────────────────────────
@@ -36,6 +72,18 @@ class LearningPath(db.Model, TimestampMixin):
     is_featured      = db.Column(db.Boolean, default=False, nullable=False)
     sort_order       = db.Column(db.Integer, default=0)
 
+    # ── 4-tier architecture fields ──────────────────────────────────────────
+    # Browse domain for the Paths tab: web|data|iot|cloud|devops|qa
+    domain           = db.Column(db.String(50), nullable=True, index=True)
+    # Denormalized count of prerequisite courses (for catalog cards)
+    prerequisite_count = db.Column(db.Integer, default=0, nullable=False, server_default="0")
+    # FK to LearningPathCategory (browse grouping)
+    category_id      = db.Column(
+        db.Integer,
+        db.ForeignKey("learning_path_categories.id"),
+        nullable=True,
+    )
+
     courses     = db.relationship(
         "PathCourse",
         back_populates="path",
@@ -49,7 +97,7 @@ class LearningPath(db.Model, TimestampMixin):
         cascade="all, delete-orphan"
     )
 
-    # ── computed helpers ─────────────────────────────────────
+    # ── computed helpers ───────────────────────────────────────────────
     @property
     def required_courses(self):
         return [pc for pc in self.courses if pc.is_required]
@@ -76,11 +124,25 @@ class PathCourse(db.Model):
     is_required   = db.Column(db.Boolean, default=True, nullable=False)
     section_label = db.Column(db.String(100))   # e.g. "Frontend", "Backend", "Database"
 
+    # ── 4-tier architecture fields ──────────────────────────────────────────
+    # Role of this course within the path context
+    role = db.Column(
+        db.String(30),
+        default="core",
+        nullable=False,
+        server_default="core",
+    )
+    # values: "prerequisite" | "core" | "elective" | "project"
+
+    # Estimated hours for THIS course within THIS path context
+    # (may differ from the course's global estimated_hours)
+    estimated_hours_in_path = db.Column(db.Integer, nullable=True)
+
     path   = db.relationship("LearningPath", back_populates="courses")
     course = db.relationship("Course")
 
     def __repr__(self):
-        return f"<PathCourse path={self.path_id} course={self.course_id} section={self.section_label}>"
+        return f"<PathCourse path={self.path_id} course={self.course_id} role={self.role} section={self.section_label}>"
 
 
 # ─────────────────────────────────────────────────────────────

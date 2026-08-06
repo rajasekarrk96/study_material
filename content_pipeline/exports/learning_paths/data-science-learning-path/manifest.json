@@ -1,0 +1,14 @@
+{
+  "package_id": "data-science-lp-001",
+  "package_type": "learning_paths",
+  "course_name": "Data Science & Data Analytics",
+  "version": "1.0",
+  "source_syllabus": "docs/syllabus/learning_paths/data-science-path.md",
+  "source_curriculum": "docs/curriculum/specializations/",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "ds_contributor",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

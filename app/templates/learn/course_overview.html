@@ -246,9 +246,19 @@
                                                     {{ type_icon }} {{ lesson.title }}
                                                 </span>
                                             </div>
-                                            <span style="font-size: 0.72rem; color: var(--text-muted); font-family: monospace; margin-left: 8px;">
-                                                {{ lesson.estimated_minutes }}m
-                                            </span>
+                                            <div style="display: flex; align-items: center; gap: 6px; flex-shrink: 0; margin-left: 8px;">
+                                                {# Course Coverage badge #}
+                                                {% if lesson.course_coverage == 'covered_in_class' %}
+                                                    <span title="Covered in Class" style="font-size: 0.72rem; opacity: 0.7;">🟢</span>
+                                                {% elif lesson.course_coverage == 'optional_discussion' %}
+                                                    <span title="Optional Discussion" style="font-size: 0.72rem; background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.3); border-radius: 4px; padding: 1px 5px; color: #fbbf24;">🟡</span>
+                                                {% elif lesson.course_coverage == 'self_learning' %}
+                                                    <span title="Self Learning" style="font-size: 0.72rem; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); border-radius: 4px; padding: 1px 5px; color: #f87171;">🔴</span>
+                                                {% endif %}
+                                                <span style="font-size: 0.72rem; color: var(--text-muted); font-family: monospace;">
+                                                    {{ lesson.estimated_minutes }}m
+                                                </span>
+                                            </div>
                                         </a>
                                     </li>
                                 {% else %}
