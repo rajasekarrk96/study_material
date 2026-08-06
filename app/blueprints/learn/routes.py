@@ -19,6 +19,33 @@ def _verify_course_prerequisites(course_id: int):
             abort(403, f"Prerequisites not met. You must first complete the prerequisite course: {p.prerequisite.title}")
 
 
+def _verify_course_access(course) -> bool:
+    """Verifies student course access based on free status or active UserCourse mapping."""
+    if current_user.role and current_user.role.name in ["super_admin", "admin", "editor", "reviewer", "author"]:
+        return True
+
+    if course.is_free:
+        return True
+
+    from app.domains.auth.models import UserCourse
+    from datetime import datetime
+    enrollment = UserCourse.query.filter_by(
+        user_id=current_user.id,
+        course_id=course.id
+    ).first()
+
+    if not enrollment:
+        return False
+        
+    if enrollment.status != "Active":
+        return False
+
+    if enrollment.expiry and enrollment.expiry < datetime.utcnow():
+        return False
+
+    return True
+
+
 @learn_bp.route("/<course_slug>/")
 @login_required
 def course_overview(course_slug: str):
@@ -26,6 +53,10 @@ def course_overview(course_slug: str):
     
     # Check prerequisites
     _verify_course_prerequisites(course.id)
+
+    # Check access enrollment
+    if not _verify_course_access(course):
+        abort(403, f"Access Denied: You must be actively enrolled to access '{course.title}'.")
 
     modules = course.modules.filter_by(is_published=True).order_by(Module.sort_order).all()
 
@@ -107,6 +138,17 @@ def lesson_view(course_slug: str, module_slug: str, lesson_slug: str):
     lesson = Lesson.query.filter_by(
         module_id=module.id, slug=lesson_slug, is_deleted=False
     ).first_or_404()
+
+    # If first lesson of course, allow preview bypass even if not enrolled
+    first_module = course.modules.order_by(Module.sort_order.asc()).first()
+    is_preview_lesson = False
+    if first_module and first_module.id == module.id:
+        first_lesson = first_module.lessons.filter_by(status="published", is_deleted=False).order_by(Lesson.sort_order.asc()).first()
+        if first_lesson and first_lesson.id == lesson.id:
+            is_preview_lesson = True
+
+    if not is_preview_lesson and not _verify_course_access(course):
+        abort(403, f"Access Denied: You must be actively enrolled to view this lesson.")
 
     # Increment view count
     lesson.view_count = (lesson.view_count or 0) + 1

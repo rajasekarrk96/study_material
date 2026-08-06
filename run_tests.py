@@ -1698,6 +1698,60 @@ class EventServiceTestCase(unittest.TestCase):
         db.session.refresh(proposal)
         self.assertEqual(proposal.status, "Merged")
 
+    def test_student_experience_access_filters(self):
+        """Test student access controls to non-free courses, preview bypass rules, and enrollment requirements."""
+        from app.domains.auth.models import Role, UserCourse
+        from app.domains.content.models import Lesson, LessonSection
+
+        # 1. Setup a non-free course
+        course = self.lesson1.module.course
+        course.is_free = False
+        db.session.commit()
+
+        # Setup a second lesson that is NOT a preview
+        lesson2 = Lesson(module_id=self.lesson1.module_id, title="Variables Advanced", slug="variables-adv", sort_order=2, status="published")
+        db.session.add(lesson2)
+        db.session.flush()
+
+        # Seed published sections for both lessons
+        sec1 = LessonSection(lesson_id=self.lesson1.id, section_type="explanation", title="Intro", content_markdown="Previewable content", is_visible=True)
+        sec2 = LessonSection(lesson_id=lesson2.id, section_type="explanation", title="Adv", content_markdown="Restricted content", is_visible=True)
+        db.session.add(sec1)
+        db.session.add(sec2)
+        db.session.commit()
+
+        # 2. Demote user to student role
+        student_role = Role.query.filter_by(name="student").first()
+        self.user.role_id = student_role.id
+        db.session.commit()
+
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        # 3. Access Course Overview (should return 403 because not enrolled)
+        res_overview = self.client.get(f"/learn/{course.slug}/")
+        self.assertEqual(res_overview.status_code, 403)
+
+        # 4. Access First Lesson (should return 200 because it bypasses as a preview lesson!)
+        res_lesson1 = self.client.get(f"/learn/{course.slug}/{self.lesson1.module.slug}/{self.lesson1.slug}/")
+        self.assertEqual(res_lesson1.status_code, 200)
+
+        # 5. Access Second Lesson (should return 403 because it is restricted)
+        res_lesson2 = self.client.get(f"/learn/{course.slug}/{self.lesson1.module.slug}/{lesson2.slug}/")
+        self.assertEqual(res_lesson2.status_code, 403)
+
+        # 6. Enroll student in the course
+        enrollment = UserCourse(user_id=self.user.id, course_id=course.id, status="Active")
+        db.session.add(enrollment)
+        db.session.commit()
+
+        # 7. Access Course Overview & Second Lesson (should now return 200)
+        res_overview_ok = self.client.get(f"/learn/{course.slug}/")
+        self.assertEqual(res_overview_ok.status_code, 200)
+
+        res_lesson2_ok = self.client.get(f"/learn/{course.slug}/{self.lesson1.module.slug}/{lesson2.slug}/")
+        self.assertEqual(res_lesson2_ok.status_code, 200)
+
 
 if __name__ == "__main__":
     unittest.main()
