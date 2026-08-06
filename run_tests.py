@@ -1523,6 +1523,46 @@ class EventServiceTestCase(unittest.TestCase):
         self.assertEqual(release.version_name, "Fall 2026")
         self.assertIn("Content version alpha", release.snapshot_json)
 
+    def test_content_pipeline_import_export(self):
+        """Test curriculum course structure package exports, imports, and auto-generated content proposals."""
+        import json
+        from app.services.pipeline_service import ContentPipelineService
+        from app.domains.workflow.models import ContentProposal, DraftLessonSection
+
+        # 1. Seed a published section for lesson1 first so it has sections to export
+        from app.domains.content.models import LessonSection
+        pub_sec = LessonSection(
+            lesson_id=self.lesson1.id,
+            section_type="explanation",
+            title="Intro",
+            content_markdown="Original text",
+            is_visible=True
+        )
+        db.session.add(pub_sec)
+        db.session.commit()
+
+        # 2. Export course
+        course_id = self.lesson1.module.course.id
+        exported_json = ContentPipelineService.export_course(course_id)
+        self.assertIsNotNone(exported_json)
+        self.assertIn("Git Fundamentals", exported_json)
+
+        # Modify the exported content
+        package_dict = json.loads(exported_json)
+        package_dict["modules"][0]["lessons"][0]["sections"][0]["content_markdown"] = "Imported pipeline content beta"
+        modified_json = json.dumps(package_dict)
+
+        # 2. Import package to trigger auto-proposal
+        proposal = ContentPipelineService.import_course_package(course_id, modified_json, self.user.id)
+        self.assertIsNotNone(proposal)
+        self.assertEqual(proposal.status, "Draft")
+        self.assertEqual(proposal.proposal_type, "CONTENT_UPDATE")
+
+        # 3. Verify drafts updated
+        drafts = DraftLessonSection.query.filter_by(lesson_id=self.lesson1.id).all()
+        self.assertGreater(len(drafts), 0)
+        self.assertEqual(drafts[0].content_markdown, "Imported pipeline content beta")
+
 
 if __name__ == "__main__":
     unittest.main()
