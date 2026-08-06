@@ -1,6 +1,6 @@
 """
-Learning OS — FTS5 Indexing & Search Service.
-Manages the virtual SQLite search index table.
+Learning OS — FTS5 Indexing & Decoupled Search Service.
+Manages both SQLite virtual search tables and decoupled keyword search indices.
 """
 import logging
 from app.core.extensions import db
@@ -17,6 +17,91 @@ class SearchIndexService:
         except Exception:
             return True
 
+    # ── 1. Decoupled Production-Safe Search Index ──────────────────────────────
+    @staticmethod
+    def index_document(target_type: str, target_id: int, content: str) -> None:
+        """Indexes a course, lesson, or topic into the decoupled SearchDocument structures."""
+        from app.domains.knowledge.models import SearchDocument, SearchChunk, SearchKeyword
+        
+        # Clean query: find or create document
+        doc = SearchDocument.query.filter_by(target_type=target_type, target_id=target_id).first()
+        if not doc:
+            doc = SearchDocument(target_type=target_type, target_id=target_id, content=content)
+            db.session.add(doc)
+            db.session.flush()
+        else:
+            doc.content = content
+            # Delete old chunks and keywords cascade
+            SearchChunk.query.filter_by(document_id=doc.id).delete()
+            db.session.flush()
+
+        # Split content into chunks of e.g. 500 characters
+        chunk_size = 500
+        chunks_text = [content[i:i+chunk_size] for i in range(0, len(content), chunk_size)]
+        
+        stop_words = {'the', 'a', 'an', 'and', 'or', 'but', 'is', 'are', 'was', 'were', 'to', 'for', 'of', 'in', 'on', 'at', 'by', 'with', 'from', 'as', 'it', 'this', 'that', 'these', 'those', 'they', 'them', 'their', 'his', 'her', 'its'}
+        
+        for idx, text_val in enumerate(chunks_text):
+            if not text_val.strip():
+                continue
+            chunk = SearchChunk(document_id=doc.id, chunk_index=idx, text_chunk=text_val)
+            db.session.add(chunk)
+            db.session.flush()
+            
+            # Extract keywords (words of length 3 to 50)
+            import re
+            words = re.findall(r'\b\w{3,50}\b', text_val.lower())
+            unique_words = set(words) - stop_words
+            
+            for word in unique_words:
+                kw = SearchKeyword(chunk_id=chunk.id, keyword=word)
+                db.session.add(kw)
+        
+        db.session.commit()
+
+    @staticmethod
+    def decoupled_search(query_string: str, limit: int = 20) -> list[dict]:
+        """Perform a keywords matching search against the search index tables, return target documents."""
+        from app.domains.knowledge.models import SearchDocument, SearchChunk, SearchKeyword
+        import re
+        
+        query_words = re.findall(r'\b\w{3,50}\b', query_string.lower())
+        if not query_words:
+            return []
+            
+        # Count frequency of matches per chunk
+        from sqlalchemy import func
+        matches = db.session.query(
+            SearchChunk.document_id,
+            SearchChunk.chunk_index,
+            SearchChunk.text_chunk,
+            func.count(SearchKeyword.id).label("score")
+        ).join(
+            SearchKeyword, SearchKeyword.chunk_id == SearchChunk.id
+        ).filter(
+            SearchKeyword.keyword.in_(query_words)
+        ).group_by(
+            SearchChunk.document_id,
+            SearchChunk.chunk_index,
+            SearchChunk.text_chunk
+        ).order_by(
+            func.count(SearchKeyword.id).desc()
+        ).limit(limit).all()
+        
+        results = []
+        for doc_id, chunk_idx, chunk_text, score in matches:
+            doc = db.session.get(SearchDocument, doc_id)
+            if doc:
+                results.append({
+                    "target_type": doc.target_type,
+                    "target_id": doc.target_id,
+                    "chunk_index": chunk_idx,
+                    "text_chunk": chunk_text,
+                    "score": score
+                })
+        return results
+
+    # ── 2. Legacy SQLite-only FTS5 Search Index ────────────────────────────────
     @staticmethod
     def rebuild_search_index():
         """Create and populate the SQLite FTS5 virtual table for lessons search."""
@@ -28,7 +113,6 @@ class SearchIndexService:
         try:
             cursor = connection.cursor()
             
-            # 1. Create virtual table using FTS5 extension
             cursor.execute("""
                 CREATE VIRTUAL TABLE IF NOT EXISTS lesson_search_idx USING fts5(
                     lesson_id,
@@ -39,10 +123,8 @@ class SearchIndexService:
                 );
             """)
             
-            # 2. Clear old index records
             cursor.execute("DELETE FROM lesson_search_idx;")
             
-            # 3. Query all published lessons
             cursor.execute("""
                 SELECT id, title, summary
                 FROM lessons
@@ -52,7 +134,6 @@ class SearchIndexService:
             
             for row in lessons:
                 lesson_id, title, summary = row
-                # Query content markdown from visible lesson sections
                 cursor.execute("""
                     SELECT content_markdown 
                     FROM lesson_sections 
@@ -80,7 +161,6 @@ class SearchIndexService:
             return []
 
         if not SearchIndexService.is_sqlite():
-            # Fallback to standard LIKE matching
             pattern = f"%{query_string}%"
             results = Lesson.query.filter(
                 (Lesson.title.ilike(pattern)) |
@@ -91,13 +171,10 @@ class SearchIndexService:
         connection = db.engine.raw_connection()
         try:
             cursor = connection.cursor()
-            # Verify if FTS5 table exists
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='lesson_search_idx';")
             if not cursor.fetchone():
-                # Rebuild index if missing
                 SearchIndexService.rebuild_search_index()
             
-            # Perform MATCH search
             cursor.execute("""
                 SELECT lesson_id, title, rank 
                 FROM lesson_search_idx 

@@ -1332,6 +1332,55 @@ class EventServiceTestCase(unittest.TestCase):
             login_user(synced_user)
             self.assertEqual(mock_action(), "ok")
 
+    def test_knowledge_layer_media_and_decoupled_search(self):
+        """Test media library uploads, taggings, references, and decoupled search index building & matching."""
+        from app.services.media_service import MediaService
+        from app.services.search_service import SearchIndexService
+        from app.domains.knowledge.models import Media, MediaFolder, MediaReference, SearchDocument
+
+        # 1. Test MediaFolder & Media registration
+        folder = MediaService.get_or_create_folder("Diagrams")
+        self.assertIsNotNone(folder)
+        self.assertEqual(folder.name, "Diagrams")
+
+        media = MediaService.add_media("flowchart.png", "/uploads/flowchart.png", "image/png", 1024, folder.id)
+        self.assertIsNotNone(media)
+        self.assertEqual(media.filename, "flowchart.png")
+
+        # 2. Test Media tagging
+        MediaService.tag_media(media.id, ["Architecture", "System Flow"])
+
+        from app.domains.knowledge.models import MediaTag
+        tags_linked = MediaTag.query.filter_by(media_id=media.id).all()
+        self.assertEqual(len(tags_linked), 2)
+
+        # 3. Test Media referencing
+        ref = MediaService.add_reference(media.id, "lesson_section", 45)
+        self.assertIsNotNone(ref)
+
+        referenced_items = MediaService.get_referenced_media("lesson_section", 45)
+        self.assertEqual(len(referenced_items), 1)
+        self.assertEqual(referenced_items[0].id, media.id)
+
+        # Delete reference
+        MediaService.remove_reference(ref.id)
+        self.assertEqual(len(MediaService.get_referenced_media("lesson_section", 45)), 0)
+
+        # 4. Test Decoupled FTS Indexing & Search
+        doc_content = "SQLAlchemy is an SQL toolkit and Object Relational Mapper for Python."
+        SearchIndexService.index_document("lesson", 101, doc_content)
+
+        # Check document was created
+        doc = SearchDocument.query.filter_by(target_type="lesson", target_id=101).first()
+        self.assertIsNotNone(doc)
+        self.assertIn("SQLAlchemy", doc.content)
+
+        # Execute search query
+        search_results = SearchIndexService.decoupled_search("SQLAlchemy Toolkit")
+        self.assertGreater(len(search_results), 0)
+        self.assertEqual(search_results[0]["target_type"], "lesson")
+        self.assertEqual(search_results[0]["target_id"], 101)
+
 
 if __name__ == "__main__":
     unittest.main()
