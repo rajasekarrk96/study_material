@@ -36,6 +36,33 @@ def create_app() -> Flask:
     def load_user(user_id: str):
         return db.session.get(User, int(user_id))
 
+    # ── JWT SSO Request Interceptor ─────────────────────────────────────────
+    @app.before_request
+    def handle_jwt_sso():
+        if request.path.startswith("/static/"):
+            return
+        if request.endpoint == "auth.logout":
+            return
+
+        # If already authenticated, skip unless a fresh JWT token query parameter is explicitly provided
+        has_new_jwt_param = bool(request.args.get("jwt"))
+        if not current_user.is_authenticated or has_new_jwt_param:
+            token = request.args.get("jwt") or request.cookies.get("jwt") or request.cookies.get("token")
+            if not token:
+                auth_header = request.headers.get("Authorization")
+                if auth_header and auth_header.startswith("Bearer "):
+                    token = auth_header[7:]
+            
+            if token:
+                from app.domains.auth.providers import ExternalAuthProvider
+                provider = ExternalAuthProvider()
+                user = provider.authenticate(token)
+                if user:
+                    from flask_login import login_user
+                    from flask import session
+                    login_user(user)
+                    session["auth_source"] = "jwt"
+
     # ── Create tables & seed defaults ──────────────────────────────────────
     with app.app_context():
         _import_all_models()
@@ -147,6 +174,42 @@ def _seed_defaults() -> None:
             )
             db.session.add(admin_user)
             db.session.commit()
+
+    # Seed default permissions in PermissionMatrix
+    from app.domains.auth.models import PermissionMatrix
+    matrix_seeds = [
+        ("student", "view_notes", True),
+        ("student", "edit_draft", False),
+        ("student", "create_proposal", False),
+        ("student", "review_proposal", False),
+        ("student", "merge_proposal", False),
+        
+        ("author", "view_notes", True),
+        ("author", "edit_draft", True),
+        ("author", "create_proposal", True),
+        ("author", "review_proposal", False),
+        ("author", "merge_proposal", False),
+        
+        ("reviewer", "view_notes", True),
+        ("reviewer", "edit_draft", True),
+        ("reviewer", "create_proposal", True),
+        ("reviewer", "review_proposal", True),
+        ("reviewer", "merge_proposal", False),
+        
+        ("editor", "view_notes", True),
+        ("editor", "edit_draft", True),
+        ("editor", "create_proposal", True),
+        ("editor", "review_proposal", True),
+        ("editor", "merge_proposal", False),
+    ]
+    for r_name, p_code, granted in matrix_seeds:
+        role = Role.query.filter_by(name=r_name).first()
+        if role:
+            entry = PermissionMatrix.query.filter_by(role_id=role.id, permission_code=p_code).first()
+            if not entry:
+                entry = PermissionMatrix(role_id=role.id, permission_code=p_code, is_granted=granted)
+                db.session.add(entry)
+    db.session.commit()
 
     # Seed default certificates for existing courses
     # Wrapped in try/except to handle the migration window where new columns

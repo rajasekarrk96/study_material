@@ -1234,6 +1234,104 @@ class EventServiceTestCase(unittest.TestCase):
         self.assertIn(b"<loc>", sitemap_data)
         self.assertIn(b"git-fundamentals", sitemap_data)
 
+    def test_auth_gateway_and_jwt_sso(self):
+        """Test local authentication, JWT SSO validation, user syncing, role mappings, and entitlements."""
+        import os
+        import jwt
+        from app.domains.auth.providers import get_auth_provider, LocalAuthProvider, ExternalAuthProvider
+        from app.domains.auth.models import User, Role, UserCourse
+        from app.domains.auth.decorators import permission_required
+        from flask import Flask
+
+        # 1. Test LocalAuthProvider
+        local_provider = LocalAuthProvider()
+        from werkzeug.security import generate_password_hash
+        local_role = Role.query.filter_by(name="student").first()
+        test_local_user = User(
+            email="localuser@bytesandboards.test",
+            username="localuser",
+            password_hash=generate_password_hash("password123"),
+            role_id=local_role.id
+        )
+        db.session.add(test_local_user)
+        db.session.commit()
+
+        # Test success login
+        auth_success = local_provider.authenticate("localuser@bytesandboards.test", "password123")
+        self.assertIsNotNone(auth_success)
+        self.assertEqual(auth_success.id, test_local_user.id)
+
+        # Test failure login
+        auth_fail = local_provider.authenticate("localuser@bytesandboards.test", "wrong-password")
+        self.assertIsNone(auth_fail)
+
+        # Seed roles & permissions for testing
+        staff_role = Role.query.filter_by(name="staff").first()
+        if not staff_role:
+            staff_role = Role(name="staff", display_name="Staff", level=5)
+            db.session.add(staff_role)
+            db.session.commit()
+
+        from app.domains.auth.models import PermissionMatrix
+        pm_entry = PermissionMatrix.query.filter_by(role_id=staff_role.id, permission_code="review_proposal").first()
+        if not pm_entry:
+            pm_entry = PermissionMatrix(role_id=staff_role.id, permission_code="review_proposal", is_granted=True)
+            db.session.add(pm_entry)
+            db.session.commit()
+
+        # 2. Test ExternalAuthProvider (JWT validation & user sync)
+        os.environ["AUTH_MODE"] = "JWT"
+        os.environ["JWT_SECRET_KEY"] = "super-secret"
+        os.environ["JWT_ALGORITHM"] = "HS256"
+
+        ext_provider = get_auth_provider()
+        self.assertIsInstance(ext_provider, ExternalAuthProvider)
+
+        # Generate token
+        token_payload = {
+            "email": "jwtuser@bytesandboards.test",
+            "username": "jwtuser",
+            "role": "editor",
+            "course_ids": [self.course.id]
+        }
+        token = jwt.encode(token_payload, "super-secret", algorithm="HS256")
+
+        # Authenticate
+        synced_user = ext_provider.authenticate(token)
+        self.assertIsNotNone(synced_user)
+        self.assertEqual(synced_user.email, "jwtuser@bytesandboards.test")
+
+        # Verify role mapping was resolved (editor -> staff)
+        staff_role = Role.query.filter_by(name="staff").first()
+        self.assertEqual(synced_user.role_id, staff_role.id)
+
+        # Verify course entitlement was synced
+        entitlement = UserCourse.query.filter_by(user_id=synced_user.id, course_id=self.course.id).first()
+        self.assertIsNotNone(entitlement)
+        self.assertEqual(entitlement.status, "Active")
+
+        # 3. Test AUTO mode query-string integration
+        os.environ["AUTH_MODE"] = "AUTO"
+
+        # Access a page with the token parameter — it should auto login
+        res = self.client.get(f"/search?jwt={token}")
+        self.assertEqual(res.status_code, 200)
+
+        # 4. Test permission_required decorator
+        from app.domains.auth.models import PermissionMatrix
+        # Verify the custom permission decorator
+        @permission_required("review_proposal")
+        def mock_action():
+            return "ok"
+
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(synced_user.id)
+
+        with self.app.test_request_context():
+            from flask_login import login_user
+            login_user(synced_user)
+            self.assertEqual(mock_action(), "ok")
+
 
 if __name__ == "__main__":
     unittest.main()
