@@ -1,0 +1,30 @@
+---
+id: "10_04_04"
+title: "Feature Selection: Embedded Methods"
+course: "Machine Learning"
+module: 4
+module_title: "Feature Engineering"
+lesson: 4
+version: "2.0"
+difficulty: "intermediate"
+duration_minutes: 60
+tags: ["lasso", "select-from-model", "permutation-importance"]
+prerequisites: []
+lab_required: true
+---
+
+# Feature Selection: Embedded Methods
+
+> **Status**: Syllabus stub. Full lesson content to be authored.
+
+---
+
+## Topics Covered
+
+*(See Phase 1 ML Syllabus for full topic and subtopic breakdown)*
+
+---
+
+## Learning Objectives
+
+- To be defined during content authoring.

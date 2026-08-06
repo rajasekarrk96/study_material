@@ -1,0 +1,14 @@
+{
+  "package_id": "prompt-engineering-package-001",
+  "package_type": "specializations",
+  "course_name": "Prompt Engineering",
+  "version": "1.0",
+  "source_syllabus": "docs\\syllabus\\electives\\prompt-engineering.md",
+  "source_curriculum": "docs\\curriculum\\electives\\49-prompt-engineering",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "contributor_name",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

@@ -1,0 +1,14 @@
+{
+  "package_id": "sql-server-package-001",
+  "package_type": "specializations",
+  "course_name": "Sql Server",
+  "version": "1.0",
+  "source_syllabus": "docs\\syllabus\\specializations\\sql-server.md",
+  "source_curriculum": "docs\\curriculum\\foundations\\backend\\14-sql-server",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "contributor_name",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

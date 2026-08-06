@@ -1,0 +1,14 @@
+{
+  "package_id": "rag-engineering-package-001",
+  "package_type": "specializations",
+  "course_name": "Rag Engineering",
+  "version": "1.0",
+  "source_syllabus": "docs\\syllabus\\electives\\rag-engineering.md",
+  "source_curriculum": "docs\\curriculum\\electives\\46-rag-engineering",
+  "export_date": "2026-08-06",
+  "status": "exported",
+  "assigned_to": "contributor_name",
+  "notes_version": 1,
+  "review_status": "pending",
+  "merge_status": "not_merged"
+}

@@ -1,13 +1,13 @@
 {
-  "package_id": "python-shared-001",
+  "package_id": "python-package-001",
   "package_type": "shared",
-  "course_name": "Python Programming",
+  "course_name": "Python",
   "version": "1.0",
-  "source_syllabus": "docs/syllabus/foundations/programming/_source_python_full_stack.md",
-  "source_curriculum": "docs/curriculum/foundations/programming/09-python-core",
+  "source_syllabus": "modular_sources",
+  "source_curriculum": "docs\\curriculum\\foundations\\programming\\10-advanced-python",
   "export_date": "2026-08-06",
   "status": "exported",
-  "assigned_to": "python_contributor",
+  "assigned_to": "contributor_name",
   "notes_version": 1,
   "review_status": "pending",
   "merge_status": "not_merged"
