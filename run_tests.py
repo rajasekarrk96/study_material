@@ -1439,6 +1439,90 @@ class EventServiceTestCase(unittest.TestCase):
         self.assertGreater(len(graph["nodes"]), 1)
         self.assertGreater(len(graph["edges"]), 0)
 
+    def test_editorial_workflow_lifecycle(self):
+        """Test draft saving, proposal creation, AI review, peer approval, admin merge, version history, rollback, and releases."""
+        from app.services.workflow_service import WorkflowService
+        from app.domains.workflow.models import (
+            DraftLessonSection, ContentProposal, ContentProposalSection, AIProposalReview,
+            ContentVersion, CurriculumRelease, Approval, ReviewComment, ActivityLog, NotificationQueue
+        )
+        from app.domains.content.models import LessonSection
+
+        # 1. Save draft sections
+        draft1 = WorkflowService.save_draft_section(
+            self.lesson1.id, "explanation", "Draft Intro", "Content version alpha", 0, self.user.id
+        )
+        self.assertIsNotNone(draft1)
+
+        drafts = WorkflowService.list_draft_sections(self.lesson1.id)
+        self.assertEqual(len(drafts), 1)
+
+        # 2. Create proposal
+        checklist = {"grammar_checked": True, "code_executed": True}
+        proposal = WorkflowService.create_proposal(
+            "CONTENT_UPDATE", "LESSON", self.lesson1.id, self.user.id, "Update intro", checklist
+        )
+        self.assertIsNotNone(proposal)
+        self.assertEqual(proposal.status, "Draft")
+        self.assertEqual(len(proposal.proposal_sections), 1)
+
+        # Submit proposal
+        proposal = WorkflowService.submit_proposal(proposal.id)
+        self.assertEqual(proposal.status, "Submitted")
+
+        # 3. AI review
+        ai_review = WorkflowService.run_ai_review(proposal.id)
+        self.assertEqual(ai_review.status, "Passed")
+        self.assertEqual(proposal.status, "AI_Review_Passed")
+
+        # 4. Peer approval
+        approval = WorkflowService.add_approval(proposal.id, self.user.id, "approved", "Approved by author")
+        self.assertEqual(proposal.status, "Approved")
+
+        # Add comment
+        comment = WorkflowService.add_comment(proposal.id, self.user.id, "Excellent edits")
+        self.assertIsNotNone(comment)
+
+        # 5. Merge proposal (Generates version snapshot)
+        version = WorkflowService.merge_proposal(proposal.id, self.user.id)
+        self.assertIsNotNone(version)
+        self.assertEqual(version.version_number, 1)
+
+        # Check published section was updated or inserted
+        pub_sec = LessonSection.query.filter_by(lesson_id=self.lesson1.id, section_type="explanation").first()
+        self.assertIsNotNone(pub_sec)
+        self.assertEqual(pub_sec.content_markdown, "Content version alpha")
+
+        # Save a new draft and merge to create version 2
+        WorkflowService.save_draft_section(
+            self.lesson1.id, "explanation", "Draft Intro V2", "Content version beta", 0, self.user.id
+        )
+        proposal2 = WorkflowService.create_proposal(
+            "CONTENT_UPDATE", "LESSON", self.lesson1.id, self.user.id, "Update intro v2", checklist
+        )
+        WorkflowService.submit_proposal(proposal2.id)
+        WorkflowService.add_approval(proposal2.id, self.user.id, "approved")
+        version2 = WorkflowService.merge_proposal(proposal2.id, self.user.id)
+        self.assertEqual(version2.version_number, 2)
+
+        # Verify published content is version 2
+        pub_sec = LessonSection.query.filter_by(lesson_id=self.lesson1.id, section_type="explanation").first()
+        self.assertEqual(pub_sec.content_markdown, "Content version beta")
+
+        # 6. Restore to version 1 (Rollback check)
+        success = WorkflowService.restore_version(version.id, self.user.id)
+        self.assertTrue(success)
+
+        # Verify published content was restored to version 1
+        pub_sec = LessonSection.query.filter_by(lesson_id=self.lesson1.id, section_type="explanation").first()
+        self.assertEqual(pub_sec.content_markdown, "Content version alpha")
+
+        # 7. Create curriculum release
+        release = WorkflowService.create_release("Fall 2026", "2026-F")
+        self.assertIsNotNone(release)
+        self.assertEqual(release.version_name, "Fall 2026")
+        self.assertIn("Content version alpha", release.snapshot_json)
+
 
 if __name__ == "__main__":
     unittest.main()
