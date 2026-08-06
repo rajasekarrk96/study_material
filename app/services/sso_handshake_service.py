@@ -80,3 +80,54 @@ class SSOHandshakeService:
 
         db.session.commit()
         return synced_count
+
+
+# ── Future SSO Service Interfaces (No Implementation Required) ───────────────
+
+class AuthenticationAPIServiceInterface:
+    """Interface for future JWT token generation, signature signoff, and external login gateway checks."""
+    
+    def generate_sso_token(self, user_claims: Dict) -> str:
+        """Generates a secure JWT token for the external user session."""
+        raise NotImplementedError
+
+    def verify_token_signature(self, token: str) -> Dict:
+        """Verifies JWT signature, algorithms, and expirations, returning decoded payload claims."""
+        raise NotImplementedError
+
+
+class AuthorizationAPIServiceInterface:
+    """Interface for resolving dynamic SSO role permissions and verifying against local DB mappings."""
+
+    def resolve_roles_from_claims(self, claims: Dict) -> str:
+        """Resolves external claims and maps roles to local role names (e.g. editor -> staff)."""
+        raise NotImplementedError
+
+    def assert_user_permissions(self, user_id: int, permission_code: str) -> bool:
+        """Asserts if a user is granted the specified permission in the permission matrix."""
+        raise NotImplementedError
+
+
+class UserSyncAPIServiceInterface:
+    """Interface for provisioning, creating, and updating local users based on external identity claims."""
+
+    def provision_external_user(self, claims: Dict) -> Dict:
+        """Dynamically provisions a user profile in the local database upon SSO handshake validation."""
+        raise NotImplementedError
+
+    def refresh_user_last_login(self, user_id: int) -> None:
+        """Updates user last login metadata in the local database."""
+        raise NotImplementedError
+
+
+class CourseEntitlementSyncAPIServiceInterface:
+    """Interface for synchronizing course enrollment metadata with external identity provider databases."""
+
+    def fetch_external_user_entitlements(self, user_id: int) -> List[Dict]:
+        """Fetches active course subscriptions and entitlements from the remote identity provider."""
+        raise NotImplementedError
+
+    def overwrite_entitlements_history(self, user_id: int, external_courses: List[Dict]) -> None:
+        """Overwrites local course permissions with external courses state tracking."""
+        raise NotImplementedError
+
