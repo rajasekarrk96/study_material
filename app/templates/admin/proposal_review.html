@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Review Proposal #{{ proposal.id }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .diff-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+    .diff-block {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        padding: 16px;
+        border-radius: 8px;
+        background: rgba(10, 10, 10, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        white-space: pre-wrap;
+        overflow-x: auto;
+        max-height: 400px;
+    }
+    .diff-original {
+        color: #f87171;
+        border-left: 4px solid #ef4444;
+    }
+    .diff-proposed {
+        color: #34d399;
+        border-left: 4px solid #10b981;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Header -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-8">
+            <h1 class="display-5 fw-bold text-white mb-2">Review Console: Proposal #{{ proposal.id }}</h1>
+            <p class="text-muted leading-relaxed">
+                Type: <span class="text-white fw-semibold">{{ proposal.proposal_type }}</span> &bull; 
+                Status: <span class="badge bg-primary">{{ proposal.status }}</span>
+            </p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <a href="{{ url_for('admin.list_proposals') }}" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Review Queue</a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Diff & Content Block (Left Column) -->
+        <div class="col-lg-8">
+            <div class="card glass-card p-4 mb-4">
+                <h3 class="h4 text-white mb-4"><i class="fas fa-columns me-2 text-primary"></i>Side-by-Side Diff Viewer</h3>
+                
+                {% for diff in diffs %}
+                <div class="mb-4 pb-3 border-bottom border-light-transparent">
+                    <h5 class="text-white mb-3"><i class="fas fa-file-alt me-2 text-warning"></i>Section: {{ diff.title }}</h5>
+                    <div class="diff-container">
+                        <div>
+                            <div class="text-muted small mb-2">Original Published Content</div>
+                            <pre class="diff-block diff-original">{{ diff.original if diff.original else '(No previous content)' }}</pre>
+                        </div>
+                        <div>
+                            <div class="text-muted small mb-2">Suggested Draft Modification</div>
+                            <pre class="diff-block diff-proposed">{{ diff.proposed }}</pre>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <p class="text-muted">No modified sections found in this proposal.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Audit & Review Sidebars (Right Column) -->
+        <div class="col-lg-4">
+            <!-- Author Checklist -->
+            <div class="card glass-card p-4 mb-4">
+                <h4 class="h5 text-white mb-3"><i class="fas fa-check-double me-2 text-primary"></i>Author Self-Checklist</h4>
+                <ul class="list-unstyled text-white">
+                    <li class="mb-2">
+                        <i class="fas fa-{{ 'check-circle text-success' if proposal.grammar_checked else 'times-circle text-muted' }} me-2"></i> Grammar checked
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-{{ 'check-circle text-success' if proposal.code_executed else 'times-circle text-muted' }} me-2"></i> Code quality checked
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-{{ 'check-circle text-success' if proposal.seo_checked else 'times-circle text-muted' }} me-2"></i> SEO meta tags filled
+                    </li>
+                </ul>
+            </div>
+
+            <!-- AI Automated Audit Review -->
+            <div class="card glass-card p-4 mb-4">
+                <h4 class="h5 text-white mb-3"><i class="fas fa-robot me-2 text-primary"></i>AI Ingestion Audit</h4>
+                {% for rev in ai_reviews %}
+                <div class="p-3 rounded bg-dark-transparent mb-2">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-white fw-bold">{{ rev.model_version }}</span>
+                        <span class="badge bg-{{ 'success' if rev.status == 'Passed' else 'danger' }}">{{ rev.status }}</span>
+                    </div>
+                    <pre class="small text-muted mb-0" style="font-family: monospace; white-space: pre-wrap;">{{ rev.feedback_json }}</pre>
+                </div>
+                {% else %}
+                <p class="text-muted small mb-0">No AI audit executed yet.</p>
+                {% endfor %}
+            </div>
+
+            <!-- Peer Review Submission -->
+            <div class="card glass-card p-4 mb-4">
+                <h4 class="h5 text-white mb-3"><i class="fas fa-user-shield me-2 text-primary"></i>Peer Decision</h4>
+                <form action="{{ url_for('admin.approve_proposal', proposal_id=proposal.id) }}" method="POST" class="mb-3">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    
+                    <div class="mb-3">
+                        <label for="status" class="form-label text-muted">Review Decision</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="approved">Approve & Mark Ready</option>
+                            <option value="changes_requested">Request Changes</option>
+                            <option value="rejected">Reject & Close</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="comments" class="form-label text-muted">Comments</label>
+                        <textarea class="form-control" id="comments" name="comments" rows="3" required placeholder="Add feedback comments..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Submit Review</button>
+                </form>
+
+                <!-- Merge Button (For Admins) -->
+                {% if proposal.status in ['Approved', 'AI_Review_Passed'] %}
+                <form action="{{ url_for('admin.merge_proposal_route', proposal_id=proposal.id) }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-success w-100 py-3"><i class="fas fa-code-merge me-2"></i>Merge & Publish to Site</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

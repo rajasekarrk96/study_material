@@ -354,3 +354,89 @@ def pipeline_export(course_id: int):
         flash(f"Export failed: {str(e)}", "danger")
         return redirect(url_for("admin.dashboard"))
 
+
+# ── Admin Workflow: Review Console, Side-by-side Diff, and Merge Tool ──────────
+
+@admin_bp.route("/proposals", methods=["GET"])
+@login_required
+@require_min_role("reviewer")
+def list_proposals():
+    """Display review queue containing all submitted ContentProposals."""
+    from app.domains.workflow.models import ContentProposal
+    proposals = ContentProposal.query.order_by(ContentProposal.id.desc()).all()
+    return render_template("admin/proposals_list.html", proposals=proposals)
+
+
+@admin_bp.route("/proposals/<int:proposal_id>", methods=["GET"])
+@login_required
+@require_min_role("reviewer")
+def review_proposal(proposal_id: int):
+    """Review Console showing side-by-side diffs, AI audits, checklists, and merge options."""
+    from app.domains.workflow.models import ContentProposal
+    from app.domains.content.models import LessonSection
+    proposal = db.session.get(ContentProposal, proposal_id)
+    if not proposal:
+        abort(404, "Proposal not found")
+
+    diffs = []
+    for prop_sec in proposal.proposal_sections:
+        original_content = ""
+        if prop_sec.lesson_section_id:
+            pub_sec = db.session.get(LessonSection, prop_sec.lesson_section_id)
+            if pub_sec:
+                original_content = pub_sec.content_markdown
+        
+        diffs.append({
+            "title": prop_sec.title,
+            "original": original_content,
+            "proposed": prop_sec.new_content
+        })
+
+    # Fetch AI reviews and comments safely
+    ai_reviews = proposal.ai_reviews.all() if hasattr(proposal.ai_reviews, 'all') else proposal.ai_reviews
+    comments = proposal.comments.all() if hasattr(proposal.comments, 'all') else proposal.comments
+
+    return render_template(
+        "admin/proposal_review.html",
+        proposal=proposal,
+        diffs=diffs,
+        ai_reviews=ai_reviews,
+        comments=comments
+    )
+
+
+@admin_bp.route("/proposals/<int:proposal_id>/approve", methods=["POST"])
+@login_required
+@require_min_role("reviewer")
+def approve_proposal(proposal_id: int):
+    """Add reviewer approval or request changes."""
+    status = request.form.get("status", "approved")
+    comments = request.form.get("comments", "").strip()
+    from flask_login import current_user
+    from app.services.workflow_service import WorkflowService
+    
+    try:
+        WorkflowService.add_approval(proposal_id, current_user.id, status, comments)
+        flash(f"Proposal review recorded as: {status}.", "success")
+    except Exception as e:
+        flash(f"Failed to record review: {str(e)}", "danger")
+
+    return redirect(url_for("admin.review_proposal", proposal_id=proposal_id))
+
+
+@admin_bp.route("/proposals/<int:proposal_id>/merge", methods=["POST"])
+@login_required
+@require_min_role("admin")
+def merge_proposal_route(proposal_id: int):
+    """Merge proposal to published layer and generate version snapshot."""
+    from flask_login import current_user
+    from app.services.workflow_service import WorkflowService
+    
+    try:
+        version = WorkflowService.merge_proposal(proposal_id, current_user.id)
+        flash(f"Proposal successfully merged! Snapshot version #{version.version_number} generated.", "success")
+    except Exception as e:
+        flash(f"Failed to merge proposal: {str(e)}", "danger")
+
+    return redirect(url_for("admin.list_proposals"))
+

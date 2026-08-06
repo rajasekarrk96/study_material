@@ -1650,6 +1650,54 @@ class EventServiceTestCase(unittest.TestCase):
         })
         self.assertEqual(res_submit.status_code, 302)
 
+    def test_admin_workflow_review_and_merge(self):
+        """Test admin review queue display, proposal review diff rendering, approval, and merging."""
+        from app.domains.workflow.models import ContentProposal
+        from app.services.workflow_service import WorkflowService
+        from app.domains.auth.models import Role
+
+        admin_role = Role.query.filter_by(name="admin").first()
+        self.user.role_id = admin_role.id
+        db.session.commit()
+
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        # 2. Create a proposal to review
+        WorkflowService.save_draft_section(
+            self.lesson1.id, "explanation", "Draft Title", "Draft content to review and merge", 0, self.user.id
+        )
+        proposal = WorkflowService.create_proposal(
+            "CONTENT_UPDATE", "LESSON", self.lesson1.id, self.user.id, "Review and merge proposal"
+        )
+        WorkflowService.submit_proposal(proposal.id)
+        WorkflowService.run_ai_review(proposal.id)
+
+        # 3. GET proposals queue
+        res_queue = self.client.get("/admin/proposals")
+        self.assertEqual(res_queue.status_code, 200)
+        self.assertIn(b"CONTENT_UPDATE", res_queue.data)
+
+        # 4. GET proposal review console
+        res_console = self.client.get(f"/admin/proposals/{proposal.id}")
+        self.assertEqual(res_console.status_code, 200)
+        self.assertIn(b"Draft content to review and merge", res_console.data)
+
+        # 5. POST approve proposal
+        res_approve = self.client.post(f"/admin/proposals/{proposal.id}/approve", data={
+            "status": "approved",
+            "comments": "Looks pristine!"
+        })
+        self.assertEqual(res_approve.status_code, 302)
+
+        # 6. POST merge proposal
+        res_merge = self.client.post(f"/admin/proposals/{proposal.id}/merge")
+        self.assertEqual(res_merge.status_code, 302)
+
+        # Verify proposal status became Merged
+        db.session.refresh(proposal)
+        self.assertEqual(proposal.status, "Merged")
+
 
 if __name__ == "__main__":
     unittest.main()
