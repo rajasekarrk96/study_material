@@ -1,6 +1,6 @@
 """
 Learning OS — Content Domain Models
-Category, Subject, Course, Module, Lesson, LessonSection, LessonVersion, Tag, Source.
+Category, Subject, CourseCategory, Course, Module, Lesson, LessonSection, LessonVersion, Tag, Source, TopicCoverage, TopicCoverageHistory, Prerequisites, RoadmapNode, RoadmapEdge.
 """
 from datetime import datetime
 from app.core.extensions import db
@@ -48,11 +48,26 @@ class Subject(db.Model, TimestampMixin):
         return f"<Subject {self.name}>"
 
 
+class CourseCategory(db.Model, TimestampMixin):
+    __tablename__ = "course_categories"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)  # Foundation, Technology, Specialization, Learning Path
+    slug = db.Column(db.String(120), unique=True, nullable=False)
+    status = db.Column(db.String(50), default="ACTIVE", nullable=False)  # ACTIVE, ARCHIVED, COMING_SOON
+
+    courses = db.relationship("Course", back_populates="course_category")
+
+    def __repr__(self):
+        return f"<CourseCategory {self.name}>"
+
+
 class Course(db.Model, TimestampMixin, SoftDeleteMixin):
     __tablename__ = "courses"
 
     id = db.Column(db.Integer, primary_key=True)
     subject_id = db.Column(db.Integer, db.ForeignKey("subjects.id"), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey("course_categories.id"), nullable=True)
     created_by = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
     title = db.Column(db.String(255), nullable=False)
     slug = db.Column(db.String(280), unique=True, nullable=False)
@@ -71,12 +86,16 @@ class Course(db.Model, TimestampMixin, SoftDeleteMixin):
     enrollment_count = db.Column(db.Integer, default=0)
     published_at = db.Column(db.DateTime)
 
+    # v2.3 metadata compatibility
+    difficulty = db.Column(db.String(50), default="BEGINNER", nullable=False)  # BEGINNER, INTERMEDIATE, ADVANCED, EXPERT
+    estimated_minutes = db.Column(db.Integer, default=0, nullable=False)
+
     subject = db.relationship("Subject", back_populates="courses")
+    course_category = db.relationship("CourseCategory", back_populates="courses")
     modules = db.relationship("Module", back_populates="course",
                                order_by="Module.sort_order", lazy="dynamic")
 
     # ── 4-tier architecture fields ────────────────────────────────────────────
-    # Classifies this course in the Learning OS catalog hierarchy.
     course_type = db.Column(
         db.String(30),
         default=CourseType.FOUNDATION,
@@ -84,17 +103,12 @@ class Course(db.Model, TimestampMixin, SoftDeleteMixin):
         server_default="foundation",
         index=True,
     )
-
-    # True = course appears independently in catalog.
-    # False = only visible when browsing a learning path.
     is_standalone = db.Column(
         db.Boolean,
         default=True,
         nullable=False,
         server_default="1",
     )
-
-    # Short subtitle shown on catalog cards (e.g. "Core language fundamentals").
     subtitle = db.Column(db.String(255), nullable=True)
 
     def __repr__(self):
@@ -107,10 +121,13 @@ class Module(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True)
     course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), nullable=False)
     title = db.Column(db.String(255), nullable=False)
-    slug = db.Column(db.String(280), nullable=False)
-    description = db.Column(db.Text)
+    slug = db.Column(db.String(280), nullable=True)
     sort_order = db.Column(db.Integer, default=0)
     is_published = db.Column(db.Boolean, default=False)
+
+    # v2.3 metadata
+    difficulty = db.Column(db.String(50), default="BEGINNER", nullable=False)
+    estimated_minutes = db.Column(db.Integer, default=0, nullable=False)
 
     course = db.relationship("Course", back_populates="modules")
     lessons = db.relationship("Lesson", back_populates="module",
@@ -139,13 +156,16 @@ class Lesson(db.Model, TimestampMixin, SoftDeleteMixin):
     canonical_url = db.Column(db.String(500))
     view_count = db.Column(db.Integer, default=0)
     published_at = db.Column(db.DateTime)
-    # Course Coverage: controls classroom/self-study classification per lesson
     course_coverage = db.Column(
         db.String(30),
         default=CourseCoverage.COVERED_IN_CLASS,
         nullable=False,
         server_default="covered_in_class",
     )
+
+    # v2.3 metadata
+    content_status = db.Column(db.String(50), default="DRAFT", nullable=False)  # DRAFT, UNDER_REVIEW, APPROVED, PUBLISHED, DEPRECATED, ARCHIVED
+    difficulty = db.Column(db.String(50), default="BEGINNER", nullable=False)
 
     module = db.relationship("Module", back_populates="lessons")
     sections = db.relationship("LessonSection", back_populates="lesson",
@@ -156,13 +176,11 @@ class Lesson(db.Model, TimestampMixin, SoftDeleteMixin):
 
     @property
     def coverage_emoji(self) -> str:
-        """Returns the emoji for this lesson's course_coverage value."""
         label = COURSE_COVERAGE_LABELS.get(self.course_coverage)
         return label[0] if label else "🟢"
 
     @property
     def coverage_label(self) -> str:
-        """Returns the human-readable label for this lesson's course_coverage value."""
         label = COURSE_COVERAGE_LABELS.get(self.course_coverage)
         return label[1] if label else "Covered in Class"
 
@@ -182,10 +200,87 @@ class LessonSection(db.Model, TimestampMixin):
     sort_order = db.Column(db.Integer, default=0)
     is_visible = db.Column(db.Boolean, default=True)
 
+    # v2.3 metadata
+    content_status = db.Column(db.String(50), default="DRAFT", nullable=False)
+    slug = db.Column(db.String(280), nullable=True)
+    difficulty = db.Column(db.String(50), default="BEGINNER", nullable=False)
+    estimated_minutes = db.Column(db.Integer, default=0, nullable=False)
+
     lesson = db.relationship("Lesson", back_populates="sections")
 
     def __repr__(self):
         return f"<LessonSection {self.section_type} for lesson {self.lesson_id}>"
+
+
+class TopicCoverage(db.Model, TimestampMixin):
+    __tablename__ = "topic_coverage"
+
+    id = db.Column(db.Integer, primary_key=True)
+    lesson_section_id = db.Column(db.Integer, db.ForeignKey("lesson_sections.id"), nullable=False)
+    coverage_status = db.Column(db.String(50), default="COVERED", nullable=False)  # COVERED, OPTIONAL, SELF_LEARNING
+    display_label = db.Column(db.String(255), default="Covered in Class", nullable=False)
+    updated_by_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
+
+    section = db.relationship("LessonSection")
+
+    def __repr__(self):
+        return f"<TopicCoverage section={self.lesson_section_id} status={self.coverage_status}>"
+
+
+class TopicCoverageHistory(db.Model):
+    __tablename__ = "topic_coverage_history"
+
+    id = db.Column(db.Integer, primary_key=True)
+    topic_coverage_id = db.Column(db.Integer, db.ForeignKey("topic_coverage.id"), nullable=False)
+    old_coverage_status = db.Column(db.String(50), nullable=True)
+    new_coverage_status = db.Column(db.String(50), nullable=False)
+    updated_by_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+
+    def __repr__(self):
+        return f"<TopicCoverageHistory coverage={self.topic_coverage_id} from={self.old_coverage_status} to={self.new_coverage_status}>"
+
+
+class CoursePrerequisite(db.Model):
+    __tablename__ = "course_prerequisites"
+
+    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), primary_key=True)
+    prerequisite_course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), primary_key=True)
+
+
+class LessonPrerequisite(db.Model):
+    __tablename__ = "lesson_prerequisites"
+
+    lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), primary_key=True)
+    prerequisite_lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), primary_key=True)
+
+
+class RoadmapNode(db.Model):
+    __tablename__ = "roadmap_nodes"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    node_type = db.Column(db.String(100), nullable=False)  # e.g., 'course', 'subject'
+    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), nullable=True)
+
+    course = db.relationship("Course")
+
+    def __repr__(self):
+        return f"<RoadmapNode {self.title}>"
+
+
+class RoadmapEdge(db.Model):
+    __tablename__ = "roadmap_edges"
+
+    id = db.Column(db.Integer, primary_key=True)
+    source_node_id = db.Column(db.Integer, db.ForeignKey("roadmap_nodes.id"), nullable=False)
+    target_node_id = db.Column(db.Integer, db.ForeignKey("roadmap_nodes.id"), nullable=False)
+
+    source_node = db.relationship("RoadmapNode", foreign_keys=[source_node_id])
+    target_node = db.relationship("RoadmapNode", foreign_keys=[target_node_id])
+
+    def __repr__(self):
+        return f"<RoadmapEdge {self.source_node_id} -> {self.target_node_id}>"
 
 
 class LessonVersion(db.Model):
@@ -220,7 +315,6 @@ class Tag(db.Model):
         return f"<Tag {self.name}>"
 
 
-# Association table for Lesson <-> Tag
 lesson_tags = db.Table(
     "lesson_tags",
     db.Column("lesson_id", db.Integer, db.ForeignKey("lessons.id"), primary_key=True),
@@ -255,6 +349,18 @@ class ContentQualityScore(db.Model):
     plagiarism_percentage = db.Column(db.Float, default=0.0, nullable=False)
     automated_feedback = db.Column(db.Text)
     checked_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+
+    # v2.3 quality specs breakdown
+    grammar_score = db.Column(db.Float, default=0.0, nullable=False)
+    technical_accuracy_score = db.Column(db.Float, default=0.0, nullable=False)
+    code_quality_score = db.Column(db.Float, default=0.0, nullable=False)
+    images_score = db.Column(db.Float, default=0.0, nullable=False)
+    examples_score = db.Column(db.Float, default=0.0, nullable=False)
+    quiz_coverage_score = db.Column(db.Float, default=0.0, nullable=False)
+    references_score = db.Column(db.Float, default=0.0, nullable=False)
+    seo_score = db.Column(db.Float, default=0.0, nullable=False)
+    accessibility_score = db.Column(db.Float, default=0.0, nullable=False)
+    overall_quality_percentage = db.Column(db.Integer, default=0, nullable=False)
 
     lesson = db.relationship("Lesson")
 

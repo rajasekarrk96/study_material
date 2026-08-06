@@ -1,6 +1,6 @@
 """
 Learning OS — Auth Domain Models
-Users, Roles, Permissions, Sessions.
+Users, Roles, Permissions, Sessions, UserRoleMapping, UserCourse, PermissionMatrix.
 """
 from datetime import datetime
 from flask_login import UserMixin
@@ -44,6 +44,46 @@ class RolePermission(db.Model):
     granted_by = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
 
 
+class UserRoleMapping(db.Model):
+    __tablename__ = "user_role_mappings"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    role_id = db.Column(db.Integer, db.ForeignKey("roles.id"), nullable=False)
+
+    user = db.relationship("User", foreign_keys=[user_id])
+    role = db.relationship("Role", foreign_keys=[role_id])
+
+
+class PermissionMatrix(db.Model):
+    __tablename__ = "permission_matrix"
+
+    id = db.Column(db.Integer, primary_key=True)
+    role_id = db.Column(db.Integer, db.ForeignKey("roles.id"), nullable=False)
+    permission_code = db.Column(db.String(100), nullable=False)
+    is_granted = db.Column(db.Boolean, default=False, nullable=False)
+
+    role = db.relationship("Role")
+
+
+class UserCourse(db.Model, TimestampMixin):
+    __tablename__ = "user_courses"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), nullable=False)
+    status = db.Column(db.String(50), default="Active", nullable=False)  # Active, Expired, Suspended, Pending, Trial, Lifetime, Corporate, Demo
+    expiry = db.Column(db.DateTime, nullable=True)
+    purchase_type = db.Column(db.String(50), default="Free", nullable=False)  # Free, Subscription, Paid
+    progress = db.Column(db.Integer, default=0, nullable=False)  # 0 to 100 percentage
+
+    user = db.relationship("User", back_populates="enrollments")
+    course = db.relationship("Course")
+
+    def __repr__(self):
+        return f"<UserCourse user={self.user_id} course={self.course_id} status={self.status}>"
+
+
 class User(db.Model, UserMixin, TimestampMixin):
     __tablename__ = "users"
 
@@ -61,6 +101,7 @@ class User(db.Model, UserMixin, TimestampMixin):
     timezone = db.Column(db.String(50), default="UTC")
 
     role = db.relationship("Role", back_populates="users")
+    enrollments = db.relationship("UserCourse", back_populates="user", cascade="all, delete-orphan")
 
     def has_role(self, *role_names: str) -> bool:
         return self.role is not None and self.role.name in role_names

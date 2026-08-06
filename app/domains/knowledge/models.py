@@ -1,12 +1,17 @@
 """
-Learning OS — Knowledge Source & Vector Embedding Domain Models.
-Models: KnowledgeSource, SourceDocument, KnowledgeChunk, ChunkEmbedding.
+Learning OS — Knowledge Domain Models
+Includes both the original vector search tables (KnowledgeSource, SourceDocument, KnowledgeChunk, ChunkEmbedding)
+and the new v2.3 Media and Search indexes (Media, MediaFolder, MediaTag, MediaReference, SearchDocument, SearchChunk, SearchKeyword).
 """
 import json
 from datetime import datetime
 from app.core.extensions import db
 from app.core.base_model import TimestampMixin
 
+
+# ─────────────────────────────────────────────────────────────
+# Original Knowledge Search & Vector Embeddings
+# ─────────────────────────────────────────────────────────────
 
 class KnowledgeSource(db.Model, TimestampMixin):
     """
@@ -69,8 +74,6 @@ class KnowledgeChunk(db.Model):
 class ChunkEmbedding(db.Model):
     """
     Stores the float vector embedding for a KnowledgeChunk as a JSON-encoded list.
-    Note: For TiDB/MySQL production, this is stored as LONGTEXT JSON.
-    For sqlite-vss, the companion VSS table is created separately via a migration script.
     """
     __tablename__ = "chunk_embeddings"
 
@@ -90,3 +93,100 @@ class ChunkEmbedding(db.Model):
 
     def __repr__(self):
         return f"<ChunkEmbedding chunk={self.chunk_id}>"
+
+
+# ─────────────────────────────────────────────────────────────
+# v2.3 Media & Decoupled Search Library
+# ─────────────────────────────────────────────────────────────
+
+class MediaFolder(db.Model, TimestampMixin):
+    __tablename__ = "media_folders"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+
+    media_items = db.relationship("Media", back_populates="folder", cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return f"<MediaFolder {self.name}>"
+
+
+class Media(db.Model, TimestampMixin):
+    __tablename__ = "media"
+
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(255), nullable=False)
+    url = db.Column(db.String(1000), nullable=False)
+    file_type = db.Column(db.String(100), nullable=False)
+    file_size = db.Column(db.Integer, nullable=False)
+    folder_id = db.Column(db.Integer, db.ForeignKey("media_folders.id"), nullable=True)
+    created_by_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
+
+    folder = db.relationship("MediaFolder", back_populates="media_items")
+    references = db.relationship("MediaReference", back_populates="media", cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return f"<Media {self.filename}>"
+
+
+class MediaTag(db.Model):
+    __tablename__ = "media_tags"
+
+    media_id = db.Column(db.Integer, db.ForeignKey("media.id"), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey("tags.id"), primary_key=True)
+
+
+class MediaReference(db.Model, TimestampMixin):
+    __tablename__ = "media_references"
+
+    id = db.Column(db.Integer, primary_key=True)
+    media_id = db.Column(db.Integer, db.ForeignKey("media.id"), nullable=False)
+    target_type = db.Column(db.String(50), nullable=False)  # 'lesson', 'topic' etc.
+    target_id = db.Column(db.Integer, nullable=False)
+
+    media = db.relationship("Media", back_populates="references")
+
+    def __repr__(self):
+        return f"<MediaReference media={self.media_id} target={self.target_type}:{self.target_id}>"
+
+
+class SearchDocument(db.Model):
+    __tablename__ = "search_documents"
+
+    id = db.Column(db.Integer, primary_key=True)
+    target_type = db.Column(db.String(50), nullable=False)  # 'course', 'lesson', 'topic'
+    target_id = db.Column(db.Integer, nullable=False)
+    content = db.Column(db.Text, nullable=False)
+
+    chunks = db.relationship("SearchChunk", back_populates="document", cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return f"<SearchDocument {self.target_type}:{self.target_id}>"
+
+
+class SearchChunk(db.Model):
+    __tablename__ = "search_chunks"
+
+    id = db.Column(db.Integer, primary_key=True)
+    document_id = db.Column(db.Integer, db.ForeignKey("search_documents.id"), nullable=False)
+    chunk_index = db.Column(db.Integer, nullable=False)
+    text_chunk = db.Column(db.Text, nullable=False)
+
+    document = db.relationship("SearchDocument", back_populates="chunks")
+    keywords = db.relationship("SearchKeyword", back_populates="chunk", cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return f"<SearchChunk doc={self.document_id} idx={self.chunk_index}>"
+
+
+class SearchKeyword(db.Model):
+    __tablename__ = "search_keywords"
+
+    id = db.Column(db.Integer, primary_key=True)
+    chunk_id = db.Column(db.Integer, db.ForeignKey("search_chunks.id"), nullable=False)
+    keyword = db.Column(db.String(255), nullable=False, index=True)
+
+    chunk = db.relationship("SearchChunk", back_populates="keywords")
+
+    def __repr__(self):
+        return f"<SearchKeyword {self.keyword}>"

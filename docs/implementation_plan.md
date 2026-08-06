@@ -1,63 +1,49 @@
-# Implementation Plan — Learning OS v2.0 Architecture & Roadmap
+# Implementation Plan — RBAC & Content Proposal Workflow (v2.3 — Approved & Frozen)
 
-This implementation plan details the setup, code changes, and task checklists for constructing the **Learning Operating System v2.0 (Learning OS v2.0)**, incorporating AI Knowledge Processing, Hybrid Search, and Local Ollama providers.
-
----
-
-## User Review Required
-
-> [!IMPORTANT]
-> Please review the newly generated v2.0 blueprint files:
-> - **v2.0 Enhancement Plan**: [00_LEARNING_OS_v2.0_ENHANCEMENT_PLAN.md](./plan/00_LEARNING_OS_v2.0_ENHANCEMENT_PLAN.md)
-> - **Main Project README**: [README.md](../README.md)
->
-> These files outline the roadmap to integrate the following without breaking compatibility:
-> 1. Local AI model support (Ollama) through a unified gateway router.
-> 2. Document chunking, vector indexing, and hybrid (semantic + keyword) search.
-> 3. Knowledge Graph pathways & automated Quiz/Exercise drafting workspaces.
+This document is the approved and frozen architecture specification and implementation roadmap for the Learning Content Management System (LCMS) v2.3. No database, model, or directory structures may be redesigned from this point forward.
 
 ---
 
-## Open Questions
-
-> [!WARNING]
-> These decisions will directly impact the implementation choices in Phase 1 and 2:
->
-> 1. **Initial Platform Brand Name**: Is **EduSphere** the desired brand name, or should we use a new name?
-> 2. **Authentication Integrations**: Should we support Social logins (Google/Github OAuth) in addition to email/password authentication?
-> 3. **Editor Preference**: Do content creators write in Markdown, or is a rich WYSIWYG editor preferred?
-> 4. **Exercise Verification**: Shall we use an external Judge0 cloud instance, or deploy a localized Docker sandbox instance during development?
+## STATUS: FROZEN
+**Effective Date**: 2026-08-06
+**Version**: v2.3
 
 ---
 
-## Proposed Changes
+## 1. Bounded Context Separation
 
-We will introduce a modular Flask app workspace inside the `notes` repository. This will be built next to the static notes directories (Core_Java, Core_Python, Java_Selenium, My_Sql), which will be imported into the new database structure.
-
-### [Component Name] Learning OS Application
-
-#### [NEW] [run.py](../run.py)
-Entrypoint wrapper starting the webserver.
-
-#### [NEW] [requirements.txt](../requirements.txt)
-Python libraries including Flask, SQLAlchemy, Alembic, Bleach, PyJWT, Cryptography, and PyMySQL.
-
-#### [NEW] [app/](../app/)
-Modular Blueprints, Domain Services, Repositories, Templates, and Static CSS/JS files.
-
-#### [NEW] [scripts/migrate_html.py](../scripts/migrate_html.py)
-Automated migration script to parse existing HTML notes into Markdown lesson documents and import them into the Database CMS schema.
+- **Knowledge Layer**: Isolated from user authentication and progress. Contains markdown content, media libraries, search indexing chunks, and taxonomy tags.
+- **Curriculum Layer**: Governs courses, modules, lessons, topic coverage, and roadmaps.
+- **Platform/Delivery Layer**: Enforces RBAC permissions, enrollments, billing states, and handles authentication.
 
 ---
 
-## Verification Plan
+## 2. Authentication Gateway & Future JWT SSO Addendum
 
-### Automated Tests
-- Build verification tests: `python -m pytest tests/`
-- DB Schema Migrations tests: `alembic upgrade head`
-- HTML migration validation tests: `python scripts/migrate_html.py --dry-run`
+To support both **Standalone Mode** and **External Authentication Mode** without changing application routes or business logic:
 
-### Manual Verification
-- Render check: Verify all lesson elements (overview, syntax, examples, references) show up consistently on dynamic templates compared to the original static HTML equivalents.
-- Admin dashboard testing: Access draft editing tools, write new Markdown notes, save, check version histories, and publish.
-- Quiz grading checks: Take quizzes as a student, review answers, verify XP accumulation, and check streaks.
+### Login Modes
+1. **LOCAL Mode (`AUTH_MODE=LOCAL`)**: Users log in directly using the local `LocalAuthProvider`.
+2. **JWT Mode (`AUTH_MODE=JWT`)**: Users are authenticated via a JWT token issued by Bytes & Boards. Validated by `ExternalAuthProvider`.
+3. **AUTO Mode (`AUTH_MODE=AUTO`)**: If a valid JWT is present (in headers, cookies, or query parameters), use `ExternalAuthProvider`; otherwise, fall back to `LocalAuthProvider`.
+
+### User Synchronization & Enrollments
+- Validated external users are synchronized into the local `User` table, with status set to `External Account` and source `Bytes & Boards`.
+- Course entitlements provided in the JWT are synchronized with the local `UserCourse` (enrollments) table.
+- A Flask session is created upon successful token validation so that subsequent requests use local sessions without validating the JWT on every request.
+
+---
+
+## 3. Detailed Implementation Phases
+
+- **Phase 1: Foundation**: Bounded Context project structures, SQLAlchemy models, relationships, and database schema migrations (complete).
+- **Phase 2: Authentication & Authorization**: `BaseAuthProvider`, `LocalAuthProvider`, `ExternalAuthProvider` interface, permission matrix, enrollments (`UserCourse`), and Flask-Login integration.
+- **Phase 3: Knowledge Layer**: Media libraries (`Media`, `MediaFolder`), search indexes (`SearchDocument`, `SearchChunk`), tags, and slugs.
+- **Phase 4: Curriculum Layer**: Course categories, topics, coverage metrics, and roadmap graphs.
+- **Phase 5: Editorial Workflow**: Draft layers, proposals lifecycle, AI checks, versions rollback systems, and releases.
+- **Phase 6: Content Pipeline**: Import/export packages and automated proposal generators.
+- **Phase 7: Admin Panel**: CMS dashboard modules.
+- **Phase 8: Staff Workflow**: suggestion triggers and drafts workspace.
+- **Phase 9: Admin Workflow**: review console, diff checks, and merges.
+- **Phase 10: Student Experience**: enrolled course validation and public previews.
+- **Phase 11: API & Future Readiness**: service layers preparing for mobile and platform integrations.

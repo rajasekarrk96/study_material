@@ -97,6 +97,7 @@ def _import_all_models() -> None:
     import app.domains.srs.models            # noqa: F401
     import app.domains.study.models          # noqa: F401
     import app.domains.knowledge.models      # noqa: F401
+    import app.domains.workflow.models       # noqa: F401
     import app.domains.tutor.models          # noqa: F401
 
 

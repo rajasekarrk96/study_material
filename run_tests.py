@@ -18,6 +18,9 @@ from app.domains.assessment.models import Quiz, Question, Option, QuizAttempt, Q
 from app.domains.gamification.models import UserXPLog
 from app.domains.learning_path.models import UserCourseProgress, UserLessonProgress
 
+from app.providers.plugins.ollama import OllamaProvider
+OllamaProvider._is_available = lambda self: False
+
 
 class QuizEngineTestCase(unittest.TestCase):
     def setUp(self):

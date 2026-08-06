@@ -12,6 +12,7 @@ Safe to run multiple times (idempotent — checks if column exists first).
 """
 import sys
 import os
+from sqlalchemy import text
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from run import app
@@ -46,11 +47,11 @@ SQL_TOTAL  = "SELECT COUNT(*) FROM lessons;"
 def column_exists(conn, dialect_name: str) -> bool:
     """Returns True if course_coverage already exists in lessons."""
     if "sqlite" in dialect_name:
-        result = conn.execute(SQL_CHECK_SQLITE)
+        result = conn.execute(text(SQL_CHECK_SQLITE))
         columns = [row[1] for row in result.fetchall()]
         return "course_coverage" in columns
     else:
-        result = conn.execute(SQL_CHECK_COLUMN)
+        result = conn.execute(text(SQL_CHECK_COLUMN))
         return result.scalar() > 0
 
 
@@ -70,37 +71,37 @@ def run_migration():
             # 1. Check if column already exists
             exists = column_exists(conn, dialect)
             if exists:
-                print("✅ Column `course_coverage` already exists in `lessons`.")
+                print("[OK] Column `course_coverage` already exists in `lessons`.")
                 print("   Skipping ALTER TABLE — migration is idempotent.\n")
             else:
                 # 2. Add column
                 print(f"SQL to execute:\n  {SQL_ADD_COLUMN}\n")
                 if not DRY_RUN:
-                    conn.execute(SQL_ADD_COLUMN)
+                    conn.execute(text(SQL_ADD_COLUMN))
                     conn.commit()
-                    print("✅ Column `course_coverage` added to `lessons`.\n")
+                    print("[OK] Column `course_coverage` added to `lessons`.\n")
                 else:
                     print("   [DRY RUN] Skipped execution.\n")
 
             if not DRY_RUN:
                 # 3. Back-fill any NULLs just in case
-                conn.execute(SQL_UPDATE_EXISTING)
+                conn.execute(text(SQL_UPDATE_EXISTING))
                 conn.commit()
 
                 # 4. Verify
-                covered = conn.execute(SQL_VERIFY).scalar()
-                total   = conn.execute(SQL_TOTAL).scalar()
-                print(f"📊 Verification:")
+                covered = conn.execute(text(SQL_VERIFY)).scalar()
+                total   = conn.execute(text(SQL_TOTAL)).scalar()
+                print(f"STATS Verification:")
                 print(f"   Total lessons        : {total}")
                 print(f"   course_coverage set  : {covered}")
                 pct = (covered / total * 100) if total else 0
                 print(f"   Coverage             : {pct:.1f}%\n")
 
                 if covered == total:
-                    print("✅ All lessons have course_coverage = 'covered_in_class'.")
+                    print("[OK] All lessons have course_coverage = 'covered_in_class'.")
                 else:
                     diff = total - covered
-                    print(f"⚠️  {diff} lessons still have NULL or non-default coverage.")
+                    print(f"[WARNING] {diff} lessons still have NULL or non-default coverage.")
             else:
                 print("[DRY RUN] Verification skipped.")
 
