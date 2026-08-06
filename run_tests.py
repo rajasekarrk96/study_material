@@ -1563,6 +1563,63 @@ class EventServiceTestCase(unittest.TestCase):
         self.assertGreater(len(drafts), 0)
         self.assertEqual(drafts[0].content_markdown, "Imported pipeline content beta")
 
+    def test_admin_panel_cms_routes(self):
+        """Test HTTP routes in the Admin CMS Blueprint for categories, media, and pipeline import/export."""
+        from app.domains.auth.models import Role
+
+        # 1. Promote our user to admin
+        admin_role = Role.query.filter_by(name="admin").first()
+        if not admin_role:
+            admin_role = Role(name="admin", display_name="Admin", level=20)
+            db.session.add(admin_role)
+            db.session.commit()
+
+        self.user.role_id = admin_role.id
+        db.session.commit()
+
+        # Authenticate user session
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        # 2. Test categories route
+        res_cat_post = self.client.post("/admin/categories", data={
+            "name": "Specialization",
+            "slug": "specialization",
+            "status": "ACTIVE"
+        })
+        self.assertEqual(res_cat_post.status_code, 302)
+
+        res_cat_get = self.client.get("/admin/categories")
+        self.assertEqual(res_cat_get.status_code, 200)
+        self.assertIn(b"Specialization", res_cat_get.data)
+
+        # 3. Test media routes
+        res_media_post = self.client.post("/admin/media", data={
+            "filename": "mockfile.jpg",
+            "url": "/uploads/mockfile.jpg",
+            "file_type": "image/jpeg",
+            "file_size": "2048",
+            "folder_name": "CourseAssets"
+        })
+        self.assertEqual(res_media_post.status_code, 302)
+
+        res_media_get = self.client.get("/admin/media")
+        self.assertEqual(res_media_get.status_code, 200)
+        self.assertIn(b"mockfile.jpg", res_media_get.data)
+
+        # 4. Test pipeline export
+        res_export = self.client.get(f"/admin/pipeline/export/{self.lesson1.module.course.id}")
+        self.assertEqual(res_export.status_code, 200)
+        self.assertEqual(res_export.mimetype, "application/json")
+
+        # 5. Test pipeline import
+        exported_payload = res_export.data.decode("utf-8")
+        res_import = self.client.post("/admin/pipeline/import", data={
+            "course_id": str(self.lesson1.module.course.id),
+            "package_json": exported_payload
+        })
+        self.assertEqual(res_import.status_code, 302)
+
 
 if __name__ == "__main__":
     unittest.main()

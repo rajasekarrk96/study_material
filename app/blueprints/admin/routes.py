@@ -261,3 +261,96 @@ def coverage_overview():
         coverage_values=coverage_values,
     )
 
+
+# ── CMS Course Categories, Media, and Content Pipeline ────────────────────────
+
+@admin_bp.route("/categories", methods=["GET", "POST"])
+@login_required
+@require_min_role("admin")
+def manage_categories():
+    """List and create Course Categories (Foundation, Technology, etc.)."""
+    from app.services.curriculum_service import CurriculumService
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        slug = request.form.get("slug", "").strip() or name.lower().replace(" ", "-")
+        status = request.form.get("status", "ACTIVE")
+        if name:
+            CurriculumService.get_or_create_course_category(name, slug, status)
+            flash(f"Category '{name}' created successfully.", "success")
+        else:
+            flash("Category name is required.", "danger")
+        return redirect(url_for("admin.manage_categories"))
+
+    categories = CurriculumService.list_course_categories()
+    return render_template("admin/categories.html", categories=categories)
+
+
+@admin_bp.route("/media", methods=["GET", "POST"])
+@login_required
+@require_min_role("admin")
+def manage_media():
+    """List and manage media assets and folders in the CMS."""
+    from app.services.media_service import MediaService
+    from flask_login import current_user
+    
+    if request.method == "POST":
+        filename = request.form.get("filename", "").strip()
+        url = request.form.get("url", "").strip()
+        file_type = request.form.get("file_type", "image/png").strip()
+        file_size = int(request.form.get("file_size", "1024"))
+        folder_name = request.form.get("folder_name", "General").strip()
+
+        if filename and url:
+            folder = MediaService.get_or_create_folder(folder_name)
+            MediaService.add_media(filename, url, file_type, file_size, folder.id, current_user.id)
+            flash(f"Media '{filename}' registered successfully.", "success")
+        else:
+            flash("Filename and URL are required.", "danger")
+        return redirect(url_for("admin.manage_media"))
+
+    folders = MediaService.list_folders()
+    return render_template("admin/media.html", folders=folders)
+
+
+from flask import Response
+
+@admin_bp.route("/pipeline/import", methods=["POST"])
+@login_required
+@require_min_role("admin")
+def pipeline_import():
+    """Import course structure JSON package to drafts & spawn proposal."""
+    from app.services.pipeline_service import ContentPipelineService
+    course_id = request.form.get("course_id", type=int)
+    package_json = request.form.get("package_json", "").strip()
+    from flask_login import current_user
+    
+    if not course_id or not package_json:
+        flash("Course ID and Package JSON data are required.", "danger")
+        return redirect(url_for("admin.dashboard"))
+
+    try:
+        proposal = ContentPipelineService.import_course_package(course_id, package_json, current_user.id)
+        flash(f"Package imported successfully! Auto-generated Content Proposal #{proposal.id} is now in drafts.", "success")
+        return redirect(url_for("admin.review_queue"))
+    except Exception as e:
+        flash(f"Import failed: {str(e)}", "danger")
+        return redirect(url_for("admin.dashboard"))
+
+
+@admin_bp.route("/pipeline/export/<int:course_id>")
+@login_required
+@require_min_role("admin")
+def pipeline_export(course_id: int):
+    """Export course structure package as JSON."""
+    from app.services.pipeline_service import ContentPipelineService
+    try:
+        export_json = ContentPipelineService.export_course(course_id)
+        return Response(
+            export_json,
+            mimetype="application/json",
+            headers={"Content-Disposition": f"attachment;filename=course_export_{course_id}.json"}
+        )
+    except Exception as e:
+        flash(f"Export failed: {str(e)}", "danger")
+        return redirect(url_for("admin.dashboard"))
+
