@@ -1381,6 +1381,64 @@ class EventServiceTestCase(unittest.TestCase):
         self.assertEqual(search_results[0]["target_type"], "lesson")
         self.assertEqual(search_results[0]["target_id"], 101)
 
+    def test_curriculum_layer_dependencies_and_roadmap(self):
+        """Test course categories, topic coverage update audits, course/lesson prerequisites, and roadmap graphs."""
+        from app.services.curriculum_service import CurriculumService
+        from app.domains.content.models import (
+            CourseCategory, TopicCoverage, TopicCoverageHistory, CoursePrerequisite,
+            LessonPrerequisite, RoadmapNode, RoadmapEdge, LessonSection
+        )
+
+        # 1. Test Course Category creation
+        cat = CurriculumService.get_or_create_course_category("Foundation", "foundation")
+        self.assertIsNotNone(cat)
+        self.assertEqual(cat.name, "Foundation")
+
+        cats = CurriculumService.list_course_categories()
+        self.assertGreater(len(cats), 0)
+
+        # Create a test section
+        section = LessonSection(lesson_id=self.lesson1.id, section_type="explanation", title="Intro to Vars")
+        db.session.add(section)
+        db.session.flush()
+
+        # 2. Test Topic Coverage
+        coverage = CurriculumService.update_topic_coverage(section.id, "COVERED", "Covered in Class", self.user.id)
+        self.assertIsNotNone(coverage)
+        self.assertEqual(coverage.coverage_status, "COVERED")
+
+        # Update again to trigger history
+        coverage = CurriculumService.update_topic_coverage(section.id, "OPTIONAL", "Optional Reading", self.user.id)
+        self.assertEqual(coverage.coverage_status, "OPTIONAL")
+
+        # Verify history is logged
+        history = TopicCoverageHistory.query.filter_by(topic_coverage_id=coverage.id).all()
+        self.assertEqual(len(history), 2)
+        self.assertEqual(history[0].new_coverage_status, "COVERED")
+        self.assertEqual(history[1].old_coverage_status, "COVERED")
+        self.assertEqual(history[1].new_coverage_status, "OPTIONAL")
+
+        # 3. Test Prerequisites
+        from app.domains.content.models import Course
+        course2 = Course(subject_id=self.lesson1.module.course.subject_id, title="Python 102", slug="python-102")
+        db.session.add(course2)
+        db.session.flush()
+
+        # Link course prerequisites
+        CurriculumService.add_course_prerequisite(course2.id, self.lesson1.module.course.id)
+        prereqs = CurriculumService.get_course_prerequisites(course2.id)
+        self.assertEqual(len(prereqs), 1)
+        self.assertEqual(prereqs[0].id, self.lesson1.module.course.id)
+
+        # 4. Test Roadmap Graph Nodes & Edges
+        node1 = CurriculumService.add_roadmap_node("Python 101 Node", "course", self.lesson1.module.course.id)
+        node2 = CurriculumService.add_roadmap_node("Python 102 Node", "course", course2.id)
+        edge = CurriculumService.add_roadmap_edge(node1.id, node2.id)
+
+        graph = CurriculumService.get_roadmap_graph()
+        self.assertGreater(len(graph["nodes"]), 1)
+        self.assertGreater(len(graph["edges"]), 0)
+
 
 if __name__ == "__main__":
     unittest.main()
