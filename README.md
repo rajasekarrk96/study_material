@@ -373,10 +373,16 @@ Path completed
 ### Code Sandbox
 - Multi-language execution via Judge0 API, lab-step validation
 
-### Admin CMS
+### Admin CMS & Enterprise LCMS
 - Category / Subject / Course / Module / Lesson CRUD
 - Learning Path builder: assign courses, set section labels, mark required/optional, reorder
 - Knowledge source ingestion dashboard, user and role management
+- **JWT SSO Authentication Gateway**: Dynamic multi-mode authentication (`AUTH_MODE=LOCAL|JWT|AUTO`), JWT signature checking, auto-provisioning, role updates, and active user course synchronization.
+- **Knowledge Layer**: Hierarchical media folder structures (`MediaFolder`) for file assets, custom file taggers, and database-agnostic decoupled search indexers.
+- **Curriculum Graphs**: Topic coverage audits, course prerequisites, and roadmap path nodes/edges.
+- **Editorial Workflow**: Draft layers, change proposals, AI automated reviews, and version rollback releases.
+- **Content Pipeline**: Full course JSON imports/exports and auto-generated content proposals.
+- **Review & Merge Tools**: Side-by-side HTML comparison Diff viewers, checklist review forms, and admin branch merging.
 
 ---
 
@@ -719,7 +725,8 @@ region: oregon
 | v2.1.0 | 2026-01 | IoT & Hardware Full Stack catalog (7 courses, 150+ lessons) |
 | v2.2.0 | 2026-04 | Python AI & Data Science catalog (ML, DL, NLP, CV, MLOps, RAG, Agents) |
 | v2.3.0 | 2026-07-29 | Catalog cleanup: fix Java/C in Python Full Stack, merge duplicate Python, recalc hours |
-| **v3.0.0** | **2026-07-29** | **Modular catalog redesign: 10 flat skill categories, 8 learning paths (no duplication), extended LearningPath model (target_role, difficulty, icon, color, is_featured), new UserLearningPathProgress + LearningPathCertificate tables, two-tab catalog UI (Browse Skills / Learning Paths), new /paths/ routes** |
+| v3.0.0 | 2026-07-29 | Modular catalog redesign: 10 flat skill categories, 8 learning paths (no duplication), extended LearningPath model (target_role, difficulty, icon, color, is_featured), new UserLearningPathProgress + LearningPathCertificate tables, two-tab catalog UI (Browse Skills / Learning Paths), new /paths/ routes |
+| **v3.1.0** | **2026-08-06** | **Enterprise LCMS Upgrade (v2.3 specs): JWT SSO Authentication Gateway (with auto-provisioning & active session sync), Knowledge Layer Media Library & Decoupled Search, Curriculum Categories & Graph Roadmaps, Editorial Workflow (drafts, proposals, version rollbacks & releases), Content JSON pipeline imports/exports, Admin & Staff suggestion dashboards, student experience locks, and JWKS key rotation APIs.** |
 
 ---
 
