@@ -455,7 +455,14 @@ input:checked + .slider:before {
 
         <!-- LESSON HEADER -->
         <div class="lesson-header">
-            <h1 style="font-size: 2.5rem; color: #fff; font-weight: 800; margin-bottom: 12px;">{{ lesson.title }}</h1>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 12px;">
+                <h1 style="font-size: 2.5rem; color: #fff; font-weight: 800; margin: 0;">{{ lesson.title }}</h1>
+                {% if current_user.is_authenticated and current_user.role and current_user.role.level >= 3 %}
+                <a href="{{ url_for('learn.suggest_edit', lesson_id=lesson.id) }}" class="btn btn-outline btn-sm" style="font-weight: 600; border-color: rgba(34,211,161,0.4); color: #22d3a1; padding: 6px 12px;">
+                    <i class="fas fa-edit me-1"></i> Suggest Edits
+                </a>
+                {% endif %}
+            </div>
             <div class="lesson-meta-row">
                 <span class="difficulty-badge difficulty-{{ lesson.difficulty_level }}">{{ lesson.difficulty_level | title }}</span>
                 <span><i class="fas fa-clock"></i> ~{{ lesson.estimated_minutes }} min</span>
