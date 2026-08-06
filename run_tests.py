@@ -1620,6 +1620,36 @@ class EventServiceTestCase(unittest.TestCase):
         })
         self.assertEqual(res_import.status_code, 302)
 
+    def test_staff_suggest_edits_workflow(self):
+        """Test staff suggesting edits, saving drafts via AJAX, and submitting proposals."""
+        import json
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        # 1. GET edit page
+        res_edit_get = self.client.get(f"/learn/lessons/{self.lesson1.id}/edit")
+        self.assertEqual(res_edit_get.status_code, 200)
+        self.assertIn(b"Suggest Edits", res_edit_get.data)
+
+        # 2. POST save draft section via AJAX
+        res_draft_post = self.client.post(f"/learn/lessons/{self.lesson1.id}/draft/save", data={
+            "section_type": "explanation",
+            "title": "Explanation Suggestions",
+            "content_markdown": "Suggesting some new draft modifications.",
+            "sort_order": "0"
+        })
+        self.assertEqual(res_draft_post.status_code, 200)
+        data = json.loads(res_draft_post.data.decode("utf-8"))
+        self.assertEqual(data["status"], "success")
+
+        # 3. POST submit proposal
+        res_submit = self.client.post(f"/learn/lessons/{self.lesson1.id}/proposal/submit", data={
+            "description": "Edits description",
+            "grammar_checked": "on",
+            "code_executed": "on"
+        })
+        self.assertEqual(res_submit.status_code, 302)
+
 
 if __name__ == "__main__":
     unittest.main()

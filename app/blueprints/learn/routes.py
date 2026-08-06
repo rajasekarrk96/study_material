@@ -318,3 +318,98 @@ def ai_tutor():
     """Renders the standalone AI Tutor workspace page."""
     return render_template("learn/tutor.html")
 
+
+# ── Staff Workflow: Suggest Edits, Save Drafts, Submit Proposals ────────────────
+
+@learn_bp.route("/lessons/<int:lesson_id>/edit", methods=["GET"])
+@login_required
+def suggest_edit(lesson_id: int):
+    """Render the suggest edits editor with current published and draft content."""
+    lesson = db.session.get(Lesson, lesson_id)
+    if not lesson:
+        abort(404, "Lesson not found")
+        
+    from app.services.workflow_service import WorkflowService
+    drafts = WorkflowService.list_draft_sections(lesson_id)
+    drafts_dict = {d.section_type: d for d in drafts}
+    
+    published_sections = {s.section_type: s for s in lesson.sections}
+    
+    return render_template(
+        "learn/suggest_edit.html",
+        lesson=lesson,
+        published_sections=published_sections,
+        drafts_dict=drafts_dict
+    )
+
+
+@learn_bp.route("/lessons/<int:lesson_id>/draft/save", methods=["POST"])
+@login_required
+def save_lesson_draft(lesson_id: int):
+    """Save a section content draft continuously without triggering review."""
+    lesson = db.session.get(Lesson, lesson_id)
+    if not lesson:
+        return jsonify({"status": "error", "message": "Lesson not found"}), 404
+        
+    section_type = request.form.get("section_type", "explanation").strip()
+    title = request.form.get("title", "").strip() or None
+    content_markdown = request.form.get("content_markdown", "").strip()
+    sort_order = int(request.form.get("sort_order", "0"))
+
+    from app.services.workflow_service import WorkflowService
+    draft = WorkflowService.save_draft_section(
+        lesson_id=lesson_id,
+        section_type=section_type,
+        title=title,
+        content_markdown=content_markdown,
+        sort_order=sort_order,
+        user_id=current_user.id
+    )
+
+    return jsonify({
+        "status": "success",
+        "message": f"Draft section '{section_type}' saved successfully.",
+        "draft_id": draft.id
+    })
+
+
+@learn_bp.route("/lessons/<int:lesson_id>/proposal/submit", methods=["POST"])
+@login_required
+def submit_lesson_proposal(lesson_id: int):
+    """Submit current lesson drafts as a new ContentProposal and trigger AI review."""
+    lesson = db.session.get(Lesson, lesson_id)
+    if not lesson:
+        flash("Lesson not found", "danger")
+        return redirect(url_for("learn.course_overview", course_slug="python"))
+
+    description = request.form.get("description", "Content proposal from editor.").strip()
+    
+    checklist = {
+        "grammar_checked": request.form.get("grammar_checked") == "on",
+        "code_executed": request.form.get("code_executed") == "on",
+        "seo_checked": request.form.get("seo_checked") == "on"
+    }
+
+    from app.services.workflow_service import WorkflowService
+    try:
+        proposal = WorkflowService.create_proposal(
+            proposal_type="CONTENT_UPDATE",
+            target_type="LESSON",
+            target_id=lesson_id,
+            author_id=current_user.id,
+            description=description,
+            checklist_data=checklist
+        )
+        
+        WorkflowService.submit_proposal(proposal.id)
+        WorkflowService.run_ai_review(proposal.id)
+        
+        flash(f"Proposal #{proposal.id} successfully submitted and passed to review queue!", "success")
+    except Exception as e:
+        flash(f"Failed to submit proposal: {str(e)}", "danger")
+
+    course = lesson.module.course if lesson.module else None
+    if course:
+        return redirect(url_for("learn.course_overview", course_slug=course.slug))
+    return redirect(url_for("admin.dashboard"))
+
