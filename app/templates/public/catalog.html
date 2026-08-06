@@ -14,7 +14,7 @@
   <div class="catalog-tabs" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; border-bottom: 2px solid #1e293b; padding-bottom: 0;">
     <button id="tab-foundations" class="cat-tab-btn active" onclick="switchTab('foundations')">
       <i class="fas fa-layer-group"></i> Foundations
-      <span class="badge-count">{{ foundation_groups.values() | sum(attribute='courses') | list | length if foundation_groups else course_count }}</span>
+      <span class="badge-count">{{ foundation_groups.values() | map(attribute='courses') | map('length') | sum if foundation_groups else course_count }}</span>
     </button>
     <button id="tab-specializations" class="cat-tab-btn" onclick="switchTab('specializations')">
       <i class="fas fa-bullseye"></i> Specializations
