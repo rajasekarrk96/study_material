@@ -1752,6 +1752,50 @@ class EventServiceTestCase(unittest.TestCase):
         res_lesson2_ok = self.client.get(f"/learn/{course.slug}/{self.lesson1.module.slug}/{lesson2.slug}/")
         self.assertEqual(res_lesson2_ok.status_code, 200)
 
+    def test_sso_handshake_and_api_endpoints(self):
+        """Test SSO public key endpoints, rotation mechanism, and external entitlements syncing APIs."""
+        import json
+        from app.domains.auth.models import Role, UserCourse
+
+        admin_role = Role.query.filter_by(name="admin").first()
+        self.user.role_id = admin_role.id
+        db.session.commit()
+
+        with self.client.session_transaction() as sess:
+            sess["_user_id"] = str(self.user.id)
+
+        # 1. Get JWKS endpoint
+        res_jwks = self.client.get("/api/v1/sso/jwks")
+        self.assertEqual(res_jwks.status_code, 200)
+        data_jwks = json.loads(res_jwks.data.decode("utf-8"))
+        self.assertIn("keys", data_jwks)
+        self.assertGreater(len(data_jwks["keys"]), 0)
+        original_kid = data_jwks["keys"][0]["kid"]
+
+        # 2. Rotate keys
+        res_rotate = self.client.post("/api/v1/sso/rotate")
+        self.assertEqual(res_rotate.status_code, 200)
+        data_rotate = json.loads(res_rotate.data.decode("utf-8"))
+        self.assertEqual(data_rotate["status"], "success")
+        new_kid = data_rotate["jwks"]["keys"][0]["kid"]
+        self.assertNotEqual(original_kid, new_kid)
+
+        # 3. Sync entitlements
+        res_sync = self.client.post("/api/v1/sso/sync-entitlements", json={
+            "user_id": self.user.id,
+            "courses": [
+                {"slug": self.lesson1.module.course.slug, "status": "Active"}
+            ]
+        })
+        self.assertEqual(res_sync.status_code, 200)
+        data_sync = json.loads(res_sync.data.decode("utf-8"))
+        self.assertEqual(data_sync["status"], "success")
+
+        # Verify enrollment was created/updated
+        ent = UserCourse.query.filter_by(user_id=self.user.id, course_id=self.lesson1.module.course.id).first()
+        self.assertIsNotNone(ent)
+        self.assertEqual(ent.status, "Active")
+
 
 if __name__ == "__main__":
     unittest.main()
