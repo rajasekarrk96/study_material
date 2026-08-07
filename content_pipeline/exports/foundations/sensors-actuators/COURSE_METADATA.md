@@ -2,5 +2,5 @@
 
 - **Slug:** `sensors-actuators`
 - **Category:** foundations
-- **Difficulty:** beginner
-- **Hours:** 15
+- **Difficulty:** beginner-to-intermediate
+- **Hours:** 80

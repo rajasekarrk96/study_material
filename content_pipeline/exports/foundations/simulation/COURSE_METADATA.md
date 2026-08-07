@@ -1,6 +1,6 @@
-# Course Metadata: Simulation (Proteus / Wokwi)
+# Course Metadata: Electronics Simulation using Proteus & Wokwi
 
 - **Slug:** `simulation`
 - **Category:** foundations
-- **Difficulty:** beginner
-- **Hours:** 2
+- **Difficulty:** beginner-to-intermediate
+- **Hours:** 40
