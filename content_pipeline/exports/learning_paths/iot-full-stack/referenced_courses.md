@@ -16,7 +16,7 @@ List of standalone reusable courses in this path:
 | Sensors & Actuators | `sensors-actuators` | `core` | `Hardware` |
 | Iot Hardware | `iot-hardware` | `core` | `Hardware` |
 | STM32 | `stm32` | `core` | `Hardware` |
-| Raspberry Pi | `raspberry-pi` | `core` | `Hardware` |
+| Raspberry Pi Development | `raspberry-pi` | `core` | `Hardware` |
 | Html5 | `html5` | `core` | `Web Stack` |
 | Css3 | `css3` | `core` | `Web Stack` |
 | Bootstrap | `bootstrap` | `core` | `Web Stack` |

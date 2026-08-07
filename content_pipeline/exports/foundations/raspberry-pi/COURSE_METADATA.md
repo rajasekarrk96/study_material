@@ -1,6 +1,6 @@
-# Course Metadata: Raspberry Pi
+# Course Metadata: Raspberry Pi Development
 
 - **Slug:** `raspberry-pi`
 - **Category:** foundations
 - **Difficulty:** intermediate
-- **Hours:** 12
+- **Hours:** 80

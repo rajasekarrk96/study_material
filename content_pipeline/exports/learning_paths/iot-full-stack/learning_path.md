@@ -14,7 +14,7 @@ References the reusable sequence:
 10. **Sensors & Actuators** (`sensors-actuators`) -- CORE (Hardware)
 11. **Iot Hardware** (`iot-hardware`) -- CORE (Hardware)
 12. **STM32** (`stm32`) -- CORE (Hardware)
-13. **Raspberry Pi** (`raspberry-pi`) -- CORE (Hardware)
+13. **Raspberry Pi Development** (`raspberry-pi`) -- CORE (Hardware)
 14. **Html5** (`html5`) -- CORE (Web Stack)
 15. **Css3** (`css3`) -- CORE (Web Stack)
 16. **Bootstrap** (`bootstrap`) -- CORE (Web Stack)

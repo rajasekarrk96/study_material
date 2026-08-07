@@ -449,7 +449,7 @@
     5. Lab Exercise
 4. **Hardware Interfacing with Python**
     - **Course Coverage:** 🟢 Covered in Class
-    1. Raspberry Pi GPIO
+    1. Raspberry Pi Development GPIO
     2. gpiozero — Higher Level
     3. PySerial — UART Communication
     4. smbus2 — I2C Communication

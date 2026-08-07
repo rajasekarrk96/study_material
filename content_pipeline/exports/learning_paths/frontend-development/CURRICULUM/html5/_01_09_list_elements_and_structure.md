@@ -142,7 +142,7 @@ graph TD
 
     LI1 --> SUB_UL["&lt;ul&gt; (Nested Sub-List)"]
     SUB_UL --> SUB_LI1["&lt;li&gt; ESP32 MCU"]
-    SUB_UL --> SUB_LI2["&lt;li&gt; Raspberry Pi"]
+    SUB_UL --> SUB_LI2["&lt;li&gt; Raspberry Pi Development"]
 ```
 
 ---
