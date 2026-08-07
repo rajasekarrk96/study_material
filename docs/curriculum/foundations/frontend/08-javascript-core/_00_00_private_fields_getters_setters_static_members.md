@@ -1,6 +1,6 @@
 # Private Fields Getters Setters Static Members
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

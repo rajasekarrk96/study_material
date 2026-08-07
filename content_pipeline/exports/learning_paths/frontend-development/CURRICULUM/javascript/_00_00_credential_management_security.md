@@ -1,6 +1,6 @@
 # Credential Management & Security
 
-> **Course**: Git Fundamentals | **Module**: Automation & Security | **Difficulty**: intermediate
+> **Course**: Git Version Control | **Module**: Automation & Security | **Difficulty**: intermediate
 
 ---
 

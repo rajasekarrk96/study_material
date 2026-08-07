@@ -11,7 +11,7 @@
 |  1 | **C Programming** | `c-programming` | 🟢 Published | 18/18 (100%) | 98 | ~7,933 words | 🟢 YES (In DB & UI) |
 |  2 | **Embedded C** | `embedded-c` | 🟢 Published | 60/60 (100%) | 360 | ~15,366 words | 🟢 YES (In DB & UI) |
 |  3 | **Core Python** | `core-python` | 🟢 Published | 44/44 (100%) | 304 | ~21,790 words | 🟢 YES (In DB & UI) |
-|  4 | **Git Fundamentals** | `git-fundamentals` | 🟢 Published | 238/238 (100%) | 2966 | ~292,749 words | 🟢 YES (In DB & UI) |
+|  4 | **Git Version Control** | `git` | 🟢 Published | 238/238 (100%) | 2966 | ~292,749 words | 🟢 YES (In DB & UI) |
 |  5 | **Electrical Fundamentals** | `electrical-fundamentals` | 🟢 Published | 15/15 (100%) | 102 | ~9,158 words | 🟢 YES (In DB & UI) |
 |  6 | **Electronics Basics** | `electronics-basics` | 🟢 Published | 20/20 (100%) | 120 | ~8,737 words | 🟢 YES (In DB & UI) |
 |  7 | **Pcb** | `pcb` | 🟢 Published | 28/28 (100%) | 56 | ~4,608 words | 🟢 YES (In DB & UI) |

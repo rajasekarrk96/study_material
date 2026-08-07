@@ -5,7 +5,7 @@ References the reusable sequence:
 1. **C Programming** (`c-programming`) -- CORE (Programming)
 2. **Embedded C** (`embedded-c`) -- CORE (Programming)
 3. **Core Python** (`core-python`) -- CORE (Programming)
-4. **Git Fundamentals** (`git-fundamentals`) -- CORE (Programming)
+4. **Git Version Control** (`git`) -- CORE (Programming)
 5. **Electrical Fundamentals** (`electrical-fundamentals`) -- CORE (Electronics)
 6. **Electronics Basics** (`electronics-basics`) -- CORE (Electronics)
 7. **Pcb** (`pcb`) -- CORE (Electronics)

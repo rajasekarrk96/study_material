@@ -279,8 +279,8 @@ class RecommendationService:
                             }
                         }
 
-        # Fallback: Default to Git Fundamentals first lesson
-        git_course = Course.query.filter_by(slug="git-fundamentals", is_deleted=False).first()
+        # Fallback: Default to Git Version Control first lesson
+        git_course = Course.query.filter_by(slug="git", is_deleted=False).first()
         if git_course:
             first_lesson = Lesson.query.join(Module).filter(
                 Module.course_id == git_course.id,
@@ -316,7 +316,7 @@ class RecommendationService:
                 active_course_id = latest_lesson.module.course_id
         
         if not active_course_id:
-            git_course = Course.query.filter_by(slug="git-fundamentals", is_deleted=False).first()
+            git_course = Course.query.filter_by(slug="git", is_deleted=False).first()
             if git_course:
                 active_course_id = git_course.id
                 

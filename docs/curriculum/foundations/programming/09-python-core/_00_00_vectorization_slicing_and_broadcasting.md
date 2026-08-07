@@ -1,6 +1,6 @@
 # Vectorization Slicing And Broadcasting
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

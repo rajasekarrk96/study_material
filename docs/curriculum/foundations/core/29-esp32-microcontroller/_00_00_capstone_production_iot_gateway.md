@@ -1,6 +1,6 @@
 # Capstone Production Iot Gateway
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

@@ -1,6 +1,6 @@
 # Adc Dac And Pwm Timer Control
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

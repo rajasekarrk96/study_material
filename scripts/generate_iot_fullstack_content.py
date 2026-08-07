@@ -18,7 +18,7 @@ For each lesson, generates 6 sections:
   overview | concept | syntax | example | pitfall | qa
 
 Already FULL (skipped):
-  c-programming(partial), embedded-c, core-python, git-fundamentals,
+  c-programming(partial), embedded-c, core-python, git,
   arduino, esp32, sensors-actuators, iot-hardware, html5, css3,
   bootstrap, javascript, mysql, flask, mqtt, computer-vision
 

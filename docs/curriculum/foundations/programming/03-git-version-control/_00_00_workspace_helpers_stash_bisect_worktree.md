@@ -1,6 +1,6 @@
 # Workspace Helpers: Stash, Bisect & Worktree
 
-> **Course**: Git Fundamentals | **Module**: Advanced Workflows | **Difficulty**: advanced
+> **Course**: Git Version Control | **Module**: Advanced Workflows | **Difficulty**: advanced
 
 ---
 

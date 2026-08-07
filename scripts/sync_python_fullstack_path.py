@@ -15,7 +15,7 @@ from app.domains.learning_path.models import LearningPath, PathCourse
 app = create_app()
 
 PFS_SLUGS = [
-    "core-python", "advanced-python", "python-dsa", "git-fundamentals",
+    "core-python", "advanced-python", "python-dsa", "git",
     "html5", "css3", "bootstrap", "javascript", "jquery", "react",
     "mysql", "mongodb", "flask", "rest-api", "auth-jwt", "fastapi",
     "linux", "docker"

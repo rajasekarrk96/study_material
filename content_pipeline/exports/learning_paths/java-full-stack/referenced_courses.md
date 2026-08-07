@@ -6,7 +6,7 @@ List of standalone reusable courses in this path:
 |---|---|---|---|
 | Core Java | `core-java` | `core` | `Programming` |
 | Java | `java` | `core` | `Programming` |
-| Git Fundamentals | `git-fundamentals` | `core` | `Programming` |
+| Git Version Control | `git` | `core` | `Programming` |
 | Html5 | `html5` | `core` | `Frontend` |
 | Css3 | `css3` | `core` | `Frontend` |
 | Bootstrap | `bootstrap` | `core` | `Frontend` |

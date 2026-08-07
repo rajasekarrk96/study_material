@@ -1,6 +1,6 @@
 # Wifi Station And Access Point Modes
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

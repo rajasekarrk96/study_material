@@ -16,7 +16,7 @@
 - [x] 🟢 `core-python` — **Core Python** (44/44 lessons) [Required - None]
 - [x] 🟢 `advanced-python` — **Advanced Python & Professional Practices** (90/90 lessons) [Required - None]
 - [x] 🟢 `python-dsa` — **Data Structures & Algorithms in Python** (75/75 lessons) [Required - None]
-- [x] 🟢 `git-fundamentals` — **Git Fundamentals** (238/238 lessons) [Required - None]
+- [x] 🟢 `git` — **Git Version Control** (238/238 lessons) [Required - None]
 - [x] 🟢 `html5` — **Html5** (24/24 lessons) [Required - None]
 - [x] 🟢 `css3` — **Css3** (45/45 lessons) [Required - None]
 - [x] 🟢 `bootstrap` — **Bootstrap** (18/18 lessons) [Required - None]
@@ -42,7 +42,7 @@
 
 - [x] 🟢 `core-java` — **Core Java** (160/160 lessons) [Required - Programming]
 - [x] 🟢 `java` — **Java** (26/26 lessons) [Required - Programming]
-- [x] 🟢 `git-fundamentals` — **Git Fundamentals** (238/238 lessons) [Required - Programming]
+- [x] 🟢 `git` — **Git Version Control** (238/238 lessons) [Required - Programming]
 - [x] 🟢 `html5` — **Html5** (24/24 lessons) [Required - Frontend]
 - [x] 🟢 `css3` — **Css3** (45/45 lessons) [Required - Frontend]
 - [x] 🟢 `bootstrap` — **Bootstrap** (18/18 lessons) [Required - Frontend]
@@ -69,7 +69,7 @@
 - [x] 🟢 `c-programming` — **C Programming** (18/18 lessons) [Required - Programming]
 - [x] 🟢 `embedded-c` — **Embedded C** (60/60 lessons) [Required - Programming]
 - [x] 🟢 `core-python` — **Core Python** (44/44 lessons) [Required - Programming]
-- [x] 🟢 `git-fundamentals` — **Git Fundamentals** (238/238 lessons) [Required - Programming]
+- [x] 🟢 `git` — **Git Version Control** (238/238 lessons) [Required - Programming]
 - [x] 🟢 `electrical-fundamentals` — **Electrical Fundamentals** (15/15 lessons) [Required - Electronics]
 - [x] 🟢 `electronics-basics` — **Electronics Basics** (20/20 lessons) [Required - Electronics]
 - [x] 🟢 `pcb` — **Pcb** (28/28 lessons) [Optional - Electronics]
@@ -99,7 +99,7 @@
 - **Status**: 🟢 Completed
 
 - [x] 🟢 `core-python` — **Core Python** (44/44 lessons) [Required - Programming]
-- [x] 🟢 `git-fundamentals` — **Git Fundamentals** (238/238 lessons) [Required - Programming]
+- [x] 🟢 `git` — **Git Version Control** (238/238 lessons) [Required - Programming]
 - [x] 🟢 `ds-math` — **Ds Math** (11/11 lessons) [Required - Mathematics]
 - [x] 🟢 `python-data-science` — **Python Data Science** (5/5 lessons) [Required - Data Science]
 - [x] 🟢 `mysql` — **MySQL** (53/53 lessons) [Required - Data Science]
@@ -124,7 +124,7 @@
 - **Status**: 🟢 Completed
 
 - [x] 🟢 `core-python` — **Core Python** (44/44 lessons) [Required - Programming]
-- [x] 🟢 `git-fundamentals` — **Git Fundamentals** (238/238 lessons) [Required - Programming]
+- [x] 🟢 `git` — **Git Version Control** (238/238 lessons) [Required - Programming]
 - [x] 🟢 `mysql` — **MySQL** (53/53 lessons) [Required - Database]
 - [x] 🟢 `ds-math` — **Ds Math** (11/11 lessons) [Required - Mathematics]
 - [x] 🟢 `python-data-science` — **Python Data Science** (5/5 lessons) [Required - Data Science]
@@ -141,7 +141,7 @@
 - **Status**: 🟢 Completed
 
 - [x] 🟢 `core-python` — **Core Python** (44/44 lessons) [Required - Programming]
-- [x] 🟢 `git-fundamentals` — **Git Fundamentals** (238/238 lessons) [Required - Programming]
+- [x] 🟢 `git` — **Git Version Control** (238/238 lessons) [Required - Programming]
 - [x] 🟢 `ds-math` — **Ds Math** (11/11 lessons) [Required - Mathematics]
 - [x] 🟢 `python-data-science` — **Python Data Science** (5/5 lessons) [Required - Data Science]
 - [x] 🟢 `machine-learning` — **Machine Learning** (107/107 lessons) [Required - Machine Learning]
@@ -160,7 +160,7 @@
 
 - [x] 🟢 `core-python` — **Core Python** (44/44 lessons) [Required - Programming]
 - [ ] 🟡 `bash` — **Bash Scripting** (0/15 lessons) [Required - Programming]
-- [x] 🟢 `git-fundamentals` — **Git Fundamentals** (238/238 lessons) [Required - Programming]
+- [x] 🟢 `git` — **Git Version Control** (238/238 lessons) [Required - Programming]
 - [x] 🟢 `linux` — **Linux Systems & Administration** (75/75 lessons) [Required - Operating System]
 - [x] 🟢 `docker` — **Docker & Containerization** (55/55 lessons) [Required - Containers]
 - [ ] 🟡 `github-actions` — **GitHub Actions** (0/15 lessons) [Required - CI/CD]
@@ -190,7 +190,7 @@
 
 - [x] 🟢 `core-java` — **Core Java** (160/160 lessons) [Required - Programming]
 - [x] 🟢 `core-python` — **Core Python** (44/44 lessons) [Required - Programming]
-- [x] 🟢 `git-fundamentals` — **Git Fundamentals** (238/238 lessons) [Required - Programming]
+- [x] 🟢 `git` — **Git Version Control** (238/238 lessons) [Required - Programming]
 - [ ] 🟡 `manual-testing` — **Manual Testing** (0/15 lessons) [Required - Testing]
 - [x] 🟢 `java-selenium` — **Java Selenium** (31/31 lessons) [Required - Automation]
 - [x] 🟢 `selenium` — **Selenium** (25/25 lessons) [Optional - Automation]

@@ -48,7 +48,7 @@
 | 29 | **Flask** | `flask` | Comprehensive Flask mastery co... | beginner | 32/32 | 🟢 Completed & Published | 100.0% |
 | 30 | **Generative Ai Llms** | `generative-ai-llms` | Comprehensive Generative Ai Ll... | beginner | 71/71 | 🟢 Completed & Published | 100.0% |
 | 31 | **Git** | `git` | Comprehensive Git mastery cour... | beginner | 20/20 | 🟢 Completed & Published | 100.0% |
-| 32 | **Git Fundamentals** | `git-fundamentals` | Learn Git Fundamentals from sc... | beginner | 238/238 | 🟢 Completed & Published | 100.0% |
+| 32 | **Git Version Control** | `git` | Learn Git Version Control from sc... | beginner | 238/238 | 🟢 Completed & Published | 100.0% |
 | 33 | **GitHub Actions** | `github-actions` | CI/CD with GitHub Actions — wo... | Intermediate | 0/15 | 🟡 In Progress / Structure Ready | 0.0% |
 | 34 | **Hibernate & JPA** | `hibernate` | Master Java persistence with H... | intermediate | 0/0 | 🔴 Pending / Stub | 0.0% |
 | 35 | **Html5** | `html5` | Comprehensive Html5 mastery co... | beginner | 24/24 | 🟢 Completed & Published | 100.0% |

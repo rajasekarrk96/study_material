@@ -1,6 +1,6 @@
 # Dense Sparse Arrays And Higher Order Methods
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

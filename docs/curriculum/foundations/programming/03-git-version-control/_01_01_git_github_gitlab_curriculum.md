@@ -22,7 +22,7 @@ graph TD
     Cat --> SubGH[Subject: GitHub]
     Cat --> SubGL[Subject: GitLab]
 
-    SubGit --> CG1[Course: Git Fundamentals]
+    SubGit --> CG1[Course: Git Version Control]
     SubGit --> CG2[Course: Git Collaboration]
     SubGit --> CG3[Course: Advanced Git]
     
@@ -39,8 +39,8 @@ graph TD
 * **Difficulty Level**: `beginner`
 * **Description**: Version control fundamentals, internal mechanics, branching, merging, and local workspace management.
 
-#### Course 1: Git Fundamentals (Beginner)
-* **Slug**: `git-fundamentals`
+#### Course 1: Git Version Control (Beginner)
+* **Slug**: `git`
 * **Estimated Hours**: 12 hours
 * **Modules**:
   1. **Introduction to VCS**: Version Control History, CVCS vs DVCS, Git's origin.

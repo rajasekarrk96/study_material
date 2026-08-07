@@ -6,7 +6,7 @@
 lesson_id: GIT-ADV-009
 lesson_title: "Diagnostic & Troubleshooting Guide"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Troubleshooting"
 difficulty: "⭐⭐⭐⭐"
 time_breakdown:

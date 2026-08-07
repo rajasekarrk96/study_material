@@ -1,10 +1,10 @@
 # Task 07 — Git Curriculum Content Ingestion Checklist
 
-> **Goal**: Write and ingest the 14 lesson Knowledge Blocks for Git Fundamentals, Git Collaboration, and Advanced Git under the Development Tools subject taxonomy.
+> **Goal**: Write and ingest the 14 lesson Knowledge Blocks for Git Version Control, Git Collaboration, and Advanced Git under the Development Tools subject taxonomy.
 
 ---
 
-## 7.1 Course 1: Git Fundamentals
+## 7.1 Course 1: Git Version Control
 - [x] **Lesson 1**: Version Control History (`_01_07_git_fundamentals_lesson1_history.md`).
 - [x] **Lesson 2**: Git Architecture and the Three States (`_01_03_git_fundamentals_lesson1.md`).
 - [x] **Lesson 3**: Basic Local Workflow: Init, Stage, and Commit (`_01_05_git_fundamentals_lesson2.md`).

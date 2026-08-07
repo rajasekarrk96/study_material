@@ -6,7 +6,7 @@
 lesson_id: "GIT-FND-005"
 lesson_title: "Branching Basics & Conflict Resolution"
 subject: "Git"
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Branching & Merging"
 difficulty: "⭐⭐"
 time_breakdown:

@@ -67,22 +67,22 @@ TRACKS = [
     ("java-full-stack", "Java Full Stack", {
         "Term 1": ["html5", "css3", "bootstrap", "javascript", "jquery", "mysql", "sql-server", "java"],
         "Term 2": ["spring", "spring-boot", "spring-mvc", "spring-security", "hibernate", "servlet-jsp", "maven",
-                   "rest-api", "auth-jwt", "react", "git", "git-fundamentals", "github-actions", "java-selenium",
+                   "rest-api", "auth-jwt", "react", "git", "git", "github-actions", "java-selenium",
                    "selenium", "postman", "docker", "jenkins", "kubernetes", "linux", "bash"],
     }),
     ("python-full-stack", "Python Full Stack", {
         "Term 1": ["html5", "css3", "bootstrap", "javascript", "jquery", "mysql", "sql-server", "python", "advanced-python"],
-        "Term 2": ["flask", "fastapi", "rest-api", "auth-jwt", "react", "git", "git-fundamentals", "github-actions",
+        "Term 2": ["flask", "fastapi", "rest-api", "auth-jwt", "react", "git", "git", "github-actions",
                    "selenium", "playwright", "postman", "docker", "kubernetes", "jenkins", "linux", "bash"],
     }),
     ("data-analyst", "Data Analyst", [
         "python", "python-data-science", "ds-math", "mysql", "sql-server", "power-bi", "python-dsa",
-        "git", "git-fundamentals", "postman", "mongodb",
+        "git", "git", "postman", "mongodb",
     ]),
     ("data-science", "Data Science", {
         "Term 1": ["python", "python-data-science", "ds-math", "mysql", "sql-server", "power-bi"],
         "Term 2": ["machine-learning", "deep-learning", "generative-ai-llms", "ai-agents", "prompt-engineering",
-                   "rag-engineering", "nlp", "computer-vision", "mlops-ai-deployment", "git", "git-fundamentals",
+                   "rag-engineering", "nlp", "computer-vision", "mlops-ai-deployment", "git", "git",
                    "docker", "kubernetes"],
     }),
     ("iot-full-stack", "IoT Full Stack", {
@@ -90,15 +90,15 @@ TRACKS = [
                    "esp32", "arduino", "raspberry-pi", "iot-hardware", "simulation", "html5", "css3", "bootstrap",
                    "javascript"],
         "Term 2": ["basic-ml-iot", "iot-cloud", "iot-projects", "mqtt", "computer-vision-iot", "advanced-components",
-                   "mysql", "flask", "basic-matlab", "pcb", "stm32", "git", "git-fundamentals"],
+                   "mysql", "flask", "basic-matlab", "pcb", "stm32", "git", "git"],
     }),
     ("cloud-computing", "Cloud Computing", [
-        "aws", "linux", "bash", "docker", "kubernetes", "jenkins", "git", "git-fundamentals", "github-actions",
+        "aws", "linux", "bash", "docker", "kubernetes", "jenkins", "git", "git", "github-actions",
     ]),
     ("devops", "DevOps", [
-        "git", "git-fundamentals", "github-actions", "docker", "kubernetes", "jenkins", "linux", "bash", "maven",
+        "git", "git", "github-actions", "docker", "kubernetes", "jenkins", "linux", "bash", "maven",
     ]),
-    ("git-version-control", "Git & Version Control", ["git", "git-fundamentals", "github-actions"]),
+    ("git-version-control", "Git & Version Control", ["git", "git", "github-actions"]),
     ("linux-administration", "Linux Administration", ["linux", "bash"]),
     ("rest-api-development", "REST API Development", ["rest-api", "auth-jwt", "postman", "flask", "fastapi"]),
     ("software-testing", "Software Testing", ["manual-testing", "selenium", "java-selenium", "playwright", "postman"]),
@@ -106,10 +106,10 @@ TRACKS = [
     ("ai-engineering", "AI Engineering", [
         "python", "advanced-python", "machine-learning", "deep-learning", "generative-ai-llms", "ai-agents",
         "prompt-engineering", "rag-engineering", "computer-vision", "nlp", "mlops-ai-deployment", "docker",
-        "kubernetes", "git", "git-fundamentals",
+        "kubernetes", "git", "git",
     ]),
     ("mlops-engineering", "MLOps Engineering", [
-        "mlops-ai-deployment", "docker", "kubernetes", "jenkins", "github-actions", "git", "git-fundamentals",
+        "mlops-ai-deployment", "docker", "kubernetes", "jenkins", "github-actions", "git", "git",
     ]),
     ("computer-vision", "Computer Vision", ["python", "machine-learning", "deep-learning", "computer-vision", "computer-vision-iot"]),
     ("nlp-generative-ai", "NLP & Generative AI", ["python", "nlp", "generative-ai-llms", "prompt-engineering", "rag-engineering", "ai-agents"]),

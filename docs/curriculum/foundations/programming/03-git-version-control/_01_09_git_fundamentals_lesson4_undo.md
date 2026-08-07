@@ -6,7 +6,7 @@
 lesson_id: "GIT-FND-004"
 lesson_title: "Undoing Changes: Reset, Restore & Revert"
 subject: "Git"
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "History Management"
 difficulty: "⭐⭐"
 time_breakdown:

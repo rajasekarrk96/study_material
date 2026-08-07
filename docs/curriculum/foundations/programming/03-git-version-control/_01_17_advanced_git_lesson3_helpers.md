@@ -6,7 +6,7 @@
 lesson_id: GIT-ADV-003
 lesson_title: "Workspace Helpers: Stash, Bisect & Worktree"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Advanced Workflows"
 difficulty: "⭐⭐⭐⭐"
 time_breakdown:

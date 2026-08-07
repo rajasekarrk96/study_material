@@ -1,6 +1,6 @@
 # Syncing Data: Fetch, Pull & Push
 
-> **Course**: Git Fundamentals | **Module**: Remote Collaboration | **Difficulty**: intermediate
+> **Course**: Git Version Control | **Module**: Remote Collaboration | **Difficulty**: intermediate
 
 ---
 

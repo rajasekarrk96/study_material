@@ -1,6 +1,6 @@
 # Remote Repositories & Origin Config
 
-> **Course**: Git Fundamentals | **Module**: Remote Collaboration | **Difficulty**: intermediate
+> **Course**: Git Version Control | **Module**: Remote Collaboration | **Difficulty**: intermediate
 
 ---
 

@@ -7,7 +7,7 @@ List of standalone reusable courses in this path:
 | C Programming | `c-programming` | `core` | `Programming` |
 | Embedded C | `embedded-c` | `core` | `Programming` |
 | Core Python | `core-python` | `core` | `Programming` |
-| Git Fundamentals | `git-fundamentals` | `core` | `Programming` |
+| Git Version Control | `git` | `core` | `Programming` |
 | Electrical Fundamentals | `electrical-fundamentals` | `core` | `Electronics` |
 | Electronics Basics | `electronics-basics` | `core` | `Electronics` |
 | Pcb | `pcb` | `core` | `Electronics` |

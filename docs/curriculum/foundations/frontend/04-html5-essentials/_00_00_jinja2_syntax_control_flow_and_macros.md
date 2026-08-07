@@ -1,6 +1,6 @@
 # Jinja2 Syntax Control Flow And Macros
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

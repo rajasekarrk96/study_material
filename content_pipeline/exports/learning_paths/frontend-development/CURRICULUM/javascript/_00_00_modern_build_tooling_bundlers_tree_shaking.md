@@ -1,6 +1,6 @@
 # Modern Build Tooling Bundlers Tree Shaking
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

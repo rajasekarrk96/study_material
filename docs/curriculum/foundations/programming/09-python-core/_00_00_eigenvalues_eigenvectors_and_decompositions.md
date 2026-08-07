@@ -1,6 +1,6 @@
 # Eigenvalues Eigenvectors And Decompositions
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

@@ -1,6 +1,6 @@
 # Forking & Upstream Workflows
 
-> **Course**: Git Fundamentals | **Module**: Remote Collaboration | **Difficulty**: advanced
+> **Course**: Git Version Control | **Module**: Remote Collaboration | **Difficulty**: advanced
 
 ---
 

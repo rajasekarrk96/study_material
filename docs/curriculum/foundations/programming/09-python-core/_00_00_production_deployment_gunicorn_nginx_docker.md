@@ -1,6 +1,6 @@
 # Production Deployment Gunicorn Nginx Docker
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

@@ -1,6 +1,6 @@
 # Interactive Staging: Patch Mode & Partial Commits
 
-> **Course**: Git Fundamentals | **Module**: Module History Management | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Module History Management | **Difficulty**: beginner
 
 ---
 

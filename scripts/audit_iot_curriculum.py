@@ -7,7 +7,7 @@ from app.domains.content.models import Course, Module, Lesson
 app = create_app()
 with app.app_context():
     relevant = [
-        'c-programming','core-python','git','git-fundamentals','mysql','flask',
+        'c-programming','core-python','git','git','mysql','flask',
         'html5','css3','bootstrap','javascript','fastapi','embedded-c',
         'arduino','esp32','raspberry-pi','sensors-actuators','advanced-components',
         'mqtt','iot-cloud','basic-ml-iot','computer-vision-iot','basic-matlab',

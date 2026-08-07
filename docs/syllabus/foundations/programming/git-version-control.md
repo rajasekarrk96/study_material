@@ -11,7 +11,7 @@
 
 ## Study Flow
 
-### 1. Git Fundamentals
+### 1. Git Version Control
 
 #### 1.1. Module 1 — Introduction
 

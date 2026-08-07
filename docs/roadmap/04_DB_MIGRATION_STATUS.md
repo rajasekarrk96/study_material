@@ -48,7 +48,7 @@ Course Created ➔ Structure Ready ➔ Markdown Drafted ➔ DB Migrated ➔ Publ
 | `flask` | **Flask** | 3 | 32 | 376 | 🟢 Completed & Published | `generate_flask_content_direct.py` |
 | `generative-ai-llms` | **Generative Ai Llms** | 10 | 71 | 142 | 🟢 Completed & Published | `generate_generative_ai_llms_content_direct.py` |
 | `git` | **Git** | 8 | 20 | 101 | 🟢 Completed & Published | `generate_git_content_direct.py` |
-| `git-fundamentals` | **Git Fundamentals** | 17 | 238 | 2966 | 🟢 Completed & Published | `generate_git_fundamentals_content_direct.py` |
+| `git` | **Git Version Control** | 17 | 238 | 2966 | 🟢 Completed & Published | `generate_git_fundamentals_content_direct.py` |
 | `github-actions` | **GitHub Actions** | 3 | 15 | 0 | 🟡 In Progress / Structure Ready | `Pending` |
 | `hibernate` | **Hibernate & JPA** | 0 | 0 | 0 | 🔴 Pending / Stub | `Pending` |
 | `html5` | **Html5** | 1 | 24 | 336 | 🟢 Completed & Published | `generate_html5_content_direct.py` |

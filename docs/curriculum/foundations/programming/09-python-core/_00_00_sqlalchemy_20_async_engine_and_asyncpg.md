@@ -1,6 +1,6 @@
 # Sqlalchemy 20 Async Engine And Asyncpg
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

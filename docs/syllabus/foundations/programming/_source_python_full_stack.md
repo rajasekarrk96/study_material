@@ -4006,7 +4006,7 @@
 
 ## 2. Term 2
 
-### 2.1. Git Fundamentals
+### 2.1. Git Version Control
 
 #### 2.1.1. Module 1 — Introduction
 

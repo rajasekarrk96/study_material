@@ -1,6 +1,6 @@
 # Async Await Syntactic Sugar And Async Iteration
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

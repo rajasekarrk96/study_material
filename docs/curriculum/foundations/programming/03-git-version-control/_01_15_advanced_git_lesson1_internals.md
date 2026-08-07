@@ -6,7 +6,7 @@
 lesson_id: GIT-ADV-001
 lesson_title: "Git Internals: Blobs, Trees & Commits"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Git Internals"
 difficulty: "⭐⭐⭐⭐"
 time_breakdown:

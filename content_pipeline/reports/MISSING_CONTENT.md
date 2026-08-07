@@ -6,7 +6,7 @@ Courses missing either an individual syllabus file or a curriculum folder.
 - `core-java`
 - `java-selenium`
 - `mysql`
-- `git-fundamentals`
+- `git`
 - `c-object-oriented-programming`
 - `html5`
 - `css3`
@@ -71,7 +71,7 @@ Courses missing either an individual syllabus file or a curriculum folder.
 - `core-java`
 - `java-selenium`
 - `mysql`
-- `git-fundamentals`
+- `git`
 - `c-object-oriented-programming`
 - `html5`
 - `css3`

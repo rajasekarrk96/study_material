@@ -1,6 +1,6 @@
 # Destructuring Assignment And Spread Rest Operators
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

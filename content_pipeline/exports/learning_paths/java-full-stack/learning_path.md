@@ -4,7 +4,7 @@ References the reusable sequence:
 
 1. **Core Java** (`core-java`) -- CORE (Programming)
 2. **Java** (`java`) -- CORE (Programming)
-3. **Git Fundamentals** (`git-fundamentals`) -- CORE (Programming)
+3. **Git Version Control** (`git`) -- CORE (Programming)
 4. **Html5** (`html5`) -- CORE (Frontend)
 5. **Css3** (`css3`) -- CORE (Frontend)
 6. **Bootstrap** (`bootstrap`) -- CORE (Frontend)

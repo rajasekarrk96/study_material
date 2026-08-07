@@ -1,6 +1,6 @@
-# Course Metadata: Linux Systems & Administration
+# Course Metadata: Linux Systems Administration
 
 - **Slug:** `linux`
 - **Category:** foundations
-- **Difficulty:** Beginner
-- **Hours:** 15
+- **Difficulty:** beginner
+- **Hours:** 50

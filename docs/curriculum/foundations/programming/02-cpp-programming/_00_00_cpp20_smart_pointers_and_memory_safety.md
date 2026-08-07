@@ -1,6 +1,6 @@
 # Cpp20 Smart Pointers And Memory Safety
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

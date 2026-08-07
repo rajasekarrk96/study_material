@@ -6,7 +6,7 @@
 lesson_id: GIT-ADV-008
 lesson_title: "Credential Management & Security"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Automation & Security"
 difficulty: "⭐⭐"
 time_breakdown:

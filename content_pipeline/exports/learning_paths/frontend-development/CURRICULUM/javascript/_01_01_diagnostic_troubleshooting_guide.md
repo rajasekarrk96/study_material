@@ -1,6 +1,6 @@
 # Diagnostic & Troubleshooting Guide
 
-> **Course**: Git Fundamentals | **Module**: Module Troubleshooting | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Module Troubleshooting | **Difficulty**: beginner
 
 ---
 

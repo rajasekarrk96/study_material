@@ -5,7 +5,7 @@ List of standalone reusable courses in this path:
 | Course Title | Slug | Role | Section |
 |---|---|---|---|
 | Core Python | `core-python` | `core` | `Programming` |
-| Git Fundamentals | `git-fundamentals` | `core` | `Programming` |
+| Git Version Control | `git` | `core` | `Programming` |
 | Ds Math | `ds-math` | `core` | `Mathematics` |
 | Python Data Science | `python-data-science` | `core` | `Data Science` |
 | Machine Learning | `machine-learning` | `core` | `Machine Learning` |

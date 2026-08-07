@@ -1,6 +1,6 @@
 # Rewriting History: Amend, Rebase & Squash
 
-> **Course**: Git Fundamentals | **Module**: Module Advanced Workflows | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Module Advanced Workflows | **Difficulty**: beginner
 
 ---
 

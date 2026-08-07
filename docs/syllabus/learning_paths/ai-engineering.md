@@ -1295,7 +1295,7 @@
     6. Q & A
         - Q & A: Refactoring Legacy Python Codebases
 
-### 3. Git Fundamentals
+### 3. Git Version Control
 
 #### 3.1. Module 1 — Introduction
 

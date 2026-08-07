@@ -7,7 +7,7 @@ List of standalone reusable courses in this path:
 | Core Python | `core-python` | `core` | `None` |
 | Advanced Python & Professional Practices | `advanced-python` | `core` | `None` |
 | Data Structures & Algorithms in Python | `python-dsa` | `core` | `None` |
-| Git Fundamentals | `git-fundamentals` | `core` | `None` |
+| Git Version Control | `git` | `core` | `None` |
 | Html5 | `html5` | `core` | `None` |
 | Css3 | `css3` | `core` | `None` |
 | Bootstrap | `bootstrap` | `core` | `None` |
@@ -20,5 +20,5 @@ List of standalone reusable courses in this path:
 | RESTful API Architecture & Design | `rest-api` | `core` | `None` |
 | Authentication, Authorization & JWT | `auth-jwt` | `core` | `None` |
 | Fastapi | `fastapi` | `core` | `None` |
-| Linux Systems & Administration | `linux` | `core` | `None` |
+| Linux Systems Administration | `linux` | `core` | `None` |
 | Docker & Containerization | `docker` | `core` | `None` |

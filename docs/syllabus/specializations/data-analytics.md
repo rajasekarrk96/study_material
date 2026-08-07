@@ -1314,7 +1314,7 @@
         - Key Concepts & Workflow
     2. Lab Exercise
 
-### 7. Git Fundamentals
+### 7. Git Version Control
 
 #### 7.1. Module 1 — Introduction
 

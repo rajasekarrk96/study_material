@@ -1,6 +1,6 @@
 # Git Internals: Blobs, Trees & Commits
 
-> **Course**: Git Fundamentals | **Module**: Git Internals | **Difficulty**: advanced
+> **Course**: Git Version Control | **Module**: Git Internals | **Difficulty**: advanced
 
 ---
 

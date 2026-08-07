@@ -1,6 +1,6 @@
 # Git Customization: Hooks & Aliases
 
-> **Course**: Git Fundamentals | **Module**: Automation & Security | **Difficulty**: advanced
+> **Course**: Git Version Control | **Module**: Automation & Security | **Difficulty**: advanced
 
 ---
 

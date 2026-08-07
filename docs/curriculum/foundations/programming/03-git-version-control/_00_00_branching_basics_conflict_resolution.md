@@ -1,6 +1,6 @@
 # Branching Basics & Conflict Resolution
 
-> **Course**: Git Fundamentals | **Module**: Branching & Merging | **Difficulty**: intermediate
+> **Course**: Git Version Control | **Module**: Branching & Merging | **Difficulty**: intermediate
 
 ---
 

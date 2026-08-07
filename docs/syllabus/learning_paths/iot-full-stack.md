@@ -8551,7 +8551,7 @@
     2. Clean, analyze, visualize, and model the data
     3. Deliver code, tests, figures, and an engineering report
 
-### 2.5. Git Fundamentals
+### 2.5. Git Version Control
 
 #### 2.5.1. Module 1 — Introduction
 

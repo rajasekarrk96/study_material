@@ -1,6 +1,6 @@
 # Local Workflow: Init, Stage & Commit
 
-> **Course**: Git Fundamentals | **Module**: Module Git Foundations | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Module Git Foundations | **Difficulty**: beginner
 
 ---
 

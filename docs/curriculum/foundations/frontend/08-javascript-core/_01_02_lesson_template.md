@@ -8,7 +8,7 @@ Every lesson file imported into the Learning OS CMS must match this strict layou
 # ── LESSON METADATA BLOCK ───────────────────────────────────────────
 lesson_id: "SUBJECT-COURSE-NUMBER"    # e.g., GIT-FND-001
 subject: "Subject Name"               # e.g., Git
-course: "Course Title"                # e.g., Git Fundamentals
+course: "Course Title"                # e.g., Git Version Control
 module: "Module Name"                 # e.g., Git Architecture
 difficulty: "⭐"                     # Rating from ⭐ to ⭐⭐⭐⭐⭐
 time_breakdown:

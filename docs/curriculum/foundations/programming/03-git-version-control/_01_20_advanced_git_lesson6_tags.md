@@ -6,7 +6,7 @@
 lesson_id: GIT-ADV-006
 lesson_title: "Tags & Release Management"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Advanced Workflows"
 difficulty: "⭐⭐"
 time_breakdown:

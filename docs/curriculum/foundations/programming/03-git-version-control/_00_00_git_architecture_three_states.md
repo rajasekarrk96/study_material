@@ -1,6 +1,6 @@
 # Git Architecture & Three States
 
-> **Course**: Git Fundamentals | **Module**: Git Foundations | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Git Foundations | **Difficulty**: beginner
 
 ---
 

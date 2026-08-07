@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Bytes and Boards Solutions — Markdown Course Unifier.
-Standardizes the course metadata of all 14 Git markdown files to 'Git Fundamentals'
+Standardizes the course metadata of all 14 Git markdown files to 'Git Version Control'
 so they are grouped into a single unified learning path.
 """
 from pathlib import Path
@@ -19,19 +19,19 @@ def unify_course():
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
 
-        # Replace course: "Git Collaboration" / "Advanced Git" with "Git Fundamentals"
+        # Replace course: "Git Collaboration" / "Advanced Git" with "Git Version Control"
         new_content = re.sub(
-            r'course:\s*[\"\']?(?:Git Collaboration|Advanced Git|Git Fundamentals)[\"\']?',
-            'course: "Git Fundamentals"',
+            r'course:\s*[\"\']?(?:Git Collaboration|Advanced Git|Git Version Control)[\"\']?',
+            'course: "Git Version Control"',
             content
         )
 
         if new_content != content:
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(new_content)
-            print("  [UPDATED] -> Git Fundamentals")
+            print("  [UPDATED] -> Git Version Control")
         else:
-            print("  [OK] Already Git Fundamentals")
+            print("  [OK] Already Git Version Control")
 
 if __name__ == "__main__":
     unify_course()

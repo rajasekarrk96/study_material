@@ -6,7 +6,7 @@
 lesson_id: GIT-COL-001
 lesson_title: "Remote Repositories & Origin Config"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Remote Collaboration"
 difficulty: "⭐⭐"
 time_breakdown:

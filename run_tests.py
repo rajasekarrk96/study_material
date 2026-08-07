@@ -586,8 +586,8 @@ class LearningServiceTestCase(unittest.TestCase):
 
         self.course = Course(
             subject_id=subj.id,
-            title="Git Fundamentals",
-            slug="git-fundamentals",
+            title="Git Version Control",
+            slug="git",
             status="published"
         )
         db.session.add(self.course)
@@ -682,7 +682,7 @@ class LearningServiceTestCase(unittest.TestCase):
         self.assertEqual(data["total_xp"], 0)
         self.assertEqual(data["streak"], 0)
         self.assertIsNotNone(data["default_course"])
-        self.assertEqual(data["default_course"]["slug"], "git-fundamentals")
+        self.assertEqual(data["default_course"]["slug"], "git")
 
         # Complete lesson and query again
         LearningProgressService.complete_lesson(self.user.id, self.lesson1.id)
@@ -766,8 +766,8 @@ class EventServiceTestCase(unittest.TestCase):
 
         self.course = Course(
             subject_id=subj.id,
-            title="Git Fundamentals",
-            slug="git-fundamentals",
+            title="Git Version Control",
+            slug="git",
             status="published"
         )
         db.session.add(self.course)
@@ -806,11 +806,11 @@ class EventServiceTestCase(unittest.TestCase):
         self.assertEqual(len(xp_logs), 1)
 
     def test_recommendation_service_returns_first_lesson(self):
-        """Before any progress, RecommendationService should suggest first lesson of git-fundamentals."""
+        """Before any progress, RecommendationService should suggest first lesson of git."""
         from app.services.learning import RecommendationService
         rec = RecommendationService.get_resume_recommendation(self.user.id)
         self.assertIsNotNone(rec)
-        self.assertEqual(rec["slug"], "git-fundamentals")
+        self.assertEqual(rec["slug"], "git")
         self.assertEqual(rec["next_lesson"]["slug"], "lesson-1")
 
     def test_recommendation_service_advances_after_completion(self):
@@ -860,7 +860,7 @@ class EventServiceTestCase(unittest.TestCase):
         # 3. Check recommended next course
         next_course = RecommendationService.get_recommended_next_course(self.user.id)
         self.assertIsNotNone(next_course)
-        self.assertEqual(next_course["slug"], "git-fundamentals")
+        self.assertEqual(next_course["slug"], "git")
 
     def test_lab_service_and_event_integration(self):
         """Test lab progress saving and auto-grading via local Git validator mock."""
@@ -907,7 +907,7 @@ class EventServiceTestCase(unittest.TestCase):
         from app.domains.content.models import Certificate, UserCertificate
         
         # Configure certificate for the course
-        cert = Certificate(course_id=self.course.id, title="Git Master Cert", description="Successfully completed Git Fundamentals")
+        cert = Certificate(course_id=self.course.id, title="Git Master Cert", description="Successfully completed Git Version Control")
         db.session.add(cert)
         db.session.commit()
         
@@ -934,7 +934,7 @@ class EventServiceTestCase(unittest.TestCase):
         from app.domains.content.models import Certificate, UserCertificate
         
         # 1. Setup course certificate
-        cert = Certificate(course_id=self.course.id, title="Git Master Cert", description="Successfully completed Git Fundamentals")
+        cert = Certificate(course_id=self.course.id, title="Git Master Cert", description="Successfully completed Git Version Control")
         db.session.add(cert)
         db.session.commit()
         
@@ -1232,7 +1232,7 @@ class EventServiceTestCase(unittest.TestCase):
         self.assertEqual(res_sitemap.mimetype, "application/xml")
         sitemap_data = res_sitemap.data
         self.assertIn(b"<loc>", sitemap_data)
-        self.assertIn(b"git-fundamentals", sitemap_data)
+        self.assertIn(b"git", sitemap_data)
 
     def test_auth_gateway_and_jwt_sso(self):
         """Test local authentication, JWT SSO validation, user syncing, role mappings, and entitlements."""
@@ -1545,7 +1545,7 @@ class EventServiceTestCase(unittest.TestCase):
         course_id = self.lesson1.module.course.id
         exported_json = ContentPipelineService.export_course(course_id)
         self.assertIsNotNone(exported_json)
-        self.assertIn("Git Fundamentals", exported_json)
+        self.assertIn("Git Version Control", exported_json)
 
         # Modify the exported content
         package_dict = json.loads(exported_json)

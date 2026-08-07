@@ -58,7 +58,7 @@ PATHS = [
             ("core-python",        True,  "Programming"),
             ("advanced-python",    True,  "Programming"),
             ("python-dsa",         True,  "Programming"),
-            ("git-fundamentals",   True,  "Programming"),
+            ("git",   True,  "Programming"),
             ("html5",              True,  "Frontend"),
             ("css3",               True,  "Frontend"),
             ("bootstrap",          True,  "Frontend"),
@@ -92,7 +92,7 @@ PATHS = [
         "courses": [
             ("core-java",          True,  "Programming"),
             ("java",               True,  "Programming"),
-            ("git-fundamentals",   True,  "Programming"),
+            ("git",   True,  "Programming"),
             ("html5",              True,  "Frontend"),
             ("css3",               True,  "Frontend"),
             ("bootstrap",          True,  "Frontend"),
@@ -128,7 +128,7 @@ PATHS = [
             ("c-programming",             True,  "Programming"),
             ("embedded-c",                True,  "Programming"),
             ("core-python",               True,  "Programming"),
-            ("git-fundamentals",          True,  "Programming"),
+            ("git",          True,  "Programming"),
             ("electrical-fundamentals",   True,  "Electronics"),
             ("electronics-basics",        True,  "Electronics"),
             ("pcb",                       False, "Electronics"),
@@ -167,7 +167,7 @@ PATHS = [
         "color": "#7B2FBE",
         "courses": [
             ("core-python",          True,  "Programming"),
-            ("git-fundamentals",     True,  "Programming"),
+            ("git",     True,  "Programming"),
             ("ds-math",              True,  "Mathematics"),
             ("python-data-science",  True,  "Data Science"),
             ("mysql",                True,  "Data Science"),
@@ -201,7 +201,7 @@ PATHS = [
         "color": "#E07A5F",
         "courses": [
             ("core-python",          True,  "Programming"),
-            ("git-fundamentals",     True,  "Programming"),
+            ("git",     True,  "Programming"),
             ("mysql",                True,  "Database"),
             ("ds-math",              True,  "Mathematics"),
             ("python-data-science",  True,  "Data Science"),
@@ -226,7 +226,7 @@ PATHS = [
         "color": "#F4A261",
         "courses": [
             ("core-python",          True, "Programming"),
-            ("git-fundamentals",     True, "Programming"),
+            ("git",     True, "Programming"),
             ("ds-math",              True, "Mathematics"),
             ("python-data-science",  True, "Data Science"),
             ("machine-learning",     True, "Machine Learning"),
@@ -254,7 +254,7 @@ PATHS = [
         "courses": [
             ("core-python",       True, "Programming"),
             ("bash",              True, "Programming"),
-            ("git-fundamentals",  True, "Programming"),
+            ("git",  True, "Programming"),
             ("linux",             True, "Operating System"),
             ("docker",            True, "Containers"),
             ("github-actions",    True, "CI/CD"),
@@ -281,7 +281,7 @@ PATHS = [
         "courses": [
             ("core-java",         True,  "Programming"),
             ("core-python",       True,  "Programming"),
-            ("git-fundamentals",  True,  "Programming"),
+            ("git",  True,  "Programming"),
             ("manual-testing",    True,  "Testing"),
             ("java-selenium",     True,  "Automation"),
             ("selenium",          False, "Automation"),

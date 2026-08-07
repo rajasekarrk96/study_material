@@ -1,6 +1,6 @@
 # Undoing Changes: Reset, Restore & Revert
 
-> **Course**: Git Fundamentals | **Module**: History Management | **Difficulty**: intermediate
+> **Course**: Git Version Control | **Module**: History Management | **Difficulty**: intermediate
 
 ---
 

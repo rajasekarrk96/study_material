@@ -3936,7 +3936,7 @@
     1. Topics Covered
     2. Learning Objectives
 
-### 2.9. Git Fundamentals
+### 2.9. Git Version Control
 
 #### 2.9.1. Module 1 — Introduction
 

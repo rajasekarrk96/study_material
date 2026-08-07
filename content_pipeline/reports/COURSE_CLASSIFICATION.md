@@ -7,7 +7,7 @@ Mapping registry of all exported packages.
 | `core-java` | `technologies` | `course` |
 | `java-selenium` | `specializations` | `course` |
 | `mysql` | `technologies` | `course` |
-| `git-fundamentals` | `foundations` | `course` |
+| `git` | `foundations` | `course` |
 | `c-object-oriented-programming` | `technologies` | `course` |
 | `html5` | `technologies` | `course` |
 | `css3` | `technologies` | `course` |

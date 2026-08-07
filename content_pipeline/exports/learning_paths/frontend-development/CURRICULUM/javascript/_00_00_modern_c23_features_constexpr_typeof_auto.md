@@ -1,6 +1,6 @@
 # Modern C23 Features Constexpr Typeof Auto
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

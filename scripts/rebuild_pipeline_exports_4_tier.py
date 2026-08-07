@@ -52,7 +52,7 @@ FOUNDATIONS_LIST = [
     "electronics-basics", "arduino", "esp32", "raspberry-pi", "sensors-actuators",
     "iot-hardware", "iot-projects", "iot-cloud", "basic-ml-iot", "simulation",
     "python-dsa", "bash", "github-actions", "jenkins", "aws", "kubernetes",
-    "git", "git-fundamentals", "advanced-components", "database-technologies"
+    "git", "git", "advanced-components", "database-technologies"
 ]
 
 TECHNOLOGIES_LIST = [

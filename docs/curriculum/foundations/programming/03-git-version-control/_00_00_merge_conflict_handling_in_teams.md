@@ -1,6 +1,6 @@
 # Merge Conflict Handling in Teams
 
-> **Course**: Git Fundamentals | **Module**: Branching & Merging | **Difficulty**: advanced
+> **Course**: Git Version Control | **Module**: Branching & Merging | **Difficulty**: advanced
 
 ---
 

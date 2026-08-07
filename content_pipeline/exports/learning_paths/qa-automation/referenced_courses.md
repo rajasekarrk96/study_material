@@ -6,7 +6,7 @@ List of standalone reusable courses in this path:
 |---|---|---|---|
 | Core Java | `core-java` | `core` | `Programming` |
 | Core Python | `core-python` | `core` | `Programming` |
-| Git Fundamentals | `git-fundamentals` | `core` | `Programming` |
+| Git Version Control | `git` | `core` | `Programming` |
 | Manual Testing | `manual-testing` | `core` | `Testing` |
 | Java Selenium | `java-selenium` | `core` | `Automation` |
 | Selenium | `selenium` | `core` | `Automation` |

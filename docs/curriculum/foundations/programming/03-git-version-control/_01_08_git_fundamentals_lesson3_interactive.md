@@ -6,7 +6,7 @@
 lesson_id: GIT-FND-003a
 lesson_title: "Interactive Staging: Patch Mode & Partial Commits"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "History Management"
 difficulty: "⭐⭐⭐"
 time_breakdown:

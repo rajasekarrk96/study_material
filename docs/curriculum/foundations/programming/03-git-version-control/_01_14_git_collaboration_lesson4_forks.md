@@ -6,7 +6,7 @@
 lesson_id: GIT-COL-004
 lesson_title: "Forking & Upstream Workflows"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Remote Collaboration"
 difficulty: "⭐⭐⭐"
 time_breakdown:

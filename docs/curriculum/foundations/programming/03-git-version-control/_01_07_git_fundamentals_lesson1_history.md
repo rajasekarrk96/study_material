@@ -6,7 +6,7 @@
 lesson_id: GIT-FND-001a
 lesson_title: "Version Control History & Evolution"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Git Foundations"
 difficulty: "⭐"
 time_breakdown:

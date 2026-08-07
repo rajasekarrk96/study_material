@@ -17,7 +17,7 @@ COURSE_HOURS_MAP = {
     "c-programming": 10,
     "embedded-c": 24,
     "core-python": 15,
-    "git-fundamentals": 12,
+    "git": 12,
     "electrical-fundamentals": 8,
     "electronics-basics": 10,
     "pcb": 12,

@@ -29,7 +29,7 @@ def _similar(title_a: str, title_b: str) -> bool:
     vocabulary (e.g. "git" or "module" itself appearing in every title of a
     course) produced false-positive merges of genuinely distinct modules
     that had just been mis-numbered identically by a buggy ingestion script
-    (e.g. Git Fundamentals' 8 unrelated modules all stamped sort_order=1).
+    (e.g. Git Version Control' 8 unrelated modules all stamped sort_order=1).
     """
     a_numbered = bool(_NUMBERED_MODULE_PREFIX_RE.match(title_a))
     b_numbered = bool(_NUMBERED_MODULE_PREFIX_RE.match(title_b))

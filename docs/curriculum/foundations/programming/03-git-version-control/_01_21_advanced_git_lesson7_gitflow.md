@@ -6,7 +6,7 @@
 lesson_id: GIT-ADV-007
 lesson_title: "Branching Strategies for Teams"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Advanced Workflows"
 difficulty: "⭐⭐⭐"
 time_breakdown:

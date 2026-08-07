@@ -6,7 +6,7 @@
 lesson_id: "GIT-FND-002"
 lesson_title: "Local Workflow: Init, Stage & Commit"
 subject: "Git"
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Git Foundations"
 difficulty: "⭐"
 time_breakdown:

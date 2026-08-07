@@ -6,7 +6,7 @@
 lesson_id: GIT-COL-003
 lesson_title: "Merge Conflict Handling in Teams"
 subject: Git
-course: "Git Fundamentals"
+course: "Git Version Control"
 module: "Branching & Merging"
 difficulty: "⭐⭐⭐"
 time_breakdown:

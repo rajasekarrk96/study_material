@@ -1028,7 +1028,7 @@
     9. Summary & Cheat Sheet
     10. References
 
-### 3. Git Fundamentals
+### 3. Git Version Control
 
 #### 3.1. Module 1 — Introduction
 

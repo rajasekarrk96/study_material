@@ -1,6 +1,6 @@
 # Function Declarations Expressions And Arrow Functions
 
-> **Course**: Git Fundamentals | **Module**: Introduction | **Difficulty**: beginner
+> **Course**: Git Version Control | **Module**: Introduction | **Difficulty**: beginner
 
 ---
 

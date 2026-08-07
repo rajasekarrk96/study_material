@@ -2,6 +2,8 @@
 
 > Source: `_source_python_full_stack.md`
 
+**Prerequisites:** git
+
 
 
 #### 2.16.1. Module 1 — GitHub Actions Fundamentals

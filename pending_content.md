@@ -24,7 +24,7 @@
 - [x] `c-programming` (18/18 lessons)
 - [x] `embedded-c` (60/60 lessons)
 - [x] `core-python` (44/44 lessons)
-- [x] `git-fundamentals` (238/238 lessons)
+- [x] `git` (238/238 lessons)
 - [x] `electrical-fundamentals` (15/15 lessons)
 - [x] `electronics-basics` (20/20 lessons)
 - [x] `pcb` (28/28 lessons)
@@ -53,7 +53,7 @@
 - [x] `core-python` (44/44 lessons)
 - [ ] `advanced-python` (0/30 published — Structure Ready)
 - [ ] `python-dsa` (0/25 published — Structure Ready)
-- [x] `git-fundamentals` (238/238 lessons)
+- [x] `git` (238/238 lessons)
 - [x] `html5` (24/24 lessons)
 - [x] `css3` (45/45 lessons)
 - [x] `bootstrap` (18/18 lessons)
@@ -76,7 +76,7 @@
 - **Status**: 9 Published / 8 Pending Content
 - [x] `core-java` (160/160 lessons)
 - [x] `java` (26/26 lessons)
-- [x] `git-fundamentals` (238/238 lessons)
+- [x] `git` (238/238 lessons)
 - [x] `html5` (24/24 lessons)
 - [x] `css3` (45/45 lessons)
 - [x] `bootstrap` (18/18 lessons)
@@ -98,7 +98,7 @@
 - **Total Courses**: 16 (15 Required, 1 Optional)
 - **Status**: 13 Published / 3 Pending Content
 - [x] `core-python` (44/44 lessons)
-- [x] `git-fundamentals` (238/238 lessons)
+- [x] `git` (238/238 lessons)
 - [x] `ds-math` (11/11 lessons)
 - [x] `python-data-science` (5/5 lessons)
 - [x] `mysql` (53/53 lessons)
@@ -120,7 +120,7 @@
 - **Total Courses**: 8 (7 Required, 1 Optional)
 - **Status**: 8 Published / 0 Pending Content — 100% COMPLETE 🎉
 - [x] `core-python` (44/44 lessons)
-- [x] `git-fundamentals` (238/238 lessons)
+- [x] `git` (238/238 lessons)
 - [x] `mysql` (53/53 lessons)
 - [x] `ds-math` (11/11 lessons)
 - [x] `python-data-science` (5/5 lessons)
@@ -134,7 +134,7 @@
 - **Total Courses**: 9 (9 Required, 0 Optional)
 - **Status**: 8 Published / 1 Pending Content
 - [x] `core-python` (44/44 lessons)
-- [x] `git-fundamentals` (238/238 lessons)
+- [x] `git` (238/238 lessons)
 - [x] `ds-math` (11/11 lessons)
 - [x] `python-data-science` (5/5 lessons)
 - [x] `machine-learning` (107/107 lessons)
@@ -150,7 +150,7 @@
 - **Status**: 2 Published / 7 Pending Content
 - [x] `core-python` (44/44 lessons)
 - [ ] `bash` (0/15 published — Structure Ready)
-- [x] `git-fundamentals` (238/238 lessons)
+- [x] `git` (238/238 lessons)
 - [ ] `linux` (0/25 published — Structure Ready)
 - [ ] `docker` (0/25 published — Structure Ready)
 - [ ] `github-actions` (0/15 published — Structure Ready)
@@ -165,7 +165,7 @@
 - **Status**: 5 Published / 6 Pending Content
 - [x] `core-java` (160/160 lessons)
 - [x] `core-python` (44/44 lessons)
-- [x] `git-fundamentals` (238/238 lessons)
+- [x] `git` (238/238 lessons)
 - [ ] `manual-testing` (0/15 published — Structure Ready)
 - [x] `java-selenium` (31/31 lessons)
 - [x] `selenium` (25/25 lessons)

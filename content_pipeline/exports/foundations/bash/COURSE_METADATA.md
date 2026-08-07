@@ -1,6 +1,6 @@
-# Course Metadata: Bash Scripting
+# Course Metadata: Bash Programming
 
 - **Slug:** `bash`
 - **Category:** foundations
-- **Difficulty:** Beginner
-- **Hours:** 8
+- **Difficulty:** beginner
+- **Hours:** 60
