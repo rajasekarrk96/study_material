@@ -2,5 +2,5 @@
 
 - **Slug:** `python-dsa`
 - **Category:** foundations
-- **Difficulty:** Intermediate
-- **Hours:** 16
+- **Difficulty:** Intermediate → Advanced
+- **Hours:** 80
