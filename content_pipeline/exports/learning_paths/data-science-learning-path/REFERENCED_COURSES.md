@@ -72,3 +72,38 @@ You SHOULD:
 - Assume the student has completed all prerequisites listed above
 - Write notes at the appropriate difficulty level assuming that background
 - Cross-reference shared concepts using `> **Prerequisite:** See Core Python — Module X`
+
+
+---
+
+## Canonical Data-Science Courses (promoted to `technologies/` on 2026-08-08)
+
+> These courses previously lived inside this learning path. Per the canonical rule (one course = one location) they now live in `exports/technologies/` and are **referenced** here, not duplicated.
+
+| # | Course | Canonical Location | Syllabus |
+|---|---|---|---|
+| 1 | Data Analytics & Business Intelligence | `exports/technologies/data-analytics` | `exports/technologies/data-analytics/SYLLABUS/data-analytics.md` |
+| 2 | Data Science & Predictive Analytics | `exports/technologies/data-science` | `exports/technologies/data-science/SYLLABUS/data-science.md` |
+| 3 | Tableau | `exports/technologies/tableau` | `exports/technologies/tableau/SYLLABUS/tableau.md` |
+| 4 | Excel for Data Analysis | `exports/technologies/excel-data-analysis` | `exports/technologies/excel-data-analysis/SYLLABUS/excel-data-analysis.md` |
+| 5 | Cloud AI Services | `exports/technologies/cloud-ai-services` | `exports/technologies/cloud-ai-services/SYLLABUS/cloud-ai-services.md` |
+| 6 | Big Data Fundamentals | `exports/technologies/big-data-fundamentals` | `exports/technologies/big-data-fundamentals/SYLLABUS/big-data-fundamentals.md` |
+| 7 | Apache Spark | `exports/technologies/apache-spark` | `exports/technologies/apache-spark/SYLLABUS/apache-spark.md` |
+| 8 | Apache Airflow | `exports/technologies/apache-airflow` | `exports/technologies/apache-airflow/SYLLABUS/apache-airflow.md` |
+| 9 | MLflow | `exports/technologies/mlflow` | `exports/technologies/mlflow/SYLLABUS/mlflow.md` |
+| 10 | Kubeflow | `exports/technologies/kubeflow` | `exports/technologies/kubeflow/SYLLABUS/kubeflow.md` |
+| 11 | Data Warehousing | `exports/technologies/data-warehousing` | `exports/technologies/data-warehousing/SYLLABUS/data-warehousing.md` |
+| 12 | Snowflake | `exports/technologies/snowflake` | `exports/technologies/snowflake/SYLLABUS/snowflake.md` |
+| 13 | Feature Engineering | `exports/technologies/feature-engineering` | `exports/technologies/feature-engineering/SYLLABUS/feature-engineering.md` |
+| 14 | Data Visualization | `exports/technologies/data-visualization` | `exports/technologies/data-visualization/SYLLABUS/data-visualization.md` |
+
+### Overlap courses — RESOLVED (2026-08-08)
+
+| Course | Canonical Location | Disposition |
+|---|---|---|
+| computer-vision | specializations/computer-vision | path copy removed (strict subset) — reference canonical |
+| deep-learning | specializations/deep-learning | path copy removed (strict subset) — reference canonical |
+| machine-learning | specializations/machine-learning | path copy removed (strict subset) — reference canonical |
+| power-bi | specializations/power-bi | path copy removed (subset) — reference canonical |
+| mlops-engineering | specializations/mlops-ai-deployment | path copy removed (strict subset) — reference canonical |
+| nlp-generative-ai | technologies/nlp-generative-ai | promoted (richer/unique) — reference canonical |

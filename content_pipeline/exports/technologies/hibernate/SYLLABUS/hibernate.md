@@ -1,95 +1,225 @@
-# Hibernate & JPA -- Syllabus
+# Hibernate & JPA — Master Syllabus
 
-> Source: `_source_java_full_stack.md`
+---
 
+# Course Information
 
+**Course Name:** Hibernate & JPA
 
-#### 2.7.1. Module 1 — ORM and JPA Foundations
+**Category:** Technology Course
 
-1. **Persistence Architecture**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Object-relational impedance mismatch and ORM responsibilities
-    2. JPA specification, provider, persistence context, and entity lifecycle
-    3. Hibernate roles in standalone and Spring applications
-2. **Project Configuration**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Dependencies, datasource, dialect, and schema settings
-    2. EntityManagerFactory, EntityManager, and Spring-managed configuration
-    3. Logging generated SQL and binding parameters
-3. **First Entity and CRUD**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Entity, table, identifier, generated value, and column mapping
-    2. persist, find, merge/update tracking, and remove
-    3. Lab: implement CRUD for a Product entity
+**Learning Path(s):**
 
-#### 2.7.2. Module 2 — Entity Mapping and Relationships
+- Java Full Stack
+- Backend Development
 
-1. **Value and Type Mapping**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Basic fields, enums, temporal values, converters, and embedded types
-    2. Identity, sequence, table, and application-assigned identifiers
-    3. Validation constraints versus database constraints
-2. **Associations**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Many-to-one, one-to-many, one-to-one, and many-to-many
-    2. Owning side, mappedBy, join columns, and join tables
-    3. Cascade operations and orphan removal
-3. **Inheritance and Mapping Lab**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Single-table, joined, and table-per-class strategies
-    2. Map Product and Category with bidirectional navigation
-    3. Verify schema, inserts, updates, and deletes
+**Difficulty:** Intermediate
 
-#### 2.7.3. Module 3 — Queries and Data Access
+**Estimated Duration:** 2 Hours
 
-1. **JPQL and HQL**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Entity-oriented select, joins, filtering, grouping, and ordering
-    2. Named and positional parameters
-    3. DTO projections and constructor expressions
-2. **Criteria and Native Queries**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Type-safe dynamic queries with Criteria API
-    2. Native SQL and result mapping
-    3. Pagination, sorting, bulk update, and bulk delete
-3. **Spring Data JPA**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Repository interfaces and derived query methods
-    2. Custom @Query methods and specifications
-    3. Lab: implement search and price filters in ProductRepository
+**Prerequisites:**
 
-#### 2.7.4. Module 4 — Transactions and Performance
+- Core Java
+- SQL
 
-1. **Transaction Management**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Transaction boundaries, propagation, isolation, and rollback
-    2. Dirty checking, flush modes, and write-behind
-    3. Optimistic and pessimistic locking
-2. **Fetching and N+1**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Lazy versus eager loading
-    2. N+1 diagnosis with SQL logs
-    3. Fetch joins, entity graphs, batch fetching, and projections
-3. **Caching and Tuning**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. First-level and second-level cache concepts
-    2. JDBC batching and ordered writes
-    3. Lab: profile and optimize a relationship-heavy query
+**Course Status:** COMING_SOON
 
-#### 2.7.5. Module 5 — Testing, Reliability, and Capstone
+---
 
-1. **Persistence Testing**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Repository slice and integration tests
-    2. Test data setup, rollback, and database containers
-    3. Verify mappings, constraints, queries, and concurrency
-2. **Production Practices**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Schema migrations instead of automatic production DDL
-    2. Connection pooling, timeouts, observability, and slow-query analysis
-    3. Avoid Open Session in View and uncontrolled serialization
-3. **Capstone: Transactional Data Service**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Model a multi-entity business domain
-    2. Implement repositories, queries, validation, and transactional services
-    3. Demonstrate N+1 remediation, locking, migrations, and automated tests
+# Module 1 — ORM and JPA Foundations
+
+## Lesson 1.1 — Persistence Architecture
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Object-relational impedance mismatch and ORM responsibilities
+- JPA specification, provider, persistence context, and entity lifecycle
+- Hibernate roles in standalone and Spring applications
+
+## Lesson 1.2 — Project Configuration
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Dependencies, datasource, dialect, and schema settings
+- EntityManagerFactory, EntityManager, and Spring-managed configuration
+- Logging generated SQL and binding parameters
+
+## Lesson 1.3 — First Entity and CRUD
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Entity, table, identifier, generated value, and column mapping
+- persist, find, merge/update tracking, and remove
+- Lab: implement CRUD for a Product entity
+
+---
+
+# Module 2 — Entity Mapping and Relationships
+
+## Lesson 2.1 — Value and Type Mapping
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Basic fields, enums, temporal values, converters, and embedded types
+- Identity, sequence, table, and application-assigned identifiers
+- Validation constraints versus database constraints
+
+## Lesson 2.2 — Associations
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Many-to-one, one-to-many, one-to-one, and many-to-many
+- Owning side, mappedBy, join columns, and join tables
+- Cascade operations and orphan removal
+
+## Lesson 2.3 — Inheritance and Mapping Lab
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Single-table, joined, and table-per-class strategies
+- Map Product and Category with bidirectional navigation
+- Verify schema, inserts, updates, and deletes
+
+---
+
+# Module 3 — Queries and Data Access
+
+## Lesson 3.1 — JPQL and HQL
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Entity-oriented select, joins, filtering, grouping, and ordering
+- Named and positional parameters
+- DTO projections and constructor expressions
+
+## Lesson 3.2 — Criteria and Native Queries
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Type-safe dynamic queries with Criteria API
+- Native SQL and result mapping
+- Pagination, sorting, bulk update, and bulk delete
+
+## Lesson 3.3 — Spring Data JPA
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Repository interfaces and derived query methods
+- Custom @Query methods and specifications
+- Lab: implement search and price filters in ProductRepository
+
+---
+
+# Module 4 — Transactions and Performance
+
+## Lesson 4.1 — Transaction Management
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Transaction boundaries, propagation, isolation, and rollback
+- Dirty checking, flush modes, and write-behind
+- Optimistic and pessimistic locking
+
+## Lesson 4.2 — Fetching and N+1
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Lazy versus eager loading
+- N+1 diagnosis with SQL logs
+- Fetch joins, entity graphs, batch fetching, and projections
+
+## Lesson 4.3 — Caching and Tuning
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- First-level and second-level cache concepts
+- JDBC batching and ordered writes
+- Lab: profile and optimize a relationship-heavy query
+
+---
+
+# Module 5 — Testing, Reliability, and Capstone
+
+## Lesson 5.1 — Persistence Testing
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Repository slice and integration tests
+- Test data setup, rollback, and database containers
+- Verify mappings, constraints, queries, and concurrency
+
+## Lesson 5.2 — Production Practices
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Schema migrations instead of automatic production DDL
+- Connection pooling, timeouts, observability, and slow-query analysis
+- Avoid Open Session in View and uncontrolled serialization
+
+## Lesson 5.3 — Capstone: Transactional Data Service
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Model a multi-entity business domain
+- Implement repositories, queries, validation, and transactional services
+- Demonstrate N+1 remediation, locking, migrations, and automated tests
+
+---
+
+# Software & Tools
+
+- Hibernate
+- JPA
+- Maven
+
+---
+
+# Hardware Requirements
+
+- A computer with the JDK and a database installed
+
+---
+
+# Course Completion Summary
+
+**Estimated Hours:** 2 Hours
+
+**Modules:** 5
+
+**Lessons:** 15
+
+**Topics:** 45+
+
+**Difficulty:** Intermediate
+
+**Course Status:** COMING_SOON

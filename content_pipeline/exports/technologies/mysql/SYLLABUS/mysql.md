@@ -1,133 +1,209 @@
-# MySQL -- Syllabus
+# MySQL — Master Syllabus
 
-> Source: `_source_modular_courses.md`
+---
 
+# Course Information
 
+**Course Name:** MySQL
 
-#### 12.1. Module 1 — MySQL Foundations
+**Category:** Technology Course
 
-1. **Database Architecture and Relational Concepts**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. What is a Relational Database?
-        - Key Concepts
-    2. MySQL Architecture
-        - Storage Engines Comparison
-    3. ACID Properties
-    4. SQL Categories
-    5. Connecting to MySQL
-    6. Lab Exercise
-2. **Database Design ER Modeling and Normalization**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Topics Covered
-        - Entity-Relationship Modeling
-        - ER to Schema Mapping
-        - Normal Forms
-        - Normalization Example
-    2. Lab
+**Learning Path(s):**
 
-#### 12.2. Module 2 — SQL Fundamentals
+- Backend Development
+- Data Engineering
+- Full Stack Development
 
-1. **DDL and Integrity Constraints**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Topics Covered
-        - CREATE TABLE
-        - ALTER TABLE
-        - ON DELETE / ON UPDATE Actions
-        - Indexes Created Automatically
-    2. Lab
-2. **DML and Basic Retrieval**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Topics Covered
-        - INSERT
-        - UPDATE
-        - DELETE
-        - SELECT with Filtering
-    2. Lab
-3. **Aggregation Grouping and Functions**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Topics Covered
-        - Aggregate Functions
-        - WITH ROLLUP
-        - String Functions
-        - Date Functions
-        - CASE Expression
-    2. Lab
-4. **Relational Joins and Set Operations**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Topics Covered
-        - JOIN Types
-        - Multi-Table Join
-        - Set Operations
-    2. Lab
+**Difficulty:** Beginner
 
-#### 12.3. Module 3 — Modern Analytical SQL & Window Functions
+**Estimated Duration:** 18 Hours
 
-1. **Lesson 3.1 MySQL 8.4 Analytical Window Functions**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Overview & Learning Objectives
-        - Learning Objectives
-    2. Environment & Prerequisites
-    3. Theoretical Foundations
-        - `GROUP BY` vs Window Functions (`OVER`)
-    4. Architecture & Diagram Visualizations
-    5. Code & Hardware Implementation
-    6. Enterprise Real-World Applications
-    7. Guided Step-by-Step Hands-On Exercise
-    8. Common Pitfalls & Troubleshooting
-    9. Best Practices & Optimization
-    10. Industry Interview Q&A
-        - Q1: What is the difference between `RANK()` and `DENSE_RANK()` in SQL?
-    11. Self-Assessment Quiz
-    12. Portfolio Assignment & Challenge
-    13. Spaced Repetition Flashcards
-    14. Summary & Cheat Sheet
-    15. Existing SQL Reference Files
+**Prerequisites:**
 
-#### 12.4. Module 4 — Advanced SQL
+- Basic Database Concepts
 
-1. **Subqueries CTEs and Window Functions**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Topics Covered
-        - Subqueries
-        - Common Table Expressions (CTEs)
-        - Recursive CTE — Org Chart
-        - Window Functions
-    2. Lab
+**Course Status:** COMING_SOON
 
-#### 12.5. Module 5 — Programmability
+---
 
-1. **Stored Procedures Functions Triggers and Events**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Topics Covered
-        - Stored Procedures
-        - User-Defined Functions
-        - Triggers
-        - Events (Scheduled Jobs)
-    2. Lab
-2. **Transactions Concurrency and Locking**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Topics Covered
-        - Transactions
-        - ACID Properties
-        - Isolation Levels
-        - Lock Types
-    2. Lab
+# Module 1 — MySQL Foundations
 
-#### 12.6. Module 6 — Administration
+## Lesson 1.1 — Database Architecture and Relational Concepts
 
-1. **Database Security Administration and Replication**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Topics Covered
-        - User Management
-        - MySQL Roles (8.0+)
-        - Backup and Restore
-        - Replication Overview
-    2. Lab
-2. **MySQL Integration with Python**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Topics Covered
-        - mysql-connector-python
-        - Connection Pooling
-        - SQLAlchemy ORM (MySQL)
-        - Async MySQL (aiomysql)
-    2. Lab
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- What is a Relational Database?
+- MySQL Architecture
+- Storage Engines Comparison
+- ACID Properties
+- SQL Categories
+- Connecting to MySQL
+
+## Lesson 1.2 — Database Design ER Modeling and Normalization
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Entity-Relationship Modeling
+- ER to Schema Mapping
+- Normal Forms
+- Normalization Example
+
+---
+
+# Module 2 — SQL Fundamentals
+
+## Lesson 2.1 — DDL and Integrity Constraints
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- CREATE TABLE
+- ALTER TABLE
+- ON DELETE / ON UPDATE Actions
+- Indexes Created Automatically
+
+## Lesson 2.2 — DML and Basic Retrieval
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- INSERT
+- UPDATE
+- DELETE
+- SELECT with Filtering
+
+## Lesson 2.3 — Aggregation Grouping and Functions
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Aggregate Functions
+- WITH ROLLUP
+- String Functions
+- Date Functions
+- CASE Expression
+
+## Lesson 2.4 — Relational Joins and Set Operations
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- JOIN Types
+- Multi-Table Join
+- Set Operations
+
+---
+
+# Module 3 — Modern Analytical SQL & Window Functions
+
+## Lesson 3.1 — MySQL 8.4 Analytical Window Functions
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- `GROUP BY` vs Window Functions (`OVER`)
+
+---
+
+# Module 4 — Advanced SQL
+
+## Lesson 4.1 — Subqueries CTEs and Window Functions
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Subqueries
+- Common Table Expressions (CTEs)
+- Recursive CTE — Org Chart
+- Window Functions
+
+---
+
+# Module 5 — Programmability
+
+## Lesson 5.1 — Stored Procedures Functions Triggers and Events
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Stored Procedures
+- User-Defined Functions
+- Triggers
+- Events (Scheduled Jobs)
+
+## Lesson 5.2 — Transactions Concurrency and Locking
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Transactions
+- ACID Properties
+- Isolation Levels
+- Lock Types
+
+---
+
+# Module 6 — Administration
+
+## Lesson 6.1 — Database Security Administration and Replication
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- User Management
+- MySQL Roles (8.0+)
+- Backup and Restore
+- Replication Overview
+
+## Lesson 6.2 — MySQL Integration with Python
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- mysql-connector-python
+- Connection Pooling
+- SQLAlchemy ORM (MySQL)
+- Async MySQL (aiomysql)
+
+---
+
+# Software & Tools
+
+- MySQL 8
+- MySQL Workbench
+
+---
+
+# Hardware Requirements
+
+- A computer with MySQL installed
+
+---
+
+# Course Completion Summary
+
+**Estimated Hours:** 18 Hours
+
+**Modules:** 6
+
+**Lessons:** 12
+
+**Topics:** 47+
+
+**Difficulty:** Beginner
+
+**Course Status:** COMING_SOON

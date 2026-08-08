@@ -1,65 +1,166 @@
-# Jquery -- Syllabus
+# jQuery — Master Syllabus
 
-> Source: `_source_modular_courses.md`
+---
 
+# Course Information
 
+**Course Name:** jQuery
 
-#### 11.1. Module 1 — Core and DOM Selection
+**Category:** Technology Course
 
-1. **jQuery Setup and Core**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. What is jQuery?
-    2. Lab Exercise
-2. **jQuery Selectors**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Selecting DOM Elements
-    2. Lab Exercise
-3. **DOM Traversal and Manipulation**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Traversal & Content Manipulation
-    2. Lab Exercise
+**Learning Path(s):**
 
-#### 11.2. Module 2 — Events and Effects
+- Frontend Development
 
-1. **Event Handling**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Event Listeners in jQuery
-    2. Lab Exercise
-2. **Effects and Animations**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Built-in Animation Effects
-    2. Lab Exercise
-3. **Custom Animation Queues**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Animation Queue Control
-    2. Lab Exercise
+**Difficulty:** Beginner
 
-#### 11.3. Module 3 — Ajax and Data Exchange
+**Estimated Duration:** 4 Hours
 
-1. **Ajax Fundamentals**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Asynchronous Requests with $.ajax
-    2. Lab Exercise
-2. **Ajax Shorthand Methods**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Shorthand AJAX Helper Functions
-    2. Lab Exercise
-3. **Deferreds and Promises**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Deferreds & Promises
-    2. Lab Exercise
+**Prerequisites:**
 
-#### 11.4. Module 4 — Plugins and Modern Usage
+- HTML5
+- CSS3
+- JavaScript
 
-1. **Plugin Development Basics**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Writing Custom jQuery Plugins
-    2. Lab Exercise
-2. **Popular jQuery Plugins**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Integrating Third-Party jQuery Plugins
-    2. Lab Exercise
-3. **Migrating from jQuery to Vanilla JS**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Modern Alternatives to jQuery
-    2. Lab Exercise
+**Course Status:** COMING_SOON
+
+---
+
+# Module 1 — Core and DOM Selection
+
+## Lesson 1.1 — jQuery Setup and Core
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- What is jQuery?
+
+## Lesson 1.2 — jQuery Selectors
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Selecting DOM Elements
+
+## Lesson 1.3 — DOM Traversal and Manipulation
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Traversal & Content Manipulation
+
+---
+
+# Module 2 — Events and Effects
+
+## Lesson 2.1 — Event Handling
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Event Listeners in jQuery
+
+## Lesson 2.2 — Effects and Animations
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Built-in Animation Effects
+
+## Lesson 2.3 — Custom Animation Queues
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Animation Queue Control
+
+---
+
+# Module 3 — Ajax and Data Exchange
+
+## Lesson 3.1 — Ajax Fundamentals
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Asynchronous Requests with $.ajax
+
+## Lesson 3.2 — Ajax Shorthand Methods
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Shorthand AJAX Helper Functions
+
+## Lesson 3.3 — Deferreds and Promises
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Deferreds & Promises
+
+---
+
+# Module 4 — Plugins and Modern Usage
+
+## Lesson 4.1 — Plugin Development Basics
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Writing Custom jQuery Plugins
+
+## Lesson 4.2 — Popular jQuery Plugins
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Integrating Third-Party jQuery Plugins
+
+## Lesson 4.3 — Migrating from jQuery to Vanilla JS
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Modern Alternatives to jQuery
+
+---
+
+# Software & Tools
+
+- jQuery
+- VS Code
+
+---
+
+# Hardware Requirements
+
+- A computer with a modern web browser
+
+---
+
+# Course Completion Summary
+
+**Estimated Hours:** 4 Hours
+
+**Modules:** 4
+
+**Lessons:** 12
+
+**Topics:** 12+
+
+**Difficulty:** Beginner
+
+**Course Status:** COMING_SOON

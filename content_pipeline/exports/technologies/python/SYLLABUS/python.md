@@ -1,469 +1,645 @@
-# Python -- Syllabus
+# Python — Master Syllabus
 
-> Source: `_source_modular_courses.md`
+---
 
+# Course Information
 
+**Course Name:** Python
 
-#### 4.1. Module 1 — Setup and Overview
+**Category:** Technology Course
 
-1. **Python Overview and Philosophy**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. What is Python?
-    2. Python's Design Philosophy
-    3. Python Versions
-    4. Where Python is Used
-    5. Python Interpreter Types
-    6. Lab Exercise
-2. **Environment Setup and Tooling**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Installing Python
-    2. Virtual Environments
-    3. Package Management with pip
-    4. Modern Tooling — uv (recommended 2024+)
-    5. pyproject.toml
-    6. Code Quality Tools
-    7. REPL and Interactive Tools
-    8. Lab Exercise
-3. **CPython Architecture and Execution Model**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. How Python Code Executes
-    2. Inspecting Bytecode
-    3. The GIL (Global Interpreter Lock)
-    4. Memory Management
-        - Reference Counting
-        - Garbage Collector (for cycles)
-        - Object Interning
-    5. `__pycache__` and .pyc Files
-    6. Lab Exercise
+**Learning Path(s):**
 
-#### 4.2. Module 2 — Core Fundamentals & Control Flow
+- Python Full Stack
+- Data Science
+- Automation & Scripting
 
-1. **Lesson 1.5 Structural Pattern Matching (match/case)**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Overview & Learning Objectives
-        - Learning Objectives
-    2. Environment & Prerequisites
-    3. Theoretical Foundations
-        - `match/case` vs Legacy `if-elif-else`
-    4. Architecture & Diagram Visualizations
-    5. Code & Hardware Implementation
-    6. Enterprise Real-World Applications
-    7. Guided Step-by-Step Hands-On Exercise
-    8. Common Pitfalls & Troubleshooting
-    9. Best Practices & Optimization
-    10. Industry Interview Q&A
-        - Q1: What makes structural pattern matching different from C/Java `switch` statements?
-    11. Self-Assessment Quiz
-    12. Portfolio Assignment & Challenge
-    13. Spaced Repetition Flashcards
-    14. Summary & Cheat Sheet
-    15. Existing Jupyter Notebooks
+**Difficulty:** Beginner
 
-#### 4.3. Module 3 — Variables and Types
+**Estimated Duration:** 20 Hours
 
-1. **Variables and Dynamic Typing**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Variables in Python
-    2. Dynamic vs Static Typing
-    3. Type Annotations (Optional Static Hints)
-    4. Duck Typing
-    5. Identity vs Equality
-    6. Lab Exercise
-2. **Built-in Primitive Data Types**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Numeric Types
-    2. Strings
-    3. NoneType
-    4. Type Conversion
-    5. isinstance and type
-    6. Lab Exercise
-3. **Syntax Rules and Code Style**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Python Syntax Fundamentals
-        - Indentation (Significant Whitespace)
-        - Statements and Line Continuation
-        - Comments
-        - Docstrings
-    2. PEP 8 Style Guide
-    3. Naming Conventions Summary
-    4. Lab Exercise
+**Prerequisites:**
 
-#### 4.4. Module 4 — Control Flow
+- Basic Computer Literacy
 
-1. **Comprehensive Operator Systems**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Python Operators Reference
-        - Arithmetic Operators
-        - Comparison Operators
-        - Logical Operators (Short-Circuit)
-        - Bitwise Operators
-        - Identity and Membership
-        - Walrus Operator `:=` (Python 3.8+)
-        - Operator Precedence (high → low)
-    2. Lab Exercise
-2. **Conditional Execution**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. if / elif / else
-    2. Ternary (Conditional Expression)
-    3. Truthy and Falsy Values
-    4. Structural Pattern Matching — match/case (3.10+)
-        - Matching Sequences and Structures
-        - Matching Data Classes
-    5. Lab Exercise
-3. **Iteration and Loop Structures**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. for Loops
-    2. while Loops
-    3. break, continue, else
-    4. Advanced Iteration Patterns
-    5. Lab Exercise
+**Course Status:** COMING_SOON
 
-#### 4.5. Module 5 — Collections
+---
 
-1. **Lists and Sequence Operations**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Lists
-    2. Modifying Lists
-    3. Sorting
-    4. List Comprehensions
-    5. Copying Lists
-    6. Lab Exercise
-2. **Tuples and Immutable Sequences**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Tuples
-    2. Why Tuples?
-    3. Named Tuples
-    4. typing.NamedTuple (Modern)
-    5. Tuple vs List Decision
-    6. Lab Exercise
-3. **Dictionaries**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Dictionaries
-    2. CRUD Operations
-    3. Iterating Dictionaries
-    4. Dictionary Comprehensions
-    5. Advanced Dict Types
-    6. Merging Dicts (3.9+)
-    7. Lab Exercise
-4. **Sets and Frozensets**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Sets
-    2. Set Operations
-    3. Modifying Sets
-    4. Set Comprehensions
-    5. Frozenset (Immutable Set)
-    6. Practical Use Cases
-    7. Lab Exercise
-5. **Strings and Text Processing**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. String Fundamentals
-    2. String Formatting
-    3. Essential String Methods
-    4. Multi-line and Raw Strings
-    5. String Encoding
-    6. textwrap for Formatting
-    7. Lab Exercise
-6. **Advanced Collections Module**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. collections.Counter
-    2. collections.deque (Double-Ended Queue)
-    3. heapq — Priority Queue
-    4. UserDict and UserList
-    5. Lab Exercise
+# Module 1 — Setup and Overview
 
-#### 4.6. Module 6 — Async Concurrency & Type Hinting
+## Lesson 1.1 — Python Overview and Philosophy
 
-1. **Lesson 5.1 Static Type Hinting & Mypy Validation**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Overview & Learning Objectives
-        - Learning Objectives
-    2. Environment & Prerequisites
-    3. Theoretical Foundations
-        - Gradual Typing in Python
-    4. Architecture & Diagram Visualizations
-    5. Code & Hardware Implementation
-    6. Enterprise Real-World Applications
-    7. Guided Step-by-Step Hands-On Exercise
-    8. Common Pitfalls & Troubleshooting
-    9. Best Practices & Optimization
-    10. Industry Interview Q&A
-        - Q1: Do Python type hints affect runtime execution speed?
-    11. Self-Assessment Quiz
-    12. Portfolio Assignment & Challenge
-    13. Spaced Repetition Flashcards
-    14. Summary & Cheat Sheet
-    15. Existing Jupyter Notebooks
-2. **Lesson 5.2 Asyncio Event Loop & async/await**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Overview & Learning Objectives
-        - Learning Objectives
-    2. Environment & Prerequisites
-    3. Theoretical Foundations
-        - Synchronous vs Asynchronous Execution
-        - Python 3.11+ `TaskGroup` Architecture
-    4. Architecture & Diagram Visualizations
-    5. Code & Hardware Implementation
-    6. Enterprise Real-World Applications
-    7. Guided Step-by-Step Hands-On Exercise
-    8. Common Pitfalls & Troubleshooting
-    9. Best Practices & Optimization
-    10. Industry Interview Q&A
-        - Q1: Is Asyncio multi-threaded?
-    11. Self-Assessment Quiz
-    12. Portfolio Assignment & Challenge
-    13. Spaced Repetition Flashcards
-    14. Summary & Cheat Sheet
-    15. Existing Jupyter Notebooks
-3. **Lesson 5.3 Modern Python Packaging (pyproject.toml & uv)**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Overview & Learning Objectives
-        - Learning Objectives
-    2. Environment & Prerequisites
-    3. Theoretical Foundations
-        - Legacy `setup.py` vs Modern `pyproject.toml`
-    4. Architecture & Diagram Visualizations
-    5. Code & Hardware Implementation
-        - Modern `pyproject.toml` Manifest Specification
-        - High-Speed `uv` CLI Commands
-    6. Enterprise Real-World Applications
-    7. Guided Step-by-Step Hands-On Exercise
-    8. Common Pitfalls & Troubleshooting
-    9. Best Practices & Optimization
-    10. Industry Interview Q&A
-        - Q1: What is `pyproject.toml` and why is it preferred over `requirements.txt`?
-    11. Self-Assessment Quiz
-    12. Portfolio Assignment & Challenge
-    13. Spaced Repetition Flashcards
-    14. Summary & Cheat Sheet
-    15. Existing Jupyter Notebooks
+**Course Coverage:** 🟢 Covered in Class
 
-#### 4.7. Module 7 — Functions
+### Topics
 
-1. **Functions and Arguments**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Defining Functions
-    2. Parameter Types
-    3. *args and **kwargs
-    4. Default Argument Gotcha
-    5. Return Values
-    6. Higher-Order Functions
-    7. Lab Exercise
-2. **Functional Programming in Python**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Lambda Functions
-    2. map, filter, reduce
-    3. functools.partial
-    4. functools.lru_cache (Memoization)
-    5. operator module
-    6. Immutability and Pure Functions
-    7. Lab Exercise
-3. **List Dict Set Comprehensions**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Comprehension Syntax
-    2. List Comprehensions
-    3. Dict Comprehensions
-    4. Set Comprehensions
-    5. Generator Expressions
-    6. Performance and Readability
-    7. When NOT to Use Comprehensions
-    8. Lab Exercise
+- What is Python?
+- Python's Design Philosophy
+- Python Versions
+- Where Python is Used
+- Python Interpreter Types
 
-#### 4.8. Module 8 — Advanced Python
+## Lesson 1.2 — Environment Setup and Tooling
 
-1. **Closures and Decorators**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Closures
-    2. The `nonlocal` Keyword
-    3. Decorators
-    4. Parametrized Decorators
-    5. Stacked Decorators
-    6. Practical Decorators
-    7. Class-Based Decorators
-    8. Lab Exercise
-2. **Generators and Iterators**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. The Iterator Protocol
-    2. Generator Functions
-    3. Generator Expressions
-    4. yield with send() and throw()
-    5. itertools — Powerful Combinators
-    6. Memory Comparison
-    7. Lab Exercise
+**Course Coverage:** 🟢 Covered in Class
 
-#### 4.9. Module 9 — Object-Oriented Programming
+### Topics
 
-1. **Classes and Instance Mechanics**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Defining a Class
-    2. Properties
-    3. `__slots__` — Memory Optimization
-    4. Lab Exercise
-2. **Inheritance and Polymorphism**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Single Inheritance
-    2. `super()` and `__init__`
-    3. Abstract Base Classes
-    4. Method Resolution Order (MRO)
-    5. Mixins
-    6. Lab Exercise
-3. **Magic Dunder Methods**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Essential Dunder Methods
-    2. Container Protocol
-    3. Context Manager Protocol
-    4. Callable Objects `__call__`
-    5. Lab Exercise
-4. **Dataclasses and Protocols**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. @dataclass
-    2. Advanced dataclass Options
-    3. TypedDict
-    4. Protocol (Structural Subtyping)
-    5. attrs Library
-    6. Lab Exercise
+- Installing Python
+- Virtual Environments
+- Package Management with pip
+- Modern Tooling — uv (recommended 2024+)
+- pyproject.toml
+- Code Quality Tools
+- REPL and Interactive Tools
 
-#### 4.10. Module 10 — Exceptions and File I/O
+## Lesson 1.3 — CPython Architecture and Execution Model
 
-1. **Exception Handling**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Exception Hierarchy
-    2. try / except / else / finally
-    3. Exception Information
-    4. Raising Exceptions
-    5. Custom Exceptions
-    6. contextlib.suppress
-    7. ExceptionGroup (Python 3.11+)
-    8. Lab Exercise
-2. **Context Managers**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Context Manager Protocol
-    2. contextlib.contextmanager
-    3. Practical Examples
-    4. contextlib.ExitStack
-    5. Async Context Managers
-    6. Lab Exercise
-3. **Logging Module**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Python Logging Overview
-    2. Log Levels
-    3. Production Logger Setup
-    4. Logging Exceptions
-    5. Structured Logging with structlog
-    6. Lab Exercise
+**Course Coverage:** 🟢 Covered in Class
 
-#### 4.11. Module 11 — File I/O and Serialisation
+### Topics
 
-1. **File I/O and Paths**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. File Operations
-    2. File Modes
-    3. pathlib — Modern Path Handling
-    4. CSV and JSON Files
-    5. Lab Exercise
-2. **Data Serialization**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. JSON
-    2. pickle — Python Object Serialization
-    3. YAML (requires PyYAML)
-    4. TOML (Python 3.11+ built-in)
-    5. Pydantic Serialization
-    6. orjson — Fast JSON
-    7. Lab Exercise
+- How Python Code Executes
+- Inspecting Bytecode
+- The GIL (Global Interpreter Lock)
+- Memory Management
+- Reference Counting
+- Garbage Collector (for cycles)
+- Object Interning
+- `__pycache__` and .pyc Files
 
-#### 4.12. Module 12 — Regular Expressions
+---
 
-1. **Regular Expressions**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. re Module Basics
-    2. Regex Syntax Reference
-    3. Groups and Named Groups
-    4. sub and subn
-    5. Compiled Patterns
-    6. Lookahead and Lookbehind
-    7. Lab Exercise
+# Module 2 — Core Fundamentals & Control Flow
 
-#### 4.13. Module 13 — s and Packages
+## Lesson 2.1 — Structural Pattern Matching (match/case)
 
-1. **Modules and Packages**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Importing Modules
-    2. Module Attributes
-    3. Package Structure
-    4. Relative Imports
-    5. sys.path and Import Resolution
-    6. importlib — Dynamic Imports
-    7. Lab Exercise
+**Course Coverage:** 🟢 Covered in Class
 
-#### 4.14. Module 14 — Concurrency
+### Topics
 
-1. **Asyncio and Async/Await**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Async/Await Fundamentals
-    2. Tasks — Fire and Forget
-    3. Async HTTP with aiohttp
-    4. asyncio Primitives
-    5. Async Context Managers and Generators
-    6. Lab Exercise
-2. **Threading and Multiprocessing**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Threading
-    2. Thread Synchronization
-    3. concurrent.futures — High-Level Interface
-    4. multiprocessing — True Parallelism
-    5. When to Use What
-    6. Lab Exercise
+- `match/case` vs Legacy `if-elif-else`
+- Existing Jupyter Notebooks
 
-#### 4.15. Module 15 — Scientific Python
+---
 
-1. **NumPy Fundamentals**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. NumPy Basics
-    2. Indexing and Slicing
-    3. Vectorized Operations (No Loops!)
-    4. Broadcasting
-    5. Matrix Operations
-    6. Lab Exercise
-2. **Pandas Fundamentals**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Pandas Basics
-    2. Selection and Filtering
-    3. Essential Operations
-    4. GroupBy
-    5. Merge and Join
-    6. Lab Exercise
-3. **Matplotlib and Visualization**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Matplotlib Basics
-    2. Common Plot Types
-    3. Subplots
-    4. Seaborn — Statistical Plots
-    5. Lab Exercise
-4. **Hardware Interfacing with Python**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Raspberry Pi GPIO
-    2. gpiozero — Higher Level
-    3. PySerial — UART Communication
-    4. smbus2 — I2C Communication
-    5. MicroPython
-    6. Lab Exercise
+# Module 3 — Variables and Types
 
-#### 4.16. Module 16 — Debugging and Testing
+## Lesson 3.1 — Variables and Dynamic Typing
 
-1. **Debugging and Profiling**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Python Debugger (pdb)
-        - pdb Commands
-    2. Profiling with cProfile
-    3. timeit — Micro-Benchmarking
-    4. Memory Profiling
-    5. Line Profiler
-    6. Lab Exercise
-2. **Testing with Pytest**
-    - **Course Coverage:** 🟢 Covered in Class
-    1. Pytest Basics
-    2. Fixtures
-    3. Parametrize
-    4. Mocking
-    5. Coverage
-    6. Property-Based Testing with Hypothesis
-    7. Lab Exercise
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Variables in Python
+- Dynamic vs Static Typing
+- Type Annotations (Optional Static Hints)
+- Duck Typing
+- Identity vs Equality
+
+## Lesson 3.2 — Built-in Primitive Data Types
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Numeric Types
+- Strings
+- NoneType
+- Type Conversion
+- isinstance and type
+
+## Lesson 3.3 — Syntax Rules and Code Style
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Python Syntax Fundamentals
+- Indentation (Significant Whitespace)
+- Statements and Line Continuation
+- Comments
+- Docstrings
+- PEP 8 Style Guide
+- Naming Conventions Summary
+
+---
+
+# Module 4 — Control Flow
+
+## Lesson 4.1 — Comprehensive Operator Systems
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Python Operators Reference
+- Arithmetic Operators
+- Comparison Operators
+- Logical Operators (Short-Circuit)
+- Bitwise Operators
+- Identity and Membership
+- Walrus Operator `:=` (Python 3.8+)
+- Operator Precedence (high → low)
+
+## Lesson 4.2 — Conditional Execution
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- if / elif / else
+- Ternary (Conditional Expression)
+- Truthy and Falsy Values
+- Structural Pattern Matching — match/case (3.10+)
+- Matching Sequences and Structures
+- Matching Data Classes
+
+## Lesson 4.3 — Iteration and Loop Structures
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- for Loops
+- while Loops
+- break, continue, else
+- Advanced Iteration Patterns
+
+---
+
+# Module 5 — Collections
+
+## Lesson 5.1 — Lists and Sequence Operations
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Lists
+- Modifying Lists
+- Sorting
+- List Comprehensions
+- Copying Lists
+
+## Lesson 5.2 — Tuples and Immutable Sequences
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Tuples
+- Why Tuples?
+- Named Tuples
+- typing.NamedTuple (Modern)
+- Tuple vs List Decision
+
+## Lesson 5.3 — Dictionaries
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- CRUD Operations
+- Iterating Dictionaries
+- Dictionary Comprehensions
+- Advanced Dict Types
+- Merging Dicts (3.9+)
+
+## Lesson 5.4 — Sets and Frozensets
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Sets
+- Set Operations
+- Modifying Sets
+- Set Comprehensions
+- Frozenset (Immutable Set)
+- Practical Use Cases
+
+## Lesson 5.5 — Strings and Text Processing
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- String Fundamentals
+- String Formatting
+- Essential String Methods
+- Multi-line and Raw Strings
+- String Encoding
+- textwrap for Formatting
+
+## Lesson 5.6 — Advanced Collections Module
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- collections.Counter
+- collections.deque (Double-Ended Queue)
+- heapq — Priority Queue
+- UserDict and UserList
+
+---
+
+# Module 6 — Async Concurrency & Type Hinting
+
+## Lesson 6.1 — Static Type Hinting & Mypy Validation
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Gradual Typing in Python
+- Existing Jupyter Notebooks
+
+## Lesson 6.2 — Asyncio Event Loop & async/await
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Synchronous vs Asynchronous Execution
+- Python 3.11+ `TaskGroup` Architecture
+- Existing Jupyter Notebooks
+
+## Lesson 6.3 — Modern Python Packaging (pyproject.toml & uv)
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Legacy `setup.py` vs Modern `pyproject.toml`
+- Modern `pyproject.toml` Manifest Specification
+- High-Speed `uv` CLI Commands
+- Existing Jupyter Notebooks
+
+---
+
+# Module 7 — Functions
+
+## Lesson 7.1 — Functions and Arguments
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Defining Functions
+- Parameter Types
+- *args and **kwargs
+- Default Argument Gotcha
+- Return Values
+- Higher-Order Functions
+
+## Lesson 7.2 — Functional Programming in Python
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Lambda Functions
+- map, filter, reduce
+- functools.partial
+- functools.lru_cache (Memoization)
+- operator module
+- Immutability and Pure Functions
+
+## Lesson 7.3 — List Dict Set Comprehensions
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Comprehension Syntax
+- List Comprehensions
+- Dict Comprehensions
+- Set Comprehensions
+- Generator Expressions
+- Performance and Readability
+- When NOT to Use Comprehensions
+
+---
+
+# Module 8 — Advanced Python
+
+## Lesson 8.1 — Closures and Decorators
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Closures
+- The `nonlocal` Keyword
+- Decorators
+- Parametrized Decorators
+- Stacked Decorators
+- Practical Decorators
+- Class-Based Decorators
+
+## Lesson 8.2 — Generators and Iterators
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- The Iterator Protocol
+- Generator Functions
+- Generator Expressions
+- yield with send() and throw()
+- itertools — Powerful Combinators
+- Memory Comparison
+
+---
+
+# Module 9 — Object-Oriented Programming
+
+## Lesson 9.1 — Classes and Instance Mechanics
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Defining a Class
+- Properties
+- `__slots__` — Memory Optimization
+
+## Lesson 9.2 — Inheritance and Polymorphism
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Single Inheritance
+- `super()` and `__init__`
+- Abstract Base Classes
+- Method Resolution Order (MRO)
+- Mixins
+
+## Lesson 9.3 — Magic Dunder Methods
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Essential Dunder Methods
+- Container Protocol
+- Context Manager Protocol
+- Callable Objects `__call__`
+
+## Lesson 9.4 — Dataclasses and Protocols
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- @dataclass
+- Advanced dataclass Options
+- TypedDict
+- Protocol (Structural Subtyping)
+- attrs Library
+
+---
+
+# Module 10 — Exceptions and File I/O
+
+## Lesson 10.1 — Exception Handling
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Exception Hierarchy
+- try / except / else / finally
+- Exception Information
+- Raising Exceptions
+- Custom Exceptions
+- contextlib.suppress
+- ExceptionGroup (Python 3.11+)
+
+## Lesson 10.2 — Context Managers
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Context Manager Protocol
+- contextlib.contextmanager
+- Practical Examples
+- contextlib.ExitStack
+- Async Context Managers
+
+## Lesson 10.3 — Logging Module
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Python Logging Overview
+- Log Levels
+- Production Logger Setup
+- Logging Exceptions
+- Structured Logging with structlog
+
+---
+
+# Module 11 — File I/O and Serialisation
+
+## Lesson 11.1 — File I/O and Paths
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- File Operations
+- File Modes
+- pathlib — Modern Path Handling
+- CSV and JSON Files
+
+## Lesson 11.2 — Data Serialization
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- JSON
+- pickle — Python Object Serialization
+- YAML (requires PyYAML)
+- TOML (Python 3.11+ built-in)
+- Pydantic Serialization
+- orjson — Fast JSON
+
+---
+
+# Module 12 — Regular Expressions
+
+## Lesson 12.1 — Regular Expressions
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- re Module Basics
+- Regex Syntax Reference
+- Groups and Named Groups
+- sub and subn
+- Compiled Patterns
+- Lookahead and Lookbehind
+
+---
+
+# Module 13 — s and Packages
+
+## Lesson 13.1 — Modules and Packages
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Importing Modules
+- Module Attributes
+- Package Structure
+- Relative Imports
+- sys.path and Import Resolution
+- importlib — Dynamic Imports
+
+---
+
+# Module 14 — Concurrency
+
+## Lesson 14.1 — Asyncio and Async/Await
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Async/Await Fundamentals
+- Tasks — Fire and Forget
+- Async HTTP with aiohttp
+- asyncio Primitives
+- Async Context Managers and Generators
+
+## Lesson 14.2 — Threading and Multiprocessing
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Threading
+- Thread Synchronization
+- concurrent.futures — High-Level Interface
+- multiprocessing — True Parallelism
+- When to Use What
+
+---
+
+# Module 15 — Scientific Python
+
+## Lesson 15.1 — NumPy Fundamentals
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- NumPy Basics
+- Indexing and Slicing
+- Vectorized Operations (No Loops!)
+- Broadcasting
+- Matrix Operations
+
+## Lesson 15.2 — Pandas Fundamentals
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Pandas Basics
+- Selection and Filtering
+- Essential Operations
+- GroupBy
+- Merge and Join
+
+## Lesson 15.3 — Matplotlib and Visualization
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Matplotlib Basics
+- Common Plot Types
+- Subplots
+- Seaborn — Statistical Plots
+
+## Lesson 15.4 — Hardware Interfacing with Python
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Raspberry Pi GPIO
+- gpiozero — Higher Level
+- PySerial — UART Communication
+- smbus2 — I2C Communication
+- MicroPython
+
+---
+
+# Module 16 — Debugging and Testing
+
+## Lesson 16.1 — Debugging and Profiling
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Python Debugger (pdb)
+- pdb Commands
+- Profiling with cProfile
+- timeit — Micro-Benchmarking
+- Memory Profiling
+- Line Profiler
+
+## Lesson 16.2 — Testing with Pytest
+
+**Course Coverage:** 🟢 Covered in Class
+
+### Topics
+
+- Pytest Basics
+- Fixtures
+- Parametrize
+- Mocking
+- Coverage
+- Property-Based Testing with Hypothesis
+
+---
+
+# Software & Tools
+
+- Python 3.10+
+- VS Code / PyCharm
+
+---
+
+# Hardware Requirements
+
+- A computer with Python 3 installed
+
+---
+
+# Course Completion Summary
+
+**Estimated Hours:** 20 Hours
+
+**Modules:** 16
+
+**Lessons:** 43
+
+**Topics:** 226+
+
+**Difficulty:** Beginner
+
+**Course Status:** COMING_SOON
