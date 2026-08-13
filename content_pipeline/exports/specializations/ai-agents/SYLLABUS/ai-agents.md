@@ -14,21 +14,25 @@
 - Generative AI Engineering
 - ML Engineer
 
-**Difficulty:** Beginner
+**Difficulty:** Intermediate to Advanced
 
-**Estimated Duration:** 20 Hours
+**Estimated Duration:** 60 Hours
 
 **Prerequisites:**
 
 - Core Python
 - LLM Fundamentals
 - Prompt Engineering
+- Basic API Development
+- Python Virtual Environments
 
 **Course Status:** COMING_SOON
 
 ---
 
 # Module 1 — Agent Foundations
+
+---
 
 ## Lesson 1.1 — What is an AI Agent
 
@@ -44,18 +48,22 @@
 - Autonomy
 - Use Cases
 
+---
+
 ## Lesson 1.2 — ReAct Agent Pattern
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
-- React
-- Thought Action Observation
+- ReAct Pattern
+- Thought → Action → Observation
 - Scratchpad
 - Tool Calling
 - Agent Executor
 - Failure Modes
+
+---
 
 ## Lesson 1.3 — Plan-and-Execute Agent
 
@@ -66,9 +74,11 @@
 - Plan Execute
 - Planner
 - Executor
-- Re Planning
-- Long Horizon
-- Plan And Execute
+- Re-Planning
+- Long Horizon Tasks
+- Plan-and-Execute Workflow
+
+---
 
 ## Lesson 1.4 — OpenAI Assistants API
 
@@ -84,19 +94,23 @@
 - Streaming Runs
 - Vector Store
 
+---
+
 ## Lesson 1.5 — Agent Reasoning Strategies
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
-- Cot Agents
-- Tree Of Thought
-- Lats
+- Chain of Thought (CoT)
+- Tree of Thought (ToT)
+- LATS
 - Reflection
 - Reflexion
-- Critic
+- Critic Models
 - Beam Search
+
+---
 
 ## Lesson 1.6 — Agent Prompt Engineering
 
@@ -107,9 +121,11 @@
 - System Prompt
 - Tool Description
 - Output Format
-- Persona
+- Persona Design
 - Error Handling
 - Safety Constraints
+
+---
 
 ## Lesson 1.7 — Agent Frameworks Comparison
 
@@ -117,17 +133,19 @@
 
 ### Topics
 
-- Langchain Agents
-- Langgraph
-- Llama Index Agents
-- Autogen
-- Crewai
-- Smolagents
-- Openai Swarm
+- LangChain Agents
+- LangGraph
+- LlamaIndex Agents
+- AutoGen
+- CrewAI
+- SmolAgents
+- OpenAI Swarm
 
 ---
 
 # Module 2 — Tool Use
+
+---
 
 ## Lesson 2.1 — Function Calling Deep Dive
 
@@ -135,12 +153,14 @@
 
 ### Topics
 
-- Openai Tools
-- Json Schema
-- Parallel Calls
-- Tool Result
+- OpenAI Tools
+- JSON Schema
+- Parallel Function Calls
+- Tool Results
 - Strict Mode
-- Hf Function Calling
+- Hugging Face Function Calling
+
+---
 
 ## Lesson 2.2 — Web Search Tools
 
@@ -149,12 +169,14 @@
 ### Topics
 
 - Tavily
-- Serpapi
-- Duckduckgo
+- SerpAPI
+- DuckDuckGo
 - Brave Search
 - Exa
 - Result Parsing
 - Rate Limits
+
+---
 
 ## Lesson 2.3 — Code Execution Tools
 
@@ -162,28 +184,32 @@
 
 ### Topics
 
-- Python Repl
+- Python REPL
 - Jupyter Kernel
-- E2b
+- E2B Sandbox
 - Modal
 - Docker Sandbox
 - Code Output
 - Security
 
-## Lesson 2.4 — Database and SQL Tools
+---
+
+## Lesson 2.4 — Database & SQL Tools
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
-- Text2sql
-- Sql Toolkit
-- Create Sql Agent
-- Sql Database
-- Validation
+- Text-to-SQL
+- SQL Toolkit
+- SQL Agent
+- SQL Database
+- Query Validation
 - Vanna AI
 
-## Lesson 2.5 — File System and Document Tools
+---
+
+## Lesson 2.5 — File System & Document Tools
 
 **Course Coverage:** 🟢 Covered in Class
 
@@ -191,9 +217,11 @@
 
 - Read File Tool
 - Write File Tool
-- List Directory
+- Directory Listing
 - File Management Toolkit
-- Csv Reader
+- CSV Reader
+
+---
 
 ## Lesson 2.6 — API Integration Tools
 
@@ -201,11 +229,13 @@
 
 ### Topics
 
-- Rest API Tool
+- REST API Tool
 - Requests Wrapper
-- Openapi Spec
-- Oauth2 Tool
-- Custom Tool Decorator
+- OpenAPI Specification
+- OAuth2 Integration
+- Custom Tool Decorators
+
+---
 
 ## Lesson 2.7 — RAG as a Tool
 
@@ -215,27 +245,31 @@
 
 - Retriever Tool
 - Create Retriever Tool
-- Multiple Kb
+- Multiple Knowledge Bases
 - Self Query Tool
 - Query Engine Tool
 - Routing
 
-## Lesson 2.8 — Tool Error Handling and Validation
+---
+
+## Lesson 2.8 — Tool Error Handling & Validation
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
-- Tool Exception
-- Handle Tool Error
+- Tool Exceptions
+- Error Handling
 - Retry Logic
-- Pydantic Args
+- Pydantic Arguments
 - Fallback Tools
-- Structured Tool
+- Structured Tools
 
 ---
 
 # Module 3 — Agent Memory
+
+---
 
 ## Lesson 3.1 — Memory Types in AI Agents
 
@@ -243,13 +277,15 @@
 
 ### Topics
 
-- In Context
-- External
-- Episodic
-- Semantic
-- Procedural
+- In-Context Memory
+- External Memory
+- Episodic Memory
+- Semantic Memory
+- Procedural Memory
 - Working Memory
-- Taxonomy
+- Memory Taxonomy
+
+---
 
 ## Lesson 3.2 — Conversation Memory
 
@@ -260,9 +296,11 @@
 - Buffer Memory
 - Window Memory
 - Summary Memory
-- Runnable With History
+- RunnableWithHistory
 - Redis Backend
-- Dynamodb
+- DynamoDB Memory
+
+---
 
 ## Lesson 3.3 — External Long-Term Memory
 
@@ -271,11 +309,13 @@
 ### Topics
 
 - Vector Memory
-- Vs Retriever Memory
+- Retriever Memory
 - Episodic Retrieval
 - Entity Memory
 - Mem0
 - Zep
+
+---
 
 ## Lesson 3.4 — Knowledge Graph Memory
 
@@ -284,13 +324,15 @@
 ### Topics
 
 - Neo4j Memory
-- Networkx
+- NetworkX
 - Entity Extraction
 - Relation Extraction
-- Graph Query
+- Graph Queries
 - Mem0 Graph
 
-## Lesson 3.5 — Working Memory and Scratchpad
+---
+
+## Lesson 3.5 — Working Memory & Scratchpad
 
 **Course Coverage:** 🟢 Covered in Class
 
@@ -298,12 +340,14 @@
 
 - Agent Scratchpad
 - Agent State
-- Typedict
-- Annotation
+- TypedDict
+- Annotations
 - Checkpointing
 - Plan Tracking
 
-## Lesson 3.6 — Memory Evaluation and Management
+---
+
+## Lesson 3.6 — Memory Evaluation & Management
 
 **Course Coverage:** 🟢 Covered in Class
 
@@ -312,14 +356,15 @@
 - Recall Accuracy
 - Staleness
 - Forgetting
-- Ttl
-- Lru
-- Pii Memory
-- Memgpt
+- TTL
+- LRU
+- PII Memory
+- MemGPT
 
 ---
-
 # Module 4 — LangGraph
+
+---
 
 ## Lesson 4.1 — LangGraph Fundamentals
 
@@ -331,38 +376,44 @@
 - Nodes
 - Edges
 - Agent State
-- Typedict
-- End Node
+- TypedDict
+- END Node
 - Compile
 - Invoke
 
-## Lesson 4.2 — Conditional Edges and Routing
+---
+
+## Lesson 4.2 — Conditional Edges & Routing
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
 - Conditional Edges
-- Add Conditional Edges
-- Should Continue
+- add_conditional_edges()
+- should_continue()
 - Dynamic Routing
-- Fallback
-- Parallel
-- Convergence
+- Fallback Nodes
+- Parallel Branches
+- Graph Convergence
 
-## Lesson 4.3 — Checkpointing and State Persistence
+---
+
+## Lesson 4.3 — Checkpointing & State Persistence
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
 - Memory Saver
-- Sqlite Saver
-- Postgres Saver
-- Thread Id
-- Resume
+- SQLite Saver
+- PostgreSQL Saver
+- Thread ID
+- Resume Execution
 - State History
 - Time Travel
+
+---
 
 ## Lesson 4.4 — Human-in-the-Loop
 
@@ -374,8 +425,10 @@
 - Interrupt After
 - Human Review
 - Update State
-- Resume
+- Resume Workflow
 - Approval Workflow
+
+---
 
 ## Lesson 4.5 — LangGraph ReAct Agent
 
@@ -383,15 +436,17 @@
 
 ### Topics
 
-- Create React Agent
+- Create ReAct Agent
 - Tool Node
-- Tools Condition
+- tools_condition()
 - Custom Agent Node
 - Streaming
 - Async Agent
-- Token Stream
+- Token Streaming
 
-## Lesson 4.6 — Subgraphs and Modular Agents
+---
+
+## Lesson 4.6 — Subgraphs & Modular Agents
 
 **Course Coverage:** 🟢 Covered in Class
 
@@ -399,23 +454,27 @@
 
 - Subgraph
 - Nested State Graph
-- Parent Child State
+- Parent-Child Graphs
 - Reusable Modules
-- State Transformer
+- State Transformers
 - Error Isolation
 
-## Lesson 4.7 — LangGraph Studio and Visualization
+---
+
+## Lesson 4.7 — LangGraph Studio & Visualization
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
-- Langgraph Studio
-- Mermaid Diagram
-- Draw Png
+- LangGraph Studio
+- Mermaid Diagrams
+- Draw PNG
 - Step Replay
-- Langgraph Dev
+- LangGraph Dev
 - Langfuse Trace
+
+---
 
 ## Lesson 4.8 — LangGraph Advanced Patterns
 
@@ -424,15 +483,17 @@
 ### Topics
 
 - Map Reduce
-- Send
-- Corrective Loop
-- Long Running
-- Streaming Mid Graph
-- Custom Reducer
+- Send API
+- Corrective Loops
+- Long Running Graphs
+- Mid-Graph Streaming
+- Custom Reducers
 
 ---
 
-# Module 5 — Multi-Agent
+# Module 5 — Multi-Agent Systems
+
+---
 
 ## Lesson 5.1 — Multi-Agent Architecture Patterns
 
@@ -440,13 +501,15 @@
 
 ### Topics
 
-- Network
-- Supervisor
-- Hierarchical
-- Sequential
-- Parallel
-- Handoff
-- When Multi Agent
+- Network Pattern
+- Supervisor Pattern
+- Hierarchical Pattern
+- Sequential Pattern
+- Parallel Pattern
+- Handoff Pattern
+- When to Use Multi-Agent Systems
+
+---
 
 ## Lesson 5.2 — Supervisor Agent
 
@@ -454,12 +517,14 @@
 
 ### Topics
 
-- Create Team Supervisor
+- Team Supervisor
 - Worker Registration
 - Dynamic Routing
-- Aggregation
-- Termination
+- Result Aggregation
+- Termination Logic
 - Error Propagation
+
+---
 
 ## Lesson 5.3 — AutoGen Multi-Agent Framework
 
@@ -467,12 +532,14 @@
 
 ### Topics
 
-- Conversable Agent
-- Assistant Agent
-- User Proxy
-- Group Chat
-- Group Chat Manager
-- Autogen V04
+- ConversableAgent
+- AssistantAgent
+- UserProxyAgent
+- GroupChat
+- GroupChatManager
+- AutoGen v0.4
+
+---
 
 ## Lesson 5.4 — CrewAI
 
@@ -484,10 +551,12 @@
 - Task
 - Crew
 - Process
-- Sequential
-- Hierarchical
+- Sequential Process
+- Hierarchical Process
 - Crew Kickoff
-- Crewai Flows
+- CrewAI Flows
+
+---
 
 ## Lesson 5.5 — Agent Communication Protocols
 
@@ -497,24 +566,28 @@
 
 - Message Passing
 - Shared State
-- Blackboard
-- Event Driven
-- Grpc
-- Mcp
-- A2a Protocol
+- Blackboard Architecture
+- Event Driven Communication
+- gRPC
+- Model Context Protocol (MCP)
+- Agent-to-Agent (A2A) Protocol
 
-## Lesson 5.6 — Collaborative and Adversarial Agents
+---
+
+## Lesson 5.6 — Collaborative & Adversarial Agents
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
-- Researcher Writer Critic
-- Red Blue Team
-- Debate
+- Researcher–Writer–Critic Pattern
+- Red Team vs Blue Team
+- AI Debate
 - Constitutional AI
 - Peer Review
-- Mixture Of Agents
+- Mixture of Agents
+
+---
 
 ## Lesson 5.7 — Multi-Agent Evaluation
 
@@ -524,15 +597,17 @@
 
 - Task Success
 - Turn Efficiency
-- Contribution
-- Redundancy
+- Contribution Analysis
+- Redundancy Detection
 - Cost Per Task
-- Agentbench
-- Langsmith Trace
+- AgentBench
+- LangSmith Trace
 
 ---
 
-# Module 6 — Specialized Agents
+# Module 6 — Specialized AI Agents
+
+---
 
 ## Lesson 6.1 — Research Agent
 
@@ -540,12 +615,14 @@
 
 ### Topics
 
-- Gpt Researcher
-- Multi Source Search
+- GPT Researcher
+- Multi-Source Search
 - Report Generation
 - Source Management
-- Langgraph Research
-- Factuality
+- LangGraph Research
+- Factuality Verification
+
+---
 
 ## Lesson 6.2 — Coding Agent
 
@@ -553,13 +630,15 @@
 
 ### Topics
 
-- Swe Agent
-- Openhands
-- Devin Style
-- E2b Sandbox
+- SWE-Agent
+- OpenHands
+- Devin-style Agents
+- E2B Sandbox
 - Shell Tool
 - Test Runner
-- Swe Bench
+- SWE-Bench
+
+---
 
 ## Lesson 6.3 — Data Analysis Agent
 
@@ -567,25 +646,28 @@
 
 ### Topics
 
-- Pandas AI
-- Pandasai
+- PandasAI
 - Code Interpreter
-- Chart Gen
-- Sql Agent
+- Chart Generation
+- SQL Agent
 - Statistical Interpretation
 
-## Lesson 6.4 — Browser and Web Agent
+---
+
+## Lesson 6.4 — Browser & Web Agent
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
 - Browser Use
-- Playwright Mcp
+- Playwright MCP
 - Element Selection
 - Form Filling
 - Scraping Agent
-- Webarena
+- WebArena
+
+---
 
 ## Lesson 6.5 — Computer Use Agent
 
@@ -595,27 +677,30 @@
 
 - Claude Computer Use
 - Screen Understanding
-- Pyautogui
-- Osworld
-- Screenspot
+- PyAutoGUI
+- OSWorld
+- ScreenSpot
 - Privilege Safety
 
-## Lesson 6.6 — Voice and Multimodal Agents
+---
+
+## Lesson 6.6 — Voice & Multimodal Agents
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
-- Stt LLM Tts
+- STT → LLM → TTS
 - Realtime API
-- Livekit Agents
+- LiveKit Agents
 - Pipecat
-- Vision Agent
-- Interruption
+- Vision Agents
+- Conversation Interruption Handling
 
 ---
+# Module 7 — Agent Evaluation
 
-# Module 7 — Evaluation
+---
 
 ## Lesson 7.1 — Agent Evaluation Framework
 
@@ -629,7 +714,9 @@
 - Correctness
 - Safety
 - Cost
-- Eval Harness
+- Evaluation Harness
+
+---
 
 ## Lesson 7.2 — Agent Benchmarks
 
@@ -637,13 +724,15 @@
 
 ### Topics
 
-- Gaia
-- Webarena
-- Swe Bench
-- Agentbench
-- Tau Bench
-- Bfcl
-- Osworld
+- GAIA
+- WebArena
+- SWE-Bench
+- AgentBench
+- Tau-Bench
+- BFCL
+- OSWorld
+
+---
 
 ## Lesson 7.3 — LangSmith Agent Evaluation
 
@@ -651,28 +740,32 @@
 
 ### Topics
 
-- Langsmith Evaluate
-- Aevaluate
-- Trajectory Eval
+- LangSmith Evaluate
+- Async Evaluation
+- Trajectory Evaluation
 - Regression Testing
 - Annotation Queue
-- Pass Fail
+- Pass / Fail Metrics
 
-## Lesson 7.4 — Agent Tracing and Debugging
+---
+
+## Lesson 7.4 — Agent Tracing & Debugging
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
-- Langsmith Trace
+- LangSmith Trace
 - Langfuse Span
-- Phoenix Arize
+- Phoenix (Arize)
 - Tracing V2
 - Manual Spans
 - Error Analysis
 - Replay
 
-## Lesson 7.5 — Cost and Latency Optimization
+---
+
+## Lesson 7.5 — Cost & Latency Optimization
 
 **Course Coverage:** 🟢 Covered in Class
 
@@ -680,14 +773,16 @@
 
 - Token Profiling
 - Model Routing
-- Caching
-- Parallel Tools
+- Response Caching
+- Parallel Tool Execution
 - Max Iterations
 - Budget Planning
 
 ---
 
-# Module 8 — Production
+# Module 8 — Production AI Agents
+
+---
 
 ## Lesson 8.1 — Deploying Agents as APIs
 
@@ -695,26 +790,30 @@
 
 ### Topics
 
-- Fastapi Agent
-- Langgraph API
-- Sse Stream
+- FastAPI Agent
+- LangGraph API
+- SSE Streaming
 - Thread Management
 - Background Tasks
-- Docker Agent
+- Dockerized Agents
 
-## Lesson 8.2 — Agent Safety and Guardrails
+---
+
+## Lesson 8.2 — Agent Safety & Guardrails
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
-- Action Filter
-- Nemo Guardrails
+- Action Filters
+- NeMo Guardrails
 - Guardrails AI
-- Irreversibility
-- Privilege Min
-- Rate Limit
+- Irreversible Actions
+- Least Privilege
+- Rate Limiting
 - Kill Switch
+
+---
 
 ## Lesson 8.3 — Agent Workflow Automation
 
@@ -722,27 +821,31 @@
 
 ### Topics
 
-- Webhook Trigger
-- N8n
+- Webhook Triggers
+- n8n
 - Zapier AI
 - Celery Tasks
-- Cron Agent
+- Cron Agents
 - Kafka
-- Retry Dlq
+- Retry Dead Letter Queue (DLQ)
 
-## Lesson 8.4 — Model Context Protocol MCP
+---
+
+## Lesson 8.4 — Model Context Protocol (MCP)
 
 **Course Coverage:** 🟢 Covered in Class
 
 ### Topics
 
-- Mcp
-- Mcp Server
-- Mcp Client
-- Mcp Tools
-- Mcp Resources
-- Fastmcp
-- Community Servers
+- MCP
+- MCP Server
+- MCP Client
+- MCP Tools
+- MCP Resources
+- FastMCP
+- Community MCP Servers
+
+---
 
 ## Lesson 8.5 — Agent Security
 
@@ -750,16 +853,18 @@
 
 ### Topics
 
-- Prompt Injection Agent
-- Indirect Injection
+- Prompt Injection
+- Indirect Prompt Injection
 - Tool Poisoning
 - Privilege Escalation
-- Secret Mgmt
-- Sandboxed Exec
+- Secret Management
+- Sandboxed Execution
 
 ---
 
-# Module 9 — Industry Projects
+# Module 9 — Industry Capstone Projects
+
+---
 
 ## Lesson 9.1 — Autonomous Research Assistant
 
@@ -767,14 +872,16 @@
 
 ### Topics
 
-- Langgraph
+- LangGraph
 - Tavily
 - Qdrant
-- Gpt4o
+- GPT-4o
 - Search Tools
 - RAG Tool
-- Ragas
-- Sse
+- RAGAS
+- SSE Streaming
+
+---
 
 ## Lesson 9.2 — Software Engineering Agent
 
@@ -782,14 +889,16 @@
 
 ### Topics
 
-- Langgraph
-- E2b
-- Codellama
+- LangGraph
+- E2B Sandbox
+- CodeLlama
 - File Tools
-- Shell
-- Github Pr
-- Swe Bench
-- Hitl
+- Shell Tools
+- GitHub Pull Requests
+- SWE-Bench
+- Human-in-the-Loop
+
+---
 
 ## Lesson 9.3 — Multi-Agent Data Pipeline
 
@@ -797,14 +906,16 @@
 
 ### Topics
 
-- Crewai
-- Sql Agent
-- Pandasai
+- CrewAI
+- SQL Agent
+- PandasAI
 - Data Collector
-- Cleaner
-- Analyst
-- Reporter
-- Cron
+- Data Cleaner
+- Data Analyst
+- Report Generator
+- Cron Scheduling
+
+---
 
 ## Lesson 9.4 — Customer Success Agent
 
@@ -812,13 +923,15 @@
 
 ### Topics
 
-- Langgraph
+- LangGraph
 - RAG
-- Crm API
+- CRM API
 - Mem0
-- Escalation
+- Escalation Workflow
 - Resolution Rate
-- Csat
+- Customer Satisfaction (CSAT)
+
+---
 
 ## Lesson 9.5 — Agentic Content Creation Pipeline
 
@@ -826,12 +939,14 @@
 
 ### Topics
 
-- Crewai
-- Image Gen
+- CrewAI
+- Image Generation
 - Web Search
-- Researcher Writer Editor
-- Cms API
-- Quality Gate
+- Researcher–Writer–Editor Workflow
+- CMS API
+- Quality Gates
+
+---
 
 ## Lesson 9.6 — Enterprise AI Agent Platform Capstone
 
@@ -841,8 +956,8 @@
 
 - API Gateway
 - Agent Router
-- Jwt
-- Multi Tenant
+- JWT Authentication
+- Multi-Tenant Architecture
 - Langfuse
 - Guardrails
 - Kubernetes
@@ -851,30 +966,109 @@
 
 # Software & Tools
 
-- Python 3.10+
+### AI Frameworks
+
 - LangChain
 - LangGraph
-- OpenAI API
-- Anthropic API
 - CrewAI
 - AutoGen
+- LlamaIndex
+- SmolAgents
+- OpenAI Agents SDK
+
+### AI Models
+
+- OpenAI
+- Anthropic Claude
+- Google Gemini
+- Ollama
+- Hugging Face Models
+
+### Development
+
+- Python 3.11+
+- VS Code
+- Jupyter Notebook
+- Git
+- GitHub
+
+### APIs & Protocols
+
+- OpenAI API
+- Anthropic API
+- Gemini API
+- FastAPI
+- Model Context Protocol (MCP)
+
+### Databases
+
+- PostgreSQL
+- SQLite
+- Redis
+- Qdrant
+- ChromaDB
+- Pinecone
+
+### Deployment
+
+- Docker
+- Docker Compose
+- Kubernetes
+- Nginx
+- Celery
+
+### Monitoring & Evaluation
+
+- LangSmith
+- Langfuse
+- Phoenix (Arize)
+- RAGAS
+- AgentBench
+
+### Automation
+
+- n8n
+- Zapier AI
+- Playwright
+- Tavily
+- SerpAPI
 
 ---
 
 # Hardware Requirements
 
-- A computer with internet access and API keys for an LLM provider
+### Minimum
+
+- Intel i5 / Ryzen 5
+- 8 GB RAM
+- 100 GB SSD
+- Stable Internet Connection
+
+### Recommended
+
+- Intel i7 / Ryzen 7
+- 16–32 GB RAM
+- NVIDIA GPU (Optional for Local Models)
+- 200 GB SSD
+
+### API Access
+
+- OpenAI API Key
+- Anthropic API Key (Optional)
+- Google Gemini API Key (Optional)
 
 ---
 
 # Course Completion Summary
 
-**Estimated Hours:** 20 Hours
+**Estimated Hours:** 60 Hours
 
 **Modules:** 9
 
 **Lessons:** 58
 
-**Difficulty:** Beginner
+**Topics:** 380+
+
+**Difficulty:** Intermediate to Advanced
 
 **Course Status:** COMING_SOON

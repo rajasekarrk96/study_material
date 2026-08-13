@@ -8,9 +8,9 @@ List of standalone reusable courses in this path:
 | Core Python | `core-python` | `core` | `Programming` |
 | Git Version Control | `git` | `core` | `Programming` |
 | Manual Testing | `manual-testing` | `core` | `Testing` |
-| Java Selenium | `java-selenium` | `core` | `Automation` |
-| Selenium | `selenium` | `core` | `Automation` |
+| Selenium Browser Automation | `selenium` | `core` | `Automation` |
 | Playwright | `playwright` | `core` | `Automation` |
+| PyTest Practices | `pytest` | `core` | `Testing` |
 | Postman / API Testing | `postman` | `core` | `API Testing` |
 | MySQL | `mysql` | `core` | `Database` |
 | Maven | `maven` | `core` | `Build` |
